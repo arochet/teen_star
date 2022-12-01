@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/PRESENTATION/auth/widget/check_connexion_widget.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_environment_widget.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/material.dart';
@@ -18,34 +20,18 @@ class HomePage extends StatelessWidget {
             children: [
               Text("TeenSTAR", style: Theme.of(context).textTheme.headline3!.copyWith(color: colorpanel(50))),
               ElevatedButton(
-                onPressed: () {},
-                child: Text("Primary"),
+                onPressed: () {
+                  context.router.push(ObservationListRoute());
+                },
+                child: Text("Observation List"),
                 style: buttonNormalPrimary,
               ),
               ElevatedButton(
-                onPressed: () {},
-                child: Text("Secondary"),
-                style: buttonNormalSecondary,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("Confirm"),
-                style: buttonNormalConfirm,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("Warning"),
-                style: buttonNormalWarning,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("Remove"),
-                style: buttonNormalRemove,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("Help"),
-                style: buttonNormalHelp,
+                onPressed: () {
+                  context.router.push(ObservationAddRoute());
+                },
+                child: Text("Nouvelle Observation"),
+                style: buttonNormalPrimary,
               ),
             ],
           ),

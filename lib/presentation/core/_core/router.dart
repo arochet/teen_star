@@ -14,10 +14,13 @@ import 'package:teenstar/PRESENTATION/auth/auth_reset_password.dart/auth_reset_p
 import 'package:teenstar/PRESENTATION/home/home_page.dart';
 import 'package:teenstar/PRESENTATION/core/_main_navigation/main_navigation_page.dart';
 import 'package:teenstar/PRESENTATION/core/_splash/splash_page.dart';
+import 'package:teenstar/PRESENTATION/observation/observation_add/observation_add_page.dart';
 
 import '../../account/account/buttons/buttons.dart';
 import '../../account/account/colors/colors.dart';
 import '../../account/account/utils/utils_page.dart';
+import '../../observation/observation_list/observation_list_page.dart';
+import '../../observation/observation_view/observation_view_page.dart';
 
 @MaterialAutoRouter(replaceInRouteName: "Page,Route", routes: [
   //RedirectRoute(path: '*', redirectTo: '/'),
@@ -113,6 +116,21 @@ import '../../account/account/utils/utils_page.dart';
     path: '/utils-route',
     name: 'UtilsRoute',
     page: UtilsPage,
+  ),
+  AutoRoute(
+    path: '/observation-add-route',
+    name: 'ObservationAddRoute',
+    page: ObservationAddPage,
+  ),
+  AutoRoute(
+    path: '/observation-list-route',
+    name: 'ObservationListRoute',
+    page: ObservationListPage,
+  ),
+  AutoRoute(
+    path: '/observation-view-route',
+    name: 'ObservationViewRoute',
+    page: ObservationViewPage,
   ), //insert-route
 ])
 class $AppRouter {}

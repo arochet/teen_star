@@ -1,5 +1,5 @@
-import 'package:base_de_projet/PRESENTATION/core/_core/theme_button.dart';
-import 'package:base_de_projet/providers.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

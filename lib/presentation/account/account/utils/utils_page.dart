@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/main_scaffold.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/show_component_file.dart';
+import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 
 class UtilsPage extends StatelessWidget {
   const UtilsPage({Key? key}) : super(key: key);

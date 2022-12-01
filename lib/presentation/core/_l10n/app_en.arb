@@ -3,7 +3,7 @@
     "@language" : {
         "description": "The current Language"
     },
-    "nomprojet": "Base De Projet",
+    "nomprojet": "TeenSTAR",
     "helloworld": "Hello World",
     "seconnecter": "Log in",
     "sinscrire": "Register",

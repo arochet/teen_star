@@ -1,4 +1,4 @@
-import 'package:base_de_projet/DOMAIN/core/failures.dart';
+import 'package:teenstar/DOMAIN/core/failures.dart';
 
 class NotAuthenticatedError extends Error {}
 

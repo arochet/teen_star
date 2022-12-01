@@ -1,6 +1,6 @@
-import 'package:base_de_projet/DOMAIN/auth/value_objects.dart';
+import 'package:teenstar/DOMAIN/auth/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:base_de_projet/DOMAIN/core/value_objects.dart';
+import 'package:teenstar/DOMAIN/core/value_objects.dart';
 
 part 'user_data.freezed.dart';
 

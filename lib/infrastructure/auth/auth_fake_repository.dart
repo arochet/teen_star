@@ -1,19 +1,19 @@
 import 'dart:io';
 
-import 'package:base_de_projet/DOMAIN/auth/auth_failure.dart';
-import 'package:base_de_projet/DOMAIN/auth/delete_failure.dart';
-import 'package:base_de_projet/DOMAIN/auth/new_password_failure.dart';
-import 'package:base_de_projet/DOMAIN/auth/reauthenticate_failure.dart';
-import 'package:base_de_projet/DOMAIN/auth/reset_password_failure.dart';
-import 'package:base_de_projet/DOMAIN/auth/server_failure.dart';
-import 'package:base_de_projet/DOMAIN/auth/user_data.dart';
-import 'package:base_de_projet/DOMAIN/auth/value_objects.dart';
-import 'package:base_de_projet/DOMAIN/core/value_objects.dart';
-import 'package:base_de_projet/INFRASTRUCTURE/core/crypt.dart';
+import 'package:teenstar/DOMAIN/auth/auth_failure.dart';
+import 'package:teenstar/DOMAIN/auth/delete_failure.dart';
+import 'package:teenstar/DOMAIN/auth/new_password_failure.dart';
+import 'package:teenstar/DOMAIN/auth/reauthenticate_failure.dart';
+import 'package:teenstar/DOMAIN/auth/reset_password_failure.dart';
+import 'package:teenstar/DOMAIN/auth/server_failure.dart';
+import 'package:teenstar/DOMAIN/auth/user_data.dart';
+import 'package:teenstar/DOMAIN/auth/value_objects.dart';
+import 'package:teenstar/DOMAIN/core/value_objects.dart';
+import 'package:teenstar/INFRASTRUCTURE/core/crypt.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:base_de_projet/DOMAIN/auth/user_auth.dart';
+import 'package:teenstar/DOMAIN/auth/user_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'auth_repository.dart';
 

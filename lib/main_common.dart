@@ -1,12 +1,12 @@
-import 'package:base_de_projet/firebase_options.dart';
-import 'package:base_de_projet/providers.dart';
+import 'package:teenstar/firebase_options.dart';
+import 'package:teenstar/providers.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
-import 'package:base_de_projet/injection.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/app_widget.dart';
+import 'package:teenstar/injection.dart';
+import 'package:teenstar/PRESENTATION/core/_core/app_widget.dart';
 
 import 'config_reader.dart';
 

@@ -1,4 +1,4 @@
-package com.alban.base_de_projet
+package com.alban.teenstar
 
 import io.flutter.embedding.android.FlutterActivity
 

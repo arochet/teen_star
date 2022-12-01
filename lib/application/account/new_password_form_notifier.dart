@@ -1,6 +1,6 @@
-import 'package:base_de_projet/DOMAIN/auth/new_password_failure.dart';
-import 'package:base_de_projet/DOMAIN/auth/value_objects.dart';
-import 'package:base_de_projet/INFRASTRUCTURE/auth/auth_repository.dart';
+import 'package:teenstar/DOMAIN/auth/new_password_failure.dart';
+import 'package:teenstar/DOMAIN/auth/value_objects.dart';
+import 'package:teenstar/INFRASTRUCTURE/auth/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

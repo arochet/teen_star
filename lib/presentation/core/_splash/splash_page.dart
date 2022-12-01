@@ -1,6 +1,6 @@
-import 'package:base_de_projet/APPLICATION/auth/auth_notifier.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/router.gr.dart';
-import 'package:base_de_projet/providers.dart';
+import 'package:teenstar/APPLICATION/auth/auth_notifier.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';

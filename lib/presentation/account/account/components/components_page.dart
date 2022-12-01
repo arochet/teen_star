@@ -1,14 +1,14 @@
-import 'package:base_de_projet/PRESENTATION/core/_components/contrained_box_max_width.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/default_panel.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/is_connected_widget.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/main_home_title.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/show_environment_widget.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/spacing.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_components/contrained_box_max_width.dart';
+import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
+import 'package:teenstar/PRESENTATION/core/_components/is_connected_widget.dart';
+import 'package:teenstar/PRESENTATION/core/_components/main_home_title.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_environment_widget.dart';
+import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:flutter/material.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/main_scaffold.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 
 class ComponentsPage extends StatelessWidget {
   const ComponentsPage({Key? key}) : super(key: key);

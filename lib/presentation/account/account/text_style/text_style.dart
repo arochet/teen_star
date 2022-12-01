@@ -1,7 +1,7 @@
-import 'package:base_de_projet/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/spacing.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
+import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:flutter/material.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/main_scaffold.dart';
+import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
 
 class TextStylePage extends StatelessWidget {
   const TextStylePage({Key? key}) : super(key: key);

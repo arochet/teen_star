@@ -1,12 +1,12 @@
-import 'package:base_de_projet/PRESENTATION/auth/auth_connexion/auth_connexion_page.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/show_environment_widget.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/theme_button.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:teenstar/PRESENTATION/auth/auth_connexion/auth_connexion_page.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_environment_widget.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/router.gr.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AuthInitPage extends StatelessWidget {
@@ -57,7 +57,7 @@ class PanelInit extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Base de projet", style: Theme.of(context).textTheme.headline2),
+              Text("TeenSTAR", style: Theme.of(context).textTheme.headline2),
               SizedBox(height: 20),
               Image(
                 image: AssetImage("assets/logo_vide.png"),

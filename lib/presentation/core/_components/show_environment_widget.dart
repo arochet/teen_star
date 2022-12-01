@@ -1,4 +1,4 @@
-import 'package:base_de_projet/providers.dart';
+import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';

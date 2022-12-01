@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/theme_colors.dart';
-import 'package:base_de_projet/providers.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
@@ -16,7 +16,7 @@ class BottomBarNavigation extends ConsumerWidget {
     return AutoTabsScaffold(
       appBarBuilder: (_, tabsRouter) => AppBar(
           backgroundColor: colorpanel(700),
-          title: Text("Base de projet", style: Theme.of(context).textTheme.headline4),
+          title: Text("TeenSTAR", style: Theme.of(context).textTheme.headline4),
           centerTitle: true,
           actions: env == Environment.dev
               ? [

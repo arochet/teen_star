@@ -1,8 +1,8 @@
-import 'package:base_de_projet/PRESENTATION/auth/widget/check_connexion_widget.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:base_de_projet/PRESENTATION/core/_components/show_environment_widget.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/theme_button.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:teenstar/PRESENTATION/auth/widget/check_connexion_widget.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_environment_widget.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,8 +16,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Base de projet",
-                  style: Theme.of(context).textTheme.headline3!.copyWith(color: colorpanel(50))),
+              Text("TeenSTAR", style: Theme.of(context).textTheme.headline3!.copyWith(color: colorpanel(50))),
               ElevatedButton(
                 onPressed: () {},
                 child: Text("Primary"),

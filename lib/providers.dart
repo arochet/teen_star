@@ -1,12 +1,12 @@
-import 'package:base_de_projet/APPLICATION/account/modify_form_notifier.dart';
-import 'package:base_de_projet/APPLICATION/auth/auth_notifier.dart';
-import 'package:base_de_projet/APPLICATION/account/new_password_form_notifier.dart';
-import 'package:base_de_projet/APPLICATION/account/reauthenticate_form_notifier.dart';
-import 'package:base_de_projet/APPLICATION/auth/register_form_notifier.dart';
-import 'package:base_de_projet/APPLICATION/auth/reset_password_notifier.dart';
-import 'package:base_de_projet/APPLICATION/auth/sign_in_form_notifier.dart';
-import 'package:base_de_projet/DOMAIN/auth/user_auth.dart';
-import 'package:base_de_projet/DOMAIN/auth/user_data.dart';
+import 'package:teenstar/APPLICATION/account/modify_form_notifier.dart';
+import 'package:teenstar/APPLICATION/auth/auth_notifier.dart';
+import 'package:teenstar/APPLICATION/account/new_password_form_notifier.dart';
+import 'package:teenstar/APPLICATION/account/reauthenticate_form_notifier.dart';
+import 'package:teenstar/APPLICATION/auth/register_form_notifier.dart';
+import 'package:teenstar/APPLICATION/auth/reset_password_notifier.dart';
+import 'package:teenstar/APPLICATION/auth/sign_in_form_notifier.dart';
+import 'package:teenstar/DOMAIN/auth/user_auth.dart';
+import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 

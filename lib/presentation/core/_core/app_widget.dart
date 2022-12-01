@@ -1,6 +1,6 @@
-import 'package:base_de_projet/PRESENTATION/core/_core/router.gr.dart';
-import 'package:base_de_projet/PRESENTATION/core/_core/theme_colors.dart';
-import 'package:base_de_projet/PRESENTATION/core/_l10n/l10n.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:teenstar/PRESENTATION/core/_l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,7 +13,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return MaterialApp.router(
-      title: 'Base de Projet',
+      title: 'TeenSTAR',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         primaryColor: Colors.red,

@@ -16,7 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddObservationFormData {
-  Observation get observation => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
+  Sensation get sensation => throw _privateConstructorUsedError;
+  String get sensationsAutre => throw _privateConstructorUsedError;
+  Sang get sang => throw _privateConstructorUsedError;
+  Mucus get mucus => throw _privateConstructorUsedError;
+  String get mucusAutre => throw _privateConstructorUsedError;
+  List<Douleur> get douleurs => throw _privateConstructorUsedError;
+  String? get douleursAutre => throw _privateConstructorUsedError;
+  List<Evenement> get evenements => throw _privateConstructorUsedError;
+  int? get temperatureBasale => throw _privateConstructorUsedError;
+  Humeur get humeur => throw _privateConstructorUsedError;
+  String get humeurAutre => throw _privateConstructorUsedError;
+  String get notesConfidentielles => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<ObservationFailure, Unit>> get authFailureOrSuccessOption =>
@@ -34,12 +46,22 @@ abstract class $AddObservationFormDataCopyWith<$Res> {
       _$AddObservationFormDataCopyWithImpl<$Res, AddObservationFormData>;
   @useResult
   $Res call(
-      {Observation observation,
+      {DateTime date,
+      Sensation sensation,
+      String sensationsAutre,
+      Sang sang,
+      Mucus mucus,
+      String mucusAutre,
+      List<Douleur> douleurs,
+      String? douleursAutre,
+      List<Evenement> evenements,
+      int? temperatureBasale,
+      Humeur humeur,
+      String humeurAutre,
+      String notesConfidentielles,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<ObservationFailure, Unit>> authFailureOrSuccessOption});
-
-  $ObservationCopyWith<$Res> get observation;
 }
 
 /// @nodoc
@@ -56,16 +78,76 @@ class _$AddObservationFormDataCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? observation = null,
+    Object? date = null,
+    Object? sensation = null,
+    Object? sensationsAutre = null,
+    Object? sang = null,
+    Object? mucus = null,
+    Object? mucusAutre = null,
+    Object? douleurs = null,
+    Object? douleursAutre = freezed,
+    Object? evenements = null,
+    Object? temperatureBasale = freezed,
+    Object? humeur = null,
+    Object? humeurAutre = null,
+    Object? notesConfidentielles = null,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      observation: null == observation
-          ? _value.observation
-          : observation // ignore: cast_nullable_to_non_nullable
-              as Observation,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      sensation: null == sensation
+          ? _value.sensation
+          : sensation // ignore: cast_nullable_to_non_nullable
+              as Sensation,
+      sensationsAutre: null == sensationsAutre
+          ? _value.sensationsAutre
+          : sensationsAutre // ignore: cast_nullable_to_non_nullable
+              as String,
+      sang: null == sang
+          ? _value.sang
+          : sang // ignore: cast_nullable_to_non_nullable
+              as Sang,
+      mucus: null == mucus
+          ? _value.mucus
+          : mucus // ignore: cast_nullable_to_non_nullable
+              as Mucus,
+      mucusAutre: null == mucusAutre
+          ? _value.mucusAutre
+          : mucusAutre // ignore: cast_nullable_to_non_nullable
+              as String,
+      douleurs: null == douleurs
+          ? _value.douleurs
+          : douleurs // ignore: cast_nullable_to_non_nullable
+              as List<Douleur>,
+      douleursAutre: freezed == douleursAutre
+          ? _value.douleursAutre
+          : douleursAutre // ignore: cast_nullable_to_non_nullable
+              as String?,
+      evenements: null == evenements
+          ? _value.evenements
+          : evenements // ignore: cast_nullable_to_non_nullable
+              as List<Evenement>,
+      temperatureBasale: freezed == temperatureBasale
+          ? _value.temperatureBasale
+          : temperatureBasale // ignore: cast_nullable_to_non_nullable
+              as int?,
+      humeur: null == humeur
+          ? _value.humeur
+          : humeur // ignore: cast_nullable_to_non_nullable
+              as Humeur,
+      humeurAutre: null == humeurAutre
+          ? _value.humeurAutre
+          : humeurAutre // ignore: cast_nullable_to_non_nullable
+              as String,
+      notesConfidentielles: null == notesConfidentielles
+          ? _value.notesConfidentielles
+          : notesConfidentielles // ignore: cast_nullable_to_non_nullable
+              as String,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -80,14 +162,6 @@ class _$AddObservationFormDataCopyWithImpl<$Res,
               as Option<Either<ObservationFailure, Unit>>,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ObservationCopyWith<$Res> get observation {
-    return $ObservationCopyWith<$Res>(_value.observation, (value) {
-      return _then(_value.copyWith(observation: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -99,13 +173,22 @@ abstract class _$$_AddObservationFormDataCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Observation observation,
+      {DateTime date,
+      Sensation sensation,
+      String sensationsAutre,
+      Sang sang,
+      Mucus mucus,
+      String mucusAutre,
+      List<Douleur> douleurs,
+      String? douleursAutre,
+      List<Evenement> evenements,
+      int? temperatureBasale,
+      Humeur humeur,
+      String humeurAutre,
+      String notesConfidentielles,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<ObservationFailure, Unit>> authFailureOrSuccessOption});
-
-  @override
-  $ObservationCopyWith<$Res> get observation;
 }
 
 /// @nodoc
@@ -120,16 +203,76 @@ class __$$_AddObservationFormDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? observation = null,
+    Object? date = null,
+    Object? sensation = null,
+    Object? sensationsAutre = null,
+    Object? sang = null,
+    Object? mucus = null,
+    Object? mucusAutre = null,
+    Object? douleurs = null,
+    Object? douleursAutre = freezed,
+    Object? evenements = null,
+    Object? temperatureBasale = freezed,
+    Object? humeur = null,
+    Object? humeurAutre = null,
+    Object? notesConfidentielles = null,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
   }) {
     return _then(_$_AddObservationFormData(
-      observation: null == observation
-          ? _value.observation
-          : observation // ignore: cast_nullable_to_non_nullable
-              as Observation,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      sensation: null == sensation
+          ? _value.sensation
+          : sensation // ignore: cast_nullable_to_non_nullable
+              as Sensation,
+      sensationsAutre: null == sensationsAutre
+          ? _value.sensationsAutre
+          : sensationsAutre // ignore: cast_nullable_to_non_nullable
+              as String,
+      sang: null == sang
+          ? _value.sang
+          : sang // ignore: cast_nullable_to_non_nullable
+              as Sang,
+      mucus: null == mucus
+          ? _value.mucus
+          : mucus // ignore: cast_nullable_to_non_nullable
+              as Mucus,
+      mucusAutre: null == mucusAutre
+          ? _value.mucusAutre
+          : mucusAutre // ignore: cast_nullable_to_non_nullable
+              as String,
+      douleurs: null == douleurs
+          ? _value._douleurs
+          : douleurs // ignore: cast_nullable_to_non_nullable
+              as List<Douleur>,
+      douleursAutre: freezed == douleursAutre
+          ? _value.douleursAutre
+          : douleursAutre // ignore: cast_nullable_to_non_nullable
+              as String?,
+      evenements: null == evenements
+          ? _value._evenements
+          : evenements // ignore: cast_nullable_to_non_nullable
+              as List<Evenement>,
+      temperatureBasale: freezed == temperatureBasale
+          ? _value.temperatureBasale
+          : temperatureBasale // ignore: cast_nullable_to_non_nullable
+              as int?,
+      humeur: null == humeur
+          ? _value.humeur
+          : humeur // ignore: cast_nullable_to_non_nullable
+              as Humeur,
+      humeurAutre: null == humeurAutre
+          ? _value.humeurAutre
+          : humeurAutre // ignore: cast_nullable_to_non_nullable
+              as String,
+      notesConfidentielles: null == notesConfidentielles
+          ? _value.notesConfidentielles
+          : notesConfidentielles // ignore: cast_nullable_to_non_nullable
+              as String,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -150,13 +293,61 @@ class __$$_AddObservationFormDataCopyWithImpl<$Res>
 
 class _$_AddObservationFormData implements _AddObservationFormData {
   const _$_AddObservationFormData(
-      {required this.observation,
+      {required this.date,
+      required this.sensation,
+      required this.sensationsAutre,
+      required this.sang,
+      required this.mucus,
+      required this.mucusAutre,
+      required final List<Douleur> douleurs,
+      required this.douleursAutre,
+      required final List<Evenement> evenements,
+      required this.temperatureBasale,
+      required this.humeur,
+      required this.humeurAutre,
+      required this.notesConfidentielles,
       required this.showErrorMessages,
       required this.isSubmitting,
-      required this.authFailureOrSuccessOption});
+      required this.authFailureOrSuccessOption})
+      : _douleurs = douleurs,
+        _evenements = evenements;
 
   @override
-  final Observation observation;
+  final DateTime date;
+  @override
+  final Sensation sensation;
+  @override
+  final String sensationsAutre;
+  @override
+  final Sang sang;
+  @override
+  final Mucus mucus;
+  @override
+  final String mucusAutre;
+  final List<Douleur> _douleurs;
+  @override
+  List<Douleur> get douleurs {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_douleurs);
+  }
+
+  @override
+  final String? douleursAutre;
+  final List<Evenement> _evenements;
+  @override
+  List<Evenement> get evenements {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_evenements);
+  }
+
+  @override
+  final int? temperatureBasale;
+  @override
+  final Humeur humeur;
+  @override
+  final String humeurAutre;
+  @override
+  final String notesConfidentielles;
   @override
   final bool showErrorMessages;
   @override
@@ -166,7 +357,7 @@ class _$_AddObservationFormData implements _AddObservationFormData {
 
   @override
   String toString() {
-    return 'AddObservationFormData(observation: $observation, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'AddObservationFormData(date: $date, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -174,8 +365,27 @@ class _$_AddObservationFormData implements _AddObservationFormData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddObservationFormData &&
-            (identical(other.observation, observation) ||
-                other.observation == observation) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.sensation, sensation) ||
+                other.sensation == sensation) &&
+            (identical(other.sensationsAutre, sensationsAutre) ||
+                other.sensationsAutre == sensationsAutre) &&
+            (identical(other.sang, sang) || other.sang == sang) &&
+            (identical(other.mucus, mucus) || other.mucus == mucus) &&
+            (identical(other.mucusAutre, mucusAutre) ||
+                other.mucusAutre == mucusAutre) &&
+            const DeepCollectionEquality().equals(other._douleurs, _douleurs) &&
+            (identical(other.douleursAutre, douleursAutre) ||
+                other.douleursAutre == douleursAutre) &&
+            const DeepCollectionEquality()
+                .equals(other._evenements, _evenements) &&
+            (identical(other.temperatureBasale, temperatureBasale) ||
+                other.temperatureBasale == temperatureBasale) &&
+            (identical(other.humeur, humeur) || other.humeur == humeur) &&
+            (identical(other.humeurAutre, humeurAutre) ||
+                other.humeurAutre == humeurAutre) &&
+            (identical(other.notesConfidentielles, notesConfidentielles) ||
+                other.notesConfidentielles == notesConfidentielles) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
             (identical(other.isSubmitting, isSubmitting) ||
@@ -187,8 +397,24 @@ class _$_AddObservationFormData implements _AddObservationFormData {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, observation, showErrorMessages,
-      isSubmitting, authFailureOrSuccessOption);
+  int get hashCode => Object.hash(
+      runtimeType,
+      date,
+      sensation,
+      sensationsAutre,
+      sang,
+      mucus,
+      mucusAutre,
+      const DeepCollectionEquality().hash(_douleurs),
+      douleursAutre,
+      const DeepCollectionEquality().hash(_evenements),
+      temperatureBasale,
+      humeur,
+      humeurAutre,
+      notesConfidentielles,
+      showErrorMessages,
+      isSubmitting,
+      authFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -200,14 +426,50 @@ class _$_AddObservationFormData implements _AddObservationFormData {
 
 abstract class _AddObservationFormData implements AddObservationFormData {
   const factory _AddObservationFormData(
-      {required final Observation observation,
+      {required final DateTime date,
+      required final Sensation sensation,
+      required final String sensationsAutre,
+      required final Sang sang,
+      required final Mucus mucus,
+      required final String mucusAutre,
+      required final List<Douleur> douleurs,
+      required final String? douleursAutre,
+      required final List<Evenement> evenements,
+      required final int? temperatureBasale,
+      required final Humeur humeur,
+      required final String humeurAutre,
+      required final String notesConfidentielles,
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<ObservationFailure, Unit>>
           authFailureOrSuccessOption}) = _$_AddObservationFormData;
 
   @override
-  Observation get observation;
+  DateTime get date;
+  @override
+  Sensation get sensation;
+  @override
+  String get sensationsAutre;
+  @override
+  Sang get sang;
+  @override
+  Mucus get mucus;
+  @override
+  String get mucusAutre;
+  @override
+  List<Douleur> get douleurs;
+  @override
+  String? get douleursAutre;
+  @override
+  List<Evenement> get evenements;
+  @override
+  int? get temperatureBasale;
+  @override
+  Humeur get humeur;
+  @override
+  String get humeurAutre;
+  @override
+  String get notesConfidentielles;
   @override
   bool get showErrorMessages;
   @override

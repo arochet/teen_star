@@ -22,22 +22,22 @@ ObservationDTO _$ObservationDTOFromJson(Map<String, dynamic> json) {
 mixin _$ObservationDTO {
   @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
-  int get date => throw _privateConstructorUsedError;
-  String get couleur => throw _privateConstructorUsedError;
-  String get analyse => throw _privateConstructorUsedError;
-  String get sensation => throw _privateConstructorUsedError;
-  String get sensationsAutre => throw _privateConstructorUsedError;
-  String get sang => throw _privateConstructorUsedError;
-  String get mucus => throw _privateConstructorUsedError;
-  String get mucusAutre => throw _privateConstructorUsedError;
+  int? get date => throw _privateConstructorUsedError;
+  String? get couleur => throw _privateConstructorUsedError;
+  String? get analyse => throw _privateConstructorUsedError;
+  String? get sensation => throw _privateConstructorUsedError;
+  String? get sensationsAutre => throw _privateConstructorUsedError;
+  String? get sang => throw _privateConstructorUsedError;
+  String? get mucus => throw _privateConstructorUsedError;
+  String? get mucusAutre => throw _privateConstructorUsedError;
   String get douleurs => throw _privateConstructorUsedError;
-  String get douleursAutre => throw _privateConstructorUsedError;
+  String? get douleursAutre => throw _privateConstructorUsedError;
   String get evenements => throw _privateConstructorUsedError;
-  int get temperatureBasale => throw _privateConstructorUsedError;
-  String get humeur => throw _privateConstructorUsedError;
-  String get humeurAutre => throw _privateConstructorUsedError;
-  String get notesConfidentielles => throw _privateConstructorUsedError;
-  String get commentaireAnimatrice => throw _privateConstructorUsedError;
+  int? get temperatureBasale => throw _privateConstructorUsedError;
+  String? get humeur => throw _privateConstructorUsedError;
+  String? get humeurAutre => throw _privateConstructorUsedError;
+  String? get notesConfidentielles => throw _privateConstructorUsedError;
+  String? get commentaireAnimatrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,22 +53,22 @@ abstract class $ObservationDTOCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(ignore: true) String? id,
-      int date,
-      String couleur,
-      String analyse,
-      String sensation,
-      String sensationsAutre,
-      String sang,
-      String mucus,
-      String mucusAutre,
+      int? date,
+      String? couleur,
+      String? analyse,
+      String? sensation,
+      String? sensationsAutre,
+      String? sang,
+      String? mucus,
+      String? mucusAutre,
       String douleurs,
-      String douleursAutre,
+      String? douleursAutre,
       String evenements,
-      int temperatureBasale,
-      String humeur,
-      String humeurAutre,
-      String notesConfidentielles,
-      String commentaireAnimatrice});
+      int? temperatureBasale,
+      String? humeur,
+      String? humeurAutre,
+      String? notesConfidentielles,
+      String? commentaireAnimatrice});
 }
 
 /// @nodoc
@@ -85,92 +85,92 @@ class _$ObservationDTOCopyWithImpl<$Res, $Val extends ObservationDTO>
   @override
   $Res call({
     Object? id = freezed,
-    Object? date = null,
-    Object? couleur = null,
-    Object? analyse = null,
-    Object? sensation = null,
-    Object? sensationsAutre = null,
-    Object? sang = null,
-    Object? mucus = null,
-    Object? mucusAutre = null,
+    Object? date = freezed,
+    Object? couleur = freezed,
+    Object? analyse = freezed,
+    Object? sensation = freezed,
+    Object? sensationsAutre = freezed,
+    Object? sang = freezed,
+    Object? mucus = freezed,
+    Object? mucusAutre = freezed,
     Object? douleurs = null,
-    Object? douleursAutre = null,
+    Object? douleursAutre = freezed,
     Object? evenements = null,
-    Object? temperatureBasale = null,
-    Object? humeur = null,
-    Object? humeurAutre = null,
-    Object? notesConfidentielles = null,
-    Object? commentaireAnimatrice = null,
+    Object? temperatureBasale = freezed,
+    Object? humeur = freezed,
+    Object? humeurAutre = freezed,
+    Object? notesConfidentielles = freezed,
+    Object? commentaireAnimatrice = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      date: null == date
+      date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as int,
-      couleur: null == couleur
+              as int?,
+      couleur: freezed == couleur
           ? _value.couleur
           : couleur // ignore: cast_nullable_to_non_nullable
-              as String,
-      analyse: null == analyse
+              as String?,
+      analyse: freezed == analyse
           ? _value.analyse
           : analyse // ignore: cast_nullable_to_non_nullable
-              as String,
-      sensation: null == sensation
+              as String?,
+      sensation: freezed == sensation
           ? _value.sensation
           : sensation // ignore: cast_nullable_to_non_nullable
-              as String,
-      sensationsAutre: null == sensationsAutre
+              as String?,
+      sensationsAutre: freezed == sensationsAutre
           ? _value.sensationsAutre
           : sensationsAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      sang: null == sang
+              as String?,
+      sang: freezed == sang
           ? _value.sang
           : sang // ignore: cast_nullable_to_non_nullable
-              as String,
-      mucus: null == mucus
+              as String?,
+      mucus: freezed == mucus
           ? _value.mucus
           : mucus // ignore: cast_nullable_to_non_nullable
-              as String,
-      mucusAutre: null == mucusAutre
+              as String?,
+      mucusAutre: freezed == mucusAutre
           ? _value.mucusAutre
           : mucusAutre // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       douleurs: null == douleurs
           ? _value.douleurs
           : douleurs // ignore: cast_nullable_to_non_nullable
               as String,
-      douleursAutre: null == douleursAutre
+      douleursAutre: freezed == douleursAutre
           ? _value.douleursAutre
           : douleursAutre // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       evenements: null == evenements
           ? _value.evenements
           : evenements // ignore: cast_nullable_to_non_nullable
               as String,
-      temperatureBasale: null == temperatureBasale
+      temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
-              as int,
-      humeur: null == humeur
+              as int?,
+      humeur: freezed == humeur
           ? _value.humeur
           : humeur // ignore: cast_nullable_to_non_nullable
-              as String,
-      humeurAutre: null == humeurAutre
+              as String?,
+      humeurAutre: freezed == humeurAutre
           ? _value.humeurAutre
           : humeurAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      notesConfidentielles: null == notesConfidentielles
+              as String?,
+      notesConfidentielles: freezed == notesConfidentielles
           ? _value.notesConfidentielles
           : notesConfidentielles // ignore: cast_nullable_to_non_nullable
-              as String,
-      commentaireAnimatrice: null == commentaireAnimatrice
+              as String?,
+      commentaireAnimatrice: freezed == commentaireAnimatrice
           ? _value.commentaireAnimatrice
           : commentaireAnimatrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -185,22 +185,22 @@ abstract class _$$_ObservationDTOCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(ignore: true) String? id,
-      int date,
-      String couleur,
-      String analyse,
-      String sensation,
-      String sensationsAutre,
-      String sang,
-      String mucus,
-      String mucusAutre,
+      int? date,
+      String? couleur,
+      String? analyse,
+      String? sensation,
+      String? sensationsAutre,
+      String? sang,
+      String? mucus,
+      String? mucusAutre,
       String douleurs,
-      String douleursAutre,
+      String? douleursAutre,
       String evenements,
-      int temperatureBasale,
-      String humeur,
-      String humeurAutre,
-      String notesConfidentielles,
-      String commentaireAnimatrice});
+      int? temperatureBasale,
+      String? humeur,
+      String? humeurAutre,
+      String? notesConfidentielles,
+      String? commentaireAnimatrice});
 }
 
 /// @nodoc
@@ -215,92 +215,92 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? date = null,
-    Object? couleur = null,
-    Object? analyse = null,
-    Object? sensation = null,
-    Object? sensationsAutre = null,
-    Object? sang = null,
-    Object? mucus = null,
-    Object? mucusAutre = null,
+    Object? date = freezed,
+    Object? couleur = freezed,
+    Object? analyse = freezed,
+    Object? sensation = freezed,
+    Object? sensationsAutre = freezed,
+    Object? sang = freezed,
+    Object? mucus = freezed,
+    Object? mucusAutre = freezed,
     Object? douleurs = null,
-    Object? douleursAutre = null,
+    Object? douleursAutre = freezed,
     Object? evenements = null,
-    Object? temperatureBasale = null,
-    Object? humeur = null,
-    Object? humeurAutre = null,
-    Object? notesConfidentielles = null,
-    Object? commentaireAnimatrice = null,
+    Object? temperatureBasale = freezed,
+    Object? humeur = freezed,
+    Object? humeurAutre = freezed,
+    Object? notesConfidentielles = freezed,
+    Object? commentaireAnimatrice = freezed,
   }) {
     return _then(_$_ObservationDTO(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      date: null == date
+      date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as int,
-      couleur: null == couleur
+              as int?,
+      couleur: freezed == couleur
           ? _value.couleur
           : couleur // ignore: cast_nullable_to_non_nullable
-              as String,
-      analyse: null == analyse
+              as String?,
+      analyse: freezed == analyse
           ? _value.analyse
           : analyse // ignore: cast_nullable_to_non_nullable
-              as String,
-      sensation: null == sensation
+              as String?,
+      sensation: freezed == sensation
           ? _value.sensation
           : sensation // ignore: cast_nullable_to_non_nullable
-              as String,
-      sensationsAutre: null == sensationsAutre
+              as String?,
+      sensationsAutre: freezed == sensationsAutre
           ? _value.sensationsAutre
           : sensationsAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      sang: null == sang
+              as String?,
+      sang: freezed == sang
           ? _value.sang
           : sang // ignore: cast_nullable_to_non_nullable
-              as String,
-      mucus: null == mucus
+              as String?,
+      mucus: freezed == mucus
           ? _value.mucus
           : mucus // ignore: cast_nullable_to_non_nullable
-              as String,
-      mucusAutre: null == mucusAutre
+              as String?,
+      mucusAutre: freezed == mucusAutre
           ? _value.mucusAutre
           : mucusAutre // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       douleurs: null == douleurs
           ? _value.douleurs
           : douleurs // ignore: cast_nullable_to_non_nullable
               as String,
-      douleursAutre: null == douleursAutre
+      douleursAutre: freezed == douleursAutre
           ? _value.douleursAutre
           : douleursAutre // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       evenements: null == evenements
           ? _value.evenements
           : evenements // ignore: cast_nullable_to_non_nullable
               as String,
-      temperatureBasale: null == temperatureBasale
+      temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
-              as int,
-      humeur: null == humeur
+              as int?,
+      humeur: freezed == humeur
           ? _value.humeur
           : humeur // ignore: cast_nullable_to_non_nullable
-              as String,
-      humeurAutre: null == humeurAutre
+              as String?,
+      humeurAutre: freezed == humeurAutre
           ? _value.humeurAutre
           : humeurAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      notesConfidentielles: null == notesConfidentielles
+              as String?,
+      notesConfidentielles: freezed == notesConfidentielles
           ? _value.notesConfidentielles
           : notesConfidentielles // ignore: cast_nullable_to_non_nullable
-              as String,
-      commentaireAnimatrice: null == commentaireAnimatrice
+              as String?,
+      commentaireAnimatrice: freezed == commentaireAnimatrice
           ? _value.commentaireAnimatrice
           : commentaireAnimatrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -335,37 +335,37 @@ class _$_ObservationDTO extends _ObservationDTO {
   @JsonKey(ignore: true)
   final String? id;
   @override
-  final int date;
+  final int? date;
   @override
-  final String couleur;
+  final String? couleur;
   @override
-  final String analyse;
+  final String? analyse;
   @override
-  final String sensation;
+  final String? sensation;
   @override
-  final String sensationsAutre;
+  final String? sensationsAutre;
   @override
-  final String sang;
+  final String? sang;
   @override
-  final String mucus;
+  final String? mucus;
   @override
-  final String mucusAutre;
+  final String? mucusAutre;
   @override
   final String douleurs;
   @override
-  final String douleursAutre;
+  final String? douleursAutre;
   @override
   final String evenements;
   @override
-  final int temperatureBasale;
+  final int? temperatureBasale;
   @override
-  final String humeur;
+  final String? humeur;
   @override
-  final String humeurAutre;
+  final String? humeurAutre;
   @override
-  final String notesConfidentielles;
+  final String? notesConfidentielles;
   @override
-  final String commentaireAnimatrice;
+  final String? commentaireAnimatrice;
 
   @override
   String toString() {
@@ -445,22 +445,22 @@ class _$_ObservationDTO extends _ObservationDTO {
 abstract class _ObservationDTO extends ObservationDTO {
   const factory _ObservationDTO(
       {@JsonKey(ignore: true) final String? id,
-      required final int date,
-      required final String couleur,
-      required final String analyse,
-      required final String sensation,
-      required final String sensationsAutre,
-      required final String sang,
-      required final String mucus,
-      required final String mucusAutre,
+      required final int? date,
+      required final String? couleur,
+      required final String? analyse,
+      required final String? sensation,
+      required final String? sensationsAutre,
+      required final String? sang,
+      required final String? mucus,
+      required final String? mucusAutre,
       required final String douleurs,
-      required final String douleursAutre,
+      required final String? douleursAutre,
       required final String evenements,
-      required final int temperatureBasale,
-      required final String humeur,
-      required final String humeurAutre,
-      required final String notesConfidentielles,
-      required final String commentaireAnimatrice}) = _$_ObservationDTO;
+      required final int? temperatureBasale,
+      required final String? humeur,
+      required final String? humeurAutre,
+      required final String? notesConfidentielles,
+      required final String? commentaireAnimatrice}) = _$_ObservationDTO;
   const _ObservationDTO._() : super._();
 
   factory _ObservationDTO.fromJson(Map<String, dynamic> json) =
@@ -470,37 +470,37 @@ abstract class _ObservationDTO extends ObservationDTO {
   @JsonKey(ignore: true)
   String? get id;
   @override
-  int get date;
+  int? get date;
   @override
-  String get couleur;
+  String? get couleur;
   @override
-  String get analyse;
+  String? get analyse;
   @override
-  String get sensation;
+  String? get sensation;
   @override
-  String get sensationsAutre;
+  String? get sensationsAutre;
   @override
-  String get sang;
+  String? get sang;
   @override
-  String get mucus;
+  String? get mucus;
   @override
-  String get mucusAutre;
+  String? get mucusAutre;
   @override
   String get douleurs;
   @override
-  String get douleursAutre;
+  String? get douleursAutre;
   @override
   String get evenements;
   @override
-  int get temperatureBasale;
+  int? get temperatureBasale;
   @override
-  String get humeur;
+  String? get humeur;
   @override
-  String get humeurAutre;
+  String? get humeurAutre;
   @override
-  String get notesConfidentielles;
+  String? get notesConfidentielles;
   @override
-  String get commentaireAnimatrice;
+  String? get commentaireAnimatrice;
   @override
   @JsonKey(ignore: true)
   _$$_ObservationDTOCopyWith<_$_ObservationDTO> get copyWith =>

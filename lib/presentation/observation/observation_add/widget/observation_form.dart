@@ -1,14 +1,21 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:teenstar/APPLICATION/auth/register_form_notifier.dart';
+import 'package:teenstar/DOMAIN/observation/value_objects.dart';
 import 'package:teenstar/PRESENTATION/auth/widget/flushbar_auth_failure.dart';
 import 'package:teenstar/APPLICATION/observation/add_observation_form_notifier.dart';
+import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
+import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/text_utils.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:auto_route/src/router/auto_router_x.dart';
+
+import 'choix_form_field.dart';
 
 class ObservationFormProvider extends ConsumerWidget {
   const ObservationFormProvider({
@@ -49,183 +56,134 @@ class ObservationForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(observationFormNotifierProvider);
+    final form = ref.watch(observationFormNotifierProvider);
+    final notifierForm = ref.read(observationFormNotifierProvider.notifier);
     return Form(
       autovalidateMode: AutovalidateMode.always,
       child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
+        Center(child: Text("Cycle 3", style: Theme.of(context).textTheme.headline3)),
         const SizedBox(height: 8),
-        TextFormField(
-          decoration: const InputDecoration(labelText: 'couleur'),
-          autocorrect: false,
-          textInputAction: TextInputAction.next,
-          onChanged: (value) {
-            ref.read(observationFormNotifierProvider.notifier).couleurChanged(value);
-          },
-          validator: (_) {
-            final notifier = ref.read(observationFormNotifierProvider);
-            if (notifier.showErrorMessages) {
-              return notifier.observation.couleur.value.fold(
-                (f) => f.maybeMap(
-                  exceedingLenghtOrNull: (_) => 'couleur invalide',
-                  orElse: () => null,
-                ),
-                (_) => null,
-              );
-            } else
-              return null;
-          },
+        Row(
+          children: [
+            Text("Date:", style: Theme.of(context).textTheme.headline4),
+            Expanded(child: Container()),
+            DefaultPanel(
+              child: Text(
+                  AppDateUtils.isToday(form.date) ? 'Aujourd\'hui' : AppDateUtils.formatDate(form.date),
+                  style: Theme.of(context).textTheme.headline5),
+            )
+          ],
         ),
-        const SizedBox(height: 8),
-        TextFormField(
-          decoration: const InputDecoration(labelText: 'analyse'),
-          autocorrect: false,
-          textInputAction: TextInputAction.next,
-          onChanged: (value) {
-            ref.read(observationFormNotifierProvider.notifier).analyseChanged(value);
-          },
-          validator: (_) {
-            final notifier = ref.read(observationFormNotifierProvider);
-            if (notifier.showErrorMessages) {
-              return notifier.observation.analyse.value.fold(
-                (f) => f.maybeMap(
-                  exceedingLenghtOrNull: (_) => 'analyse invalide',
-                  orElse: () => null,
-                ),
-                (_) => null,
-              );
-            } else
-              return null;
-          },
+        SpaceH30(),
+
+        //SENSATION
+        Text("Sensation", style: Theme.of(context).textTheme.headline4),
+        const SizedBox(height: 5),
+        ChoixFormField(
+          choix: SensationState.values.where((state) => state != SensationState.none).toList(),
+          onSelect: (state) => notifierForm.sensationChanged(Sensation(state as SensationState)),
+          currentState: form.sensation.getOrCrash(),
+          titre: (state) => TextUtils.toFirstLettersUpperCase((state as SensationState).toDisplayString()),
         ),
-        const SizedBox(height: 8),
-        TextFormField(
-          decoration: const InputDecoration(labelText: 'sensation'),
-          autocorrect: false,
-          textInputAction: TextInputAction.next,
-          onChanged: (value) {
-            ref.read(observationFormNotifierProvider.notifier).sensationChanged(value);
-          },
-          validator: (_) {
-            final notifier = ref.read(observationFormNotifierProvider);
-            if (notifier.showErrorMessages) {
-              return notifier.observation.sensation.value.fold(
-                (f) => f.maybeMap(
-                  exceedingLenghtOrNull: (_) => 'sensation invalide',
-                  orElse: () => null,
-                ),
-                (_) => null,
-              );
-            } else
-              return null;
-          },
+        if (form.sensation.getOrCrash() == SensationState.autre)
+          TextFormField(
+            autocorrect: false,
+            onChanged: (String value) => notifierForm.sensationsAutreChanged(value),
+          ),
+        SpaceH10(),
+
+        //SANG
+        Text("Sang", style: Theme.of(context).textTheme.headline4),
+        const SizedBox(height: 5),
+        ChoixFormField(
+          choix: SangState.values.where((state) => state != SangState.none).toList(),
+          onSelect: (state) => notifierForm.sangChanged(Sang(state as SangState)),
+          currentState: form.sang.getOrCrash(),
+          titre: (state) => TextUtils.toFirstLettersUpperCase((state as SangState).toDisplayString()),
         ),
-        const SizedBox(height: 8),
-        TextFormField(
-          decoration: const InputDecoration(labelText: 'sang'),
-          autocorrect: false,
-          textInputAction: TextInputAction.next,
-          onChanged: (value) {
-            ref.read(observationFormNotifierProvider.notifier).sangChanged(value);
-          },
-          validator: (_) {
-            final notifier = ref.read(observationFormNotifierProvider);
-            if (notifier.showErrorMessages) {
-              return notifier.observation.sang.value.fold(
-                (f) => f.maybeMap(
-                  exceedingLenghtOrNull: (_) => 'sang invalide',
-                  orElse: () => null,
-                ),
-                (_) => null,
-              );
-            } else
-              return null;
-          },
+        SpaceH10(),
+
+        //MUCUS
+        Text("Mucus", style: Theme.of(context).textTheme.headline4),
+        const SizedBox(height: 5),
+        ChoixFormField(
+          choix: MucusState.values.where((state) => state != MucusState.none).toList(),
+          onSelect: (state) => notifierForm.mucusChanged(Mucus(state as MucusState)),
+          currentState: form.mucus.getOrCrash(),
+          titre: (state) => (state as MucusState).toDisplayString(),
         ),
-        const SizedBox(height: 8),
-        TextFormField(
-          decoration: const InputDecoration(labelText: 'mucus'),
-          autocorrect: false,
-          textInputAction: TextInputAction.next,
-          onChanged: (value) {
-            ref.read(observationFormNotifierProvider.notifier).mucusChanged(value);
-          },
-          validator: (_) {
-            final notifier = ref.read(observationFormNotifierProvider);
-            if (notifier.showErrorMessages) {
-              return notifier.observation.mucus.value.fold(
-                (f) => f.maybeMap(
-                  exceedingLenghtOrNull: (_) => 'mucus invalide',
-                  orElse: () => null,
-                ),
-                (_) => null,
-              );
-            } else
-              return null;
-          },
+        if (form.mucus.getOrCrash() == MucusState.autre)
+          TextFormField(
+            autocorrect: false,
+            onChanged: (String value) => notifierForm.mucusAutreChanged(value),
+          ),
+        SpaceH10(),
+
+        //DOULEURS
+        Text("Douleurs", style: Theme.of(context).textTheme.headline4),
+        const SizedBox(height: 5),
+        ChoixMultipleFormField(
+          choix: DouleurState.values.where((state) => state != DouleurState.none).toList(),
+          onSelect: (state) => notifierForm.douleursChanged(state as DouleurState),
+          currentStates: form.douleurs.map((e) => e.getOrCrash()).toList(),
+          titre: (state) => (state as DouleurState).toDisplayString(),
         ),
-        const SizedBox(height: 8),
-        TextFormField(
-          decoration: const InputDecoration(labelText: 'douleurs'),
-          autocorrect: false,
-          textInputAction: TextInputAction.next,
-          onChanged: (value) {
-            ref.read(observationFormNotifierProvider.notifier).douleursChanged(value);
-          },
-          validator: (_) {
-            final notifier = ref.read(observationFormNotifierProvider);
-            if (notifier.showErrorMessages) {
-              return null;
-            } else
-              return null;
-          },
+        SpaceH10(),
+
+        //EVENEMENTS
+        Text("Evénements", style: Theme.of(context).textTheme.headline4),
+        const SizedBox(height: 5),
+        ChoixMultipleFormField(
+          choix: EvenementState.values.where((state) => state != EvenementState.none).toList(),
+          onSelect: (state) => notifierForm.evenementsChanged(state as EvenementState),
+          currentStates: form.evenements.map((e) => e.getOrCrash()).toList(),
+          titre: (state) => (state as EvenementState).toDisplayString(),
         ),
-        const SizedBox(height: 8),
-        TextFormField(
-          decoration: const InputDecoration(labelText: 'evenements'),
-          autocorrect: false,
-          textInputAction: TextInputAction.next,
-          onChanged: (value) {
-            ref.read(observationFormNotifierProvider.notifier).evenementsChanged(value);
-          },
-          validator: (_) {
-            final notifier = ref.read(observationFormNotifierProvider);
-            if (notifier.showErrorMessages) {
-              return null;
-            } else
-              return null;
-          },
+        SpaceH10(),
+
+        //TEMPERATURE BASALE
+        Row(
+          children: [
+            Text("Température Basale", style: Theme.of(context).textTheme.headline5),
+            Expanded(child: Container()),
+            Container(
+              width: 60,
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                autocorrect: false,
+                onChanged: (value) => notifierForm.temperatureBasaleChanged(int.parse(value)),
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 8),
-        TextFormField(
-          decoration: const InputDecoration(labelText: 'humeur'),
-          autocorrect: false,
-          textInputAction: TextInputAction.next,
-          onChanged: (value) {
-            ref.read(observationFormNotifierProvider.notifier).humeurChanged(value);
-          },
-          validator: (_) {
-            final notifier = ref.read(observationFormNotifierProvider);
-            if (notifier.showErrorMessages) {
-              return notifier.observation.humeur.value.fold(
-                (f) => f.maybeMap(
-                  exceedingLenghtOrNull: (_) => 'humeur invalide',
-                  orElse: () => null,
-                ),
-                (_) => null,
-              );
-            } else
-              return null;
-          },
+        SpaceH20(),
+
+        //HUMEUR
+        Text("Humeur", style: Theme.of(context).textTheme.headline4),
+        const SizedBox(height: 5),
+        ChoixFormField(
+          choix: HumeurState.values.where((state) => state != HumeurState.none).toList(),
+          onSelect: (state) => notifierForm.humeurChanged(Humeur(state as HumeurState)),
+          currentState: form.humeur.getOrCrash(),
+          titre: (state) => (state as HumeurState).toDisplayString(),
         ),
-        const SizedBox(height: 8), //insert-field-complete
+        if (form.humeur.getOrCrash() == HumeurState.autre)
+          TextFormField(
+            autocorrect: false,
+            onChanged: (String value) => notifierForm.humeurAutreChanged(value),
+          ),
+        SpaceH10(),
+
+        //insert-field-complete
+
         const SizedBox(height: 14),
         Align(
           child: ElevatedButton(
             onPressed: () {
-              ref.read(observationFormNotifierProvider.notifier).addObservationPressed();
+              notifierForm.addObservationPressed();
             },
             style: buttonNormalConfirm,
-            child: const Text("Enregistrer l'observation"),
+            child: const Text("Enregistrer l'Observation"),
           ),
         ),
         const SizedBox(height: 12),

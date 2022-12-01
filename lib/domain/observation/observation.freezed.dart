@@ -17,22 +17,22 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Observation {
   UniqueId get id => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError;
-  CouleurAnalyse get couleur => throw _privateConstructorUsedError;
-  CouleurAnalyse get analyse => throw _privateConstructorUsedError;
-  Sensation get sensation => throw _privateConstructorUsedError;
-  String get sensationsAutre => throw _privateConstructorUsedError;
-  Sang get sang => throw _privateConstructorUsedError;
-  Mucus get mucus => throw _privateConstructorUsedError;
-  String get mucusAutre => throw _privateConstructorUsedError;
-  List<Douleur> get douleurs => throw _privateConstructorUsedError;
-  String get douleursAutre => throw _privateConstructorUsedError;
-  List<Evenement> get evenements => throw _privateConstructorUsedError;
-  int get temperatureBasale => throw _privateConstructorUsedError;
-  Humeur get humeur => throw _privateConstructorUsedError;
-  String get humeurAutre => throw _privateConstructorUsedError;
-  String get notesConfidentielles => throw _privateConstructorUsedError;
-  String get commentaireAnimatrice => throw _privateConstructorUsedError;
+  DateTime? get date => throw _privateConstructorUsedError;
+  CouleurAnalyse? get couleur => throw _privateConstructorUsedError;
+  CouleurAnalyse? get analyse => throw _privateConstructorUsedError;
+  Sensation? get sensation => throw _privateConstructorUsedError;
+  String? get sensationsAutre => throw _privateConstructorUsedError;
+  Sang? get sang => throw _privateConstructorUsedError;
+  Mucus? get mucus => throw _privateConstructorUsedError;
+  String? get mucusAutre => throw _privateConstructorUsedError;
+  List<Douleur>? get douleurs => throw _privateConstructorUsedError;
+  String? get douleursAutre => throw _privateConstructorUsedError;
+  List<Evenement>? get evenements => throw _privateConstructorUsedError;
+  int? get temperatureBasale => throw _privateConstructorUsedError;
+  Humeur? get humeur => throw _privateConstructorUsedError;
+  String? get humeurAutre => throw _privateConstructorUsedError;
+  String? get notesConfidentielles => throw _privateConstructorUsedError;
+  String? get commentaireAnimatrice => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ObservationCopyWith<Observation> get copyWith =>
@@ -47,22 +47,22 @@ abstract class $ObservationCopyWith<$Res> {
   @useResult
   $Res call(
       {UniqueId id,
-      DateTime date,
-      CouleurAnalyse couleur,
-      CouleurAnalyse analyse,
-      Sensation sensation,
-      String sensationsAutre,
-      Sang sang,
-      Mucus mucus,
-      String mucusAutre,
-      List<Douleur> douleurs,
-      String douleursAutre,
-      List<Evenement> evenements,
-      int temperatureBasale,
-      Humeur humeur,
-      String humeurAutre,
-      String notesConfidentielles,
-      String commentaireAnimatrice});
+      DateTime? date,
+      CouleurAnalyse? couleur,
+      CouleurAnalyse? analyse,
+      Sensation? sensation,
+      String? sensationsAutre,
+      Sang? sang,
+      Mucus? mucus,
+      String? mucusAutre,
+      List<Douleur>? douleurs,
+      String? douleursAutre,
+      List<Evenement>? evenements,
+      int? temperatureBasale,
+      Humeur? humeur,
+      String? humeurAutre,
+      String? notesConfidentielles,
+      String? commentaireAnimatrice});
 }
 
 /// @nodoc
@@ -79,92 +79,92 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
   @override
   $Res call({
     Object? id = null,
-    Object? date = null,
-    Object? couleur = null,
-    Object? analyse = null,
-    Object? sensation = null,
-    Object? sensationsAutre = null,
-    Object? sang = null,
-    Object? mucus = null,
-    Object? mucusAutre = null,
-    Object? douleurs = null,
-    Object? douleursAutre = null,
-    Object? evenements = null,
-    Object? temperatureBasale = null,
-    Object? humeur = null,
-    Object? humeurAutre = null,
-    Object? notesConfidentielles = null,
-    Object? commentaireAnimatrice = null,
+    Object? date = freezed,
+    Object? couleur = freezed,
+    Object? analyse = freezed,
+    Object? sensation = freezed,
+    Object? sensationsAutre = freezed,
+    Object? sang = freezed,
+    Object? mucus = freezed,
+    Object? mucusAutre = freezed,
+    Object? douleurs = freezed,
+    Object? douleursAutre = freezed,
+    Object? evenements = freezed,
+    Object? temperatureBasale = freezed,
+    Object? humeur = freezed,
+    Object? humeurAutre = freezed,
+    Object? notesConfidentielles = freezed,
+    Object? commentaireAnimatrice = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as UniqueId,
-      date: null == date
+      date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      couleur: null == couleur
+              as DateTime?,
+      couleur: freezed == couleur
           ? _value.couleur
           : couleur // ignore: cast_nullable_to_non_nullable
-              as CouleurAnalyse,
-      analyse: null == analyse
+              as CouleurAnalyse?,
+      analyse: freezed == analyse
           ? _value.analyse
           : analyse // ignore: cast_nullable_to_non_nullable
-              as CouleurAnalyse,
-      sensation: null == sensation
+              as CouleurAnalyse?,
+      sensation: freezed == sensation
           ? _value.sensation
           : sensation // ignore: cast_nullable_to_non_nullable
-              as Sensation,
-      sensationsAutre: null == sensationsAutre
+              as Sensation?,
+      sensationsAutre: freezed == sensationsAutre
           ? _value.sensationsAutre
           : sensationsAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      sang: null == sang
+              as String?,
+      sang: freezed == sang
           ? _value.sang
           : sang // ignore: cast_nullable_to_non_nullable
-              as Sang,
-      mucus: null == mucus
+              as Sang?,
+      mucus: freezed == mucus
           ? _value.mucus
           : mucus // ignore: cast_nullable_to_non_nullable
-              as Mucus,
-      mucusAutre: null == mucusAutre
+              as Mucus?,
+      mucusAutre: freezed == mucusAutre
           ? _value.mucusAutre
           : mucusAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      douleurs: null == douleurs
+              as String?,
+      douleurs: freezed == douleurs
           ? _value.douleurs
           : douleurs // ignore: cast_nullable_to_non_nullable
-              as List<Douleur>,
-      douleursAutre: null == douleursAutre
+              as List<Douleur>?,
+      douleursAutre: freezed == douleursAutre
           ? _value.douleursAutre
           : douleursAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      evenements: null == evenements
+              as String?,
+      evenements: freezed == evenements
           ? _value.evenements
           : evenements // ignore: cast_nullable_to_non_nullable
-              as List<Evenement>,
-      temperatureBasale: null == temperatureBasale
+              as List<Evenement>?,
+      temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
-              as int,
-      humeur: null == humeur
+              as int?,
+      humeur: freezed == humeur
           ? _value.humeur
           : humeur // ignore: cast_nullable_to_non_nullable
-              as Humeur,
-      humeurAutre: null == humeurAutre
+              as Humeur?,
+      humeurAutre: freezed == humeurAutre
           ? _value.humeurAutre
           : humeurAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      notesConfidentielles: null == notesConfidentielles
+              as String?,
+      notesConfidentielles: freezed == notesConfidentielles
           ? _value.notesConfidentielles
           : notesConfidentielles // ignore: cast_nullable_to_non_nullable
-              as String,
-      commentaireAnimatrice: null == commentaireAnimatrice
+              as String?,
+      commentaireAnimatrice: freezed == commentaireAnimatrice
           ? _value.commentaireAnimatrice
           : commentaireAnimatrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -179,22 +179,22 @@ abstract class _$$_ObservationCopyWith<$Res>
   @useResult
   $Res call(
       {UniqueId id,
-      DateTime date,
-      CouleurAnalyse couleur,
-      CouleurAnalyse analyse,
-      Sensation sensation,
-      String sensationsAutre,
-      Sang sang,
-      Mucus mucus,
-      String mucusAutre,
-      List<Douleur> douleurs,
-      String douleursAutre,
-      List<Evenement> evenements,
-      int temperatureBasale,
-      Humeur humeur,
-      String humeurAutre,
-      String notesConfidentielles,
-      String commentaireAnimatrice});
+      DateTime? date,
+      CouleurAnalyse? couleur,
+      CouleurAnalyse? analyse,
+      Sensation? sensation,
+      String? sensationsAutre,
+      Sang? sang,
+      Mucus? mucus,
+      String? mucusAutre,
+      List<Douleur>? douleurs,
+      String? douleursAutre,
+      List<Evenement>? evenements,
+      int? temperatureBasale,
+      Humeur? humeur,
+      String? humeurAutre,
+      String? notesConfidentielles,
+      String? commentaireAnimatrice});
 }
 
 /// @nodoc
@@ -209,92 +209,92 @@ class __$$_ObservationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? date = null,
-    Object? couleur = null,
-    Object? analyse = null,
-    Object? sensation = null,
-    Object? sensationsAutre = null,
-    Object? sang = null,
-    Object? mucus = null,
-    Object? mucusAutre = null,
-    Object? douleurs = null,
-    Object? douleursAutre = null,
-    Object? evenements = null,
-    Object? temperatureBasale = null,
-    Object? humeur = null,
-    Object? humeurAutre = null,
-    Object? notesConfidentielles = null,
-    Object? commentaireAnimatrice = null,
+    Object? date = freezed,
+    Object? couleur = freezed,
+    Object? analyse = freezed,
+    Object? sensation = freezed,
+    Object? sensationsAutre = freezed,
+    Object? sang = freezed,
+    Object? mucus = freezed,
+    Object? mucusAutre = freezed,
+    Object? douleurs = freezed,
+    Object? douleursAutre = freezed,
+    Object? evenements = freezed,
+    Object? temperatureBasale = freezed,
+    Object? humeur = freezed,
+    Object? humeurAutre = freezed,
+    Object? notesConfidentielles = freezed,
+    Object? commentaireAnimatrice = freezed,
   }) {
     return _then(_$_Observation(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as UniqueId,
-      date: null == date
+      date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      couleur: null == couleur
+              as DateTime?,
+      couleur: freezed == couleur
           ? _value.couleur
           : couleur // ignore: cast_nullable_to_non_nullable
-              as CouleurAnalyse,
-      analyse: null == analyse
+              as CouleurAnalyse?,
+      analyse: freezed == analyse
           ? _value.analyse
           : analyse // ignore: cast_nullable_to_non_nullable
-              as CouleurAnalyse,
-      sensation: null == sensation
+              as CouleurAnalyse?,
+      sensation: freezed == sensation
           ? _value.sensation
           : sensation // ignore: cast_nullable_to_non_nullable
-              as Sensation,
-      sensationsAutre: null == sensationsAutre
+              as Sensation?,
+      sensationsAutre: freezed == sensationsAutre
           ? _value.sensationsAutre
           : sensationsAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      sang: null == sang
+              as String?,
+      sang: freezed == sang
           ? _value.sang
           : sang // ignore: cast_nullable_to_non_nullable
-              as Sang,
-      mucus: null == mucus
+              as Sang?,
+      mucus: freezed == mucus
           ? _value.mucus
           : mucus // ignore: cast_nullable_to_non_nullable
-              as Mucus,
-      mucusAutre: null == mucusAutre
+              as Mucus?,
+      mucusAutre: freezed == mucusAutre
           ? _value.mucusAutre
           : mucusAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      douleurs: null == douleurs
+              as String?,
+      douleurs: freezed == douleurs
           ? _value._douleurs
           : douleurs // ignore: cast_nullable_to_non_nullable
-              as List<Douleur>,
-      douleursAutre: null == douleursAutre
+              as List<Douleur>?,
+      douleursAutre: freezed == douleursAutre
           ? _value.douleursAutre
           : douleursAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      evenements: null == evenements
+              as String?,
+      evenements: freezed == evenements
           ? _value._evenements
           : evenements // ignore: cast_nullable_to_non_nullable
-              as List<Evenement>,
-      temperatureBasale: null == temperatureBasale
+              as List<Evenement>?,
+      temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
-              as int,
-      humeur: null == humeur
+              as int?,
+      humeur: freezed == humeur
           ? _value.humeur
           : humeur // ignore: cast_nullable_to_non_nullable
-              as Humeur,
-      humeurAutre: null == humeurAutre
+              as Humeur?,
+      humeurAutre: freezed == humeurAutre
           ? _value.humeurAutre
           : humeurAutre // ignore: cast_nullable_to_non_nullable
-              as String,
-      notesConfidentielles: null == notesConfidentielles
+              as String?,
+      notesConfidentielles: freezed == notesConfidentielles
           ? _value.notesConfidentielles
           : notesConfidentielles // ignore: cast_nullable_to_non_nullable
-              as String,
-      commentaireAnimatrice: null == commentaireAnimatrice
+              as String?,
+      commentaireAnimatrice: freezed == commentaireAnimatrice
           ? _value.commentaireAnimatrice
           : commentaireAnimatrice // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -312,9 +312,9 @@ class _$_Observation extends _Observation {
       required this.sang,
       required this.mucus,
       required this.mucusAutre,
-      required final List<Douleur> douleurs,
+      required final List<Douleur>? douleurs,
       required this.douleursAutre,
-      required final List<Evenement> evenements,
+      required final List<Evenement>? evenements,
       required this.temperatureBasale,
       required this.humeur,
       required this.humeurAutre,
@@ -327,47 +327,51 @@ class _$_Observation extends _Observation {
   @override
   final UniqueId id;
   @override
-  final DateTime date;
+  final DateTime? date;
   @override
-  final CouleurAnalyse couleur;
+  final CouleurAnalyse? couleur;
   @override
-  final CouleurAnalyse analyse;
+  final CouleurAnalyse? analyse;
   @override
-  final Sensation sensation;
+  final Sensation? sensation;
   @override
-  final String sensationsAutre;
+  final String? sensationsAutre;
   @override
-  final Sang sang;
+  final Sang? sang;
   @override
-  final Mucus mucus;
+  final Mucus? mucus;
   @override
-  final String mucusAutre;
-  final List<Douleur> _douleurs;
+  final String? mucusAutre;
+  final List<Douleur>? _douleurs;
   @override
-  List<Douleur> get douleurs {
+  List<Douleur>? get douleurs {
+    final value = _douleurs;
+    if (value == null) return null;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_douleurs);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final String douleursAutre;
-  final List<Evenement> _evenements;
+  final String? douleursAutre;
+  final List<Evenement>? _evenements;
   @override
-  List<Evenement> get evenements {
+  List<Evenement>? get evenements {
+    final value = _evenements;
+    if (value == null) return null;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_evenements);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int temperatureBasale;
+  final int? temperatureBasale;
   @override
-  final Humeur humeur;
+  final Humeur? humeur;
   @override
-  final String humeurAutre;
+  final String? humeurAutre;
   @override
-  final String notesConfidentielles;
+  final String? notesConfidentielles;
   @override
-  final String commentaireAnimatrice;
+  final String? commentaireAnimatrice;
 
   @override
   String toString() {
@@ -438,58 +442,58 @@ class _$_Observation extends _Observation {
 abstract class _Observation extends Observation {
   const factory _Observation(
       {required final UniqueId id,
-      required final DateTime date,
-      required final CouleurAnalyse couleur,
-      required final CouleurAnalyse analyse,
-      required final Sensation sensation,
-      required final String sensationsAutre,
-      required final Sang sang,
-      required final Mucus mucus,
-      required final String mucusAutre,
-      required final List<Douleur> douleurs,
-      required final String douleursAutre,
-      required final List<Evenement> evenements,
-      required final int temperatureBasale,
-      required final Humeur humeur,
-      required final String humeurAutre,
-      required final String notesConfidentielles,
-      required final String commentaireAnimatrice}) = _$_Observation;
+      required final DateTime? date,
+      required final CouleurAnalyse? couleur,
+      required final CouleurAnalyse? analyse,
+      required final Sensation? sensation,
+      required final String? sensationsAutre,
+      required final Sang? sang,
+      required final Mucus? mucus,
+      required final String? mucusAutre,
+      required final List<Douleur>? douleurs,
+      required final String? douleursAutre,
+      required final List<Evenement>? evenements,
+      required final int? temperatureBasale,
+      required final Humeur? humeur,
+      required final String? humeurAutre,
+      required final String? notesConfidentielles,
+      required final String? commentaireAnimatrice}) = _$_Observation;
   const _Observation._() : super._();
 
   @override
   UniqueId get id;
   @override
-  DateTime get date;
+  DateTime? get date;
   @override
-  CouleurAnalyse get couleur;
+  CouleurAnalyse? get couleur;
   @override
-  CouleurAnalyse get analyse;
+  CouleurAnalyse? get analyse;
   @override
-  Sensation get sensation;
+  Sensation? get sensation;
   @override
-  String get sensationsAutre;
+  String? get sensationsAutre;
   @override
-  Sang get sang;
+  Sang? get sang;
   @override
-  Mucus get mucus;
+  Mucus? get mucus;
   @override
-  String get mucusAutre;
+  String? get mucusAutre;
   @override
-  List<Douleur> get douleurs;
+  List<Douleur>? get douleurs;
   @override
-  String get douleursAutre;
+  String? get douleursAutre;
   @override
-  List<Evenement> get evenements;
+  List<Evenement>? get evenements;
   @override
-  int get temperatureBasale;
+  int? get temperatureBasale;
   @override
-  Humeur get humeur;
+  Humeur? get humeur;
   @override
-  String get humeurAutre;
+  String? get humeurAutre;
   @override
-  String get notesConfidentielles;
+  String? get notesConfidentielles;
   @override
-  String get commentaireAnimatrice;
+  String? get commentaireAnimatrice;
   @override
   @JsonKey(ignore: true)
   _$$_ObservationCopyWith<_$_Observation> get copyWith =>

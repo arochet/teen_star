@@ -7,19 +7,44 @@ import 'package:teenstar/DOMAIN/observation/observation.dart';
 import 'package:teenstar/DOMAIN/observation/observation_failure.dart';
 import 'package:teenstar/DOMAIN/observation/value_objects.dart';
 import 'package:teenstar/INFRASTRUCTURE/observation/observation_repository.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 part 'add_observation_form_notifier.freezed.dart';
 
 @freezed
 class AddObservationFormData with _$AddObservationFormData {
   const factory AddObservationFormData({
-    required Observation observation,
+    required DateTime date,
+    required Sensation sensation,
+    required String sensationsAutre,
+    required Sang sang,
+    required Mucus mucus,
+    required String mucusAutre,
+    required List<Douleur> douleurs,
+    required String? douleursAutre,
+    required List<Evenement> evenements,
+    required int? temperatureBasale,
+    required Humeur humeur,
+    required String humeurAutre,
+    required String notesConfidentielles,
     required bool showErrorMessages,
     required bool isSubmitting,
     required Option<Either<ObservationFailure, Unit>> authFailureOrSuccessOption,
   }) = _AddObservationFormData;
 
   factory AddObservationFormData.initial() => AddObservationFormData(
-      observation: Observation.empty(),
+      date: AppDateUtils.todayAtMidnight,
+      sensation: Sensation.init(),
+      sensationsAutre: '',
+      sang: Sang.init(),
+      mucus: Mucus.init(),
+      mucusAutre: '',
+      douleurs: [],
+      douleursAutre: '',
+      evenements: [],
+      temperatureBasale: null,
+      humeur: Humeur.init(),
+      humeurAutre: '',
+      notesConfidentielles: '',
       showErrorMessages: false,
       isSubmitting: false,
       authFailureOrSuccessOption: none());
@@ -31,95 +56,70 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
   ObservationFormNotifier(this._iObservationRepository) : super(AddObservationFormData.initial());
 
   dateChanged(int param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(date: DateTime.fromMillisecondsSinceEpoch(param)),
-        authFailureOrSuccessOption: none());
+    state =
+        state.copyWith(date: DateTime.fromMillisecondsSinceEpoch(param), authFailureOrSuccessOption: none());
   }
 
-  couleurChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(couleur: CouleurAnalyse.fromString(param)),
-        authFailureOrSuccessOption: none());
-  }
-
-  analyseChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(analyse: CouleurAnalyse.fromString(param)),
-        authFailureOrSuccessOption: none());
-  }
-
-  sensationChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(sensation: Sensation.fromString(param)),
-        authFailureOrSuccessOption: none());
+  sensationChanged(Sensation sensation) {
+    state = state.copyWith(sensation: sensation, authFailureOrSuccessOption: none());
   }
 
   sensationsAutreChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(sensationsAutre: param), authFailureOrSuccessOption: none());
+    state = state.copyWith(sensationsAutre: param, authFailureOrSuccessOption: none());
   }
 
-  sangChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(sang: Sang.fromString(param)),
-        authFailureOrSuccessOption: none());
+  sangChanged(Sang param) {
+    state = state.copyWith(sang: param, authFailureOrSuccessOption: none());
   }
 
-  mucusChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(mucus: Mucus.fromString(param)),
-        authFailureOrSuccessOption: none());
+  mucusChanged(Mucus param) {
+    state = state.copyWith(mucus: param, authFailureOrSuccessOption: none());
   }
 
   mucusAutreChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(mucusAutre: param), authFailureOrSuccessOption: none());
+    state = state.copyWith(mucusAutre: param, authFailureOrSuccessOption: none());
   }
 
-  douleursChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(douleurs: [Douleur(DouleurState.aucune)]),
-        authFailureOrSuccessOption: none());
+  douleursChanged(DouleurState param) {
+    List<Douleur> newList = [...state.douleurs];
+    newList = newList.toSet().toList();
+    if (newList.contains(Douleur(param))) {
+      newList.remove(Douleur(param));
+    } else {
+      newList.add(Douleur(param));
+    }
+    state = state.copyWith(douleurs: newList, authFailureOrSuccessOption: none());
   }
 
   douleursAutreChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(douleursAutre: param), authFailureOrSuccessOption: none());
+    state = state.copyWith(douleursAutre: param, authFailureOrSuccessOption: none());
   }
 
-  evenementsChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(evenements: [Evenement(EvenementState.none)]),
-        authFailureOrSuccessOption: none());
+  evenementsChanged(EvenementState param) {
+    List<Evenement> newList = [...state.evenements];
+    newList = newList.toSet().toList();
+    if (newList.contains(Evenement(param))) {
+      newList.remove(Evenement(param));
+    } else {
+      newList.add(Evenement(param));
+    }
+    state = state.copyWith(evenements: newList, authFailureOrSuccessOption: none());
   }
 
   temperatureBasaleChanged(int param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(temperatureBasale: param),
-        authFailureOrSuccessOption: none());
+    state = state.copyWith(temperatureBasale: param, authFailureOrSuccessOption: none());
   }
 
-  humeurChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(humeur: Humeur.fromString(param)),
-        authFailureOrSuccessOption: none());
+  humeurChanged(Humeur param) {
+    state = state.copyWith(humeur: (param), authFailureOrSuccessOption: none());
   }
 
   humeurAutreChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(humeurAutre: param), authFailureOrSuccessOption: none());
+    state = state.copyWith(humeurAutre: param, authFailureOrSuccessOption: none());
   }
 
   notesConfidentiellesChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(notesConfidentielles: param),
-        authFailureOrSuccessOption: none());
-  }
-
-  commentaireAnimatriceChanged(String param) {
-    state = state.copyWith(
-        observation: state.observation.copyWith(commentaireAnimatrice: param),
-        authFailureOrSuccessOption: none());
+    state = state.copyWith(notesConfidentielles: param, authFailureOrSuccessOption: none());
   }
 //insert-changed
 
@@ -127,13 +127,34 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
     Either<ObservationFailure, Unit>? failureOrSuccess;
 
     //insert-valid-params
-    if (false /* insert-valid-condition */) {
+    if (state.sensation.isValid() &&
+        state.sang.isValid() &&
+        state.mucus.isValid() &&
+        state.humeur.isValid()) {
       state = state.copyWith(isSubmitting: true, authFailureOrSuccessOption: none());
 
-      failureOrSuccess = await this._iObservationRepository.create(state.observation);
+      failureOrSuccess = await this._iObservationRepository.create(Observation(
+            id: UniqueId(),
+            date: state.date,
+            couleur: null,
+            analyse: null,
+            sensation: state.sensation,
+            sensationsAutre: state.sensationsAutre,
+            sang: state.sang,
+            mucus: state.mucus,
+            mucusAutre: state.mucusAutre,
+            douleurs: state.douleurs,
+            douleursAutre: state.douleursAutre,
+            evenements: state.evenements,
+            temperatureBasale: state.temperatureBasale,
+            humeur: state.humeur,
+            humeurAutre: state.humeurAutre,
+            notesConfidentielles: state.notesConfidentielles,
+            commentaireAnimatrice: null,
+          ));
 
       if (failureOrSuccess.isRight()) {
-        state = state.copyWith(observation: Observation.empty());
+        state = AddObservationFormData.initial();
       }
     }
 

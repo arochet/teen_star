@@ -14,7 +14,7 @@ class ObservationAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      title: 'ObservationAdd',
+      title: 'Nouvelle Observation',
       child: ShowComponentFile(
         title: './lib/PRESENTATION/./observation/observation_add/observation_add_page.dart',
         child: Padding(

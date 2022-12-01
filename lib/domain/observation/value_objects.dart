@@ -22,7 +22,7 @@ class CouleurAnalyse extends ValueObject<CouleurAnalyseState> {
     return CouleurAnalyse._(right(input));
   }
 
-  factory CouleurAnalyse.fromString(String input) {
+  factory CouleurAnalyse.fromString(String? input) {
     try {
       final CouleurAnalyseState state =
           CouleurAnalyseState.values.firstWhere((e) => e.toShortString() == input);
@@ -46,6 +46,25 @@ extension ParseToSringSensation on SensationState {
   String toShortString() {
     return this.toString().toLowerCase();
   }
+
+  String toDisplayString() {
+    switch (this) {
+      case SensationState.sec:
+        return 'sec';
+      case SensationState.humide:
+        return 'humide';
+      case SensationState.mouille:
+        return 'mouillé';
+      case SensationState.glissantLubrifie:
+        return 'glissant lubrifié';
+      case SensationState.nonpercu:
+        return 'non perçu';
+      case SensationState.autre:
+        return 'autre';
+      case SensationState.none:
+        return '';
+    }
+  }
 }
 
 @immutable
@@ -57,7 +76,7 @@ class Sensation extends ValueObject<SensationState> {
     return Sensation._(right(input));
   }
 
-  factory Sensation.fromString(String input) {
+  factory Sensation.fromString(String? input) {
     try {
       final SensationState state = SensationState.values.firstWhere((e) => e.toShortString() == input);
       if (state == null) return Sensation._(left(ValueFailure.invalidEnum(failedValue: state)));
@@ -80,6 +99,21 @@ extension ParseToSringSang on SangState {
   String toShortString() {
     return this.toString().toLowerCase();
   }
+
+  String toDisplayString() {
+    switch (this) {
+      case SangState.fluxPP:
+        return 'flux ++';
+      case SangState.fluxP:
+        return 'flux +';
+      case SangState.traces:
+        return 'traces';
+      case SangState.rien:
+        return 'rien';
+      case SangState.none:
+        return '';
+    }
+  }
 }
 
 @immutable
@@ -91,7 +125,7 @@ class Sang extends ValueObject<SangState> {
     return Sang._(right(input));
   }
 
-  factory Sang.fromString(String input) {
+  factory Sang.fromString(String? input) {
     try {
       final SangState state = SangState.values.firstWhere((e) => e.toShortString() == input);
       if (state == null) return Sang._(left(ValueFailure.invalidEnum(failedValue: state)));
@@ -109,18 +143,40 @@ class Sang extends ValueObject<SangState> {
 }
 
 enum MucusState {
-  opageBlancOuJaune,
+  opaqueBlancOuJaune,
   depotSecheBlancOuJaune,
   opaqueAvecTransparent_UnPeuEtirable,
   nuageuxATransparent_Elastique,
   transparentFilantOuTresFluide,
   aucunMucusVisible,
+  autre,
   none,
 }
 
 extension ParseToSringMucus on MucusState {
   String toShortString() {
     return this.toString().toLowerCase();
+  }
+
+  String toDisplayString() {
+    switch (this) {
+      case MucusState.opaqueBlancOuJaune:
+        return 'Opaque blanc ou jaune';
+      case MucusState.depotSecheBlancOuJaune:
+        return 'Dépôt séché blanc ou jaune';
+      case MucusState.opaqueAvecTransparent_UnPeuEtirable:
+        return 'Opaque avec transparent. Un peu étirable';
+      case MucusState.nuageuxATransparent_Elastique:
+        return 'Nuageux (blanc) à transparent; élastique';
+      case MucusState.transparentFilantOuTresFluide:
+        return 'Transparent; filant ou très fluide';
+      case MucusState.aucunMucusVisible:
+        return 'Aucun mucus visible';
+      case MucusState.autre:
+        return 'Autre';
+      case MucusState.none:
+        return '';
+    }
   }
 }
 
@@ -133,7 +189,7 @@ class Mucus extends ValueObject<MucusState> {
     return Mucus._(right(input));
   }
 
-  factory Mucus.fromString(String input) {
+  factory Mucus.fromString(String? input) {
     try {
       final MucusState state = MucusState.values.firstWhere((e) => e.toShortString() == input);
       if (state == null) return Mucus._(left(ValueFailure.invalidEnum(failedValue: state)));
@@ -156,6 +212,21 @@ extension ParseToSringDouleur on DouleurState {
   String toShortString() {
     return this.toString().toLowerCase();
   }
+
+  String toDisplayString() {
+    switch (this) {
+      case DouleurState.seins:
+        return 'Douleurs seins';
+      case DouleurState.ventre:
+        return 'Douleurs ventre';
+      case DouleurState.malDeTete:
+        return 'Mal de tête';
+      case DouleurState.aucune:
+        return 'Aucune';
+      case DouleurState.none:
+        return '';
+    }
+  }
 }
 
 @immutable
@@ -167,7 +238,7 @@ class Douleur extends ValueObject<DouleurState> {
     return Douleur._(right(input));
   }
 
-  factory Douleur.fromString(String input) {
+  factory Douleur.fromString(String? input) {
     try {
       final DouleurState state = DouleurState.values.firstWhere((e) => e.toShortString() == input);
       if (state == null) return Douleur._(left(ValueFailure.invalidEnum(failedValue: state)));
@@ -190,6 +261,25 @@ extension ParseToSringEvenement on EvenementState {
   String toShortString() {
     return this.toString().toLowerCase();
   }
+
+  String toDisplayString() {
+    switch (this) {
+      case EvenementState.fatigue:
+        return 'Fatigue';
+      case EvenementState.stress:
+        return 'Stress';
+      case EvenementState.voyage:
+        return 'Voyage';
+      case EvenementState.personnelType1:
+        return 'Personnel Type 1';
+      case EvenementState.personnelType2:
+        return 'Personnel Type 2';
+      case EvenementState.autre:
+        return 'Autre';
+      case EvenementState.none:
+        return '';
+    }
+  }
 }
 
 @immutable
@@ -201,7 +291,7 @@ class Evenement extends ValueObject<EvenementState> {
     return Evenement._(right(input));
   }
 
-  factory Evenement.fromString(String input) {
+  factory Evenement.fromString(String? input) {
     try {
       final EvenementState state = EvenementState.values.firstWhere((e) => e.toShortString() == input);
       if (state == null) return Evenement._(left(ValueFailure.invalidEnum(failedValue: state)));
@@ -234,6 +324,29 @@ extension ParseToSringHumeur on HumeurState {
   String toShortString() {
     return this.toString().toLowerCase();
   }
+
+  String toDisplayString() {
+    switch (this) {
+      case HumeurState.tresBonne:
+        return 'Très bonne';
+      case HumeurState.bonne:
+        return 'Bonne';
+      case HumeurState.pasEmotionParticuliere:
+        return 'Pas d\'émotion particulière';
+      case HumeurState.EnvieEtreTranquille:
+        return 'Envie d\'être tranquille';
+      case HumeurState.humeurChangeante:
+        return 'Humeur Changeante';
+      case HumeurState.nervositeIrritable:
+        return 'Nervosité Irritable';
+      case HumeurState.tristesse:
+        return 'Tristesse';
+      case HumeurState.autre:
+        return 'Autre';
+      case HumeurState.none:
+        return '';
+    }
+  }
 }
 
 @immutable
@@ -245,7 +358,7 @@ class Humeur extends ValueObject<HumeurState> {
     return Humeur._(right(input));
   }
 
-  factory Humeur.fromString(String input) {
+  factory Humeur.fromString(String? input) {
     try {
       final HumeurState state = HumeurState.values.firstWhere((e) => e.toShortString() == input);
       if (state == null) return Humeur._(left(ValueFailure.invalidEnum(failedValue: state)));

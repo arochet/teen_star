@@ -20,7 +20,6 @@ import 'package:teenstar/PRESENTATION/resume/resume_page.dart';
 import '../../account/account/buttons/buttons.dart';
 import '../../account/account/colors/colors.dart';
 import '../../account/account/utils/utils_page.dart';
-import '../../observation/observation_list/observation_list_page.dart';
 import '../../observation/observation_view/observation_view_page.dart';
 
 @MaterialAutoRouter(replaceInRouteName: "Page,Route", routes: [
@@ -127,11 +126,6 @@ import '../../observation/observation_view/observation_view_page.dart';
     path: '/observation-add-route',
     name: 'ObservationAddRoute',
     page: ObservationAddPage,
-  ),
-  AutoRoute(
-    path: '/observation-list-route',
-    name: 'ObservationListRoute',
-    page: ObservationListPage,
   ),
   AutoRoute(
     path: '/observation-view-route',

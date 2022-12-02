@@ -22,8 +22,14 @@ class ShowComponentFile extends ConsumerWidget {
           if (displayPath)
             Center(
                 heightFactor: 1,
-                child: Text(title!,
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(color: actioncolor['secondary']))),
+                child: Text(
+                  title!,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1!
+                      .copyWith(color: Colors.white, backgroundColor: Colors.black45),
+                  selectionColor: Colors.red,
+                )),
         ],
       );
     }

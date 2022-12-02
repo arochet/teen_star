@@ -14,7 +14,7 @@ class AppBarAnalyse extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final displayAnalyse = ref.watch(showAnalyse);
     return ShowComponentFile(
-      title: 'AppBarAnalyse',
+      title: 'appbar_analyse.dart',
       child: Container(
         height: displayAnalyse ? 100 : 50,
         child: Column(

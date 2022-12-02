@@ -4,6 +4,6 @@ import 'package:teenstar/DOMAIN/core/value_objects.dart';
 
 extension FirebaseUserDomainX on firebase.User {
   UserAuth toDomain() {
-    return UserAuth(id: UniqueId.fromUniqueString(uid));
+    return UserAuth(id: UniqueId.fromUniqueInt(0));
   }
 }

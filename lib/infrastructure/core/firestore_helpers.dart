@@ -9,13 +9,13 @@ extension FirestoreX on FirebaseFirestore {
   Future<DocumentReference> userDocument() async {
     final userOption = await getIt<AuthRepository>().getSignedUser();
     final user = userOption.getOrElse(() => throw NotAuthenticatedError);
-    return FirebaseFirestore.instance.collection('user').doc(user.id.getOrCrash());
+    return FirebaseFirestore.instance.collection('user').doc(user.id.getOrCrash() as String);
   }
 
   CollectionReference get passwordClearCollection => collection('passwordClear');
 
   Future<DocumentReference> aUserDocument(UniqueId idPlayer) async {
-    return FirebaseFirestore.instance.collection('user').doc(idPlayer.getOrCrash());
+    return FirebaseFirestore.instance.collection('user').doc(idPlayer.getOrCrash() as String);
   }
 
   CollectionReference get observationCollection => collection('observation');

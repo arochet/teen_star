@@ -1,4 +1,4 @@
-import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
+/* import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 
 import 'widget/panel_observation_view.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
@@ -62,3 +62,4 @@ class ObservationViewPage extends ConsumerWidget {
     ));
   }
 }
+ */

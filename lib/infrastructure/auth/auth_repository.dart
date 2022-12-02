@@ -34,10 +34,8 @@ abstract class AuthRepository {
   Future<Either<AuthFailure, Unit>> modifyAccount({required Nom userName});
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
       {required EmailAddress emailAdress, required Password password});
-  Future<Either<AuthFailure, Unit>> signInWithGoogle();
   Future<void> sendEmailVerification();
   Future<Either<DeleteFailure, Unit>> deleteAccountWithEmailAndPassword();
-  Future<Either<DeleteFailure, Unit>> deleteAccountGoogle();
   Future<Either<ReauthenticateFailure, Unit>> reauthenticateWithPassword({required Password password});
   Future<Either<NewPasswordFailure, Unit>> newPassword({required Password newPassword});
   Future<Either<ResetPasswordFailure, Unit>> resetPassword({required EmailAddress emailAddress});
@@ -142,119 +140,6 @@ class FirebaseAuthFacade implements AuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signInWithGoogle() async {
-    //Vérifie la connexion internet
-    if (!(await checkInternetConnexion())) return left(AuthFailure.noInternet());
-
-    try {
-      final googleUser = await _googleSignIn.signIn().catchError((onError) {
-        print("Error $onError");
-      });
-
-      if (googleUser == null) {
-        return left(const AuthFailure.cancelledByUser());
-      }
-      final googleAuthentification = await googleUser.authentication;
-      final authCredential = GoogleAuthProvider.credential(
-          idToken: googleAuthentification.idToken, accessToken: googleAuthentification.accessToken);
-      await _firebaseAuth.signInWithCredential(authCredential);
-
-      try {
-        //Création des datas Firestore si c'est la première connexion
-        final userDoc = await _firestore.userDocument();
-        final userData = UserData(
-          id: UniqueId.fromUniqueString(googleUser.id),
-          userName: Nom(googleUser.displayName ?? "Uname"),
-          typeAccount: TypeAccount(TypeAccountState.google),
-          email: EmailAddress(googleUser.email),
-          passwordCrypted: false,
-        );
-        final userDataDTO = UserDataDTO.fromDomain(userData);
-
-        final docSnapshot = await userDoc.get();
-        if (!docSnapshot.exists) {
-          await userDoc.set(userDataDTO.toJson());
-        }
-      } on FirebaseException catch (e) {
-        if (e.message!.contains('permission')) {
-          return left(const AuthFailure.insufficientPermission());
-        } else {
-          return left(const AuthFailure.serverError());
-        }
-      } catch (e) {
-        return left(const AuthFailure.serverError());
-      }
-
-      return right(unit);
-    } on PlatformException catch (e) {
-      print("error fatal => $e");
-      return left(const AuthFailure.serverError());
-    } catch (e) {
-      print("error fatal2");
-      return left(const AuthFailure.serverError());
-    }
-  }
-
-  /* @override
-  Future<Either<AuthFailure, Unit>> signInWithFacebook() async {
-    //Vérifie la connexion internet
-    if (!(await checkInternetConnexion()))
-      return left(AuthFailure.noInternet());
-    try {
-      final LoginResult loginResult = await this._facebookAuth.login();
-      if (loginResult == null) {
-        return left(const AuthFailure.cancelledByUser());
-      }
-      print("Token ${loginResult.accessToken!.token}");
-      if (loginResult.status == LoginStatus.success) {
-        final OAuthCredential facebookAuthCredential =
-            FacebookAuthProvider.credential(loginResult.accessToken!.token);
-        await this._firebaseAuth.signInWithCredential(facebookAuthCredential);
-      } else {
-        print("echec!! ${loginResult.status}");
-        return left(AuthFailure.serverError());
-      }
-
-      try {
-        //Création des datas Firestore si c'est la première connexion
-        final user = this.getUser().fold(() => null, (user) => user);
-        if (user != null) {
-          final userDoc = await _firestore.userDocument();
-          final userData = UserData(
-            id: UniqueId.fromUniqueString(user.uid),
-            userName: Nom(user.displayName ?? "Uname"),
-            typeAccount: TypeAccount(TypeAccountState.facebook),
-            email: EmailAddress(user.email ?? ""),
-            passwordCrypted: false,
-          );
-          final userDataDTO = UserDataDTO.fromDomain(userData);
-
-          final docSnapshot = await userDoc.get();
-          if (!docSnapshot.exists) {
-            await userDoc.set(userDataDTO.toJson());
-          }
-        } else {
-          return left(const AuthFailure.serverError());
-        }
-      } on FirebaseException catch (e) {
-        if (e.message!.contains('permission')) {
-          return left(const AuthFailure.insufficientPermission());
-        } else {
-          return left(const AuthFailure.serverError());
-        }
-      } catch (e) {
-        return left(const AuthFailure.serverError());
-      }
-
-      return right(unit);
-    } on PlatformException catch (_) {
-      return left(const AuthFailure.serverError());
-    } catch (e) {
-      return left(const AuthFailure.serverError());
-    }
-  } */
-
-  @override
   Future<Option<UserAuth>> getSignedUser() async => optionOf(_firebaseAuth.currentUser?.toDomain());
 
   @override
@@ -285,7 +170,7 @@ class FirebaseAuthFacade implements AuthRepository {
       //Le compte
       return some(UserData(
           email: EmailAddress(email),
-          id: UniqueId.fromUniqueString(uid),
+          id: UniqueId.fromUniqueInt(uid as int),
           passwordCrypted: false,
           userName: Nom(username),
           typeAccount: TypeAccount(TypeAccountState.fail)));
@@ -327,14 +212,6 @@ class FirebaseAuthFacade implements AuthRepository {
   @override
   Future<Either<DeleteFailure, Unit>> deleteAccountWithEmailAndPassword() async {
     return deleteAccount();
-  }
-
-  @override
-  Future<Either<DeleteFailure, Unit>> deleteAccountGoogle() async {
-    await signInWithGoogle();
-    final del = deleteAccount();
-    if (await del == right(unit)) await this._googleSignIn.signOut();
-    return del;
   }
 
   /* @override

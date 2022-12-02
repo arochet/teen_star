@@ -27,7 +27,7 @@ abstract class UserDataDTO implements _$UserDataDTO {
 
   UserData toDomain(String? _email) {
     return UserData(
-      id: UniqueId.fromUniqueString(id!),
+      id: UniqueId.fromUniqueInt(id! as int),
       userName: Nom(userName),
       email: _email != null ? EmailAddress(_email) : null,
       passwordCrypted: passwordCrypted,

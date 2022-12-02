@@ -127,11 +127,11 @@ import '../../observation/observation_view/observation_view_page.dart';
     name: 'ObservationAddRoute',
     page: ObservationAddPage,
   ),
-  AutoRoute(
+  /* AutoRoute(
     path: '/observation-view-route',
     name: 'ObservationViewRoute',
     page: ObservationViewPage,
-  ),
+  ), */
   //insert-route
 ])
 class $AppRouter {}

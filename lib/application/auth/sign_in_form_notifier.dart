@@ -61,10 +61,4 @@ class SignInFormNotifier extends StateNotifier<SignInFormData> {
             ? some(failureOrSuccess)
             : none()); //optionOf -> value != null ? some(value) : none();     | optionOf ne fonctionne pas
   }
-
-  signInWithGooglePressed() async {
-    state = state.copyWith(isSubmitting: true, authFailureOrSuccessOption: none());
-    final failureOrSuccess = await _authRepository.signInWithGoogle();
-    state = state.copyWith(isSubmitting: false, authFailureOrSuccessOption: some(failureOrSuccess));
-  }
 }

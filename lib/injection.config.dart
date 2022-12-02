@@ -11,10 +11,11 @@ import 'package:firebase_storage/firebase_storage.dart' as _i7;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i8;
 import 'package:injectable/injectable.dart' as _i2;
+import 'package:sqflite/sqlite_api.dart' as _i10;
 
 import 'INFRASTRUCTURE/auth/auth_fake_repository.dart' as _i4;
 import 'INFRASTRUCTURE/auth/auth_repository.dart' as _i3;
-import 'INFRASTRUCTURE/core/firebase_injectable_module.dart' as _i10;
+import 'INFRASTRUCTURE/core/firebase_injectable_module.dart' as _i11;
 import 'INFRASTRUCTURE/observation/observation_repository.dart' as _i9;
 
 const String _test = 'test';
@@ -45,8 +46,10 @@ _i1.GetIt $initGetIt(
   gh.lazySingleton<_i7.FirebaseStorage>(() => firebaseInjectableModule.storage);
   gh.lazySingleton<_i8.GoogleSignIn>(
       () => firebaseInjectableModule.googleSignIn);
-  gh.lazySingleton<_i9.IObservationRepository>(
-      () => _i9.ObservationRepository(get<_i6.FirebaseFirestore>()));
+  gh.lazySingleton<_i9.IObservationRepository>(() => _i9.ObservationRepository(
+        get<_i6.FirebaseFirestore>(),
+        get<_i10.Database>(),
+      ));
   gh.lazySingleton<_i3.AuthRepository>(
     () => _i3.FirebaseAuthFacade(
       get<_i5.FirebaseAuth>(),
@@ -62,4 +65,4 @@ _i1.GetIt $initGetIt(
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i10.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i11.FirebaseInjectableModule {}

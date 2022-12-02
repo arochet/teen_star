@@ -97,12 +97,13 @@ final observationFormNotifierProvider =
   (ref) => ObservationFormNotifier(ref.watch(observationRepositoryProvider)),
 );
 
-final allObservationProvider = StreamProvider.autoDispose<Either<ObservationFailure, List<Observation>>>(
-    (ref) => ref.watch(observationRepositoryProvider).watch());
+final allObservationProviderRead = FutureProvider<Either<ObservationFailure, List<Observation>>>((ref) {
+  return ref.read(observationRepositoryProvider).read();
+});
 
-final oneObservationProvider = FutureProvider.autoDispose
+/* final oneObservationProvider = FutureProvider.autoDispose
     .family<Either<ObservationFailure, Observation>, UniqueId>(
-        (ref, id) => ref.watch(observationRepositoryProvider).watchWithId(id));
+        (ref, id) => ref.watch(observationRepositoryProvider).watchWithId(id)); */
 
 
 //insert-provider

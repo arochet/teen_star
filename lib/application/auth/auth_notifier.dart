@@ -25,7 +25,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
   AuthNotifier(this._authRepository) : super(AuthInital());
 
   Future authCheckRequested() async {
-    try {
+    print('authCheckRequested() called');
+    print('A voir pour se déconnecté !');
+    state = AuthAuthenticated();
+    /* try {
       final userOption = await _authRepository.getSignedUser();
       state = await userOption.fold(() => AuthUnauthenticated(), (a) async {
         if (_authRepository.isUserEmailVerified())
@@ -33,7 +36,9 @@ class AuthNotifier extends StateNotifier<AuthState> {
         else
           return AuthAuthenticated();
       });
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    } */
   }
 
   bool authCheckEmail() {
@@ -49,9 +54,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
     switch (type) {
       case TypeAccountState.email:
         await _authRepository.deleteAccountWithEmailAndPassword();
-        break;
-      case TypeAccountState.google:
-        await _authRepository.deleteAccountGoogle();
         break;
       default:
         break;

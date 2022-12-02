@@ -41,6 +41,7 @@ class ObservationFormProvider extends ConsumerWidget {
               }, (_) {
                 //Création réussie !
                 Future.delayed(Duration.zero, () async {
+                  ref.refresh(allObservationProviderRead);
                   context.router.pop();
                 });
               }));

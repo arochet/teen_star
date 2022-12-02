@@ -5,7 +5,6 @@ import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'widget/auth_button_connexion.dart';
-import 'widget/auth_button_google.dart';
 import 'widget/auth_divider_or.dart';
 import 'widget/auth_no_account_link.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;

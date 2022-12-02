@@ -20,8 +20,7 @@ ObservationDTO _$ObservationDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ObservationDTO {
-  @JsonKey(ignore: true)
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   int? get date => throw _privateConstructorUsedError;
   String? get couleur => throw _privateConstructorUsedError;
   String? get analyse => throw _privateConstructorUsedError;
@@ -38,6 +37,7 @@ mixin _$ObservationDTO {
   String? get humeurAutre => throw _privateConstructorUsedError;
   String? get notesConfidentielles => throw _privateConstructorUsedError;
   String? get commentaireAnimatrice => throw _privateConstructorUsedError;
+  int? get idCycle => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +52,7 @@ abstract class $ObservationDTOCopyWith<$Res> {
       _$ObservationDTOCopyWithImpl<$Res, ObservationDTO>;
   @useResult
   $Res call(
-      {@JsonKey(ignore: true) String? id,
+      {int? id,
       int? date,
       String? couleur,
       String? analyse,
@@ -68,7 +68,8 @@ abstract class $ObservationDTOCopyWith<$Res> {
       String? humeur,
       String? humeurAutre,
       String? notesConfidentielles,
-      String? commentaireAnimatrice});
+      String? commentaireAnimatrice,
+      int? idCycle});
 }
 
 /// @nodoc
@@ -101,12 +102,13 @@ class _$ObservationDTOCopyWithImpl<$Res, $Val extends ObservationDTO>
     Object? humeurAutre = freezed,
     Object? notesConfidentielles = freezed,
     Object? commentaireAnimatrice = freezed,
+    Object? idCycle = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -171,6 +173,10 @@ class _$ObservationDTOCopyWithImpl<$Res, $Val extends ObservationDTO>
           ? _value.commentaireAnimatrice
           : commentaireAnimatrice // ignore: cast_nullable_to_non_nullable
               as String?,
+      idCycle: freezed == idCycle
+          ? _value.idCycle
+          : idCycle // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -184,7 +190,7 @@ abstract class _$$_ObservationDTOCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(ignore: true) String? id,
+      {int? id,
       int? date,
       String? couleur,
       String? analyse,
@@ -200,7 +206,8 @@ abstract class _$$_ObservationDTOCopyWith<$Res>
       String? humeur,
       String? humeurAutre,
       String? notesConfidentielles,
-      String? commentaireAnimatrice});
+      String? commentaireAnimatrice,
+      int? idCycle});
 }
 
 /// @nodoc
@@ -231,12 +238,13 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
     Object? humeurAutre = freezed,
     Object? notesConfidentielles = freezed,
     Object? commentaireAnimatrice = freezed,
+    Object? idCycle = freezed,
   }) {
     return _then(_$_ObservationDTO(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -301,6 +309,10 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
           ? _value.commentaireAnimatrice
           : commentaireAnimatrice // ignore: cast_nullable_to_non_nullable
               as String?,
+      idCycle: freezed == idCycle
+          ? _value.idCycle
+          : idCycle // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -309,7 +321,7 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ObservationDTO extends _ObservationDTO {
   const _$_ObservationDTO(
-      {@JsonKey(ignore: true) this.id,
+      {required this.id,
       required this.date,
       required this.couleur,
       required this.analyse,
@@ -325,15 +337,15 @@ class _$_ObservationDTO extends _ObservationDTO {
       required this.humeur,
       required this.humeurAutre,
       required this.notesConfidentielles,
-      required this.commentaireAnimatrice})
+      required this.commentaireAnimatrice,
+      required this.idCycle})
       : super._();
 
   factory _$_ObservationDTO.fromJson(Map<String, dynamic> json) =>
       _$$_ObservationDTOFromJson(json);
 
   @override
-  @JsonKey(ignore: true)
-  final String? id;
+  final int? id;
   @override
   final int? date;
   @override
@@ -366,10 +378,12 @@ class _$_ObservationDTO extends _ObservationDTO {
   final String? notesConfidentielles;
   @override
   final String? commentaireAnimatrice;
+  @override
+  final int? idCycle;
 
   @override
   String toString() {
-    return 'ObservationDTO(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice)';
+    return 'ObservationDTO(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice, idCycle: $idCycle)';
   }
 
   @override
@@ -403,7 +417,8 @@ class _$_ObservationDTO extends _ObservationDTO {
             (identical(other.notesConfidentielles, notesConfidentielles) ||
                 other.notesConfidentielles == notesConfidentielles) &&
             (identical(other.commentaireAnimatrice, commentaireAnimatrice) ||
-                other.commentaireAnimatrice == commentaireAnimatrice));
+                other.commentaireAnimatrice == commentaireAnimatrice) &&
+            (identical(other.idCycle, idCycle) || other.idCycle == idCycle));
   }
 
   @JsonKey(ignore: true)
@@ -426,7 +441,8 @@ class _$_ObservationDTO extends _ObservationDTO {
       humeur,
       humeurAutre,
       notesConfidentielles,
-      commentaireAnimatrice);
+      commentaireAnimatrice,
+      idCycle);
 
   @JsonKey(ignore: true)
   @override
@@ -444,7 +460,7 @@ class _$_ObservationDTO extends _ObservationDTO {
 
 abstract class _ObservationDTO extends ObservationDTO {
   const factory _ObservationDTO(
-      {@JsonKey(ignore: true) final String? id,
+      {required final int? id,
       required final int? date,
       required final String? couleur,
       required final String? analyse,
@@ -460,15 +476,15 @@ abstract class _ObservationDTO extends ObservationDTO {
       required final String? humeur,
       required final String? humeurAutre,
       required final String? notesConfidentielles,
-      required final String? commentaireAnimatrice}) = _$_ObservationDTO;
+      required final String? commentaireAnimatrice,
+      required final int? idCycle}) = _$_ObservationDTO;
   const _ObservationDTO._() : super._();
 
   factory _ObservationDTO.fromJson(Map<String, dynamic> json) =
       _$_ObservationDTO.fromJson;
 
   @override
-  @JsonKey(ignore: true)
-  String? get id;
+  int? get id;
   @override
   int? get date;
   @override
@@ -501,6 +517,8 @@ abstract class _ObservationDTO extends ObservationDTO {
   String? get notesConfidentielles;
   @override
   String? get commentaireAnimatrice;
+  @override
+  int? get idCycle;
   @override
   @JsonKey(ignore: true)
   _$$_ObservationDTOCopyWith<_$_ObservationDTO> get copyWith =>

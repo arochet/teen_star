@@ -40,13 +40,13 @@ abstract class ValueObject<T> {
   int get hashCode => value.hashCode;
 }
 
-class UniqueId extends ValueObject<String> {
+class UniqueId extends ValueObject<int> {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<int>, int> value;
   factory UniqueId() {
-    return UniqueId._(right(Uuid().v1()));
+    return UniqueId._(right(DateTime.now().microsecondsSinceEpoch));
   }
-  factory UniqueId.fromUniqueString(String uniqueId) {
+  factory UniqueId.fromUniqueInt(int uniqueId) {
     return UniqueId._(right(uniqueId));
   }
   const UniqueId._(this.value);

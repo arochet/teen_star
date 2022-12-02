@@ -20,7 +20,7 @@ import 'auth_repository.dart';
 @LazySingleton(as: AuthRepository, env: [Environment.test])
 class FakeAuthFacade implements AuthRepository {
   UserData _userData = UserData(
-    id: UniqueId.fromUniqueString("test"),
+    id: UniqueId.fromUniqueInt(0),
     userName: Nom("testName"),
     email: EmailAddress("test@yopmail.com"),
     passwordCrypted: true,
@@ -52,7 +52,7 @@ class FakeAuthFacade implements AuthRepository {
   }
 
   @override
-  Future<Option<UserAuth>> getSignedUser() async => some(UserAuth(id: UniqueId.fromUniqueString("test")));
+  Future<Option<UserAuth>> getSignedUser() async => some(UserAuth(id: UniqueId.fromUniqueInt(0)));
 
   @override
   bool isUserEmailVerified() {

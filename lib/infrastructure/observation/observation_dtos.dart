@@ -13,7 +13,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
   const ObservationDTO._();
 
   const factory ObservationDTO({
-    @JsonKey(ignore: true) String? id,
+    required int? id,
     required int? date,
     required String? couleur,
     required String? analyse,
@@ -30,9 +30,10 @@ abstract class ObservationDTO implements _$ObservationDTO {
     required String? humeurAutre,
     required String? notesConfidentielles,
     required String? commentaireAnimatrice,
+    required int? idCycle,
   }) = _ObservationDTO;
 
-  factory ObservationDTO.fromDomain(Observation obj) {
+  factory ObservationDTO.fromDomain(Observation obj, int idCycle) {
     return ObservationDTO(
       id: obj.id.getOrCrash(),
       date: obj.date?.millisecondsSinceEpoch,
@@ -51,12 +52,13 @@ abstract class ObservationDTO implements _$ObservationDTO {
       humeurAutre: obj.humeurAutre,
       notesConfidentielles: obj.notesConfidentielles,
       commentaireAnimatrice: obj.commentaireAnimatrice,
+      idCycle: idCycle,
     );
   }
 
   Observation toDomain() {
     return Observation(
-      id: UniqueId.fromUniqueString(id!),
+      id: UniqueId.fromUniqueInt(id!),
       date: DateTime.fromMillisecondsSinceEpoch(date!),
       couleur: CouleurAnalyse.fromString(couleur),
       analyse: CouleurAnalyse.fromString(analyse),
@@ -65,9 +67,9 @@ abstract class ObservationDTO implements _$ObservationDTO {
       sang: Sang.fromString(sang),
       mucus: Mucus.fromString(mucus),
       mucusAutre: mucusAutre,
-      douleurs: jsonDecode(douleurs) as List<Douleur>,
+      douleurs: (jsonDecode(douleurs) as List).map((e) => Douleur.fromString(e)).toList(),
       douleursAutre: douleursAutre,
-      evenements: jsonDecode(evenements) as List<Evenement>,
+      evenements: (jsonDecode(evenements) as List).map((e) => Evenement.fromString(e)).toList(),
       temperatureBasale: temperatureBasale,
       humeur: Humeur.fromString(humeur),
       humeurAutre: humeurAutre,
@@ -77,8 +79,4 @@ abstract class ObservationDTO implements _$ObservationDTO {
   }
 
   factory ObservationDTO.fromJson(Map<String, dynamic> json) => _$ObservationDTOFromJson(json);
-
-  factory ObservationDTO.fromFirestore(DocumentSnapshot doc) {
-    return ObservationDTO.fromJson(doc.data() as Map<String, dynamic>).copyWith(id: doc.id);
-  }
 }

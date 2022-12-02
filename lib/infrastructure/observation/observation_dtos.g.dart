@@ -8,6 +8,7 @@ part of 'observation_dtos.dart';
 
 _$_ObservationDTO _$$_ObservationDTOFromJson(Map<String, dynamic> json) =>
     _$_ObservationDTO(
+      id: json['id'] as int?,
       date: json['date'] as int?,
       couleur: json['couleur'] as String?,
       analyse: json['analyse'] as String?,
@@ -24,10 +25,12 @@ _$_ObservationDTO _$$_ObservationDTOFromJson(Map<String, dynamic> json) =>
       humeurAutre: json['humeurAutre'] as String?,
       notesConfidentielles: json['notesConfidentielles'] as String?,
       commentaireAnimatrice: json['commentaireAnimatrice'] as String?,
+      idCycle: json['idCycle'] as int?,
     );
 
 Map<String, dynamic> _$$_ObservationDTOToJson(_$_ObservationDTO instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'date': instance.date,
       'couleur': instance.couleur,
       'analyse': instance.analyse,
@@ -44,4 +47,5 @@ Map<String, dynamic> _$$_ObservationDTOToJson(_$_ObservationDTO instance) =>
       'humeurAutre': instance.humeurAutre,
       'notesConfidentielles': instance.notesConfidentielles,
       'commentaireAnimatrice': instance.commentaireAnimatrice,
+      'idCycle': instance.idCycle,
     };

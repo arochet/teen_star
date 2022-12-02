@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/providers.dart';
@@ -6,6 +7,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 
+import '../../DOMAIN/observation/observation.dart';
+import '../../DOMAIN/observation/observation_failure.dart';
 import 'widget/appbar_analyse.dart';
 import 'widget/tableau_cycle.dart';
 
@@ -13,11 +16,10 @@ import 'widget/tableau_cycle.dart';
 final showAnalyse = StateProvider<bool>((ref) => false);
 
 class ResumePage extends ConsumerWidget {
-  const ResumePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final listAsync = ref.watch(allObservationProvider);
+    AsyncValue<Either<ObservationFailure, List<Observation>>> listAsync =
+        ref.watch(allObservationProviderRead);
 
     //LIST OBSERVATION
     final listObservationWidget = listAsync.when(
@@ -48,9 +50,7 @@ class ResumePage extends ConsumerWidget {
                 //APPBAR_ANALYSE
                 AppBarAnalyse(),
                 //TABLEAU
-                Expanded(
-                  child: listObservationWidget,
-                ),
+                Expanded(child: listObservationWidget),
               ],
             ),
             Container(

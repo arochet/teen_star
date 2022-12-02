@@ -9,7 +9,8 @@ class MainNavigationPage extends StatelessWidget {
   MainNavigationPage({Key? key}) : super(key: key);
 
   final listRoute = [
-    HomeRoute(),
+    ResumeRoute(),
+    HistoriqueRoute(),
     AccountRoute(),
   ];
 
@@ -17,14 +18,19 @@ class MainNavigationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final listMenu = [
       {
-        "title": AppLocalizations.of(context)!.accueil,
-        "icon": Icons.home,
+        "title": "Résumé",
+        "icon": Icons.radio_button_checked,
         "id": 0,
       },
       {
-        "title": AppLocalizations.of(context)!.compte,
-        "icon": Icons.person_rounded,
+        "title": "Historique",
+        "icon": Icons.graphic_eq,
         "id": 1,
+      },
+      {
+        "title": "Réglages",
+        "icon": Icons.settings,
+        "id": 2,
       },
     ];
     return CheckUserConnected(

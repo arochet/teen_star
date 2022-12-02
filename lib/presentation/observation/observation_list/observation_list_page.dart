@@ -1,14 +1,10 @@
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 
-import 'widget/panel_observation_view.dart';
+import '../../resume/widget/panel_observation_view.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
-import 'package:another_flushbar/flushbar.dart';
-import 'package:teenstar/APPLICATION/observation/add_observation_form_notifier.dart';
-import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:auto_route/src/router/auto_router_x.dart';
 
 class ObservationListPage extends ConsumerWidget {

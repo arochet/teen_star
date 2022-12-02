@@ -174,6 +174,17 @@ class ObservationForm extends ConsumerWidget {
           ),
         SpaceH10(),
 
+        //NOTES CONFIDENTIELLES
+        Text("Notes Confidentielles", style: Theme.of(context).textTheme.headline5),
+        const SizedBox(height: 5),
+        TextFormField(
+          autocorrect: false,
+          keyboardType: TextInputType.multiline,
+          maxLines: 5,
+          maxLength: 500,
+          onChanged: (String value) => notifierForm.notesConfidentiellesChanged(value),
+        ),
+
         //insert-field-complete
 
         const SizedBox(height: 14),

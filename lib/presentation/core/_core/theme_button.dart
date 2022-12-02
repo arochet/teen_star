@@ -8,9 +8,8 @@ ButtonStyle buttonBig(Color color, bool isWhite) => ElevatedButton.styleFrom(
       vertical: (VisualDensity.maximumDensity - 2.0),
     ),
     minimumSize: Size(double.infinity, 30),
-    primary: color,
-    onPrimary: isWhite ? Colors.white : colorpanel(900),
-    onSurface: Colors.grey,
+    backgroundColor: color,
+    foregroundColor: isWhite ? Colors.white : colorpanel(900),
     elevation: 0,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))));
 
@@ -24,9 +23,8 @@ final buttonBigHelp = buttonBig(actioncolor["help"]!, true);
 ButtonStyle buttonNormal(Color color, bool isWhite) => ElevatedButton.styleFrom(
       textStyle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-      primary: color,
-      onPrimary: isWhite ? Colors.white : Colors.black,
-      onSurface: Colors.grey,
+      backgroundColor: color,
+      foregroundColor: isWhite ? Colors.white : Colors.black,
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
     );
@@ -38,10 +36,34 @@ final buttonNormalWarning = buttonNormal(actioncolor["warning"]!, true);
 final buttonNormalRemove = buttonNormal(actioncolor["remove"]!, true);
 final buttonNormalHelp = buttonNormal(actioncolor["help"]!, true);
 
+ButtonStyle buttonLittle(Color color, bool isWhite) => ElevatedButton.styleFrom(
+      textStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+      backgroundColor: color,
+      foregroundColor: isWhite ? Colors.white : Colors.black,
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+    );
+
+final buttonLittlePrimary = buttonLittle(actioncolor["primary"]!, false);
+final buttonLittleSecondary = buttonLittle(actioncolor["secondary"]!, false);
+final buttonLittleConfirm = buttonLittle(actioncolor["confirm"]!, false);
+final buttonLittleWarning = buttonLittle(actioncolor["warning"]!, true);
+final buttonLittleRemove = buttonLittle(actioncolor["remove"]!, true);
+final buttonLittleHelp = buttonLittle(actioncolor["help"]!, true);
+
 final buttonPrimaryHide = ElevatedButton.styleFrom(
   textStyle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-  primary: Colors.transparent,
-  onPrimary: colorpanel(200),
+  backgroundColor: Colors.transparent,
+  foregroundColor: colorpanel(200),
+  elevation: 0,
+);
+
+final buttonPrimaryHideLittle = ElevatedButton.styleFrom(
+  textStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+  backgroundColor: Colors.transparent,
+  foregroundColor: colorpanel(200),
   elevation: 0,
 );

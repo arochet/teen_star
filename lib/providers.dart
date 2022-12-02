@@ -104,5 +104,6 @@ final oneObservationProvider = FutureProvider.autoDispose
     .family<Either<ObservationFailure, Observation>, UniqueId>(
         (ref, id) => ref.watch(observationRepositoryProvider).watchWithId(id));
 
+
 //insert-provider
 //Ne pas supprimer la balise ci-dessus

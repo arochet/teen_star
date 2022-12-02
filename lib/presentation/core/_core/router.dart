@@ -11,10 +11,11 @@ import 'package:teenstar/PRESENTATION/auth/auth_connexion/auth_connexion_page.da
 import 'package:teenstar/PRESENTATION/auth/auth_init/auth_init_page.dart';
 import 'package:teenstar/PRESENTATION/auth/auth_register/auth_register_page.dart';
 import 'package:teenstar/PRESENTATION/auth/auth_reset_password.dart/auth_reset_password_page.dart';
-import 'package:teenstar/PRESENTATION/home/home_page.dart';
+import 'package:teenstar/PRESENTATION/historique/historique_page.dart';
 import 'package:teenstar/PRESENTATION/core/_main_navigation/main_navigation_page.dart';
 import 'package:teenstar/PRESENTATION/core/_splash/splash_page.dart';
 import 'package:teenstar/PRESENTATION/observation/observation_add/observation_add_page.dart';
+import 'package:teenstar/PRESENTATION/resume/resume_page.dart';
 
 import '../../account/account/buttons/buttons.dart';
 import '../../account/account/colors/colors.dart';
@@ -34,11 +35,16 @@ import '../../observation/observation_view/observation_view_page.dart';
     path: '/main',
     page: MainNavigationPage,
     children: [
-      RedirectRoute(path: '', redirectTo: 'home'),
+      RedirectRoute(path: '', redirectTo: 'resume-route'),
       AutoRoute(
-        path: 'home',
-        name: 'HomeRoute',
-        page: HomePage,
+        path: 'resume-route',
+        name: 'ResumeRoute',
+        page: ResumePage,
+      ),
+      AutoRoute(
+        path: 'historique-route',
+        name: 'HistoriqueRoute',
+        page: HistoriquePage,
       ),
       AutoRoute(
         path: 'account',
@@ -131,6 +137,7 @@ import '../../observation/observation_view/observation_view_page.dart';
     path: '/observation-view-route',
     name: 'ObservationViewRoute',
     page: ObservationViewPage,
-  ), //insert-route
+  ),
+  //insert-route
 ])
 class $AppRouter {}

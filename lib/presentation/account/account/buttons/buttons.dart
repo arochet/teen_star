@@ -22,6 +22,12 @@ class ButtonsPage extends StatelessWidget {
           child: ListView(children: [
             Text("PRESENTATION/core/_core/theme_buttons", style: Theme.of(context).textTheme.headline5),
             SpaceH20(),
+            ElevatedButton(onPressed: () {}, child: Text("buttonLittlePrimary"), style: buttonLittlePrimary),
+            ElevatedButton(
+                onPressed: () {}, child: Text("buttonLittleSecondary"), style: buttonLittleSecondary),
+            ElevatedButton(onPressed: () {}, child: Text("buttonLittleWarning"), style: buttonLittleWarning),
+            ElevatedButton(onPressed: () {}, child: Text("buttonLittleRemove"), style: buttonLittleRemove),
+            ElevatedButton(onPressed: () {}, child: Text("buttonLittleHelp"), style: buttonLittleHelp),
             ElevatedButton(onPressed: () {}, child: Text("buttonNormalPrimary"), style: buttonNormalPrimary),
             ElevatedButton(
                 onPressed: () {}, child: Text("buttonNormalSecondary"), style: buttonNormalSecondary),
@@ -34,6 +40,8 @@ class ButtonsPage extends StatelessWidget {
             ElevatedButton(onPressed: () {}, child: Text("buttonBigRemove"), style: buttonBigRemove),
             ElevatedButton(onPressed: () {}, child: Text("buttonBigHelp"), style: buttonBigHelp),
             ElevatedButton(onPressed: () {}, child: Text("buttonPrimaryHide"), style: buttonPrimaryHide),
+            ElevatedButton(
+                onPressed: () {}, child: Text("buttonPrimaryHideLittle"), style: buttonPrimaryHideLittle),
           ]),
         ),
       ),

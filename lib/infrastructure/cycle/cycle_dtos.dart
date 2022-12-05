@@ -10,7 +10,7 @@ abstract class CycleDTO implements _$CycleDTO {
   const CycleDTO._();
 
   const factory CycleDTO({
-    required int id,
+    int? id,
     required int idJourneeSoleil,
   }) = _CycleDTO;
 

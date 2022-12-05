@@ -48,8 +48,8 @@ Future<void> mainCommon(Environment env) async {
           'FOREIGN KEY (idCycle) REFERENCES Cycle (id) ON DELETE NO ACTION ON UPDATE NO ACTION)');
       await db.execute('CREATE TABLE Cycle('
           'id INTEGER PRIMARY KEY,'
-          'idObservationSommet INTEGER NOT NULL,'
-          'FOREIGN KEY (idObservationSommet) REFERENCES Observation (id) ON DELETE NO ACTION ON UPDATE NO ACTION)');
+          'idJourneeSoleil INTEGER NOT NULL,'
+          'FOREIGN KEY (idJourneeSoleil) REFERENCES Observation (id) ON DELETE NO ACTION ON UPDATE NO ACTION)');
       return;
     },
     // Set the version. This executes the onCreate function and provides a

@@ -20,7 +20,7 @@ CycleDTO _$CycleDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CycleDTO {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   int get idJourneeSoleil => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $CycleDTOCopyWith<$Res> {
   factory $CycleDTOCopyWith(CycleDTO value, $Res Function(CycleDTO) then) =
       _$CycleDTOCopyWithImpl<$Res, CycleDTO>;
   @useResult
-  $Res call({int id, int idJourneeSoleil});
+  $Res call({int? id, int idJourneeSoleil});
 }
 
 /// @nodoc
@@ -50,14 +50,14 @@ class _$CycleDTOCopyWithImpl<$Res, $Val extends CycleDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? idJourneeSoleil = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       idJourneeSoleil: null == idJourneeSoleil
           ? _value.idJourneeSoleil
           : idJourneeSoleil // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,7 @@ abstract class _$$_CycleDTOCopyWith<$Res> implements $CycleDTOCopyWith<$Res> {
       __$$_CycleDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, int idJourneeSoleil});
+  $Res call({int? id, int idJourneeSoleil});
 }
 
 /// @nodoc
@@ -87,14 +87,14 @@ class __$$_CycleDTOCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? idJourneeSoleil = null,
   }) {
     return _then(_$_CycleDTO(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       idJourneeSoleil: null == idJourneeSoleil
           ? _value.idJourneeSoleil
           : idJourneeSoleil // ignore: cast_nullable_to_non_nullable
@@ -106,14 +106,13 @@ class __$$_CycleDTOCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_CycleDTO extends _CycleDTO {
-  const _$_CycleDTO({required this.id, required this.idJourneeSoleil})
-      : super._();
+  const _$_CycleDTO({this.id, required this.idJourneeSoleil}) : super._();
 
   factory _$_CycleDTO.fromJson(Map<String, dynamic> json) =>
       _$$_CycleDTOFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final int idJourneeSoleil;
 
@@ -151,15 +150,14 @@ class _$_CycleDTO extends _CycleDTO {
 }
 
 abstract class _CycleDTO extends CycleDTO {
-  const factory _CycleDTO(
-      {required final int id,
-      required final int idJourneeSoleil}) = _$_CycleDTO;
+  const factory _CycleDTO({final int? id, required final int idJourneeSoleil}) =
+      _$_CycleDTO;
   const _CycleDTO._() : super._();
 
   factory _CycleDTO.fromJson(Map<String, dynamic> json) = _$_CycleDTO.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   int get idJourneeSoleil;
   @override

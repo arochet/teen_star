@@ -14,13 +14,12 @@ import 'package:teenstar/PRESENTATION/auth/auth_reset_password.dart/auth_reset_p
 import 'package:teenstar/PRESENTATION/historique/historique_page.dart';
 import 'package:teenstar/PRESENTATION/core/_main_navigation/main_navigation_page.dart';
 import 'package:teenstar/PRESENTATION/core/_splash/splash_page.dart';
-import 'package:teenstar/PRESENTATION/observation/observation_add/observation_add_page.dart';
+import 'package:teenstar/PRESENTATION/resume/ajout_observation_journee/observation_add_page.dart';
 import 'package:teenstar/PRESENTATION/resume/resume_page.dart';
 
 import '../../account/account/buttons/buttons.dart';
 import '../../account/account/colors/colors.dart';
 import '../../account/account/utils/utils_page.dart';
-import '../../observation/observation_view/observation_view_page.dart';
 
 @MaterialAutoRouter(replaceInRouteName: "Page,Route", routes: [
   //RedirectRoute(path: '*', redirectTo: '/'),

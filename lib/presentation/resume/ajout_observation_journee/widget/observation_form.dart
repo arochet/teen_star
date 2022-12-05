@@ -1,7 +1,10 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:injectable/injectable.dart';
+import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
-import 'package:teenstar/APPLICATION/observation/add_observation_form_notifier.dart';
+import 'package:teenstar/APPLICATION/cycle/add_observation_form_notifier.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
@@ -21,6 +24,7 @@ class ObservationFormProvider extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //Lorsque l'on clique sur le bouton enregistrer observation !
     ref.listen<AddObservationFormData>(cycleFormNotifierProvider, (prev, myRegisterState) {
       myRegisterState.authFailureOrSuccessOption.fold(
           () {},
@@ -73,7 +77,32 @@ class ObservationForm extends ConsumerWidget {
           ],
         ),
         SpaceH30(),
-
+        if (ref.watch(environment).name == Environment.dev)
+          Align(
+            child: ElevatedButton(
+              onPressed: () {
+                notifierForm.sensationChanged(Sensation(SensationState.humide));
+                notifierForm.douleursChanged(DouleurState.malDeTete);
+                notifierForm.notesConfidentiellesChanged("Test note confidentielles");
+                notifierForm.evenementsChanged(EvenementState.fatigue);
+                notifierForm.humeurChanged(Humeur(HumeurState.humeurChangeante));
+                final idCycle = ref.read(idCycleCourant);
+                if (idCycle != null) {
+                  //Le cycle existe
+                  final cycleAsync = ref.read(cycleProvider(idCycle));
+                  cycleAsync.whenData((value) => value.fold(
+                        (err) => showSnackbarCycleFailure(context, err),
+                        (cycle) => notifierForm.addObservationPressed(cycle),
+                      ));
+                } else {
+                  //Pas de cycle
+                  notifierForm.addObservationPressed(null);
+                }
+              },
+              style: buttonNormalConfirm,
+              child: const Text("[DEV] Enregistrer l'Observation"),
+            ),
+          ),
         //SENSATION
         Text("Sensation", style: Theme.of(context).textTheme.headline4),
         const SizedBox(height: 5),
@@ -186,10 +215,22 @@ class ObservationForm extends ConsumerWidget {
         //insert-field-complete
 
         const SizedBox(height: 14),
+        SpaceH10(),
         Align(
           child: ElevatedButton(
             onPressed: () {
-              notifierForm.addObservationPressed();
+              final idCycle = ref.read(idCycleCourant);
+              if (idCycle != null) {
+                //Le cycle existe
+                final cycleAsync = ref.read(cycleProvider(idCycle));
+                cycleAsync.whenData((value) => value.fold(
+                      (err) => showSnackbarCycleFailure(context, err),
+                      (cycle) => notifierForm.addObservationPressed(cycle),
+                    ));
+              } else {
+                //Pas de cycle
+                notifierForm.addObservationPressed(null);
+              }
             },
             style: buttonNormalConfirm,
             child: const Text("Enregistrer l'Observation"),

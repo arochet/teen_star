@@ -7,7 +7,7 @@ part of 'cycle_dtos.dart';
 // **************************************************************************
 
 _$_CycleDTO _$$_CycleDTOFromJson(Map<String, dynamic> json) => _$_CycleDTO(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       idJourneeSoleil: json['idJourneeSoleil'] as int,
     );
 

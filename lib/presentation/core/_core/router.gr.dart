@@ -31,7 +31,8 @@ import '../../auth/auth_register/auth_register_page.dart' as _i5;
 import '../../auth/auth_reset_password.dart/auth_reset_password_page.dart'
     as _i7;
 import '../../historique/historique_page.dart' as _i19;
-import '../../observation/observation_add/observation_add_page.dart' as _i17;
+import '../../resume/ajout_observation_journee/observation_add_page.dart'
+    as _i17;
 import '../../resume/resume_page.dart' as _i18;
 import '../_main_navigation/main_navigation_page.dart' as _i2;
 import '../_splash/splash_page.dart' as _i1;

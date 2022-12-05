@@ -18,21 +18,27 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CycleFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() unexpected,
+    required TResult Function(String? erreur) unexpected,
+    required TResult Function() idCycleUnfound,
+    required TResult Function() cycleUnfound,
     required TResult Function() insufficientPermission,
     required TResult Function() unableToUpdate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? unexpected,
+    TResult? Function(String? erreur)? unexpected,
+    TResult? Function()? idCycleUnfound,
+    TResult? Function()? cycleUnfound,
     TResult? Function()? insufficientPermission,
     TResult? Function()? unableToUpdate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? unexpected,
+    TResult Function(String? erreur)? unexpected,
+    TResult Function()? idCycleUnfound,
+    TResult Function()? cycleUnfound,
     TResult Function()? insufficientPermission,
     TResult Function()? unableToUpdate,
     required TResult orElse(),
@@ -41,6 +47,8 @@ mixin _$CycleFailure {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_IdCycleUnfound value) idCycleUnfound,
+    required TResult Function(_CycleUnfound value) cycleUnfound,
     required TResult Function(_InsufficientPermission value)
         insufficientPermission,
     required TResult Function(_UnableToUpdate value) unableToUpdate,
@@ -49,6 +57,8 @@ mixin _$CycleFailure {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult? Function(_CycleUnfound value)? cycleUnfound,
     TResult? Function(_InsufficientPermission value)? insufficientPermission,
     TResult? Function(_UnableToUpdate value)? unableToUpdate,
   }) =>
@@ -56,6 +66,8 @@ mixin _$CycleFailure {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult Function(_CycleUnfound value)? cycleUnfound,
     TResult Function(_InsufficientPermission value)? insufficientPermission,
     TResult Function(_UnableToUpdate value)? unableToUpdate,
     required TResult orElse(),
@@ -86,6 +98,8 @@ abstract class _$$_UnexpectedCopyWith<$Res> {
   factory _$$_UnexpectedCopyWith(
           _$_Unexpected value, $Res Function(_$_Unexpected) then) =
       __$$_UnexpectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? erreur});
 }
 
 /// @nodoc
@@ -95,57 +109,87 @@ class __$$_UnexpectedCopyWithImpl<$Res>
   __$$_UnexpectedCopyWithImpl(
       _$_Unexpected _value, $Res Function(_$_Unexpected) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? erreur = freezed,
+  }) {
+    return _then(_$_Unexpected(
+      freezed == erreur
+          ? _value.erreur
+          : erreur // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Unexpected implements _Unexpected {
-  const _$_Unexpected();
+  const _$_Unexpected(this.erreur);
+
+  @override
+  final String? erreur;
 
   @override
   String toString() {
-    return 'CycleFailure.unexpected()';
+    return 'CycleFailure.unexpected(erreur: $erreur)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Unexpected);
+        (other.runtimeType == runtimeType &&
+            other is _$_Unexpected &&
+            (identical(other.erreur, erreur) || other.erreur == erreur));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, erreur);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UnexpectedCopyWith<_$_Unexpected> get copyWith =>
+      __$$_UnexpectedCopyWithImpl<_$_Unexpected>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() unexpected,
+    required TResult Function(String? erreur) unexpected,
+    required TResult Function() idCycleUnfound,
+    required TResult Function() cycleUnfound,
     required TResult Function() insufficientPermission,
     required TResult Function() unableToUpdate,
   }) {
-    return unexpected();
+    return unexpected(erreur);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? unexpected,
+    TResult? Function(String? erreur)? unexpected,
+    TResult? Function()? idCycleUnfound,
+    TResult? Function()? cycleUnfound,
     TResult? Function()? insufficientPermission,
     TResult? Function()? unableToUpdate,
   }) {
-    return unexpected?.call();
+    return unexpected?.call(erreur);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? unexpected,
+    TResult Function(String? erreur)? unexpected,
+    TResult Function()? idCycleUnfound,
+    TResult Function()? cycleUnfound,
     TResult Function()? insufficientPermission,
     TResult Function()? unableToUpdate,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
-      return unexpected();
+      return unexpected(erreur);
     }
     return orElse();
   }
@@ -154,6 +198,8 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_IdCycleUnfound value) idCycleUnfound,
+    required TResult Function(_CycleUnfound value) cycleUnfound,
     required TResult Function(_InsufficientPermission value)
         insufficientPermission,
     required TResult Function(_UnableToUpdate value) unableToUpdate,
@@ -165,6 +211,8 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult? Function(_CycleUnfound value)? cycleUnfound,
     TResult? Function(_InsufficientPermission value)? insufficientPermission,
     TResult? Function(_UnableToUpdate value)? unableToUpdate,
   }) {
@@ -175,6 +223,8 @@ class _$_Unexpected implements _Unexpected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult Function(_CycleUnfound value)? cycleUnfound,
     TResult Function(_InsufficientPermission value)? insufficientPermission,
     TResult Function(_UnableToUpdate value)? unableToUpdate,
     required TResult orElse(),
@@ -187,7 +237,254 @@ class _$_Unexpected implements _Unexpected {
 }
 
 abstract class _Unexpected implements CycleFailure {
-  const factory _Unexpected() = _$_Unexpected;
+  const factory _Unexpected(final String? erreur) = _$_Unexpected;
+
+  String? get erreur;
+  @JsonKey(ignore: true)
+  _$$_UnexpectedCopyWith<_$_Unexpected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_IdCycleUnfoundCopyWith<$Res> {
+  factory _$$_IdCycleUnfoundCopyWith(
+          _$_IdCycleUnfound value, $Res Function(_$_IdCycleUnfound) then) =
+      __$$_IdCycleUnfoundCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_IdCycleUnfoundCopyWithImpl<$Res>
+    extends _$CycleFailureCopyWithImpl<$Res, _$_IdCycleUnfound>
+    implements _$$_IdCycleUnfoundCopyWith<$Res> {
+  __$$_IdCycleUnfoundCopyWithImpl(
+      _$_IdCycleUnfound _value, $Res Function(_$_IdCycleUnfound) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_IdCycleUnfound implements _IdCycleUnfound {
+  const _$_IdCycleUnfound();
+
+  @override
+  String toString() {
+    return 'CycleFailure.idCycleUnfound()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_IdCycleUnfound);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? erreur) unexpected,
+    required TResult Function() idCycleUnfound,
+    required TResult Function() cycleUnfound,
+    required TResult Function() insufficientPermission,
+    required TResult Function() unableToUpdate,
+  }) {
+    return idCycleUnfound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? erreur)? unexpected,
+    TResult? Function()? idCycleUnfound,
+    TResult? Function()? cycleUnfound,
+    TResult? Function()? insufficientPermission,
+    TResult? Function()? unableToUpdate,
+  }) {
+    return idCycleUnfound?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? erreur)? unexpected,
+    TResult Function()? idCycleUnfound,
+    TResult Function()? cycleUnfound,
+    TResult Function()? insufficientPermission,
+    TResult Function()? unableToUpdate,
+    required TResult orElse(),
+  }) {
+    if (idCycleUnfound != null) {
+      return idCycleUnfound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_IdCycleUnfound value) idCycleUnfound,
+    required TResult Function(_CycleUnfound value) cycleUnfound,
+    required TResult Function(_InsufficientPermission value)
+        insufficientPermission,
+    required TResult Function(_UnableToUpdate value) unableToUpdate,
+  }) {
+    return idCycleUnfound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult? Function(_CycleUnfound value)? cycleUnfound,
+    TResult? Function(_InsufficientPermission value)? insufficientPermission,
+    TResult? Function(_UnableToUpdate value)? unableToUpdate,
+  }) {
+    return idCycleUnfound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult Function(_CycleUnfound value)? cycleUnfound,
+    TResult Function(_InsufficientPermission value)? insufficientPermission,
+    TResult Function(_UnableToUpdate value)? unableToUpdate,
+    required TResult orElse(),
+  }) {
+    if (idCycleUnfound != null) {
+      return idCycleUnfound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IdCycleUnfound implements CycleFailure {
+  const factory _IdCycleUnfound() = _$_IdCycleUnfound;
+}
+
+/// @nodoc
+abstract class _$$_CycleUnfoundCopyWith<$Res> {
+  factory _$$_CycleUnfoundCopyWith(
+          _$_CycleUnfound value, $Res Function(_$_CycleUnfound) then) =
+      __$$_CycleUnfoundCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CycleUnfoundCopyWithImpl<$Res>
+    extends _$CycleFailureCopyWithImpl<$Res, _$_CycleUnfound>
+    implements _$$_CycleUnfoundCopyWith<$Res> {
+  __$$_CycleUnfoundCopyWithImpl(
+      _$_CycleUnfound _value, $Res Function(_$_CycleUnfound) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_CycleUnfound implements _CycleUnfound {
+  const _$_CycleUnfound();
+
+  @override
+  String toString() {
+    return 'CycleFailure.cycleUnfound()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_CycleUnfound);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? erreur) unexpected,
+    required TResult Function() idCycleUnfound,
+    required TResult Function() cycleUnfound,
+    required TResult Function() insufficientPermission,
+    required TResult Function() unableToUpdate,
+  }) {
+    return cycleUnfound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? erreur)? unexpected,
+    TResult? Function()? idCycleUnfound,
+    TResult? Function()? cycleUnfound,
+    TResult? Function()? insufficientPermission,
+    TResult? Function()? unableToUpdate,
+  }) {
+    return cycleUnfound?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? erreur)? unexpected,
+    TResult Function()? idCycleUnfound,
+    TResult Function()? cycleUnfound,
+    TResult Function()? insufficientPermission,
+    TResult Function()? unableToUpdate,
+    required TResult orElse(),
+  }) {
+    if (cycleUnfound != null) {
+      return cycleUnfound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_IdCycleUnfound value) idCycleUnfound,
+    required TResult Function(_CycleUnfound value) cycleUnfound,
+    required TResult Function(_InsufficientPermission value)
+        insufficientPermission,
+    required TResult Function(_UnableToUpdate value) unableToUpdate,
+  }) {
+    return cycleUnfound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult? Function(_CycleUnfound value)? cycleUnfound,
+    TResult? Function(_InsufficientPermission value)? insufficientPermission,
+    TResult? Function(_UnableToUpdate value)? unableToUpdate,
+  }) {
+    return cycleUnfound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult Function(_CycleUnfound value)? cycleUnfound,
+    TResult Function(_InsufficientPermission value)? insufficientPermission,
+    TResult Function(_UnableToUpdate value)? unableToUpdate,
+    required TResult orElse(),
+  }) {
+    if (cycleUnfound != null) {
+      return cycleUnfound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CycleUnfound implements CycleFailure {
+  const factory _CycleUnfound() = _$_CycleUnfound;
 }
 
 /// @nodoc
@@ -229,7 +526,9 @@ class _$_InsufficientPermission implements _InsufficientPermission {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() unexpected,
+    required TResult Function(String? erreur) unexpected,
+    required TResult Function() idCycleUnfound,
+    required TResult Function() cycleUnfound,
     required TResult Function() insufficientPermission,
     required TResult Function() unableToUpdate,
   }) {
@@ -239,7 +538,9 @@ class _$_InsufficientPermission implements _InsufficientPermission {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? unexpected,
+    TResult? Function(String? erreur)? unexpected,
+    TResult? Function()? idCycleUnfound,
+    TResult? Function()? cycleUnfound,
     TResult? Function()? insufficientPermission,
     TResult? Function()? unableToUpdate,
   }) {
@@ -249,7 +550,9 @@ class _$_InsufficientPermission implements _InsufficientPermission {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? unexpected,
+    TResult Function(String? erreur)? unexpected,
+    TResult Function()? idCycleUnfound,
+    TResult Function()? cycleUnfound,
     TResult Function()? insufficientPermission,
     TResult Function()? unableToUpdate,
     required TResult orElse(),
@@ -264,6 +567,8 @@ class _$_InsufficientPermission implements _InsufficientPermission {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_IdCycleUnfound value) idCycleUnfound,
+    required TResult Function(_CycleUnfound value) cycleUnfound,
     required TResult Function(_InsufficientPermission value)
         insufficientPermission,
     required TResult Function(_UnableToUpdate value) unableToUpdate,
@@ -275,6 +580,8 @@ class _$_InsufficientPermission implements _InsufficientPermission {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult? Function(_CycleUnfound value)? cycleUnfound,
     TResult? Function(_InsufficientPermission value)? insufficientPermission,
     TResult? Function(_UnableToUpdate value)? unableToUpdate,
   }) {
@@ -285,6 +592,8 @@ class _$_InsufficientPermission implements _InsufficientPermission {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult Function(_CycleUnfound value)? cycleUnfound,
     TResult Function(_InsufficientPermission value)? insufficientPermission,
     TResult Function(_UnableToUpdate value)? unableToUpdate,
     required TResult orElse(),
@@ -338,7 +647,9 @@ class _$_UnableToUpdate implements _UnableToUpdate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() unexpected,
+    required TResult Function(String? erreur) unexpected,
+    required TResult Function() idCycleUnfound,
+    required TResult Function() cycleUnfound,
     required TResult Function() insufficientPermission,
     required TResult Function() unableToUpdate,
   }) {
@@ -348,7 +659,9 @@ class _$_UnableToUpdate implements _UnableToUpdate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? unexpected,
+    TResult? Function(String? erreur)? unexpected,
+    TResult? Function()? idCycleUnfound,
+    TResult? Function()? cycleUnfound,
     TResult? Function()? insufficientPermission,
     TResult? Function()? unableToUpdate,
   }) {
@@ -358,7 +671,9 @@ class _$_UnableToUpdate implements _UnableToUpdate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? unexpected,
+    TResult Function(String? erreur)? unexpected,
+    TResult Function()? idCycleUnfound,
+    TResult Function()? cycleUnfound,
     TResult Function()? insufficientPermission,
     TResult Function()? unableToUpdate,
     required TResult orElse(),
@@ -373,6 +688,8 @@ class _$_UnableToUpdate implements _UnableToUpdate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_IdCycleUnfound value) idCycleUnfound,
+    required TResult Function(_CycleUnfound value) cycleUnfound,
     required TResult Function(_InsufficientPermission value)
         insufficientPermission,
     required TResult Function(_UnableToUpdate value) unableToUpdate,
@@ -384,6 +701,8 @@ class _$_UnableToUpdate implements _UnableToUpdate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult? Function(_CycleUnfound value)? cycleUnfound,
     TResult? Function(_InsufficientPermission value)? insufficientPermission,
     TResult? Function(_UnableToUpdate value)? unableToUpdate,
   }) {
@@ -394,6 +713,8 @@ class _$_UnableToUpdate implements _UnableToUpdate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_IdCycleUnfound value)? idCycleUnfound,
+    TResult Function(_CycleUnfound value)? cycleUnfound,
     TResult Function(_InsufficientPermission value)? insufficientPermission,
     TResult Function(_UnableToUpdate value)? unableToUpdate,
     required TResult orElse(),

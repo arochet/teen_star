@@ -6,12 +6,13 @@ import 'package:teenstar/APPLICATION/account/reauthenticate_form_notifier.dart';
 import 'package:teenstar/APPLICATION/auth/register_form_notifier.dart';
 import 'package:teenstar/APPLICATION/auth/reset_password_notifier.dart';
 import 'package:teenstar/APPLICATION/auth/sign_in_form_notifier.dart';
-import 'package:teenstar/APPLICATION/observation/add_observation_form_notifier.dart';
+import 'package:teenstar/APPLICATION/cycle/add_observation_form_notifier.dart';
 import 'package:teenstar/DOMAIN/auth/user_auth.dart';
 import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
+import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 
 import 'DOMAIN/core/errors.dart';
 import 'DOMAIN/core/value_objects.dart';
@@ -90,19 +91,22 @@ final currentUserData = FutureProvider.autoDispose<UserData?>((ref) async {
 });
 
 //Cycle
-
 final cycleRepositoryProvider = Provider<ICycleRepository>((ref) => getIt<ICycleRepository>());
 
-final allCycleProvider = FutureProvider<Either<ObservationFailure, List<Observation>>>((ref) {
-  return ref.read(cycleRepositoryProvider).read();
+final idCycleCourant = StateProvider<UniqueId?>((ref) => null);
+
+final allCycleProvider = FutureProvider<Either<CycleFailure, List<CycleDTO>>>((ref) {
+  return ref.read(cycleRepositoryProvider).readAllCycles();
 });
-/* 
-final oneCycleProvider = FutureProvider.autoDispose.family<Either<CycleFailure, Cycle>, UniqueId>(
-    (ref, id) => ref.watch(cycleRepositoryProvider).read(/* id */)); */
+
+final cycleProvider = FutureProvider.family<Either<CycleFailure, Cycle>, UniqueId>((ref, id) {
+  return ref.read(cycleRepositoryProvider).readCycle(id);
+});
 
 final cycleFormNotifierProvider =
     StateNotifierProvider.autoDispose<ObservationFormNotifier, AddObservationFormData>(
   (ref) => ObservationFormNotifier(ref.watch(cycleRepositoryProvider)),
 );
+
 //insert-provider
 //Ne pas supprimer la balise ci-dessus

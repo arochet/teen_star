@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
+import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
@@ -123,7 +124,7 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
   }
 //insert-changed
 
-  addObservationPressed() async {
+  addObservationPressed(Cycle? cycle) async {
     Either<ObservationFailure, Unit>? failureOrSuccess;
 
     //insert-valid-params
@@ -133,7 +134,9 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
         state.humeur.isValid()) {
       state = state.copyWith(isSubmitting: true, authFailureOrSuccessOption: none());
 
-      failureOrSuccess = await this._iObservationRepository.create(Observation(
+      failureOrSuccess = await this._iObservationRepository.createObservation(
+          cycle,
+          Observation(
             id: UniqueId(),
             date: state.date,
             couleur: null,

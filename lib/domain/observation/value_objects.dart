@@ -65,6 +65,25 @@ extension ParseToSringSensation on SensationState {
         return '';
     }
   }
+
+  String toDisplayShort() {
+    switch (this) {
+      case SensationState.sec:
+        return 'S';
+      case SensationState.humide:
+        return 'H';
+      case SensationState.mouille:
+        return 'M';
+      case SensationState.glissantLubrifie:
+        return 'GL';
+      case SensationState.nonpercu:
+        return 'np';
+      case SensationState.autre:
+        return '?';
+      case SensationState.none:
+        return '';
+    }
+  }
 }
 
 @immutable
@@ -223,6 +242,21 @@ extension ParseToSringDouleur on DouleurState {
         return 'Mal de tête';
       case DouleurState.aucune:
         return 'Aucune';
+      case DouleurState.none:
+        return '';
+    }
+  }
+
+  String toDisplayShort() {
+    switch (this) {
+      case DouleurState.seins:
+        return 'DS';
+      case DouleurState.ventre:
+        return 'DV';
+      case DouleurState.malDeTete:
+        return 'MT';
+      case DouleurState.aucune:
+        return '-';
       case DouleurState.none:
         return '';
     }

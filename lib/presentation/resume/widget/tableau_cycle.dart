@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/observation/observation.dart';
+import 'package:teenstar/DOMAIN/observation/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
 import 'package:teenstar/PRESENTATION/resume/resume_page.dart';
 
 import '../../core/_utils/app_date_utils.dart';
@@ -26,6 +28,8 @@ class TableauCycle extends ConsumerWidget {
       'Humeur',
       'Evenements'
     ];
+
+    Map cellsWidth = {'Observation': 150, 'Evenements': 120};
     return ShowComponentFile(
       title: 'tableau_cycle.dart',
       child: StickyHeadersTable(
@@ -34,10 +38,11 @@ class TableauCycle extends ConsumerWidget {
         contentCellBuilder: (int columnIndex, int rowIndex) => _Cell(list[rowIndex], title[columnIndex]),
         rowsLength: list.length,
         rowsTitleBuilder: (int rowIndex) => _CellDay('$rowIndex'),
+        widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
           stickyLegendHeight: 50,
-          contentCellWidth: 60,
+          contentCellWidth: 60, //Sert à rien car il y'a widthCell
           contentCellHeight: 50,
         ),
       ),
@@ -59,8 +64,10 @@ class _Cell extends StatelessWidget {
     Widget info;
     switch (column) {
       case 'Date':
-        info = Text(AppDateUtils.formatDate(observation.date, 'dd/MM'),
-            style: Theme.of(context).textTheme.headline5);
+        info = Center(
+          child: Text(AppDateUtils.formatDate(observation.date, 'dd/MM'),
+              style: Theme.of(context).textTheme.headline5),
+        );
         break;
       case 'Couleur':
         info = Container(
@@ -77,39 +84,45 @@ class _Cell extends StatelessWidget {
         );
         break;
       case 'Sensation':
-        info = Container(
-          width: 40,
-          height: 35,
-          child: Text("H", style: Theme.of(context).textTheme.headline4),
+        info = Center(
+          child: Text(observation.sensation?.getOrCrash().toDisplayShort() ?? '',
+              style: Theme.of(context).textTheme.headline4),
         );
         break;
       case 'Observation':
-        info = Container(
-          width: 40,
-          height: 35,
-          child: Icon(Icons.accessibility),
+        info = Row(
+          children: [
+            Container(
+              width: 40,
+              height: 35,
+              color: Color.fromARGB(255, 160, 141, 140),
+            ),
+            ...observation.evenements?.map((evt) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: 40,
+                        height: 35,
+                        color: Color.fromARGB(255, 160, 141, 140),
+                      ),
+                    )) ??
+                []
+          ],
         );
         break;
       case 'Douleur':
-        info = Container(
-          width: 40,
-          height: 35,
-          child: Text("DV", style: Theme.of(context).textTheme.headline4),
-        );
+        info = Text(
+            observation.douleurs
+                    ?.map((Douleur douleur) => douleur.getOrCrash().toDisplayShort())
+                    .toList()
+                    .toString() ??
+                '/',
+            style: Theme.of(context).textTheme.headline5);
         break;
       case 'Humeur':
-        info = Container(
-          width: 40,
-          height: 35,
-          child: Icon(Icons.tag_faces),
-        );
+        info = Icon(Icons.tag_faces);
         break;
       case 'Evenements':
-        info = Container(
-          width: 40,
-          height: 35,
-          child: Text("#2", style: Theme.of(context).textTheme.headline4),
-        );
+        info = Text("#2", style: Theme.of(context).textTheme.headline4);
         break;
       default:
         info = Text(' ** ', style: Theme.of(context).textTheme.headline5);

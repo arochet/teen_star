@@ -26,6 +26,9 @@ class StickyHeadersTable extends StatefulWidget {
     /// Title for Top Left cell (always visible)
     this.legendCell = const Text(' '),
 
+    /// Width Cell by column
+    this.widthCell,
+
     /// Table cell dimensions
     this.cellDimensions = CellDimensions.base,
 
@@ -43,6 +46,7 @@ class StickyHeadersTable extends StatefulWidget {
   final Widget Function(int rowIndex) rowsTitleBuilder;
   final Widget Function(int columnIndex, int rowIndex) contentCellBuilder;
   final Function(int rowIndex)? rowSelect;
+  final double Function(int rowIndex)? widthCell;
   final CellDimensions cellDimensions;
   final BoxFit cellFit;
 
@@ -98,7 +102,9 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                     children: List<Widget>.generate(
                       widget.columnsLength,
                       (int i) => SizedBox(
-                        width: widget.cellDimensions.contentCellWidth,
+                        width: widget.widthCell != null
+                            ? widget.widthCell!(i)
+                            : widget.cellDimensions.contentCellWidth,
                         height: widget.cellDimensions.stickyLegendHeight,
                         child: FittedBox(
                           fit: widget.cellFit,
@@ -172,7 +178,9 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                                   children: List<Container>.generate(
                                     widget.columnsLength,
                                     (int j) => Container(
-                                      width: widget.cellDimensions.contentCellWidth,
+                                      width: widget.widthCell != null
+                                          ? widget.widthCell!(j)
+                                          : widget.cellDimensions.contentCellWidth,
                                       height: widget.cellDimensions.contentCellHeight,
                                       color: i % 2 == 1 ? const Color.fromARGB(14, 255, 255, 255) : null,
                                       child: FittedBox(

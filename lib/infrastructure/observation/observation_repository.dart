@@ -79,11 +79,9 @@ class ObservationRepository implements IObservationRepository {
 
   @override
   Future<Either<ObservationFailure, List<Observation>>> read() async {
-    print('read ObsersvationREpository');
     try {
       final List<Map<String, dynamic>> maps = await _database.query(observationTableName);
 
-      // Convert the List<Map<String, dynamic> into a List<Dog>.
       return right(List.generate(maps.length, (i) {
         print('maps[$i]');
         print(maps[i]);

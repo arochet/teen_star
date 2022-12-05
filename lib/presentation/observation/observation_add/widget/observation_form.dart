@@ -1,11 +1,8 @@
 import 'package:another_flushbar/flushbar.dart';
-import 'package:teenstar/APPLICATION/auth/register_form_notifier.dart';
-import 'package:teenstar/DOMAIN/observation/value_objects.dart';
-import 'package:teenstar/PRESENTATION/auth/widget/flushbar_auth_failure.dart';
+import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/APPLICATION/observation/add_observation_form_notifier.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/text_utils.dart';
@@ -24,7 +21,7 @@ class ObservationFormProvider extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen<AddObservationFormData>(observationFormNotifierProvider, (prev, myRegisterState) {
+    ref.listen<AddObservationFormData>(cycleFormNotifierProvider, (prev, myRegisterState) {
       myRegisterState.authFailureOrSuccessOption.fold(
           () {},
           (either) => either.fold((failure) {
@@ -41,7 +38,7 @@ class ObservationFormProvider extends ConsumerWidget {
               }, (_) {
                 //Création réussie !
                 Future.delayed(Duration.zero, () async {
-                  ref.refresh(allObservationProviderRead);
+                  ref.refresh(allCycleProvider);
                   context.router.pop();
                 });
               }));
@@ -57,8 +54,8 @@ class ObservationForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final form = ref.watch(observationFormNotifierProvider);
-    final notifierForm = ref.read(observationFormNotifierProvider.notifier);
+    final form = ref.watch(cycleFormNotifierProvider);
+    final notifierForm = ref.read(cycleFormNotifierProvider.notifier);
     return Form(
       autovalidateMode: AutovalidateMode.always,
       child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
@@ -199,7 +196,7 @@ class ObservationForm extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 12),
-        if (ref.read(observationFormNotifierProvider).isSubmitting) ...[
+        if (ref.read(cycleFormNotifierProvider).isSubmitting) ...[
           const SizedBox(height: 8),
           const LinearProgressIndicator(value: null)
         ]

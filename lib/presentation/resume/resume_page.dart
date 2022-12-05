@@ -7,8 +7,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 
-import '../../DOMAIN/observation/observation.dart';
-import '../../DOMAIN/observation/observation_failure.dart';
+import '../../DOMAIN/cycle/observation.dart';
+import '../../DOMAIN/cycle/observation_failure.dart';
 import 'widget/appbar_analyse.dart';
 import 'widget/tableau_cycle.dart';
 
@@ -18,8 +18,7 @@ final showAnalyse = StateProvider<bool>((ref) => false);
 class ResumePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<Either<ObservationFailure, List<Observation>>> listAsync =
-        ref.watch(allObservationProviderRead);
+    AsyncValue<Either<ObservationFailure, List<Observation>>> listAsync = ref.watch(allCycleProvider);
 
     //LIST OBSERVATION
     final listObservationWidget = listAsync.when(

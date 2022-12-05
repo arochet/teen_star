@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:teenstar/DOMAIN/observation/observation.dart';
-import 'package:teenstar/DOMAIN/observation/value_objects.dart';
+import 'package:teenstar/DOMAIN/cycle/observation.dart';
+import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';

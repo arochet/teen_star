@@ -17,7 +17,5 @@ extension FirestoreX on FirebaseFirestore {
   Future<DocumentReference> aUserDocument(UniqueId idPlayer) async {
     return FirebaseFirestore.instance.collection('user').doc(idPlayer.getOrCrash() as String);
   }
-
-  CollectionReference get observationCollection => collection('observation');
 //insert-collection
 }

@@ -28,7 +28,8 @@ import '../../auth/auth_check_email/auth_check_email_page.dart' as _i6;
 import '../../auth/auth_connexion/auth_connexion_page.dart' as _i4;
 import '../../auth/auth_init/auth_init_page.dart' as _i3;
 import '../../auth/auth_register/auth_register_page.dart' as _i5;
-import '../../auth/auth_reset_password.dart/auth_reset_password_page.dart' as _i7;
+import '../../auth/auth_reset_password.dart/auth_reset_password_page.dart'
+    as _i7;
 import '../../historique/historique_page.dart' as _i19;
 import '../../observation/observation_add/observation_add_page.dart' as _i17;
 import '../../resume/resume_page.dart' as _i18;
@@ -36,7 +37,8 @@ import '../_main_navigation/main_navigation_page.dart' as _i2;
 import '../_splash/splash_page.dart' as _i1;
 
 class AppRouter extends _i21.RootStackRouter {
-  AppRouter([_i22.GlobalKey<_i22.NavigatorState>? navigatorKey]) : super(navigatorKey);
+  AppRouter([_i22.GlobalKey<_i22.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, _i21.PageFactory> pagesMap = {
@@ -47,7 +49,8 @@ class AppRouter extends _i21.RootStackRouter {
       );
     },
     MainNavigationRoute.name: (routeData) {
-      final args = routeData.argsAs<MainNavigationRouteArgs>(orElse: () => const MainNavigationRouteArgs());
+      final args = routeData.argsAs<MainNavigationRouteArgs>(
+          orElse: () => const MainNavigationRouteArgs());
       return _i21.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i2.MainNavigationPage(key: args.key),

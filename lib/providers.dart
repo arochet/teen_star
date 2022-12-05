@@ -11,13 +11,15 @@ import 'package:teenstar/DOMAIN/auth/user_auth.dart';
 import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
-import 'package:teenstar/INFRASTRUCTURE/observation/observation_repository.dart';
+import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 
 import 'DOMAIN/core/errors.dart';
 import 'DOMAIN/core/value_objects.dart';
-import 'DOMAIN/observation/observation.dart';
-import 'DOMAIN/observation/observation_failure.dart';
+import 'DOMAIN/cycle/cycle_failure.dart';
+import 'DOMAIN/cycle/observation.dart';
+import 'DOMAIN/cycle/observation_failure.dart';
 import 'INFRASTRUCTURE/auth/auth_repository.dart';
+import 'INFRASTRUCTURE/cycle/cycle_repository.dart';
 import 'injection.dart';
 
 //ENVIRONNEMENT
@@ -87,24 +89,20 @@ final currentUserData = FutureProvider.autoDispose<UserData?>((ref) async {
     return user;
 });
 
-//Observation
+//Cycle
 
-final observationRepositoryProvider =
-    Provider<IObservationRepository>((ref) => getIt<IObservationRepository>());
+final cycleRepositoryProvider = Provider<ICycleRepository>((ref) => getIt<ICycleRepository>());
 
-final observationFormNotifierProvider =
-    StateNotifierProvider.autoDispose<ObservationFormNotifier, AddObservationFormData>(
-  (ref) => ObservationFormNotifier(ref.watch(observationRepositoryProvider)),
-);
-
-final allObservationProviderRead = FutureProvider<Either<ObservationFailure, List<Observation>>>((ref) {
-  return ref.read(observationRepositoryProvider).read();
+final allCycleProvider = FutureProvider<Either<ObservationFailure, List<Observation>>>((ref) {
+  return ref.read(cycleRepositoryProvider).read();
 });
+/* 
+final oneCycleProvider = FutureProvider.autoDispose.family<Either<CycleFailure, Cycle>, UniqueId>(
+    (ref, id) => ref.watch(cycleRepositoryProvider).read(/* id */)); */
 
-/* final oneObservationProvider = FutureProvider.autoDispose
-    .family<Either<ObservationFailure, Observation>, UniqueId>(
-        (ref, id) => ref.watch(observationRepositoryProvider).watchWithId(id)); */
-
-
+final cycleFormNotifierProvider =
+    StateNotifierProvider.autoDispose<ObservationFormNotifier, AddObservationFormData>(
+  (ref) => ObservationFormNotifier(ref.watch(cycleRepositoryProvider)),
+);
 //insert-provider
 //Ne pas supprimer la balise ci-dessus

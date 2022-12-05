@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
-import 'package:teenstar/DOMAIN/observation/observation.dart';
+import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:teenstar/DOMAIN/observation/value_objects.dart';
+import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 part 'observation_dtos.freezed.dart';
 part 'observation_dtos.g.dart';
 

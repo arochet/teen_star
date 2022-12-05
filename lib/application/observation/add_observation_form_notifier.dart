@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
-import 'package:teenstar/DOMAIN/observation/observation.dart';
-import 'package:teenstar/DOMAIN/observation/observation_failure.dart';
-import 'package:teenstar/DOMAIN/observation/value_objects.dart';
-import 'package:teenstar/INFRASTRUCTURE/observation/observation_repository.dart';
+import 'package:teenstar/DOMAIN/cycle/observation.dart';
+import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
+import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
+import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_repository.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 part 'add_observation_form_notifier.freezed.dart';
 
@@ -51,7 +51,7 @@ class AddObservationFormData with _$AddObservationFormData {
 }
 
 class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
-  final IObservationRepository _iObservationRepository;
+  final ICycleRepository _iObservationRepository;
 
   ObservationFormNotifier(this._iObservationRepository) : super(AddObservationFormData.initial());
 

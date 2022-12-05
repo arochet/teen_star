@@ -1,4 +1,4 @@
-import 'package:teenstar/DOMAIN/observation/observation.dart';
+import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';

@@ -7,7 +7,6 @@ import 'package:teenstar/APPLICATION/auth/register_form_notifier.dart';
 import 'package:teenstar/APPLICATION/auth/reset_password_notifier.dart';
 import 'package:teenstar/APPLICATION/auth/sign_in_form_notifier.dart';
 import 'package:teenstar/APPLICATION/cycle/add_observation_form_notifier.dart';
-import 'package:teenstar/DOMAIN/auth/user_auth.dart';
 import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';

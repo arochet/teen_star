@@ -1,7 +1,6 @@
 import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_data_dtos.freezed.dart';
 part 'user_data_dtos.g.dart';
@@ -36,8 +35,4 @@ abstract class UserDataDTO implements _$UserDataDTO {
   }
 
   factory UserDataDTO.fromJson(Map<String, dynamic> json) => _$UserDataDTOFromJson(json);
-
-  factory UserDataDTO.fromFirestore(DocumentSnapshot doc) {
-    return UserDataDTO.fromJson(doc.data() as Map<String, dynamic>).copyWith(id: doc.id);
-  }
 }

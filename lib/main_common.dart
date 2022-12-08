@@ -1,7 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:teenstar/firebase_options.dart';
 import 'package:teenstar/providers.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,10 +14,6 @@ Future<void> mainCommon(Environment env) async {
   configurationInjection(env.name);
   WidgetsFlutterBinding.ensureInitialized();
   await ConfigReader.initialize();
-  await Firebase.initializeApp(
-    name: 'base-de-projet',
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   final database = openDatabase(

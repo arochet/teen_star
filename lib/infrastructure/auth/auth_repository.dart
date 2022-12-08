@@ -11,11 +11,8 @@ import 'package:teenstar/DOMAIN/auth/value_objects.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/INFRASTRUCTURE/auth/user_data_dtos.dart';
 import 'package:teenstar/INFRASTRUCTURE/core/crypt.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:teenstar/DOMAIN/auth/user_auth.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class AuthRepository {
@@ -45,13 +42,8 @@ class FirebaseAuthFacade implements AuthRepository {
 
     try {
       return right(unit);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == "email-already-in-use") {
-        return left(const AuthFailure.emailAlreadyInUse());
-      } else {
-        print(e.message);
-        return left(const AuthFailure.serverError());
-      }
+    } catch (e) {
+      return left(const AuthFailure.serverError());
     }
   }
 

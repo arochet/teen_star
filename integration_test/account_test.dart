@@ -1,7 +1,6 @@
 import 'package:teenstar/PRESENTATION/reglages/account/account_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_page.dart';
 import 'package:teenstar/providers.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:injectable/injectable.dart';
@@ -12,7 +11,6 @@ void main() {
   testWidgets(
     "Test Account - La page info affiche bien les données correctements",
     (WidgetTester tester) async {
-      await Firebase.initializeApp();
       await tester.pumpWidget(
         buildMainWidgetWithOption(
           AccountPage(),

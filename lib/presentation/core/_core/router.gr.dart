@@ -15,6 +15,12 @@ import 'package:auto_route/auto_route.dart' as _i20;
 import 'package:flutter/material.dart' as _i21;
 
 import '../../../DOMAIN/cycle/cycle.dart' as _i22;
+import '../../auth/auth_connexion/auth_connexion_page.dart' as _i4;
+import '../../auth/auth_init/auth_init_page.dart' as _i3;
+import '../../auth/auth_register/auth_register_page.dart' as _i5;
+import '../../auth/auth_reset_password.dart/auth_reset_password_page.dart'
+    as _i6;
+import '../../historique/historique_page.dart' as _i18;
 import '../../reglages/account/account_page.dart' as _i19;
 import '../../reglages/account/buttons/buttons.dart' as _i13;
 import '../../reglages/account/colors/colors.dart' as _i12;
@@ -25,18 +31,15 @@ import '../../reglages/delete_account/delete_account_page.dart' as _i9;
 import '../../reglages/modify_account/modify_account_page.dart' as _i7;
 import '../../reglages/new_password/new_password_page.dart' as _i10;
 import '../../reglages/reauthenticate/reauthenticate_page.dart' as _i8;
-import '../../auth/auth_connexion/auth_connexion_page.dart' as _i4;
-import '../../auth/auth_init/auth_init_page.dart' as _i3;
-import '../../auth/auth_register/auth_register_page.dart' as _i5;
-import '../../auth/auth_reset_password.dart/auth_reset_password_page.dart' as _i6;
-import '../../historique/historique_page.dart' as _i18;
-import '../../resume/ajout_observation_journee/ajout_observation_journee_page.dart' as _i16;
+import '../../resume/ajout_observation_journee/ajout_observation_journee_page.dart'
+    as _i16;
 import '../../resume/resume_page.dart' as _i17;
 import '../_main_navigation/main_navigation_page.dart' as _i2;
 import '../_splash/splash_page.dart' as _i1;
 
 class AppRouter extends _i20.RootStackRouter {
-  AppRouter([_i21.GlobalKey<_i21.NavigatorState>? navigatorKey]) : super(navigatorKey);
+  AppRouter([_i21.GlobalKey<_i21.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, _i20.PageFactory> pagesMap = {
@@ -47,7 +50,8 @@ class AppRouter extends _i20.RootStackRouter {
       );
     },
     MainNavigationRoute.name: (routeData) {
-      final args = routeData.argsAs<MainNavigationRouteArgs>(orElse: () => const MainNavigationRouteArgs());
+      final args = routeData.argsAs<MainNavigationRouteArgs>(
+          orElse: () => const MainNavigationRouteArgs());
       return _i20.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i2.MainNavigationPage(key: args.key),

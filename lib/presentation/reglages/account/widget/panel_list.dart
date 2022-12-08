@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 class ItemPanelList {
   final IconData? icon;
   final String title;
-  final Function() onTap;
+  final Function()? onTap;
+  final bool enable;
 
-  ItemPanelList({required this.title, this.icon, required this.onTap});
+  ItemPanelList({required this.title, this.icon, this.onTap, this.enable = true});
 }
 
 class PanelList extends StatelessWidget {
@@ -23,16 +24,20 @@ class PanelList extends StatelessWidget {
       child: Column(children: [
         ...list
             .map((item) => GestureDetector(
-                  onTap: item.onTap,
+                  onTap: item.enable ? item.onTap : null,
                   child: Container(
                     color: colorpanel(800),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       children: [
-                        if (item.icon != null) Icon(item.icon, color: colorpanel(200)),
+                        if (item.icon != null)
+                          Icon(item.icon, color: item.enable ? colorpanel(200) : colorpanel(400)),
                         SizedBox(width: 10),
                         Text(item.title,
-                            style: Theme.of(context).textTheme.bodyText1!.copyWith(color: colorpanel(50))),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(color: item.enable ? colorpanel(50) : colorpanel(400))),
                       ],
                     ),
                   ),

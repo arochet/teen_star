@@ -1,7 +1,7 @@
 import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
-import 'package:teenstar/PRESENTATION/account/account/widget/panel_developper.dart';
-import 'package:teenstar/PRESENTATION/account/account/widget/panel_modify_mdp_delete_account.dart';
+import 'package:teenstar/PRESENTATION/reglages/account/widget/panel_developper.dart';
+import 'package:teenstar/PRESENTATION/reglages/account/widget/panel_modify_mdp_delete_account.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_environment_widget.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
@@ -13,6 +13,7 @@ import 'package:injectable/injectable.dart';
 
 import 'widget/button_log_out.dart';
 import 'widget/panel_personnel_data.dart';
+import 'widget/panel_reglages_autre.dart';
 import 'widget/version_number.dart';
 import 'widget/diplay_title.dart';
 
@@ -42,8 +43,8 @@ class _AccountPageState extends ConsumerState<AccountPage> {
       user.when(
         data: (data) {
           if (data != null) {
-            nameUser = data.userName.getOrCrash();
-            email = data.email?.getOrCrash();
+            nameUser = 'data.userName.getOrCrash()';
+            email = 'data.email?.getOrCrash()';
             typeAccount = data.typeAccount.getOrCrash();
           }
         },
@@ -62,7 +63,7 @@ class _AccountPageState extends ConsumerState<AccountPage> {
 
       //Container Informations personnelles
       return ShowComponentFile(
-        title: 'account/account/account_pages.dart',
+        title: 'reglages/account/account_pages.dart',
         child: ListView(
           children: <Widget>[
             SpaceH20(),
@@ -72,12 +73,11 @@ class _AccountPageState extends ConsumerState<AccountPage> {
             PanelPersonnelData(nameUser: nameUser, email: email, typeAccount: typeAccount),
             //PANEL MODIFIER MOT DE PASSE / SUPPRIMER COMPTE
             PanelModifyMdpDeleteAccount(typeAccount: typeAccount),
+
+            DisplayTitle(title: 'Autre'),
+            PanelReglagesAutre(),
             //PANEL DEVELOPPEMENT
             if (env == Environment.dev) ...[DisplayTitle(title: 'Developpement'), PanelDevelopper()],
-            SpaceH10(),
-            //BOUTON SE DECONNECTER
-            ButtonLogOut(),
-            SpaceH10(),
             VersionNumber(),
           ],
         ),

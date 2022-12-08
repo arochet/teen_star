@@ -20,18 +20,25 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
   @override
   Widget build(BuildContext context) {
     return PanelList(title: 'PanelModifyMdpDeleteAccount', list: [
-      //Modifier le mot de passe
-      if (widget.typeAccount == TypeAccountState.email)
-        ItemPanelList(
-          title: AppLocalizations.of(context)!.modifiermotdepasse,
-          icon: Icons.lock,
-          onTap: () {
-            context.router.push(ReauthenticateRoute(route: NewPasswordRoute()));
-          },
-        ),
+      //Modifier le mot de passe Appli
+      ItemPanelList(
+        title: 'Modifier le mot de passe Appli',
+        icon: Icons.lock,
+        onTap: () {
+          context.router.push(ReauthenticateRoute(route: NewPasswordRoute()));
+        },
+      ),
+      //Modifier le mot de passe PDF
+      ItemPanelList(
+        title: 'Modifier le mot de passe PDF',
+        icon: Icons.lock,
+        onTap: () {
+          context.router.push(ReauthenticateRoute(route: NewPasswordRoute()));
+        },
+      ),
       //Supprimer le compte
       ItemPanelList(
-        title: AppLocalizations.of(context)!.supprimerlecompte,
+        title: 'Réinitialiser l\'application',
         icon: Icons.cancel,
         onTap: () => deleteAccount(),
       ),

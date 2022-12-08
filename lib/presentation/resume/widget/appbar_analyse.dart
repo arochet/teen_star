@@ -19,15 +19,24 @@ class AppBarAnalyse extends ConsumerWidget {
         height: displayAnalyse ? 100 : 50,
         child: Column(
           children: [
-            Center(
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  ref.watch(showAnalyse.notifier).state = !displayAnalyse;
-                },
-                icon: Icon(Icons.analytics, size: 18),
-                label: Text("${displayAnalyse ? 'Masquer' : 'Afficher'} les analyses"),
-                style: buttonLittlePrimary,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {
+                    ref.watch(showAnalyse.notifier).state = !displayAnalyse;
+                  },
+                  icon: Icon(Icons.analytics, size: 18),
+                  label: Text("${displayAnalyse ? 'Masquer' : 'Afficher'} les analyses"),
+                  style: buttonLittlePrimary,
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(Icons.file_copy, size: 18),
+                  label: Text("PDF"),
+                  style: buttonLittlePrimary,
+                ),
+              ],
             ),
             if (displayAnalyse)
               Padding(

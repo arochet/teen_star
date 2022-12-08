@@ -29,7 +29,7 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
             final bool? continuerCycle = await showDialog<bool?>(
               context: context,
               builder: (BuildContext context) {
-                return _DialogChoixContinuationCycle();
+                return _DialogChoixContinuationCycle(cycle);
               },
             );
 
@@ -49,7 +49,9 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
 }
 
 class _DialogChoixContinuationCycle extends StatelessWidget {
-  const _DialogChoixContinuationCycle({
+  Cycle cycle;
+  _DialogChoixContinuationCycle(
+    this.cycle, {
     Key? key,
   }) : super(key: key);
 
@@ -75,7 +77,7 @@ class _DialogChoixContinuationCycle extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop(true);
                 },
-                child: Text("Continuer Cycle 3"),
+                child: Text("Continuer Cycle ${cycle.id.getOrCrash()}"),
                 style: buttonNormalPrimary,
               ),
             ],

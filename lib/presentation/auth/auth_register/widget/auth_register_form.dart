@@ -27,7 +27,7 @@ class FormRegisterProvide extends ConsumerWidget {
                 //Authentification réussie !
                 Future.delayed(Duration.zero, () async {
                   ref.read(authNotifierProvider.notifier).authCheckRequested();
-                  context.router.push(AuthCheckEmailRoute());
+                  context.router.push(ResumeRoute());
                 });
               }));
     });

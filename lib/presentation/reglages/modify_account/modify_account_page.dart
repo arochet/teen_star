@@ -1,4 +1,4 @@
-import 'package:teenstar/PRESENTATION/account/modify_account/modify_account_form.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class _ModifyAccountPageState extends State<ModifyAccountPage> {
     return MainScaffold(
       title: AppLocalizations.of(context)!.modifierprofil,
       child: ShowComponentFile(
-          title: 'account/modify_account/modify_account_page.dart', child: ModifyAccountForm()),
+          title: 'reglages/modify_account/modify_account_page.dart', child: ModifyAccountForm()),
     );
   }
 }

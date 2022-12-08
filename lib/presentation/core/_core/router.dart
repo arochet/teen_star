@@ -1,12 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:teenstar/PRESENTATION/account/account/components/components_page.dart';
-import 'package:teenstar/PRESENTATION/account/account/text_style/text_style.dart';
-import 'package:teenstar/PRESENTATION/account/account/account_page.dart';
-import 'package:teenstar/PRESENTATION/account/delete_account/delete_account_page.dart';
-import 'package:teenstar/PRESENTATION/account/modify_account/modify_account_page.dart';
-import 'package:teenstar/PRESENTATION/account/new_password/new_password_page.dart';
-import 'package:teenstar/PRESENTATION/account/reauthenticate/reauthenticate_page.dart';
-import 'package:teenstar/PRESENTATION/auth/auth_check_email/auth_check_email_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/account/components/components_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/account/text_style/text_style.dart';
+import 'package:teenstar/PRESENTATION/reglages/account/account_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/delete_account/delete_account_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/new_password/new_password_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/reauthenticate/reauthenticate_page.dart';
 import 'package:teenstar/PRESENTATION/auth/auth_connexion/auth_connexion_page.dart';
 import 'package:teenstar/PRESENTATION/auth/auth_init/auth_init_page.dart';
 import 'package:teenstar/PRESENTATION/auth/auth_register/auth_register_page.dart';
@@ -17,9 +16,9 @@ import 'package:teenstar/PRESENTATION/core/_splash/splash_page.dart';
 import 'package:teenstar/PRESENTATION/resume/ajout_observation_journee/ajout_observation_journee_page.dart';
 import 'package:teenstar/PRESENTATION/resume/resume_page.dart';
 
-import '../../account/account/buttons/buttons.dart';
-import '../../account/account/colors/colors.dart';
-import '../../account/account/utils/utils_page.dart';
+import '../../reglages/account/buttons/buttons.dart';
+import '../../reglages/account/colors/colors.dart';
+import '../../reglages/account/utils/utils_page.dart';
 
 @MaterialAutoRouter(replaceInRouteName: "Page,Route", routes: [
   //RedirectRoute(path: '*', redirectTo: '/'),
@@ -65,11 +64,6 @@ import '../../account/account/utils/utils_page.dart';
     path: '/auth-register',
     name: 'AuthRegisterRoute',
     page: AuthRegisterPage,
-  ),
-  AutoRoute(
-    path: '/auth-check-email',
-    name: 'AuthCheckEmailRoute',
-    page: AuthCheckEmailPage,
   ),
   AutoRoute(
     path: '/auth-reset-password',

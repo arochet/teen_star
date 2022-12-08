@@ -72,22 +72,9 @@ final resetPasswordFormNotifierProvider =
 final currentPageNavProvider = StateProvider<int?>((ref) => null);
 
 //USER
-//Utilisateur courant (comprend son identifiant FirebaseAuth)
-final currentUser = FutureProvider.autoDispose<UserAuth>((ref) async {
-  final userOption = await getIt<AuthRepository>().getSignedUser();
-  return userOption.getOrElse(() => throw NotAuthenticatedError);
-});
-
 //Utilisateur courant (comprend ses données FireStore)
 final currentUserData = FutureProvider.autoDispose<UserData?>((ref) async {
-  ref.watch(currentUser);
-  final userOption = await getIt<AuthRepository>().getUserData();
-  final user = userOption.getOrElse(() => UserData.empty());
-
-  if (user == UserData.empty() || userOption.isNone())
-    return null;
-  else
-    return user;
+  return UserData.empty();
 });
 
 //Cycle

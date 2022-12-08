@@ -36,15 +36,12 @@ class AppBarCycle extends ConsumerWidget {
       title: '_AppBarCycle',
       child: Stack(
         children: [
-          //BOUTON PDF CENTRE
+          //CYCLE COURANT
           Center(
-            child: ElevatedButton.icon(
-              onPressed: () {},
-              icon: Icon(Icons.file_copy, size: 18),
-              label: Text("PDF"),
-              style: buttonLittlePrimary,
-            ),
-          ),
+              child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.headline4),
+          )),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

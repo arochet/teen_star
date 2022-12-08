@@ -32,23 +32,31 @@ class PanelPersonnelData extends StatelessWidget {
     return PanelList(
       title: 'PanelPersonnelData',
       list: [
-        if (typeAccount == TypeAccountState.google)
-          ItemPanelList(
-            title: typeAc,
-            icon: Icons.manage_accounts,
-            onTap: () {},
-          ),
         ItemPanelList(
-          title: nameUser,
+          title: 'Pseudo : $nameUser',
           icon: Icons.account_circle_rounded,
           onTap: () {},
         ),
-        if (email != null)
-          ItemPanelList(
-            title: email!,
-            icon: Icons.mail_rounded,
-            onTap: () {},
-          ),
+        ItemPanelList(
+          title: 'Année des 1ères règles: 2013',
+          icon: Icons.mail_rounded,
+          onTap: () {},
+        ),
+        ItemPanelList(
+          title: 'Date de naissance: 2013',
+          icon: Icons.mail_rounded,
+          onTap: () {},
+        ),
+        ItemPanelList(
+          title: 'Langue: Français',
+          icon: Icons.mail_rounded,
+          onTap: () {},
+        ),
+        ItemPanelList(
+          title: 'Thème: Bleu',
+          icon: Icons.mail_rounded,
+          onTap: () {},
+        ),
       ],
       //Bouton modifier
       button: ElevatedButton(

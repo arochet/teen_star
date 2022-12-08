@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
-import 'package:teenstar/INFRASTRUCTURE/core/firestore_helpers.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';

@@ -113,8 +113,6 @@ class _Cycle extends ConsumerWidget {
             children: [
               Column(
                 children: [
-                  Text("Cycle ${cycle.id.getOrCrash()}", style: Theme.of(context).textTheme.headline4),
-                  SpaceH10(),
                   //APPBAR_LIST_CYCLES
                   AppBarCycle(listCyclesDTO: listCycleDTO, idCycle: id),
                   //APPBAR_ANALYSE

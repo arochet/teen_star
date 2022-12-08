@@ -39,6 +39,13 @@ _i1.GetIt $initGetIt(
     () => _i4.FakeAuthFacade(),
     registerFor: {_test},
   );
+  gh.lazySingleton<_i3.AuthRepository>(
+    () => _i3.FirebaseAuthFacade(),
+    registerFor: {
+      _dev,
+      _prod,
+    },
+  );
   gh.lazySingleton<_i5.FirebaseAuth>(
       () => firebaseInjectableModule.firebaseAuth);
   gh.lazySingleton<_i6.FirebaseFirestore>(
@@ -48,18 +55,6 @@ _i1.GetIt $initGetIt(
       () => firebaseInjectableModule.googleSignIn);
   gh.lazySingleton<_i9.ICycleRepository>(
       () => _i9.CycleRepository(get<_i10.Database>()));
-  gh.lazySingleton<_i3.AuthRepository>(
-    () => _i3.FirebaseAuthFacade(
-      get<_i5.FirebaseAuth>(),
-      get<_i8.GoogleSignIn>(),
-      get<_i6.FirebaseFirestore>(),
-      get<_i7.FirebaseStorage>(),
-    ),
-    registerFor: {
-      _dev,
-      _prod,
-    },
-  );
   return get;
 }
 

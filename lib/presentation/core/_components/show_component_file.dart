@@ -16,20 +16,22 @@ class ShowComponentFile extends ConsumerWidget {
     final bool displayPath = ref.watch(showFilePath);
 
     if (title != null) {
+      if (!displayPath) {
+        return child;
+      }
       return Stack(
         children: [
           child,
-          if (displayPath)
-            Center(
-                heightFactor: 1,
-                child: Text(
-                  title!,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Colors.white, backgroundColor: Colors.black45),
-                  selectionColor: Colors.red,
-                )),
+          Center(
+              heightFactor: 1,
+              child: Text(
+                title!,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(color: Colors.white, backgroundColor: Colors.black45),
+                selectionColor: Colors.red,
+              )),
         ],
       );
     }

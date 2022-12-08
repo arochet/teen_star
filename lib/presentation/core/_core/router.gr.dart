@@ -14,6 +14,7 @@
 import 'package:auto_route/auto_route.dart' as _i21;
 import 'package:flutter/material.dart' as _i22;
 
+import '../../../DOMAIN/cycle/cycle.dart' as _i23;
 import '../../account/account/account_page.dart' as _i20;
 import '../../account/account/buttons/buttons.dart' as _i14;
 import '../../account/account/colors/colors.dart' as _i13;
@@ -31,7 +32,7 @@ import '../../auth/auth_register/auth_register_page.dart' as _i5;
 import '../../auth/auth_reset_password.dart/auth_reset_password_page.dart'
     as _i7;
 import '../../historique/historique_page.dart' as _i19;
-import '../../resume/ajout_observation_journee/observation_add_page.dart'
+import '../../resume/ajout_observation_journee/ajout_observation_journee_page.dart'
     as _i17;
 import '../../resume/resume_page.dart' as _i18;
 import '../_main_navigation/main_navigation_page.dart' as _i2;
@@ -146,15 +147,19 @@ class AppRouter extends _i21.RootStackRouter {
       );
     },
     ObservationAddRoute.name: (routeData) {
+      final args = routeData.argsAs<ObservationAddRouteArgs>();
       return _i21.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i17.ObservationAddPage(),
+        child: _i17.ObservationAddPage(
+          args.cycle,
+          key: args.key,
+        ),
       );
     },
     ResumeRoute.name: (routeData) {
       return _i21.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i18.ResumePage(),
+        child: const _i18.ResumePage(),
       );
     },
     HistoriqueRoute.name: (routeData) {
@@ -499,14 +504,36 @@ class UtilsRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i17.ObservationAddPage]
-class ObservationAddRoute extends _i21.PageRouteInfo<void> {
-  const ObservationAddRoute()
-      : super(
+class ObservationAddRoute extends _i21.PageRouteInfo<ObservationAddRouteArgs> {
+  ObservationAddRoute({
+    required _i23.Cycle? cycle,
+    _i22.Key? key,
+  }) : super(
           ObservationAddRoute.name,
           path: '/observation-add-route',
+          args: ObservationAddRouteArgs(
+            cycle: cycle,
+            key: key,
+          ),
         );
 
   static const String name = 'ObservationAddRoute';
+}
+
+class ObservationAddRouteArgs {
+  const ObservationAddRouteArgs({
+    required this.cycle,
+    this.key,
+  });
+
+  final _i23.Cycle? cycle;
+
+  final _i22.Key? key;
+
+  @override
+  String toString() {
+    return 'ObservationAddRouteArgs{cycle: $cycle, key: $key}';
+  }
 }
 
 /// generated route for

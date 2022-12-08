@@ -18,7 +18,9 @@ import 'package:auto_route/src/router/auto_router_x.dart';
 import 'choix_form_field.dart';
 
 class ObservationFormProvider extends ConsumerWidget {
-  const ObservationFormProvider({
+  Cycle? cycle;
+  ObservationFormProvider(
+    this.cycle, {
     Key? key,
   }) : super(key: key);
 
@@ -47,12 +49,14 @@ class ObservationFormProvider extends ConsumerWidget {
                 });
               }));
     });
-    return ObservationForm();
+    return ObservationForm(cycle);
   }
 }
 
 class ObservationForm extends ConsumerWidget {
-  const ObservationForm({
+  Cycle? cycle;
+  ObservationForm(
+    this.cycle, {
     Key? key,
   }) : super(key: key);
 
@@ -86,18 +90,7 @@ class ObservationForm extends ConsumerWidget {
                 notifierForm.notesConfidentiellesChanged("Test note confidentielles");
                 notifierForm.evenementsChanged(EvenementState.fatigue);
                 notifierForm.humeurChanged(Humeur(HumeurState.humeurChangeante));
-                final idCycle = ref.read(idCycleCourant);
-                if (idCycle != null) {
-                  //Le cycle existe
-                  final cycleAsync = ref.read(cycleProvider(idCycle));
-                  cycleAsync.whenData((value) => value.fold(
-                        (err) => showSnackbarCycleFailure(context, err),
-                        (cycle) => notifierForm.addObservationPressed(cycle),
-                      ));
-                } else {
-                  //Pas de cycle
-                  notifierForm.addObservationPressed(null);
-                }
+                notifierForm.addObservationPressed(cycle);
               },
               style: buttonNormalConfirm,
               child: const Text("[DEV] Enregistrer l'Observation"),
@@ -218,20 +211,7 @@ class ObservationForm extends ConsumerWidget {
         SpaceH10(),
         Align(
           child: ElevatedButton(
-            onPressed: () {
-              final idCycle = ref.read(idCycleCourant);
-              if (idCycle != null) {
-                //Le cycle existe
-                final cycleAsync = ref.read(cycleProvider(idCycle));
-                cycleAsync.whenData((value) => value.fold(
-                      (err) => showSnackbarCycleFailure(context, err),
-                      (cycle) => notifierForm.addObservationPressed(cycle),
-                    ));
-              } else {
-                //Pas de cycle
-                notifierForm.addObservationPressed(null);
-              }
-            },
+            onPressed: () => notifierForm.addObservationPressed(cycle),
             style: buttonNormalConfirm,
             child: const Text("Enregistrer l'Observation"),
           ),

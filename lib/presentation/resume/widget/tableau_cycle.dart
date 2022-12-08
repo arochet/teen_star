@@ -35,9 +35,11 @@ class TableauCycle extends ConsumerWidget {
       child: StickyHeadersTable(
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) => _CellHeader(title[colulmnIndex]),
-        contentCellBuilder: (int columnIndex, int rowIndex) => _Cell(list[rowIndex], title[columnIndex]),
-        rowsLength: list.length,
-        rowsTitleBuilder: (int rowIndex) => _CellDay('$rowIndex'),
+        contentCellBuilder: (int columnIndex, int rowIndex) => rowIndex == list.length
+            ? Container(height: 50, width: 50)
+            : _Cell(list[rowIndex], title[columnIndex]),
+        rowsLength: list.length + 1,
+        rowsTitleBuilder: (int rowIndex) => rowIndex == list.length ? Container() : _CellDay('$rowIndex'),
         widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,

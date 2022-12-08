@@ -14,7 +14,7 @@ import 'package:teenstar/PRESENTATION/auth/auth_reset_password.dart/auth_reset_p
 import 'package:teenstar/PRESENTATION/historique/historique_page.dart';
 import 'package:teenstar/PRESENTATION/core/_main_navigation/main_navigation_page.dart';
 import 'package:teenstar/PRESENTATION/core/_splash/splash_page.dart';
-import 'package:teenstar/PRESENTATION/resume/ajout_observation_journee/observation_add_page.dart';
+import 'package:teenstar/PRESENTATION/resume/ajout_observation_journee/ajout_observation_journee_page.dart';
 import 'package:teenstar/PRESENTATION/resume/resume_page.dart';
 
 import '../../account/account/buttons/buttons.dart';

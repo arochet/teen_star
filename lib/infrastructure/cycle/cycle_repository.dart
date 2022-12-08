@@ -50,8 +50,6 @@ class CycleRepository implements ICycleRepository {
 
       //On crée la méchante observation
       final observationDTO = ObservationDTO.fromDomain(observation, idCycle.getOrCrash());
-      print('observationDTO.toJson()');
-      print(observationDTO.toJson());
       _database.insert(observationTableName, observationDTO.toJson());
 
       return right(unit);
@@ -102,8 +100,6 @@ class CycleRepository implements ICycleRepository {
         final List<Map<String, dynamic>> mapsObservation =
             await _database.query(observationTableName, where: 'idCycle = ?', whereArgs: [cycleDTO.id]);
         List<Observation> listObservation = List.generate(mapsObservation.length, (i) {
-          print('maps[$i]');
-          print(mapsObservation[i]);
           return ObservationDTO.fromJson(mapsObservation[i]).toDomain();
         });
 
@@ -125,7 +121,6 @@ class CycleRepository implements ICycleRepository {
       //Récupère les CyclesDTO (DataTransferObject)
       final List<Map<String, dynamic>> mapsCycle = await _database.query(cycleTableName);
       List<CycleDTO> cycleDTO = List.generate(mapsCycle.length, (index) {
-        print('mapsCycle[index] ${mapsCycle[index]}');
         return CycleDTO.fromJson(mapsCycle[index]);
       });
 

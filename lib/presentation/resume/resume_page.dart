@@ -10,12 +10,9 @@ import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
-import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
-
 import 'widget/app_bar_cycle.dart';
 import 'widget/appbar_analyse.dart';
+import 'widget/button_ajout_observation_journee.dart';
 import 'widget/tableau_cycle.dart';
 
 //Analyse
@@ -59,13 +56,13 @@ class _ResumePageState extends ConsumerState<ResumePage> {
     UniqueId? idCourant = ref.watch(idCycleCourant);
     AsyncValue<Either<CycleFailure, List<CycleDTO>>> listAsync = ref.watch(allCycleProvider);
 
-    //LIST CYCLE
+    //LIST CYCLE DTO
     final listCycleWidget = listAsync.when(
       data: (data) {
         return data.fold(
           (error) => ShowError(error.toString()),
-          (List<CycleDTO> cycles) {
-            if (cycles.length == 0) {
+          (List<CycleDTO> listCyclesDTO) {
+            if (listCyclesDTO.length == 0) {
               //Pas de cycle
               return Center(
                   child: Text("Pas de Cycle\nVeuillez ajoutez une nouvelle observation",
@@ -74,7 +71,7 @@ class _ResumePageState extends ConsumerState<ResumePage> {
               if (idCourant == null) {
                 return Center(child: Text("...", style: Theme.of(context).textTheme.headline4));
               } else {
-                return _Cycle(id: idCourant);
+                return _Cycle(listCyclesDTO, id: idCourant);
               }
             }
           },
@@ -88,31 +85,16 @@ class _ResumePageState extends ConsumerState<ResumePage> {
       title: './lib/PRESENTATION/resume/resume_page.dart',
       child: Padding(
         padding: EdgeInsets.all(10),
-        child: Stack(
-          children: [
-            listCycleWidget,
-            Container(
-              padding: const EdgeInsets.all(5.0),
-              alignment: Alignment.bottomCenter,
-              child: ElevatedButton(
-                onPressed: () async {
-                  await context.router.push(ObservationAddRoute());
-                  _loadIdCycleCourant();
-                  ref.refresh(allCycleProvider);
-                },
-                child: Text("Observation de la journée"),
-                style: buttonNormalPrimary,
-              ),
-            ),
-          ],
-        ),
+        child: listCycleWidget,
       ),
     );
   }
 }
 
 class _Cycle extends ConsumerWidget {
-  const _Cycle({
+  List<CycleDTO> listCycleDTO;
+  _Cycle(
+    this.listCycleDTO, {
     Key? key,
     required this.id,
   }) : super(key: key);
@@ -127,16 +109,21 @@ class _Cycle extends ConsumerWidget {
       data: (cycleAsync) {
         return cycleAsync.fold(
           (error) => ShowError(error.toString()),
-          (Cycle cycle) => Column(
+          (Cycle cycle) => Stack(
             children: [
-              Text("Cycle ${cycle.id.getOrCrash()}", style: Theme.of(context).textTheme.headline4),
-              SpaceH10(),
-              //APPBAR
-              AppBarCycle(),
-              //APPBAR_ANALYSE
-              AppBarAnalyse(),
-              //TABLEAU
-              Expanded(child: TableauCycle(cycle.observations)),
+              Column(
+                children: [
+                  Text("Cycle ${cycle.id.getOrCrash()}", style: Theme.of(context).textTheme.headline4),
+                  SpaceH10(),
+                  //APPBAR_LIST_CYCLES
+                  AppBarCycle(listCyclesDTO: listCycleDTO, idCycle: id),
+                  //APPBAR_ANALYSE
+                  AppBarAnalyse(),
+                  //TABLEAU
+                  Expanded(child: TableauCycle(cycle.observations)),
+                ],
+              ),
+              ButtonAjoutObservationJournee(cycle),
             ],
           ),
         );

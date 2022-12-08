@@ -23,8 +23,9 @@ mixin _$UserDataDTO {
   @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
-  bool get passwordCrypted => throw _privateConstructorUsedError;
-  String get typeAccount => throw _privateConstructorUsedError;
+  int? get dateNaissance => throw _privateConstructorUsedError;
+  int get anneePremiereRegle => throw _privateConstructorUsedError;
+  int get theme => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,8 +42,9 @@ abstract class $UserDataDTOCopyWith<$Res> {
   $Res call(
       {@JsonKey(ignore: true) String? id,
       String userName,
-      bool passwordCrypted,
-      String typeAccount});
+      int? dateNaissance,
+      int anneePremiereRegle,
+      int theme});
 }
 
 /// @nodoc
@@ -60,8 +62,9 @@ class _$UserDataDTOCopyWithImpl<$Res, $Val extends UserDataDTO>
   $Res call({
     Object? id = freezed,
     Object? userName = null,
-    Object? passwordCrypted = null,
-    Object? typeAccount = null,
+    Object? dateNaissance = freezed,
+    Object? anneePremiereRegle = null,
+    Object? theme = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -72,14 +75,18 @@ class _$UserDataDTOCopyWithImpl<$Res, $Val extends UserDataDTO>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      passwordCrypted: null == passwordCrypted
-          ? _value.passwordCrypted
-          : passwordCrypted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      typeAccount: null == typeAccount
-          ? _value.typeAccount
-          : typeAccount // ignore: cast_nullable_to_non_nullable
-              as String,
+      dateNaissance: freezed == dateNaissance
+          ? _value.dateNaissance
+          : dateNaissance // ignore: cast_nullable_to_non_nullable
+              as int?,
+      anneePremiereRegle: null == anneePremiereRegle
+          ? _value.anneePremiereRegle
+          : anneePremiereRegle // ignore: cast_nullable_to_non_nullable
+              as int,
+      theme: null == theme
+          ? _value.theme
+          : theme // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -95,8 +102,9 @@ abstract class _$$_UserDataDTOCopyWith<$Res>
   $Res call(
       {@JsonKey(ignore: true) String? id,
       String userName,
-      bool passwordCrypted,
-      String typeAccount});
+      int? dateNaissance,
+      int anneePremiereRegle,
+      int theme});
 }
 
 /// @nodoc
@@ -112,8 +120,9 @@ class __$$_UserDataDTOCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? userName = null,
-    Object? passwordCrypted = null,
-    Object? typeAccount = null,
+    Object? dateNaissance = freezed,
+    Object? anneePremiereRegle = null,
+    Object? theme = null,
   }) {
     return _then(_$_UserDataDTO(
       id: freezed == id
@@ -124,14 +133,18 @@ class __$$_UserDataDTOCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      passwordCrypted: null == passwordCrypted
-          ? _value.passwordCrypted
-          : passwordCrypted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      typeAccount: null == typeAccount
-          ? _value.typeAccount
-          : typeAccount // ignore: cast_nullable_to_non_nullable
-              as String,
+      dateNaissance: freezed == dateNaissance
+          ? _value.dateNaissance
+          : dateNaissance // ignore: cast_nullable_to_non_nullable
+              as int?,
+      anneePremiereRegle: null == anneePremiereRegle
+          ? _value.anneePremiereRegle
+          : anneePremiereRegle // ignore: cast_nullable_to_non_nullable
+              as int,
+      theme: null == theme
+          ? _value.theme
+          : theme // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -142,8 +155,9 @@ class _$_UserDataDTO extends _UserDataDTO {
   const _$_UserDataDTO(
       {@JsonKey(ignore: true) this.id,
       required this.userName,
-      required this.passwordCrypted,
-      required this.typeAccount})
+      required this.dateNaissance,
+      required this.anneePremiereRegle,
+      required this.theme})
       : super._();
 
   factory _$_UserDataDTO.fromJson(Map<String, dynamic> json) =>
@@ -155,13 +169,15 @@ class _$_UserDataDTO extends _UserDataDTO {
   @override
   final String userName;
   @override
-  final bool passwordCrypted;
+  final int? dateNaissance;
   @override
-  final String typeAccount;
+  final int anneePremiereRegle;
+  @override
+  final int theme;
 
   @override
   String toString() {
-    return 'UserDataDTO(id: $id, userName: $userName, passwordCrypted: $passwordCrypted, typeAccount: $typeAccount)';
+    return 'UserDataDTO(id: $id, userName: $userName, dateNaissance: $dateNaissance, anneePremiereRegle: $anneePremiereRegle, theme: $theme)';
   }
 
   @override
@@ -172,16 +188,17 @@ class _$_UserDataDTO extends _UserDataDTO {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
-            (identical(other.passwordCrypted, passwordCrypted) ||
-                other.passwordCrypted == passwordCrypted) &&
-            (identical(other.typeAccount, typeAccount) ||
-                other.typeAccount == typeAccount));
+            (identical(other.dateNaissance, dateNaissance) ||
+                other.dateNaissance == dateNaissance) &&
+            (identical(other.anneePremiereRegle, anneePremiereRegle) ||
+                other.anneePremiereRegle == anneePremiereRegle) &&
+            (identical(other.theme, theme) || other.theme == theme));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, userName, passwordCrypted, typeAccount);
+  int get hashCode => Object.hash(
+      runtimeType, id, userName, dateNaissance, anneePremiereRegle, theme);
 
   @JsonKey(ignore: true)
   @override
@@ -201,8 +218,9 @@ abstract class _UserDataDTO extends UserDataDTO {
   const factory _UserDataDTO(
       {@JsonKey(ignore: true) final String? id,
       required final String userName,
-      required final bool passwordCrypted,
-      required final String typeAccount}) = _$_UserDataDTO;
+      required final int? dateNaissance,
+      required final int anneePremiereRegle,
+      required final int theme}) = _$_UserDataDTO;
   const _UserDataDTO._() : super._();
 
   factory _UserDataDTO.fromJson(Map<String, dynamic> json) =
@@ -214,9 +232,11 @@ abstract class _UserDataDTO extends UserDataDTO {
   @override
   String get userName;
   @override
-  bool get passwordCrypted;
+  int? get dateNaissance;
   @override
-  String get typeAccount;
+  int get anneePremiereRegle;
+  @override
+  int get theme;
   @override
   @JsonKey(ignore: true)
   _$$_UserDataDTOCopyWith<_$_UserDataDTO> get copyWith =>

@@ -18,9 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UserData {
   UniqueId get id => throw _privateConstructorUsedError;
   Nom get userName => throw _privateConstructorUsedError;
-  EmailAddress? get email => throw _privateConstructorUsedError;
-  bool get passwordCrypted => throw _privateConstructorUsedError;
-  TypeAccount get typeAccount => throw _privateConstructorUsedError;
+  DateTime? get dateNaissance => throw _privateConstructorUsedError;
+  int get anneePremiereRegle => throw _privateConstructorUsedError;
+  int get theme => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserDataCopyWith<UserData> get copyWith =>
@@ -35,9 +35,9 @@ abstract class $UserDataCopyWith<$Res> {
   $Res call(
       {UniqueId id,
       Nom userName,
-      EmailAddress? email,
-      bool passwordCrypted,
-      TypeAccount typeAccount});
+      DateTime? dateNaissance,
+      int anneePremiereRegle,
+      int theme});
 }
 
 /// @nodoc
@@ -55,9 +55,9 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
   $Res call({
     Object? id = null,
     Object? userName = null,
-    Object? email = freezed,
-    Object? passwordCrypted = null,
-    Object? typeAccount = null,
+    Object? dateNaissance = freezed,
+    Object? anneePremiereRegle = null,
+    Object? theme = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -68,18 +68,18 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as Nom,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as EmailAddress?,
-      passwordCrypted: null == passwordCrypted
-          ? _value.passwordCrypted
-          : passwordCrypted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      typeAccount: null == typeAccount
-          ? _value.typeAccount
-          : typeAccount // ignore: cast_nullable_to_non_nullable
-              as TypeAccount,
+      dateNaissance: freezed == dateNaissance
+          ? _value.dateNaissance
+          : dateNaissance // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      anneePremiereRegle: null == anneePremiereRegle
+          ? _value.anneePremiereRegle
+          : anneePremiereRegle // ignore: cast_nullable_to_non_nullable
+              as int,
+      theme: null == theme
+          ? _value.theme
+          : theme // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -94,9 +94,9 @@ abstract class _$$_UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
   $Res call(
       {UniqueId id,
       Nom userName,
-      EmailAddress? email,
-      bool passwordCrypted,
-      TypeAccount typeAccount});
+      DateTime? dateNaissance,
+      int anneePremiereRegle,
+      int theme});
 }
 
 /// @nodoc
@@ -112,9 +112,9 @@ class __$$_UserDataCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? userName = null,
-    Object? email = freezed,
-    Object? passwordCrypted = null,
-    Object? typeAccount = null,
+    Object? dateNaissance = freezed,
+    Object? anneePremiereRegle = null,
+    Object? theme = null,
   }) {
     return _then(_$_UserData(
       id: null == id
@@ -125,18 +125,18 @@ class __$$_UserDataCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as Nom,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as EmailAddress?,
-      passwordCrypted: null == passwordCrypted
-          ? _value.passwordCrypted
-          : passwordCrypted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      typeAccount: null == typeAccount
-          ? _value.typeAccount
-          : typeAccount // ignore: cast_nullable_to_non_nullable
-              as TypeAccount,
+      dateNaissance: freezed == dateNaissance
+          ? _value.dateNaissance
+          : dateNaissance // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      anneePremiereRegle: null == anneePremiereRegle
+          ? _value.anneePremiereRegle
+          : anneePremiereRegle // ignore: cast_nullable_to_non_nullable
+              as int,
+      theme: null == theme
+          ? _value.theme
+          : theme // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -147,9 +147,9 @@ class _$_UserData extends _UserData {
   const _$_UserData(
       {required this.id,
       required this.userName,
-      required this.email,
-      required this.passwordCrypted,
-      required this.typeAccount})
+      required this.dateNaissance,
+      required this.anneePremiereRegle,
+      required this.theme})
       : super._();
 
   @override
@@ -157,15 +157,15 @@ class _$_UserData extends _UserData {
   @override
   final Nom userName;
   @override
-  final EmailAddress? email;
+  final DateTime? dateNaissance;
   @override
-  final bool passwordCrypted;
+  final int anneePremiereRegle;
   @override
-  final TypeAccount typeAccount;
+  final int theme;
 
   @override
   String toString() {
-    return 'UserData(id: $id, userName: $userName, email: $email, passwordCrypted: $passwordCrypted, typeAccount: $typeAccount)';
+    return 'UserData(id: $id, userName: $userName, dateNaissance: $dateNaissance, anneePremiereRegle: $anneePremiereRegle, theme: $theme)';
   }
 
   @override
@@ -176,16 +176,16 @@ class _$_UserData extends _UserData {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.passwordCrypted, passwordCrypted) ||
-                other.passwordCrypted == passwordCrypted) &&
-            (identical(other.typeAccount, typeAccount) ||
-                other.typeAccount == typeAccount));
+            (identical(other.dateNaissance, dateNaissance) ||
+                other.dateNaissance == dateNaissance) &&
+            (identical(other.anneePremiereRegle, anneePremiereRegle) ||
+                other.anneePremiereRegle == anneePremiereRegle) &&
+            (identical(other.theme, theme) || other.theme == theme));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, userName, email, passwordCrypted, typeAccount);
+      runtimeType, id, userName, dateNaissance, anneePremiereRegle, theme);
 
   @JsonKey(ignore: true)
   @override
@@ -198,9 +198,9 @@ abstract class _UserData extends UserData {
   const factory _UserData(
       {required final UniqueId id,
       required final Nom userName,
-      required final EmailAddress? email,
-      required final bool passwordCrypted,
-      required final TypeAccount typeAccount}) = _$_UserData;
+      required final DateTime? dateNaissance,
+      required final int anneePremiereRegle,
+      required final int theme}) = _$_UserData;
   const _UserData._() : super._();
 
   @override
@@ -208,11 +208,11 @@ abstract class _UserData extends UserData {
   @override
   Nom get userName;
   @override
-  EmailAddress? get email;
+  DateTime? get dateNaissance;
   @override
-  bool get passwordCrypted;
+  int get anneePremiereRegle;
   @override
-  TypeAccount get typeAccount;
+  int get theme;
   @override
   @JsonKey(ignore: true)
   _$$_UserDataCopyWith<_$_UserData> get copyWith =>

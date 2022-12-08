@@ -9,8 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'panel_list.dart';
 
 class PanelModifyMdpDeleteAccount extends ConsumerStatefulWidget {
-  final TypeAccountState typeAccount;
-  const PanelModifyMdpDeleteAccount({Key? key, required this.typeAccount}) : super(key: key);
+  const PanelModifyMdpDeleteAccount({Key? key}) : super(key: key);
 
   @override
   _PanelModifyMdpDeleteAccountState createState() => _PanelModifyMdpDeleteAccountState();
@@ -57,7 +56,7 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
         await context.router.pop();
         ref
             .read(authNotifierProvider.notifier)
-            .deleteAccount(widget.typeAccount)
+            .deleteAccount()
             .then((value) => context.router.push(AuthInitRoute()));
       },
       child: Text(AppLocalizations.of(context)!.supprimer),

@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignInFormData {
-  EmailAddress get emailAddress => throw _privateConstructorUsedError;
   Password get password => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
@@ -35,8 +34,7 @@ abstract class $SignInFormDataCopyWith<$Res> {
       _$SignInFormDataCopyWithImpl<$Res, SignInFormData>;
   @useResult
   $Res call(
-      {EmailAddress emailAddress,
-      Password password,
+      {Password password,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -55,17 +53,12 @@ class _$SignInFormDataCopyWithImpl<$Res, $Val extends SignInFormData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emailAddress = null,
     Object? password = null,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      emailAddress: null == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -95,8 +88,7 @@ abstract class _$$_SignInFormDataCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {EmailAddress emailAddress,
-      Password password,
+      {Password password,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -113,17 +105,12 @@ class __$$_SignInFormDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emailAddress = null,
     Object? password = null,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
   }) {
     return _then(_$_SignInFormData(
-      emailAddress: null == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -148,14 +135,11 @@ class __$$_SignInFormDataCopyWithImpl<$Res>
 
 class _$_SignInFormData implements _SignInFormData {
   const _$_SignInFormData(
-      {required this.emailAddress,
-      required this.password,
+      {required this.password,
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.authFailureOrSuccessOption});
 
-  @override
-  final EmailAddress emailAddress;
   @override
   final Password password;
   @override
@@ -167,7 +151,7 @@ class _$_SignInFormData implements _SignInFormData {
 
   @override
   String toString() {
-    return 'SignInFormData(emailAddress: $emailAddress, password: $password, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'SignInFormData(password: $password, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -175,8 +159,6 @@ class _$_SignInFormData implements _SignInFormData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SignInFormData &&
-            (identical(other.emailAddress, emailAddress) ||
-                other.emailAddress == emailAddress) &&
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
@@ -190,8 +172,8 @@ class _$_SignInFormData implements _SignInFormData {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, emailAddress, password,
-      showErrorMessages, isSubmitting, authFailureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, password, showErrorMessages,
+      isSubmitting, authFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -202,15 +184,12 @@ class _$_SignInFormData implements _SignInFormData {
 
 abstract class _SignInFormData implements SignInFormData {
   const factory _SignInFormData(
-      {required final EmailAddress emailAddress,
-      required final Password password,
+      {required final Password password,
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<AuthFailure, Unit>>
           authFailureOrSuccessOption}) = _$_SignInFormData;
 
-  @override
-  EmailAddress get emailAddress;
   @override
   Password get password;
   @override

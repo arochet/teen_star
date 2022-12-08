@@ -25,9 +25,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
   AuthNotifier(this._authRepository) : super(AuthInital());
 
   Future authCheckRequested() async {
-    print('authCheckRequested() called');
-    print('A voir pour se déconnecté !');
-    state = AuthAuthenticated();
+    final optionUser = await _authRepository.getUserData();
+    if (optionUser.isNone()) {
+      state = AuthUnauthenticated();
+    } else {
+      state = AuthAuthenticated();
+    }
   }
 
   Future signOut() async {
@@ -35,7 +38,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = AuthUnauthenticated();
   }
 
-  Future deleteAccount(TypeAccountState type) async {
+  Future deleteAccount() async {
     state = AuthUnauthenticated();
   }
 }

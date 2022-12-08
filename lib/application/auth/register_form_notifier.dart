@@ -12,9 +12,12 @@ part 'register_form_notifier.freezed.dart';
 class RegisterFormData with _$RegisterFormData {
   const factory RegisterFormData({
     required Nom nomUtilisateur,
-    required EmailAddress emailAddress,
-    required Password password,
-    required PasswordConfirmation passwordConfirmation,
+    required int annePremiereRegle,
+    required DateTime? dateNaissance,
+    required Password passwordAppli,
+    required PasswordConfirmation passwordAppliConfirmation,
+    required Password passwordPDF,
+    required PasswordConfirmation passwordPDFConfirmation,
     required bool showErrorMessages,
     required bool isSubmitting,
     required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
@@ -22,9 +25,12 @@ class RegisterFormData with _$RegisterFormData {
 
   factory RegisterFormData.initial() => RegisterFormData(
       nomUtilisateur: Nom(''),
-      emailAddress: EmailAddress(''),
-      password: Password(''),
-      passwordConfirmation: PasswordConfirmation('', ''),
+      annePremiereRegle: 0,
+      dateNaissance: null,
+      passwordAppli: Password(''),
+      passwordAppliConfirmation: PasswordConfirmation('', ''),
+      passwordPDF: Password(''),
+      passwordPDFConfirmation: PasswordConfirmation('', ''),
       showErrorMessages: false,
       isSubmitting: false,
       authFailureOrSuccessOption: none());
@@ -39,17 +45,25 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormData> {
     state = state.copyWith(nomUtilisateur: Nom(nomStr), authFailureOrSuccessOption: none());
   }
 
-  emailChanged(String emailStr) {
-    state = state.copyWith(emailAddress: EmailAddress(emailStr), authFailureOrSuccessOption: none());
+  passwordAppliChanged(String passwordStr) {
+    state = state.copyWith(passwordAppli: Password(passwordStr), authFailureOrSuccessOption: none());
   }
 
-  passwordChanged(String passwordStr) {
-    state = state.copyWith(password: Password(passwordStr), authFailureOrSuccessOption: none());
-  }
-
-  passwordConfirmationChanged(String passwordStr) {
+  passwordAppliConfirmationChanged(String passwordStr) {
     state = state.copyWith(
-        passwordConfirmation: PasswordConfirmation(state.password.value.getOrElse(() => ''), passwordStr),
+        passwordAppliConfirmation:
+            PasswordConfirmation(state.passwordAppli.value.getOrElse(() => ''), passwordStr),
+        authFailureOrSuccessOption: none());
+  }
+
+  passwordPDFChanged(String passwordStr) {
+    state = state.copyWith(passwordPDF: Password(passwordStr), authFailureOrSuccessOption: none());
+  }
+
+  passwordPDFConfirmationChanged(String passwordStr) {
+    state = state.copyWith(
+        passwordPDFConfirmation:
+            PasswordConfirmation(state.passwordAppli.value.getOrElse(() => ''), passwordStr),
         authFailureOrSuccessOption: none());
   }
 
@@ -57,25 +71,37 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormData> {
     Either<AuthFailure, Unit>? failureOrSuccess;
 
     final isUserNameValid = state.nomUtilisateur.isValid();
-    final isEmailValid = state.emailAddress.isValid();
-    final isPasswordValid = state.password.isValid();
-    final isPasswordConfirmationValid = state.passwordConfirmation.isValid();
-    if (isUserNameValid && isEmailValid && isPasswordValid && isPasswordConfirmationValid) {
+    final isPasswordAppliValid = state.passwordAppli.isValid();
+    final isPasswordPDFValid = state.passwordPDF.isValid();
+    final isPasswordAppliConfirmationValid = state.passwordAppliConfirmation.isValid();
+    final isPasswordPDFConfirmationValid = state.passwordPDFConfirmation.isValid();
+    if (isUserNameValid &&
+        isPasswordAppliValid &&
+        isPasswordPDFValid &&
+        isPasswordAppliConfirmationValid &&
+        isPasswordPDFConfirmationValid) {
       state = state.copyWith(isSubmitting: true, authFailureOrSuccessOption: none());
 
       failureOrSuccess = await this._authRepository.registerWithEmailAndPassword(
           userData: UserData(
               id: UniqueId(),
               userName: state.nomUtilisateur,
-              email: state.emailAddress,
-              passwordCrypted: true,
-              typeAccount: TypeAccount(TypeAccountState.email)),
-          emailAddress: state.emailAddress,
-          password: state.password);
+              anneePremiereRegle: state.annePremiereRegle,
+              dateNaissance: state.dateNaissance,
+              theme: 0),
+          passwordAppli: state.passwordAppli,
+          passwordPDF: state.passwordPDF);
 
       if (failureOrSuccess.isRight()) {
-        state =
-            state.copyWith(nomUtilisateur: Nom(""), emailAddress: EmailAddress(""), password: Password(""));
+        state = state.copyWith(
+          nomUtilisateur: Nom(""),
+          annePremiereRegle: 0,
+          dateNaissance: null,
+          passwordAppli: Password(''),
+          passwordAppliConfirmation: PasswordConfirmation('', ''),
+          passwordPDF: Password(''),
+          passwordPDFConfirmation: PasswordConfirmation('', ''),
+        );
       }
     }
 

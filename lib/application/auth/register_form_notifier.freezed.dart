@@ -17,9 +17,13 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RegisterFormData {
   Nom get nomUtilisateur => throw _privateConstructorUsedError;
-  EmailAddress get emailAddress => throw _privateConstructorUsedError;
-  Password get password => throw _privateConstructorUsedError;
-  PasswordConfirmation get passwordConfirmation =>
+  int get annePremiereRegle => throw _privateConstructorUsedError;
+  DateTime? get dateNaissance => throw _privateConstructorUsedError;
+  Password get passwordAppli => throw _privateConstructorUsedError;
+  PasswordConfirmation get passwordAppliConfirmation =>
+      throw _privateConstructorUsedError;
+  Password get passwordPDF => throw _privateConstructorUsedError;
+  PasswordConfirmation get passwordPDFConfirmation =>
       throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
@@ -39,9 +43,12 @@ abstract class $RegisterFormDataCopyWith<$Res> {
   @useResult
   $Res call(
       {Nom nomUtilisateur,
-      EmailAddress emailAddress,
-      Password password,
-      PasswordConfirmation passwordConfirmation,
+      int annePremiereRegle,
+      DateTime? dateNaissance,
+      Password passwordAppli,
+      PasswordConfirmation passwordAppliConfirmation,
+      Password passwordPDF,
+      PasswordConfirmation passwordPDFConfirmation,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -61,9 +68,12 @@ class _$RegisterFormDataCopyWithImpl<$Res, $Val extends RegisterFormData>
   @override
   $Res call({
     Object? nomUtilisateur = null,
-    Object? emailAddress = null,
-    Object? password = null,
-    Object? passwordConfirmation = null,
+    Object? annePremiereRegle = null,
+    Object? dateNaissance = freezed,
+    Object? passwordAppli = null,
+    Object? passwordAppliConfirmation = null,
+    Object? passwordPDF = null,
+    Object? passwordPDFConfirmation = null,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
@@ -73,17 +83,29 @@ class _$RegisterFormDataCopyWithImpl<$Res, $Val extends RegisterFormData>
           ? _value.nomUtilisateur
           : nomUtilisateur // ignore: cast_nullable_to_non_nullable
               as Nom,
-      emailAddress: null == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
+      annePremiereRegle: null == annePremiereRegle
+          ? _value.annePremiereRegle
+          : annePremiereRegle // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateNaissance: freezed == dateNaissance
+          ? _value.dateNaissance
+          : dateNaissance // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      passwordAppli: null == passwordAppli
+          ? _value.passwordAppli
+          : passwordAppli // ignore: cast_nullable_to_non_nullable
               as Password,
-      passwordConfirmation: null == passwordConfirmation
-          ? _value.passwordConfirmation
-          : passwordConfirmation // ignore: cast_nullable_to_non_nullable
+      passwordAppliConfirmation: null == passwordAppliConfirmation
+          ? _value.passwordAppliConfirmation
+          : passwordAppliConfirmation // ignore: cast_nullable_to_non_nullable
+              as PasswordConfirmation,
+      passwordPDF: null == passwordPDF
+          ? _value.passwordPDF
+          : passwordPDF // ignore: cast_nullable_to_non_nullable
+              as Password,
+      passwordPDFConfirmation: null == passwordPDFConfirmation
+          ? _value.passwordPDFConfirmation
+          : passwordPDFConfirmation // ignore: cast_nullable_to_non_nullable
               as PasswordConfirmation,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
@@ -111,9 +133,12 @@ abstract class _$$_RegisterFormDataCopyWith<$Res>
   @useResult
   $Res call(
       {Nom nomUtilisateur,
-      EmailAddress emailAddress,
-      Password password,
-      PasswordConfirmation passwordConfirmation,
+      int annePremiereRegle,
+      DateTime? dateNaissance,
+      Password passwordAppli,
+      PasswordConfirmation passwordAppliConfirmation,
+      Password passwordPDF,
+      PasswordConfirmation passwordPDFConfirmation,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -131,9 +156,12 @@ class __$$_RegisterFormDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? nomUtilisateur = null,
-    Object? emailAddress = null,
-    Object? password = null,
-    Object? passwordConfirmation = null,
+    Object? annePremiereRegle = null,
+    Object? dateNaissance = freezed,
+    Object? passwordAppli = null,
+    Object? passwordAppliConfirmation = null,
+    Object? passwordPDF = null,
+    Object? passwordPDFConfirmation = null,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
@@ -143,17 +171,29 @@ class __$$_RegisterFormDataCopyWithImpl<$Res>
           ? _value.nomUtilisateur
           : nomUtilisateur // ignore: cast_nullable_to_non_nullable
               as Nom,
-      emailAddress: null == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
+      annePremiereRegle: null == annePremiereRegle
+          ? _value.annePremiereRegle
+          : annePremiereRegle // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateNaissance: freezed == dateNaissance
+          ? _value.dateNaissance
+          : dateNaissance // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      passwordAppli: null == passwordAppli
+          ? _value.passwordAppli
+          : passwordAppli // ignore: cast_nullable_to_non_nullable
               as Password,
-      passwordConfirmation: null == passwordConfirmation
-          ? _value.passwordConfirmation
-          : passwordConfirmation // ignore: cast_nullable_to_non_nullable
+      passwordAppliConfirmation: null == passwordAppliConfirmation
+          ? _value.passwordAppliConfirmation
+          : passwordAppliConfirmation // ignore: cast_nullable_to_non_nullable
+              as PasswordConfirmation,
+      passwordPDF: null == passwordPDF
+          ? _value.passwordPDF
+          : passwordPDF // ignore: cast_nullable_to_non_nullable
+              as Password,
+      passwordPDFConfirmation: null == passwordPDFConfirmation
+          ? _value.passwordPDFConfirmation
+          : passwordPDFConfirmation // ignore: cast_nullable_to_non_nullable
               as PasswordConfirmation,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
@@ -176,9 +216,12 @@ class __$$_RegisterFormDataCopyWithImpl<$Res>
 class _$_RegisterFormData implements _RegisterFormData {
   const _$_RegisterFormData(
       {required this.nomUtilisateur,
-      required this.emailAddress,
-      required this.password,
-      required this.passwordConfirmation,
+      required this.annePremiereRegle,
+      required this.dateNaissance,
+      required this.passwordAppli,
+      required this.passwordAppliConfirmation,
+      required this.passwordPDF,
+      required this.passwordPDFConfirmation,
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.authFailureOrSuccessOption});
@@ -186,11 +229,17 @@ class _$_RegisterFormData implements _RegisterFormData {
   @override
   final Nom nomUtilisateur;
   @override
-  final EmailAddress emailAddress;
+  final int annePremiereRegle;
   @override
-  final Password password;
+  final DateTime? dateNaissance;
   @override
-  final PasswordConfirmation passwordConfirmation;
+  final Password passwordAppli;
+  @override
+  final PasswordConfirmation passwordAppliConfirmation;
+  @override
+  final Password passwordPDF;
+  @override
+  final PasswordConfirmation passwordPDFConfirmation;
   @override
   final bool showErrorMessages;
   @override
@@ -200,7 +249,7 @@ class _$_RegisterFormData implements _RegisterFormData {
 
   @override
   String toString() {
-    return 'RegisterFormData(nomUtilisateur: $nomUtilisateur, emailAddress: $emailAddress, password: $password, passwordConfirmation: $passwordConfirmation, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'RegisterFormData(nomUtilisateur: $nomUtilisateur, annePremiereRegle: $annePremiereRegle, dateNaissance: $dateNaissance, passwordAppli: $passwordAppli, passwordAppliConfirmation: $passwordAppliConfirmation, passwordPDF: $passwordPDF, passwordPDFConfirmation: $passwordPDFConfirmation, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -210,12 +259,20 @@ class _$_RegisterFormData implements _RegisterFormData {
             other is _$_RegisterFormData &&
             (identical(other.nomUtilisateur, nomUtilisateur) ||
                 other.nomUtilisateur == nomUtilisateur) &&
-            (identical(other.emailAddress, emailAddress) ||
-                other.emailAddress == emailAddress) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.passwordConfirmation, passwordConfirmation) ||
-                other.passwordConfirmation == passwordConfirmation) &&
+            (identical(other.annePremiereRegle, annePremiereRegle) ||
+                other.annePremiereRegle == annePremiereRegle) &&
+            (identical(other.dateNaissance, dateNaissance) ||
+                other.dateNaissance == dateNaissance) &&
+            (identical(other.passwordAppli, passwordAppli) ||
+                other.passwordAppli == passwordAppli) &&
+            (identical(other.passwordAppliConfirmation,
+                    passwordAppliConfirmation) ||
+                other.passwordAppliConfirmation == passwordAppliConfirmation) &&
+            (identical(other.passwordPDF, passwordPDF) ||
+                other.passwordPDF == passwordPDF) &&
+            (identical(
+                    other.passwordPDFConfirmation, passwordPDFConfirmation) ||
+                other.passwordPDFConfirmation == passwordPDFConfirmation) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
             (identical(other.isSubmitting, isSubmitting) ||
@@ -230,9 +287,12 @@ class _$_RegisterFormData implements _RegisterFormData {
   int get hashCode => Object.hash(
       runtimeType,
       nomUtilisateur,
-      emailAddress,
-      password,
-      passwordConfirmation,
+      annePremiereRegle,
+      dateNaissance,
+      passwordAppli,
+      passwordAppliConfirmation,
+      passwordPDF,
+      passwordPDFConfirmation,
       showErrorMessages,
       isSubmitting,
       authFailureOrSuccessOption);
@@ -247,9 +307,12 @@ class _$_RegisterFormData implements _RegisterFormData {
 abstract class _RegisterFormData implements RegisterFormData {
   const factory _RegisterFormData(
       {required final Nom nomUtilisateur,
-      required final EmailAddress emailAddress,
-      required final Password password,
-      required final PasswordConfirmation passwordConfirmation,
+      required final int annePremiereRegle,
+      required final DateTime? dateNaissance,
+      required final Password passwordAppli,
+      required final PasswordConfirmation passwordAppliConfirmation,
+      required final Password passwordPDF,
+      required final PasswordConfirmation passwordPDFConfirmation,
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<AuthFailure, Unit>>
@@ -258,11 +321,17 @@ abstract class _RegisterFormData implements RegisterFormData {
   @override
   Nom get nomUtilisateur;
   @override
-  EmailAddress get emailAddress;
+  int get annePremiereRegle;
   @override
-  Password get password;
+  DateTime? get dateNaissance;
   @override
-  PasswordConfirmation get passwordConfirmation;
+  Password get passwordAppli;
+  @override
+  PasswordConfirmation get passwordAppliConfirmation;
+  @override
+  Password get passwordPDF;
+  @override
+  PasswordConfirmation get passwordPDFConfirmation;
   @override
   bool get showErrorMessages;
   @override

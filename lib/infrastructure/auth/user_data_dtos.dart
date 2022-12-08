@@ -12,25 +12,27 @@ abstract class UserDataDTO implements _$UserDataDTO {
   const factory UserDataDTO({
     @JsonKey(ignore: true) String? id,
     required String userName,
-    required bool passwordCrypted,
-    required String typeAccount,
+    required int? dateNaissance,
+    required int anneePremiereRegle,
+    required int theme,
   }) = _UserDataDTO;
 
   factory UserDataDTO.fromDomain(UserData user) {
     return UserDataDTO(
       userName: user.userName.getOrCrash(),
-      passwordCrypted: user.passwordCrypted,
-      typeAccount: user.typeAccount.getOrCrash().toShortString(),
+      dateNaissance: user.dateNaissance?.millisecondsSinceEpoch,
+      anneePremiereRegle: user.anneePremiereRegle,
+      theme: user.theme,
     );
   }
 
-  UserData toDomain(String? _email) {
+  UserData toDomain() {
     return UserData(
       id: UniqueId.fromUniqueInt(id! as int),
       userName: Nom(userName),
-      email: _email != null ? EmailAddress(_email) : null,
-      passwordCrypted: passwordCrypted,
-      typeAccount: TypeAccount.fromString(typeAccount),
+      dateNaissance: dateNaissance != null ? DateTime.fromMillisecondsSinceEpoch(dateNaissance!) : null,
+      anneePremiereRegle: anneePremiereRegle,
+      theme: theme,
     );
   }
 

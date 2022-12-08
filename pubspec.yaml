@@ -48,6 +48,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
   easy_sidemenu: ^0.4.1
   sqflite: ^2.2.1
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   build_runner: ^2.2.0

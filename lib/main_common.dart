@@ -9,12 +9,18 @@ import 'package:teenstar/PRESENTATION/core/_core/app_widget.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'config_reader.dart';
+import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 Future<void> mainCommon(Environment env) async {
   configurationInjection(env.name);
   WidgetsFlutterBinding.ensureInitialized();
   await ConfigReader.initialize();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  FlutterError.demangleStackTrace = (StackTrace stack) {
+    if (stack is stack_trace.Trace) return stack.vmTrace;
+    if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;
+    return stack;
+  };
 
   final database = openDatabase(
     join(await getDatabasesPath(), 'ts_database.db'),

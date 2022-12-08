@@ -38,23 +38,17 @@ class _AccountPageState extends ConsumerState<AccountPage> {
       AsyncValue<UserData?> user = ref.watch(currentUserData);
       //Récupère les données utilisateurs (Informations personnelles)
       String nameUser = "";
-      String? email;
-      TypeAccountState typeAccount = TypeAccountState.fail;
       user.when(
         data: (data) {
           if (data != null) {
             nameUser = 'data.userName.getOrCrash()';
-            email = 'data.email?.getOrCrash()';
-            typeAccount = data.typeAccount.getOrCrash();
           }
         },
         loading: () {
           nameUser = "...";
-          email = "...";
         },
         error: (err, stack) {
           nameUser = "Error";
-          email = "Error";
         },
       );
 
@@ -70,9 +64,9 @@ class _AccountPageState extends ConsumerState<AccountPage> {
             //TEXTE COMPTE
             DisplayTitle(title: AppLocalizations.of(context)!.compte),
             //PANEL DONNEES PERSONNELES
-            PanelPersonnelData(nameUser: nameUser, email: email, typeAccount: typeAccount),
+            PanelPersonnelData(nameUser: nameUser),
             //PANEL MODIFIER MOT DE PASSE / SUPPRIMER COMPTE
-            PanelModifyMdpDeleteAccount(typeAccount: typeAccount),
+            PanelModifyMdpDeleteAccount(),
 
             DisplayTitle(title: 'Autre'),
             PanelReglagesAutre(),

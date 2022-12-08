@@ -22,7 +22,7 @@ class _DeleteAccountPageState extends ConsumerState<DeleteAccountPage> {
       //Supprime le compte et redirige vers authInit
       ref
           .read(authNotifierProvider.notifier)
-          .deleteAccount(TypeAccountState.email)
+          .deleteAccount()
           .then((value) => context.router.push(AuthInitRoute()));
     });
   }

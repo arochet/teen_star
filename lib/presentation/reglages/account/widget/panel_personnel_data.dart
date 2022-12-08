@@ -10,25 +10,12 @@ class PanelPersonnelData extends StatelessWidget {
   const PanelPersonnelData({
     Key? key,
     required this.nameUser,
-    required this.email,
-    required this.typeAccount,
   }) : super(key: key);
 
   final String nameUser;
-  final String? email;
-  final TypeAccountState typeAccount;
 
   @override
   Widget build(BuildContext context) {
-    String typeAc = "";
-    switch (typeAccount) {
-      case TypeAccountState.google:
-        typeAc = AppLocalizations.of(context)!.connecteeavecgoogle;
-        break;
-      default:
-        typeAc = "";
-        break;
-    }
     return PanelList(
       title: 'PanelPersonnelData',
       list: [

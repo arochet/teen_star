@@ -76,42 +76,16 @@ class FormRegister extends ConsumerWidget {
           const SizedBox(height: 8),
           TextFormField(
             decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.adresseemail,
-            ),
-            autocorrect: false,
-            keyboardType: TextInputType.emailAddress,
-            textInputAction: TextInputAction.next,
-            onChanged: (value) {
-              ref.read(registerFormNotifierProvider.notifier).emailChanged(value);
-            },
-            autofillHints: [AutofillHints.email],
-            validator: (_) {
-              final registerData = ref.read(registerFormNotifierProvider);
-              if (registerData.showErrorMessages) {
-                return registerData.emailAddress.value.fold(
-                  (f) => f.maybeMap(
-                    invalidEmail: (_) => AppLocalizations.of(context)!.emailinvalide,
-                    orElse: () => null,
-                  ),
-                  (_) => null,
-                );
-              } else
-                return null;
-            },
-          ),
-          const SizedBox(height: 8),
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.motdepasse,
+              labelText: 'Mot de Passe Appli',
             ),
             autocorrect: false,
             textInputAction: TextInputAction.next,
             obscureText: true,
-            onChanged: (value) => ref.read(registerFormNotifierProvider.notifier).passwordChanged(value),
+            onChanged: (value) => ref.read(registerFormNotifierProvider.notifier).passwordAppliChanged(value),
             validator: (_) {
               final registerData = ref.read(registerFormNotifierProvider);
               if (registerData.showErrorMessages) {
-                return registerData.password.value.fold(
+                return registerData.passwordAppli.value.fold(
                   (f) => f.maybeMap(
                     shortPassword: (_) => AppLocalizations.of(context)!.motdepassetropcourt,
                     orElse: () => null,
@@ -126,17 +100,17 @@ class FormRegister extends ConsumerWidget {
           //MOT DE PASSE DE CONFIRMATION
           TextFormField(
             decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.motdepasseconfirmation,
+              labelText: 'Mot de Passe Appli Confirmation',
             ),
             autocorrect: false,
             textInputAction: TextInputAction.done,
             obscureText: true,
             onChanged: (value) =>
-                ref.read(registerFormNotifierProvider.notifier).passwordConfirmationChanged(value),
+                ref.read(registerFormNotifierProvider.notifier).passwordAppliConfirmationChanged(value),
             validator: (_) {
               final registerData = ref.read(registerFormNotifierProvider);
               if (registerData.showErrorMessages) {
-                return registerData.passwordConfirmation.value.fold(
+                return registerData.passwordAppliConfirmation.value.fold(
                   (f) => f.maybeMap(
                     confirmationPasswordFail: (_) =>
                         AppLocalizations.of(context)!.motdepasseconfirmationdifferent,

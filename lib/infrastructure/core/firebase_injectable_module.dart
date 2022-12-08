@@ -1,7 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
-import 'package:path/path.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @module
-abstract class FirebaseInjectableModule {}
+abstract class FirebaseInjectableModule {
+  @lazySingleton
+  Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();
+}

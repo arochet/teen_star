@@ -52,38 +52,11 @@ class FormConnexion extends ConsumerWidget {
         if (env == Environment.dev)
           ElevatedButton(
             onPressed: () {
-              ref.read(signInFormNotifierProvider.notifier).emailChanged("azer@yopmail.com");
               ref.read(signInFormNotifierProvider.notifier).passwordChanged("azerazer");
             },
             child: Text("Fill form"),
             style: buttonPrimaryHide,
           ),
-        TextFormField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.email),
-            labelText: AppLocalizations.of(context)!.adresseemail,
-          ),
-          keyboardType: TextInputType.emailAddress,
-          textInputAction: TextInputAction.next,
-          autocorrect: false,
-          autofillHints: [AutofillHints.email],
-          onChanged: (value) {
-            ref.read(signInFormNotifierProvider.notifier).emailChanged(value);
-          },
-          validator: (_) {
-            final signIn = ref.read(signInFormNotifierProvider);
-            if (signIn.showErrorMessages) {
-              return signIn.emailAddress.value.fold(
-                (f) => f.maybeMap(
-                  invalidEmail: (_) => AppLocalizations.of(context)!.emailinvalide,
-                  orElse: () => null,
-                ),
-                (_) => null,
-              );
-            } else
-              return null;
-          },
-        ),
         const SizedBox(height: 14),
         //MOT DE PASSE
         TextFormField(

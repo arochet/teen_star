@@ -11,16 +11,16 @@ abstract class UserData with _$UserData {
   const factory UserData({
     required UniqueId id,
     required Nom userName,
-    required EmailAddress? email,
-    required bool passwordCrypted,
-    required TypeAccount typeAccount,
+    required DateTime? dateNaissance,
+    required int anneePremiereRegle,
+    required int theme,
   }) = _UserData;
 
   factory UserData.empty() => UserData(
         id: UniqueId(),
         userName: Nom(''),
-        email: null,
-        passwordCrypted: true,
-        typeAccount: TypeAccount(TypeAccountState.email),
+        dateNaissance: null,
+        anneePremiereRegle: 0,
+        theme: 0,
       );
 }

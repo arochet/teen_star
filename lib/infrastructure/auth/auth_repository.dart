@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teenstar/DOMAIN/auth/auth_failure.dart';
 import 'package:teenstar/DOMAIN/auth/delete_failure.dart';
 import 'package:teenstar/DOMAIN/auth/new_password_failure.dart';
@@ -17,25 +19,35 @@ import 'package:injectable/injectable.dart';
 
 abstract class AuthRepository {
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
-      {required UserData userData, required EmailAddress emailAddress, required Password password});
+      {required UserData userData, required Password passwordAppli, required Password passwordPDF});
   Future<Either<AuthFailure, Unit>> modifyAccount({required Nom userName});
-  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
-      {required EmailAddress emailAdress, required Password password});
+  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({required Password password});
   Future<Either<ReauthenticateFailure, Unit>> reauthenticateWithPassword({required Password password});
   Future<Either<NewPasswordFailure, Unit>> newPassword({required Password newPassword});
   Future<Either<ResetPasswordFailure, Unit>> resetPassword({required EmailAddress emailAddress});
+  Future<Option<UserData>> getUserData();
   Future<void> signOut();
 }
 
-@LazySingleton(as: AuthRepository, env: [Environment.dev, Environment.prod])
+@LazySingleton(as: AuthRepository)
 class FirebaseAuthFacade implements AuthRepository {
+  final String userPrefs = 'user';
+  final String passwordAppliPrefs = 'passwordAppli';
+  final String passwordPDFPrefs = 'passwordPDF';
+  final Future<SharedPreferences> _preferences = SharedPreferences.getInstance();
   FirebaseAuthFacade();
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
-      {required UserData userData, required EmailAddress emailAddress, required Password password}) async {
-    final emailAdressStr = emailAddress.getOrCrash();
-    final passwordStr = password.getOrCrash();
+      {required UserData userData, required Password passwordAppli, required Password passwordPDF}) async {
+    final prefs = await _preferences;
+
+    final passwordAppliStr = passwordAppli.getOrCrash();
+    final passwordPDFStr = passwordPDF.getOrCrash();
+
+    prefs.setString(userPrefs, json.encode(UserDataDTO.fromDomain(userData).toJson()));
+    prefs.setString(passwordAppliPrefs, passwordAppli.getOrCrash());
+    prefs.setString(passwordPDFPrefs, passwordPDF.getOrCrash());
 
     //Vérifie la connexion internet
     if (!(await checkInternetConnexion())) return left(AuthFailure.noInternet());
@@ -48,9 +60,7 @@ class FirebaseAuthFacade implements AuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
-      {required EmailAddress emailAdress, required Password password}) async {
-    final emailAdressStr = emailAdress.getOrCrash();
+  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({required Password password}) async {
     final passwordStr = password.getOrCrash();
 
     //Vérifie la connexion internet
@@ -68,15 +78,16 @@ class FirebaseAuthFacade implements AuthRepository {
 
   @override
   Future<Option<UserData>> getUserData() async {
-    //Le compte
-    return some(UserData(
-        email: EmailAddress('email'),
-        id: UniqueId.fromUniqueInt(0),
-        passwordCrypted: false,
-        userName: Nom('username'),
-        typeAccount: TypeAccount(TypeAccountState.fail)));
+    final prefs = await _preferences;
 
-    return none();
+    final String? userJson = prefs.getString(userPrefs);
+    if (userJson == null) {
+      return none();
+    }
+
+    UserDataDTO userDataDTO = UserDataDTO.fromJson(json.decode(userJson));
+    //Le compte
+    return some(userDataDTO.toDomain());
   }
 
   @override

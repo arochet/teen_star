@@ -9,7 +9,6 @@ part 'sign_in_form_notifier.freezed.dart';
 @freezed
 class SignInFormData with _$SignInFormData {
   const factory SignInFormData({
-    required EmailAddress emailAddress,
     required Password password,
     required bool showErrorMessages,
     required bool isSubmitting,
@@ -17,7 +16,6 @@ class SignInFormData with _$SignInFormData {
   }) = _SignInFormData;
 
   factory SignInFormData.initial() => SignInFormData(
-      emailAddress: EmailAddress(''),
       password: Password(''),
       showErrorMessages: false,
       isSubmitting: false,
@@ -29,28 +27,20 @@ class SignInFormNotifier extends StateNotifier<SignInFormData> {
 
   SignInFormNotifier(this._authRepository) : super(SignInFormData.initial());
 
-  emailChanged(String emailStr) {
-    state = state.copyWith(emailAddress: EmailAddress(emailStr), authFailureOrSuccessOption: none());
-  }
-
   passwordChanged(String passwordStr) {
     state = state.copyWith(password: Password(passwordStr), authFailureOrSuccessOption: none());
   }
 
   signInWithEmailAndPasswordPressed() async {
     Either<AuthFailure, Unit>? failureOrSuccess;
-
-    final isEmailValid = state.emailAddress.isValid();
     final isPasswordValid = state.password.isValid();
-    if (isEmailValid && isPasswordValid) {
+    if (isPasswordValid) {
       state = state.copyWith(isSubmitting: true, authFailureOrSuccessOption: none());
 
-      failureOrSuccess = await this
-          ._authRepository
-          .signInWithEmailAndPassword(emailAdress: state.emailAddress, password: state.password);
+      failureOrSuccess = await this._authRepository.signInWithEmailAndPassword(password: state.password);
 
       if (failureOrSuccess.isRight()) {
-        state = state.copyWith(emailAddress: EmailAddress(""), password: Password(""));
+        state = state.copyWith(password: Password(""));
       }
     }
 

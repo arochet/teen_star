@@ -9,13 +9,15 @@ part of 'user_data_dtos.dart';
 _$_UserDataDTO _$$_UserDataDTOFromJson(Map<String, dynamic> json) =>
     _$_UserDataDTO(
       userName: json['userName'] as String,
-      passwordCrypted: json['passwordCrypted'] as bool,
-      typeAccount: json['typeAccount'] as String,
+      dateNaissance: json['dateNaissance'] as int?,
+      anneePremiereRegle: json['anneePremiereRegle'] as int,
+      theme: json['theme'] as int,
     );
 
 Map<String, dynamic> _$$_UserDataDTOToJson(_$_UserDataDTO instance) =>
     <String, dynamic>{
       'userName': instance.userName,
-      'passwordCrypted': instance.passwordCrypted,
-      'typeAccount': instance.typeAccount,
+      'dateNaissance': instance.dateNaissance,
+      'anneePremiereRegle': instance.anneePremiereRegle,
+      'theme': instance.theme,
     };

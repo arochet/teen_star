@@ -10,14 +10,21 @@ part 'modify_form_notifier.freezed.dart';
 @freezed
 class ModifyFormData with _$ModifyFormData {
   const factory ModifyFormData({
-    required Nom userName,
+    required Nom nomUtilisateur,
+    required int annePremiereRegle,
+    required DateTime? dateNaissance,
     required bool showErrorMessages,
     required bool isSubmitting,
     required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
   }) = _ModifyFormData;
 
   factory ModifyFormData.initial() => ModifyFormData(
-      userName: Nom(''), showErrorMessages: false, isSubmitting: false, authFailureOrSuccessOption: none());
+      nomUtilisateur: Nom(''),
+      annePremiereRegle: 0,
+      dateNaissance: null,
+      showErrorMessages: false,
+      isSubmitting: false,
+      authFailureOrSuccessOption: none());
 }
 
 class ModifyFormNotifier extends StateNotifier<ModifyFormData> {
@@ -27,21 +34,34 @@ class ModifyFormNotifier extends StateNotifier<ModifyFormData> {
 
   setValueWithUserData(UserData userData) {
     state = state.copyWith(
-      userName: userData.userName,
+      nomUtilisateur: userData.userName,
     );
   }
 
-  userNameChanged(String nomStr) {
-    state = state.copyWith(userName: Nom(nomStr), authFailureOrSuccessOption: none());
+  nomUtilisateurChanged(String nomStr) {
+    state = state.copyWith(nomUtilisateur: Nom(nomStr), authFailureOrSuccessOption: none());
+  }
+
+  dateNaissanceChanged(DateTime? dateNaissance) {
+    state = state.copyWith(dateNaissance: dateNaissance, authFailureOrSuccessOption: none());
+  }
+
+  anneePremiereRegleChanged(int annee) {
+    print('annee $annee');
+    state = state.copyWith(annePremiereRegle: annee, authFailureOrSuccessOption: none());
   }
 
   modifyPressed() async {
     Either<AuthFailure, Unit>? failureOrSuccess;
 
-    final isUserNameValid = state.userName.isValid();
-    if (isUserNameValid) {
+    final isUserNameValid = state.nomUtilisateur.isValid();
+    if (isUserNameValid && state.dateNaissance != null) {
       state = state.copyWith(isSubmitting: true, authFailureOrSuccessOption: none());
-      failureOrSuccess = await this._authRepository.modifyAccount(userName: state.userName);
+      failureOrSuccess = await this._authRepository.modifyAccount(
+            nomUtilisateur: state.nomUtilisateur,
+            annePremiereRegle: state.annePremiereRegle,
+            dateNaissance: state.dateNaissance!,
+          );
     }
 
     state = state.copyWith(

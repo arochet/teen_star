@@ -16,7 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ModifyFormData {
-  Nom get userName => throw _privateConstructorUsedError;
+  Nom get nomUtilisateur => throw _privateConstructorUsedError;
+  int get annePremiereRegle => throw _privateConstructorUsedError;
+  DateTime? get dateNaissance => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
@@ -34,7 +36,9 @@ abstract class $ModifyFormDataCopyWith<$Res> {
       _$ModifyFormDataCopyWithImpl<$Res, ModifyFormData>;
   @useResult
   $Res call(
-      {Nom userName,
+      {Nom nomUtilisateur,
+      int annePremiereRegle,
+      DateTime? dateNaissance,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -53,16 +57,26 @@ class _$ModifyFormDataCopyWithImpl<$Res, $Val extends ModifyFormData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userName = null,
+    Object? nomUtilisateur = null,
+    Object? annePremiereRegle = null,
+    Object? dateNaissance = freezed,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      nomUtilisateur: null == nomUtilisateur
+          ? _value.nomUtilisateur
+          : nomUtilisateur // ignore: cast_nullable_to_non_nullable
               as Nom,
+      annePremiereRegle: null == annePremiereRegle
+          ? _value.annePremiereRegle
+          : annePremiereRegle // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateNaissance: freezed == dateNaissance
+          ? _value.dateNaissance
+          : dateNaissance // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -88,7 +102,9 @@ abstract class _$$_ModifyFormDataCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Nom userName,
+      {Nom nomUtilisateur,
+      int annePremiereRegle,
+      DateTime? dateNaissance,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -105,16 +121,26 @@ class __$$_ModifyFormDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userName = null,
+    Object? nomUtilisateur = null,
+    Object? annePremiereRegle = null,
+    Object? dateNaissance = freezed,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
   }) {
     return _then(_$_ModifyFormData(
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      nomUtilisateur: null == nomUtilisateur
+          ? _value.nomUtilisateur
+          : nomUtilisateur // ignore: cast_nullable_to_non_nullable
               as Nom,
+      annePremiereRegle: null == annePremiereRegle
+          ? _value.annePremiereRegle
+          : annePremiereRegle // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateNaissance: freezed == dateNaissance
+          ? _value.dateNaissance
+          : dateNaissance // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -135,13 +161,19 @@ class __$$_ModifyFormDataCopyWithImpl<$Res>
 
 class _$_ModifyFormData implements _ModifyFormData {
   const _$_ModifyFormData(
-      {required this.userName,
+      {required this.nomUtilisateur,
+      required this.annePremiereRegle,
+      required this.dateNaissance,
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.authFailureOrSuccessOption});
 
   @override
-  final Nom userName;
+  final Nom nomUtilisateur;
+  @override
+  final int annePremiereRegle;
+  @override
+  final DateTime? dateNaissance;
   @override
   final bool showErrorMessages;
   @override
@@ -151,7 +183,7 @@ class _$_ModifyFormData implements _ModifyFormData {
 
   @override
   String toString() {
-    return 'ModifyFormData(userName: $userName, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'ModifyFormData(nomUtilisateur: $nomUtilisateur, annePremiereRegle: $annePremiereRegle, dateNaissance: $dateNaissance, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -159,8 +191,12 @@ class _$_ModifyFormData implements _ModifyFormData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ModifyFormData &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
+            (identical(other.nomUtilisateur, nomUtilisateur) ||
+                other.nomUtilisateur == nomUtilisateur) &&
+            (identical(other.annePremiereRegle, annePremiereRegle) ||
+                other.annePremiereRegle == annePremiereRegle) &&
+            (identical(other.dateNaissance, dateNaissance) ||
+                other.dateNaissance == dateNaissance) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
             (identical(other.isSubmitting, isSubmitting) ||
@@ -172,8 +208,14 @@ class _$_ModifyFormData implements _ModifyFormData {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userName, showErrorMessages,
-      isSubmitting, authFailureOrSuccessOption);
+  int get hashCode => Object.hash(
+      runtimeType,
+      nomUtilisateur,
+      annePremiereRegle,
+      dateNaissance,
+      showErrorMessages,
+      isSubmitting,
+      authFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -184,14 +226,20 @@ class _$_ModifyFormData implements _ModifyFormData {
 
 abstract class _ModifyFormData implements ModifyFormData {
   const factory _ModifyFormData(
-      {required final Nom userName,
+      {required final Nom nomUtilisateur,
+      required final int annePremiereRegle,
+      required final DateTime? dateNaissance,
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<AuthFailure, Unit>>
           authFailureOrSuccessOption}) = _$_ModifyFormData;
 
   @override
-  Nom get userName;
+  Nom get nomUtilisateur;
+  @override
+  int get annePremiereRegle;
+  @override
+  DateTime? get dateNaissance;
   @override
   bool get showErrorMessages;
   @override

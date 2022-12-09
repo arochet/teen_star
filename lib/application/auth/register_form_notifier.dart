@@ -45,11 +45,12 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormData> {
     state = state.copyWith(nomUtilisateur: Nom(nomStr), authFailureOrSuccessOption: none());
   }
 
-  dateNaissanceChanged(DateTime dateNaissance) {
+  dateNaissanceChanged(DateTime? dateNaissance) {
     state = state.copyWith(dateNaissance: dateNaissance, authFailureOrSuccessOption: none());
   }
 
   anneePremiereRegleChanged(int annee) {
+    print('annne $annee');
     state = state.copyWith(annePremiereRegle: annee, authFailureOrSuccessOption: none());
   }
 

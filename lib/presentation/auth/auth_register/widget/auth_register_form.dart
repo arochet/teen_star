@@ -1,3 +1,5 @@
+import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:teenstar/APPLICATION/auth/register_form_notifier.dart';
 import 'package:teenstar/PRESENTATION/auth/widget/flushbar_auth_failure.dart';
 import 'package:teenstar/PRESENTATION/core/_components/contrained_box_max_width.dart';
@@ -25,10 +27,10 @@ class FormRegisterProvide extends ConsumerWidget {
                 //Message d'erreur
                 FlushbarAuthFailure.show(context, failure);
               }, (_) {
-                //Authentification réussie !
+                //Inscription réussie !
                 Future.delayed(Duration.zero, () async {
                   ref.read(authNotifierProvider.notifier).authCheckRequested();
-                  context.router.push(ResumeRoute());
+                  context.router.replaceAll([SplashRoute()]);
                 });
               }));
     });
@@ -50,6 +52,23 @@ class FormRegister extends ConsumerWidget {
         autovalidateMode: AutovalidateMode.always,
         child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
           SpaceH10(),
+          if (ref.watch(environment).name == Environment.dev)
+            ElevatedButton(
+              onPressed: () {
+                final _formatter = new DateFormat('dd.MM.yy');
+                ref.read(registerFormNotifierProvider.notifier).nomUtilisateurChanged('azer');
+                ref
+                    .read(registerFormNotifierProvider.notifier)
+                    .dateNaissanceChanged(_formatter.parse('03.01.97'));
+                ref.read(registerFormNotifierProvider.notifier).anneePremiereRegleChanged(2000);
+                ref.read(registerFormNotifierProvider.notifier).passwordAppliChanged('azerazer');
+                ref.read(registerFormNotifierProvider.notifier).passwordAppliConfirmationChanged('azerazer');
+                ref.read(registerFormNotifierProvider.notifier).passwordPDFChanged('qsdfqsdf');
+                ref.read(registerFormNotifierProvider.notifier).passwordPDFConfirmationChanged('qsdfqsdf');
+              },
+              child: Text("[DEV] fill form"),
+              style: buttonPrimaryHide,
+            ),
           TextFormField(
             decoration: InputDecoration(
               labelText: AppLocalizations.of(context)!.nomutilisateur,
@@ -77,27 +96,26 @@ class FormRegister extends ConsumerWidget {
           SpaceH10(),
           TextFormField(
             decoration: InputDecoration(
-              labelText: "Date de naissance",
+              labelText: "Date de naissance (jj.mm.aa)",
             ),
             autocorrect: false,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.datetime,
             onChanged: (value) {
-              ref
-                  .read(registerFormNotifierProvider.notifier)
-                  .dateNaissanceChanged(DateTime.tryParse(value) ?? DateTime.now());
+              final _formatter = new DateFormat('dd.MM.yy');
+              try {
+                ref.read(registerFormNotifierProvider.notifier).dateNaissanceChanged(_formatter.parse(value));
+              } catch (e) {}
             },
             validator: (_) {
               final registerData = ref.read(registerFormNotifierProvider);
 
               if (registerData.showErrorMessages) {
-                return registerData.nomUtilisateur.value.fold(
-                  (f) => f.maybeMap(
-                    exceedingLenghtOrNull: (_) => AppLocalizations.of(context)!.nominvalide,
-                    orElse: () => null,
-                  ),
-                  (_) => null,
-                );
+                if (registerData.dateNaissance == null) {
+                  return 'Date invalide';
+                } else {
+                  return null;
+                }
               } else
                 return null;
             },
@@ -111,19 +129,21 @@ class FormRegister extends ConsumerWidget {
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.number,
             onChanged: (value) {
-              ref.read(registerFormNotifierProvider.notifier).dateNaissanceChanged(DateTime.now());
+              print('value $value');
+
+              ref
+                  .read(registerFormNotifierProvider.notifier)
+                  .anneePremiereRegleChanged(int.tryParse(value) ?? 0);
             },
             validator: (_) {
               final registerData = ref.read(registerFormNotifierProvider);
 
               if (registerData.showErrorMessages) {
-                return registerData.nomUtilisateur.value.fold(
-                  (f) => f.maybeMap(
-                    exceedingLenghtOrNull: (_) => AppLocalizations.of(context)!.nominvalide,
-                    orElse: () => null,
-                  ),
-                  (_) => null,
-                );
+                print('registerData.annePremiereRegle ${registerData.annePremiereRegle}');
+                if (registerData.annePremiereRegle < 1900 || registerData.annePremiereRegle > 3000)
+                  return "Année invalide";
+                else
+                  return null;
               } else
                 return null;
             },

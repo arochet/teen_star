@@ -18,7 +18,10 @@ import '../../../DOMAIN/cycle/cycle.dart' as _i26;
 import '../../auth/auth_connexion/auth_connexion_page.dart' as _i4;
 import '../../auth/auth_init/auth_init_page.dart' as _i3;
 import '../../auth/auth_register/auth_register_page.dart' as _i5;
-import '../../auth/auth_reset_password.dart/auth_reset_password_page.dart' as _i6;
+import '../../auth/auth_reset_password.dart/auth_reset_password_page.dart'
+    as _i6;
+import '../../auth/condition_utilisation/condition_utilisation_page.dart'
+    as _i19;
 import '../../historique/historique_page.dart' as _i22;
 import '../../reglages/account/account_page.dart' as _i23;
 import '../../reglages/account/buttons/buttons.dart' as _i13;
@@ -26,7 +29,6 @@ import '../../reglages/account/colors/colors.dart' as _i12;
 import '../../reglages/account/components/components_page.dart' as _i11;
 import '../../reglages/account/text_style/text_style.dart' as _i14;
 import '../../reglages/account/utils/utils_page.dart' as _i15;
-import '../../auth/condition_utilisation/condition_utilisation_page.dart' as _i19;
 import '../../reglages/delete_account/delete_account_page.dart' as _i9;
 import '../../reglages/guide_avance/guide_avance_page.dart' as _i20;
 import '../../reglages/langue/langue_page.dart' as _i17;
@@ -34,13 +36,15 @@ import '../../reglages/modify_account/modify_account_page.dart' as _i7;
 import '../../reglages/new_password/new_password_page.dart' as _i10;
 import '../../reglages/principes_de_base/principes_de_base_page.dart' as _i18;
 import '../../reglages/reauthenticate/reauthenticate_page.dart' as _i8;
-import '../../resume/ajout_observation_journee/ajout_observation_journee_page.dart' as _i16;
+import '../../resume/ajout_observation_journee/ajout_observation_journee_page.dart'
+    as _i16;
 import '../../resume/resume_page.dart' as _i21;
 import '../_main_navigation/main_navigation_page.dart' as _i2;
 import '../_splash/splash_page.dart' as _i1;
 
 class AppRouter extends _i24.RootStackRouter {
-  AppRouter([_i25.GlobalKey<_i25.NavigatorState>? navigatorKey]) : super(navigatorKey);
+  AppRouter([_i25.GlobalKey<_i25.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, _i24.PageFactory> pagesMap = {
@@ -51,7 +55,8 @@ class AppRouter extends _i24.RootStackRouter {
       );
     },
     MainNavigationRoute.name: (routeData) {
-      final args = routeData.argsAs<MainNavigationRouteArgs>(orElse: () => const MainNavigationRouteArgs());
+      final args = routeData.argsAs<MainNavigationRouteArgs>(
+          orElse: () => const MainNavigationRouteArgs());
       return _i24.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i2.MainNavigationPage(key: args.key),

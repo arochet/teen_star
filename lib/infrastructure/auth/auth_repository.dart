@@ -7,22 +7,20 @@ import 'package:teenstar/DOMAIN/auth/delete_failure.dart';
 import 'package:teenstar/DOMAIN/auth/new_password_failure.dart';
 import 'package:teenstar/DOMAIN/auth/reauthenticate_failure.dart';
 import 'package:teenstar/DOMAIN/auth/reset_password_failure.dart';
-import 'package:teenstar/DOMAIN/auth/server_failure.dart';
 import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
-import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/INFRASTRUCTURE/auth/user_data_dtos.dart';
-import 'package:teenstar/INFRASTRUCTURE/core/crypt.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class AuthRepository {
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
       {required UserData userData, required Password passwordAppli, required Password passwordPDF});
-  Future<Either<AuthFailure, Unit>> modifyAccount({required Nom userName});
+  Future<Either<AuthFailure, Unit>> modifyAccount(
+      {required Nom nomUtilisateur, required int annePremiereRegle, required DateTime dateNaissance});
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({required Password password});
   Future<Either<ReauthenticateFailure, Unit>> reauthenticateWithPassword({required Password password});
+  Future<Either<AuthFailure, Unit>> deleteALL();
   Future<Either<NewPasswordFailure, Unit>> newPassword({required Password newPassword});
   Future<Either<ResetPasswordFailure, Unit>> resetPassword({required EmailAddress emailAddress});
   Future<Option<UserData>> getUserData();
@@ -40,19 +38,16 @@ class FirebaseAuthFacade implements AuthRepository {
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
       {required UserData userData, required Password passwordAppli, required Password passwordPDF}) async {
-    final prefs = await _preferences;
-
-    final passwordAppliStr = passwordAppli.getOrCrash();
-    final passwordPDFStr = passwordPDF.getOrCrash();
-
-    prefs.setString(userPrefs, json.encode(UserDataDTO.fromDomain(userData).toJson()));
-    prefs.setString(passwordAppliPrefs, passwordAppli.getOrCrash());
-    prefs.setString(passwordPDFPrefs, passwordPDF.getOrCrash());
-
-    //Vérifie la connexion internet
-    if (!(await checkInternetConnexion())) return left(AuthFailure.noInternet());
-
     try {
+      final prefs = await _preferences;
+
+      final passwordAppliStr = passwordAppli.getOrCrash();
+      final passwordPDFStr = passwordPDF.getOrCrash();
+
+      prefs.setString(userPrefs, json.encode(UserDataDTO.fromDomain(userData).toJson()));
+      prefs.setString(passwordAppliPrefs, passwordAppli.getOrCrash());
+      prefs.setString(passwordPDFPrefs, passwordPDF.getOrCrash());
+
       return right(unit);
     } catch (e) {
       return left(const AuthFailure.serverError());
@@ -91,20 +86,39 @@ class FirebaseAuthFacade implements AuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> modifyAccount({required Nom userName}) async {
+  Future<Either<AuthFailure, Unit>> modifyAccount({
+    required Nom nomUtilisateur,
+    required int annePremiereRegle,
+    required DateTime dateNaissance,
+  }) async {
+    final prefs = await _preferences;
+
     try {
-      return right(unit);
+      final userOption = await getUserData();
+
+      return userOption.fold(
+        () => left(const AuthFailure.serverError()),
+        (user) {
+          final UserData u = user.copyWith(
+              userName: nomUtilisateur, anneePremiereRegle: annePremiereRegle, dateNaissance: dateNaissance);
+          prefs.setString(
+            userPrefs,
+            json.encode(UserDataDTO.fromDomain(u).toJson()),
+          );
+          return right(unit);
+        },
+      );
     } catch (e) {
       return left(const AuthFailure.serverError());
     }
   }
 
   @override
-  Future<Either<DeleteFailure, Unit>> deleteAccountWithEmailAndPassword() async {
-    return deleteAccount();
-  }
-
-  Future<Either<DeleteFailure, Unit>> deleteAccount() async {
+  Future<Either<AuthFailure, Unit>> deleteALL() async {
+    final prefs = await _preferences;
+    prefs.remove(userPrefs);
+    prefs.remove(passwordAppliPrefs);
+    prefs.remove(passwordPDFPrefs);
     return right(unit);
   }
 

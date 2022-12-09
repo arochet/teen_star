@@ -28,9 +28,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
     final optionUser = await _authRepository.getUserData();
     if (optionUser.isNone()) {
       state = AuthUnauthenticated();
+      print('AuthUnauthenticated');
     } else {
+      print('AuthAuthenticated');
       state = AuthAuthenticated();
     }
+
+    state = state;
   }
 
   Future signOut() async {
@@ -39,6 +43,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   Future deleteAccount() async {
-    state = AuthUnauthenticated();
+    await _authRepository.deleteALL();
   }
 }

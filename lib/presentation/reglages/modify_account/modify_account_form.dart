@@ -1,8 +1,10 @@
 // import 'package:another_flushbar/flushbar.dart';
+import 'package:intl/intl.dart';
 import 'package:teenstar/APPLICATION/account/modify_form_notifier.dart';
 import 'package:teenstar/PRESENTATION/auth/widget/flushbar_auth_failure.dart';
 import 'package:teenstar/PRESENTATION/core/_components/contrained_box_max_width.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,6 +49,8 @@ class FormModifyAccount extends ConsumerStatefulWidget {
 class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
   //CONTROLLER DU FORMULAIRE POUR L'INITIALISATION DES VALEURS DES CHAMPS
   TextEditingController _controllerUserName = new TextEditingController(text: '');
+  TextEditingController _controllerAnneePremiereRegle = new TextEditingController(text: '');
+  TextEditingController _controllerDateNaissance = new TextEditingController(text: '');
 
   @override
   void initState() {
@@ -66,7 +70,16 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
           //Remplis le formulaire
           setState(() {
             _controllerUserName = new TextEditingController(text: dataUser.userName.getOrCrash());
+            _controllerAnneePremiereRegle =
+                new TextEditingController(text: dataUser.anneePremiereRegle.toString());
+            _controllerDateNaissance =
+                new TextEditingController(text: AppDateUtils.formatDate(dataUser.dateNaissance));
           });
+          ref.read(modifyFormNotifierProvider.notifier).nomUtilisateurChanged(_controllerUserName.text);
+          ref
+              .read(modifyFormNotifierProvider.notifier)
+              .anneePremiereRegleChanged(dataUser.anneePremiereRegle);
+          ref.read(modifyFormNotifierProvider.notifier).dateNaissanceChanged(dataUser.dateNaissance);
         }
       },
     );
@@ -89,13 +102,13 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
               ),
               autocorrect: false,
               onChanged: (value) {
-                ref.read(modifyFormNotifierProvider.notifier).userNameChanged(value);
+                ref.read(modifyFormNotifierProvider.notifier).nomUtilisateurChanged(value);
               },
               validator: (_) {
                 final registerData = ref.read(modifyFormNotifierProvider);
 
                 if (registerData.showErrorMessages) {
-                  return registerData.userName.value.fold(
+                  return registerData.nomUtilisateur.value.fold(
                     (f) => f.maybeMap(
                       exceedingLenghtOrNull: (_) => AppLocalizations.of(context)!.nominvalide,
                       orElse: () => null,
@@ -106,6 +119,60 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
                   return null;
               },
               controller: _controllerUserName,
+            ),
+            const SizedBox(height: 8),
+            //ANNEE PREMIERE REGLE
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: "Année des premières règles",
+              ),
+              autocorrect: false,
+              keyboardType: TextInputType.number,
+              onChanged: (value) {
+                ref
+                    .read(modifyFormNotifierProvider.notifier)
+                    .anneePremiereRegleChanged(int.tryParse(value) ?? 0);
+              },
+              validator: (_) {
+                final registerData = ref.read(modifyFormNotifierProvider);
+
+                if (registerData.showErrorMessages) {
+                  if (registerData.annePremiereRegle < 1900 || registerData.annePremiereRegle > 3000)
+                    return "Année invalide";
+                  else
+                    return null;
+                } else
+                  return null;
+              },
+              controller: _controllerAnneePremiereRegle,
+            ),
+            const SizedBox(height: 8),
+            //DATE DE NAISSANCE
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: "Date de naissance (jj.mm.aa)",
+              ),
+              autocorrect: false,
+              keyboardType: TextInputType.datetime,
+              onChanged: (value) {
+                final _formatter = new DateFormat('dd.MM.yy');
+                try {
+                  ref.read(modifyFormNotifierProvider.notifier).dateNaissanceChanged(_formatter.parse(value));
+                } catch (e) {}
+              },
+              validator: (_) {
+                final registerData = ref.read(modifyFormNotifierProvider);
+
+                if (registerData.showErrorMessages) {
+                  if (registerData.dateNaissance == null) {
+                    return 'Date invalide';
+                  } else {
+                    return null;
+                  }
+                } else
+                  return null;
+              },
+              controller: _controllerDateNaissance,
             ),
             const SizedBox(height: 8),
             //BOUTON MODIFIER

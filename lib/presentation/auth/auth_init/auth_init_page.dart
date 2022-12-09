@@ -1,6 +1,7 @@
 import 'package:teenstar/PRESENTATION/auth/auth_connexion/auth_connexion_page.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_environment_widget.dart';
+import 'package:teenstar/PRESENTATION/core/_core/app_images.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/material.dart';
@@ -60,8 +61,8 @@ class PanelInit extends StatelessWidget {
               Text("TeenSTAR", style: Theme.of(context).textTheme.headline2),
               SizedBox(height: 20),
               Image(
-                image: AssetImage("assets/logo_vide.png"),
-                height: 120,
+                image: AssetImage(AppImage.icon),
+                height: 160,
               ),
             ],
           ),
@@ -74,7 +75,7 @@ class PanelInit extends StatelessWidget {
                 padding: const EdgeInsets.all(38.0),
                 child: Center(
                   child: ElevatedButton(
-                    onPressed: () => context.router.push(AuthConnexionRoute()),
+                    onPressed: () => context.router.push(LangueRoute()),
                     style: buttonBigPrimary,
                     child: Text(AppLocalizations.of(context)!.commencer),
                   ),

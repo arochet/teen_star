@@ -35,21 +35,19 @@ class _AccountPageState extends ConsumerState<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, watch, child) {
-      AsyncValue<UserData?> user = ref.watch(currentUserData);
+      AsyncValue<UserData?> userAsync = ref.watch(currentUserData);
       //Récupère les données utilisateurs (Informations personnelles)
-      String nameUser = "";
-      user.when(
+      late UserData user;
+      userAsync.when(
         data: (data) {
           if (data != null) {
-            nameUser = 'data.userName.getOrCrash()';
+            user = data;
+          } else {
+            user = UserData.error();
           }
         },
-        loading: () {
-          nameUser = "...";
-        },
-        error: (err, stack) {
-          nameUser = "Error";
-        },
+        loading: () => user = UserData.loading(),
+        error: (err, stack) => user = UserData.error(),
       );
 
       //Environnement
@@ -64,7 +62,7 @@ class _AccountPageState extends ConsumerState<AccountPage> {
             //TEXTE COMPTE
             DisplayTitle(title: AppLocalizations.of(context)!.compte),
             //PANEL DONNEES PERSONNELES
-            PanelPersonnelData(nameUser: nameUser),
+            PanelPersonnelData(user),
             //PANEL MODIFIER MOT DE PASSE / SUPPRIMER COMPTE
             PanelModifyMdpDeleteAccount(),
 

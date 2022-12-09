@@ -73,7 +73,8 @@ final currentPageNavProvider = StateProvider<int?>((ref) => null);
 //USER
 //Utilisateur courant (comprend ses données FireStore)
 final currentUserData = FutureProvider.autoDispose<UserData?>((ref) async {
-  return UserData.empty();
+  final userOption = await ref.read(authRepositoryProvider).getUserData();
+  return userOption.fold(() => null, (user) => user);
 });
 
 //Cycle

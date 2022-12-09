@@ -45,6 +45,14 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormData> {
     state = state.copyWith(nomUtilisateur: Nom(nomStr), authFailureOrSuccessOption: none());
   }
 
+  dateNaissanceChanged(DateTime dateNaissance) {
+    state = state.copyWith(dateNaissance: dateNaissance, authFailureOrSuccessOption: none());
+  }
+
+  anneePremiereRegleChanged(int annee) {
+    state = state.copyWith(annePremiereRegle: annee, authFailureOrSuccessOption: none());
+  }
+
   passwordAppliChanged(String passwordStr) {
     state = state.copyWith(passwordAppli: Password(passwordStr), authFailureOrSuccessOption: none());
   }
@@ -63,7 +71,7 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormData> {
   passwordPDFConfirmationChanged(String passwordStr) {
     state = state.copyWith(
         passwordPDFConfirmation:
-            PasswordConfirmation(state.passwordAppli.value.getOrElse(() => ''), passwordStr),
+            PasswordConfirmation(state.passwordPDF.value.getOrElse(() => ''), passwordStr),
         authFailureOrSuccessOption: none());
   }
 

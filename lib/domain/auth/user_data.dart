@@ -23,4 +23,20 @@ abstract class UserData with _$UserData {
         anneePremiereRegle: 0,
         theme: 0,
       );
+
+  factory UserData.error() => UserData(
+        id: UniqueId(),
+        userName: Nom('Erreur'),
+        dateNaissance: null,
+        anneePremiereRegle: 0,
+        theme: 0,
+      );
+
+  factory UserData.loading() => UserData(
+        id: UniqueId(),
+        userName: Nom('...'),
+        dateNaissance: null,
+        anneePremiereRegle: 0,
+        theme: 0,
+      );
 }

@@ -2,9 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/components/components_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/text_style/text_style.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/account_page.dart';
+import 'package:teenstar/PRESENTATION/auth/condition_utilisation/condition_utilisation_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/delete_account/delete_account_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/guide_avance/guide_avance_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/langue/langue_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/new_password/new_password_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/principes_de_base/principes_de_base_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/reauthenticate/reauthenticate_page.dart';
 import 'package:teenstar/PRESENTATION/auth/auth_connexion/auth_connexion_page.dart';
 import 'package:teenstar/PRESENTATION/auth/auth_init/auth_init_page.dart';
@@ -120,6 +124,25 @@ import '../../reglages/account/utils/utils_page.dart';
     name: 'ObservationAddRoute',
     page: ObservationAddPage,
   ),
-  //insert-route
+  AutoRoute(
+    path: '/langue-route',
+    name: 'LangueRoute',
+    page: LanguePage,
+  ),
+  AutoRoute(
+    path: '/principes_de_base-route',
+    name: 'Principes_de_baseRoute',
+    page: Principes_de_basePage,
+  ),
+  AutoRoute(
+    path: '/condition_utilisation-route',
+    name: 'Condition_utilisationRoute',
+    page: Condition_utilisationPage,
+  ),
+  AutoRoute(
+    path: '/guide_avance-route',
+    name: 'Guide_avanceRoute',
+    page: Guide_avancePage,
+  ), //insert-route
 ])
 class $AppRouter {}

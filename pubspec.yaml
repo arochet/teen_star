@@ -82,5 +82,6 @@ flutter:
   generate: true 
   assets:
     - assets/logo_vide.png
+    - assets/icon/logo.png
     - config/
   

@@ -28,7 +28,7 @@ abstract class UserDataDTO implements _$UserDataDTO {
 
   UserData toDomain() {
     return UserData(
-      id: UniqueId.fromUniqueInt(id! as int),
+      id: UniqueId(),
       userName: Nom(userName),
       dateNaissance: dateNaissance != null ? DateTime.fromMillisecondsSinceEpoch(dateNaissance!) : null,
       anneePremiereRegle: anneePremiereRegle,

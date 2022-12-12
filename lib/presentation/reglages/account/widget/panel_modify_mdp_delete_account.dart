@@ -24,7 +24,7 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
         title: 'Modifier le mot de passe Appli',
         icon: Icons.lock,
         onTap: () {
-          context.router.push(ReauthenticateRoute(route: NewPasswordRoute()));
+          context.router.push(ReauthenticateRoute(route: NewPasswordRoute(isMotDePasseAppli: true)));
         },
       ),
       //Modifier le mot de passe PDF
@@ -32,7 +32,7 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
         title: 'Modifier le mot de passe PDF',
         icon: Icons.lock,
         onTap: () {
-          context.router.push(ReauthenticateRoute(route: NewPasswordRoute()));
+          context.router.push(ReauthenticateRoute(route: NewPasswordRoute(isMotDePasseAppli: false)));
         },
       ),
       //Supprimer le compte
@@ -40,6 +40,15 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
         title: 'Réinitialiser l\'application',
         icon: Icons.cancel,
         onTap: () => deleteAccount(),
+      ),
+      //
+      ItemPanelList(
+        title: 'Réinitialiser BDD',
+        icon: Icons.cancel,
+        onTap: () async {
+          final result = await ref.read(cycleRepositoryProvider).resetAll();
+          result.fold((l) => print('Erreur ! ${l.toString()}'), (r) => print('Reset OKAY'));
+        },
       ),
     ]);
   }

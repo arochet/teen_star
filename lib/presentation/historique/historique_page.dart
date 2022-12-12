@@ -18,11 +18,8 @@ class HistoriquePage extends ConsumerWidget {
         padding: EdgeInsets.all(10),
         child: Center(
           child: ElevatedButton(
-            onPressed: () async {
-              final result = await ref.read(cycleRepositoryProvider).resetAll();
-              result.fold((l) => print('Erreur ! ${l.toString()}'), (r) => print('Reset OKAY'));
-            },
-            child: Text("Reset BDD"),
+            onPressed: () async {},
+            child: Text("--"),
             style: buttonNormalPrimary,
           ),
         ),

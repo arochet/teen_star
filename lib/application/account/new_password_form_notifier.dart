@@ -13,7 +13,7 @@ class NewPasswordFormData with _$NewPasswordFormData {
     required PasswordConfirmation passwordConfirmation,
     required bool showErrorMessages,
     required bool isSubmitting,
-    required Option<Either<NewPasswordFailure, Unit>> authFailureOrSuccessOption,
+    required Option<Unit> authFailureOrSuccessOption,
   }) = _NewPasswordFormData;
 
   factory NewPasswordFormData.initial() => NewPasswordFormData(
@@ -39,20 +39,19 @@ class NewPasswordFormNotifier extends StateNotifier<NewPasswordFormData> {
         authFailureOrSuccessOption: none());
   }
 
-  newPasswordPressed() async {
-    Either<NewPasswordFailure, Unit>? failureOrSuccess;
+  newPasswordPressed(bool isMotDePasseAppli) async {
+    Unit? failureOrSuccess;
 
     final isPasswordValid = state.password.isValid();
     final isPasswordConfirmationValid = state.password.isValid();
     if (isPasswordValid && isPasswordConfirmationValid) {
       state = state.copyWith(isSubmitting: true, authFailureOrSuccessOption: none());
 
-      failureOrSuccess = await this._authRepository.newPassword(newPassword: state.password);
+      failureOrSuccess = await this
+          ._authRepository
+          .newPassword(newPassword: state.password, isMotDePasseAppli: isMotDePasseAppli);
 
-      if (failureOrSuccess.isRight()) {
-        //Reinitialise le formulaire
-        state = state.copyWith(password: Password(""));
-      }
+      state = state.copyWith(password: Password(""));
     }
 
     state = state.copyWith(

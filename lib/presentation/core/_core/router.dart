@@ -5,6 +5,7 @@ import 'package:teenstar/PRESENTATION/reglages/account/account_page.dart';
 import 'package:teenstar/PRESENTATION/auth/condition_utilisation/condition_utilisation_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/delete_account/delete_account_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/guide_avance/guide_avance_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/info_application/info_application_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/langue/langue_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/new_password/new_password_page.dart';
@@ -143,6 +144,11 @@ import '../../reglages/account/utils/utils_page.dart';
     path: '/guide_avance-route',
     name: 'Guide_avanceRoute',
     page: Guide_avancePage,
+  ),
+  AutoRoute(
+    path: '/info_application-route',
+    name: 'Info_applicationRoute',
+    page: Info_applicationPage,
   ), //insert-route
 ])
 class $AppRouter {}

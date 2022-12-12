@@ -54,7 +54,7 @@ class _BoutonDeValidation extends StatelessWidget {
         SizedBox(width: 20),
         ElevatedButton(
           onPressed: () {
-            context.router.push(Condition_utilisationRoute());
+            context.router.push(Condition_utilisationRoute(doitEtreAccepte: true));
           },
           child: Text("OK"),
           style: buttonNormalPrimary,

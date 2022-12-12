@@ -6,21 +6,19 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Guide_avancePage extends StatelessWidget {
-  const Guide_avancePage({Key? key}) : super(key: key);
+class Info_applicationPage extends StatelessWidget {
+  const Info_applicationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      title: 'Guide Avancé',
+      title: 'Info Application',
       child: ShowComponentFile(
-        title: './lib/PRESENTATION/reglages/guide_avance/guide_avance_page.dart',
+        title: './lib/PRESENTATION/reglages/info_application/info_application_page.dart',
         child: Padding(
           padding: EdgeInsets.all(10),
-          child: ListView(
-            children: [
-              Text("Guide avancé", style: Theme.of(context).textTheme.headline4),
-            ],
+          child: Center(
+            child: Text("TeenSTAR - Application de test", style: Theme.of(context).textTheme.headline4),
           ),
         ),
       ),

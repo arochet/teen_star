@@ -14,17 +14,21 @@ class PanelReglagesAutre extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PanelList(
-      title: 'PanelPersonnelData',
+      title: 'Panel Reglages Autre',
       list: [
         ItemPanelList(
           title: 'Principes d\'utilisation',
           icon: Icons.account_circle_rounded,
-          onTap: () {},
+          onTap: () {
+            context.router.push(Condition_utilisationRoute(doitEtreAccepte: false));
+          },
         ),
         ItemPanelList(
           title: 'Guide avancé',
           icon: Icons.mail_rounded,
-          onTap: () {},
+          onTap: () {
+            context.router.push(Guide_avanceRoute());
+          },
         ),
         ItemPanelList(
           title: 'Notification de rappel',
@@ -40,7 +44,7 @@ class PanelReglagesAutre extends StatelessWidget {
         ItemPanelList(
           title: 'Info sur l\'application',
           icon: Icons.mail_rounded,
-          onTap: () {},
+          onTap: () => context.router.push(Info_applicationRoute()),
         ),
       ],
     );

@@ -14,42 +14,34 @@ import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 final mdpupdate = StateProvider<bool>((ref) => false);
 
 class NewPasswordPage extends ConsumerWidget {
-  const NewPasswordPage({Key? key}) : super(key: key);
+  final bool isMotDePasseAppli;
+  const NewPasswordPage({Key? key, required this.isMotDePasseAppli}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<NewPasswordFormData>(newPasswordFormNotifierProvider, (prev, newPasswordInState) {
-      newPasswordInState.authFailureOrSuccessOption.fold(
-          () {},
-          (either) => either.fold((failure) {
-                //Message d'erreur
-                Flushbar(
-                    duration: const Duration(seconds: 3),
-                    icon: const Icon(Icons.warning),
-                    messageColor: Colors.red,
-                    message: failure.map(
-                      serverError: (_) => AppLocalizations.of(context)!.problemedeserveur,
-                    )).show(context);
-              }, (_) {
-                //Authentification réussie !
-                ref.read(mdpupdate.notifier).state = true;
-                Future.delayed(Duration(seconds: 1), () {
-                  ref.read(mdpupdate.notifier).state = false;
-                  context.router.replaceAll([
-                    MainNavigationRoute(children: [AccountRoute()])
-                  ]);
-                });
-              }));
+      newPasswordInState.authFailureOrSuccessOption.fold(() {}, (either) {
+        //Authentification réussie !
+        ref.read(mdpupdate.notifier).state = true;
+        Future.delayed(Duration(seconds: 1), () {
+          ref.read(mdpupdate.notifier).state = false;
+          context.router.replaceAll([
+            MainNavigationRoute(children: [AccountRoute()])
+          ]);
+        });
+      });
     });
     return MainScaffold(
       child: ShowComponentFile(
-          title: 'account/new_password/new_password_page.dart', child: FormReauthenticate()),
+          title: 'account/new_password/new_password_page.dart', child: FormReauthenticate(isMotDePasseAppli)),
     );
   }
 }
 
 class FormReauthenticate extends ConsumerWidget {
-  const FormReauthenticate({
+  final bool isMotDePasseAppli;
+  const FormReauthenticate(
+    this.isMotDePasseAppli, {
     Key? key,
   }) : super(key: key);
 
@@ -75,7 +67,7 @@ class FormReauthenticate extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 0),
             child: Text(
-              AppLocalizations.of(context)!.votrenouveaumotdepasse,
+              "${AppLocalizations.of(context)!.votrenouveaumotdepasse} ${isMotDePasseAppli ? 'Appli' : 'PDF'}",
               style: Theme.of(context).textTheme.headline3,
             ),
           ),
@@ -136,7 +128,7 @@ class FormReauthenticate extends ConsumerWidget {
           Align(
             child: ElevatedButton(
               onPressed: () {
-                ref.read(newPasswordFormNotifierProvider.notifier).newPasswordPressed();
+                ref.read(newPasswordFormNotifierProvider.notifier).newPasswordPressed(isMotDePasseAppli);
               },
               style: buttonNormalPrimary,
               child: Text(AppLocalizations.of(context)!.valider),

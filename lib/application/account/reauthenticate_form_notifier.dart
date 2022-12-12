@@ -31,7 +31,7 @@ class ReauthenticateFormNotifier extends StateNotifier<ReauthenticateFormData> {
     state = state.copyWith(password: Password(passwordStr), authFailureOrSuccessOption: none());
   }
 
-  reauthenticateWithEmailAndPasswordPressed() async {
+  reauthenticatePressed() async {
     Either<ReauthenticateFailure, Unit>? failureOrSuccess;
 
     final isPasswordValid = state.password.isValid();
@@ -51,6 +51,6 @@ class ReauthenticateFormNotifier extends StateNotifier<ReauthenticateFormData> {
         showErrorMessages: true,
         authFailureOrSuccessOption: failureOrSuccess != null
             ? some(failureOrSuccess)
-            : none()); //optionOf -> value != null ? some(value) : none();     | optionOf ne fonctionne pas
+            : none()); //optionOf -> value != null ? some(value) : none(); | optionOf ne fonctionne pas
   }
 }

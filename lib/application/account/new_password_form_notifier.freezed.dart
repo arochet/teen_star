@@ -21,7 +21,7 @@ mixin _$NewPasswordFormData {
       throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  Option<Either<NewPasswordFailure, Unit>> get authFailureOrSuccessOption =>
+  Option<Unit> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -40,7 +40,7 @@ abstract class $NewPasswordFormDataCopyWith<$Res> {
       PasswordConfirmation passwordConfirmation,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<NewPasswordFailure, Unit>> authFailureOrSuccessOption});
+      Option<Unit> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -82,7 +82,7 @@ class _$NewPasswordFormDataCopyWithImpl<$Res, $Val extends NewPasswordFormData>
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<NewPasswordFailure, Unit>>,
+              as Option<Unit>,
     ) as $Val);
   }
 }
@@ -100,7 +100,7 @@ abstract class _$$_NewPasswordFormDataCopyWith<$Res>
       PasswordConfirmation passwordConfirmation,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<NewPasswordFailure, Unit>> authFailureOrSuccessOption});
+      Option<Unit> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -140,7 +140,7 @@ class __$$_NewPasswordFormDataCopyWithImpl<$Res>
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<NewPasswordFailure, Unit>>,
+              as Option<Unit>,
     ));
   }
 }
@@ -164,7 +164,7 @@ class _$_NewPasswordFormData implements _NewPasswordFormData {
   @override
   final bool isSubmitting;
   @override
-  final Option<Either<NewPasswordFailure, Unit>> authFailureOrSuccessOption;
+  final Option<Unit> authFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -204,12 +204,12 @@ class _$_NewPasswordFormData implements _NewPasswordFormData {
 
 abstract class _NewPasswordFormData implements NewPasswordFormData {
   const factory _NewPasswordFormData(
-      {required final Password password,
-      required final PasswordConfirmation passwordConfirmation,
-      required final bool showErrorMessages,
-      required final bool isSubmitting,
-      required final Option<Either<NewPasswordFailure, Unit>>
-          authFailureOrSuccessOption}) = _$_NewPasswordFormData;
+          {required final Password password,
+          required final PasswordConfirmation passwordConfirmation,
+          required final bool showErrorMessages,
+          required final bool isSubmitting,
+          required final Option<Unit> authFailureOrSuccessOption}) =
+      _$_NewPasswordFormData;
 
   @override
   Password get password;
@@ -220,7 +220,7 @@ abstract class _NewPasswordFormData implements NewPasswordFormData {
   @override
   bool get isSubmitting;
   @override
-  Option<Either<NewPasswordFailure, Unit>> get authFailureOrSuccessOption;
+  Option<Unit> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_NewPasswordFormDataCopyWith<_$_NewPasswordFormData> get copyWith =>

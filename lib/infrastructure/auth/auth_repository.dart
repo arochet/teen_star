@@ -21,7 +21,7 @@ abstract class AuthRepository {
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({required Password password});
   Future<Either<ReauthenticateFailure, Unit>> reauthenticateWithPassword({required Password password});
   Future<Either<AuthFailure, Unit>> deleteALL();
-  Future<Either<NewPasswordFailure, Unit>> newPassword({required Password newPassword});
+  Future<Unit> newPassword({required Password newPassword, required bool isMotDePasseAppli});
   Future<Either<ResetPasswordFailure, Unit>> resetPassword({required EmailAddress emailAddress});
   Future<Option<UserData>> getUserData();
   Future<void> signOut();
@@ -124,12 +124,20 @@ class FirebaseAuthFacade implements AuthRepository {
 
   @override
   Future<Either<ReauthenticateFailure, Unit>> reauthenticateWithPassword({required Password password}) async {
-    return left(ReauthenticateFailure.notAuthenticated());
+    final prefs = await _preferences;
+    final String? motDePasseCourant = prefs.getString(passwordAppliPrefs);
+    if (motDePasseCourant == password.getOrCrash()) {
+      return right(unit);
+    } else {
+      return left(ReauthenticateFailure.wrongPassword());
+    }
   }
 
   @override
-  Future<Either<NewPasswordFailure, Unit>> newPassword({required Password newPassword}) async {
-    return left(NewPasswordFailure.serverError());
+  Future<Unit> newPassword({required Password newPassword, required bool isMotDePasseAppli}) async {
+    final prefs = await _preferences;
+    prefs.setString(isMotDePasseAppli ? passwordAppliPrefs : passwordPDFPrefs, newPassword.getOrCrash());
+    return unit;
   }
 
   @override

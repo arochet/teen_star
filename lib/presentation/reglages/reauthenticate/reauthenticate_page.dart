@@ -48,7 +48,7 @@ class ReauthenticatePage extends ConsumerWidget {
     });
     return MainScaffold(
       child: ShowComponentFile(
-          title: 'account/reauthenticate/reauthenticate_page.dart', child: FormReauthenticate()),
+          title: 'reglages/reauthenticate/reauthenticate_page.dart', child: FormReauthenticate()),
     );
   }
 }
@@ -106,9 +106,7 @@ class FormReauthenticate extends ConsumerWidget {
           Align(
             child: ElevatedButton(
               onPressed: () {
-                ref
-                    .read(reauthenticateFormNotifierProvider.notifier)
-                    .reauthenticateWithEmailAndPasswordPressed();
+                ref.read(reauthenticateFormNotifierProvider.notifier).reauthenticatePressed();
               },
               style: buttonNormalPrimary,
               child: Text(AppLocalizations.of(context)!.valider),

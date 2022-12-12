@@ -12,7 +12,8 @@ import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Condition_utilisationPage extends StatefulWidget {
-  const Condition_utilisationPage({Key? key}) : super(key: key);
+  final bool doitEtreAccepte;
+  const Condition_utilisationPage(this.doitEtreAccepte, {Key? key}) : super(key: key);
 
   @override
   State<Condition_utilisationPage> createState() => _Condition_utilisationPageState();
@@ -25,56 +26,59 @@ class _Condition_utilisationPageState extends State<Condition_utilisationPage> {
     return MainScaffold(
       title: 'Principe d\'utilisation',
       child: ShowComponentFile(
-        title: './lib/PRESENTATION/reglages/condition_utilisation/condition_utilisation_page.dart',
+        title: './lib/PRESENTATION/auth/condition_utilisation/condition_utilisation_page.dart',
         child: Padding(
           padding: EdgeInsets.all(10),
           child: ListView(children: [
             SpaceH20(),
-            ElevatedButton.icon(
-              icon: Icon(Icons.access_alarm),
-              onPressed: () {},
-              label: Text("Principe de base"),
-              style: buttonNormalPrimary,
-            ),
+            if (widget.doitEtreAccepte)
+              ElevatedButton.icon(
+                icon: Icon(Icons.access_alarm),
+                onPressed: () {},
+                label: Text("Principe de base"),
+                style: buttonNormalPrimary,
+              ),
             SpaceH20(),
             Placeholder(),
             SpaceH20(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    conditionAccecpte = !conditionAccecpte;
-                  });
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(conditionAccecpte ? Icons.check_box : Icons.check_box_outline_blank),
-                    SizedBox(width: 20),
-                    Flexible(
-                      child: Text("J'ai lu et j'accepte les conditions d'utilisations",
-                          style: Theme.of(context).textTheme.headline4),
-                    ),
-                  ],
+            if (conditionAccecpte) ...[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      conditionAccecpte = !conditionAccecpte;
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(conditionAccecpte ? Icons.check_box : Icons.check_box_outline_blank),
+                      SizedBox(width: 20),
+                      Flexible(
+                        child: Text("J'ai lu et j'accepte les conditions d'utilisations",
+                            style: Theme.of(context).textTheme.headline4),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SpaceH20(),
-            Container(
-              width: 100,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (conditionAccecpte) {
-                    context.router.push(AuthRegisterRoute());
-                  } else {
-                    showSnackbar(context, 'Vous devez accepter les conditions d\'utilsiation');
-                  }
-                },
-                child: Text("Continuer"),
-                style: buttonNormalPrimary,
+              SpaceH20(),
+              Container(
+                width: 100,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (conditionAccecpte) {
+                      context.router.push(AuthRegisterRoute());
+                    } else {
+                      showSnackbar(context, 'Vous devez accepter les conditions d\'utilsiation');
+                    }
+                  },
+                  child: Text("Continuer"),
+                  style: buttonNormalPrimary,
+                ),
               ),
-            ),
+            ],
           ]),
         ),
       ),

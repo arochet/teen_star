@@ -20,6 +20,7 @@ import 'DOMAIN/cycle/observation.dart';
 import 'DOMAIN/cycle/observation_failure.dart';
 import 'INFRASTRUCTURE/auth/auth_repository.dart';
 import 'INFRASTRUCTURE/cycle/cycle_repository.dart';
+import 'INFRASTRUCTURE/cycle/observation_historique_dtos.dart';
 import 'injection.dart';
 
 //ENVIRONNEMENT
@@ -84,6 +85,11 @@ final idCycleCourant = StateProvider<UniqueId?>((ref) => null);
 
 final allCycleProvider = FutureProvider<Either<CycleFailure, List<CycleDTO>>>((ref) {
   return ref.read(cycleRepositoryProvider).readAllCycles();
+});
+
+final allCycleHistoriqueProvider =
+    FutureProvider<Either<CycleFailure, List<ObservationHistoriqueDTO>>>((ref) {
+  return ref.read(cycleRepositoryProvider).readAllCyclesHistorique();
 });
 
 final cycleProvider = FutureProvider.family<Either<CycleFailure, Cycle>, UniqueId>((ref, id) {

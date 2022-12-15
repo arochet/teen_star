@@ -4,6 +4,7 @@ import 'package:teenstar/INFRASTRUCTURE/auth/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 part 'reset_password_notifier.freezed.dart';
 
 @freezed
@@ -32,6 +33,7 @@ class ResetPasswordFormNotifier extends StateNotifier<ResetPasswordFormData> {
   }
 
   resetPasswordPressed() async {
+    printDev('resetPasswordPressed()');
     Either<ResetPasswordFailure, Unit>? failureOrSuccess;
 
     final isEmailValid = state.emailAddress.isValid();

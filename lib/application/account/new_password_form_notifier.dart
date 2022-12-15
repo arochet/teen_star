@@ -4,6 +4,7 @@ import 'package:teenstar/INFRASTRUCTURE/auth/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 part 'new_password_form_notifier.freezed.dart';
 
 @freezed
@@ -40,6 +41,7 @@ class NewPasswordFormNotifier extends StateNotifier<NewPasswordFormData> {
   }
 
   newPasswordPressed(bool isMotDePasseAppli) async {
+    printDev('newPasswordPressed()');
     Unit? failureOrSuccess;
 
     final isPasswordValid = state.password.isValid();

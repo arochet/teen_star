@@ -5,6 +5,7 @@ import 'package:teenstar/INFRASTRUCTURE/auth/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 part 'modify_form_notifier.freezed.dart';
 
 @freezed
@@ -47,11 +48,11 @@ class ModifyFormNotifier extends StateNotifier<ModifyFormData> {
   }
 
   anneePremiereRegleChanged(int annee) {
-    print('annee $annee');
     state = state.copyWith(annePremiereRegle: annee, authFailureOrSuccessOption: none());
   }
 
   modifyPressed() async {
+    printDev('modifyPressed');
     Either<AuthFailure, Unit>? failureOrSuccess;
 
     final isUserNameValid = state.nomUtilisateur.isValid();

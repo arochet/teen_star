@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,7 +40,13 @@ class BottomBarNavigation extends ConsumerWidget {
             backgroundColor: colorpanel(700),
             currentIndex: tabsRouter.activeIndex,
             selectedItemColor: actioncolor["primary"],
-            onTap: tabsRouter.setActiveIndex,
+            onTap: (id) {
+              printDev("Page: ${listMenu[id]["title"]}");
+              if (id == 1) {
+                ref.refresh(allCycleHistoriqueProvider);
+              }
+              tabsRouter.setActiveIndex(id);
+            },
             selectedLabelStyle: TextStyle(
               fontFamily: Theme.of(context).textTheme.headline3?.fontFamily,
               fontWeight: FontWeight.w600,

@@ -9,6 +9,7 @@ import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_repository.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 part 'add_observation_form_notifier.freezed.dart';
 
 @freezed
@@ -125,6 +126,7 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
 //insert-changed
 
   addObservationPressed(Cycle? cycle) async {
+    printDev('addObservationPressed(Cycle? cycle)');
     Either<ObservationFailure, Unit>? failureOrSuccess;
 
     //insert-valid-params

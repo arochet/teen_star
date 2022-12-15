@@ -39,7 +39,8 @@ class TableauCycle extends ConsumerWidget {
             ? Container(height: 50, width: 50)
             : _Cell(list[rowIndex], title[columnIndex]),
         rowsLength: list.length + 1,
-        rowsTitleBuilder: (int rowIndex) => rowIndex == list.length ? Container() : _CellDay('$rowIndex'),
+        rowsTitleBuilder: (int rowIndex) =>
+            rowIndex == list.length ? Container() : _CellDay('${rowIndex + 1}'),
         widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
@@ -75,7 +76,7 @@ class _Cell extends StatelessWidget {
         info = Container(
           width: 40,
           height: 35,
-          color: Color.fromARGB(255, 198, 84, 75),
+          color: observation.couleur?.getOrCrash().toColor(),
         );
         break;
       case 'Analyse':

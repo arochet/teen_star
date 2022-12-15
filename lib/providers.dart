@@ -13,11 +13,8 @@ import 'package:injectable/injectable.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 
-import 'DOMAIN/core/errors.dart';
 import 'DOMAIN/core/value_objects.dart';
 import 'DOMAIN/cycle/cycle_failure.dart';
-import 'DOMAIN/cycle/observation.dart';
-import 'DOMAIN/cycle/observation_failure.dart';
 import 'INFRASTRUCTURE/auth/auth_repository.dart';
 import 'INFRASTRUCTURE/cycle/cycle_repository.dart';
 import 'INFRASTRUCTURE/cycle/observation_historique_dtos.dart';
@@ -78,24 +75,28 @@ final currentUserData = FutureProvider.autoDispose<UserData?>((ref) async {
   return userOption.fold(() => null, (user) => user);
 });
 
-//Cycle
+//CYCLE
 final cycleRepositoryProvider = Provider<ICycleRepository>((ref) => getIt<ICycleRepository>());
 
 final idCycleCourant = StateProvider<UniqueId?>((ref) => null);
 
+//Tous les cycles
 final allCycleProvider = FutureProvider<Either<CycleFailure, List<CycleDTO>>>((ref) {
   return ref.read(cycleRepositoryProvider).readAllCycles();
 });
 
+//Page Historique
 final allCycleHistoriqueProvider =
     FutureProvider<Either<CycleFailure, List<ObservationHistoriqueDTO>>>((ref) {
   return ref.read(cycleRepositoryProvider).readAllCyclesHistorique();
 });
 
+//Un cycle par id
 final cycleProvider = FutureProvider.family<Either<CycleFailure, Cycle>, UniqueId>((ref, id) {
   return ref.read(cycleRepositoryProvider).readCycle(id);
 });
 
+//FORM - Formulaire d'ajout d'observation
 final cycleFormNotifierProvider =
     StateNotifierProvider.autoDispose<ObservationFormNotifier, AddObservationFormData>(
   (ref) => ObservationFormNotifier(ref.watch(cycleRepositoryProvider)),

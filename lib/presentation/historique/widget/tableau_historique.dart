@@ -24,7 +24,6 @@ class TableauHistorique extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<CycleHistorique> listHistorique = [];
-    print('listCyclesDTO ${listObservation.length}');
 
     //Alimente listHistorique
     //Liste Cycle avec la liste des observations
@@ -32,7 +31,6 @@ class TableauHistorique extends ConsumerWidget {
       bool found = false;
       for (var cycle in listHistorique) {
         if (found == false) {
-          print('${observation.idCycle} - ${cycle.id.getOrCrash()}');
           if (observation.idCycle == cycle.id.getOrCrash()) {
             //cycle.observations.add(observation.toDomain());
             found = true;
@@ -45,21 +43,29 @@ class TableauHistorique extends ConsumerWidget {
       }
     }
 
-    final title = listHistorique.map((e) => '${e.id}').toList();
-    print('title $title');
+    //Titre des colonnes. Exemple : Cycle 1, Cycle 2, Cycle 3
+    final List<String> title = listHistorique.map((e) => 'Cycle ${e.id.getOrCrash()}').toList();
 
     return ShowComponentFile(
       title: 'tableau_historique.dart',
       child: StickyHeadersTable(
         columnsLength: title.length,
-        columnsTitleBuilder: (int colulmnIndex) =>
-            _CellHeader(/* title[colulmnIndex].getOrCrash() as String */ '-'),
+        columnsTitleBuilder: (int colulmnIndex) => _CellHeader(title[colulmnIndex]), //Titre des colonnes
         contentCellBuilder: (int columnIndex, int rowIndex) {
-          return _Cell(Color.fromARGB(255, 160, 141, 140));
+          // Cellule observation
+          if (columnIndex < listHistorique.length) {
+            if (rowIndex < listHistorique[columnIndex].observations.length) {
+              return _Cell(listHistorique[columnIndex].observations[rowIndex]);
+            } else {
+              return _CellEmpty();
+            }
+          } else {
+            return _CellEmpty();
+          }
         },
         rowsLength: _getCyclePlusLong(listHistorique),
         rowsTitleBuilder: (int rowIndex) =>
-            rowIndex == listObservation.length ? Container() : _CellObservation('$rowIndex'),
+            rowIndex == listObservation.length ? Container() : _CellObservation('${rowIndex + 1}'),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
           stickyLegendHeight: 50,
@@ -84,22 +90,42 @@ class TableauHistorique extends ConsumerWidget {
 }
 
 class _Cell extends StatelessWidget {
-  Color couleur;
+  final ObservationHistorique observation;
   _Cell(
-    this.couleur, {
+    this.observation, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Widget info;
-
     return Center(
       child: Container(
         width: 40,
         height: 35,
-        color: couleur,
+        color: observation.couleur?.getOrCrash().toColor() ?? Colors.white,
       ),
+    );
+  }
+}
+
+//Cellule vide
+class _CellEmpty extends StatelessWidget {
+  _CellEmpty({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+          width: 40,
+          height: 35,
+          child: Center(
+            child: Text(
+              '-',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+          )),
     );
   }
 }

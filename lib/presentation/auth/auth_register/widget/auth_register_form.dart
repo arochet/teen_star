@@ -129,8 +129,6 @@ class FormRegister extends ConsumerWidget {
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.number,
             onChanged: (value) {
-              print('value $value');
-
               ref
                   .read(registerFormNotifierProvider.notifier)
                   .anneePremiereRegleChanged(int.tryParse(value) ?? 0);
@@ -139,7 +137,6 @@ class FormRegister extends ConsumerWidget {
               final registerData = ref.read(registerFormNotifierProvider);
 
               if (registerData.showErrorMessages) {
-                print('registerData.annePremiereRegle ${registerData.annePremiereRegle}');
                 if (registerData.annePremiereRegle < 1900 || registerData.annePremiereRegle > 3000)
                   return "Année invalide";
                 else

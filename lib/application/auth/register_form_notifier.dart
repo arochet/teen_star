@@ -6,6 +6,7 @@ import 'package:teenstar/INFRASTRUCTURE/auth/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 part 'register_form_notifier.freezed.dart';
 
 @freezed
@@ -50,7 +51,6 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormData> {
   }
 
   anneePremiereRegleChanged(int annee) {
-    print('annne $annee');
     state = state.copyWith(annePremiereRegle: annee, authFailureOrSuccessOption: none());
   }
 
@@ -77,6 +77,7 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormData> {
   }
 
   registerWithEmailAndPasswordPressed() async {
+    printDev('registerWithEmailAndPasswordPressed');
     Either<AuthFailure, Unit>? failureOrSuccess;
 
     final isUserNameValid = state.nomUtilisateur.isValid();

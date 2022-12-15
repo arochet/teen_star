@@ -11,7 +11,6 @@ class SplashPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authNotifierProvider);
-    print('authState called()');
     if (authState is AuthAuthenticated) {
       Future.delayed(Duration.zero, () async {
         ref.read(currentPageNavProvider.notifier).state = 0;

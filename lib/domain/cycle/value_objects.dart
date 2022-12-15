@@ -5,11 +5,26 @@ import 'package:teenstar/DOMAIN/core/failures.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/core/value_validators.dart';
 
-enum CouleurAnalyseState { rouge, brun, vert, none }
+enum CouleurAnalyseState { rouge, brun, vert, none, invalide }
 
 extension ParseToSringTA on CouleurAnalyseState {
   String toShortString() {
     return this.toString().toLowerCase();
+  }
+
+  Color toColor() {
+    switch (this) {
+      case CouleurAnalyseState.rouge:
+        return Colors.red;
+      case CouleurAnalyseState.brun:
+        return Colors.brown;
+      case CouleurAnalyseState.vert:
+        return Colors.green;
+      case CouleurAnalyseState.none:
+        return Colors.transparent;
+      case CouleurAnalyseState.invalide:
+        return Color.fromARGB(255, 204, 0, 255);
+    }
   }
 }
 
@@ -23,6 +38,7 @@ class CouleurAnalyse extends ValueObject<CouleurAnalyseState> {
   }
 
   factory CouleurAnalyse.fromString(String? input) {
+    if (input == null) return CouleurAnalyse._(right(CouleurAnalyseState.none));
     try {
       final CouleurAnalyseState state =
           CouleurAnalyseState.values.firstWhere((e) => e.toShortString() == input);

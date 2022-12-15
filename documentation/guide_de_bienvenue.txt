@@ -52,6 +52,9 @@ Les fichiers sont répartis en 4 dossiers :
     - INFRASTRUCTURE : Comprends tous les fichiers liés à l'ajout / modification / suppression de données en base 
     - DOMAIN : Comprends toutes les classes du projet. 
     - APPLICATION : Tous les fichiers qui permettent de gerer les formulaires
+    Voici un arcticle sur ce type d'architecture
+    https://otakoyi.software/blog/flutter-clean-architecture-with-riverpod-and-supabase
+
 
 Ajout d'une classe : 
     Lorsque l'on veut ajouter une classe on créer le fichier MaClasse.dart dans Domain, puis son

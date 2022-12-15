@@ -6,6 +6,7 @@ import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'cycle_dtos.dart';
 import 'observation_historique_dtos.dart';
 import 'observation_dtos.dart';
@@ -33,6 +34,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<ObservationFailure, Unit>> createObservation(Cycle? cycle, Observation observation) async {
+    printDev('createObservation(Cycle? cycle, Observation observation)');
     try {
       late UniqueId idCycle;
       if (cycle == null) {
@@ -61,6 +63,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, int>> createCycle() async {
+    printDev('createCycle()');
     try {
       CycleDTO newCycle = CycleDTO(idJourneeSoleil: -1);
       int idCycle = await _database.insert(db_cycle, newCycle.toJson());
@@ -73,16 +76,19 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<ObservationFailure, Unit>> delete(UniqueId id) async {
+    printDev('delete(UniqueId id)');
     return left(const ObservationFailure.unexpected());
   }
 
   @override
   Future<Either<ObservationFailure, Unit>> update(Observation observation) async {
+    printDev('update(Observation observation)');
     return left(const ObservationFailure.unexpected());
   }
 
   @override
   Future<Either<CycleFailure, Cycle>> readCycle(UniqueId idCycle) async {
+    printDev('readCycle(UniqueId idCycle)');
     try {
       //Récupère les CyclesDTO (DataTransferObject)
       final List<Map<String, dynamic>> mapsCycle =
@@ -118,6 +124,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, List<CycleDTO>>> readAllCycles() async {
+    printDev('readAllCycles()');
     try {
       //Récupère les CyclesDTO (DataTransferObject)
       final List<Map<String, dynamic>> mapsCycle = await _database.query(db_cycle);
@@ -135,6 +142,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, List<ObservationHistoriqueDTO>>> readAllCyclesHistorique() async {
+    printDev('readAllCyclesHistorique()');
     try {
       //Récupère les CyclesDTO (DataTransferObject)
       String sql =
@@ -143,9 +151,6 @@ class CycleRepository implements ICycleRepository {
       List<ObservationHistoriqueDTO> cycleDTO = List.generate(mapsCycle.length, (index) {
         return ObservationHistoriqueDTO.fromJson(mapsCycle[index]);
       });
-/* 
-      print('cycleDTO');
-      print(cycleDTO); */
 
       return right(cycleDTO);
     } catch (e, trace) {
@@ -157,6 +162,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, Unit>> resetAll() async {
+    printDev('resetAll()');
     //Supprimer toutes les données de la base
     await _database.delete(db_cycle);
     await _database.delete(db_observation);

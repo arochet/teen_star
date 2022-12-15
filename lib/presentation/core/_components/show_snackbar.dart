@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 
 showSnackbar(BuildContext context, String text) {
   final snackBar = SnackBar(
@@ -9,7 +10,7 @@ showSnackbar(BuildContext context, String text) {
 }
 
 showSnackbarCycleFailure(BuildContext context, CycleFailure failure) {
-  print('Erreur FATALE : $failure');
+  printDev('Erreur FATALE : $failure');
   final snackBar = SnackBar(
     content: Text(failure.map(
         unexpected: (e) => 'Erreur Inattendue $e',

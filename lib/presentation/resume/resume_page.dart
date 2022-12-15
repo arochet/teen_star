@@ -33,6 +33,8 @@ class _ResumePageState extends ConsumerState<ResumePage> {
     WidgetsBinding.instance.addPostFrameCallback((_) => _loadIdCycleCourant());
   }
 
+  //Chargement de l'id du cycle choisit par l'utilisateur
+  //La fonction vérifie si l'id du cycle courant est null
   _loadIdCycleCourant() async {
     //Mis à jour de ID cycle courant
     final idCycle = ref.read(idCycleCourant);
@@ -44,7 +46,7 @@ class _ResumePageState extends ConsumerState<ResumePage> {
         //On a la liste des cycles
         if (listCycleDTO.length > 0) {
           //Met à jour le cycle courant
-          ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(listCycleDTO.first.id!);
+          ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(listCycleDTO.last.id!);
         }
       });
     }
@@ -63,12 +65,11 @@ class _ResumePageState extends ConsumerState<ResumePage> {
           (error) => ShowError(error.toString()),
           (List<CycleDTO> listCyclesDTO) {
             if (listCyclesDTO.length == 0) {
-              //Pas de cycle
-              return Center(
-                  child: Text("Pas de Cycle\nVeuillez ajoutez une nouvelle observation",
-                      style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center));
+              //PAGE : Pas de cycle
+              return _PagePasDeCycle();
             } else {
               if (idCourant == null) {
+                //PAGE : Erreur sur l'id du cycle courant
                 return Center(child: Text("...", style: Theme.of(context).textTheme.headline4));
               } else {
                 return _Cycle(listCyclesDTO, id: idCourant);
@@ -128,6 +129,30 @@ class _Cycle extends ConsumerWidget {
       },
       loading: () => CircularProgressIndicator(),
       error: (err, stack) => Text(err.toString()),
+    );
+  }
+}
+
+//Première utilisation de l'application
+class _PagePasDeCycle extends StatelessWidget {
+  const _PagePasDeCycle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ShowComponentFile(
+      title: 'PagePasDeCycle',
+      child: Column(
+        children: [
+          Expanded(
+            child: Center(
+                child: Text("Pas de Cycle\nVeuillez ajoutez une nouvelle observation",
+                    style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center)),
+          ),
+          ButtonAjoutObservationJournee(null),
+        ],
+      ),
     );
   }
 }

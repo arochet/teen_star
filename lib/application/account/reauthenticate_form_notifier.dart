@@ -4,6 +4,7 @@ import 'package:teenstar/INFRASTRUCTURE/auth/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 part 'reauthenticate_form_notifier.freezed.dart';
 
 @freezed
@@ -32,6 +33,7 @@ class ReauthenticateFormNotifier extends StateNotifier<ReauthenticateFormData> {
   }
 
   reauthenticatePressed() async {
+    printDev('reauthenticatePressed()');
     Either<ReauthenticateFailure, Unit>? failureOrSuccess;
 
     final isPasswordValid = state.password.isValid();

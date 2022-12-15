@@ -34,7 +34,6 @@ class HistoriquePage extends ConsumerWidget {
                   child: Text("Pas de Cycle\nVeuillez ajoutez une nouvelle observation",
                       style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center));
             } else {
-              print('listCyclesDTO ${listCyclesDTO.length}');
               return TableauHistorique(listCyclesDTO);
             }
           },

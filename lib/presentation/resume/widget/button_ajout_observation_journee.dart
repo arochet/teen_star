@@ -7,6 +7,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/providers.dart';
 
 class ButtonAjoutObservationJournee extends ConsumerWidget {
@@ -25,6 +26,7 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
         title: 'ButtonAjoutObservationJournee',
         child: ElevatedButton(
           onPressed: () async {
+            printDev("ButtonAjoutObservationJournee onPressed");
             //Affiche une boite de dialogue pour choisir si on continue le cycle ou non
             if (cycle != null) {
               //DIALOG pour un nouveau cycle
@@ -54,10 +56,13 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
     if (continuerCycle != null || cycle == null) {
       //On ouvre la page d'ajout d'observation
       await context.router.push(ObservationAddRoute(cycle: continuerCycle == true ? cycle : null));
+
+      //L'observation a été ajoutée, on recharge les données
       ref.refresh(allCycleProvider);
+
       final idCurrentCycle = ref.read(idCycleCourant);
       //On recharge le cycle courant
-      if (idCurrentCycle != null)
+      if (idCurrentCycle != null && continuerCycle == true)
         ref.refresh(cycleProvider(idCurrentCycle));
       else {
         //Si le cycle courant est null, on regarde si il existe un cycle dans la liste
@@ -67,7 +72,9 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
           (listCycleDTO) {
             if (listCycleDTO.length > 0) {
               //On prend le dernier cycle de la liste
-              ref.refresh(cycleProvider(UniqueId.fromUniqueInt(listCycleDTO.length - 1)));
+              final idLastCycle = UniqueId.fromUniqueInt(listCycleDTO.length);
+              ref.refresh(cycleProvider(idLastCycle));
+              ref.read(idCycleCourant.notifier).state = idLastCycle;
             }
           },
         );

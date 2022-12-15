@@ -54,7 +54,7 @@ class ObservationFormProvider extends ConsumerWidget {
 }
 
 class ObservationForm extends ConsumerWidget {
-  Cycle? cycle;
+  Cycle? cycle; //Le cycle est null si c'est la première observation
   ObservationForm(
     this.cycle, {
     Key? key,
@@ -67,7 +67,9 @@ class ObservationForm extends ConsumerWidget {
     return Form(
       autovalidateMode: AutovalidateMode.always,
       child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
-        Center(child: Text("Cycle 3", style: Theme.of(context).textTheme.headline3)),
+        Center(
+            child: Text(cycle != null ? "Cycle ${cycle!.id.getOrCrash()}" : "Nouveau cycle",
+                style: Theme.of(context).textTheme.headline3)),
         const SizedBox(height: 8),
         Row(
           children: [

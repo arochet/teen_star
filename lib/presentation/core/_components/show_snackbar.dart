@@ -13,7 +13,7 @@ showSnackbarCycleFailure(BuildContext context, CycleFailure failure) {
   printDev('Erreur FATALE : $failure');
   final snackBar = SnackBar(
     content: Text(failure.map(
-        unexpected: (e) => 'Erreur Inattendue $e',
+        unexpected: (e) => 'Erreur Inattendue : ${e.erreur ?? ''}',
         idCycleUnfound: (_) => 'Id du cycle introuvable',
         cycleUnfound: (_) => 'Cycle non trouvé',
         insufficientPermission: (_) => 'Permission Insuffisante',

@@ -42,6 +42,9 @@ class BottomBarNavigation extends ConsumerWidget {
             selectedItemColor: actioncolor["primary"],
             onTap: (id) {
               printDev("Page: ${listMenu[id]["title"]}");
+              if (id == 0) {
+                ref.refresh(allCycleProvider);
+              }
               if (id == 1) {
                 ref.refresh(allCycleHistoriqueProvider);
               }

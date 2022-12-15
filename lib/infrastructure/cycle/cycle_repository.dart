@@ -20,6 +20,7 @@ abstract class ICycleRepository {
   Future<Either<ObservationFailure, Unit>> update(Observation observation);
   Future<Either<ObservationFailure, Unit>> delete(UniqueId id);
   Future<Either<CycleFailure, Unit>> resetAll();
+  Future<Either<CycleFailure, Unit>> renvoieDernierCycle();
 }
 
 @LazySingleton(as: ICycleRepository)
@@ -167,5 +168,25 @@ class CycleRepository implements ICycleRepository {
     await _database.delete(db_cycle);
     await _database.delete(db_observation);
     return right(unit);
+  }
+
+  @override
+  Future<Either<CycleFailure, Unit>> renvoieDernierCycle() async {
+    printDev('renvoieDernierCycle()');
+    final Either<CycleFailure, List<CycleDTO>> list = await readAllCycles();
+    return list.fold((l) => left(l), (listCycle) async {
+      //Il n'y a pas assez de cycle
+      if (listCycle.length < 2) return left(CycleFailure.unexpected('Pas assez de cycle'));
+
+      //Récupère le dernier cycle
+      final lastCycle = listCycle.last;
+      if (lastCycle.id == null) return left(CycleFailure.cycleUnfound());
+
+      //On met à jour les observations du cycle précédent
+      Map<String, dynamic> row = {'idCycle': lastCycle.id! - 1};
+      await _database.update(db_observation, row, where: 'idCycle = ?', whereArgs: [lastCycle.id]);
+      await _database.delete(db_cycle, where: 'id = ?', whereArgs: [lastCycle.id]);
+      return right(unit);
+    });
   }
 }

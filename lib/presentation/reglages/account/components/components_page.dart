@@ -1,5 +1,6 @@
 import 'package:teenstar/PRESENTATION/core/_components/contrained_box_max_width.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
+import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/is_connected_widget.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_home_title.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
@@ -106,6 +107,15 @@ class ComponentsPage extends StatelessWidget {
                       );
                     },
                   );
+                },
+                child: Text("showDialog()"),
+                style: buttonNormalPrimary,
+              ),
+              //SHOW DIALOG CHOIX
+              ElevatedButton(
+                onPressed: () {
+                  showDialogChoix(context, 'Etes-vous sûr de vouloir ... ?',
+                      positiveText: 'OK', negativeText: 'Annuler');
                 },
                 child: Text("showDialog()"),
                 style: buttonNormalPrimary,

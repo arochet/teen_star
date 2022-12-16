@@ -104,6 +104,9 @@ class _Cell extends StatelessWidget {
                 children: [
                   if (isJourSommet)
                     Center(child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white)),
+                  if (observation.marque != null && observation.marque! > 0)
+                    Center(
+                        child: Text("${observation.marque}", style: Theme.of(context).textTheme.headline4)),
                   Container(color: observation.couleur?.getOrCrash().toColor()),
                 ],
               ),

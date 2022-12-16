@@ -38,29 +38,35 @@ class MenuObservationModification extends ConsumerWidget {
             ElevatedButton(
               onPressed: () async {
                 await ref.read(cycleRepositoryProvider).marquerJourSommet(cycle, observation.id);
-                ref.refresh(allCycleProvider);
-                final id = ref.read(idCycleCourant);
-                if (id != null) ref.refresh(cycleProvider(id));
-                Navigator.of(context).pop();
+                refreshAndPop(context, ref);
               },
               child: Text("Marquer comme jour Sommet"),
               style: buttonNormalPrimary,
             ),
             SpaceH10(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                await ref.read(cycleRepositoryProvider).marquerComme(observation, 1);
+                refreshAndPop(context, ref);
+              },
               child: Text("Marquer 1"),
               style: buttonNormalPrimary,
             ),
             SpaceH10(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                await ref.read(cycleRepositoryProvider).marquerComme(observation, 2);
+                refreshAndPop(context, ref);
+              },
               child: Text("Marquer 2"),
               style: buttonNormalPrimary,
             ),
             SpaceH10(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                await ref.read(cycleRepositoryProvider).marquerComme(observation, 3);
+                refreshAndPop(context, ref);
+              },
               child: Text("Marquer 3"),
               style: buttonNormalPrimary,
             ),
@@ -81,5 +87,12 @@ class MenuObservationModification extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  refreshAndPop(BuildContext context, WidgetRef ref) {
+    ref.refresh(allCycleProvider);
+    final id = ref.read(idCycleCourant);
+    if (id != null) ref.refresh(cycleProvider(id));
+    Navigator.of(context).pop();
   }
 }

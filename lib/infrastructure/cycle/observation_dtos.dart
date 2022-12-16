@@ -29,6 +29,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
     required String? humeurAutre,
     required String? notesConfidentielles,
     required String? commentaireAnimatrice,
+    required int? marque,
     required int? idCycle,
   }) = _ObservationDTO;
 
@@ -51,6 +52,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
       humeurAutre: obj.humeurAutre,
       notesConfidentielles: obj.notesConfidentielles,
       commentaireAnimatrice: obj.commentaireAnimatrice,
+      marque: obj.marque,
       idCycle: idCycle,
     );
   }
@@ -74,6 +76,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
       humeurAutre: humeurAutre,
       notesConfidentielles: notesConfidentielles,
       commentaireAnimatrice: commentaireAnimatrice,
+      marque: marque,
     );
   }
 

@@ -11,18 +11,19 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Condition_utilisationPage extends StatefulWidget {
+class Condition_utilisationPage extends ConsumerStatefulWidget {
   final bool doitEtreAccepte;
   const Condition_utilisationPage(this.doitEtreAccepte, {Key? key}) : super(key: key);
 
   @override
-  State<Condition_utilisationPage> createState() => _Condition_utilisationPageState();
+  _Condition_utilisationPageState createState() => _Condition_utilisationPageState();
 }
 
-class _Condition_utilisationPageState extends State<Condition_utilisationPage> {
+class _Condition_utilisationPageState extends ConsumerState<Condition_utilisationPage> {
   bool conditionAccecpte = false;
   @override
   Widget build(BuildContext context) {
+    final currentUserDataAsync = ref.watch(currentUserData);
     return MainScaffold(
       title: 'Principe d\'utilisation',
       child: ShowComponentFile(
@@ -41,44 +42,52 @@ class _Condition_utilisationPageState extends State<Condition_utilisationPage> {
             SpaceH20(),
             Placeholder(),
             SpaceH20(),
-            if (conditionAccecpte) ...[
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      conditionAccecpte = !conditionAccecpte;
-                    });
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(conditionAccecpte ? Icons.check_box : Icons.check_box_outline_blank),
-                      SizedBox(width: 20),
-                      Flexible(
-                        child: Text("J'ai lu et j'accepte les conditions d'utilisations",
-                            style: Theme.of(context).textTheme.headline4),
+            //CONDITION D'UTILISATION ACCEPTATION
+            ...currentUserDataAsync.when(
+              data: (data) {
+                if (data != null) return [];
+                return [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          conditionAccecpte = !conditionAccecpte;
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(conditionAccecpte ? Icons.check_box : Icons.check_box_outline_blank),
+                          SizedBox(width: 20),
+                          Flexible(
+                            child: Text("J'ai lu et j'accepte les conditions d'utilisations",
+                                style: Theme.of(context).textTheme.headline4),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-              SpaceH20(),
-              Container(
-                width: 100,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (conditionAccecpte) {
-                      context.router.push(AuthRegisterRoute());
-                    } else {
-                      showSnackbar(context, 'Vous devez accepter les conditions d\'utilsiation');
-                    }
-                  },
-                  child: Text("Continuer"),
-                  style: buttonNormalPrimary,
-                ),
-              ),
-            ],
+                  SpaceH20(),
+                  Container(
+                    width: 100,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (conditionAccecpte) {
+                          context.router.push(AuthRegisterRoute());
+                        } else {
+                          showSnackbar(context, 'Vous devez accepter les conditions d\'utilsiation');
+                        }
+                      },
+                      child: Text("Continuer"),
+                      style: buttonNormalPrimary,
+                    ),
+                  ),
+                ];
+              },
+              loading: () => [CircularProgressIndicator()],
+              error: (err, stack) => [Text(err.toString())],
+            ),
           ]),
         ),
       ),

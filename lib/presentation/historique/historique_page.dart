@@ -81,7 +81,6 @@ class HistoriquePage extends ConsumerWidget {
                             style: buttonNormalPrimary,
                           ),
                         //TABLEAU HISTORIQUE
-
                         Expanded(child: TableauHistorique(listCycle)),
                       ],
                     );

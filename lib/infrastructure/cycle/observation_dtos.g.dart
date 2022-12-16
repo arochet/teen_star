@@ -25,6 +25,7 @@ _$_ObservationDTO _$$_ObservationDTOFromJson(Map<String, dynamic> json) =>
       humeurAutre: json['humeurAutre'] as String?,
       notesConfidentielles: json['notesConfidentielles'] as String?,
       commentaireAnimatrice: json['commentaireAnimatrice'] as String?,
+      marque: json['marque'] as int?,
       idCycle: json['idCycle'] as int?,
     );
 
@@ -47,5 +48,6 @@ Map<String, dynamic> _$$_ObservationDTOToJson(_$_ObservationDTO instance) =>
       'humeurAutre': instance.humeurAutre,
       'notesConfidentielles': instance.notesConfidentielles,
       'commentaireAnimatrice': instance.commentaireAnimatrice,
+      'marque': instance.marque,
       'idCycle': instance.idCycle,
     };

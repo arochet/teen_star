@@ -33,6 +33,7 @@ mixin _$Observation {
   String? get humeurAutre => throw _privateConstructorUsedError;
   String? get notesConfidentielles => throw _privateConstructorUsedError;
   String? get commentaireAnimatrice => throw _privateConstructorUsedError;
+  int? get marque => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ObservationCopyWith<Observation> get copyWith =>
@@ -62,7 +63,8 @@ abstract class $ObservationCopyWith<$Res> {
       Humeur? humeur,
       String? humeurAutre,
       String? notesConfidentielles,
-      String? commentaireAnimatrice});
+      String? commentaireAnimatrice,
+      int? marque});
 }
 
 /// @nodoc
@@ -95,6 +97,7 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
     Object? humeurAutre = freezed,
     Object? notesConfidentielles = freezed,
     Object? commentaireAnimatrice = freezed,
+    Object? marque = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -165,6 +168,10 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
           ? _value.commentaireAnimatrice
           : commentaireAnimatrice // ignore: cast_nullable_to_non_nullable
               as String?,
+      marque: freezed == marque
+          ? _value.marque
+          : marque // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -194,7 +201,8 @@ abstract class _$$_ObservationCopyWith<$Res>
       Humeur? humeur,
       String? humeurAutre,
       String? notesConfidentielles,
-      String? commentaireAnimatrice});
+      String? commentaireAnimatrice,
+      int? marque});
 }
 
 /// @nodoc
@@ -225,6 +233,7 @@ class __$$_ObservationCopyWithImpl<$Res>
     Object? humeurAutre = freezed,
     Object? notesConfidentielles = freezed,
     Object? commentaireAnimatrice = freezed,
+    Object? marque = freezed,
   }) {
     return _then(_$_Observation(
       id: null == id
@@ -295,6 +304,10 @@ class __$$_ObservationCopyWithImpl<$Res>
           ? _value.commentaireAnimatrice
           : commentaireAnimatrice // ignore: cast_nullable_to_non_nullable
               as String?,
+      marque: freezed == marque
+          ? _value.marque
+          : marque // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -319,7 +332,8 @@ class _$_Observation extends _Observation {
       required this.humeur,
       required this.humeurAutre,
       required this.notesConfidentielles,
-      required this.commentaireAnimatrice})
+      required this.commentaireAnimatrice,
+      required this.marque})
       : _douleurs = douleurs,
         _evenements = evenements,
         super._();
@@ -372,10 +386,12 @@ class _$_Observation extends _Observation {
   final String? notesConfidentielles;
   @override
   final String? commentaireAnimatrice;
+  @override
+  final int? marque;
 
   @override
   String toString() {
-    return 'Observation(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice)';
+    return 'Observation(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice, marque: $marque)';
   }
 
   @override
@@ -408,7 +424,8 @@ class _$_Observation extends _Observation {
             (identical(other.notesConfidentielles, notesConfidentielles) ||
                 other.notesConfidentielles == notesConfidentielles) &&
             (identical(other.commentaireAnimatrice, commentaireAnimatrice) ||
-                other.commentaireAnimatrice == commentaireAnimatrice));
+                other.commentaireAnimatrice == commentaireAnimatrice) &&
+            (identical(other.marque, marque) || other.marque == marque));
   }
 
   @override
@@ -430,7 +447,8 @@ class _$_Observation extends _Observation {
       humeur,
       humeurAutre,
       notesConfidentielles,
-      commentaireAnimatrice);
+      commentaireAnimatrice,
+      marque);
 
   @JsonKey(ignore: true)
   @override
@@ -457,7 +475,8 @@ abstract class _Observation extends Observation {
       required final Humeur? humeur,
       required final String? humeurAutre,
       required final String? notesConfidentielles,
-      required final String? commentaireAnimatrice}) = _$_Observation;
+      required final String? commentaireAnimatrice,
+      required final int? marque}) = _$_Observation;
   const _Observation._() : super._();
 
   @override
@@ -494,6 +513,8 @@ abstract class _Observation extends Observation {
   String? get notesConfidentielles;
   @override
   String? get commentaireAnimatrice;
+  @override
+  int? get marque;
   @override
   @JsonKey(ignore: true)
   _$$_ObservationCopyWith<_$_Observation> get copyWith =>

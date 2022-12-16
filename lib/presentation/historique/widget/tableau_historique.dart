@@ -10,6 +10,7 @@ import 'package:teenstar/INFRASTRUCTURE/cycle/observation_historique_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
+import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
 import 'package:teenstar/PRESENTATION/resume/resume_page.dart';
@@ -18,7 +19,7 @@ import 'package:teenstar/providers.dart';
 import '../../core/_utils/app_date_utils.dart';
 
 class TableauHistorique extends ConsumerWidget {
-  List<CycleHistorique> listHistorique;
+  final List<CycleHistorique> listHistorique;
   TableauHistorique(this.listHistorique, {Key? key}) : super(key: key);
 
   @override
@@ -35,7 +36,12 @@ class TableauHistorique extends ConsumerWidget {
           // Cellule observation
           if (columnIndex < listHistorique.length) {
             if (rowIndex < listHistorique[columnIndex].observations.length) {
-              return _Cell(listHistorique[columnIndex].observations[rowIndex]);
+              print(
+                  '${listHistorique[columnIndex].idJourneeSoleil.getOrCrash()} / ${listHistorique[columnIndex].observations[rowIndex].id.getOrCrash()}');
+              return _Cell(
+                  observation: listHistorique[columnIndex].observations[rowIndex],
+                  isJourSommet: listHistorique[columnIndex].idJourneeSoleil.getOrCrash() ==
+                      listHistorique[columnIndex].observations[rowIndex].id.getOrCrash());
             } else {
               return _CellEmpty();
             }
@@ -70,20 +76,32 @@ class TableauHistorique extends ConsumerWidget {
 
 class _Cell extends StatelessWidget {
   final ObservationHistorique observation;
-  _Cell(
-    this.observation, {
+  final bool isJourSommet;
+  _Cell({
     Key? key,
+    required this.observation,
+    required this.isJourSommet,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 40,
-        height: 35,
-        color: observation.couleur?.getOrCrash().toColor() ?? Colors.white,
-        //child: Text("${observation.id.getOrCrash()}", style: Theme.of(context).textTheme.bodyText1),
-      ),
+    return Stack(
+      children: [
+        if (isJourSommet)
+          Center(
+              child: Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white),
+          )),
+        Center(
+          child: Container(
+            width: 40,
+            height: 35,
+            color: observation.couleur?.getOrCrash().toColor() ?? Colors.white,
+            //child: Text("${observation.id.getOrCrash()}", style: Theme.of(context).textTheme.bodyText1),
+          ),
+        ),
+      ],
     );
   }
 }

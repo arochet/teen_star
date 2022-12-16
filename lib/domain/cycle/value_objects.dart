@@ -181,7 +181,7 @@ extension ParseToSringSang on SangState {
       case SangState.rien:
         return AssetsPath.icon_sang_vide;
       case SangState.none:
-        return '';
+        return AssetsPath.icon_sang_vide;
     }
   }
 }
@@ -266,7 +266,7 @@ extension ParseToSringMucus on MucusState {
       case MucusState.autre:
         return AssetsPath.icon_autre;
       case MucusState.none:
-        return '';
+        return AssetsPath.icon_vide;
     }
   }
 }
@@ -297,7 +297,7 @@ class Mucus extends ValueObject<MucusState> {
   const Mucus._(this.value);
 }
 
-enum DouleurState { seins, ventre, malDeTete, aucune, none }
+enum DouleurState { aucune, seins, ventre, malDeTete, autre, none }
 
 extension ParseToSringDouleur on DouleurState {
   String toShortString() {
@@ -314,6 +314,8 @@ extension ParseToSringDouleur on DouleurState {
         return 'Mal de tête';
       case DouleurState.aucune:
         return 'Aucune';
+      case DouleurState.autre:
+        return 'Autre';
       case DouleurState.none:
         return '';
     }
@@ -327,6 +329,8 @@ extension ParseToSringDouleur on DouleurState {
         return 'DV';
       case DouleurState.malDeTete:
         return 'MT';
+      case DouleurState.autre:
+        return '?';
       case DouleurState.aucune:
         return '-';
       case DouleurState.none:
@@ -342,6 +346,8 @@ extension ParseToSringDouleur on DouleurState {
         return AssetsPath.icon_vide;
       case DouleurState.malDeTete:
         return AssetsPath.icon_vide;
+      case DouleurState.autre:
+        return AssetsPath.icon_autre;
       case DouleurState.aucune:
         return AssetsPath.icon_vide;
       case DouleurState.none:

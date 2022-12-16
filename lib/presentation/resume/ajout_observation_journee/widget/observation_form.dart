@@ -158,7 +158,13 @@ class ObservationForm extends ConsumerWidget {
           currentStates: form.douleurs.map((e) => e.getOrCrash()).toList(),
           titre: (state) => (state as DouleurState).toDisplayString(),
           iconPath: (state) => (state as DouleurState).toIconPath(),
+          iconTxt: (state) => (state as DouleurState).toDisplayShort(),
         ),
+        if (form.douleurs.contains(Douleur(DouleurState.autre)))
+          TextFormField(
+            autocorrect: false,
+            onChanged: (String value) => notifierForm.douleursAutreChanged(value),
+          ),
         SpaceH10(),
 
         //EVENEMENTS

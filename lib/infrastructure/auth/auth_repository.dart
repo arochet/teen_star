@@ -26,6 +26,7 @@ abstract class AuthRepository {
   Future<Either<ResetPasswordFailure, Unit>> resetPassword({required EmailAddress emailAddress});
   Future<Option<UserData>> getUserData();
   Future<void> signOut();
+  Future<bool> checkPasswordAppli(String appliPassword);
 }
 
 @LazySingleton(as: AuthRepository)
@@ -171,5 +172,13 @@ class FirebaseAuthFacade implements AuthRepository {
       return false;
     } else
       return true;
+  }
+
+  @override
+  Future<bool> checkPasswordAppli(String appliPassword) {
+    return _preferences.then((prefs) {
+      final String? motDePasseCourant = prefs.getString(passwordAppliPrefs);
+      return motDePasseCourant == appliPassword;
+    });
   }
 }

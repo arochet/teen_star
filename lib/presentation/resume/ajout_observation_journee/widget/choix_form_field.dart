@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
+import 'package:teenstar/PRESENTATION/resume/shared/icon_observation.dart';
 
 class ChoixFormField extends ConsumerWidget {
   List<Enum> choix;
@@ -63,17 +64,8 @@ class _Field extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Row(children: [
-        Container(
-          child: Stack(
-            children: [
-              Center(child: Image.asset(iconPath(state), width: 30, height: 30)),
-              if (iconText != null)
-                Center(child: Text(iconText!(state), style: Theme.of(context).textTheme.bodyText2)),
-            ],
-          ),
-          width: 30,
-          height: 30,
-        ),
+        IconObservation(
+            iconPath: iconPath(state), iconText: iconText != null ? iconText!(state) : null, iconSize: 30),
         SizedBox(width: 10),
         Expanded(child: Text(titre(state), style: Theme.of(context).textTheme.bodyText1)),
         if (isSelected) Icon(Icons.check, size: 20)

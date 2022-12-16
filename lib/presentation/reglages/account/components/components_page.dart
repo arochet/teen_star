@@ -117,7 +117,7 @@ class ComponentsPage extends StatelessWidget {
                   showDialogChoix(context, 'Etes-vous sûr de vouloir ... ?',
                       positiveText: 'OK', negativeText: 'Annuler');
                 },
-                child: Text("showDialog()"),
+                child: Text("showDialogChoix()"),
                 style: buttonNormalPrimary,
               ),
               Text("Show Modal Bottom Sheet", style: Theme.of(context).textTheme.bodyText1),

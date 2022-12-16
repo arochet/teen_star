@@ -105,7 +105,7 @@ class _DialogChoixContinuationCycle extends StatelessWidget {
                   Navigator.of(context).pop(false);
                 },
                 child: Text("Nouveau Cycle"),
-                style: buttonNormalPrimary,
+                style: buttonPrimaryHide,
               ),
               SpaceH10(),
               ElevatedButton(

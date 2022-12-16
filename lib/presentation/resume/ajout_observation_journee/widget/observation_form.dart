@@ -6,6 +6,7 @@ import 'package:teenstar/APPLICATION/cycle/add_observation_form_notifier.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
+import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/text_utils.dart';
@@ -64,6 +65,7 @@ class ObservationForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final form = ref.watch(cycleFormNotifierProvider);
     final notifierForm = ref.read(cycleFormNotifierProvider.notifier);
+    //Formulaire de l'observation
     return Form(
       autovalidateMode: AutovalidateMode.always,
       child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
@@ -71,6 +73,7 @@ class ObservationForm extends ConsumerWidget {
             child: Text(cycle != null ? "Cycle ${cycle!.id.getOrCrash()}" : "Nouveau cycle",
                 style: Theme.of(context).textTheme.headline3)),
         const SizedBox(height: 8),
+        //Date de l'observation
         Row(
           children: [
             Text("Date:", style: Theme.of(context).textTheme.headline4),
@@ -83,6 +86,7 @@ class ObservationForm extends ConsumerWidget {
           ],
         ),
         SpaceH30(),
+        //Bouton pour enregistrer l'observation en mode dev
         if (ref.watch(environment).name == Environment.dev)
           Align(
             child: ElevatedButton(
@@ -104,8 +108,10 @@ class ObservationForm extends ConsumerWidget {
         ChoixFormField(
           choix: SensationState.values.where((state) => state != SensationState.none).toList(),
           onSelect: (state) => notifierForm.sensationChanged(Sensation(state as SensationState)),
-          currentState: form.sensation.getOrCrash(),
+          currentStates: [form.sensation.getOrCrash()],
           titre: (state) => TextUtils.toFirstLettersUpperCase((state as SensationState).toDisplayString()),
+          iconPath: (state) => (state as SensationState).toIconPath(),
+          iconTxt: (state) => (state as SensationState).toDisplayShort(),
         ),
         if (form.sensation.getOrCrash() == SensationState.autre)
           TextFormField(
@@ -120,8 +126,9 @@ class ObservationForm extends ConsumerWidget {
         ChoixFormField(
           choix: SangState.values.where((state) => state != SangState.none).toList(),
           onSelect: (state) => notifierForm.sangChanged(Sang(state as SangState)),
-          currentState: form.sang.getOrCrash(),
+          currentStates: [form.sang.getOrCrash()],
           titre: (state) => TextUtils.toFirstLettersUpperCase((state as SangState).toDisplayString()),
+          iconPath: (state) => (state as SangState).toIconPath(),
         ),
         SpaceH10(),
 
@@ -131,8 +138,9 @@ class ObservationForm extends ConsumerWidget {
         ChoixFormField(
           choix: MucusState.values.where((state) => state != MucusState.none).toList(),
           onSelect: (state) => notifierForm.mucusChanged(Mucus(state as MucusState)),
-          currentState: form.mucus.getOrCrash(),
+          currentStates: [form.mucus.getOrCrash()],
           titre: (state) => (state as MucusState).toDisplayString(),
+          iconPath: (state) => (state as MucusState).toIconPath(),
         ),
         if (form.mucus.getOrCrash() == MucusState.autre)
           TextFormField(
@@ -144,22 +152,24 @@ class ObservationForm extends ConsumerWidget {
         //DOULEURS
         Text("Douleurs", style: Theme.of(context).textTheme.headline4),
         const SizedBox(height: 5),
-        ChoixMultipleFormField(
+        ChoixFormField(
           choix: DouleurState.values.where((state) => state != DouleurState.none).toList(),
           onSelect: (state) => notifierForm.douleursChanged(state as DouleurState),
           currentStates: form.douleurs.map((e) => e.getOrCrash()).toList(),
           titre: (state) => (state as DouleurState).toDisplayString(),
+          iconPath: (state) => (state as DouleurState).toIconPath(),
         ),
         SpaceH10(),
 
         //EVENEMENTS
         Text("Evénements", style: Theme.of(context).textTheme.headline4),
         const SizedBox(height: 5),
-        ChoixMultipleFormField(
+        ChoixFormField(
           choix: EvenementState.values.where((state) => state != EvenementState.none).toList(),
           onSelect: (state) => notifierForm.evenementsChanged(state as EvenementState),
           currentStates: form.evenements.map((e) => e.getOrCrash()).toList(),
           titre: (state) => (state as EvenementState).toDisplayString(),
+          iconPath: (state) => (state as EvenementState).toIconPath(),
         ),
         SpaceH10(),
 
@@ -186,8 +196,9 @@ class ObservationForm extends ConsumerWidget {
         ChoixFormField(
           choix: HumeurState.values.where((state) => state != HumeurState.none).toList(),
           onSelect: (state) => notifierForm.humeurChanged(Humeur(state as HumeurState)),
-          currentState: form.humeur.getOrCrash(),
+          currentStates: [form.humeur.getOrCrash()],
           titre: (state) => (state as HumeurState).toDisplayString(),
+          iconPath: (state) => (state as HumeurState).toIconPath(),
         ),
         if (form.humeur.getOrCrash() == HumeurState.autre)
           TextFormField(

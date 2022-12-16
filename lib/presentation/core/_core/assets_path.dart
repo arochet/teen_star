@@ -1,0 +1,39 @@
+class AssetsPath {
+  static const String icon_autre = 'assets/icon_observation/icon_autre.png';
+  static const String icon_bleu_vide = 'assets/icon_observation/icon_bleu_vide.png';
+  static const String icon_douleur = 'assets/icon_observation/icon_douleur.png';
+  static const String icon_evt_autre = 'assets/icon_observation/icon_evt_autre.png';
+  static const String icon_evt_confidentielle = 'assets/icon_observation/icon_evt_confidentielle.png';
+  static const String icon_evt_fatigue = 'assets/icon_observation/icon_evt_fatigue.png';
+  static const String icon_evt_maladie = 'assets/icon_observation/icon_evt_maladie.png';
+  static const String icon_evt_medicament = 'assets/icon_observation/icon_evt_medicament.png';
+  static const String icon_evt_perso1 = 'assets/icon_observation/icon_evt_perso1.png';
+  static const String icon_evt_perso2 = 'assets/icon_observation/icon_evt_perso2.png';
+  static const String icon_evt_stress = 'assets/icon_observation/icon_evt_stress.png';
+  static const String icon_evt_voyage = 'assets/icon_observation/icon_evt_voyage.png';
+  static const String icon_mucus_depot_seche_blanc =
+      'assets/icon_observation/icon_mucus_depot_seche_blanc.png';
+  static const String icon_mucus_nuageux = 'assets/icon_observation/icon_mucus_nuageux.png';
+  static const String icon_mucus_opaque_blanc_jaune =
+      'assets/icon_observation/icon_mucus_opaque_blanc_jaune.png';
+  static const String icon_mucus_opaque_transparent =
+      'assets/icon_observation/icon_mucus_opaque_transparent.png';
+  static const String icon_mucus_transparent_filant =
+      'assets/icon_observation/icon_mucus_transparent_filant.png';
+  static const String icon_mucus_visible = 'assets/icon_observation/icon_mucus_visible.png';
+  static const String icon_sang_flux_p = 'assets/icon_observation/icon_sang_flux+.png';
+  static const String icon_sang_flux_pp = 'assets/icon_observation/icon_sang_flux++.png';
+  static const String icon_sang_traces = 'assets/icon_observation/icon_sang_traces.png';
+  static const String icon_sang_vide = 'assets/icon_observation/icon_sang_vide.png';
+  static const String icon_temperature_basale = 'assets/icon_observation/icon_temperature_basale.png';
+  static const String icon_vide = 'assets/icon_observation/icon_vide.png';
+  static const String icon_humeur_autre = 'assets/icon_observation/icon_humeur_autre.png';
+  static const String icon_humeur_bonne = 'assets/icon_observation/icon_humeur_bonne.png';
+  static const String icon_humeur_changeante = 'assets/icon_observation/icon_humeur_changeante.png';
+  static const String icon_humeur_envie_tranquille =
+      'assets/icon_observation/icon_humeur_envie_tranquille.png';
+  static const String icon_humeur_nervosite = 'assets/icon_observation/icon_humeur_nervosite.png';
+  static const String icon_humeur_neutre = 'assets/icon_observation/icon_humeur_neutre.png';
+  static const String icon_humeur_tres_bonne = 'assets/icon_observation/icon_humeur_tres_bonne.png';
+  static const String icon_humeur_tristesse = 'assets/icon_observation/icon_humeur_tristesse.png';
+}

@@ -84,4 +84,38 @@ flutter:
     - assets/logo_vide.png
     - assets/icon/logo.png
     - config/
+    - assets/icon_observation/icon_autre.png
+    - assets/icon_observation/icon_bleu_vide.png
+    - assets/icon_observation/icon_douleur.png
+    - assets/icon_observation/icon_evt_autre.png
+    - assets/icon_observation/icon_evt_confidentielle.png
+    - assets/icon_observation/icon_evt_fatigue.png
+    - assets/icon_observation/icon_evt_maladie.png
+    - assets/icon_observation/icon_evt_medicament.png
+    - assets/icon_observation/icon_evt_perso1.png
+    - assets/icon_observation/icon_evt_perso2.png
+    - assets/icon_observation/icon_evt_stress.png
+    - assets/icon_observation/icon_evt_voyage.png
+    - assets/icon_observation/icon_mucus_depot_seche_blanc.png
+    - assets/icon_observation/icon_mucus_nuageux.png
+    - assets/icon_observation/icon_mucus_opaque_blanc_jaune.png
+    - assets/icon_observation/icon_mucus_opaque_transparent.png
+    - assets/icon_observation/icon_mucus_transparent_filant.png
+    - assets/icon_observation/icon_mucus_visible.png
+    - assets/icon_observation/icon_sang_flux+.png
+    - assets/icon_observation/icon_sang_flux++.png
+    - assets/icon_observation/icon_sang_traces.png
+    - assets/icon_observation/icon_sang_vide.png
+    - assets/icon_observation/icon_temperature_basale.png
+    - assets/icon_observation/icon_vide.png
+    - assets/icon_observation/icon_humeur_autre.png
+    - assets/icon_observation/icon_humeur_bonne.png
+    - assets/icon_observation/icon_humeur_changeante.png
+    - assets/icon_observation/icon_humeur_envie_tranquille.png
+    - assets/icon_observation/icon_humeur_nervosite.png
+    - assets/icon_observation/icon_humeur_neutre.png
+    - assets/icon_observation/icon_humeur_tres_bonne.png
+    - assets/icon_observation/icon_humeur_tristesse.png
+
+
   

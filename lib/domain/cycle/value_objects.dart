@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:teenstar/DOMAIN/core/failures.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/core/value_validators.dart';
+import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 
 enum CouleurAnalyseState { rouge, brun, vert, none, invalide }
 
@@ -100,6 +101,25 @@ extension ParseToSringSensation on SensationState {
         return '';
     }
   }
+
+  String toIconPath() {
+    switch (this) {
+      case SensationState.sec:
+        return AssetsPath.icon_vide;
+      case SensationState.humide:
+        return AssetsPath.icon_vide;
+      case SensationState.mouille:
+        return AssetsPath.icon_vide;
+      case SensationState.glissantLubrifie:
+        return AssetsPath.icon_vide;
+      case SensationState.nonpercu:
+        return AssetsPath.icon_vide;
+      case SensationState.autre:
+        return AssetsPath.icon_vide;
+      case SensationState.none:
+        return '';
+    }
+  }
 }
 
 @immutable
@@ -145,6 +165,21 @@ extension ParseToSringSang on SangState {
         return 'traces';
       case SangState.rien:
         return 'rien';
+      case SangState.none:
+        return '';
+    }
+  }
+
+  String toIconPath() {
+    switch (this) {
+      case SangState.fluxPP:
+        return AssetsPath.icon_sang_flux_pp;
+      case SangState.fluxP:
+        return AssetsPath.icon_sang_flux_p;
+      case SangState.traces:
+        return AssetsPath.icon_sang_traces;
+      case SangState.rien:
+        return AssetsPath.icon_sang_vide;
       case SangState.none:
         return '';
     }
@@ -213,6 +248,27 @@ extension ParseToSringMucus on MucusState {
         return '';
     }
   }
+
+  String toIconPath() {
+    switch (this) {
+      case MucusState.opaqueBlancOuJaune:
+        return AssetsPath.icon_mucus_opaque_blanc_jaune;
+      case MucusState.depotSecheBlancOuJaune:
+        return AssetsPath.icon_mucus_depot_seche_blanc;
+      case MucusState.opaqueAvecTransparent_UnPeuEtirable:
+        return AssetsPath.icon_mucus_opaque_transparent;
+      case MucusState.nuageuxATransparent_Elastique:
+        return AssetsPath.icon_mucus_nuageux;
+      case MucusState.transparentFilantOuTresFluide:
+        return AssetsPath.icon_mucus_transparent_filant;
+      case MucusState.aucunMucusVisible:
+        return AssetsPath.icon_mucus_visible;
+      case MucusState.autre:
+        return AssetsPath.icon_autre;
+      case MucusState.none:
+        return '';
+    }
+  }
 }
 
 @immutable
@@ -277,6 +333,21 @@ extension ParseToSringDouleur on DouleurState {
         return '';
     }
   }
+
+  String toIconPath() {
+    switch (this) {
+      case DouleurState.seins:
+        return AssetsPath.icon_vide;
+      case DouleurState.ventre:
+        return AssetsPath.icon_vide;
+      case DouleurState.malDeTete:
+        return AssetsPath.icon_vide;
+      case DouleurState.aucune:
+        return AssetsPath.icon_vide;
+      case DouleurState.none:
+        return '';
+    }
+  }
 }
 
 @immutable
@@ -326,6 +397,25 @@ extension ParseToSringEvenement on EvenementState {
         return 'Personnel Type 2';
       case EvenementState.autre:
         return 'Autre';
+      case EvenementState.none:
+        return '';
+    }
+  }
+
+  String toIconPath() {
+    switch (this) {
+      case EvenementState.fatigue:
+        return AssetsPath.icon_evt_fatigue;
+      case EvenementState.stress:
+        return AssetsPath.icon_evt_stress;
+      case EvenementState.voyage:
+        return AssetsPath.icon_evt_voyage;
+      case EvenementState.personnelType1:
+        return AssetsPath.icon_evt_perso1;
+      case EvenementState.personnelType2:
+        return AssetsPath.icon_evt_perso2;
+      case EvenementState.autre:
+        return AssetsPath.icon_evt_autre;
       case EvenementState.none:
         return '';
     }
@@ -393,6 +483,29 @@ extension ParseToSringHumeur on HumeurState {
         return 'Tristesse';
       case HumeurState.autre:
         return 'Autre';
+      case HumeurState.none:
+        return '';
+    }
+  }
+
+  String toIconPath() {
+    switch (this) {
+      case HumeurState.tresBonne:
+        return AssetsPath.icon_humeur_tres_bonne;
+      case HumeurState.bonne:
+        return AssetsPath.icon_humeur_bonne;
+      case HumeurState.pasEmotionParticuliere:
+        return AssetsPath.icon_humeur_autre;
+      case HumeurState.EnvieEtreTranquille:
+        return AssetsPath.icon_humeur_envie_tranquille;
+      case HumeurState.humeurChangeante:
+        return AssetsPath.icon_humeur_changeante;
+      case HumeurState.nervositeIrritable:
+        return AssetsPath.icon_humeur_nervosite;
+      case HumeurState.tristesse:
+        return AssetsPath.icon_humeur_tristesse;
+      case HumeurState.autre:
+        return AssetsPath.icon_humeur_autre;
       case HumeurState.none:
         return '';
     }

@@ -21,6 +21,8 @@ abstract class ICycleRepository {
   Future<Either<ObservationFailure, Unit>> delete(UniqueId id);
   Future<Either<CycleFailure, Unit>> resetAll();
   Future<Either<CycleFailure, Unit>> renvoieDernierCycle();
+  Future<Either<CycleFailure, Unit>> marquerJourSommet(Cycle cycle, UniqueId id);
+  Future<Unit> marquerComme(Observation observation, int i);
 }
 
 @LazySingleton(as: ICycleRepository)
@@ -188,5 +190,21 @@ class CycleRepository implements ICycleRepository {
       await _database.delete(db_cycle, where: 'id = ?', whereArgs: [lastCycle.id]);
       return right(unit);
     });
+  }
+
+  @override
+  Future<Either<CycleFailure, Unit>> marquerJourSommet(Cycle cycle, UniqueId id) async {
+    printDev('marquerJourSommet(Cycle cycle, UniqueId id)');
+    await _database.update(db_cycle, {'idJourneeSoleil': id.getOrCrash()},
+        where: 'id = ?', whereArgs: [cycle.id.getOrCrash()]);
+    return right(unit);
+  }
+
+  @override
+  Future<Unit> marquerComme(Observation observation, int i) async {
+    printDev('marquerComme(Observation observation, int i)');
+    await _database.update(db_observation, {'marque': i},
+        where: 'id = ?', whereArgs: [observation.id.getOrCrash()]);
+    return unit;
   }
 }

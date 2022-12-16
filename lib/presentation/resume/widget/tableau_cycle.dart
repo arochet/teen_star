@@ -2,12 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
+import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
+import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
 import 'package:teenstar/PRESENTATION/resume/resume_page.dart';
@@ -15,12 +18,13 @@ import 'package:teenstar/PRESENTATION/resume/shared/icon_observation.dart';
 import 'package:teenstar/providers.dart';
 
 import '../../core/_utils/app_date_utils.dart';
+import 'menu_observation_modification.dart';
 import 'show_observation_notes.dart';
 
 class TableauCycle extends ConsumerWidget {
-  List<Observation> observations;
+  Cycle cycle;
   TableauCycle(
-    this.observations, {
+    this.cycle, {
     Key? key,
   }) : super(key: key);
 
@@ -43,12 +47,13 @@ class TableauCycle extends ConsumerWidget {
       child: StickyHeadersTable(
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) => _CellHeader(title[colulmnIndex]),
-        contentCellBuilder: (int columnIndex, int rowIndex) => rowIndex == observations.length
+        contentCellBuilder: (int columnIndex, int rowIndex) => rowIndex == cycle.observations.length
             ? Container(height: 50, width: 50)
-            : _Cell(observations[rowIndex], title[columnIndex]),
-        rowsLength: observations.length + 1,
+            : _Cell(cycle.observations[rowIndex], title[columnIndex],
+                cycle.observations[rowIndex].id.getOrCrash() == cycle.idJourneeSoleil.getOrCrash()),
+        rowsLength: cycle.observations.length + 1,
         rowsTitleBuilder: (int rowIndex) =>
-            rowIndex == observations.length ? Container() : _CellDay('${rowIndex + 1}'),
+            rowIndex == cycle.observations.length ? Container() : _CellDay('${rowIndex + 1}'),
         widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
@@ -57,13 +62,10 @@ class TableauCycle extends ConsumerWidget {
           contentCellHeight: 50,
         ),
         rowSelect: (rowIndex) {
-          if (rowIndex == observations.length) return;
-          showDialog<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return ShowObservationNotes(observation: observations[rowIndex]);
-            },
-          );
+          if (rowIndex == cycle.observations.length) return;
+          showModalBottomSheet(
+              context: context,
+              builder: (context) => MenuObservationModification(cycle, cycle.observations[rowIndex]));
         },
       ),
     );
@@ -72,10 +74,12 @@ class TableauCycle extends ConsumerWidget {
 
 class _Cell extends StatelessWidget {
   Observation observation;
+  final bool isJourSommet;
   String column;
   _Cell(
     this.observation,
-    this.column, {
+    this.column,
+    this.isJourSommet, {
     Key? key,
   }) : super(key: key);
 
@@ -96,8 +100,12 @@ class _Cell extends StatelessWidget {
             color: colorpanel(800),
             child: Padding(
               padding: const EdgeInsets.all(2.0),
-              child: Container(
-                color: observation.couleur?.getOrCrash().toColor(),
+              child: Stack(
+                children: [
+                  if (isJourSommet)
+                    Center(child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white)),
+                  Container(color: observation.couleur?.getOrCrash().toColor()),
+                ],
               ),
             ));
         break;

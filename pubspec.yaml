@@ -116,6 +116,10 @@ flutter:
     - assets/icon_observation/icon_humeur_neutre.png
     - assets/icon_observation/icon_humeur_tres_bonne.png
     - assets/icon_observation/icon_humeur_tristesse.png
+    - assets/icon_app/icon_fleur_sommet.png
+    - assets/icon_app/icon_guide_avance.png
+    - assets/icon_app/icon_pdf.png
+    - assets/icon_app/icon_principe_de_base.png
 
 
   

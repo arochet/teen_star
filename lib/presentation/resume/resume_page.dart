@@ -119,7 +119,7 @@ class _Cycle extends ConsumerWidget {
                   //APPBAR_ANALYSE
                   AppBarAnalyse(),
                   //TABLEAU
-                  Expanded(child: TableauCycle(cycle.observations)),
+                  Expanded(child: TableauCycle(cycle)),
                 ],
               ),
               ButtonAjoutObservationJournee(cycle),

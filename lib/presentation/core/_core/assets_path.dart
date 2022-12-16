@@ -36,4 +36,8 @@ class AssetsPath {
   static const String icon_humeur_neutre = 'assets/icon_observation/icon_humeur_neutre.png';
   static const String icon_humeur_tres_bonne = 'assets/icon_observation/icon_humeur_tres_bonne.png';
   static const String icon_humeur_tristesse = 'assets/icon_observation/icon_humeur_tristesse.png';
+  static const String icon_fleur_sommet = 'assets/icon_app/icon_fleur_sommet.png';
+  static const String icon_guide_avance = 'assets/icon_app/icon_guide_avance.png';
+  static const String icon_pdf = 'assets/icon_app/icon_pdf.png';
+  static const String icon_principe_de_base = 'assets/icon_app/icon_principe_de_base.png';
 }

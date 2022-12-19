@@ -157,6 +157,7 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
             notesConfidentielles: state.notesConfidentielles,
             commentaireAnimatrice: null,
             marque: 0,
+            jourFertile: true,
           ));
 
       if (failureOrSuccess.isRight()) {

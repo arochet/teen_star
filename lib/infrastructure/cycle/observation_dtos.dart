@@ -4,6 +4,8 @@ import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/bool_utils.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
 part 'observation_dtos.freezed.dart';
 part 'observation_dtos.g.dart';
 
@@ -30,6 +32,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
     required String? notesConfidentielles,
     required String? commentaireAnimatrice,
     required int? marque,
+    required int? jourFertile,
     required int? idCycle,
   }) = _ObservationDTO;
 
@@ -53,6 +56,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
       notesConfidentielles: obj.notesConfidentielles,
       commentaireAnimatrice: obj.commentaireAnimatrice,
       marque: obj.marque,
+      jourFertile: NumUtils.parseInt(obj.jourFertile),
       idCycle: idCycle,
     );
   }
@@ -77,6 +81,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
       notesConfidentielles: notesConfidentielles,
       commentaireAnimatrice: commentaireAnimatrice,
       marque: marque,
+      jourFertile: BoolUtils.parseBool(jourFertile),
     );
   }
 

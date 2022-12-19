@@ -21,15 +21,26 @@ import '../../core/_utils/app_date_utils.dart';
 import 'menu_observation_modification.dart';
 import 'show_observation_notes.dart';
 
-class TableauCycle extends ConsumerWidget {
+class TableauCycle extends ConsumerStatefulWidget {
   Cycle cycle;
-  TableauCycle(
-    this.cycle, {
-    Key? key,
-  }) : super(key: key);
+  TableauCycle(this.cycle, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _TableauCycleState();
+}
+
+class _TableauCycleState extends ConsumerState<TableauCycle> {
+  late List<bool> _selected;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _selected = List.generate(widget.cycle.observations.length, (index) => false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final title = [
       'Date',
       if (!ref.watch(showAnalyse)) 'Couleur',
@@ -47,13 +58,16 @@ class TableauCycle extends ConsumerWidget {
       child: StickyHeadersTable(
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) => _CellHeader(title[colulmnIndex]),
-        contentCellBuilder: (int columnIndex, int rowIndex) => rowIndex == cycle.observations.length
+        contentCellBuilder: (int columnIndex, int rowIndex) => rowIndex == widget.cycle.observations.length
             ? Container(height: 50, width: 50)
-            : _Cell(cycle.observations[rowIndex], title[columnIndex],
-                cycle.observations[rowIndex].id.getOrCrash() == cycle.idJourneeSoleil.getOrCrash()),
-        rowsLength: cycle.observations.length + 1,
+            : _Cell(
+                widget.cycle.observations[rowIndex],
+                title[columnIndex],
+                widget.cycle.observations[rowIndex].id.getOrCrash() ==
+                    widget.cycle.idJourneeSoleil.getOrCrash()),
+        rowsLength: widget.cycle.observations.length + 1,
         rowsTitleBuilder: (int rowIndex) =>
-            rowIndex == cycle.observations.length ? Container() : _CellDay('${rowIndex + 1}'),
+            rowIndex == widget.cycle.observations.length ? Container() : _CellDay('${rowIndex + 1}'),
         widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
@@ -62,10 +76,11 @@ class TableauCycle extends ConsumerWidget {
           contentCellHeight: 50,
         ),
         rowSelect: (rowIndex) {
-          if (rowIndex == cycle.observations.length) return;
+          if (rowIndex == widget.cycle.observations.length) return;
           showModalBottomSheet(
               context: context,
-              builder: (context) => MenuObservationModification(cycle, cycle.observations[rowIndex]));
+              builder: (context) =>
+                  MenuObservationModification(widget.cycle, widget.cycle.observations[rowIndex]));
         },
       ),
     );
@@ -121,7 +136,6 @@ class _Cell extends StatelessWidget {
               padding: const EdgeInsets.all(2.0),
               child: Container(color: observation.analyse?.getOrCrash().toColor()),
             ));
-        //info = IconObservation(iconPath: observation.analyse?.getOrCrash().toShortString(), state: state, iconText: iconText, iconSize: iconSize)
         break;
       case 'Sensation':
         info = IconObservation(
@@ -130,41 +144,55 @@ class _Cell extends StatelessWidget {
             iconSize: 30);
         break;
       case 'Observation':
-        info = Row(
-          children: [
-            IconObservation(
-                iconPath: observation.sang?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30),
-            IconObservation(
-                iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30),
-          ],
+        info = SingleChildScrollView(
+          child: Row(
+            children: [
+              IconObservation(
+                  iconPath: observation.sang?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide,
+                  iconSize: 30),
+              IconObservation(
+                  iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide,
+                  iconSize: 30),
+            ],
+          ),
         );
         break;
       case 'Douleur':
-        info = Row(
-          children: observation.douleurs
-                  ?.map((Douleur douleur) => IconObservation(
-                      iconPath: douleur.getOrCrash().toIconPath(),
-                      iconText: douleur.getOrCrash().toDisplayShort(),
-                      iconSize: 30))
-                  .toList() ??
-              [],
-        );
+        if (observation.douleurs?.length != null && observation.douleurs!.length > 0)
+          info = SingleChildScrollView(
+            child: Row(
+              children: observation.douleurs
+                      ?.map((Douleur douleur) => IconObservation(
+                          iconPath: douleur.getOrCrash().toIconPath(),
+                          iconText: douleur.getOrCrash().toDisplayShort(),
+                          iconSize: 30))
+                      .toList() ??
+                  [],
+            ),
+          );
+        else
+          info = Container(width: 1, height: 1);
         break;
       case 'Humeur':
         info = IconObservation(
             iconPath: observation.humeur?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30);
         break;
       case 'Evenements':
-        info = Row(
-          children: observation.evenements
-                  ?.map((Evenement evt) =>
-                      IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 30))
-                  .toList() ??
-              [],
-        );
+        if (observation.evenements?.length != null && observation.evenements!.length > 0)
+          info = SingleChildScrollView(
+            child: Row(
+              children: observation.evenements
+                      ?.map((Evenement evt) =>
+                          IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 30))
+                      .toList() ??
+                  [],
+            ),
+          );
+        else
+          info = Container(width: 1, height: 1);
         break;
       default:
-        info = Text(' ** ', style: Theme.of(context).textTheme.headline5);
+        info = Text(' ?? ', style: Theme.of(context).textTheme.headline5);
         break;
     }
 

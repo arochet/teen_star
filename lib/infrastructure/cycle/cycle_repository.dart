@@ -62,6 +62,7 @@ class CycleRepository implements ICycleRepository {
 
       return right(unit);
     } catch (e) {
+      print("$e");
       return left(const ObservationFailure.unexpected());
     }
   }

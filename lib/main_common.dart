@@ -45,6 +45,7 @@ Future<void> mainCommon(Environment env) async {
           'notesConfidentielles TEXT,'
           'commentaireAnimatrice TEXT,'
           'marque INTEGER,'
+          'jourFertile INTEGER,'
           'idCycle INTEGER NOT NULL,'
           'FOREIGN KEY (idCycle) REFERENCES Cycle (id) ON DELETE NO ACTION ON UPDATE NO ACTION)');
       await db.execute('CREATE TABLE Cycle('

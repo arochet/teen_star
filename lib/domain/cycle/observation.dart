@@ -29,6 +29,7 @@ abstract class Observation with _$Observation {
     required String? notesConfidentielles,
     required String? commentaireAnimatrice,
     required int? marque,
+    required bool? jourFertile,
   }) = _Observation;
 
   factory Observation.empty() => Observation(
@@ -50,5 +51,6 @@ abstract class Observation with _$Observation {
         notesConfidentielles: '',
         commentaireAnimatrice: '',
         marque: 0,
+        jourFertile: true,
       );
 }

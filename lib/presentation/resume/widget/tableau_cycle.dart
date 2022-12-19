@@ -119,9 +119,7 @@ class _Cell extends StatelessWidget {
             color: colorpanel(800),
             child: Padding(
               padding: const EdgeInsets.all(2.0),
-              child: Container(
-                color: observation.analyse?.getOrCrash().toColor(),
-              ),
+              child: Container(color: observation.analyse?.getOrCrash().toColor()),
             ));
         //info = IconObservation(iconPath: observation.analyse?.getOrCrash().toShortString(), state: state, iconText: iconText, iconSize: iconSize)
         break;

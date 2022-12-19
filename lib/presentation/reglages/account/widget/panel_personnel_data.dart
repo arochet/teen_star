@@ -28,7 +28,7 @@ class PanelPersonnelData extends StatelessWidget {
         ),
         ItemPanelList(
           title: 'Année des 1ères règles: ${userData?.anneePremiereRegle ?? '--'}',
-          icon: Icons.mail_rounded,
+          icon: Icons.star_border,
           onTap: () {},
         ),
         ItemPanelList(

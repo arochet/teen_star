@@ -44,6 +44,8 @@ class BottomBarNavigation extends ConsumerWidget {
               printDev("Page: ${listMenu[id]["title"]}");
               if (id == 0) {
                 ref.refresh(allCycleProvider);
+                final id = ref.read(idCycleCourant);
+                if (id != null) ref.refresh(cycleProvider(id));
               }
               if (id == 1) {
                 ref.refresh(allCycleHistoriqueProvider);

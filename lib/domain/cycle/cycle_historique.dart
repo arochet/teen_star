@@ -24,7 +24,6 @@ abstract class CycleHistorique with _$CycleHistorique {
 
   factory CycleHistorique.fromListDTO(List<ObservationHistoriqueDTO> list, int id) {
     List<ObservationHistorique> observations = [];
-    UniqueId idJourneeSoleil = UniqueId(); //C est pas bon ca !!!!
 
     for (var obs in list) {
       if (obs.idCycle == id) {
@@ -35,7 +34,7 @@ abstract class CycleHistorique with _$CycleHistorique {
     return CycleHistorique(
       id: UniqueId.fromUniqueInt(id),
       observations: observations,
-      idJourneeSoleil: idJourneeSoleil,
+      idJourneeSoleil: list.length > 0 ? UniqueId.fromUniqueInt(list.first.idJourneeSoleil) : UniqueId(),
     );
   }
 }

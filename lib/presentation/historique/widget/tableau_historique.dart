@@ -89,10 +89,7 @@ class _Cell extends StatelessWidget {
       children: [
         if (isJourSommet)
           Center(
-              child: Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white),
-          )),
+              child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white, width: 30, height: 30)),
         Center(
           child: Container(
             width: 40,

@@ -6,6 +6,7 @@ import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
+import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'cycle_dtos.dart';
 import 'observation_historique_dtos.dart';
@@ -23,6 +24,7 @@ abstract class ICycleRepository {
   Future<Either<CycleFailure, Unit>> renvoieDernierCycle();
   Future<Either<CycleFailure, Unit>> marquerJourSommet(Cycle cycle, UniqueId id);
   Future<Unit> marquerComme(Observation observation, int i);
+  Future<Unit> modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state);
 }
 
 @LazySingleton(as: ICycleRepository)
@@ -204,6 +206,14 @@ class CycleRepository implements ICycleRepository {
   Future<Unit> marquerComme(Observation observation, int i) async {
     printDev('marquerComme(Observation observation, int i)');
     await _database.update(db_observation, {'marque': i},
+        where: 'id = ?', whereArgs: [observation.id.getOrCrash()]);
+    return unit;
+  }
+
+  @override
+  Future<Unit> modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state) async {
+    printDev('modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state)');
+    await _database.update(db_observation, {'analyse': state.toString()},
         where: 'id = ?', whereArgs: [observation.id.getOrCrash()]);
     return unit;
   }

@@ -41,8 +41,7 @@ class CouleurAnalyse extends ValueObject<CouleurAnalyseState> {
   factory CouleurAnalyse.fromString(String? input) {
     if (input == null) return CouleurAnalyse._(right(CouleurAnalyseState.none));
     try {
-      final CouleurAnalyseState state =
-          CouleurAnalyseState.values.firstWhere((e) => e.toShortString() == input);
+      final CouleurAnalyseState state = CouleurAnalyseState.values.firstWhere((e) => e.toString() == input);
       if (state == null) return CouleurAnalyse._(left(ValueFailure.invalidEnum(failedValue: state)));
       return CouleurAnalyse._(right(state));
     } catch (e) {

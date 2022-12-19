@@ -20,21 +20,23 @@ final buttonBigWarning = buttonBig(actioncolor["warning"]!, true);
 final buttonBigRemove = buttonBig(actioncolor["remove"]!, true);
 final buttonBigHelp = buttonBig(actioncolor["help"]!, true);
 
-ButtonStyle buttonNormal(Color color, bool isWhite) => ElevatedButton.styleFrom(
+ButtonStyle buttonNormal(Color color, bool isWhite, bool fullWidth) => ElevatedButton.styleFrom(
       textStyle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       backgroundColor: color,
       foregroundColor: isWhite ? Colors.white : Colors.black,
       elevation: 0,
+      minimumSize: fullWidth ? Size(double.infinity, 30) : null,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
     );
 
-final buttonNormalPrimary = buttonNormal(actioncolor["primary"]!, false);
-final buttonNormalSecondary = buttonNormal(actioncolor["secondary"]!, false);
-final buttonNormalConfirm = buttonNormal(actioncolor["confirm"]!, false);
-final buttonNormalWarning = buttonNormal(actioncolor["warning"]!, true);
-final buttonNormalRemove = buttonNormal(actioncolor["remove"]!, true);
-final buttonNormalHelp = buttonNormal(actioncolor["help"]!, true);
+final buttonNormalPrimary = buttonNormal(actioncolor["primary"]!, false, false);
+final buttonNormalPrimaryFull = buttonNormal(actioncolor["primary"]!, false, true);
+final buttonNormalSecondary = buttonNormal(actioncolor["secondary"]!, false, false);
+final buttonNormalConfirm = buttonNormal(actioncolor["confirm"]!, false, false);
+final buttonNormalWarning = buttonNormal(actioncolor["warning"]!, true, false);
+final buttonNormalRemove = buttonNormal(actioncolor["remove"]!, true, false);
+final buttonNormalHelp = buttonNormal(actioncolor["help"]!, true, false);
 
 ButtonStyle buttonLittle(Color color, bool isWhite) => ElevatedButton.styleFrom(
       textStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),

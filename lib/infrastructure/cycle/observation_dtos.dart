@@ -56,7 +56,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
       notesConfidentielles: obj.notesConfidentielles,
       commentaireAnimatrice: obj.commentaireAnimatrice,
       marque: obj.marque,
-      jourFertile: NumUtils.parseInt(obj.jourFertile),
+      jourFertile: obj.jourFertile == false ? 0 : 1,
       idCycle: idCycle,
     );
   }
@@ -81,7 +81,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
       notesConfidentielles: notesConfidentielles,
       commentaireAnimatrice: commentaireAnimatrice,
       marque: marque,
-      jourFertile: BoolUtils.parseBool(jourFertile),
+      jourFertile: jourFertile == 0 ? false : true,
     );
   }
 

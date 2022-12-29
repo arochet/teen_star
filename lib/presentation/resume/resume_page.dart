@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
+import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
@@ -13,10 +14,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widget/app_bar_cycle.dart';
 import 'widget/appbar_analyse.dart';
 import 'widget/button_ajout_observation_journee.dart';
+import 'widget/button_modification_observation.dart';
 import 'widget/tableau_cycle.dart';
 
 //Analyse
 final showAnalyse = StateProvider<bool>((ref) => false);
+final isSelection = StateProvider<bool>((ref) => false);
+final observationSectionne = StateProvider<List<Observation>>((ref) => []);
 
 class ResumePage extends ConsumerStatefulWidget {
   const ResumePage({Key? key}) : super(key: key);
@@ -105,6 +109,7 @@ class _Cycle extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncCycle = ref.watch(cycleProvider(id));
+    final selection = ref.watch(isSelection);
 
     return asyncCycle.when(
       data: (cycleAsync) {
@@ -115,14 +120,15 @@ class _Cycle extends ConsumerWidget {
               Column(
                 children: [
                   //APPBAR_LIST_CYCLES
-                  AppBarCycle(listCyclesDTO: listCycleDTO, idCycle: id),
+                  if (!selection) AppBarCycle(listCyclesDTO: listCycleDTO, idCycle: id),
                   //APPBAR_ANALYSE
                   AppBarAnalyse(),
                   //TABLEAU
                   Expanded(child: TableauCycle(cycle)),
                 ],
               ),
-              ButtonAjoutObservationJournee(cycle),
+              if (!selection) ButtonAjoutObservationJournee(cycle),
+              if (selection) ButtonModificationObservation(cycle),
             ],
           ),
         );

@@ -37,6 +37,7 @@ class StickyHeadersTable extends StatefulWidget {
 
     /// Click on the row
     this.rowSelect = null,
+    this.isRowSelected,
   }) : super(key: key);
 
   final int rowsLength;
@@ -49,6 +50,7 @@ class StickyHeadersTable extends StatefulWidget {
   final double Function(int rowIndex)? widthCell;
   final CellDimensions cellDimensions;
   final BoxFit cellFit;
+  final bool Function(int rowIndex)? isRowSelected;
 
   @override
   _StickyHeadersTableState createState() => _StickyHeadersTableState();
@@ -136,7 +138,11 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                       (int i) => Container(
                         width: widget.cellDimensions.stickyLegendWidth,
                         height: widget.cellDimensions.contentCellHeight,
-                        color: i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null,
+                        color: widget.isRowSelected != null
+                            ? (widget.isRowSelected!(i)
+                                ? Colors.blue
+                                : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null))
+                            : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null),
                         child: SizedBox(
                           width: widget.cellDimensions.stickyLegendWidth,
                           height: widget.cellDimensions.contentCellHeight,
@@ -182,7 +188,11 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                                           ? widget.widthCell!(j)
                                           : widget.cellDimensions.contentCellWidth,
                                       height: widget.cellDimensions.contentCellHeight,
-                                      color: i % 2 == 1 ? const Color.fromARGB(14, 255, 255, 255) : null,
+                                      color: widget.isRowSelected != null
+                                          ? (widget.isRowSelected!(i)
+                                              ? Color.fromARGB(169, 23, 129, 215)
+                                              : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null))
+                                          : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null),
                                       child: FittedBox(
                                         fit: widget.cellFit,
                                         child: widget.contentCellBuilder(j, i),

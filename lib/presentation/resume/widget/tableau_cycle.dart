@@ -35,12 +35,18 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
   @override
   void initState() {
     super.initState();
-
     _selected = List.generate(widget.cycle.observations.length, (index) => false);
   }
 
   @override
   Widget build(BuildContext context) {
+    final selection = ref.watch(isSelection);
+    //Si le tableau a changé, on réinitialise la liste de sélection
+    if (_selected.length != widget.cycle.observations.length || !selection) {
+      _selected = List.generate(widget.cycle.observations.length, (index) => false);
+    }
+
+    //Titre du tableau
     final title = [
       'Date',
       if (!ref.watch(showAnalyse)) 'Couleur',
@@ -52,6 +58,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
       'Evenements'
     ];
 
+    //Largeur des colonnes
     Map cellsWidth = {'Observation': 150, 'Evenements': 120};
     return ShowComponentFile(
       title: 'tableau_cycle.dart',
@@ -66,8 +73,9 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
                 widget.cycle.observations[rowIndex].id.getOrCrash() ==
                     widget.cycle.idJourneeSoleil.getOrCrash()),
         rowsLength: widget.cycle.observations.length + 1,
-        rowsTitleBuilder: (int rowIndex) =>
-            rowIndex == widget.cycle.observations.length ? Container() : _CellDay('${rowIndex + 1}'),
+        rowsTitleBuilder: (int rowIndex) => rowIndex == widget.cycle.observations.length
+            ? Container()
+            : _CellDay('${rowIndex + 1}', selection),
         widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
@@ -77,13 +85,37 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
         ),
         rowSelect: (rowIndex) {
           if (rowIndex == widget.cycle.observations.length) return;
-          showModalBottomSheet(
-              context: context,
-              builder: (context) =>
-                  MenuObservationModification(widget.cycle, widget.cycle.observations[rowIndex]));
+
+          //Séléction de la ligne
+          if (selection) {
+            setState(() {
+              _selected[rowIndex] = !_selected[rowIndex];
+              alimenterListObservationSelectionne();
+            });
+          } else {
+            //Modal de modification de l'observation
+            showModalBottomSheet(
+                context: context,
+                builder: (context) =>
+                    MenuObservationModification(widget.cycle, widget.cycle.observations[rowIndex]));
+          }
+        },
+        isRowSelected: (rowIndex) {
+          if (rowIndex >= widget.cycle.observations.length) return false;
+          return _selected![rowIndex];
         },
       ),
     );
+  }
+
+  alimenterListObservationSelectionne() {
+    List<Observation> observations = [];
+    for (int i = 0; i < _selected.length; i++) {
+      if (_selected[i]) {
+        observations.add(widget.cycle.observations[i]);
+      }
+    }
+    ref.read(observationSectionne.notifier).state = observations;
   }
 }
 
@@ -134,7 +166,12 @@ class _Cell extends StatelessWidget {
             color: colorpanel(800),
             child: Padding(
               padding: const EdgeInsets.all(2.0),
-              child: Container(color: observation.analyse?.getOrCrash().toColor()),
+              child: Stack(
+                children: [
+                  Container(color: observation.analyse?.getOrCrash().toColor()),
+                  if (observation.jourFertile == false) Placeholder(),
+                ],
+              ),
             ));
         break;
       case 'Sensation':
@@ -215,13 +252,20 @@ class _CellHeader extends StatelessWidget {
 
 class _CellDay extends StatelessWidget {
   String value;
+  bool selection;
   _CellDay(
-    this.value, {
+    this.value,
+    this.selection, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('J$value', style: Theme.of(context).textTheme.headline5));
+    /* return Row(children: [
+
+      Text('J$value', style: Theme.of(context).textTheme.headline5),
+    ]); */
+    return Center(
+        child: Text('${selection ? " - " : ""}J$value', style: Theme.of(context).textTheme.headline5));
   }
 }

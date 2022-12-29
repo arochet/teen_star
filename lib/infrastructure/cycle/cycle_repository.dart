@@ -25,6 +25,7 @@ abstract class ICycleRepository {
   Future<Either<CycleFailure, Unit>> marquerJourSommet(Cycle cycle, UniqueId id);
   Future<Unit> marquerComme(Observation observation, int i);
   Future<Unit> modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state);
+  Future<Unit> marquerJourFertile(List<Observation> observation, bool fertile);
 }
 
 @LazySingleton(as: ICycleRepository)
@@ -216,6 +217,16 @@ class CycleRepository implements ICycleRepository {
     printDev('modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state)');
     await _database.update(db_observation, {'analyse': state.toString()},
         where: 'id = ?', whereArgs: [observation.id.getOrCrash()]);
+    return unit;
+  }
+
+  @override
+  Future<Unit> marquerJourFertile(List<Observation> observation, bool fertile) async {
+    printDev('marquerJourInfertile(List<Observation> observation)');
+    for (var obs in observation) {
+      await _database.update(db_observation, {'jourFertile': fertile ? 1 : 0},
+          where: 'id = ?', whereArgs: [obs.id.getOrCrash()]);
+    }
     return unit;
   }
 }

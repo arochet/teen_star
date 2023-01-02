@@ -16,6 +16,7 @@ abstract class ICycleRepository {
   Future<Either<CycleFailure, int>> createCycle();
   Future<Either<CycleFailure, Cycle>> readCycle(UniqueId id);
   Future<Either<CycleFailure, List<CycleDTO>>> readAllCycles();
+  Future<Either<CycleFailure, List<Cycle>>> readListCycles(int start, int finish);
   Future<Either<CycleFailure, List<ObservationHistoriqueDTO>>> readAllCyclesHistorique();
   Future<Either<ObservationFailure, Unit>> createObservation(Cycle? cycle, Observation observation);
   Future<Either<ObservationFailure, Unit>> update(Observation observation);
@@ -140,6 +141,34 @@ class CycleRepository implements ICycleRepository {
       });
 
       return right(cycleDTO);
+    } catch (e, trace) {
+      print(e);
+      print(trace);
+      return left(CycleFailure.unexpected(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CycleFailure, List<Cycle>>> readListCycles(int start, int finish) async {
+    printDev('readListCycles(UniqueId start, UniqueId finish)');
+    try {
+      //Récupère les CyclesDTO (DataTransferObject) sans les observations
+      final List<Map<String, dynamic>> mapsCycle =
+          await _database.query(db_cycle, where: 'id >= ? AND id <= ?', whereArgs: [start, finish]);
+      List<Cycle> cyclesVide = List.generate(mapsCycle.length, (index) {
+        return CycleDTO.fromJson(mapsCycle[index]).toDomain([]);
+      });
+
+      //Pour chaque cycle, on récupère les observations
+      List<Cycle> listCycle = [];
+      for (var cycle in cyclesVide) {
+        final asyncCycle = await readCycle(cycle.id);
+        asyncCycle.foldRight(null, (Cycle r, previous) {
+          listCycle.add(r);
+        });
+      }
+
+      return right(listCycle);
     } catch (e, trace) {
       print(e);
       print(trace);

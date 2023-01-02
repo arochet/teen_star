@@ -4,6 +4,7 @@ import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/providers.dart';
 
 import '../pdf/generate_cycle_pdf.dart';
 
@@ -71,10 +72,11 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
               ),
               SpaceH30(),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   print('Premier Cycle ${controllerPremierCycle.text}');
                   print('Dernier Cycle ${controllerDernierCycle.text}');
-                  generatePDF();
+                  final userData = await ref.read(currentUserData.future);
+                  generatePDF(userData, []);
                   Navigator.of(context).pop();
                 },
                 child: Text("Exportation PDF"),

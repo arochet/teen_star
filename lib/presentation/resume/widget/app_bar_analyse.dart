@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
 
 import '../../core/_core/theme_button.dart';
+import '../pdf/generate_cycle_pdf.dart';
 import '../resume_page.dart';
 import 'dialog_pdf.dart';
 
@@ -52,13 +54,23 @@ class _BarMain extends ConsumerWidget {
                 final listeCycleEither = await ref.read(allCycleProvider.future);
 
                 listeCycleEither.fold(
-                    (l) => showSnackbarCycleFailure(context, l),
-                    (listeCycle) => showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return DialogPDF(listeCycle);
-                          },
-                        ));
+                  (l) => showSnackbarCycleFailure(context, l),
+                  (List<CycleDTO> listeCycle) async {
+                    final listCycleAsync = await ref
+                        .read(cycleRepositoryProvider)
+                        .readListCycles(listeCycle.first.id!, listeCycle.last.id!);
+
+                    final userData = await ref.read(currentUserData.future);
+                    listCycleAsync.fold(
+                        (l) => showSnackbarCycleFailure(context, l), (list) => generatePDF(userData, list));
+                    /* showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return DialogPDF(listeCycle);
+                    },
+                  ); */
+                  },
+                );
               },
               icon: Icon(Icons.file_copy, size: 18),
               label: Text("PDF"),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
 
 import '../../core/_core/theme_button.dart';
 import '../resume_page.dart';
+import 'dialog_pdf.dart';
 
 class AppBarAnalyse extends ConsumerWidget {
   const AppBarAnalyse({
@@ -46,7 +48,18 @@ class _BarMain extends ConsumerWidget {
           SizedBox(height: 10),
           if (!displayAnalyse)
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                final listeCycleEither = await ref.read(allCycleProvider.future);
+
+                listeCycleEither.fold(
+                    (l) => showSnackbarCycleFailure(context, l),
+                    (listeCycle) => showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return DialogPDF(listeCycle);
+                          },
+                        ));
+              },
               icon: Icon(Icons.file_copy, size: 18),
               label: Text("PDF"),
               style: buttonLittlePrimary,

@@ -33,7 +33,7 @@ class AppBarCycle extends ConsumerWidget {
 
     //APPBAR
     return ShowComponentFile(
-      title: '_AppBarCycle',
+      title: 'AppBarCycle',
       child: Stack(
         children: [
           //CYCLE COURANT

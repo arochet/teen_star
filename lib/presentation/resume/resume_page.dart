@@ -12,7 +12,7 @@ import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widget/app_bar_cycle.dart';
-import 'widget/appbar_analyse.dart';
+import 'widget/app_bar_analyse.dart';
 import 'widget/button_ajout_observation_journee.dart';
 import 'widget/button_modification_observation.dart';
 import 'widget/tableau_cycle.dart';

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -7,6 +8,7 @@ import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
+import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 
 generatePDF(UserData? userData, List<Cycle> listCycles) async {
@@ -36,10 +38,41 @@ generatePDF(UserData? userData, List<Cycle> listCycles) async {
     Cell('Commentaires animatrice', flex: 8),
   ];
 
+  //IMAGE
+  final MemoryImage image = MemoryImage(
+    (await rootBundle.load(AssetsPath.icon_humeur_neutre)).buffer.asUint8List(),
+  );
+
   //POUR CHAQUE CYCLE
   final int nombreObservationAffichee = 15;
   for (Cycle cycle in listCycles) {
     for (int i = 0; i < cycle.observations.length / nombreObservationAffichee; i++) {
+      //Range des observations à afficher
+      int rangeStart = i * nombreObservationAffichee;
+      int rangeEnd = (i * nombreObservationAffichee) + nombreObservationAffichee;
+      if (rangeEnd > cycle.observations.length) {
+        rangeEnd = (i * nombreObservationAffichee) + (cycle.observations.length % nombreObservationAffichee);
+      }
+
+      //Liste des images à charger
+      Map listImageDouleur = {};
+      for (var douleur in DouleurState.values) {
+        listImageDouleur[douleur] =
+            MemoryImage((await rootBundle.load(douleur.toIconPath())).buffer.asUint8List());
+      }
+
+      Map listImagehumeur = {};
+      for (var humeur in HumeurState.values) {
+        listImagehumeur[humeur] =
+            MemoryImage((await rootBundle.load(humeur.toIconPath())).buffer.asUint8List());
+      }
+
+      Map listImageSensation = {};
+      for (var sensation in SensationState.values) {
+        listImageSensation[sensation] =
+            MemoryImage((await rootBundle.load(sensation.toIconPath())).buffer.asUint8List());
+      }
+
       pdf.addPage(Page(
           pageFormat: PdfPageFormat.a4,
           orientation: PageOrientation.portrait,
@@ -55,21 +88,18 @@ generatePDF(UserData? userData, List<Cycle> listCycles) async {
                   context,
                   tabTitleCycle,
                   cycle.observations
-                      .getRange(
-                          i * nombreObservationAffichee,
-                          (i * nombreObservationAffichee) +
-                              (cycle.observations.length % nombreObservationAffichee)) //A CHANGER !!!!!
+                      .getRange(rangeStart, rangeEnd) //A CHANGER !!!!!
                       .map((Observation observation) => [
                             'J${cycle.getDayOfObservation(observation)}',
                             AppDateUtils.formatDate(observation.date),
                             observation.couleur?.getOrCrash().toColorPDF(),
                             observation.analyse?.getOrCrash().toColorPDF(),
-                            observation.sensation?.getOrCrash().toDisplayShort(),
+                            listImageSensation[observation.sensation?.getOrCrash()],
                             '${observation.sang?.getOrCrash().toDisplayString()} ${observation.mucus?.getOrCrash().toDisplayString()}',
                             observation.douleurs
-                                ?.map((douleur) => douleur.getOrCrash().toDisplayShort())
-                                .toString(),
-                            observation.humeur?.getOrCrash().toDisplayString(),
+                                ?.map((douleur) => listImageDouleur[douleur.getOrCrash()])
+                                .toList(),
+                            listImagehumeur[observation.humeur?.getOrCrash()],
                             observation.evenements
                                 ?.map((evenement) => evenement.getOrCrash().toDisplayString())
                                 .toString(),
@@ -81,7 +111,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles) async {
                   context,
                   tabTitleCycleCommentaire,
                   cycle.observations
-                      .getRange(i * 10, (i * 10) + (cycle.observations.length % 10)) ////A CHANGER !!!!!
+                      .getRange(rangeStart, rangeEnd) ////A CHANGER !!!!!
                       .map((Observation observation) => [
                             'J${cycle.getDayOfObservation(observation)}',
                             AppDateUtils.formatDate(observation.date),
@@ -179,6 +209,13 @@ Widget tableauWidget(Context context, List<Cell> title, List<List<dynamic>> data
               return paddedText('$e');
             } else if (e is PdfColor) {
               return Container(height: 20, width: 20, color: e);
+            } else if (e is MemoryImage) {
+              return Padding(
+                  padding: EdgeInsets.all(3), child: Center(child: Image(e, width: 18, height: 18)));
+            } else if (e is List<MemoryImage>) {
+              return Padding(
+                  padding: EdgeInsets.all(3),
+                  child: Row(children: e.map((image) => Image(image, width: 18, height: 18)).toList()));
             }
 
             return Container();

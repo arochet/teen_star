@@ -132,7 +132,7 @@ extension ParseToSringSensation on SensationState {
       case SensationState.autre:
         return AssetsPath.icon_vide;
       case SensationState.none:
-        return '';
+        return AssetsPath.icon_vide;
     }
   }
 }
@@ -366,7 +366,7 @@ extension ParseToSringDouleur on DouleurState {
       case DouleurState.aucune:
         return AssetsPath.icon_vide;
       case DouleurState.none:
-        return '';
+        return AssetsPath.icon_vide;
     }
   }
 }
@@ -438,7 +438,7 @@ extension ParseToSringEvenement on EvenementState {
       case EvenementState.autre:
         return AssetsPath.icon_evt_autre;
       case EvenementState.none:
-        return '';
+        return AssetsPath.icon_vide;
     }
   }
 }
@@ -528,7 +528,7 @@ extension ParseToSringHumeur on HumeurState {
       case HumeurState.autre:
         return AssetsPath.icon_humeur_autre;
       case HumeurState.none:
-        return '';
+        return AssetsPath.icon_vide;
     }
   }
 }

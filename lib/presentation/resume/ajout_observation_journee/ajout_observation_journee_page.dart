@@ -7,7 +7,8 @@ import 'widget/observation_form.dart';
 
 class ObservationAddPage extends StatelessWidget {
   Cycle? cycle;
-  ObservationAddPage(this.cycle, {Key? key}) : super(key: key);
+  DateTime date;
+  ObservationAddPage(this.cycle, this.date, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ObservationAddPage extends StatelessWidget {
         title: '/PRESENTATION/./resume/ajout_observation_journee/observation_add_page.dart',
         child: Padding(
           padding: EdgeInsets.all(10),
-          child: ObservationFormProvider(cycle),
+          child: ObservationFormProvider(cycle, date),
         ),
       ),
     );

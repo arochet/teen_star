@@ -22,14 +22,14 @@ generatePDF(UserData? userData, List<Cycle> listCycles) async {
   //Données tableau
   final List<Cell> tabTitleCycle = [
     Cell('Jour', flex: 1),
-    Cell('Date', flex: 2),
+    Cell('Date', flex: 1),
     Cell('Couleur', flex: 1),
     Cell('Analyse', flex: 1),
-    Cell('Sensation', flex: 2),
-    Cell('Observation', flex: 1),
-    Cell('Douleur', flex: 1),
+    Cell('Sensation', flex: 1),
+    Cell('Observation', flex: 2),
+    Cell('Douleurs', flex: 2),
     Cell('Humeur', flex: 1),
-    Cell('Evénement', flex: 1),
+    Cell('Evénement', flex: 2),
   ];
 
   final List<Cell> tabTitleCycleCommentaire = [
@@ -54,23 +54,37 @@ generatePDF(UserData? userData, List<Cycle> listCycles) async {
         rangeEnd = (i * nombreObservationAffichee) + (cycle.observations.length % nombreObservationAffichee);
       }
 
-      //Liste des images à charger
-      Map listImageDouleur = {};
-      for (var douleur in DouleurState.values) {
-        listImageDouleur[douleur] =
-            MemoryImage((await rootBundle.load(douleur.toIconPath())).buffer.asUint8List());
-      }
-
-      Map listImagehumeur = {};
-      for (var humeur in HumeurState.values) {
-        listImagehumeur[humeur] =
-            MemoryImage((await rootBundle.load(humeur.toIconPath())).buffer.asUint8List());
-      }
-
-      Map listImageSensation = {};
+      //CHARGEMENT LISTE DES ICONES
+      Map<SensationState, Widget> listImageSensation = {};
       for (var sensation in SensationState.values) {
-        listImageSensation[sensation] =
-            MemoryImage((await rootBundle.load(sensation.toIconPath())).buffer.asUint8List());
+        listImageSensation[sensation] = await _iconFromTxt(sensation.toDisplayShort());
+      }
+
+      Map<SangState, MemoryImage> listImageSang = {};
+      for (var sang in SangState.values) {
+        listImageSang[sang] = MemoryImage((await rootBundle.load(sang.toIconPath())).buffer.asUint8List());
+      }
+
+      Map<MucusState, MemoryImage> listImageMucus = {};
+      for (var mucus in MucusState.values) {
+        listImageMucus[mucus] = MemoryImage((await rootBundle.load(mucus.toIconPath())).buffer.asUint8List());
+      }
+
+      Map<DouleurState, Widget> listWidgetDouleur = {};
+      for (var douleur in DouleurState.values) {
+        listWidgetDouleur[douleur] = await _iconFromTxt(douleur.toDisplayShort());
+      }
+
+      Map<EvenementState, MemoryImage> listImageEvenement = {};
+      for (var evenement in EvenementState.values) {
+        listImageEvenement[evenement] =
+            MemoryImage((await rootBundle.load(evenement.toIconPath())).buffer.asUint8List());
+      }
+
+      Map<HumeurState, MemoryImage> listImageHumeur = {};
+      for (var humeur in HumeurState.values) {
+        listImageHumeur[humeur] =
+            MemoryImage((await rootBundle.load(humeur.toIconPath())).buffer.asUint8List());
       }
 
       pdf.addPage(Page(
@@ -95,14 +109,17 @@ generatePDF(UserData? userData, List<Cycle> listCycles) async {
                             observation.couleur?.getOrCrash().toColorPDF(),
                             observation.analyse?.getOrCrash().toColorPDF(),
                             listImageSensation[observation.sensation?.getOrCrash()],
-                            '${observation.sang?.getOrCrash().toDisplayString()} ${observation.mucus?.getOrCrash().toDisplayString()}',
+                            [
+                              listImageSang[observation.sang?.getOrCrash()],
+                              listImageMucus[observation.mucus?.getOrCrash()]
+                            ],
                             observation.douleurs
-                                ?.map((douleur) => listImageDouleur[douleur.getOrCrash()])
+                                ?.map((douleur) => listWidgetDouleur[douleur.getOrCrash()])
                                 .toList(),
-                            listImagehumeur[observation.humeur?.getOrCrash()],
+                            listImageHumeur[observation.humeur?.getOrCrash()],
                             observation.evenements
-                                ?.map((evenement) => evenement.getOrCrash().toDisplayString())
-                                .toString(),
+                                ?.map((evenement) => listImageEvenement[evenement.getOrCrash()])
+                                .toList(),
                           ])
                       .toList()),
               SizedBox(height: 15),
@@ -206,19 +223,37 @@ Widget tableauWidget(Context context, List<Cell> title, List<List<dynamic>> data
         (List row) => TableRow(
           children: row.map<Widget>((e) {
             if (e is String) {
-              return paddedText('$e');
+              return Center(child: paddedText('$e'));
             } else if (e is PdfColor) {
-              return Container(height: 20, width: 20, color: e);
+              return Center(child: Container(height: 20, width: 20, color: e));
             } else if (e is MemoryImage) {
               return Padding(
                   padding: EdgeInsets.all(3), child: Center(child: Image(e, width: 18, height: 18)));
-            } else if (e is List<MemoryImage>) {
+            } else if (e is List<MemoryImage> || e is List<MemoryImage?>) {
               return Padding(
                   padding: EdgeInsets.all(3),
-                  child: Row(children: e.map((image) => Image(image, width: 18, height: 18)).toList()));
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: e
+                          .map<Widget>((MemoryImage? image) =>
+                              image != null ? Image(image, width: 18, height: 18) : Container())
+                          .toList()));
+            } else if (e is List<Widget> || e is List<Widget?>) {
+              return Padding(
+                  padding: EdgeInsets.all(3),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: e.map<Widget>((Widget? w) {
+                        if (w != null) {
+                          return w;
+                        }
+                        return Container();
+                      }).toList()));
+            } else if (e is Widget) {
+              return Padding(padding: EdgeInsets.all(3), child: e);
             }
 
-            return Container();
+            return Center(child: Text('Inconnu'));
           }).toList(),
         ),
       ),
@@ -261,3 +296,11 @@ class Cell {
 
   Cell(this.label, {this.flex = 1});
 }
+
+Future<Widget> _iconFromTxt(String txt) async => Container(
+    width: 20,
+    height: 20,
+    child: Stack(children: [
+      Center(child: Image(MemoryImage((await rootBundle.load(AssetsPath.icon_vide)).buffer.asUint8List()))),
+      Center(child: Text(txt, style: TextStyle(fontSize: 10))),
+    ]));

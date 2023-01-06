@@ -27,4 +27,23 @@ abstract class Cycle with _$Cycle {
     DateTime? firstDayOfCycle = this.observations.first.date;
     return AppDateUtils.diffInDaysWith(obs.date!, firstDayOfCycle!) + 1;
   }
+
+  List<Observation> getObservationsWithEmptyDays() {
+    List<Observation> observationsWithEmptyDays = [];
+    DateTime? firstDayOfCycle = this.observations.first.date;
+    DateTime? lastDayOfCycle = this.observations.last.date;
+    int nbDays = AppDateUtils.diffInDaysWith(lastDayOfCycle!, firstDayOfCycle!) + 1;
+    for (int i = 0; i < nbDays; i++) {
+      DateTime day = firstDayOfCycle.add(Duration(days: i));
+      List<Observation> obs = this.observations.where((element) => element.date == day).toList();
+      if (obs.length == 0) {
+        observationsWithEmptyDays.add(Observation.none(day));
+      } else {
+        for (var o in obs) {
+          observationsWithEmptyDays.add(o);
+        }
+      }
+    }
+    return observationsWithEmptyDays;
+  }
 }

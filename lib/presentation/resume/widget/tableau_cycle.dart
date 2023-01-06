@@ -5,6 +5,7 @@ import 'package:teenstar/DOMAIN/auth/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
+import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
@@ -18,6 +19,7 @@ import 'package:teenstar/PRESENTATION/resume/shared/icon_observation.dart';
 import 'package:teenstar/providers.dart';
 
 import '../../core/_utils/app_date_utils.dart';
+import 'button_ajout_observation_journee.dart';
 import 'menu_observation_modification.dart';
 import 'show_observation_notes.dart';
 
@@ -35,15 +37,17 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
   @override
   void initState() {
     super.initState();
-    _selected = List.generate(widget.cycle.observations.length, (index) => false);
+    _selected = List.generate(widget.cycle.getObservationsWithEmptyDays().length, (index) => false);
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Observation> observations = widget.cycle.getObservationsWithEmptyDays();
+
     final selection = ref.watch(isSelection);
     //Si le tableau a changé, on réinitialise la liste de sélection
-    if (_selected.length != widget.cycle.observations.length || !selection) {
-      _selected = List.generate(widget.cycle.observations.length, (index) => false);
+    if (_selected.length != observations.length || !selection) {
+      _selected = List.generate(observations.length, (index) => false);
     }
 
     //Titre du tableau
@@ -60,22 +64,20 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
 
     //Largeur des colonnes
     Map cellsWidth = {'Observation': 150, 'Evenements': 120};
+
     return ShowComponentFile(
       title: 'tableau_cycle.dart',
       child: StickyHeadersTable(
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) => _CellHeader(title[colulmnIndex]),
-        contentCellBuilder: (int columnIndex, int rowIndex) => rowIndex == widget.cycle.observations.length
+        contentCellBuilder: (int columnIndex, int rowIndex) => rowIndex == observations.length
             ? Container(height: 50, width: 50)
-            : _Cell(
-                widget.cycle.observations[rowIndex],
-                title[columnIndex],
-                widget.cycle.observations[rowIndex].id.getOrCrash() ==
-                    widget.cycle.idJourneeSoleil.getOrCrash()),
-        rowsLength: widget.cycle.observations.length + 1,
-        rowsTitleBuilder: (int rowIndex) => rowIndex == widget.cycle.observations.length
+            : _Cell(observations[rowIndex], title[columnIndex],
+                observations[rowIndex].id.getOrCrash() == widget.cycle.idJourneeSoleil.getOrCrash()),
+        rowsLength: observations.length + 1,
+        rowsTitleBuilder: (int rowIndex) => rowIndex == observations.length
             ? Container()
-            : _CellDay('${rowIndex + 1}', selection),
+            : _CellDay('${widget.cycle.getDayOfObservation(observations[rowIndex])}', selection),
         widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
@@ -83,8 +85,8 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
           contentCellWidth: 60, //Sert à rien car il y'a widthCell
           contentCellHeight: 50,
         ),
-        rowSelect: (rowIndex) {
-          if (rowIndex == widget.cycle.observations.length) return;
+        rowSelect: (rowIndex) async {
+          if (rowIndex == observations.length) return;
 
           //Séléction de la ligne
           if (selection) {
@@ -93,16 +95,26 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
               alimenterListObservationSelectionne();
             });
           } else {
-            //Modal de modification de l'observation
-            showModalBottomSheet(
-                context: context,
-                builder: (context) =>
-                    MenuObservationModification(widget.cycle, widget.cycle.observations[rowIndex]));
+            if (!observations[rowIndex].isNone)
+              //Modal de modification de l'observation
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) => MenuObservationModification(widget.cycle, observations[rowIndex]));
+            else {
+              DateTime dateObservation = observations[rowIndex].date!;
+              //Si l'observation est vide, on affiche un message
+              if (await showDialogChoix(context,
+                      'Voulez-vous ajouter une observation pour le ${AppDateUtils.formatDate(dateObservation)} ?',
+                      positiveText: 'Ajouter', negativeText: 'Annuler') ==
+                  true)
+                ButtonAjoutObservationJournee.openPageNouvelleObservation(
+                    context, widget.cycle, ref, true, dateObservation);
+            }
           }
         },
         isRowSelected: (rowIndex) {
-          if (rowIndex >= widget.cycle.observations.length) return false;
-          return _selected![rowIndex];
+          if (rowIndex >= observations.length) return false;
+          return _selected[rowIndex];
         },
       ),
     );
@@ -133,6 +145,12 @@ class _Cell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget info;
+
+    //Cas ou c'est une observation vide
+    if (observation.isNone) {
+      if (column != 'Date') return Container(width: 10, height: 10);
+    }
+
     switch (column) {
       case 'Date':
         info = Center(

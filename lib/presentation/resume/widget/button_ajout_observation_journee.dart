@@ -38,10 +38,10 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
                 },
               );
 
-              _openPageNouvelleObservation(context, cycle, ref, continuerCycle);
+              openPageNouvelleObservation(context, cycle, ref, continuerCycle, DateTime.now());
             } else {
               //Cas ou il n'existe pas de cycle (première observation)
-              _openPageNouvelleObservation(context, null, ref, null);
+              openPageNouvelleObservation(context, null, ref, null, DateTime.now());
             }
           },
           child: Text("Observation de la journée"),
@@ -51,11 +51,12 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
     );
   }
 
-  _openPageNouvelleObservation(
-      BuildContext context, Cycle? cycle, WidgetRef ref, bool? continuerCycle) async {
+  static openPageNouvelleObservation(
+      BuildContext context, Cycle? cycle, WidgetRef ref, bool? continuerCycle, DateTime date) async {
     if (continuerCycle != null || cycle == null) {
       //On ouvre la page d'ajout d'observation
-      await context.router.push(ObservationAddRoute(cycle: continuerCycle == true ? cycle : null));
+      await context.router
+          .push(ObservationAddRoute(cycle: continuerCycle == true ? cycle : null, date: date));
 
       //L'observation a été ajoutée, on recharge les données
       ref.refresh(allCycleProvider);

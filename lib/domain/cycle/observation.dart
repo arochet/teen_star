@@ -53,4 +53,45 @@ abstract class Observation with _$Observation {
         marque: 0,
         jourFertile: true,
       );
+
+  factory Observation.none(DateTime date) => Observation(
+        id: UniqueId(),
+        date: date,
+        couleur: null,
+        analyse: null,
+        sensation: null,
+        sensationsAutre: null,
+        sang: null,
+        mucus: null,
+        mucusAutre: null,
+        douleurs: null,
+        douleursAutre: null,
+        evenements: null,
+        temperatureBasale: null,
+        humeur: null,
+        humeurAutre: null,
+        notesConfidentielles: null,
+        commentaireAnimatrice: null,
+        marque: null,
+        jourFertile: null,
+      );
+
+  bool get isNone =>
+      couleur == null &&
+      analyse == null &&
+      sensation == null &&
+      sensationsAutre == null &&
+      sang == null &&
+      mucus == null &&
+      mucusAutre == null &&
+      douleurs == null &&
+      douleursAutre == null &&
+      evenements == null &&
+      temperatureBasale == null &&
+      humeur == null &&
+      humeurAutre == null &&
+      notesConfidentielles == null &&
+      commentaireAnimatrice == null &&
+      marque == null &&
+      jourFertile == null;
 }

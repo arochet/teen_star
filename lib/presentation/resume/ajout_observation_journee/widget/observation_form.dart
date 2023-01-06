@@ -20,8 +20,10 @@ import 'choix_form_field.dart';
 
 class ObservationFormProvider extends ConsumerWidget {
   Cycle? cycle;
+  DateTime date;
   ObservationFormProvider(
-    this.cycle, {
+    this.cycle,
+    this.date, {
     Key? key,
   }) : super(key: key);
 
@@ -50,19 +52,30 @@ class ObservationFormProvider extends ConsumerWidget {
                 });
               }));
     });
-    return ObservationForm(cycle);
+    return ObservationForm(cycle, date);
   }
 }
 
-class ObservationForm extends ConsumerWidget {
+class ObservationForm extends ConsumerStatefulWidget {
   Cycle? cycle; //Le cycle est null si c'est la première observation
-  ObservationForm(
-    this.cycle, {
-    Key? key,
-  }) : super(key: key);
+  DateTime date;
+  ObservationForm(this.cycle, this.date, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _ObservationFormState createState() => _ObservationFormState();
+}
+
+class _ObservationFormState extends ConsumerState<ObservationForm> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(cycleFormNotifierProvider.notifier).dateChanged(widget.date);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final form = ref.watch(cycleFormNotifierProvider);
     final notifierForm = ref.read(cycleFormNotifierProvider.notifier);
     //Formulaire de l'observation
@@ -70,7 +83,7 @@ class ObservationForm extends ConsumerWidget {
       autovalidateMode: AutovalidateMode.always,
       child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
         Center(
-            child: Text(cycle != null ? "Cycle ${cycle!.id.getOrCrash()}" : "Nouveau cycle",
+            child: Text(widget.cycle != null ? "Cycle ${widget.cycle!.id.getOrCrash()}" : "Nouveau cycle",
                 style: Theme.of(context).textTheme.headline3)),
         const SizedBox(height: 8),
         //Date de l'observation
@@ -96,7 +109,7 @@ class ObservationForm extends ConsumerWidget {
                 notifierForm.notesConfidentiellesChanged("Test note confidentielles");
                 notifierForm.evenementsChanged(EvenementState.fatigue);
                 notifierForm.humeurChanged(Humeur(HumeurState.humeurChangeante));
-                notifierForm.addObservationPressed(cycle);
+                notifierForm.addObservationPressed(widget.cycle);
               },
               style: buttonNormalConfirm,
               child: const Text("[DEV] Enregistrer l'Observation"),
@@ -230,7 +243,7 @@ class ObservationForm extends ConsumerWidget {
         SpaceH10(),
         Align(
           child: ElevatedButton(
-            onPressed: () => notifierForm.addObservationPressed(cycle),
+            onPressed: () => notifierForm.addObservationPressed(widget.cycle),
             style: buttonNormalConfirm,
             child: const Text("Enregistrer l'Observation"),
           ),

@@ -155,6 +155,7 @@ class AppRouter extends _i25.RootStackRouter {
         routeData: routeData,
         child: _i16.ObservationAddPage(
           args.cycle,
+          args.date,
           key: args.key,
         ),
       );
@@ -570,12 +571,14 @@ class UtilsRoute extends _i25.PageRouteInfo<void> {
 class ObservationAddRoute extends _i25.PageRouteInfo<ObservationAddRouteArgs> {
   ObservationAddRoute({
     required _i27.Cycle? cycle,
+    required DateTime date,
     _i26.Key? key,
   }) : super(
           ObservationAddRoute.name,
           path: '/observation-add-route',
           args: ObservationAddRouteArgs(
             cycle: cycle,
+            date: date,
             key: key,
           ),
         );
@@ -586,16 +589,19 @@ class ObservationAddRoute extends _i25.PageRouteInfo<ObservationAddRouteArgs> {
 class ObservationAddRouteArgs {
   const ObservationAddRouteArgs({
     required this.cycle,
+    required this.date,
     this.key,
   });
 
   final _i27.Cycle? cycle;
 
+  final DateTime date;
+
   final _i26.Key? key;
 
   @override
   String toString() {
-    return 'ObservationAddRouteArgs{cycle: $cycle, key: $key}';
+    return 'ObservationAddRouteArgs{cycle: $cycle, date: $date, key: $key}';
   }
 }
 

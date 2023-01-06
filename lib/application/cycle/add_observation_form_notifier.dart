@@ -57,9 +57,8 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
 
   ObservationFormNotifier(this._iObservationRepository) : super(AddObservationFormData.initial());
 
-  dateChanged(int param) {
-    state =
-        state.copyWith(date: DateTime.fromMillisecondsSinceEpoch(param), authFailureOrSuccessOption: none());
+  dateChanged(DateTime date) {
+    state = state.copyWith(date: date, authFailureOrSuccessOption: none());
   }
 
   sensationChanged(Sensation sensation) {

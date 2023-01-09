@@ -66,6 +66,8 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
   late _SyncScrollController _verticalSyncController;
   late _SyncScrollController _horizontalSyncController;
 
+  final double paddingBottom = 50;
+
   @override
   void initState() {
     super.initState();
@@ -132,21 +134,28 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
               // STICKY COLUMN
               NotificationListener<ScrollNotification>(
                 child: SingleChildScrollView(
-                  child: Column(
-                    children: List<Widget>.generate(
-                      widget.rowsLength,
-                      (int i) => Container(
-                        width: widget.cellDimensions.stickyLegendWidth,
-                        height: widget.cellDimensions.contentCellHeight,
-                        color: widget.isRowSelected != null
-                            ? (widget.isRowSelected!(i)
-                                ? Colors.blue
-                                : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null))
-                            : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null),
-                        child: SizedBox(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: paddingBottom),
+                    child: Column(
+                      children: List<Widget>.generate(
+                        widget.rowsLength,
+                        (int i) => Container(
                           width: widget.cellDimensions.stickyLegendWidth,
                           height: widget.cellDimensions.contentCellHeight,
-                          child: widget.rowsTitleBuilder(i),
+                          decoration: BoxDecoration(
+                            color: widget.isRowSelected != null
+                                ? (widget.isRowSelected!(i)
+                                    ? Colors.blue
+                                    : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null))
+                                : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
+                          ),
+                          child: SizedBox(
+                            width: widget.cellDimensions.stickyLegendWidth,
+                            height: widget.cellDimensions.contentCellHeight,
+                            child: widget.rowsTitleBuilder(i),
+                          ),
                         ),
                       ),
                     ),
@@ -171,31 +180,42 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                     child: NotificationListener<ScrollNotification>(
                       child: SingleChildScrollView(
                           controller: _verticalBodyController,
-                          child: Column(
-                            children: List.generate(
-                              widget.rowsLength,
-                              (int i) => InkWell(
-                                onTap: (() {
-                                  if (widget.rowSelect != null) {
-                                    widget.rowSelect!(i);
-                                  }
-                                }),
-                                child: Row(
-                                  children: List<Container>.generate(
-                                    widget.columnsLength,
-                                    (int j) => Container(
-                                      width: widget.widthCell != null
-                                          ? widget.widthCell!(j)
-                                          : widget.cellDimensions.contentCellWidth,
-                                      height: widget.cellDimensions.contentCellHeight,
-                                      color: widget.isRowSelected != null
-                                          ? (widget.isRowSelected!(i)
-                                              ? Color.fromARGB(169, 23, 129, 215)
-                                              : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null))
-                                          : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null),
-                                      child: FittedBox(
-                                        fit: widget.cellFit,
-                                        child: widget.contentCellBuilder(j, i),
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: paddingBottom),
+                            child: Column(
+                              children: List.generate(
+                                widget.rowsLength,
+                                (int i) => InkWell(
+                                  onTap: (() {
+                                    if (widget.rowSelect != null) {
+                                      widget.rowSelect!(i);
+                                    }
+                                  }),
+                                  child: Row(
+                                    children: List<Container>.generate(
+                                      widget.columnsLength,
+                                      (int j) => Container(
+                                        width: widget.widthCell != null
+                                            ? widget.widthCell!(j)
+                                            : widget.cellDimensions.contentCellWidth,
+                                        height: widget.cellDimensions.contentCellHeight,
+                                        //Arrondis + Couleur
+                                        decoration: BoxDecoration(
+                                          color: widget.isRowSelected != null
+                                              ? (widget.isRowSelected!(i)
+                                                  ? Color.fromARGB(169, 23, 129, 215)
+                                                  : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null))
+                                              : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null),
+                                          borderRadius: j == widget.columnsLength - 1
+                                              ? BorderRadius.only(
+                                                  topRight: Radius.circular(10),
+                                                  bottomRight: Radius.circular(10))
+                                              : null,
+                                        ),
+                                        child: FittedBox(
+                                          fit: widget.cellFit,
+                                          child: widget.contentCellBuilder(j, i),
+                                        ),
                                       ),
                                     ),
                                   ),

@@ -14,10 +14,6 @@ import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 generatePDF(UserData? userData, List<Cycle> listCycles) async {
   final Document pdf = Document();
 
-  /* final logo = MemoryImage((await rootBundle.load(AppStaticImages.icOnePerson))
-      .buffer
-      .asUint8List()); */
-
   //LISTE DES CYCLES
   //Données tableau
   final List<Cell> tabTitleCycle = [
@@ -26,7 +22,8 @@ generatePDF(UserData? userData, List<Cycle> listCycles) async {
     Cell('Couleur', flex: 1),
     Cell('Analyse', flex: 1),
     Cell('Sensation', flex: 1),
-    Cell('Observation', flex: 2),
+    Cell('Sang', flex: 1),
+    Cell('Mucus', flex: 1),
     Cell('Douleurs', flex: 2),
     Cell('Humeur', flex: 1),
     Cell('Evénement', flex: 2),
@@ -109,10 +106,8 @@ generatePDF(UserData? userData, List<Cycle> listCycles) async {
                             observation.couleur?.getOrCrash().toColorPDF(),
                             observation.analyse?.getOrCrash().toColorPDF(),
                             listImageSensation[observation.sensation?.getOrCrash()],
-                            [
-                              listImageSang[observation.sang?.getOrCrash()],
-                              listImageMucus[observation.mucus?.getOrCrash()]
-                            ],
+                            listImageSang[observation.sang?.getOrCrash()],
+                            listImageMucus[observation.mucus?.getOrCrash()],
                             observation.douleurs
                                 ?.map((douleur) => listWidgetDouleur[douleur.getOrCrash()])
                                 .toList(),

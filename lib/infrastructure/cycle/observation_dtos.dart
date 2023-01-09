@@ -4,8 +4,7 @@ import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
-import 'package:teenstar/PRESENTATION/core/_utils/bool_utils.dart';
-import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 part 'observation_dtos.freezed.dart';
 part 'observation_dtos.g.dart';
 
@@ -39,7 +38,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
   factory ObservationDTO.fromDomain(Observation obj, int idCycle) {
     return ObservationDTO(
       id: obj.id.getOrCrash(),
-      date: obj.date?.millisecondsSinceEpoch,
+      date: obj.date?.toDate().millisecondsSinceEpoch,
       couleur: obj.couleur?.getOrCrash().toShortString(),
       analyse: obj.analyse?.getOrCrash().toShortString(),
       sensation: obj.sensation?.getOrCrash().toShortString(),
@@ -64,7 +63,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
   Observation toDomain() {
     return Observation(
       id: UniqueId.fromUniqueInt(id!),
-      date: DateTime.fromMillisecondsSinceEpoch(date!),
+      date: DateTime.fromMillisecondsSinceEpoch(date!).toDate(),
       couleur: CouleurAnalyse.fromString(couleur),
       analyse: CouleurAnalyse.fromString(analyse),
       sensation: Sensation.fromString(sensation),

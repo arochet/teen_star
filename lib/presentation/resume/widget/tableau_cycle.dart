@@ -1,27 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:teenstar/DOMAIN/auth/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
-import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
-import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
 import 'package:teenstar/PRESENTATION/resume/resume_page.dart';
 import 'package:teenstar/PRESENTATION/resume/shared/icon_observation.dart';
-import 'package:teenstar/providers.dart';
 
 import '../../core/_utils/app_date_utils.dart';
 import 'button_ajout_observation_journee.dart';
 import 'menu_observation_modification.dart';
-import 'show_observation_notes.dart';
 
 class TableauCycle extends ConsumerStatefulWidget {
   Cycle cycle;
@@ -56,28 +50,28 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
       if (!ref.watch(showAnalyse)) 'Couleur',
       if (ref.watch(showAnalyse)) 'Analyse',
       'Sensation',
-      'Observation',
+      'Sang',
+      'Mucus',
       'Douleur',
       'Humeur',
       'Evenements'
     ];
 
     //Largeur des colonnes
-    Map cellsWidth = {'Observation': 150, 'Evenements': 120};
+    Map cellsWidth = {'Douleur': 120, 'Evenements': 120};
 
     return ShowComponentFile(
       title: 'tableau_cycle.dart',
       child: StickyHeadersTable(
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) => _CellHeader(title[colulmnIndex]),
-        contentCellBuilder: (int columnIndex, int rowIndex) => rowIndex == observations.length
-            ? Container(height: 50, width: 50)
-            : _Cell(observations[rowIndex], title[columnIndex],
-                observations[rowIndex].id.getOrCrash() == widget.cycle.idJourneeSoleil.getOrCrash()),
-        rowsLength: observations.length + 1,
-        rowsTitleBuilder: (int rowIndex) => rowIndex == observations.length
-            ? Container()
-            : _CellDay('${widget.cycle.getDayOfObservation(observations[rowIndex])}', selection),
+        contentCellBuilder: (int columnIndex, int rowIndex) => _Cell(
+            observations[rowIndex],
+            title[columnIndex],
+            observations[rowIndex].id.getOrCrash() == widget.cycle.idJourneeSoleil.getOrCrash()),
+        rowsLength: observations.length,
+        rowsTitleBuilder: (int rowIndex) =>
+            _CellDay('${widget.cycle.getDayOfObservation(observations[rowIndex])}', selection),
         widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
@@ -86,8 +80,6 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
           contentCellHeight: 50,
         ),
         rowSelect: (rowIndex) async {
-          if (rowIndex == observations.length) return;
-
           //Séléction de la ligne
           if (selection) {
             setState(() {
@@ -95,12 +87,15 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
               alimenterListObservationSelectionne();
             });
           } else {
-            if (!observations[rowIndex].isNone)
+            if (!observations[rowIndex].isNone) {
               //Modal de modification de l'observation
-              showModalBottomSheet(
+              showDialog(
                   context: context,
                   builder: (context) => MenuObservationModification(widget.cycle, observations[rowIndex]));
-            else {
+              /* showModalBottomSheet(
+                  context: context,
+                  builder: (context) => MenuObservationModification(widget.cycle, observations[rowIndex])); */
+            } else {
               DateTime dateObservation = observations[rowIndex].date!;
               //Si l'observation est vide, on affiche un message
               if (await showDialogChoix(context,
@@ -155,7 +150,7 @@ class _Cell extends StatelessWidget {
       case 'Date':
         info = Center(
           child: Text(AppDateUtils.formatDate(observation.date, 'dd/MM'),
-              style: Theme.of(context).textTheme.headline5),
+              style: Theme.of(context).textTheme.headline6),
         );
         break;
       case 'Couleur':
@@ -211,6 +206,14 @@ class _Cell extends StatelessWidget {
             ],
           ),
         );
+        break;
+      case 'Sang':
+        info = IconObservation(
+            iconPath: observation.sang?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30);
+        break;
+      case 'Mucus':
+        info = IconObservation(
+            iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30);
         break;
       case 'Douleur':
         if (observation.douleurs?.length != null && observation.douleurs!.length > 0)

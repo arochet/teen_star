@@ -43,6 +43,10 @@ class CycleRepository implements ICycleRepository {
   Future<Either<ObservationFailure, Unit>> createObservation(Cycle? cycle, Observation observation) async {
     printDev('createObservation(Cycle? cycle, Observation observation)');
     try {
+      //Supprime les observations du même jour
+      await _database.delete(db_observation,
+          where: 'date = ?', whereArgs: [ObservationDTO.fromDomain(observation, 0).date]);
+
       late UniqueId idCycle;
       if (cycle == null) {
         //Création du cycle
@@ -85,7 +89,9 @@ class CycleRepository implements ICycleRepository {
   @override
   Future<Either<ObservationFailure, Unit>> delete(UniqueId id) async {
     printDev('delete(UniqueId id)');
-    return left(const ObservationFailure.unexpected());
+    print('id: ${id.getOrCrash()}');
+    await _database.delete(db_observation, where: 'id = ?', whereArgs: [id.getOrCrash()]);
+    return right(unit);
   }
 
   @override

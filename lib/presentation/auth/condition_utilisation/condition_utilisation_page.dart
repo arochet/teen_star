@@ -32,15 +32,22 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
           padding: EdgeInsets.all(10),
           child: ListView(children: [
             SpaceH20(),
+            SpaceH20(),
             if (widget.doitEtreAccepte)
               ElevatedButton.icon(
                 icon: Icon(Icons.access_alarm),
-                onPressed: () {},
+                onPressed: () {
+                  context.router.push(Principes_de_baseRoute());
+                },
                 label: Text("Principe de base"),
                 style: buttonNormalPrimary,
               ),
             SpaceH20(),
-            Placeholder(),
+            SpaceH20(),
+            Text(
+                "J’ai lu les points ci-dessus et j’ai compris que cette application m’aidera à enregistrer mes observations quotidiennes au cours des cycles menstruels, mais ne peut absolument pas me suffire telle quelle pour éviter (ou favoriser) une grossesse. Je comprends que si tel était mon objectif, je devrais impérativement suivre une formation approfondie avec une monitrice spécialisée en méthode naturelle de régulation des naissances.",
+                style: Theme.of(context).textTheme.bodyText1,
+                textAlign: TextAlign.justify),
             SpaceH20(),
             //CONDITION D'UTILISATION ACCEPTATION
             ...currentUserDataAsync.when(
@@ -62,7 +69,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                           SizedBox(width: 20),
                           Flexible(
                             child: Text("J'ai lu et j'accepte les conditions d'utilisations",
-                                style: Theme.of(context).textTheme.headline4),
+                                style: Theme.of(context).textTheme.headline5),
                           ),
                         ],
                       ),
@@ -76,7 +83,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                         if (conditionAccecpte) {
                           context.router.push(AuthRegisterRoute());
                         } else {
-                          showSnackbar(context, 'Vous devez accepter les conditions d\'utilsiation');
+                          showSnackbar(context, 'Vous devez accepter les conditions d\'utilisation');
                         }
                       },
                       child: Text("Continuer"),

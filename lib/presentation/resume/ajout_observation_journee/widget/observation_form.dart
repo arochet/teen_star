@@ -129,21 +129,22 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                   notifierForm.humeurChanged(Humeur(HumeurState.humeurChangeante));
 
                   //Vérification qu'il n'extiste pas déjà une observation pour cette journée
-                  if (widget.cycle != null) {
-                    final List<Observation> obs = widget.cycle!.observations
-                        .where((obs) => obs.date?.isSameDayAs(form.date) == true)
-                        .toList();
-                    if (obs.length > 0) {
-                      final ok = await showDialogChoix(context,
-                          "Attention, une observation existe déjà pour cette date, voulez-vous la remplacer ?",
-                          positiveText: "Remplacer", negativeText: "Annuler", isDanger: true);
 
-                      if (ok == true) {
-                        notifierForm.addObservationPressed(widget.cycle);
-                      }
-                    } else {
+                  final List<Observation> obs = widget.cycle?.observations
+                          .where((obs) => obs.date?.isSameDayAs(form.date) == true)
+                          .toList() ??
+                      [];
+
+                  if (obs.length > 0) {
+                    final ok = await showDialogChoix(context,
+                        "Attention, une observation existe déjà pour cette date, voulez-vous la remplacer ?",
+                        positiveText: "Remplacer", negativeText: "Annuler", isDanger: true);
+
+                    if (ok == true) {
                       notifierForm.addObservationPressed(widget.cycle);
                     }
+                  } else {
+                    notifierForm.addObservationPressed(widget.cycle);
                   }
                 },
                 style: buttonNormalConfirm,
@@ -285,9 +286,10 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
           Align(
             child: ElevatedButton(
               onPressed: () async {
-                final List<Observation> obs = widget.cycle!.observations
-                    .where((obs) => obs.date?.isSameDayAs(form.date) == true)
-                    .toList();
+                final List<Observation> obs = widget.cycle?.observations
+                        .where((obs) => obs.date?.isSameDayAs(form.date) == true)
+                        .toList() ??
+                    [];
                 if (obs.length > 0) {
                   final ok = await showDialogChoix(context,
                       "Attention, une observation existe déjà pour cette date, voulez-vous la remplacer ?",

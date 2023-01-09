@@ -63,10 +63,12 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
     Widget continueButton = ElevatedButton(
       onPressed: () async {
         await context.router.pop();
+        final result = await ref.read(cycleRepositoryProvider).resetAll();
+        result.fold((l) => print('Erreur ! ${l.toString()}'), (r) => print('Reset OKAY'));
         ref
             .read(authNotifierProvider.notifier)
             .deleteAccount()
-            .then((value) => context.router.push(AuthInitRoute()));
+            .then((value) => context.router.replaceAll([AuthInitRoute()]));
       },
       child: Text(AppLocalizations.of(context)!.supprimer),
       style: buttonNormalRemove,

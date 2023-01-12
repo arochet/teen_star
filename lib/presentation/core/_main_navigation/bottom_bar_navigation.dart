@@ -13,11 +13,13 @@ class BottomBarNavigation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Color? colorPanel = colorpanel(700);
     final env = ref.watch(environment.notifier).state.name;
+
     return AutoTabsScaffold(
       appBarBuilder: (_, tabsRouter) => AppBar(
-          backgroundColor: colorpanel(700),
-          title: Text("TeenSTAR", style: Theme.of(context).textTheme.headline4),
+          backgroundColor: colorPanel,
+          title: _buildAppBar(context, tabsRouter.activeIndex),
           centerTitle: true,
           actions: env == Environment.dev
               ? [
@@ -37,9 +39,10 @@ class BottomBarNavigation extends ConsumerWidget {
       routes: listRoute,
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
-            backgroundColor: colorpanel(700),
+            backgroundColor: colorPanel,
             currentIndex: tabsRouter.activeIndex,
             selectedItemColor: actioncolor["primary"],
+            unselectedItemColor: colorpanel(100),
             onTap: (id) {
               printDev("Page: ${listMenu[id]["title"]}");
               if (id == 0) {
@@ -70,5 +73,17 @@ class BottomBarNavigation extends ConsumerWidget {
                 .toList());
       },
     );
+  }
+
+  _buildAppBar(BuildContext context, int index) {
+    if (index == 0) {
+      return Text("Cycle", style: Theme.of(context).textTheme.headline4);
+    } else if (index == 1) {
+      return Text(listMenu[index]["title"], style: Theme.of(context).textTheme.headline4);
+    } else if (index == 2) {
+      return Text(listMenu[index]["title"], style: Theme.of(context).textTheme.headline4);
+    } else {
+      return Container();
+    }
   }
 }

@@ -74,7 +74,7 @@ class _BarMain extends ConsumerWidget {
               },
               icon: Icon(Icons.file_copy, size: 18),
               label: Text("PDF"),
-              style: buttonLittlePrimary,
+              style: buttonLittleSecondary,
             ),
           if (displayAnalyse)
             ElevatedButton.icon(
@@ -83,7 +83,7 @@ class _BarMain extends ConsumerWidget {
               },
               icon: Icon(Icons.mode_edit, size: 18),
               label: Text("Modifier"),
-              style: buttonLittlePrimary,
+              style: buttonLittleSecondary,
             ),
         ],
       ),
@@ -149,6 +149,8 @@ class _TabBarAnalyseState extends ConsumerState<TabBarAnalyse> with SingleTicker
           }
         },
         controller: _tabController,
+        labelColor: colorpanel(50),
+        indicatorColor: actioncolor['primary'],
         tabs: myTabs);
   }
 }

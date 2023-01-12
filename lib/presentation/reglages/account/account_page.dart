@@ -1,5 +1,6 @@
 import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/widget/panel_developper.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/widget/panel_modify_mdp_delete_account.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
@@ -56,22 +57,25 @@ class _AccountPageState extends ConsumerState<AccountPage> {
       //Container Informations personnelles
       return ShowComponentFile(
         title: 'reglages/account/account_pages.dart',
-        child: ListView(
-          children: <Widget>[
-            SpaceH20(),
-            //TEXTE COMPTE
-            DisplayTitle(title: AppLocalizations.of(context)!.compte),
-            //PANEL DONNEES PERSONNELES
-            PanelPersonnelData(user),
-            //PANEL MODIFIER MOT DE PASSE / SUPPRIMER COMPTE
-            PanelModifyMdpDeleteAccount(),
+        child: Container(
+          color: colorpanel(800),
+          child: ListView(
+            children: <Widget>[
+              SpaceH20(),
+              //TEXTE COMPTE
+              DisplayTitle(title: AppLocalizations.of(context)!.compte),
+              //PANEL DONNEES PERSONNELES
+              PanelPersonnelData(user),
+              //PANEL MODIFIER MOT DE PASSE / SUPPRIMER COMPTE
+              PanelModifyMdpDeleteAccount(),
 
-            DisplayTitle(title: 'Autre'),
-            PanelReglagesAutre(),
-            //PANEL DEVELOPPEMENT
-            if (env == Environment.dev) ...[DisplayTitle(title: 'Developpement'), PanelDevelopper()],
-            VersionNumber(),
-          ],
+              DisplayTitle(title: 'Autre'),
+              PanelReglagesAutre(),
+              //PANEL DEVELOPPEMENT
+              if (env == Environment.dev) ...[DisplayTitle(title: 'Developpement'), PanelDevelopper()],
+              VersionNumber(),
+            ],
+          ),
         ),
       );
     });

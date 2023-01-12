@@ -78,7 +78,7 @@ class HistoriquePage extends ConsumerWidget {
                               }
                             },
                             child: Text("Renvoyer Cycle ${listCycle.length} vers ${listCycle.length - 1}"),
-                            style: buttonNormalPrimary,
+                            style: buttonNormalSecondary,
                           ),
                         //TABLEAU HISTORIQUE
                         Expanded(child: TableauHistorique(listCycle)),

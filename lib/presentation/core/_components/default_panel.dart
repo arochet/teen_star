@@ -21,7 +21,7 @@ class DefaultPanel extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: colorpanel(800),
+            color: colorpanel(900),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
           child: child,

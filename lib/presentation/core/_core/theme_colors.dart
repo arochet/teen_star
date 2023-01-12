@@ -10,12 +10,31 @@ final palettecolor = [
 ];
 
 Color? colorpanel(int tint) {
-  return Colors.blueGrey[tint];
+  switch (tint) {
+    case 900:
+      return Color(0xFFE6FCFF);
+    case 800:
+      return Color(0xFFC7DAE4);
+    case 700:
+      return Color(0xFFA7B9C9);
+    case 600:
+      return Color(0xFF8897AE);
+    case 500:
+      return Color(0xFF687593);
+    case 200:
+      return Color(0xFF495378);
+    case 100:
+      return Color(0xFF29325D);
+    case 50:
+      return Color(0xFF0A1042);
+    default:
+      return Colors.blueGrey[tint];
+  }
 }
 
 final actioncolor = {
-  "primary": Color(0xff2DE1FC),
-  "secondary": Color(0xffBCABAE),
+  "primary": Color(0xFF004FFF),
+  "secondary": Color(0xFF846A6A),
   "tertiary": Color(0xffFBFBFB),
   "confirm": Color(0xff2AFC98),
   "warning": Colors.amber[700],

@@ -18,7 +18,7 @@ class MainNavigationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final listMenu = [
       {
-        "title": "Résumé",
+        "title": "Cycles",
         "icon": Icons.radio_button_checked,
         "id": 0,
       },

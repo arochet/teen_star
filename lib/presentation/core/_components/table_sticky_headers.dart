@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide DateUtils;
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 
 /// Table with sticky headers. Whenever you scroll content horizontally
 /// or vertically - top and left headers always stay.
@@ -83,6 +84,7 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
 
   @override
   Widget build(BuildContext context) {
+    final colorRow = /* Color.fromARGB(112, 255, 255, 255) */ colorpanel(800);
     return Column(
       children: <Widget>[
         Row(
@@ -144,10 +146,8 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                           height: widget.cellDimensions.contentCellHeight,
                           decoration: BoxDecoration(
                             color: widget.isRowSelected != null
-                                ? (widget.isRowSelected!(i)
-                                    ? Colors.blue
-                                    : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null))
-                                : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null),
+                                ? (widget.isRowSelected!(i) ? Colors.blue : (i % 2 == 1 ? colorRow : null))
+                                : (i % 2 == 1 ? colorRow : null),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
                           ),
@@ -204,8 +204,8 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                                           color: widget.isRowSelected != null
                                               ? (widget.isRowSelected!(i)
                                                   ? Color.fromARGB(169, 23, 129, 215)
-                                                  : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null))
-                                              : (i % 2 == 1 ? Color.fromARGB(14, 255, 255, 255) : null),
+                                                  : (i % 2 == 1 ? colorRow : null))
+                                              : (i % 2 == 1 ? colorRow : null),
                                           borderRadius: j == widget.columnsLength - 1
                                               ? BorderRadius.only(
                                                   topRight: Radius.circular(10),

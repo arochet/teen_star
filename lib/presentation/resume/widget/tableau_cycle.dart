@@ -5,6 +5,7 @@ import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
+import 'package:teenstar/PRESENTATION/core/_components/little_box.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
@@ -154,34 +155,32 @@ class _Cell extends StatelessWidget {
         );
         break;
       case 'Couleur':
-        info = Container(
-            width: 40,
-            height: 35,
-            color: colorpanel(800),
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Stack(
-                children: [
-                  if (isJourSommet)
-                    Center(child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white)),
-                  if (observation.marque != null && observation.marque! > 0)
-                    Center(
-                        child: Text("${observation.marque}", style: Theme.of(context).textTheme.headline4)),
-                  Container(color: observation.couleur?.getOrCrash().toColor()),
-                ],
-              ),
-            ));
+        info = LittleBox(
+          width: 40,
+          height: 35,
+          child: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Stack(
+              children: [
+                if (isJourSommet)
+                  Center(child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white)),
+                if (observation.marque != null && observation.marque! > 0)
+                  Center(child: Text("${observation.marque}", style: Theme.of(context).textTheme.headline4)),
+                Container(color: observation.couleur?.getOrCrash().toColor()),
+              ],
+            ),
+          ),
+        );
         break;
       case 'Analyse':
-        info = Container(
+        info = LittleBox(
             width: 40,
             height: 35,
-            color: colorpanel(800),
             child: Padding(
               padding: const EdgeInsets.all(2.0),
               child: Stack(
                 children: [
-                  Container(color: observation.analyse?.getOrCrash().toColor()),
+                  LittleBox(color: observation.analyse?.getOrCrash().toColor()),
                   if (observation.jourFertile == false) Placeholder(),
                 ],
               ),

@@ -42,7 +42,7 @@ class PanelPersonnelData extends StatelessWidget {
           onTap: () {},
         ),
         ItemPanelList(
-          title: 'Thème: Bleu',
+          title: 'Thème: Clair',
           icon: Icons.mail_rounded,
           onTap: () {},
         ),

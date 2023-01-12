@@ -13,8 +13,8 @@ ButtonStyle buttonBig(Color color, bool isWhite) => ElevatedButton.styleFrom(
     elevation: 0,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))));
 
-final buttonBigPrimary = buttonBig(actioncolor["primary"]!, false);
-final buttonBigSecondary = buttonBig(actioncolor["secondary"]!, false);
+final buttonBigPrimary = buttonBig(actioncolor["primary"]!, true);
+final buttonBigSecondary = buttonBig(actioncolor["secondary"]!, true);
 final buttonBigConfirm = buttonBig(actioncolor["confirm"]!, false);
 final buttonBigWarning = buttonBig(actioncolor["warning"]!, true);
 final buttonBigRemove = buttonBig(actioncolor["remove"]!, true);
@@ -30,9 +30,9 @@ ButtonStyle buttonNormal(Color color, bool isWhite, bool fullWidth) => ElevatedB
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
     );
 
-final buttonNormalPrimary = buttonNormal(actioncolor["primary"]!, false, false);
-final buttonNormalPrimaryFull = buttonNormal(actioncolor["primary"]!, false, true);
-final buttonNormalSecondary = buttonNormal(actioncolor["secondary"]!, false, false);
+final buttonNormalPrimary = buttonNormal(actioncolor["primary"]!, true, false);
+final buttonNormalPrimaryFull = buttonNormal(actioncolor["primary"]!, true, true);
+final buttonNormalSecondary = buttonNormal(actioncolor["secondary"]!, true, false);
 final buttonNormalConfirm = buttonNormal(actioncolor["confirm"]!, false, false);
 final buttonNormalWarning = buttonNormal(actioncolor["warning"]!, true, false);
 final buttonNormalRemove = buttonNormal(actioncolor["remove"]!, true, false);
@@ -47,8 +47,8 @@ ButtonStyle buttonLittle(Color color, bool isWhite) => ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
     );
 
-final buttonLittlePrimary = buttonLittle(actioncolor["primary"]!, false);
-final buttonLittleSecondary = buttonLittle(actioncolor["secondary"]!, false);
+final buttonLittlePrimary = buttonLittle(actioncolor["primary"]!, true);
+final buttonLittleSecondary = buttonLittle(actioncolor["secondary"]!, true);
 final buttonLittleConfirm = buttonLittle(actioncolor["confirm"]!, false);
 final buttonLittleWarning = buttonLittle(actioncolor["warning"]!, true);
 final buttonLittleRemove = buttonLittle(actioncolor["remove"]!, true);

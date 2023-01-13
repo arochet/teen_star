@@ -30,6 +30,7 @@ abstract class Cycle with _$Cycle {
 
   List<Observation> getObservationsWithEmptyDays() {
     List<Observation> observationsWithEmptyDays = [];
+    if (this.observations.length == 0) return [];
     DateTime? firstDayOfCycle = this.observations.first.date?.toDate();
 
     DateTime lastDayOfCycleWithEmptyDays = firstDayOfCycle!;

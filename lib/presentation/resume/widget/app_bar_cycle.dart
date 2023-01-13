@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
+import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
 
 class AppBarCycle extends ConsumerWidget {
@@ -18,17 +20,17 @@ class AppBarCycle extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //On aliment le Cycle PRECEDENT <- COURANT -> SUIVANT
-    CycleDTO? cyclePrecedent;
+    // CycleDTO? cyclePrecedent;
     CycleDTO? cycleCourant;
-    CycleDTO? cycleSuivant;
+    // CycleDTO? cycleSuivant;
     for (var cycleDTO in listCyclesDTO) {
-      if (cycleCourant != null && cycleSuivant == null) {
+      /* if (cycleCourant != null && cycleSuivant == null) {
         cycleSuivant = cycleDTO;
-      }
+      } */
       if (cycleDTO.id == idCycle.getOrCrash()) {
         cycleCourant = cycleDTO;
       }
-      if (cycleCourant == null) cyclePrecedent = cycleDTO;
+      //if (cycleCourant == null) cyclePrecedent = cycleDTO;
     }
 
     //APPBAR
@@ -41,9 +43,46 @@ class AppBarCycle extends ConsumerWidget {
               heightFactor: 0.94,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.headline4),
+                child: InkWell(
+                  onTap: () {
+                    showDialogApp(
+                        context: context,
+                        titre: "Choisir un cycle",
+                        child: Container(
+                          height: 250,
+                          width: 130,
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) => Divider(
+                              color: Colors.black,
+                            ),
+                            itemCount: listCyclesDTO.length,
+                            itemBuilder: (context, index) => InkWell(
+                              onTap: () {
+                                ref.read(idCycleCourant.notifier).state =
+                                    UniqueId.fromUniqueInt(listCyclesDTO[index].id!);
+                                Navigator.pop(context);
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text("Cycle ${listCyclesDTO[index].id}"),
+                              ),
+                            ),
+                          ),
+                        ));
+                  },
+                  child: Container(
+                    width: 150,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.headline4),
+                        Icon(Icons.keyboard_arrow_down, size: 30, color: colorpanel(50)),
+                      ],
+                    ),
+                  ),
+                ),
               )),
-          Row(
+          /* Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               //BOUTON CYCLE PRECEDENT
@@ -69,7 +108,7 @@ class AppBarCycle extends ConsumerWidget {
                   style: buttonPrimaryHideLittle,
                 )
             ],
-          ),
+          ), */
         ],
       ),
     );

@@ -23,8 +23,9 @@ abstract class CycleHistorique with _$CycleHistorique {
         idJourneeSoleil: UniqueId(),
       );
 
-  factory CycleHistorique.fromListDTOwithEmptyDays(List<ObservationHistoriqueDTO> list, int id) {
+  factory CycleHistorique.fromListDTOwithEmptyDays(List<ObservationHistoriqueDTO> listAll, int id) {
     List<ObservationHistorique> observationsWithEmptyDays = [];
+    List<ObservationHistoriqueDTO> list = listAll.where((element) => element.idCycle == id).toList();
     DateTime? firstDayOfCycle = list.first.toDomain().date!.toDate();
 
     DateTime lastDayOfCycleWithEmptyDays = firstDayOfCycle;

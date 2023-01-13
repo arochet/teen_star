@@ -86,6 +86,8 @@ final buttonPrimaryHide = ElevatedButton.styleFrom(
   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
   backgroundColor: Colors.transparent,
   foregroundColor: colorpanel(200),
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+  shadowColor: Colors.transparent,
   elevation: 0,
 );
 
@@ -95,4 +97,6 @@ final buttonPrimaryHideLittle = ElevatedButton.styleFrom(
   backgroundColor: Colors.transparent,
   foregroundColor: colorpanel(200),
   elevation: 0,
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+  shadowColor: Colors.transparent,
 );

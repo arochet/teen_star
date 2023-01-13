@@ -43,10 +43,9 @@ class _BarMain extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 100,
+      height: 60,
       child: Column(
         children: [
-          Container(height: 40, child: TabBarAnalyse()),
           SizedBox(height: 10),
           if (!displayAnalyse)
             ElevatedButton.icon(
@@ -108,49 +107,5 @@ class _BarModification extends ConsumerWidget {
       child: Text("Annuler"),
       style: buttonLittleSecondary,
     );
-  }
-}
-
-class TabBarAnalyse extends ConsumerStatefulWidget {
-  TabBarAnalyse({Key? key}) : super(key: key);
-
-  @override
-  _TabBarAnalyseState createState() => _TabBarAnalyseState();
-}
-
-class _TabBarAnalyseState extends ConsumerState<TabBarAnalyse> with SingleTickerProviderStateMixin {
-  List<Tab> myTabs = <Tab>[
-    Tab(text: 'Résumé'),
-    Tab(text: 'Analyse'),
-  ];
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(vsync: this, length: myTabs.length);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    _tabController.index = ref.watch(showAnalyse) ? 1 : 0;
-    return TabBar(
-        onTap: (value) {
-          if (value == 0) {
-            ref.read(showAnalyse.notifier).state = false;
-          } else {
-            ref.read(showAnalyse.notifier).state = true;
-          }
-        },
-        controller: _tabController,
-        labelColor: colorpanel(50),
-        indicatorColor: actioncolor['primary'],
-        tabs: myTabs);
   }
 }

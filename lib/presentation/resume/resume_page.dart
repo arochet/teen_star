@@ -44,9 +44,9 @@ class _ResumePageState extends ConsumerState<ResumePage> {
     final idCycle = ref.read(idCycleCourant);
 
     if (idCycle == null) {
-      final cycles = await ref.read(cycleRepositoryProvider).readAllCycles();
+      final eitherCyclesDTO = await ref.read(cycleRepositoryProvider).readAllCycles();
 
-      cycles.fold((l) => showSnackbarCycleFailure(context, l), (listCycleDTO) {
+      eitherCyclesDTO.fold((failure) => showSnackbarCycleFailure(context, failure), (listCycleDTO) {
         //On a la liste des cycles
         if (listCycleDTO.length > 0) {
           //Met à jour le cycle courant
@@ -119,8 +119,6 @@ class _Cycle extends ConsumerWidget {
             children: [
               Column(
                 children: [
-                  //APPBAR_LIST_CYCLES
-                  if (!selection) AppBarCycle(listCyclesDTO: listCycleDTO, idCycle: id),
                   //APPBAR_ANALYSE
                   AppBarAnalyse(),
                   //TABLEAU

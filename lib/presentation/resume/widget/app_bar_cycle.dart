@@ -38,10 +38,11 @@ class AppBarCycle extends ConsumerWidget {
         children: [
           //CYCLE COURANT
           Center(
+              heightFactor: 0.94,
               child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.headline4),
-          )),
+                padding: const EdgeInsets.all(12.0),
+                child: Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.headline4),
+              )),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

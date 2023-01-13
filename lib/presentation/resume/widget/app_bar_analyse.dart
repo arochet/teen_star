@@ -106,7 +106,7 @@ class _BarModification extends ConsumerWidget {
         ref.watch(isSelection.notifier).state = !selection;
       },
       child: Text("Annuler"),
-      style: buttonPrimaryHide,
+      style: buttonLittleSecondary,
     );
   }
 }

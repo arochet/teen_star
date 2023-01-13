@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
+import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
@@ -31,11 +32,10 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
             if (cycle != null) {
               //DIALOG pour un nouveau cycle
               //3 options : true = continuer cycle | false = nouveau cyle | null = annulation
-              final bool? continuerCycle = await showDialog<bool?>(
+              final bool? continuerCycle = await showDialogApp<bool?>(
                 context: context,
-                builder: (BuildContext context) {
-                  return _DialogChoixContinuationCycle(cycle!);
-                },
+                titre: "Voulez-vous continuer le Cycle en cours ?",
+                child: _DialogChoixContinuationCycle(cycle!),
               );
 
               openPageNouvelleObservation(context, cycle, ref, continuerCycle, DateTime.now());
@@ -93,31 +93,29 @@ class _DialogChoixContinuationCycle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text("Voulez-vous continuer le Cycle en cours ?", style: Theme.of(context).textTheme.headline4),
-      content: ShowComponentFile(
-        title: '_DialogChoixContinuationCycle',
-        child: Container(
-          height: 120,
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: Text("Nouveau Cycle"),
-                style: buttonPrimaryHide,
-              ),
-              SpaceH10(),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: Text("Continuer Cycle ${cycle.id.getOrCrash()}"),
-                style: buttonNormalPrimary,
-              ),
-            ],
-          ),
+    return ShowComponentFile(
+      title: '_DialogChoixContinuationCycle',
+      child: Container(
+        height: 120,
+        child: Column(
+          children: [
+            SpaceH10(),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text("Nouveau Cycle"),
+              style: buttonPrimaryHide,
+            ),
+            SpaceH10(),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: Text("Continuer Cycle ${cycle.id.getOrCrash()}"),
+              style: buttonNormalPrimary,
+            ),
+          ],
         ),
       ),
     );

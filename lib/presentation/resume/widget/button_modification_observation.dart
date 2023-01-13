@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
+import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
@@ -29,12 +30,12 @@ class ButtonModificationObservation extends ConsumerWidget {
         child: ElevatedButton(
           onPressed: () async {
             printDev("ButtonModificationObservation onPressed");
+            final int nombreObservation = ref.read(observationSectionne).length;
             //DIALOG pour la modification du cycle
-            await showDialog(
+            await showDialogApp(
               context: context,
-              builder: (BuildContext context) {
-                return _DialogModificationCycle();
-              },
+              titre: "Modifier $nombreObservation observation${nombreObservation > 1 ? 's' : ''}",
+              child: _DialogModificationCycle(),
             );
           },
           child: Text("Modifier"),
@@ -53,49 +54,45 @@ class _DialogModificationCycle extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final int nombreObservation = ref.watch(observationSectionne).length;
-    return AlertDialog(
-      title: Center(
-          child: Text("Modifier $nombreObservation observation${nombreObservation > 1 ? 's' : ''}",
-              style: Theme.of(context).textTheme.headline4)),
-      content: ShowComponentFile(
-        title: '_DialogModificationCycle',
-        child: Container(
-          height: 180,
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  ref.watch(isSelection.notifier).state = false;
-                  final listObservationSelectionnee = ref.read(observationSectionne);
-                  ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, false);
-                  _rafraichirPage(ref);
-                  Navigator.of(context).pop();
-                },
-                child: Text("Enlever infertile"),
-                style: buttonNormalPrimaryFull,
-              ),
-              SpaceH10(),
-              ElevatedButton(
-                onPressed: () {
-                  ref.watch(isSelection.notifier).state = false;
-                  final listObservationSelectionnee = ref.read(observationSectionne);
-                  ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
-                  _rafraichirPage(ref);
-                  Navigator.of(context).pop();
-                },
-                child: Text("Marquer infertile"),
-                style: buttonNormalPrimaryFull,
-              ),
-              SpaceH10(),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("Enlever ?"),
-                style: buttonNormalPrimaryFull,
-              ),
-            ],
-          ),
+    return ShowComponentFile(
+      title: '_DialogModificationCycle',
+      child: Container(
+        height: 180,
+        child: Column(
+          children: [
+            SpaceH20(),
+            ElevatedButton(
+              onPressed: () {
+                ref.watch(isSelection.notifier).state = false;
+                final listObservationSelectionnee = ref.read(observationSectionne);
+                ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, false);
+                _rafraichirPage(ref);
+                Navigator.of(context).pop();
+              },
+              child: Text("Enlever infertile"),
+              style: buttonNormalSecondaryFull,
+            ),
+            SpaceH5(),
+            ElevatedButton(
+              onPressed: () {
+                ref.watch(isSelection.notifier).state = false;
+                final listObservationSelectionnee = ref.read(observationSectionne);
+                ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
+                _rafraichirPage(ref);
+                Navigator.of(context).pop();
+              },
+              child: Text("Marquer infertile"),
+              style: buttonNormalSecondaryFull,
+            ),
+            SpaceH5(),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Enlever ?"),
+              style: buttonNormalSecondaryFull,
+            ),
+          ],
         ),
       ),
     );

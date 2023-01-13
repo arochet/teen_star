@@ -1,8 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 
 import 'show_component_file.dart';
 
+//DIALOG
+Future<dynamic> showDialogApp<T>(
+    {required BuildContext context, required Widget child, String? titre}) async {
+  return showDialog<T>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        title: titre != null
+            ? Text(
+                titre,
+                style: Theme.of(context).textTheme.headline4,
+                textAlign: TextAlign.center,
+              )
+            : null,
+        content: child,
+        backgroundColor: colorpanel(800),
+      );
+    },
+  );
+}
+
+//DIALOG CHOIX
 Future<bool?> showDialogChoix(BuildContext context, String titre,
     {String? positiveText, String? negativeText, bool isDanger = false}) async {
   final bool? choix = await showDialog<bool?>(

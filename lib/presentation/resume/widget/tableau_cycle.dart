@@ -90,9 +90,11 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
           } else {
             if (!observations[rowIndex].isNone) {
               //Modal de modification de l'observation
-              showDialog(
-                  context: context,
-                  builder: (context) => MenuObservationModification(widget.cycle, observations[rowIndex]));
+              showDialogApp(
+                context: context,
+                titre: "Observation du J${widget.cycle.getDayOfObservation(observations[rowIndex])}",
+                child: MenuObservationModification(widget.cycle, observations[rowIndex]),
+              );
               /* showModalBottomSheet(
                   context: context,
                   builder: (context) => MenuObservationModification(widget.cycle, observations[rowIndex])); */

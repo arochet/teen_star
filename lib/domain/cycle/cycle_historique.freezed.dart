@@ -191,6 +191,7 @@ abstract class _CycleHistorique extends CycleHistorique {
 mixin _$ObservationHistorique {
   UniqueId get id => throw _privateConstructorUsedError;
   CouleurAnalyse? get couleur => throw _privateConstructorUsedError;
+  DateTime? get date => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ObservationHistoriqueCopyWith<ObservationHistorique> get copyWith =>
@@ -203,7 +204,7 @@ abstract class $ObservationHistoriqueCopyWith<$Res> {
           $Res Function(ObservationHistorique) then) =
       _$ObservationHistoriqueCopyWithImpl<$Res, ObservationHistorique>;
   @useResult
-  $Res call({UniqueId id, CouleurAnalyse? couleur});
+  $Res call({UniqueId id, CouleurAnalyse? couleur, DateTime? date});
 }
 
 /// @nodoc
@@ -222,6 +223,7 @@ class _$ObservationHistoriqueCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? couleur = freezed,
+    Object? date = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -232,6 +234,10 @@ class _$ObservationHistoriqueCopyWithImpl<$Res,
           ? _value.couleur
           : couleur // ignore: cast_nullable_to_non_nullable
               as CouleurAnalyse?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -244,7 +250,7 @@ abstract class _$$_ObservationHistoriqueCopyWith<$Res>
       __$$_ObservationHistoriqueCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UniqueId id, CouleurAnalyse? couleur});
+  $Res call({UniqueId id, CouleurAnalyse? couleur, DateTime? date});
 }
 
 /// @nodoc
@@ -260,6 +266,7 @@ class __$$_ObservationHistoriqueCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? couleur = freezed,
+    Object? date = freezed,
   }) {
     return _then(_$_ObservationHistorique(
       id: null == id
@@ -270,6 +277,10 @@ class __$$_ObservationHistoriqueCopyWithImpl<$Res>
           ? _value.couleur
           : couleur // ignore: cast_nullable_to_non_nullable
               as CouleurAnalyse?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -277,17 +288,20 @@ class __$$_ObservationHistoriqueCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ObservationHistorique extends _ObservationHistorique {
-  const _$_ObservationHistorique({required this.id, required this.couleur})
+  const _$_ObservationHistorique(
+      {required this.id, required this.couleur, required this.date})
       : super._();
 
   @override
   final UniqueId id;
   @override
   final CouleurAnalyse? couleur;
+  @override
+  final DateTime? date;
 
   @override
   String toString() {
-    return 'ObservationHistorique(id: $id, couleur: $couleur)';
+    return 'ObservationHistorique(id: $id, couleur: $couleur, date: $date)';
   }
 
   @override
@@ -296,11 +310,12 @@ class _$_ObservationHistorique extends _ObservationHistorique {
         (other.runtimeType == runtimeType &&
             other is _$_ObservationHistorique &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.couleur, couleur) || other.couleur == couleur));
+            (identical(other.couleur, couleur) || other.couleur == couleur) &&
+            (identical(other.date, date) || other.date == date));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, couleur);
+  int get hashCode => Object.hash(runtimeType, id, couleur, date);
 
   @JsonKey(ignore: true)
   @override
@@ -313,13 +328,16 @@ class _$_ObservationHistorique extends _ObservationHistorique {
 abstract class _ObservationHistorique extends ObservationHistorique {
   const factory _ObservationHistorique(
       {required final UniqueId id,
-      required final CouleurAnalyse? couleur}) = _$_ObservationHistorique;
+      required final CouleurAnalyse? couleur,
+      required final DateTime? date}) = _$_ObservationHistorique;
   const _ObservationHistorique._() : super._();
 
   @override
   UniqueId get id;
   @override
   CouleurAnalyse? get couleur;
+  @override
+  DateTime? get date;
   @override
   @JsonKey(ignore: true)
   _$$_ObservationHistoriqueCopyWith<_$_ObservationHistorique> get copyWith =>

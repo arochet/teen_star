@@ -7,6 +7,7 @@ import 'package:teenstar/DOMAIN/cycle/cycle_historique.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/observation_historique_dtos.dart';
+import 'package:teenstar/PRESENTATION/core/_components/little_box.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
@@ -38,10 +39,13 @@ class TableauHistorique extends ConsumerWidget {
             if (rowIndex < listHistorique[columnIndex].observations.length) {
               print(
                   '${listHistorique[columnIndex].idJourneeSoleil.getOrCrash()} / ${listHistorique[columnIndex].observations[rowIndex].id.getOrCrash()}');
-              return _Cell(
-                  observation: listHistorique[columnIndex].observations[rowIndex],
-                  isJourSommet: listHistorique[columnIndex].idJourneeSoleil.getOrCrash() ==
-                      listHistorique[columnIndex].observations[rowIndex].id.getOrCrash());
+              if (listHistorique[columnIndex].observations[rowIndex].isEmpty)
+                return _CellEmpty();
+              else
+                return _Cell(
+                    observation: listHistorique[columnIndex].observations[rowIndex],
+                    isJourSommet: listHistorique[columnIndex].idJourneeSoleil.getOrCrash() ==
+                        listHistorique[columnIndex].observations[rowIndex].id.getOrCrash());
             } else {
               return _CellEmpty();
             }
@@ -91,7 +95,7 @@ class _Cell extends StatelessWidget {
           Center(
               child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white, width: 30, height: 30)),
         Center(
-          child: Container(
+          child: LittleBox(
             width: 40,
             height: 35,
             color: observation.couleur?.getOrCrash().toColor() ?? Colors.white,
@@ -116,10 +120,7 @@ class _CellEmpty extends StatelessWidget {
           width: 40,
           height: 35,
           child: Center(
-            child: Text(
-              '-',
-              style: Theme.of(context).textTheme.headline5,
-            ),
+            child: Text('', style: Theme.of(context).textTheme.headline5),
           )),
     );
   }

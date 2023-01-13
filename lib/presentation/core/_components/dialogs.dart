@@ -6,7 +6,7 @@ import 'show_component_file.dart';
 
 //DIALOG
 Future<dynamic> showDialogApp<T>(
-    {required BuildContext context, required Widget child, String? titre}) async {
+    {required BuildContext context, required Widget child, String? titre, List<Widget>? actions}) async {
   return showDialog<T>(
     context: context,
     builder: (BuildContext context) {
@@ -21,6 +21,7 @@ Future<dynamic> showDialogApp<T>(
             : null,
         content: child,
         backgroundColor: colorpanel(800),
+        actions: actions,
       );
     },
   );
@@ -28,68 +29,33 @@ Future<dynamic> showDialogApp<T>(
 
 //DIALOG CHOIX
 Future<bool?> showDialogChoix(BuildContext context, String titre,
-    {String? positiveText, String? negativeText, bool isDanger = false}) async {
-  final bool? choix = await showDialog<bool?>(
+    {String? positiveText, String? negativeText, bool isDanger = false, final Widget? container}) async {
+  final bool? choix = await showDialogApp<bool?>(
     context: context,
-    builder: (BuildContext context) {
-      return _DialogChoix(
-        titre: titre,
-        positiveText: positiveText,
-        negativeText: negativeText,
-        isDanger: isDanger,
-      );
-    },
-  );
-  return choix;
-}
-
-class _DialogChoix extends StatelessWidget {
-  final String titre;
-  final String? positiveText;
-  final String? negativeText;
-  final Widget? container;
-  final bool isDanger;
-  _DialogChoix({
-    Key? key,
-    required this.titre,
-    required this.isDanger,
-    this.positiveText,
-    this.negativeText,
-    this.container,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      title: Text(
-        titre,
-        style: Theme.of(context).textTheme.headline4,
-        textAlign: TextAlign.center,
-      ),
-      content: ShowComponentFile(
-        title: '_DialogChoix',
-        child: container ?? Container(height: 0),
-      ),
-      actions: <Widget>[
-        if (negativeText != null)
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: Text(negativeText!),
-            style: buttonPrimaryHide,
-          ),
-        SizedBox(width: 10),
+    titre: titre,
+    child: ShowComponentFile(
+      title: '_DialogChoix',
+      child: container ?? Container(height: 0),
+    ),
+    actions: <Widget>[
+      if (negativeText != null)
         TextButton(
           onPressed: () {
-            Navigator.of(context).pop(true);
+            Navigator.of(context).pop(false);
           },
-          child: Text(positiveText ?? 'Oui'),
-          style: isDanger ? buttonNormalRemove : buttonNormalPrimary,
+          child: Text(negativeText!),
+          style: buttonPrimaryHide,
         ),
-        SizedBox(width: 10),
-      ],
-    );
-  }
+      SizedBox(width: 10),
+      TextButton(
+        onPressed: () {
+          Navigator.of(context).pop(true);
+        },
+        child: Text(positiveText ?? 'Oui'),
+        style: isDanger ? buttonNormalRemove : buttonNormalPrimary,
+      ),
+      SizedBox(width: 10),
+    ],
+  );
+  return choix;
 }

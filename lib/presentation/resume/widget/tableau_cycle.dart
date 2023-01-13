@@ -152,14 +152,21 @@ class _Cell extends StatelessWidget {
     switch (column) {
       case 'Date':
         info = Center(
-          child: Text(AppDateUtils.formatDate(observation.date, 'dd/MM'),
-              style: Theme.of(context).textTheme.headline6),
+          child: Column(
+            children: [
+              Text(AppDateUtils.formatDate(observation.date, 'dd'),
+                  style: Theme.of(context).textTheme.headline6?.copyWith(fontSize: 14)),
+              Text(AppDateUtils.formatDate(observation.date, 'MMM'),
+                  style: Theme.of(context).textTheme.headline6),
+            ],
+          ),
         );
         break;
       case 'Couleur':
         info = LittleBox(
           width: 40,
           height: 35,
+          color: observation.couleur?.getOrCrash().toColor(),
           child: Padding(
             padding: const EdgeInsets.all(2.0),
             child: Stack(
@@ -178,21 +185,15 @@ class _Cell extends StatelessWidget {
         info = LittleBox(
             width: 40,
             height: 35,
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Stack(
-                children: [
-                  LittleBox(color: observation.analyse?.getOrCrash().toColor()),
-                  if (observation.jourFertile == false) Placeholder(),
-                ],
-              ),
+            child: Stack(
+              children: [
+                LittleBox(width: 40, height: 35, color: observation.analyse?.getOrCrash().toColor()),
+                if (observation.jourFertile == false) Placeholder(),
+              ],
             ));
         break;
       case 'Sensation':
-        info = IconObservation(
-            iconPath: observation.sensation?.getOrCrash().toIconPath() ?? '',
-            iconText: observation.sensation?.getOrCrash().toDisplayShort() ?? '',
-            iconSize: 30);
+        info = _LittleBoxText(observation.sensation?.getOrCrash().toDisplayShort() ?? '');
         break;
       case 'Observation':
         info = SingleChildScrollView(
@@ -209,22 +210,27 @@ class _Cell extends StatelessWidget {
         );
         break;
       case 'Sang':
-        info = IconObservation(
-            iconPath: observation.sang?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30);
+        info = _LittleBoxChild(
+          IconObservation(
+              iconPath: observation.sang?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 60),
+        );
         break;
       case 'Mucus':
-        info = IconObservation(
-            iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30);
+        info = _LittleBoxChild(
+          IconObservation(
+              iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 60),
+        );
         break;
       case 'Douleur':
         if (observation.douleurs?.length != null && observation.douleurs!.length > 0)
           info = SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             child: Row(
               children: observation.douleurs
-                      ?.map((Douleur douleur) => IconObservation(
-                          iconPath: douleur.getOrCrash().toIconPath(),
-                          iconText: douleur.getOrCrash().toDisplayShort(),
-                          iconSize: 30))
+                      ?.map((Douleur douleur) => Padding(
+                            padding: const EdgeInsets.only(right: 2),
+                            child: _LittleBoxText(douleur.getOrCrash().toDisplayShort()),
+                          ))
                       .toList() ??
                   [],
             ),
@@ -241,8 +247,8 @@ class _Cell extends StatelessWidget {
           info = SingleChildScrollView(
             child: Row(
               children: observation.evenements
-                      ?.map((Evenement evt) =>
-                          IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 30))
+                      ?.map((Evenement evt) => _LittleBoxChild(
+                          IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 60)))
                       .toList() ??
                   [],
             ),
@@ -256,6 +262,41 @@ class _Cell extends StatelessWidget {
     }
 
     return Center(child: info);
+  }
+}
+
+class _LittleBoxText extends StatelessWidget {
+  const _LittleBoxText(
+    this.titre, {
+    Key? key,
+  }) : super(key: key);
+
+  final String titre;
+
+  @override
+  Widget build(BuildContext context) {
+    return LittleBox(
+      width: 35,
+      height: 35,
+      child: Center(
+        child: Text(titre,
+            style: Theme.of(context).textTheme.headline6?.copyWith(color: colorpanel(100), fontSize: 13)),
+      ),
+    );
+  }
+}
+
+class _LittleBoxChild extends StatelessWidget {
+  const _LittleBoxChild(
+    this.child, {
+    Key? key,
+  }) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return LittleBox(width: 35, height: 35, child: Center(child: child));
   }
 }
 

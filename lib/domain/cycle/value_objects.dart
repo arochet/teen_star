@@ -6,6 +6,7 @@ import 'package:teenstar/DOMAIN/core/failures.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/core/value_validators.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 
 enum CouleurAnalyseState { rouge, brun, vert, none, invalide }
 
@@ -17,15 +18,15 @@ extension ParseToSringTA on CouleurAnalyseState {
   Color toColor() {
     switch (this) {
       case CouleurAnalyseState.rouge:
-        return Colors.red;
+        return Color.fromARGB(255, 224, 101, 92);
       case CouleurAnalyseState.brun:
-        return Colors.brown;
+        return Color.fromARGB(255, 142, 105, 91);
       case CouleurAnalyseState.vert:
-        return Colors.green;
+        return Color.fromARGB(255, 100, 197, 104);
       case CouleurAnalyseState.none:
-        return Colors.transparent;
+        return colorpanel(700)!;
       case CouleurAnalyseState.invalide:
-        return Color.fromARGB(255, 204, 0, 255);
+        return Color.fromARGB(255, 186, 88, 210);
     }
   }
 

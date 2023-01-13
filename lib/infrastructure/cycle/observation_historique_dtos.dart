@@ -16,12 +16,14 @@ abstract class ObservationHistoriqueDTO implements _$ObservationHistoriqueDTO {
     required int idJourneeSoleil,
     required String? couleur,
     required int idCycle,
+    required int date,
   }) = _ObservationHistoriqueDTO;
 
   ObservationHistorique toDomain() {
     return ObservationHistorique(
       id: UniqueId.fromUniqueInt(id!),
       couleur: CouleurAnalyse.fromString(couleur),
+      date: DateTime.fromMillisecondsSinceEpoch(date),
     );
   }
 

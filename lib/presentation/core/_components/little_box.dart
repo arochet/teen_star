@@ -20,11 +20,12 @@ class LittleBox extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-        color: color ?? colorpanel(700),
-      ),
-      child: child,
+      child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          child: Container(
+            child: child,
+            color: color ?? colorpanel(700),
+          )),
     );
   }
 }

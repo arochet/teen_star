@@ -46,7 +46,7 @@ class MainScaffold extends ConsumerWidget {
     final env = ref.watch(environment.notifier).state.name;
     return AppBar(
       toolbarHeight: 55,
-      backgroundColor: colorpanel(700),
+      backgroundColor: colorpanel(800),
       shadowColor: Colors.transparent,
       iconTheme: IconThemeData(
         color: colorpanel(50),

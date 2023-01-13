@@ -56,7 +56,8 @@ class HistoriquePage extends ConsumerWidget {
                       }
 
                       if (found == false) {
-                        listCycle.add(CycleHistorique.fromListDTO(listObservation, observation.idCycle));
+                        listCycle.add(
+                            CycleHistorique.fromListDTOwithEmptyDays(listObservation, observation.idCycle));
                       }
                     }
                     listCycle = listCycle.reversed.toList();

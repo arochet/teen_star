@@ -146,7 +146,9 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                           height: widget.cellDimensions.contentCellHeight,
                           decoration: BoxDecoration(
                             color: widget.isRowSelected != null
-                                ? (widget.isRowSelected!(i) ? Colors.blue : (i % 2 == 1 ? colorRow : null))
+                                ? (widget.isRowSelected!(i)
+                                    ? actioncolor['primary']
+                                    : (i % 2 == 1 ? colorRow : null))
                                 : (i % 2 == 1 ? colorRow : null),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
@@ -203,7 +205,7 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                                         decoration: BoxDecoration(
                                           color: widget.isRowSelected != null
                                               ? (widget.isRowSelected!(i)
-                                                  ? Color.fromARGB(169, 23, 129, 215)
+                                                  ? actioncolor['primary']
                                                   : (i % 2 == 1 ? colorRow : null))
                                               : (i % 2 == 1 ? colorRow : null),
                                           borderRadius: j == widget.columnsLength - 1

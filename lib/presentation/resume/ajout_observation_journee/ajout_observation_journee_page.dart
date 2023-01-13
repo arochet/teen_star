@@ -15,7 +15,7 @@ class ObservationAddPage extends StatelessWidget {
     return MainScaffold(
       title: 'Nouvelle Observation',
       child: ShowComponentFile(
-        title: '/PRESENTATION/./resume/ajout_observation_journee/observation_add_page.dart',
+        title: '/PRESENTATION/./resume/ajout_observation_journee/ajout_observation_journee_page.dart',
         child: Padding(
           padding: EdgeInsets.all(10),
           child: ObservationFormProvider(cycle, date),

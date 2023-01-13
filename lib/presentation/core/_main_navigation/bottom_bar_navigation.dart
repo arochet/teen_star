@@ -21,17 +21,19 @@ class BottomBarNavigation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Color? colorPanel = colorpanel(700);
+    Color? colorScaffoldBar = colorpanel(900);
+    Color? colorScaffoldBarReglage = colorpanel(800);
     final env = ref.watch(environment.notifier).state.name;
 
     return DefaultTabController(
       length: 2,
       child: AutoTabsScaffold(
         appBarBuilder: (_, tabsRouter) => AppBar(
-            backgroundColor: colorPanel,
+            backgroundColor: tabsRouter.activeIndex == 2 ? colorScaffoldBarReglage : colorScaffoldBar,
             title: _buildAppBar(context, ref, tabsRouter.activeIndex),
             centerTitle: true,
             bottom: tabsRouter.activeIndex == 0 ? _buildTabBarCycle(ref) : null,
+            elevation: tabsRouter.activeIndex == 0 ? 4 : 0,
             actions: env == Environment.dev
                 ? [
                     InkWell(
@@ -41,7 +43,7 @@ class BottomBarNavigation extends ConsumerWidget {
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.remove_red_eye, size: 25),
+                        child: Icon(Icons.remove_red_eye, size: 25, color: colorpanel(200)),
                       ),
                     ),
                   ]
@@ -50,10 +52,11 @@ class BottomBarNavigation extends ConsumerWidget {
         routes: listRoute,
         bottomNavigationBuilder: (_, tabsRouter) {
           return BottomNavigationBar(
-              backgroundColor: colorPanel,
+              backgroundColor: tabsRouter.activeIndex == 2 ? colorScaffoldBarReglage : colorScaffoldBar,
               currentIndex: tabsRouter.activeIndex,
               selectedItemColor: actioncolor["primary"],
               unselectedItemColor: colorpanel(100),
+              elevation: 0,
               onTap: (id) {
                 printDev("Page: ${listMenu[id]["title"]}");
                 if (id == 0) {

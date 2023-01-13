@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/resume/shared/icon_observation.dart';
 
+import '../../../core/_core/theme_colors.dart';
+
 class ChoixFormField extends ConsumerWidget {
   List<Enum> choix;
   Function(Enum) onSelect;
@@ -62,14 +64,32 @@ class _Field extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Row(children: [
-        IconObservation(
-            iconPath: iconPath(state), iconText: iconText != null ? iconText!(state) : null, iconSize: 30),
-        SizedBox(width: 10),
-        Expanded(child: Text(titre(state), style: Theme.of(context).textTheme.bodyText1)),
-        if (isSelected) Icon(Icons.check, size: 20)
-      ]),
+      padding: const EdgeInsets.all(1.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: isSelected ? actioncolor['primary'] : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(children: [
+            SizedBox(width: 2),
+            IconObservation(
+                iconPath: iconPath(state),
+                iconText: iconText != null ? iconText!(state) : null,
+                iconSize: 28),
+            SizedBox(width: 10),
+            Expanded(
+                child: Text(titre(state),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        ?.copyWith(color: isSelected ? Colors.white : Colors.black))),
+            if (isSelected) Icon(Icons.check, size: 20),
+            SizedBox(width: 5),
+          ]),
+        ),
+      ),
     );
   }
 }

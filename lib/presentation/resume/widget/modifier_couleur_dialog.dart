@@ -5,6 +5,8 @@ import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/providers.dart';
 
+import '../resume_page.dart';
+
 class ModifierCouleurDialog extends StatelessWidget {
   final Observation observation;
   const ModifierCouleurDialog(this.observation, {Key? key}) : super(key: key);
@@ -47,7 +49,7 @@ class _ButtonCouleur extends ConsumerWidget {
         onTap: () async {
           await ref.read(cycleRepositoryProvider).modifierCouleurAnalyse(observation, state);
           Navigator.of(context).pop(state);
-          Navigator.of(context).pop(state);
+          ref.read(showAnalyse.notifier).state = true;
           ref.refresh(allCycleProvider);
           final id = ref.read(idCycleCourant);
           if (id != null) ref.refresh(cycleProvider(id));

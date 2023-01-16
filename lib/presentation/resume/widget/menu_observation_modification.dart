@@ -1,19 +1,113 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
-import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
-import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
-import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
-import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/providers.dart';
 
+import '../resume_page.dart';
 import 'modifier_couleur_dialog.dart';
 import 'show_observation_notes.dart';
 
+afficherModalModificationObservation(
+    BuildContext context, WidgetRef ref, Observation observation, Cycle cycle) {
+  showCupertinoModalPopup<void>(
+    context: context,
+    builder: (BuildContext context) => CupertinoActionSheet(
+      title: Text("Observation du J${cycle.getDayOfObservation(observation)}"),
+      message: Text("${AppDateUtils.formatDate(observation.date, "EEEE d MMMM yyyy")}"),
+      cancelButton: CupertinoActionSheetAction(
+        onPressed: () async {
+          Navigator.pop(context);
+        },
+        child: Text('Annuler'),
+      ),
+      actions: <CupertinoActionSheetAction>[
+        CupertinoActionSheetAction(
+          onPressed: () async {
+            await ref.read(cycleRepositoryProvider).marquerJourSommet(cycle, observation.id);
+            refreshAndPop(context, ref);
+          },
+          child: Text('Marquer comme jour Sommet'),
+        ),
+        CupertinoActionSheetAction(
+          onPressed: () async {
+            await showDialog<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return ModifierCouleurDialog(observation);
+              },
+            );
+            Navigator.pop(context);
+          },
+          child: Text('Modifier la couleur'),
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Annuler marquage'),
+          onPressed: () async {
+            await ref.read(cycleRepositoryProvider).marquerComme(observation, 0);
+            ref.read(showAnalyse.notifier).state = true;
+            refreshAndPop(context, ref);
+            Navigator.pop(context);
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Marquer 1'),
+          onPressed: () async {
+            await ref.read(cycleRepositoryProvider).marquerComme(observation, 1);
+            ref.read(showAnalyse.notifier).state = true;
+            refreshAndPop(context, ref);
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Marquer 2'),
+          onPressed: () async {
+            await ref.read(cycleRepositoryProvider).marquerComme(observation, 2);
+            ref.read(showAnalyse.notifier).state = true;
+            refreshAndPop(context, ref);
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Marquer 3'),
+          onPressed: () async {
+            await ref.read(cycleRepositoryProvider).marquerComme(observation, 3);
+            ref.read(showAnalyse.notifier).state = true;
+            refreshAndPop(context, ref);
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Voir les notes'),
+          onPressed: () async {
+            await showDialog<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return ShowObservationNotes(observation: observation);
+              },
+            );
+            Navigator.pop(context);
+          },
+        ),
+        CupertinoActionSheetAction(
+          isDestructiveAction: true,
+          onPressed: () async {
+            final res = await showDialogChoix(context, "Voulez-vous vraiment supprimer cette observation ?",
+                positiveText: 'Supprimer', negativeText: 'Annuler', isDanger: true);
+
+            if (res == true) {
+              await ref.read(cycleRepositoryProvider).delete(observation.id);
+              refreshAndPop(context, ref);
+            }
+          },
+          child: Text('Supprimer'),
+        ),
+      ],
+    ),
+  );
+}
+
+/* 
 class MenuObservationModification extends ConsumerWidget {
   final Cycle cycle;
   final Observation observation;
@@ -34,7 +128,7 @@ class MenuObservationModification extends ConsumerWidget {
               style: Theme.of(context).textTheme.headline5?.copyWith(color: colorpanel(400))),
           SpaceH10(),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               showDialog<void>(
                 context: context,
                 builder: (BuildContext context) {
@@ -132,10 +226,12 @@ class MenuObservationModification extends ConsumerWidget {
     );
   }
 
-  refreshAndPop(BuildContext context, WidgetRef ref) {
-    ref.refresh(allCycleProvider);
-    final id = ref.read(idCycleCourant);
-    if (id != null) ref.refresh(cycleProvider(id));
-    Navigator.of(context).pop();
-  }
+}
+ */
+
+refreshAndPop(BuildContext context, WidgetRef ref) {
+  ref.refresh(allCycleProvider);
+  final id = ref.read(idCycleCourant);
+  if (id != null) ref.refresh(cycleProvider(id));
+  Navigator.of(context).pop();
 }

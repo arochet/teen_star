@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
@@ -37,7 +38,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
 
   @override
   Widget build(BuildContext context) {
-    List<Observation> observations = widget.cycle.getObservationsWithEmptyDays();
+    List<Observation> observations = widget.cycle.getObservationsWithEmptyDays().reversed.toList();
 
     final selection = ref.watch(isSelection);
     //Si le tableau a changé, on réinitialise la liste de sélection
@@ -90,14 +91,14 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
           } else {
             if (!observations[rowIndex].isNone) {
               //Modal de modification de l'observation
-              showDialogApp(
+              final observation = observations[rowIndex];
+              afficherModalModificationObservation(context, ref, observation, widget.cycle);
+
+              /* showDialogApp(
                 context: context,
                 titre: "Observation du J${widget.cycle.getDayOfObservation(observations[rowIndex])}",
                 child: MenuObservationModification(widget.cycle, observations[rowIndex]),
-              );
-              /* showModalBottomSheet(
-                  context: context,
-                  builder: (context) => MenuObservationModification(widget.cycle, observations[rowIndex])); */
+              ); */
             } else {
               DateTime dateObservation = observations[rowIndex].date!;
               //Si l'observation est vide, on affiche un message

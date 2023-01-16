@@ -24,27 +24,22 @@ class PanelPersonnelData extends StatelessWidget {
         ItemPanelList(
           title: 'Pseudo : ${userData?.userName.getOrCrash() ?? '--'}',
           icon: Icons.account_circle_rounded,
-          onTap: () {},
         ),
         ItemPanelList(
           title: 'Année des 1ères règles: ${userData?.anneePremiereRegle ?? '--'}',
           icon: Icons.star_border,
-          onTap: () {},
         ),
         ItemPanelList(
           title: 'Date de naissance: ${AppDateUtils.formatDate(userData?.dateNaissance)}',
           icon: Icons.mail_rounded,
-          onTap: () {},
         ),
         ItemPanelList(
           title: 'Langue: Français',
           icon: Icons.mail_rounded,
-          onTap: () {},
         ),
         ItemPanelList(
           title: 'Thème: Clair',
           icon: Icons.mail_rounded,
-          onTap: () {},
         ),
       ],
       //Bouton modifier

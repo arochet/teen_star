@@ -38,6 +38,11 @@ class PanelList extends StatelessWidget {
                                 .textTheme
                                 .bodyText1!
                                 .copyWith(color: item.enable ? colorpanel(50) : colorpanel(400))),
+                        Expanded(child: Container()),
+                        SizedBox(width: 10),
+                        if (item.onTap != null)
+                          Icon(Icons.arrow_forward_ios,
+                              color: item.enable ? colorpanel(100) : colorpanel(400), size: 15),
                       ],
                     ),
                   ),

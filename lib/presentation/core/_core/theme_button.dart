@@ -32,11 +32,19 @@ ButtonStyle buttonNormal(Color color, bool isWhite, bool fullWidth) => ElevatedB
 
 final buttonNormalPrimary = buttonNormal(actioncolor["primary"]!, true, false);
 final buttonNormalPrimaryFull = buttonNormal(actioncolor["primary"]!, true, true);
-final buttonNormalSecondary = buttonNormal(actioncolor["secondary"]!, true, false);
 final buttonNormalConfirm = buttonNormal(actioncolor["confirm"]!, false, false);
 final buttonNormalWarning = buttonNormal(actioncolor["warning"]!, true, false);
 final buttonNormalRemove = buttonNormal(actioncolor["remove"]!, true, false);
 final buttonNormalHelp = buttonNormal(actioncolor["help"]!, true, false);
+
+final buttonNormalSecondary = ElevatedButton.styleFrom(
+  textStyle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+  backgroundColor: Color.fromARGB(255, 163, 205, 238),
+  foregroundColor: actioncolor["primary"],
+  elevation: 0,
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
+);
 
 final buttonNormalSecondaryFull = ElevatedButton.styleFrom(
   textStyle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),

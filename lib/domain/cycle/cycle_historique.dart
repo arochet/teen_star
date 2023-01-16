@@ -45,9 +45,10 @@ abstract class CycleHistorique with _$CycleHistorique {
       if (obs.length == 0) {
         observationsWithEmptyDays.add(ObservationHistorique.empty());
       } else {
-        for (var o in obs) {
+        observationsWithEmptyDays.add(obs.last);
+        /* for (var o in obs) {
           observationsWithEmptyDays.add(o);
-        }
+        } */
       }
     }
 

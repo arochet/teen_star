@@ -33,55 +33,54 @@ class AppBarCycle extends ConsumerWidget {
       //if (cycleCourant == null) cyclePrecedent = cycleDTO;
     }
 
-    //APPBAR
+    //NEW APPBAR
+    return ShowComponentFile(
+      title: 'AppBarCycle',
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: InkWell(
+          onTap: () {
+            _ouvrirChoixCycle(context, ref);
+          },
+          child: Container(
+            width: 150,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.headline4),
+                Icon(Icons.keyboard_arrow_down, size: 30, color: colorpanel(50)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    //OLD APPBAR / <- CYCLE COURANT ->
     return ShowComponentFile(
       title: 'AppBarCycle',
       child: Stack(
         children: [
           //CYCLE COURANT
           Center(
-              heightFactor: 0.94,
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: InkWell(
-                  onTap: () {
-                    showDialogApp(
-                        context: context,
-                        titre: "Choisir un cycle",
-                        child: Container(
-                          height: 250,
-                          width: 130,
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) => Divider(
-                              color: Colors.black,
-                            ),
-                            itemCount: listCyclesDTO.length,
-                            itemBuilder: (context, index) => InkWell(
-                              onTap: () {
-                                ref.read(idCycleCourant.notifier).state =
-                                    UniqueId.fromUniqueInt(listCyclesDTO[index].id!);
-                                Navigator.pop(context);
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text("Cycle ${listCyclesDTO[index].id}"),
-                              ),
-                            ),
-                          ),
-                        ));
-                  },
-                  child: Container(
-                    width: 150,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.headline4),
-                        Icon(Icons.keyboard_arrow_down, size: 30, color: colorpanel(50)),
-                      ],
-                    ),
-                  ),
+            padding: const EdgeInsets.all(12.0),
+            child: InkWell(
+              onTap: () {
+                _ouvrirChoixCycle(context, ref);
+              },
+              child: Container(
+                width: 150,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.headline4),
+                    Icon(Icons.keyboard_arrow_down, size: 30, color: colorpanel(50)),
+                  ],
                 ),
-              )),
+              ),
+            ),
+          )),
           /* Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -112,5 +111,31 @@ class AppBarCycle extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  Future<dynamic> _ouvrirChoixCycle(BuildContext context, WidgetRef ref) {
+    return showDialogApp(
+        context: context,
+        titre: "Choisir un cycle",
+        child: Container(
+          height: 250,
+          width: 130,
+          child: ListView.separated(
+            separatorBuilder: (context, index) => Divider(
+              color: Colors.black,
+            ),
+            itemCount: listCyclesDTO.length,
+            itemBuilder: (context, index) => InkWell(
+              onTap: () {
+                ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(listCyclesDTO[index].id!);
+                Navigator.pop(context);
+              },
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("Cycle ${listCyclesDTO[index].id}"),
+              ),
+            ),
+          ),
+        ));
   }
 }

@@ -99,7 +99,15 @@ class _Cell extends StatelessWidget {
             width: 40,
             height: 35,
             color: observation.couleur?.getOrCrash().toColor() ?? Colors.white,
-            //child: Text("${observation.id.getOrCrash()}", style: Theme.of(context).textTheme.bodyText1),
+            child: isJourSommet
+                ? Center(
+                    child:
+                        Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white, width: 30, height: 30))
+                : null,
+            /* child: Center(
+              child: Text("${AppDateUtils.formatDate(observation.date, 'dd/MM')}",
+                  style: Theme.of(context).textTheme.bodyText1),
+            ), */
           ),
         ),
       ],

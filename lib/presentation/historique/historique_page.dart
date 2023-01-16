@@ -63,28 +63,7 @@ class HistoriquePage extends ConsumerWidget {
                     listCycle = listCycle.reversed.toList();
 
                     //PAGE HISTORIQUE
-                    return Column(
-                      children: [
-                        //BOUTON RENVOYER CYCLE
-                        if (listCycle.length > 1)
-                          ElevatedButton(
-                            onPressed: () async {
-                              final onRenvoie = await showDialogChoix(context,
-                                  'Etes-vous sûr de vouloir renvoyer le cycle ${listCycle.length} vers ${listCycle.length - 1} ?',
-                                  positiveText: 'Renvoyer', negativeText: 'Annuler');
-                              if (onRenvoie == true) {
-                                final result = await ref.read(cycleRepositoryProvider).renvoieDernierCycle();
-                                result.fold((l) => showSnackbarCycleFailure(context, l),
-                                    (_) => ref.refresh(allCycleHistoriqueProvider));
-                              }
-                            },
-                            child: Text("Renvoyer Cycle ${listCycle.length} vers ${listCycle.length - 1}"),
-                            style: buttonLittleSecondary,
-                          ),
-                        //TABLEAU HISTORIQUE
-                        Expanded(child: TableauHistorique(listCycle)),
-                      ],
-                    );
+                    return TableauHistorique(listCycle);
                   }
                 },
               );

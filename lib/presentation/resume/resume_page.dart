@@ -119,8 +119,6 @@ class _Cycle extends ConsumerWidget {
             children: [
               Column(
                 children: [
-                  //APPBAR_ANALYSE
-                  AppBarAnalyse(),
                   //TABLEAU
                   Expanded(child: TableauCycle(cycle)),
                 ],

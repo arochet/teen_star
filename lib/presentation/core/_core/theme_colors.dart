@@ -12,11 +12,11 @@ final palettecolor = [
 Color? colorpanel(int tint) {
   switch (tint) {
     case 900:
-      return Color(0xFFE6FCFF);
+      return Color.fromARGB(255, 239, 251, 252);
     case 800:
-      return Color(0xFFC7DAE4);
+      return Color.fromARGB(255, 216, 230, 237);
     case 700:
-      return Color(0xFFA7B9C9);
+      return Color.fromARGB(255, 185, 201, 215);
     case 600:
       return Color(0xFF8897AE);
     case 500:

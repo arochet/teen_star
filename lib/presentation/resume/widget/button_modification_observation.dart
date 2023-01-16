@@ -27,19 +27,32 @@ class ButtonModificationObservation extends ConsumerWidget {
       alignment: Alignment.bottomCenter,
       child: ShowComponentFile(
         title: 'ButtonModificationObservation',
-        child: ElevatedButton(
-          onPressed: () async {
-            printDev("ButtonModificationObservation onPressed");
-            final int nombreObservation = ref.read(observationSectionne).length;
-            //DIALOG pour la modification du cycle
-            await showDialogApp(
-              context: context,
-              titre: "Modifier $nombreObservation observation${nombreObservation > 1 ? 's' : ''}",
-              child: _DialogModificationCycle(),
-            );
-          },
-          child: Text("Modifier"),
-          style: buttonNormalPrimary,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                printDev("ButtonAnnulerObservation onPressed");
+                ref.watch(isSelection.notifier).state = !ref.read(isSelection);
+              },
+              child: Text("Annuler"),
+              style: buttonNormalSecondary,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                printDev("ButtonModificationObservation onPressed");
+                final int nombreObservation = ref.read(observationSectionne).length;
+                //DIALOG pour la modification du cycle
+                await showDialogApp(
+                  context: context,
+                  titre: "Modifier $nombreObservation observation${nombreObservation > 1 ? 's' : ''}",
+                  child: _DialogModificationCycle(),
+                );
+              },
+              child: Text("Modifier"),
+              style: buttonNormalPrimary,
+            ),
+          ],
         ),
       ),
     );

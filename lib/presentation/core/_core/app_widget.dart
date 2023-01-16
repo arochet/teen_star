@@ -19,6 +19,8 @@ class AppWidget extends StatelessWidget {
         primaryColor: Colors.red,
         scaffoldBackgroundColor: colorpanel(800),
         inputDecorationTheme: InputDecorationTheme(
+          labelStyle: TextStyle(color: colorpanel(200)),
+          iconColor: colorpanel(200),
           fillColor: colorpanel(900),
           floatingLabelStyle: TextStyle(color: colorpanel(100)),
           filled: true,

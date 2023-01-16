@@ -28,17 +28,17 @@ afficherModalModificationObservation(
         CupertinoActionSheetAction(
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerJourSommet(cycle, observation.id);
+            ref.read(showAnalyse.notifier).state = false;
             refreshAndPop(context, ref);
           },
           child: Text('Marquer comme jour Sommet'),
         ),
         CupertinoActionSheetAction(
           onPressed: () async {
-            await showDialog<void>(
+            await showDialogApp<void>(
               context: context,
-              builder: (BuildContext context) {
-                return ModifierCouleurDialog(observation);
-              },
+              child: ModifierCouleurDialog(observation),
+              titre: "Choisir une couleur",
             );
             Navigator.pop(context);
           },
@@ -48,16 +48,15 @@ afficherModalModificationObservation(
           child: Text('Annuler marquage'),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 0);
-            ref.read(showAnalyse.notifier).state = true;
+            ref.read(showAnalyse.notifier).state = false;
             refreshAndPop(context, ref);
-            Navigator.pop(context);
           },
         ),
         CupertinoActionSheetAction(
           child: Text('Marquer 1'),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 1);
-            ref.read(showAnalyse.notifier).state = true;
+            ref.read(showAnalyse.notifier).state = false;
             refreshAndPop(context, ref);
           },
         ),
@@ -65,7 +64,7 @@ afficherModalModificationObservation(
           child: Text('Marquer 2'),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 2);
-            ref.read(showAnalyse.notifier).state = true;
+            ref.read(showAnalyse.notifier).state = false;
             refreshAndPop(context, ref);
           },
         ),
@@ -73,18 +72,33 @@ afficherModalModificationObservation(
           child: Text('Marquer 3'),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 3);
-            ref.read(showAnalyse.notifier).state = true;
+            ref.read(showAnalyse.notifier).state = false;
             refreshAndPop(context, ref);
           },
         ),
         CupertinoActionSheetAction(
           child: Text('Voir les notes'),
           onPressed: () async {
-            await showDialog<void>(
+            await showDialogApp<void>(
               context: context,
-              builder: (BuildContext context) {
-                return ShowObservationNotes(observation: observation);
-              },
+              titre: "Observation du ${AppDateUtils.formatDate(observation.date)}",
+              child: ShowObservationNotes(observation: observation),
+              actions: <Widget>[
+                TextButton(
+                  style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
+                  child: const Text('Notes confidentielles'),
+                  onPressed: () {
+                    ouvrirNoteConfidentielles(context, ref, observation);
+                  },
+                ),
+                SizedBox(width: 20),
+                TextButton(
+                    style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
+                    child: const Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+              ],
             );
             Navigator.pop(context);
           },

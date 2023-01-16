@@ -76,9 +76,10 @@ class _DialogModificationCycle extends ConsumerWidget {
             SpaceH20(),
             ElevatedButton(
               onPressed: () {
-                ref.watch(isSelection.notifier).state = false;
                 final listObservationSelectionnee = ref.read(observationSectionne);
                 ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, false);
+                ref.watch(isSelection.notifier).state = false;
+                ref.watch(showAnalyse.notifier).state = true;
                 _rafraichirPage(ref);
                 Navigator.of(context).pop();
               },
@@ -88,9 +89,10 @@ class _DialogModificationCycle extends ConsumerWidget {
             SpaceH5(),
             ElevatedButton(
               onPressed: () {
-                ref.watch(isSelection.notifier).state = false;
                 final listObservationSelectionnee = ref.read(observationSectionne);
                 ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
+                ref.watch(isSelection.notifier).state = false;
+                ref.watch(showAnalyse.notifier).state = true;
                 _rafraichirPage(ref);
                 Navigator.of(context).pop();
               },

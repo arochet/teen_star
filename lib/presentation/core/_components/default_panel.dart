@@ -3,11 +3,11 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class DefaultPanel extends StatelessWidget {
-  final String? title;
+  final String? componentName;
   const DefaultPanel({
     Key? key,
     required this.child,
-    this.title,
+    this.componentName,
   }) : super(key: key);
 
   final Widget child;
@@ -17,7 +17,7 @@ class DefaultPanel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: ShowComponentFile(
-        title: title,
+        title: componentName,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),

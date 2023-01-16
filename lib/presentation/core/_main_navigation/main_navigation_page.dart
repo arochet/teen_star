@@ -24,7 +24,7 @@ class MainNavigationPage extends StatelessWidget {
       },
       {
         "title": "Historique",
-        "icon": Icons.graphic_eq,
+        "icon": Icons.assessment_outlined,
         "id": 1,
       },
       {

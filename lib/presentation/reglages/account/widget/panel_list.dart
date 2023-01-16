@@ -20,7 +20,7 @@ class PanelList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultPanel(
-      title: title,
+      componentName: title,
       child: Column(children: [
         ...list
             .map((item) => GestureDetector(

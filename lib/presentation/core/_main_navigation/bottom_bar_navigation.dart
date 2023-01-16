@@ -96,6 +96,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
               elevation: 0,
               onTap: (id) {
                 printDev("Page: ${widget.listMenu[id]["title"]}");
+                ref.read(isSelection.notifier).state = false;
                 if (id == 0) {
                   ref.refresh(allCycleProvider);
                   final id = ref.read(idCycleCourant);

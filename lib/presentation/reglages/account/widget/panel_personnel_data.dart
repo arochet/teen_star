@@ -27,19 +27,19 @@ class PanelPersonnelData extends StatelessWidget {
         ),
         ItemPanelList(
           title: 'Année des 1ères règles: ${userData?.anneePremiereRegle ?? '--'}',
-          icon: Icons.star_border,
+          icon: Icons.local_florist,
         ),
         ItemPanelList(
           title: 'Date de naissance: ${AppDateUtils.formatDate(userData?.dateNaissance)}',
-          icon: Icons.mail_rounded,
+          icon: Icons.child_friendly,
         ),
         ItemPanelList(
           title: 'Langue: Français',
-          icon: Icons.mail_rounded,
+          icon: Icons.flag,
         ),
         ItemPanelList(
           title: 'Thème: Clair',
-          icon: Icons.mail_rounded,
+          icon: Icons.palette,
         ),
       ],
       //Bouton modifier

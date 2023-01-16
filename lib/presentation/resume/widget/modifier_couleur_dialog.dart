@@ -13,22 +13,19 @@ class ModifierCouleurDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Center(child: Text('Choisir une couleur')),
-      content: ShowComponentFile(
-          title: 'ModifierCouleurDialog',
-          child: Container(
-            height: 100,
-            child: Center(
-              child: Wrap(
-                alignment: WrapAlignment.spaceAround,
-                children: CouleurAnalyseState.values
-                    .map((CouleurAnalyseState state) => _ButtonCouleur(observation, state))
-                    .toList(),
-              ),
+    return ShowComponentFile(
+        title: 'ModifierCouleurDialog',
+        child: Container(
+          height: 100,
+          child: Center(
+            child: Wrap(
+              alignment: WrapAlignment.spaceAround,
+              children: CouleurAnalyseState.values
+                  .map((CouleurAnalyseState state) => _ButtonCouleur(observation, state))
+                  .toList(),
             ),
-          )),
-    );
+          ),
+        ));
   }
 }
 

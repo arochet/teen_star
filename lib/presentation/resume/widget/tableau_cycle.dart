@@ -38,12 +38,12 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
 
   @override
   Widget build(BuildContext context) {
-    List<Observation> observations = widget.cycle.getObservationsWithEmptyDays().reversed.toList();
+    List<Observation> observationsAndEmpty = widget.cycle.getObservationsWithEmptyDays().reversed.toList();
 
     final selection = ref.watch(isSelection);
     //Si le tableau a changé, on réinitialise la liste de sélection
-    if (_selected.length != observations.length || !selection) {
-      _selected = List.generate(observations.length, (index) => false);
+    if (_selected.length != observationsAndEmpty.length || !selection) {
+      _selected = List.generate(observationsAndEmpty.length, (index) => false);
     }
 
     //Titre du tableau
@@ -68,15 +68,15 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) => _CellHeader(title[colulmnIndex]),
         contentCellBuilder: (int columnIndex, int rowIndex) => _Cell(
-            observations[rowIndex],
+            observationsAndEmpty[rowIndex],
             title[columnIndex],
-            observations[rowIndex].id.getOrCrash() == widget.cycle.idJourneeSoleil.getOrCrash()),
-        rowsLength: observations.length,
+            observationsAndEmpty[rowIndex].id.getOrCrash() == widget.cycle.idJourneeSoleil.getOrCrash()),
+        rowsLength: observationsAndEmpty.length,
         rowsTitleBuilder: (int rowIndex) =>
-            _CellDay('${widget.cycle.getDayOfObservation(observations[rowIndex])}', selection),
+            _CellDay('${widget.cycle.getDayOfObservation(observationsAndEmpty[rowIndex])}', selection),
         widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
         cellDimensions: CellDimensions(
-          stickyLegendWidth: 40,
+          stickyLegendWidth: 50,
           stickyLegendHeight: 50,
           contentCellWidth: 60, //Sert à rien car il y'a widthCell
           contentCellHeight: 50,
@@ -86,21 +86,15 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
           if (selection) {
             setState(() {
               _selected[rowIndex] = !_selected[rowIndex];
-              alimenterListObservationSelectionne();
+              alimenterListObservationSelectionne(observationsAndEmpty);
             });
           } else {
-            if (!observations[rowIndex].isNone) {
+            if (!observationsAndEmpty[rowIndex].isNone) {
               //Modal de modification de l'observation
-              final observation = observations[rowIndex];
+              final observation = observationsAndEmpty[rowIndex];
               afficherModalModificationObservation(context, ref, observation, widget.cycle);
-
-              /* showDialogApp(
-                context: context,
-                titre: "Observation du J${widget.cycle.getDayOfObservation(observations[rowIndex])}",
-                child: MenuObservationModification(widget.cycle, observations[rowIndex]),
-              ); */
             } else {
-              DateTime dateObservation = observations[rowIndex].date!;
+              DateTime dateObservation = observationsAndEmpty[rowIndex].date!;
               //Si l'observation est vide, on affiche un message
               if (await showDialogChoix(context,
                       'Voulez-vous ajouter une observation pour le ${AppDateUtils.formatDate(dateObservation)} ?',
@@ -112,18 +106,18 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
           }
         },
         isRowSelected: (rowIndex) {
-          if (rowIndex >= observations.length) return false;
+          if (rowIndex >= observationsAndEmpty.length) return false;
           return _selected[rowIndex];
         },
       ),
     );
   }
 
-  alimenterListObservationSelectionne() {
+  alimenterListObservationSelectionne(List<Observation> observationsAndEmpty) {
     List<Observation> observations = [];
     for (int i = 0; i < _selected.length; i++) {
       if (_selected[i]) {
-        observations.add(widget.cycle.observations[i]);
+        observations.add(observationsAndEmpty[i]);
       }
     }
     ref.read(observationSectionne.notifier).state = observations;
@@ -173,10 +167,9 @@ class _Cell extends StatelessWidget {
             child: Stack(
               children: [
                 if (isJourSommet)
-                  Center(child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white)),
+                  Center(child: Image.asset(AssetsPath.icon_fleur_sommet, color: colorpanel(50))),
                 if (observation.marque != null && observation.marque! > 0)
-                  Center(child: Text("${observation.marque}", style: Theme.of(context).textTheme.headline4)),
-                Container(color: observation.couleur?.getOrCrash().toColor()),
+                  Center(child: Text("${observation.marque}", style: Theme.of(context).textTheme.headline5)),
               ],
             ),
           ),

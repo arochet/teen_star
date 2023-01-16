@@ -3,8 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/providers.dart';
+
+import '../../core/_components/dialogs.dart';
 
 class ShowObservationNotes extends ConsumerWidget {
   final Observation observation;
@@ -25,18 +28,65 @@ class ShowObservationNotes extends ConsumerWidget {
     if (observation.humeurAutre != null && observation.humeurAutre!.length > 0)
       txt += 'Autre humeur : ${observation.humeurAutre}\n';
     if (txt == '') txt = 'Aucune observation';
-    return AlertDialog(
-      title: Text('Observation du ${AppDateUtils.formatDate(observation.date)}'),
-      content: ShowComponentFile(title: '_ShowObservationNotes', child: Text(txt)),
-      actions: <Widget>[
-        TextButton(
+
+    return ShowComponentFile(title: '_ShowObservationNotes', child: Text(txt));
+  }
+}
+
+ouvrirNoteConfidentielles(BuildContext context, WidgetRef ref, Observation observation) async {
+  //Vérifier le mot de passe de l'application
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController? controller = TextEditingController();
+  final pass = await showDialogApp<bool>(
+    context: context,
+    child: Form(
+      key: _formKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextFormField(
+            decoration: InputDecoration(
+              hintText: 'Mot de passe Application',
+              border: OutlineInputBorder(),
+              hintStyle: TextStyle(color: colorpanel(200)),
+            ),
+            controller: controller,
+            obscureText: true,
+          ),
+        ],
+      ),
+    ),
+    actions: <Widget>[
+      TextButton(
           style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-          child: const Text('Notes confidentielles'),
-          onPressed: () {
-            _ouvrirNoteConfidentielles(context, ref);
-          },
-        ),
-        SizedBox(width: 20),
+          child: const Text('Voir les notes'),
+          onPressed: () async {
+            final passwordOK = await ref.read(authRepositoryProvider).checkPasswordAppli(controller.text);
+            Navigator.of(context).pop(passwordOK);
+          }),
+    ],
+  );
+
+  if (pass == true) {
+    //Voir les notes confidentielles
+    String txtObservation = '';
+    if (observation.notesConfidentielles != null && observation.notesConfidentielles!.length > 0)
+      txtObservation += '${observation.notesConfidentielles}\n';
+    else
+      txtObservation += 'Pas de notes confidentielles\n';
+    showDialogApp<bool>(
+      context: context,
+      titre: 'Notes confidentielles',
+      child: Container(
+          height: 160,
+          child: Center(
+              child: SingleChildScrollView(
+            child: Text(
+              txtObservation,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ))),
+      actions: <Widget>[
         TextButton(
             style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
             child: const Text('OK'),
@@ -45,83 +95,7 @@ class ShowObservationNotes extends ConsumerWidget {
             }),
       ],
     );
-  }
-
-  _ouvrirNoteConfidentielles(BuildContext context, WidgetRef ref) async {
-    //Vérifier le mot de passe de l'application
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    TextEditingController? controller = TextEditingController();
-    final pass = await showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Mot de passe Application',
-                    border: OutlineInputBorder(),
-                  ),
-                  controller: controller,
-                  obscureText: true,
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-                style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-                child: const Text('Voir les notes'),
-                onPressed: () async {
-                  final passwordOK =
-                      await ref.read(authRepositoryProvider).checkPasswordAppli(controller.text);
-                  Navigator.of(context).pop(passwordOK);
-                }),
-          ],
-        );
-      },
-    );
-
-    if (pass == true) {
-      //Voir les notes confidentielles
-      showDialog<bool>(
-        context: context,
-        builder: (BuildContext context) {
-          String txtObservation = '';
-          if (observation.notesConfidentielles != null && observation.notesConfidentielles!.length > 0)
-            txtObservation += '${observation.notesConfidentielles}\n';
-          else
-            txtObservation += 'Pas de notes confidentielles\n';
-          return AlertDialog(
-            title: Text(
-              'Notes confidentielles',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            content: Container(
-                height: 160,
-                child: Center(
-                    child: SingleChildScrollView(
-                  child: Text(
-                    txtObservation,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                ))),
-            actions: <Widget>[
-              TextButton(
-                  style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  }),
-            ],
-          );
-        },
-      );
-    } else if (pass == false) {
-      showSnackbar(context, 'Erreur dans le mot de passe');
-    }
+  } else if (pass == false) {
+    showSnackbar(context, 'Erreur dans le mot de passe');
   }
 }

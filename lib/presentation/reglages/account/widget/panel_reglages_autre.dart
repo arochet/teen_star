@@ -17,10 +17,10 @@ class PanelReglagesAutre extends StatelessWidget {
       title: 'Panel Reglages Autre',
       list: [
         ItemPanelList(
-          title: 'Principes d\'utilisation',
+          title: 'Guide de base',
           icon: Icons.library_books,
           onTap: () {
-            context.router.push(Condition_utilisationRoute(doitEtreAccepte: false));
+            context.router.push(Principes_de_baseRoute());
           },
         ),
         ItemPanelList(
@@ -40,6 +40,7 @@ class PanelReglagesAutre extends StatelessWidget {
           title: 'Lire mes notes confidentielles',
           icon: Icons.mail_rounded,
           onTap: () {},
+          enable: false,
         ),
         ItemPanelList(
           title: 'Info sur l\'application',

@@ -197,6 +197,13 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
   }
 
   void _showActionSheetCycle(BuildContext context, WidgetRef ref) {
+    UniqueId? idCourant = ref.watch(idCycleCourant);
+
+    if (idCourant == null) {
+      showSnackbar(context, "Aucun cycle pour le moment !");
+      return;
+    }
+
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
@@ -227,7 +234,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
               Navigator.pop(context);
               ref.read(isSelection.notifier).state = !ref.read(isSelection);
             },
-            child: const Text('Modifier Cycle'),
+            child: Text('Modifier Cycle ${idCourant?.getOrCrash()}'),
           ),
         ],
       ),

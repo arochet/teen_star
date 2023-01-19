@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
-import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/providers.dart';
 
 import '../../core/_components/dialogs.dart';
@@ -27,7 +25,7 @@ class ShowObservationNotes extends ConsumerWidget {
       txt += 'Autre douleur : ${observation.douleursAutre}\n';
     if (observation.humeurAutre != null && observation.humeurAutre!.length > 0)
       txt += 'Autre humeur : ${observation.humeurAutre}\n';
-    if (txt == '') txt = 'Aucune observation';
+    if (txt == '') txt = 'Pas de note';
 
     return ShowComponentFile(title: '_ShowObservationNotes', child: Text(txt));
   }
@@ -37,35 +35,7 @@ ouvrirNoteConfidentielles(BuildContext context, WidgetRef ref, Observation obser
   //Vérifier le mot de passe de l'application
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController? controller = TextEditingController();
-  final pass = await showDialogApp<bool>(
-    context: context,
-    child: Form(
-      key: _formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: 'Mot de passe Application',
-              border: OutlineInputBorder(),
-              hintStyle: TextStyle(color: colorpanel(200)),
-            ),
-            controller: controller,
-            obscureText: true,
-          ),
-        ],
-      ),
-    ),
-    actions: <Widget>[
-      TextButton(
-          style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-          child: const Text('Voir les notes'),
-          onPressed: () async {
-            final passwordOK = await ref.read(authRepositoryProvider).checkPasswordAppli(controller.text);
-            Navigator.of(context).pop(passwordOK);
-          }),
-    ],
-  );
+  final pass = await showDialogPassword<bool>(context: context, ref: ref, dissmissable: true);
 
   if (pass == true) {
     //Voir les notes confidentielles
@@ -95,7 +65,5 @@ ouvrirNoteConfidentielles(BuildContext context, WidgetRef ref, Observation obser
             }),
       ],
     );
-  } else if (pass == false) {
-    showSnackbar(context, 'Erreur dans le mot de passe');
   }
 }

@@ -1,18 +1,51 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/PRESENTATION/auth/widget/check_connexion_widget.dart';
+import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_main_navigation/bottom_bar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+import 'package:teenstar/providers.dart';
 import 'side_bar_navigation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class MainNavigationPage extends StatelessWidget {
+class MainNavigationPage extends ConsumerStatefulWidget {
   MainNavigationPage({Key? key}) : super(key: key);
 
+  @override
+  _MainNavigationPageState createState() => _MainNavigationPageState();
+}
+
+class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with WidgetsBindingObserver {
   final listRoute = [
     ResumeRoute(),
     HistoriqueRoute(),
     AccountRoute(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      showDialogPassword(context: context, ref: ref, dissmissable: false);
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.resumed) {
+      await showDialogPassword(context: context, ref: ref, dissmissable: false);
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:teenstar/providers.dart';
 
 import 'show_component_file.dart';
 
@@ -58,4 +60,77 @@ Future<bool?> showDialogChoix(BuildContext context, String titre,
     ],
   );
   return choix;
+}
+
+//PASSWORD
+Future<bool?> showDialogPassword<bool>(
+    {required BuildContext context, required WidgetRef ref, required bool dissmissable}) async {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController? controller = TextEditingController();
+  String? textError;
+  return showDialog<bool>(
+    context: context,
+    barrierDismissible: dissmissable == false,
+    barrierColor: dissmissable == false ? colorpanel(700) : null,
+    builder: (BuildContext context) {
+      return StatefulBuilder(builder: (context, setState) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          title: Text('Entrez le mot de passe',
+              style: Theme.of(context).textTheme.headline4, textAlign: TextAlign.center),
+          content: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Mot de passe Application',
+                    border: OutlineInputBorder(),
+                    hintStyle: TextStyle(color: colorpanel(200)),
+                    errorText: textError,
+                  ),
+                  controller: controller,
+                  obscureText: true,
+                  onChanged: (value) {
+                    setState(() {
+                      textError = null;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          backgroundColor: colorpanel(800),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: <Widget>[
+            if (dissmissable == true) ...[
+              ElevatedButton(
+                  style: buttonPrimaryHideLittle,
+                  child: const Text('Annuler'),
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  }),
+              SizedBox(width: 10),
+            ],
+            ElevatedButton(
+                style: buttonLittlePrimary,
+                child: const Text('Accéder'),
+                onPressed: () async {
+                  final passwordOK =
+                      await ref.read(authRepositoryProvider).checkPasswordAppli(controller.text);
+                  if (passwordOK)
+                    Navigator.of(context).pop(true);
+                  else {
+                    setState(() {
+                      textError = "Mot de passe incorrect";
+                    });
+                    controller.clear();
+                  }
+                }),
+          ],
+        );
+      });
+    },
+  );
 }

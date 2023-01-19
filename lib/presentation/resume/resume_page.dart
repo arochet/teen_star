@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
@@ -9,6 +10,8 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/resume/pdf/generate_cycle_pdf.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widget/app_bar_cycle.dart';
@@ -119,6 +122,28 @@ class _Cycle extends ConsumerWidget {
             children: [
               Column(
                 children: [
+                  if (ref.watch(environment).name == Environment.dev)
+                    Center(
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            final listeCycleEither = await ref.read(allCycleProvider.future);
+
+                            listeCycleEither.fold(
+                              (l) => showSnackbarCycleFailure(context, l),
+                              (List<CycleDTO> listeCycle) async {
+                                final listCycleAsync = await ref
+                                    .read(cycleRepositoryProvider)
+                                    .readListCycles(listeCycle.first.id!, listeCycle.last.id!);
+
+                                final userData = await ref.read(currentUserData.future);
+                                listCycleAsync.fold((l) => showSnackbarCycleFailure(context, l),
+                                    (list) => generatePDF(userData, list));
+                              },
+                            );
+                          },
+                          child: Text("Exporter PDF"),
+                          style: buttonLittleSecondary),
+                    ),
                   //TABLEAU
                   Expanded(child: TableauCycle(cycle)),
                 ],

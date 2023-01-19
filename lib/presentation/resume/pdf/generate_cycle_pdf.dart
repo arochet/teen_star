@@ -2,8 +2,9 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart';
+// import 'package:pdf/pdf.dart';
+//import 'package:pdf/widgets.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
@@ -12,79 +13,130 @@ import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 
 generatePDF(UserData? userData, List<Cycle> listCycles) async {
-  final Document pdf = Document();
+  final PdfDocument pdf = PdfDocument();
+  header(pdf, userData, listCycles);
+
+  //CHARGEMENT LISTE DES ICONES
+  Map<SangState, PdfBitmap> listImageSang = {};
+  for (var sang in SangState.values) {
+    listImageSang[sang] = PdfBitmap((await rootBundle.load(sang.toIconPath())).buffer.asUint8List());
+  }
+
+  Map<MucusState, PdfBitmap> listImageMucus = {};
+  for (var mucus in MucusState.values) {
+    listImageMucus[mucus] = PdfBitmap((await rootBundle.load(mucus.toIconPath())).buffer.asUint8List());
+  }
+
+  Map<EvenementState, PdfBitmap> listImageEvenement = {};
+  for (var evenement in EvenementState.values) {
+    listImageEvenement[evenement] =
+        PdfBitmap((await rootBundle.load(evenement.toIconPath())).buffer.asUint8List());
+  }
+
+  Map<HumeurState, PdfBitmap> listImageHumeur = {};
+  for (var humeur in HumeurState.values) {
+    listImageHumeur[humeur] = PdfBitmap((await rootBundle.load(humeur.toIconPath())).buffer.asUint8List());
+  }
 
   //LISTE DES CYCLES
   //Données tableau
-  final List<Cell> tabTitleCycle = [
-    Cell('Jour', flex: 1),
-    Cell('Date', flex: 1),
-    Cell('Couleur', flex: 1),
-    Cell('Analyse', flex: 1),
-    Cell('Sensation', flex: 1),
-    Cell('Sang', flex: 1),
-    Cell('Mucus', flex: 1),
-    Cell('Douleurs', flex: 2),
-    Cell('Humeur', flex: 1),
-    Cell('Evénement', flex: 2),
+  final List<CellHeader> tabTitleCycle = [
+    CellHeader('Jour', width: 20),
+    CellHeader('Date'),
+    CellHeader('Couleur'),
+    CellHeader('Analyse'),
+    CellHeader('Sensation'),
+    CellHeader('Sang'),
+    CellHeader('Mucus'),
+    CellHeader('Douleurs', width: 80),
+    CellHeader('Humeur'),
+    CellHeader('Evénement', width: 80),
   ];
 
-  final List<Cell> tabTitleCycleCommentaire = [
-    Cell('Jour', flex: 1),
-    Cell('Date', flex: 2),
-    Cell('Commentaires animatrice', flex: 8),
+  final List<CellHeader> tabTitleCycleCommentaire = [
+    CellHeader('Jour', width: 20),
+    CellHeader('Date', width: 40),
+    CellHeader('Commentaires animatrice'),
   ];
 
   //IMAGE
-  final MemoryImage image = MemoryImage(
+  final PdfBitmap image = PdfBitmap(
     (await rootBundle.load(AssetsPath.icon_humeur_neutre)).buffer.asUint8List(),
   );
 
   //POUR CHAQUE CYCLE
-  final int nombreObservationAffichee = 15;
   for (Cycle cycle in listCycles) {
-    for (int i = 0; i < cycle.observations.length / nombreObservationAffichee; i++) {
-      //Range des observations à afficher
-      int rangeStart = i * nombreObservationAffichee;
-      int rangeEnd = (i * nombreObservationAffichee) + nombreObservationAffichee;
-      if (rangeEnd > cycle.observations.length) {
-        rangeEnd = (i * nombreObservationAffichee) + (cycle.observations.length % nombreObservationAffichee);
-      }
+    PdfPage page = pdf.pages.add();
 
-      //CHARGEMENT LISTE DES ICONES
-      Map<SensationState, Widget> listImageSensation = {};
-      for (var sensation in SensationState.values) {
-        listImageSensation[sensation] = await _iconFromTxt(sensation.toDisplayShort());
-      }
+    //Entete du text Cycle
+    PdfTextElement textElement = PdfTextElement(
+        text: 'Cycle ${cycle.id.getOrCrash()}',
+        font: PdfStandardFont(PdfFontFamily.helvetica, 20),
+        brush: PdfBrushes.black);
 
-      Map<SangState, MemoryImage> listImageSang = {};
-      for (var sang in SangState.values) {
-        listImageSang[sang] = MemoryImage((await rootBundle.load(sang.toIconPath())).buffer.asUint8List());
-      }
+    PdfLayoutResult? layoutResult = textElement.draw(
+        page: page, bounds: Rect.fromLTWH(0, 0, page.getClientSize().width, page.getClientSize().height))!;
 
-      Map<MucusState, MemoryImage> listImageMucus = {};
-      for (var mucus in MucusState.values) {
-        listImageMucus[mucus] = MemoryImage((await rootBundle.load(mucus.toIconPath())).buffer.asUint8List());
-      }
+    layoutResult = tableauCycle(
+        page,
+        tabTitleCycle,
+        cycle
+            .getObservationsWithEmptyDays()
+            .map((Observation observation) => !observation.isNone
+                ? <_Cell>[
+                    _CellText('J${cycle.getDayOfObservation(observation)}'),
+                    _CellText(AppDateUtils.formatDate(observation.date)),
+                    _CellColor(observation.couleur?.getOrCrash().toColorPDF()),
+                    _CellColor(observation.analyse?.getOrCrash().toColorPDF()),
+                    _CellIcon(observation.sensation?.getOrCrash().toDisplayShort() ?? ''),
+                    _CellImage(listImageSang[observation.sang?.getOrCrash()]!),
+                    _CellImage(listImageMucus[observation.mucus?.getOrCrash()]!),
+                    _CellList(observation.douleurs
+                            ?.map<String>((douleur) => douleur.getOrCrash().toDisplayString())
+                            .toList() ??
+                        []),
+                    _CellImage(listImageHumeur[observation.humeur?.getOrCrash()]!),
+                    _CellList(observation.evenements
+                            ?.map<String>((evenement) => evenement.getOrCrash().toDisplayString())
+                            .toList() ??
+                        []),
+                  ]
+                : <_Cell>[
+                    _CellText('J${cycle.getDayOfObservation(observation)}'),
+                    _CellNone(),
+                    _CellNone(),
+                    _CellNone(),
+                    _CellNone(),
+                    _CellNone(),
+                    _CellNone(),
+                    _CellNone(),
+                    _CellNone(),
+                    _CellNone(),
+                  ])
+            .toList(),
+        listImageMucus[MucusState.none]!,
+        layoutResult);
 
-      Map<DouleurState, Widget> listWidgetDouleur = {};
-      for (var douleur in DouleurState.values) {
-        listWidgetDouleur[douleur] = await _iconFromTxt(douleur.toDisplayShort());
-      }
+    //PAGE COMMENTAIRES
+    page = pdf.pages.add();
 
-      Map<EvenementState, MemoryImage> listImageEvenement = {};
-      for (var evenement in EvenementState.values) {
-        listImageEvenement[evenement] =
-            MemoryImage((await rootBundle.load(evenement.toIconPath())).buffer.asUint8List());
-      }
+    tableauCycle(
+        page,
+        tabTitleCycleCommentaire,
+        cycle.observations
+            .map((Observation observation) => <_Cell>[
+                  _CellText('J${cycle.getDayOfObservation(observation)}'),
+                  _CellText(AppDateUtils.formatDate(observation.date)),
+                  _CellText('${observation.commentaireAnimatrice ?? "-"}'),
+                ])
+            .toList(),
+        listImageMucus[MucusState.none]!,
+        layoutResult!);
+/* 
+      //Draw image on the page in the specified location and with required size
+      page.graphics.drawImage(listImageEvenement[EvenementState.fatigue]!, Rect.fromLTWH(150, 30, 30, 30)); */
 
-      Map<HumeurState, MemoryImage> listImageHumeur = {};
-      for (var humeur in HumeurState.values) {
-        listImageHumeur[humeur] =
-            MemoryImage((await rootBundle.load(humeur.toIconPath())).buffer.asUint8List());
-      }
-
-      pdf.addPage(Page(
+    /* page.graphics.pdf.addPage(Page(
           pageFormat: PdfPageFormat.a4,
           orientation: PageOrientation.portrait,
           build: (Context context) {
@@ -133,12 +185,12 @@ generatePDF(UserData? userData, List<Cycle> listCycles) async {
             ]);
 
             return w;
-          })); // Page
-    }
+          })); // Page */
+
   }
 
   //PAGE HISTORIQUE
-  List<Cell> headerHistorique = [
+  /* List<Cell> headerHistorique = [
     Cell('Jour'),
     ...listCycles.map((Cycle cycle) => Cell('${cycle.id.getOrCrash()}')).toList()
   ];
@@ -169,39 +221,106 @@ generatePDF(UserData? userData, List<Cycle> listCycles) async {
           SizedBox(height: 5),
           tableauWidget(context, headerHistorique, rows),
         ]);
-      })); // Pag
-
+      })); // Page
+ */
+  //CREATION DU FICHIER
   Directory appDocDirectory = await getApplicationDocumentsDirectory();
-  final File file = File('${appDocDirectory.path}/alertes.pdf');
+  final File file = File('${appDocDirectory.path}/cycles.pdf');
   await file.writeAsBytes(await pdf.save());
 
-  OpenFilex.open('${appDocDirectory.path}/alertes.pdf');
+  OpenFilex.open('${appDocDirectory.path}/cycles.pdf');
+  pdf.dispose();
 }
 
-//HEAD
-Widget header(Context context, UserData? userData, List<Cycle> listCycle) {
-  final TextStyle styleMain = TextStyle(fontWeight: FontWeight.bold, color: PdfColors.black, fontSize: 16);
-  final TextStyle styleSecond = TextStyle(fontWeight: FontWeight.normal, fontSize: 12);
-
-  return Container(
-      decoration: BoxDecoration(border: Border.all()),
-      child: Padding(
-          padding: EdgeInsets.all(5),
-          child: Row(children: [
-            SizedBox(width: 10),
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                  listCycle.length > 1
-                      ? 'Résumé / Analyse du cycle ${listCycle.first.id.getOrCrash()} au cycle ${listCycle.last.id.getOrCrash()}'
-                      : 'Résumé / Analyse du cycle ${listCycle.first.id.getOrCrash()}',
-                  style: styleMain),
-              Text(
-                  '${userData?.userName.getOrCrash()} - ${userData?.dateNaissance?.year} - PR ${userData?.anneePremiereRegle}',
-                  style: styleSecond),
-            ]),
-          ])));
+header(PdfDocument pdf, UserData? userData, List<Cycle> listCycle) {
+  final PdfPageTemplateElement headerTemplate = PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 515, 70));
+//Draw text in the header.
+  headerTemplate.graphics.drawString(
+      listCycle.length > 1
+          ? 'Résumé / Analyse du cycle ${listCycle.first.id.getOrCrash()} au cycle ${listCycle.last.id.getOrCrash()}'
+          : 'Résumé / Analyse du cycle ${listCycle.first.id.getOrCrash()}',
+      PdfStandardFont(PdfFontFamily.helvetica, 16, style: PdfFontStyle.bold),
+      bounds: const Rect.fromLTWH(0, 15, 200, 20));
+  headerTemplate.graphics.drawString(
+      '${userData?.userName.getOrCrash()} - ${userData?.dateNaissance?.year} - PR ${userData?.anneePremiereRegle}',
+      PdfStandardFont(PdfFontFamily.helvetica, 14),
+      bounds: const Rect.fromLTWH(0, 35, 200, 20));
+//Add the header element to the document.
+  pdf.template.top = headerTemplate;
+//Create a PDF page template and add footer content.
+  final PdfPageTemplateElement footerTemplate = PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 515, 50));
+//Draw text in the footer.
+  footerTemplate.graphics.drawString('This is page footer', PdfStandardFont(PdfFontFamily.helvetica, 12),
+      bounds: const Rect.fromLTWH(0, 15, 200, 20));
+//Set footer in the pdf.
+  pdf.template.bottom = footerTemplate;
 }
 
+PdfLayoutResult? tableauCycle(PdfPage page, List<CellHeader> tabTitleHeader, List<List<_Cell>> data,
+    PdfBitmap iconEmpty, PdfLayoutResult layout) {
+  final PdfGrid grid = PdfGrid();
+  grid.columns.add(count: tabTitleHeader.length); // Specify the grid column count.
+
+  for (int i = 0; i < tabTitleHeader.length; i++) {
+    if (tabTitleHeader[i].width != null) {
+      grid.columns[i].width = tabTitleHeader[i].width!;
+    }
+  }
+
+  //HEADER
+  final PdfGridRow headerRow = grid.headers.add(1)[0];
+  for (int i = 0; i < tabTitleHeader.length; i++) {
+    headerRow.cells[i].value = tabTitleHeader[i].text;
+    headerRow.cells[i].style.backgroundBrush = PdfSolidBrush(PdfColor(230, 230, 230));
+  }
+  headerRow.style.font = PdfStandardFont(PdfFontFamily.helvetica, 8, style: PdfFontStyle.bold);
+
+  //ROWS
+  for (List<_Cell> rowData in data) {
+    PdfGridRow row = grid.rows.add();
+    row.height = 30;
+    for (int i = 0; i < tabTitleHeader.length; i++) {
+      final cell = rowData[i];
+      if (cell is _CellText)
+        row.cells[i].value = cell.display();
+      else if (cell is _CellColor) {
+        row.cells[i].style.backgroundBrush = cell.display();
+      } else if (cell is _CellIcon) {
+        row.cells[i].imagePosition = PdfGridImagePosition.stretch;
+        row.cells[i].style.backgroundImage = iconEmpty;
+        row.cells[i].value = cell.display();
+        double paddH = 6;
+        double paddV = 12;
+        row.cells[i].style.font = PdfStandardFont(PdfFontFamily.helvetica, 13);
+        row.cells[i].style.cellPadding = PdfPaddings(bottom: paddH, top: paddH, right: paddV, left: paddV);
+        row.cells[i].style.stringFormat = PdfStringFormat(
+          alignment: PdfTextAlignment.center,
+          lineAlignment: PdfVerticalAlignment.middle,
+        );
+      } else if (cell is _CellImage) {
+        row.cells[i].imagePosition = PdfGridImagePosition.stretch;
+        row.cells[i].style.backgroundImage = cell.display();
+        double paddH = 6;
+        double paddV = 12;
+        row.cells[i].style.cellPadding = PdfPaddings(bottom: paddH, top: paddH, right: paddV, left: paddV);
+      } else if (cell is _CellNone) {
+        row.cells[i].value = '';
+      } else {
+        row.cells[i].value = cell.display();
+      }
+    }
+  }
+
+  grid.style.cellPadding = PdfPaddings(left: 5, top: 5);
+
+  // Draw table in the PDF page.
+  return grid.draw(
+      page: page,
+      bounds: Rect.fromLTWH(
+          0, /* layout.bounds.bottom + */ 40, page.getClientSize().width, page.getClientSize().height));
+}
+
+/*
 //CONTENT
 Widget tableauWidget(Context context, List<Cell> title, List<List<dynamic>> data) {
   return Table(
@@ -221,16 +340,16 @@ Widget tableauWidget(Context context, List<Cell> title, List<List<dynamic>> data
               return Center(child: paddedText('$e'));
             } else if (e is PdfColor) {
               return Center(child: Container(height: 20, width: 20, color: e));
-            } else if (e is MemoryImage) {
+            } else if (e is PdfBitmap) {
               return Padding(
                   padding: EdgeInsets.all(3), child: Center(child: Image(e, width: 18, height: 18)));
-            } else if (e is List<MemoryImage> || e is List<MemoryImage?>) {
+            } else if (e is List<PdfBitmap> || e is List<PdfBitmap?>) {
               return Padding(
                   padding: EdgeInsets.all(3),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: e
-                          .map<Widget>((MemoryImage? image) =>
+                          .map<Widget>((PdfBitmap? image) =>
                               image != null ? Image(image, width: 18, height: 18) : Container())
                           .toList()));
             } else if (e is List<Widget> || e is List<Widget?>) {
@@ -283,19 +402,93 @@ Widget paddedHeader(
         textAlign: align,
         style: TextStyle(fontSize: fontSize, fontWeight: bold ? FontWeight.bold : FontWeight.normal),
       ),
-    );
+    );*/
 
-class Cell {
-  int flex;
-  String label;
+class CellHeader {
+  double? width;
+  String text;
 
-  Cell(this.label, {this.flex = 1});
+  CellHeader(this.text, {this.width});
 }
 
+abstract class _Cell {
+  display();
+}
+
+class _CellText extends _Cell {
+  String value;
+
+  _CellText(this.value);
+
+  @override
+  display() {
+    return value;
+  }
+}
+
+class _CellColor extends _Cell {
+  PdfBrush? value;
+
+  _CellColor(this.value);
+
+  @override
+  display() {
+    return value;
+  }
+}
+
+class _CellIcon extends _Cell {
+  String value;
+
+  _CellIcon(this.value);
+
+  @override
+  display() {
+    return value;
+  }
+}
+
+class _CellList extends _Cell {
+  List<String> value;
+
+  _CellList(this.value);
+
+  @override
+  display() {
+    String str = '';
+    for (var element in value) {
+      str += '$element\n';
+    }
+    return str;
+  }
+}
+
+class _CellImage extends _Cell {
+  PdfBitmap value;
+
+  _CellImage(this.value);
+
+  @override
+  display() {
+    return value;
+  }
+}
+
+class _CellNone extends _Cell {
+  _CellNone();
+
+  @override
+  display() {
+    return null;
+  }
+}
+
+/*
 Future<Widget> _iconFromTxt(String txt) async => Container(
     width: 20,
     height: 20,
     child: Stack(children: [
-      Center(child: Image(MemoryImage((await rootBundle.load(AssetsPath.icon_vide)).buffer.asUint8List()))),
+      Center(child: Image(PdfBitmap((await rootBundle.load(AssetsPath.icon_vide)).buffer.asUint8List()))),
       Center(child: Text(txt, style: TextStyle(fontSize: 10))),
     ]));
+ */

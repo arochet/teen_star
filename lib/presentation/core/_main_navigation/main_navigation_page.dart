@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:injectable/injectable.dart';
 import 'package:teenstar/PRESENTATION/auth/widget/check_connexion_widget.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
@@ -28,7 +29,8 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      showDialogPassword(context: context, ref: ref, dissmissable: false);
+      if (ref.read(environment).name == Environment.prod)
+        showDialogPassword(context: context, ref: ref, dissmissable: false);
     });
   }
 
@@ -37,7 +39,8 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
     super.didChangeAppLifecycleState(state);
 
     if (state == AppLifecycleState.resumed) {
-      await showDialogPassword(context: context, ref: ref, dissmissable: false);
+      if (ref.read(environment).name == Environment.prod)
+        await showDialogPassword(context: context, ref: ref, dissmissable: false);
     }
   }
 

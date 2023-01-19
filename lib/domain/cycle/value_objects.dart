@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pdf/pdf.dart' as pdf;
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:teenstar/DOMAIN/core/failures.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/core/value_validators.dart';
@@ -30,18 +30,18 @@ extension ParseToSringTA on CouleurAnalyseState {
     }
   }
 
-  pdf.PdfColor toColorPDF() {
+  PdfBrush toColorPDF() {
     switch (this) {
       case CouleurAnalyseState.rouge:
-        return pdf.PdfColors.red;
+        return PdfBrushes.red; //red;
       case CouleurAnalyseState.brun:
-        return pdf.PdfColors.brown;
+        return PdfBrushes.brown; //brown;
       case CouleurAnalyseState.vert:
-        return pdf.PdfColors.green;
+        return PdfBrushes.green; //green;
       case CouleurAnalyseState.none:
-        return pdf.PdfColors.amber50;
+        return PdfBrushes.beige; //amber50;
       case CouleurAnalyseState.invalide:
-        return pdf.PdfColor.fromRYB(255, 204, 0);
+        return PdfBrushes.beige;
     }
   }
 }

@@ -43,9 +43,11 @@ class TableauHistorique extends ConsumerWidget {
                 return _CellEmpty();
               else
                 return _Cell(
-                    observation: listHistorique[columnIndex].observations[rowIndex],
-                    isJourSommet: listHistorique[columnIndex].idJourneeSoleil.getOrCrash() ==
-                        listHistorique[columnIndex].observations[rowIndex].id.getOrCrash());
+                  observation: listHistorique[columnIndex].observations[rowIndex],
+                  isJourSommet: listHistorique[columnIndex].idJourneeSoleil.getOrCrash() ==
+                      listHistorique[columnIndex].observations[rowIndex].id.getOrCrash(),
+                  isInfertile: listHistorique[columnIndex].observations[rowIndex].jourFertile == false,
+                );
             } else {
               return _CellEmpty();
             }
@@ -81,10 +83,12 @@ class TableauHistorique extends ConsumerWidget {
 class _Cell extends StatelessWidget {
   final ObservationHistorique observation;
   final bool isJourSommet;
+  final bool isInfertile;
   _Cell({
     Key? key,
     required this.observation,
     required this.isJourSommet,
+    required this.isInfertile,
   }) : super(key: key);
 
   @override
@@ -99,15 +103,16 @@ class _Cell extends StatelessWidget {
             width: 40,
             height: 35,
             color: observation.couleur?.getOrCrash().toColor() ?? Colors.white,
-            child: isJourSommet
-                ? Center(
-                    child:
-                        Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white, width: 30, height: 30))
-                : null,
-            /* child: Center(
-              child: Text("${AppDateUtils.formatDate(observation.date, 'dd/MM')}",
-                  style: Theme.of(context).textTheme.bodyText1),
-            ), */
+            child: Stack(
+              children: [
+                if (isJourSommet)
+                  Center(
+                      child: Image.asset(AssetsPath.icon_fleur_sommet,
+                          color: Colors.white, width: 30, height: 30)),
+                if (isInfertile)
+                  Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40)
+              ],
+            ),
           ),
         ),
       ],

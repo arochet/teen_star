@@ -41,4 +41,5 @@ class AssetsPath {
   static const String icon_pdf = 'assets/icon_app/icon_pdf.png';
   static const String icon_principe_de_base = 'assets/icon_app/icon_principe_de_base.png';
   static const String icon = "assets/icon/logo.png";
+  static const String icon_hachurage = "assets/icon_app/icon_hachurage.png";
 }

@@ -191,6 +191,7 @@ abstract class _CycleHistorique extends CycleHistorique {
 mixin _$ObservationHistorique {
   UniqueId get id => throw _privateConstructorUsedError;
   CouleurAnalyse? get couleur => throw _privateConstructorUsedError;
+  bool? get jourFertile => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -204,7 +205,11 @@ abstract class $ObservationHistoriqueCopyWith<$Res> {
           $Res Function(ObservationHistorique) then) =
       _$ObservationHistoriqueCopyWithImpl<$Res, ObservationHistorique>;
   @useResult
-  $Res call({UniqueId id, CouleurAnalyse? couleur, DateTime? date});
+  $Res call(
+      {UniqueId id,
+      CouleurAnalyse? couleur,
+      bool? jourFertile,
+      DateTime? date});
 }
 
 /// @nodoc
@@ -223,6 +228,7 @@ class _$ObservationHistoriqueCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? couleur = freezed,
+    Object? jourFertile = freezed,
     Object? date = freezed,
   }) {
     return _then(_value.copyWith(
@@ -234,6 +240,10 @@ class _$ObservationHistoriqueCopyWithImpl<$Res,
           ? _value.couleur
           : couleur // ignore: cast_nullable_to_non_nullable
               as CouleurAnalyse?,
+      jourFertile: freezed == jourFertile
+          ? _value.jourFertile
+          : jourFertile // ignore: cast_nullable_to_non_nullable
+              as bool?,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -250,7 +260,11 @@ abstract class _$$_ObservationHistoriqueCopyWith<$Res>
       __$$_ObservationHistoriqueCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UniqueId id, CouleurAnalyse? couleur, DateTime? date});
+  $Res call(
+      {UniqueId id,
+      CouleurAnalyse? couleur,
+      bool? jourFertile,
+      DateTime? date});
 }
 
 /// @nodoc
@@ -266,6 +280,7 @@ class __$$_ObservationHistoriqueCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? couleur = freezed,
+    Object? jourFertile = freezed,
     Object? date = freezed,
   }) {
     return _then(_$_ObservationHistorique(
@@ -277,6 +292,10 @@ class __$$_ObservationHistoriqueCopyWithImpl<$Res>
           ? _value.couleur
           : couleur // ignore: cast_nullable_to_non_nullable
               as CouleurAnalyse?,
+      jourFertile: freezed == jourFertile
+          ? _value.jourFertile
+          : jourFertile // ignore: cast_nullable_to_non_nullable
+              as bool?,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -289,7 +308,10 @@ class __$$_ObservationHistoriqueCopyWithImpl<$Res>
 
 class _$_ObservationHistorique extends _ObservationHistorique {
   const _$_ObservationHistorique(
-      {required this.id, required this.couleur, required this.date})
+      {required this.id,
+      required this.couleur,
+      required this.jourFertile,
+      required this.date})
       : super._();
 
   @override
@@ -297,11 +319,13 @@ class _$_ObservationHistorique extends _ObservationHistorique {
   @override
   final CouleurAnalyse? couleur;
   @override
+  final bool? jourFertile;
+  @override
   final DateTime? date;
 
   @override
   String toString() {
-    return 'ObservationHistorique(id: $id, couleur: $couleur, date: $date)';
+    return 'ObservationHistorique(id: $id, couleur: $couleur, jourFertile: $jourFertile, date: $date)';
   }
 
   @override
@@ -311,11 +335,13 @@ class _$_ObservationHistorique extends _ObservationHistorique {
             other is _$_ObservationHistorique &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.couleur, couleur) || other.couleur == couleur) &&
+            (identical(other.jourFertile, jourFertile) ||
+                other.jourFertile == jourFertile) &&
             (identical(other.date, date) || other.date == date));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, couleur, date);
+  int get hashCode => Object.hash(runtimeType, id, couleur, jourFertile, date);
 
   @JsonKey(ignore: true)
   @override
@@ -329,6 +355,7 @@ abstract class _ObservationHistorique extends ObservationHistorique {
   const factory _ObservationHistorique(
       {required final UniqueId id,
       required final CouleurAnalyse? couleur,
+      required final bool? jourFertile,
       required final DateTime? date}) = _$_ObservationHistorique;
   const _ObservationHistorique._() : super._();
 
@@ -336,6 +363,8 @@ abstract class _ObservationHistorique extends ObservationHistorique {
   UniqueId get id;
   @override
   CouleurAnalyse? get couleur;
+  @override
+  bool? get jourFertile;
   @override
   DateTime? get date;
   @override

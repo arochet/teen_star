@@ -14,6 +14,7 @@ _$_ObservationHistoriqueDTO _$$_ObservationHistoriqueDTOFromJson(
       couleur: json['couleur'] as String?,
       idCycle: json['idCycle'] as int,
       date: json['date'] as int,
+      jourFertile: json['jourFertile'] as int?,
     );
 
 Map<String, dynamic> _$$_ObservationHistoriqueDTOToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$_ObservationHistoriqueDTOToJson(
       'couleur': instance.couleur,
       'idCycle': instance.idCycle,
       'date': instance.date,
+      'jourFertile': instance.jourFertile,
     };

@@ -67,6 +67,7 @@ abstract class ObservationHistorique with _$ObservationHistorique {
   const factory ObservationHistorique({
     required UniqueId id,
     required CouleurAnalyse? couleur,
+    required bool? jourFertile,
     required DateTime? date,
   }) = _ObservationHistorique;
 
@@ -74,6 +75,7 @@ abstract class ObservationHistorique with _$ObservationHistorique {
         id: UniqueId(),
         couleur: null,
         date: null,
+        jourFertile: false,
       );
 
   bool get isEmpty => couleur == null && date == null;

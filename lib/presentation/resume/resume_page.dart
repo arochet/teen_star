@@ -122,7 +122,8 @@ class _Cycle extends ConsumerWidget {
             children: [
               Column(
                 children: [
-                  if (ref.watch(environment).name == Environment.dev)
+                  //Bouton pour exporter le cycle en PDF
+                  /* if (ref.watch(environment).name == Environment.dev)
                     Center(
                       child: ElevatedButton(
                           onPressed: () async {
@@ -145,7 +146,7 @@ class _Cycle extends ConsumerWidget {
                           },
                           child: Text("Exporter PDF"),
                           style: buttonLittleSecondary),
-                    ),
+                    ), */
                   //TABLEAU
                   Expanded(child: TableauCycle(cycle)),
                 ],

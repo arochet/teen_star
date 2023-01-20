@@ -182,7 +182,9 @@ class _Cell extends StatelessWidget {
             child: Stack(
               children: [
                 LittleBox(width: 40, height: 35, color: observation.analyse?.getOrCrash().toColor()),
-                if (observation.jourFertile == false) Placeholder(),
+                if (observation.jourFertile == false)
+                  Image.asset(AssetsPath.icon_hachurage,
+                      color: colorpanel(50), width: 40, height: 35, fit: BoxFit.fill),
               ],
             ));
         break;

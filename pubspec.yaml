@@ -88,6 +88,7 @@ flutter:
   assets:
     - assets/logo_vide.png
     - assets/icon/logo.png
+    - assets/icon_app/icon_hachurage.png
     - config/
     - assets/icon_observation/icon_autre.png
     - assets/icon_observation/icon_bleu_vide.png

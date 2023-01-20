@@ -69,7 +69,8 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
 
         if (ok == true) {
           final result = await ref.read(cycleRepositoryProvider).resetAll();
-          ref.refresh(allCycleProvider);
+          ref.invalidate(allCycleProvider);
+          ref.invalidate(lastCycleId);
 
           result.fold((l) => print('Erreur ! ${l.toString()}'), (r) => print('Reset OKAY'));
           ref

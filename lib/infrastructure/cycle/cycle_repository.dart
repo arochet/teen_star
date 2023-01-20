@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:teenstar/DOMAIN/cycle/cycle_historique.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
@@ -220,13 +221,13 @@ class CycleRepository implements ICycleRepository {
       if (listCycle.length < 2) return left(CycleFailure.unexpected('Pas assez de cycle'));
 
       //Récupère le dernier cycle
-      final lastCycle = listCycle.last;
-      if (lastCycle.id == null) return left(CycleFailure.cycleUnfound());
+      final lastCycle = Cycle.lastId(listCycle.map((e) => e.toDomain([])).toList());
+      if (lastCycle == null) return left(CycleFailure.cycleUnfound());
 
       //On met à jour les observations du cycle précédent
-      Map<String, dynamic> row = {'idCycle': lastCycle.id! - 1};
-      await _database.update(db_observation, row, where: 'idCycle = ?', whereArgs: [lastCycle.id]);
-      await _database.delete(db_cycle, where: 'id = ?', whereArgs: [lastCycle.id]);
+      Map<String, dynamic> row = {'idCycle': lastCycle.getOrCrash() - 1};
+      await _database.update(db_observation, row, where: 'idCycle = ?', whereArgs: [lastCycle.getOrCrash()]);
+      await _database.delete(db_cycle, where: 'id = ?', whereArgs: [lastCycle.getOrCrash()]);
       return right(unit);
     });
   }

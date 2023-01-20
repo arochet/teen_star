@@ -5,6 +5,7 @@ import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
@@ -12,9 +13,7 @@ import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/providers.dart';
 
 class ButtonAjoutObservationJournee extends ConsumerWidget {
-  Cycle? cycle;
-  ButtonAjoutObservationJournee(
-    this.cycle, {
+  ButtonAjoutObservationJournee({
     Key? key,
   }) : super(key: key);
 
@@ -29,16 +28,21 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
           onPressed: () async {
             printDev("ButtonAjoutObservationJournee onPressed");
             //Affiche une boite de dialogue pour choisir si on continue le cycle ou non
-            if (cycle != null) {
-              //DIALOG pour un nouveau cycle
-              //3 options : true = continuer cycle | false = nouveau cyle | null = annulation
-              final bool? continuerCycle = await showDialogApp<bool?>(
-                context: context,
-                titre: "Voulez-vous continuer le Cycle en cours ?",
-                child: _DialogChoixContinuationCycle(cycle!),
-              );
+            final idLastCycle = (await ref.read(lastCycleId.future)).fold((l) => null, (r) => r);
+            print('idLastCycle $idLastCycle');
+            if (idLastCycle != null) {
+              final cycleAsync = await ref.watch(cycleProvider(idLastCycle).future);
+              cycleAsync.fold((l) => showSnackbarCycleFailure(context, l), (cycle) async {
+                //DIALOG pour un nouveau cycle
+                //3 options : true = continuer cycle | false = nouveau cyle | null = annulation
+                final bool? continuerCycle = await showDialogApp<bool?>(
+                  context: context,
+                  titre: "Voulez-vous continuer le Cycle en cours ?",
+                  child: _DialogChoixContinuationCycle(cycle),
+                );
 
-              openPageNouvelleObservation(context, cycle, ref, continuerCycle, DateTime.now());
+                openPageNouvelleObservation(context, cycle, ref, continuerCycle, DateTime.now());
+              });
             } else {
               //Cas ou il n'existe pas de cycle (première observation)
               openPageNouvelleObservation(context, null, ref, null, DateTime.now());
@@ -59,26 +63,21 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
           .push(ObservationAddRoute(cycle: continuerCycle == true ? cycle : null, date: date));
 
       //L'observation a été ajoutée, on recharge les données
-      ref.refresh(allCycleProvider);
+      ref.invalidate(allCycleProvider);
+      ref.invalidate(lastCycleId);
 
-      final idCurrentCycle = ref.read(idCycleCourant);
+      await Future.delayed(Duration(milliseconds: 50));
+
+      print("???????");
+      final idLastCycle =
+          (await ref.read(lastCycleId.future)).fold((l) => showSnackbarCycleFailure(context, l), (r) => r);
       //On recharge le cycle courant
-      if (idCurrentCycle != null && continuerCycle == true)
-        ref.refresh(cycleProvider(idCurrentCycle));
-      else {
-        //Si le cycle courant est null, on regarde si il existe un cycle dans la liste
-        final listAllCycleProvider = await ref.read(cycleRepositoryProvider).readAllCycles();
-        listAllCycleProvider.fold(
-          (l) => null,
-          (listCycleDTO) {
-            if (listCycleDTO.length > 0) {
-              //On prend le dernier cycle de la liste
-              final idLastCycle = UniqueId.fromUniqueInt(listCycleDTO.length);
-              ref.refresh(cycleProvider(idLastCycle));
-              ref.read(idCycleCourant.notifier).state = idLastCycle;
-            }
-          },
-        );
+      if (idLastCycle != null && continuerCycle == true) {
+        ref.invalidate(cycleProvider(idLastCycle));
+        ref.read(idCycleCourant.notifier).state = idLastCycle;
+      } else {
+        print('Error ! idLastCycle is null');
+        throw Exception("idLastCycle is null");
       }
     }
   }

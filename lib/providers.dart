@@ -85,6 +85,16 @@ final allCycleProvider = FutureProvider<Either<CycleFailure, List<CycleDTO>>>((r
   return ref.read(cycleRepositoryProvider).readAllCycles();
 });
 
+//Dernier Cycle
+final lastCycleId = FutureProvider<Either<CycleFailure, UniqueId?>>((ref) async {
+  final async = await ref.read(allCycleProvider.future);
+  return async.fold((l) => left(l), (r) {
+    final lastId = Cycle.lastId(r.map((e) => e.toDomain([])).toList());
+    print('lsatId: $lastId');
+    return right(lastId);
+  });
+});
+
 //Page Historique
 final allCycleHistoriqueProvider =
     FutureProvider<Either<CycleFailure, List<ObservationHistoriqueDTO>>>((ref) {

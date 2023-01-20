@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 
 showSnackbar(BuildContext context, String text) {
   final snackBar = SnackBar(
-    content: Text(text),
+    content: Text(text, style: TextStyle(color: colorpanel(900))),
+    backgroundColor: colorpanel(200),
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

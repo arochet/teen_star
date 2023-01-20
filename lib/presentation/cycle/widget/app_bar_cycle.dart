@@ -62,7 +62,7 @@ class AppBarCycle extends ConsumerWidget {
       child: //CYCLE COURANT
           Row(
         children: [
-          SizedBox(width: 62),
+          SizedBox(width: 60),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Row(

@@ -164,7 +164,7 @@ class _Cycle extends ConsumerWidget {
                   Expanded(child: TableauCycle(cycle)),
                 ],
               ),
-              if (!selection) ButtonAjoutObservationJournee(cycle),
+              if (!selection) ButtonAjoutObservationJournee(),
               if (selection) ButtonModificationObservation(cycle),
             ],
           ),
@@ -193,7 +193,7 @@ class _PagePasDeCycle extends StatelessWidget {
                 child: Text("Ajoutez votre première observation !",
                     style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center)),
           ),
-          ButtonAjoutObservationJournee(null),
+          ButtonAjoutObservationJournee(),
         ],
       ),
     );

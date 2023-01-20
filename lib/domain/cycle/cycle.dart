@@ -55,4 +55,19 @@ abstract class Cycle with _$Cycle {
     }
     return observationsWithEmptyDays;
   }
+
+  static UniqueId? lastId(List<Cycle> list) {
+    if (list.length == 0) {
+      print('List is empty for lastId');
+      return null;
+    }
+    UniqueId lastId = list.last.id;
+    for (var cycle in list) {
+      if (cycle.id.getOrCrash() > lastId.getOrCrash()) {
+        lastId = cycle.id;
+      }
+    }
+    print("Last id is ${lastId.getOrCrash()}");
+    return lastId;
+  }
 }

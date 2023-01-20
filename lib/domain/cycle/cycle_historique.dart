@@ -58,6 +58,16 @@ abstract class CycleHistorique with _$CycleHistorique {
       idJourneeSoleil: list.length > 0 ? UniqueId.fromUniqueInt(list.first.idJourneeSoleil) : UniqueId(),
     );
   }
+
+  static UniqueId lastHistoriqueId(List<CycleHistorique> list) {
+    UniqueId lastId = list.last.id;
+    for (var cycle in list) {
+      if (cycle.id.getOrCrash() > lastId.getOrCrash()) {
+        lastId = cycle.id;
+      }
+    }
+    return lastId;
+  }
 }
 
 @freezed

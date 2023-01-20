@@ -282,6 +282,14 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
               }
               listCycle = listCycle.reversed.toList();
 
+              if (listCycle.length == 1) {
+                showSnackbar(context, "Il n'y a qu'un seul cycle : pas de renvoi possible");
+                return;
+              }
+              if (listCycle.length == 0) {
+                showSnackbar(context, "Il n'y a pas de cycle : pas de renvoi possible");
+                return;
+              }
               showCupertinoModalPopup<void>(
                 context: context,
                 builder: (BuildContext context) => CupertinoActionSheet(

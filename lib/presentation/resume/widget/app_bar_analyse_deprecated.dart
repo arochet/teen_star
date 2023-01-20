@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
+import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
@@ -10,7 +11,7 @@ import '../../core/_core/theme_button.dart';
 import '../pdf/generate_cycle_pdf.dart';
 import '../resume_page.dart';
 import 'dialog_pdf.dart';
-
+/* 
 class AppBarAnalyse extends ConsumerWidget {
   const AppBarAnalyse({
     Key? key,
@@ -60,14 +61,13 @@ class _BarMain extends ConsumerWidget {
                         .readListCycles(listeCycle.first.id!, listeCycle.last.id!);
 
                     final userData = await ref.read(currentUserData.future);
-                    listCycleAsync.fold(
-                        (l) => showSnackbarCycleFailure(context, l), (list) => generatePDF(userData, list));
-                    /* showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return DialogPDF(listeCycle);
-                    },
-                  ); */
+                    final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
+                    /* listCycleAsync.fold((l) => showSnackbarCycleFailure(context, l),
+                        (list) => generatePDF(userData, list, passwordPdf)); */
+                    showDialogApp(
+                      context: context,
+                      child: DialogPDF(listeCycle),
+                    );
                   },
                 );
               },
@@ -109,3 +109,4 @@ class _BarModification extends ConsumerWidget {
     );
   }
 }
+ */

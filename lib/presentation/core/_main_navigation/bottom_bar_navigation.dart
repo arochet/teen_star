@@ -13,6 +13,7 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/PRESENTATION/resume/pdf/generate_cycle_pdf.dart';
 import 'package:teenstar/PRESENTATION/resume/widget/app_bar_cycle.dart';
+import 'package:teenstar/PRESENTATION/resume/widget/dialog_pdf.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -222,8 +223,15 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                       .readListCycles(listeCycle.first.id!, listeCycle.last.id!);
 
                   final userData = await ref.read(currentUserData.future);
-                  listCycleAsync.fold(
-                      (l) => showSnackbarCycleFailure(context, l), (list) => generatePDF(userData, list));
+                  final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
+                  /* listCycleAsync.fold((l) => showSnackbarCycleFailure(context, l),
+                      (list) => generatePDF(userData, list, passwordPdf)); */
+
+                  showDialogApp(
+                    context: context,
+                    titre: "Exporter PDF",
+                    child: DialogPDF(listeCycle),
+                  );
                 },
               );
             },

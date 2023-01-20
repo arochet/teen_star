@@ -15,7 +15,7 @@ import 'package:teenstar/PRESENTATION/resume/pdf/generate_cycle_pdf.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widget/app_bar_cycle.dart';
-import 'widget/app_bar_analyse.dart';
+import 'widget/app_bar_analyse_deprecated.dart';
 import 'widget/button_ajout_observation_journee.dart';
 import 'widget/button_modification_observation.dart';
 import 'widget/tableau_cycle.dart';
@@ -126,6 +126,7 @@ class _Cycle extends ConsumerWidget {
                     Center(
                       child: ElevatedButton(
                           onPressed: () async {
+                            //DEV !!
                             final listeCycleEither = await ref.read(allCycleProvider.future);
 
                             listeCycleEither.fold(
@@ -136,8 +137,9 @@ class _Cycle extends ConsumerWidget {
                                     .readListCycles(listeCycle.first.id!, listeCycle.last.id!);
 
                                 final userData = await ref.read(currentUserData.future);
+                                final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
                                 listCycleAsync.fold((l) => showSnackbarCycleFailure(context, l),
-                                    (list) => generatePDF(userData, list));
+                                    (list) => generatePDF(userData, list, passwordPdf));
                               },
                             );
                           },

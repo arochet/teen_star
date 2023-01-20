@@ -31,11 +31,11 @@ import '../../reglages/account/text_style/text_style.dart' as _i14;
 import '../../reglages/account/utils/utils_page.dart' as _i15;
 import '../../reglages/delete_account/delete_account_page.dart' as _i9;
 import '../../reglages/guide_avance/guide_avance_page.dart' as _i20;
+import '../../reglages/guide_de_base/guide_de_base_page.dart' as _i18;
 import '../../reglages/info_application/info_application_page.dart' as _i21;
 import '../../reglages/langue/langue_page.dart' as _i17;
 import '../../reglages/modify_account/modify_account_page.dart' as _i7;
 import '../../reglages/new_password/new_password_page.dart' as _i10;
-import '../../reglages/principes_de_base/principes_de_base_page.dart' as _i18;
 import '../../reglages/reauthenticate/reauthenticate_page.dart' as _i8;
 import '../../resume/ajout_observation_journee/ajout_observation_journee_page.dart'
     as _i16;
@@ -169,17 +169,13 @@ class AppRouter extends _i25.RootStackRouter {
     Principes_de_baseRoute.name: (routeData) {
       return _i25.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i18.Principes_de_basePage(),
+        child: const _i18.Guide_de_basePage(),
       );
     },
     Condition_utilisationRoute.name: (routeData) {
-      final args = routeData.argsAs<Condition_utilisationRouteArgs>();
       return _i25.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i19.Condition_utilisationPage(
-          args.doitEtreAccepte,
-          key: args.key,
-        ),
+        child: const _i19.Condition_utilisationPage(),
       );
     },
     Guide_avanceRoute.name: (routeData) {
@@ -618,7 +614,7 @@ class LangueRoute extends _i25.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.Principes_de_basePage]
+/// [_i18.Guide_de_basePage]
 class Principes_de_baseRoute extends _i25.PageRouteInfo<void> {
   const Principes_de_baseRoute()
       : super(
@@ -631,37 +627,14 @@ class Principes_de_baseRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i19.Condition_utilisationPage]
-class Condition_utilisationRoute
-    extends _i25.PageRouteInfo<Condition_utilisationRouteArgs> {
-  Condition_utilisationRoute({
-    required bool doitEtreAccepte,
-    _i26.Key? key,
-  }) : super(
+class Condition_utilisationRoute extends _i25.PageRouteInfo<void> {
+  const Condition_utilisationRoute()
+      : super(
           Condition_utilisationRoute.name,
           path: '/condition_utilisation-route',
-          args: Condition_utilisationRouteArgs(
-            doitEtreAccepte: doitEtreAccepte,
-            key: key,
-          ),
         );
 
   static const String name = 'Condition_utilisationRoute';
-}
-
-class Condition_utilisationRouteArgs {
-  const Condition_utilisationRouteArgs({
-    required this.doitEtreAccepte,
-    this.key,
-  });
-
-  final bool doitEtreAccepte;
-
-  final _i26.Key? key;
-
-  @override
-  String toString() {
-    return 'Condition_utilisationRouteArgs{doitEtreAccepte: $doitEtreAccepte, key: $key}';
-  }
 }
 
 /// generated route for

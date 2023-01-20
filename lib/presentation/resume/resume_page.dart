@@ -11,6 +11,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/resume/pdf/generate_cycle_pdf.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -147,6 +148,17 @@ class _Cycle extends ConsumerWidget {
                           child: Text("Exporter PDF"),
                           style: buttonLittleSecondary),
                     ), */
+                  if (selection)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text("Touchez une observation pour la sélectionner",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                ?.copyWith(color: actioncolor['primary'])),
+                      ),
+                    ),
                   //TABLEAU
                   Expanded(child: TableauCycle(cycle)),
                 ],
@@ -177,7 +189,7 @@ class _PagePasDeCycle extends StatelessWidget {
         children: [
           Expanded(
             child: Center(
-                child: Text("Pas de Cycle\nVeuillez ajoutez une nouvelle observation",
+                child: Text("Ajoutez votre première observation !",
                     style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center)),
           ),
           ButtonAjoutObservationJournee(null),

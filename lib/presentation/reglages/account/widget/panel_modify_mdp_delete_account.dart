@@ -1,4 +1,5 @@
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
+import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
@@ -40,7 +41,7 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
       ItemPanelList(
         title: 'Réinitialiser l\'application',
         icon: Icons.cancel,
-        onTap: () => deleteAccount(),
+        onTap: () => _deleteAccount(ref),
       ),
       //
       ItemPanelList(
@@ -54,7 +55,7 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
     ]);
   }
 
-  deleteAccount() {
+  _deleteAccount(WidgetRef ref) {
     // set up the buttons
     Widget cancelButton = TextButton(
       child: Text(AppLocalizations.of(context)!.annuler, style: Theme.of(context).textTheme.button),
@@ -64,35 +65,32 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
     Widget continueButton = ElevatedButton(
       onPressed: () async {
         await context.router.pop();
-        final result = await ref.read(cycleRepositoryProvider).resetAll();
-        result.fold((l) => print('Erreur ! ${l.toString()}'), (r) => print('Reset OKAY'));
-        ref
-            .read(authNotifierProvider.notifier)
-            .deleteAccount()
-            .then((value) => context.router.replaceAll([AuthInitRoute()]));
+        final ok = await showDialogPassword(context: context, ref: ref, dissmissable: true);
+
+        if (ok == true) {
+          final result = await ref.read(cycleRepositoryProvider).resetAll();
+          ref.refresh(allCycleProvider);
+
+          result.fold((l) => print('Erreur ! ${l.toString()}'), (r) => print('Reset OKAY'));
+          ref
+              .read(authNotifierProvider.notifier)
+              .deleteAccount()
+              .then((value) => context.router.replaceAll([AuthInitRoute()]));
+        }
       },
       child: Text(AppLocalizations.of(context)!.supprimer),
       style: buttonNormalRemove,
     );
 
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(AppLocalizations.of(context)!.attention),
-      content: Text(AppLocalizations.of(context)!.etesvoussurdevouloursupprimervotrecomte),
-      backgroundColor: colorpanel(800),
-      actionsAlignment: MainAxisAlignment.spaceAround,
+    // show the dialog
+    showDialogApp(
+      context: context,
+      titre: AppLocalizations.of(context)!.attention,
+      child: Text(AppLocalizations.of(context)!.etesvoussurdevouloursupprimervotrecomte),
       actions: [
         cancelButton,
         continueButton,
       ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

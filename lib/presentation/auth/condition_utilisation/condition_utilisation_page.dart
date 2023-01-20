@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,8 +13,7 @@ import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Condition_utilisationPage extends ConsumerStatefulWidget {
-  final bool doitEtreAccepte;
-  const Condition_utilisationPage(this.doitEtreAccepte, {Key? key}) : super(key: key);
+  const Condition_utilisationPage({Key? key}) : super(key: key);
 
   @override
   _Condition_utilisationPageState createState() => _Condition_utilisationPageState();
@@ -29,55 +29,62 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
       child: ShowComponentFile(
         title: './lib/PRESENTATION/auth/condition_utilisation/condition_utilisation_page.dart',
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
           child: ListView(children: [
-            SpaceH20(),
-            SpaceH20(),
-            if (widget.doitEtreAccepte)
-              ElevatedButton.icon(
-                icon: Icon(Icons.access_alarm),
-                onPressed: () {
-                  context.router.push(Principes_de_baseRoute());
-                },
-                label: Text("Principe de base"),
-                style: buttonNormalPrimary,
-              ),
-            SpaceH20(),
-            SpaceH20(),
-            Text(
-                "J’ai lu les points ci-dessus et j’ai compris que cette application m’aidera à enregistrer mes observations quotidiennes au cours des cycles menstruels, mais ne peut absolument pas me suffire telle quelle pour éviter (ou favoriser) une grossesse. Je comprends que si tel était mon objectif, je devrais impérativement suivre une formation approfondie avec une monitrice spécialisée en méthode naturelle de régulation des naissances.",
-                style: Theme.of(context).textTheme.bodyText1,
-                textAlign: TextAlign.justify),
-            SpaceH20(),
             //CONDITION D'UTILISATION ACCEPTATION
             ...currentUserDataAsync.when(
               data: (data) {
                 if (data != null) return [];
                 return [
+                  SpaceH40(),
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          conditionAccecpte = !conditionAccecpte;
-                        });
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                    child: ElevatedButton.icon(
+                      icon: Icon(Icons.library_books),
+                      onPressed: () {
+                        context.router.push(Principes_de_baseRoute());
                       },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(conditionAccecpte ? Icons.check_box : Icons.check_box_outline_blank),
-                          SizedBox(width: 20),
-                          Flexible(
-                            child: Text("J'ai lu et j'accepte les conditions d'utilisations",
-                                style: Theme.of(context).textTheme.headline5),
-                          ),
-                        ],
-                      ),
+                      label: Text("Guide de base"),
+                      style: buttonLittleSecondary,
                     ),
                   ),
+                  SpaceH40(),
+                  DefaultPanel(
+                      child: Column(
+                    children: [
+                      SpaceH20(),
+                      Text(
+                          "J’ai lu les points ci-dessus et j’ai compris que cette application m’aidera à enregistrer mes observations quotidiennes au cours des cycles menstruels, mais ne peut absolument pas me suffire telle quelle pour éviter (ou favoriser) une grossesse. Je comprends que si tel était mon objectif, je devrais impérativement suivre une formation approfondie avec une monitrice spécialisée en méthode naturelle de régulation des naissances.",
+                          style: Theme.of(context).textTheme.bodyText1,
+                          textAlign: TextAlign.justify),
+                      SpaceH20(),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              conditionAccecpte = !conditionAccecpte;
+                            });
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(conditionAccecpte ? Icons.check_box : Icons.check_box_outline_blank,
+                                  color: colorpanel(50)),
+                              SizedBox(width: 15),
+                              Flexible(
+                                child: Text("J'ai lu et j'accepte les \nconditions d'utilisations",
+                                    style: Theme.of(context).textTheme.headline6),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
                   SpaceH20(),
-                  Container(
-                    width: 100,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
                     child: ElevatedButton(
                       onPressed: () {
                         if (conditionAccecpte) {
@@ -87,7 +94,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                         }
                       },
                       child: Text("Continuer"),
-                      style: buttonNormalPrimary,
+                      style: conditionAccecpte ? buttonNormalPrimary : buttonNormalDesactivate,
                     ),
                   ),
                 ];

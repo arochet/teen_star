@@ -36,6 +36,7 @@ final buttonNormalConfirm = buttonNormal(actioncolor["confirm"]!, false, false);
 final buttonNormalWarning = buttonNormal(actioncolor["warning"]!, true, false);
 final buttonNormalRemove = buttonNormal(actioncolor["remove"]!, true, false);
 final buttonNormalHelp = buttonNormal(actioncolor["help"]!, true, false);
+final buttonNormalDesactivate = buttonNormal(Color.fromARGB(255, 174, 174, 174), true, false);
 
 final buttonNormalSecondary = ElevatedButton.styleFrom(
   textStyle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),

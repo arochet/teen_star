@@ -36,7 +36,7 @@ class LanguePage extends StatelessWidget {
                   //BOUTON VALIDATON
                   ElevatedButton(
                     onPressed: () {
-                      context.router.push(Principes_de_baseRoute());
+                      context.router.push(Condition_utilisationRoute());
                     },
                     child: Text("Continuer"),
                     style: buttonNormalPrimary,
@@ -66,12 +66,16 @@ class _ChoixLangue extends StatelessWidget {
     return Row(
       // mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(enable ? Icons.check_box : Icons.check_box_outline_blank),
+        Icon(enable ? Icons.check_box : Icons.check_box_outline_blank,
+            color: enable ? colorpanel(50) : colorpanel(600)),
         SizedBox(width: 10),
         Flexible(
           child: Text(
             langue,
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context)
+                .textTheme
+                .headline4
+                ?.copyWith(color: enable ? colorpanel(50) : colorpanel(600)),
           ),
         ),
       ],

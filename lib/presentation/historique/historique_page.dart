@@ -38,7 +38,7 @@ class HistoriquePage extends ConsumerWidget {
                   if (listObservation.length == 0) {
                     //Pas de cycle
                     return Center(
-                        child: Text("Pas de Cycle\nVeuillez ajoutez une nouvelle observation",
+                        child: Text("Ajoutez votre première observation !",
                             style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center));
                   } else {
                     //Conversion des observations en Cycle

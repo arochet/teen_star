@@ -12,15 +12,15 @@ import 'package:teenstar/PRESENTATION/reglages/account/widget/diplay_title.dart'
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Principes_de_basePage extends StatelessWidget {
-  const Principes_de_basePage({Key? key}) : super(key: key);
+class Guide_de_basePage extends StatelessWidget {
+  const Guide_de_basePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
       title: 'Guide de base',
       child: ShowComponentFile(
-        title: './lib/PRESENTATION/reglages/principes_de_base/principes_de_base_page.dart',
+        title: './lib/PRESENTATION/reglages/principes_de_base/guide_de_base_page.dart',
         child: Padding(
           padding: EdgeInsets.all(10),
           child: ListView(children: [
@@ -70,23 +70,13 @@ class _BoutonDeValidation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          child: Text("PDF"),
-          style: buttonPrimaryHide,
-        ),
-        SizedBox(width: 20),
-        ElevatedButton(
-          onPressed: () {
-            context.router.push(Condition_utilisationRoute(doitEtreAccepte: true));
-          },
-          child: Text("OK"),
-          style: buttonNormalPrimary,
-        ),
-      ],
+    return Center(
+      child: ElevatedButton.icon(
+        onPressed: () {},
+        label: Text("Version PDF"),
+        icon: Icon(Icons.picture_as_pdf),
+        style: buttonLittleSecondary,
+      ),
     );
   }
 }

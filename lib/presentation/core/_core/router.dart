@@ -9,7 +9,7 @@ import 'package:teenstar/PRESENTATION/reglages/info_application/info_application
 import 'package:teenstar/PRESENTATION/reglages/langue/langue_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/new_password/new_password_page.dart';
-import 'package:teenstar/PRESENTATION/reglages/principes_de_base/principes_de_base_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/guide_de_base/guide_de_base_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/reauthenticate/reauthenticate_page.dart';
 import 'package:teenstar/PRESENTATION/auth/auth_connexion/auth_connexion_page.dart';
 import 'package:teenstar/PRESENTATION/auth/auth_init/auth_init_page.dart';
@@ -133,7 +133,7 @@ import '../../reglages/account/utils/utils_page.dart';
   AutoRoute(
     path: '/principes_de_base-route',
     name: 'Principes_de_baseRoute',
-    page: Principes_de_basePage,
+    page: Guide_de_basePage,
   ),
   AutoRoute(
     path: '/condition_utilisation-route',

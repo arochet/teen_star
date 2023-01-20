@@ -25,7 +25,7 @@ abstract class ObservationHistoriqueDTO implements _$ObservationHistoriqueDTO {
       id: UniqueId.fromUniqueInt(id!),
       couleur: CouleurAnalyse.fromString(couleur),
       date: DateTime.fromMillisecondsSinceEpoch(date),
-      jourFertile: jourFertile == 1 ? false : true,
+      jourFertile: jourFertile == 0 ? false : true,
     );
   }
 

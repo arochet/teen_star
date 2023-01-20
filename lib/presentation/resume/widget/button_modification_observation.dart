@@ -77,7 +77,7 @@ class _DialogModificationCycle extends ConsumerWidget {
             ElevatedButton(
               onPressed: () {
                 final listObservationSelectionnee = ref.read(observationSectionne);
-                ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, false);
+                ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
                 ref.watch(isSelection.notifier).state = false;
                 ref.watch(showAnalyse.notifier).state = true;
                 _rafraichirPage(ref);
@@ -90,7 +90,7 @@ class _DialogModificationCycle extends ConsumerWidget {
             ElevatedButton(
               onPressed: () {
                 final listObservationSelectionnee = ref.read(observationSectionne);
-                ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
+                ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, false);
                 ref.watch(isSelection.notifier).state = false;
                 ref.watch(showAnalyse.notifier).state = true;
                 _rafraichirPage(ref);

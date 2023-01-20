@@ -12,7 +12,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
-import 'package:teenstar/PRESENTATION/resume/pdf/generate_cycle_pdf.dart';
+import 'package:teenstar/PRESENTATION/cycle/pdf/generate_cycle_pdf.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widget/app_bar_cycle.dart';
@@ -148,6 +148,7 @@ class _Cycle extends ConsumerWidget {
                           child: Text("Exporter PDF"),
                           style: buttonLittleSecondary),
                     ), */
+                  _ShowAnalyse(),
                   if (selection)
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -194,6 +195,38 @@ class _PagePasDeCycle extends StatelessWidget {
           ),
           ButtonAjoutObservationJournee(null),
         ],
+      ),
+    );
+  }
+}
+
+class _ShowAnalyse extends ConsumerStatefulWidget {
+  const _ShowAnalyse({Key? key}) : super(key: key);
+
+  @override
+  __ShowAnalyseState createState() => __ShowAnalyseState();
+}
+
+class __ShowAnalyseState extends ConsumerState<_ShowAnalyse> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        ref.read(showAnalyse.notifier).state = !ref.read(showAnalyse);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(ref.watch(showAnalyse) ? Icons.check_box : Icons.check_box_outline_blank,
+                color: ref.watch(showAnalyse) ? actioncolor['primary'] : colorpanel(50)),
+            SizedBox(width: 15),
+            Flexible(
+              child: Text("Afficher l'analyse", style: Theme.of(context).textTheme.headline5),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -11,15 +11,15 @@ import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
-import 'package:teenstar/PRESENTATION/resume/pdf/generate_cycle_pdf.dart';
-import 'package:teenstar/PRESENTATION/resume/widget/app_bar_cycle.dart';
-import 'package:teenstar/PRESENTATION/resume/widget/dialog_pdf.dart';
+import 'package:teenstar/PRESENTATION/cycle/pdf/generate_cycle_pdf.dart';
+import 'package:teenstar/PRESENTATION/cycle/widget/app_bar_cycle.dart';
+import 'package:teenstar/PRESENTATION/cycle/widget/dialog_pdf.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../resume/resume_page.dart';
+import '../../cycle/resume_page.dart';
 
 class BottomBarNavigation extends ConsumerStatefulWidget {
   final listRoute;
@@ -54,8 +54,8 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
             backgroundColor: tabsRouter.activeIndex == 2 ? colorScaffoldBarReglage : colorScaffoldBar,
             title: _buildAppBar(context, ref, tabsRouter.activeIndex),
             centerTitle: true,
-            bottom: tabsRouter.activeIndex == 0 ? _buildTabBarCycle(ref) : null,
-            elevation: tabsRouter.activeIndex == 0 ? 4 : 0,
+            bottom: /* tabsRouter.activeIndex == 0 ? _buildTabBarCycle(ref)  :*/ null,
+            elevation: /* tabsRouter.activeIndex == 0 ? 4 : */ 0,
             actions: [
               if (env == Environment.dev)
                 InkWell(

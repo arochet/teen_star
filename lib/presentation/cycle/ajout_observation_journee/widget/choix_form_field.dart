@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:teenstar/PRESENTATION/resume/shared/icon_observation.dart';
+import 'package:teenstar/PRESENTATION/cycle/shared/icon_observation.dart';
 
 import '../../../core/_core/theme_colors.dart';
 

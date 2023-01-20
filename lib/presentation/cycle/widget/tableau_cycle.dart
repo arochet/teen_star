@@ -12,8 +12,8 @@ import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
-import 'package:teenstar/PRESENTATION/resume/resume_page.dart';
-import 'package:teenstar/PRESENTATION/resume/shared/icon_observation.dart';
+import 'package:teenstar/PRESENTATION/cycle/resume_page.dart';
+import 'package:teenstar/PRESENTATION/cycle/shared/icon_observation.dart';
 
 import '../../core/_utils/app_date_utils.dart';
 import 'button_ajout_observation_journee.dart';

@@ -57,10 +57,10 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
 
   _deleteAccount(WidgetRef ref) {
     // set up the buttons
-    Widget cancelButton = TextButton(
-      child: Text(AppLocalizations.of(context)!.annuler, style: Theme.of(context).textTheme.button),
-      onPressed: () => context.router.pop(),
-    );
+    Widget cancelButton = ElevatedButton(
+        child: Text(AppLocalizations.of(context)!.annuler),
+        onPressed: () => context.router.pop(),
+        style: buttonPrimaryHideLittle);
 
     Widget continueButton = ElevatedButton(
       onPressed: () async {
@@ -90,6 +90,7 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
       child: Text(AppLocalizations.of(context)!.etesvoussurdevouloursupprimervotrecomte),
       actions: [
         cancelButton,
+        SizedBox(width: 10),
         continueButton,
       ],
     );

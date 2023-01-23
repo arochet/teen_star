@@ -23,6 +23,7 @@ Future<dynamic> showDialogApp<T>(
             : null,
         content: child,
         backgroundColor: colorpanel(800),
+        actionsAlignment: MainAxisAlignment.center,
         actions: actions,
       );
     },

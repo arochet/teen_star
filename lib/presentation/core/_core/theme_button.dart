@@ -91,7 +91,7 @@ final buttonLittleOutlined = ElevatedButton.styleFrom(
     side: BorderSide(color: actioncolor["primary"]!, width: 2));
 
 final buttonPrimaryHide = ElevatedButton.styleFrom(
-  textStyle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
+  textStyle: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
   backgroundColor: Colors.transparent,
   foregroundColor: colorpanel(200),
@@ -101,7 +101,7 @@ final buttonPrimaryHide = ElevatedButton.styleFrom(
 );
 
 final buttonPrimaryHideLittle = ElevatedButton.styleFrom(
-  textStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+  textStyle: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
   backgroundColor: Colors.transparent,
   foregroundColor: colorpanel(200),

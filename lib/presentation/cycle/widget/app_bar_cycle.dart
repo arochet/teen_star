@@ -55,6 +55,15 @@ class AppBarCycle extends ConsumerWidget {
         ),
       ),
     ); */
+    ButtonStyle style = ElevatedButton.styleFrom(
+      textStyle: TextStyle(fontSize: 5.0),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+      backgroundColor: Colors.transparent,
+      foregroundColor: colorpanel(200),
+      elevation: 0,
+      shadowColor: Colors.transparent,
+    );
+    final double widthVide = 40;
 
     //OLD APPBAR / <- CYCLE COURANT ->
     return ShowComponentFile(
@@ -71,15 +80,19 @@ class AppBarCycle extends ConsumerWidget {
                 children: [
                   //BOUTON CYCLE PRECEDENT
                   if (cyclePrecedent != null)
-                    ElevatedButton(
-                      onPressed: () {
-                        ref.invalidate(cycleProvider(UniqueId.fromUniqueInt(cyclePrecedent!.id!)));
-                        ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(cyclePrecedent!.id!);
-                      },
-                      child: Icon(Icons.arrow_back_ios, size: 16, color: colorpanel(50)),
-                      style: buttonPrimaryHideLittle,
+                    Container(
+                      width: widthVide,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          ref.invalidate(cycleProvider(UniqueId.fromUniqueInt(cyclePrecedent!.id!)));
+                          ref.read(idCycleCourant.notifier).state =
+                              UniqueId.fromUniqueInt(cyclePrecedent!.id!);
+                        },
+                        child: Icon(Icons.arrow_back_ios, size: 18, color: colorpanel(50)),
+                        style: style,
+                      ),
                     ),
-                  if (cyclePrecedent == null) Container(width: 64),
+                  if (cyclePrecedent == null) Container(width: widthVide),
                   Flexible(
                     child: Text(
                       "Cycle ${cycleCourant?.id}",
@@ -88,15 +101,18 @@ class AppBarCycle extends ConsumerWidget {
                     ),
                   ),
                   //BOUTON CYCLE SUIVANT
-                  if (cycleSuivant == null) Container(width: 64),
+                  if (cycleSuivant == null) Container(width: widthVide),
                   if (cycleSuivant != null)
-                    ElevatedButton(
-                      onPressed: () {
-                        ref.invalidate(cycleProvider(UniqueId.fromUniqueInt(cycleSuivant!.id!)));
-                        ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(cycleSuivant!.id!);
-                      },
-                      child: Icon(Icons.arrow_forward_ios, size: 16, color: colorpanel(50)),
-                      style: buttonPrimaryHideLittle,
+                    Container(
+                      width: widthVide,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          ref.invalidate(cycleProvider(UniqueId.fromUniqueInt(cycleSuivant!.id!)));
+                          ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(cycleSuivant!.id!);
+                        },
+                        child: Icon(Icons.arrow_forward_ios, size: 18, color: colorpanel(50)),
+                        style: style,
+                      ),
                     )
                 ],
               ),

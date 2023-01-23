@@ -102,9 +102,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
               if (await showDialogChoix(context,
                       'Voulez-vous ajouter une observation pour le ${AppDateUtils.formatDate(dateObservation)} ?',
                       positiveText: 'Ajouter', negativeText: 'Annuler') ==
-                  true)
-                ButtonAjoutObservationJournee.openPageNouvelleObservation(
-                    context, widget.cycle, ref, true, dateObservation);
+                  true) openPageNouvelleObservation(context, widget.cycle, ref, true, dateObservation);
             }
           }
         },

@@ -54,33 +54,37 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
       ),
     );
   }
+}
 
-  static openPageNouvelleObservation(
-      BuildContext context, Cycle? cycle, WidgetRef ref, bool? continuerCycle, DateTime date) async {
-    if (continuerCycle != null || cycle == null) {
-      //On ouvre la page d'ajout d'observation
-      await context.router
-          .push(ObservationAddRoute(cycle: continuerCycle == true ? cycle : null, date: date));
+openPageNouvelleObservation(
+    BuildContext context, Cycle? cycle, WidgetRef ref, bool? continuerCycle, DateTime date) async {
+  if (continuerCycle != null || cycle == null) {
+    //On ouvre la page d'ajout d'observation
+    await context.router.push(ObservationAddRoute(cycle: continuerCycle == true ? cycle : null, date: date));
 
-      //L'observation a été ajoutée, on recharge les données
+    //L'observation a été ajoutée, on recharge les données
+    ref.invalidate(allCycleProvider);
+    ref.invalidate(lastCycleId);
+
+    await Future.delayed(Duration(milliseconds: 50));
+
+    try {
       ref.invalidate(allCycleProvider);
-      ref.invalidate(lastCycleId);
+      print('qsdf');
 
-      await Future.delayed(Duration(milliseconds: 50));
-
-      try {
-        final async = await ref.read(lastCycleId.future);
-        final idLastCycle = async.fold((l) => showSnackbarCycleFailure(context, l), (r) => r);
-
+      final async = await ref.read(allCycleProvider.future);
+      async.fold((l) => showSnackbarCycleFailure(context, l), (listCycleDTO) {
+        print('qsdf');
+        final idLastCycle = Cycle.lastId(listCycleDTO.map((e) => e.toDomain([])).toList());
         if (idLastCycle != null) {
           //On recharge le cycle courant
           ref.invalidate(cycleProvider(idLastCycle));
           ref.read(idCycleCourant.notifier).state = idLastCycle;
         }
-      } catch (e, trace) {
-        print('Erreur ! $e');
-        print('$trace');
-      }
+      });
+    } catch (e, trace) {
+      print('Erreur ! $e');
+      print('$trace');
     }
   }
 }

@@ -81,7 +81,7 @@ final cycleRepositoryProvider = Provider<ICycleRepository>((ref) => getIt<ICycle
 final idCycleCourant = StateProvider<UniqueId?>((ref) => null);
 
 //Tous les cycles
-final allCycleProvider = FutureProvider<Either<CycleFailure, List<CycleDTO>>>((ref) {
+final allCycleProvider = FutureProvider.autoDispose<Either<CycleFailure, List<CycleDTO>>>((ref) {
   return ref.read(cycleRepositoryProvider).readAllCycles();
 });
 

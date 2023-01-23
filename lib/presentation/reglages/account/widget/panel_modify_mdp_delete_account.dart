@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
@@ -43,15 +44,16 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
         icon: Icons.cancel,
         onTap: () => _deleteAccount(ref),
       ),
-      //
-      ItemPanelList(
-        title: 'Réinitialiser BDD',
-        icon: Icons.cancel,
-        onTap: () async {
-          final result = await ref.read(cycleRepositoryProvider).resetAll();
-          result.fold((l) => print('Erreur ! ${l.toString()}'), (r) => print('Reset OKAY'));
-        },
-      ),
+      //Supprimer la BDD
+      if (ref.watch(environment).name == Environment.dev)
+        ItemPanelList(
+          title: 'Réinitialiser BDD',
+          icon: Icons.cancel,
+          onTap: () async {
+            final result = await ref.read(cycleRepositoryProvider).resetAll();
+            result.fold((l) => print('Erreur ! ${l.toString()}'), (r) => print('Reset OKAY'));
+          },
+        ),
     ]);
   }
 

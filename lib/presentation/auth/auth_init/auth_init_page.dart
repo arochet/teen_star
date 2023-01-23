@@ -18,17 +18,17 @@ class AuthInitPage extends StatelessWidget {
     if (!kIsWeb) {
       //Application Mobile
       return Scaffold(
-        backgroundColor: colorpanel(800),
         body: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color.fromARGB(255, 76, 157, 215),
-              /* Color.fromARGB(255, 39, 45, 215) */ actioncolor['primary']!,
-            ],
-          )),
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(255, 76, 157, 215),
+                /* Color.fromARGB(255, 39, 45, 215) */ actioncolor['primary']!,
+              ],
+            ),
+          ),
           child: SafeArea(
             child: ShowEnvironment(
                 child: ShowComponentFile(title: 'auth/auth_init/auth_init.dart', child: PanelInit())),

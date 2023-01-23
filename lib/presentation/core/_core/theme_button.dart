@@ -2,14 +2,14 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 ButtonStyle buttonBig(Color color, bool isWhite) => ElevatedButton.styleFrom(
-    textStyle: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+    textStyle: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
     visualDensity: VisualDensity(
       horizontal: (VisualDensity.maximumDensity - 1.0),
       vertical: (VisualDensity.maximumDensity - 2.0),
     ),
     minimumSize: Size(double.infinity, 30),
-    backgroundColor: color,
-    foregroundColor: isWhite ? Colors.white : colorpanel(900),
+    backgroundColor: colorpanel(900)!,
+    foregroundColor: isWhite ? color : colorpanel(900),
     elevation: 0,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))));
 

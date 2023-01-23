@@ -68,6 +68,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
         child: Form(
           autovalidateMode: AutovalidateMode.always,
           child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
+            Center(child: Text("Etape 3/3", style: Theme.of(context).textTheme.headline5)),
             SpaceH10(),
             if (ref.watch(environment).name == Environment.dev)
               ElevatedButton(
@@ -281,8 +282,8 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
                 onPressed: () {
                   ref.read(registerFormNotifierProvider.notifier).registerWithEmailAndPasswordPressed();
                 },
-                style: buttonBigPrimary,
-                child: Text("Continuer"),
+                style: buttonNormalPrimary,
+                child: Text("S'inscrire"),
               ),
             ),
             const SizedBox(height: 12),

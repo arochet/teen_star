@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -10,6 +11,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/cycle/pdf/generate_cycle_pdf.dart';
@@ -148,6 +150,16 @@ class _Cycle extends ConsumerWidget {
                           child: Text("Exporter PDF"),
                           style: buttonLittleSecondary),
                     ), */
+                  if (ref.watch(environment).name == Environment.dev)
+                    Center(
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            //DEV !!
+                            context.router.push(AuthInitRoute());
+                          },
+                          child: Text("Première page"),
+                          style: buttonLittleSecondary),
+                    ),
                   _ShowAnalyse(),
                   if (selection)
                     Padding(

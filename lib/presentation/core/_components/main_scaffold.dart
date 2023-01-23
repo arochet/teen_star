@@ -50,7 +50,7 @@ class MainScaffold extends ConsumerWidget {
       shadowColor: Colors.transparent,
       iconTheme: IconThemeData(
         color: colorpanel(50),
-        size: 30,
+        size: 24,
       ),
       title: title != null
           ? Text(

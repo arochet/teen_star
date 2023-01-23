@@ -57,7 +57,6 @@ Future<bool?> showDialogChoix(BuildContext context, String titre,
         child: Text(positiveText ?? 'Oui'),
         style: isDanger ? buttonNormalRemove : buttonNormalPrimary,
       ),
-      SizedBox(width: 10),
     ],
   );
   return choix;

@@ -38,6 +38,11 @@ class AppWidget extends StatelessWidget {
           TargetPlatform.linux: NonePageTransitionsBuilder(),
         }),
         textTheme: theme.textTheme.copyWith(
+          headline1: TextStyle(
+            fontSize: 38.0,
+            fontWeight: FontWeight.bold,
+            color: colorpanel(50),
+          ),
           headline2: TextStyle(
             fontSize: 28.0,
             fontWeight: FontWeight.bold,

@@ -18,16 +18,27 @@ class AuthInitPage extends StatelessWidget {
     if (!kIsWeb) {
       //Application Mobile
       return Scaffold(
-        backgroundColor: colorpanel(900),
-        body: SafeArea(
-          child: ShowEnvironment(
-              child: ShowComponentFile(title: 'auth/auth_init/auth_init.dart', child: PanelInit())),
+        backgroundColor: colorpanel(800),
+        body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color.fromARGB(255, 76, 157, 215),
+              /* Color.fromARGB(255, 39, 45, 215) */ actioncolor['primary']!,
+            ],
+          )),
+          child: SafeArea(
+            child: ShowEnvironment(
+                child: ShowComponentFile(title: 'auth/auth_init/auth_init.dart', child: PanelInit())),
+          ),
         ),
       );
     } else {
       //Web
       return Scaffold(
-        backgroundColor: colorpanel(900),
+        backgroundColor: colorpanel(800),
         body: ShowEnvironment(
           child: ShowComponentFile(
             title: 'auth/auth_init/auth_init.dart',
@@ -58,26 +69,39 @@ class PanelInit extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("TeenSTAR", style: Theme.of(context).textTheme.headline2),
+              Text("Bienvenue sur",
+                  style: Theme.of(context).textTheme.headline4?.copyWith(color: colorpanel(900))),
+              Text("TeenSTAR",
+                  style: Theme.of(context).textTheme.headline1?.copyWith(color: colorpanel(900))),
               SizedBox(height: 20),
-              Image(
+              /* Image(
                 image: AssetImage(AssetsPath.icon),
                 height: 160,
-              ),
+              ), */
+              Icon(Icons.local_florist, size: 120, color: colorpanel(900)),
             ],
           ),
         ),
         if (!kIsWeb)
           Container(
               constraints: BoxConstraints(maxWidth: 400),
-              height: MediaQuery.of(context).size.height / 3,
+              height: MediaQuery.of(context).size.height / 5,
               child: Padding(
                 padding: const EdgeInsets.all(38.0),
                 child: Center(
                   child: ElevatedButton(
                     onPressed: () => context.router.push(LangueRoute()),
                     style: buttonBigPrimary,
-                    child: Text(AppLocalizations.of(context)!.commencer),
+                    child: Container(
+                      height: 40,
+                      child: Row(
+                        children: [
+                          Text(AppLocalizations.of(context)!.commencer),
+                          Expanded(child: Container()),
+                          Icon(Icons.arrow_forward),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ))

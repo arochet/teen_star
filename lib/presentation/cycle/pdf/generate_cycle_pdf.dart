@@ -179,6 +179,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
   security.algorithm = PdfEncryptionAlgorithm.rc4x128Bit;
   security.userPassword = password.getOrCrash(); //Set user password
   final File file = File('${appDocDirectory.path}/cycles.pdf');
+
   await file.writeAsBytes(await pdf.save());
 
   OpenFilex.open('${appDocDirectory.path}/cycles.pdf');

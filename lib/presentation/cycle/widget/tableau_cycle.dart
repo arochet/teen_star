@@ -66,7 +66,10 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
       title: 'tableau_cycle.dart',
       child: StickyHeadersTable(
         columnsLength: title.length,
-        columnsTitleBuilder: (int colulmnIndex) => _CellHeader(title[colulmnIndex]),
+        columnsTitleBuilder: (int colulmnIndex) => _CellHeader(
+          title[colulmnIndex],
+          underline: colulmnIndex == 1 && ref.watch(showAnalyse),
+        ),
         contentCellBuilder: (int columnIndex, int rowIndex) => _Cell(
             observationsAndEmpty[rowIndex],
             title[columnIndex],
@@ -298,14 +301,21 @@ class _LittleBoxChild extends StatelessWidget {
 
 class _CellHeader extends StatelessWidget {
   String value;
+  bool? underline;
   _CellHeader(
     this.value, {
+    this.underline,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text(value, style: Theme.of(context).textTheme.headline6));
+    return Center(
+        child: Text(value,
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                ?.copyWith(decoration: underline == true ? TextDecoration.underline : null)));
   }
 }
 

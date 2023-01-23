@@ -67,7 +67,6 @@ abstract class Cycle with _$Cycle {
         lastId = cycle.id;
       }
     }
-    print("Last id is ${lastId.getOrCrash()}");
     return lastId;
   }
 }

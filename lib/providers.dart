@@ -87,10 +87,10 @@ final allCycleProvider = FutureProvider<Either<CycleFailure, List<CycleDTO>>>((r
 
 //Dernier Cycle
 final lastCycleId = FutureProvider<Either<CycleFailure, UniqueId?>>((ref) async {
+  ref.invalidate(allCycleProvider);
   final async = await ref.read(allCycleProvider.future);
   return async.fold((l) => left(l), (r) {
     final lastId = Cycle.lastId(r.map((e) => e.toDomain([])).toList());
-    print('lsatId: $lastId');
     return right(lastId);
   });
 });

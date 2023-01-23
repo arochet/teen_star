@@ -37,8 +37,6 @@ class TableauHistorique extends ConsumerWidget {
           // Cellule observation
           if (columnIndex < listHistorique.length) {
             if (rowIndex < listHistorique[columnIndex].observations.length) {
-              print(
-                  '${listHistorique[columnIndex].idJourneeSoleil.getOrCrash()} / ${listHistorique[columnIndex].observations[rowIndex].id.getOrCrash()}');
               if (listHistorique[columnIndex].observations[rowIndex].isEmpty)
                 return _CellEmpty();
               else

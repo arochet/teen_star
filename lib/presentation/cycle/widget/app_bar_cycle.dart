@@ -63,35 +63,43 @@ class AppBarCycle extends ConsumerWidget {
           Row(
         children: [
           SizedBox(width: 60),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //BOUTON CYCLE PRECEDENT
-                if (cyclePrecedent != null)
-                  ElevatedButton(
-                    onPressed: () {
-                      ref.invalidate(cycleProvider(UniqueId.fromUniqueInt(cyclePrecedent!.id!)));
-                      ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(cyclePrecedent!.id!);
-                    },
-                    child: Icon(Icons.arrow_back_ios, size: 16, color: colorpanel(50)),
-                    style: buttonPrimaryHideLittle,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //BOUTON CYCLE PRECEDENT
+                  if (cyclePrecedent != null)
+                    ElevatedButton(
+                      onPressed: () {
+                        ref.invalidate(cycleProvider(UniqueId.fromUniqueInt(cyclePrecedent!.id!)));
+                        ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(cyclePrecedent!.id!);
+                      },
+                      child: Icon(Icons.arrow_back_ios, size: 16, color: colorpanel(50)),
+                      style: buttonPrimaryHideLittle,
+                    ),
+                  if (cyclePrecedent == null) Container(width: 64),
+                  Flexible(
+                    child: Text(
+                      "Cycle ${cycleCourant?.id}",
+                      style: Theme.of(context).textTheme.headline4,
+                      overflow: TextOverflow.fade,
+                    ),
                   ),
-                if (cyclePrecedent == null) Container(width: 64),
-                Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.headline4),
-                //BOUTON CYCLE SUIVANT
-                if (cycleSuivant == null) Container(width: 64),
-                if (cycleSuivant != null)
-                  ElevatedButton(
-                    onPressed: () {
-                      ref.invalidate(cycleProvider(UniqueId.fromUniqueInt(cycleSuivant!.id!)));
-                      ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(cycleSuivant!.id!);
-                    },
-                    child: Icon(Icons.arrow_forward_ios, size: 16, color: colorpanel(50)),
-                    style: buttonPrimaryHideLittle,
-                  )
-              ],
+                  //BOUTON CYCLE SUIVANT
+                  if (cycleSuivant == null) Container(width: 64),
+                  if (cycleSuivant != null)
+                    ElevatedButton(
+                      onPressed: () {
+                        ref.invalidate(cycleProvider(UniqueId.fromUniqueInt(cycleSuivant!.id!)));
+                        ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(cycleSuivant!.id!);
+                      },
+                      child: Icon(Icons.arrow_forward_ios, size: 16, color: colorpanel(50)),
+                      style: buttonPrimaryHideLittle,
+                    )
+                ],
+              ),
             ),
           ),
         ],

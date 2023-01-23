@@ -2,16 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
+import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
-import 'package:teenstar/DOMAIN/cycle/cycle_historique.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
-import 'package:teenstar/INFRASTRUCTURE/cycle/observation_historique_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
-import 'package:teenstar/PRESENTATION/cycle/pdf/generate_cycle_pdf.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/app_bar_cycle.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/dialog_pdf.dart';
 import 'package:teenstar/providers.dart';
@@ -99,12 +97,13 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                 printDev("Page: ${widget.listMenu[id]["title"]}");
                 ref.read(isSelection.notifier).state = false;
                 if (id == 0) {
-                  ref.refresh(allCycleProvider);
+                  ref.invalidate(allCycleProvider);
+                  ref.invalidate(lastCycleId);
                   final id = ref.read(idCycleCourant);
-                  if (id != null) ref.refresh(cycleProvider(id));
+                  if (id != null) ref.invalidate(cycleProvider(id));
                 }
                 if (id == 1) {
-                  ref.refresh(allCycleHistoriqueProvider);
+                  ref.invalidate(allCycleHistoriqueProvider);
                 }
                 tabsRouter.setActiveIndex(id);
               },
@@ -223,8 +222,6 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
 
                   final userData = await ref.read(currentUserData.future);
                   final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
-                  /* listCycleAsync.fold((l) => showSnackbarCycleFailure(context, l),
-                      (list) => generatePDF(userData, list, passwordPdf)); */
 
                   showDialogApp(
                     context: context,
@@ -248,74 +245,49 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
     );
   }
 
-  void _showActionSheetHistorique(BuildContext context, WidgetRef ref) {
-    AsyncValue<Either<CycleFailure, List<ObservationHistoriqueDTO>>> listAsync =
-        ref.watch(allCycleHistoriqueProvider);
+  void _showActionSheetHistorique(BuildContext context, WidgetRef ref) async {
+    //TEST
+    final result = await ref.read(cycleRepositoryProvider).readAllCycles();
+    result.fold((l) => showSnackbarCycleFailure(context, l), (listCycle) async {
+      final idDernierCycle = Cycle.lastId(listCycle.map((e) => e.toDomain([])).toList())?.getOrCrash();
 
-    listAsync.whenData(
-      (data) {
-        return data.fold(
-          (error) => showSnackbarCycleFailure(context, error),
-          (List<ObservationHistoriqueDTO> listObservation) {
-            if (listObservation.length == 0) {
-              //Pas de cycle
-              return null;
-            } else {
-              //Conversion des observations en Cycle
-              List<CycleHistorique> listCycle = [];
-
-              //Créer une liste de Cycle avec les observations
-              for (var observation in listObservation) {
-                bool found = false;
-                for (var cycle in listCycle) {
-                  if (found == false) {
-                    if (observation.idCycle == cycle.id.getOrCrash()) {
-                      found = true;
-                    }
-                  }
+      if (idDernierCycle == 1 || idDernierCycle == null) {
+        showSnackbar(context, "Il n'y a qu'un seul cycle : pas de renvoi possible");
+        return;
+      }
+      if (idDernierCycle == 0) {
+        showSnackbar(context, "Il n'y a pas de cycle : pas de renvoi possible");
+        return;
+      }
+      await showCupertinoModalPopup<void>(
+        context: context,
+        builder: (BuildContext context) => CupertinoActionSheet(
+          actions: <CupertinoActionSheetAction>[
+            CupertinoActionSheetAction(
+              onPressed: () async {
+                final onRenvoie = await showDialogChoix(context,
+                    'Etes-vous sûr de vouloir renvoyer le cycle $idDernierCycle vers ${idDernierCycle - 1} ?',
+                    positiveText: 'Renvoyer', negativeText: 'Annuler');
+                if (onRenvoie == true) {
+                  final result = await ref.read(cycleRepositoryProvider).renvoieDernierCycle();
+                  print('renvoie derneir cycle');
+                  result.fold((l) => showSnackbarCycleFailure(context, l),
+                      (_) => ref.refresh(allCycleHistoriqueProvider));
                 }
+                Navigator.pop(context);
+              },
+              child: Text('Renvoyer Cycle $idDernierCycle vers ${idDernierCycle - 1}'),
+            ),
+          ],
+        ),
+      );
 
-                if (found == false) {
-                  listCycle
-                      .add(CycleHistorique.fromListDTOwithEmptyDays(listObservation, observation.idCycle));
-                }
-              }
-              listCycle = listCycle.reversed.toList();
-
-              if (listCycle.length == 1) {
-                showSnackbar(context, "Il n'y a qu'un seul cycle : pas de renvoi possible");
-                return;
-              }
-              if (listCycle.length == 0) {
-                showSnackbar(context, "Il n'y a pas de cycle : pas de renvoi possible");
-                return;
-              }
-              showCupertinoModalPopup<void>(
-                context: context,
-                builder: (BuildContext context) => CupertinoActionSheet(
-                  // title: const Text('Title'),
-                  actions: <CupertinoActionSheetAction>[
-                    CupertinoActionSheetAction(
-                      onPressed: () async {
-                        final onRenvoie = await showDialogChoix(context,
-                            'Etes-vous sûr de vouloir renvoyer le cycle ${listCycle.length} vers ${listCycle.length - 1} ?',
-                            positiveText: 'Renvoyer', negativeText: 'Annuler');
-                        if (onRenvoie == true) {
-                          final result = await ref.read(cycleRepositoryProvider).renvoieDernierCycle();
-                          result.fold((l) => showSnackbarCycleFailure(context, l),
-                              (_) => ref.refresh(allCycleHistoriqueProvider));
-                        }
-                        Navigator.pop(context);
-                      },
-                      child: Text('Renvoyer Cycle ${listCycle.length} vers ${listCycle.length - 1}'),
-                    ),
-                  ],
-                ),
-              );
-            }
-          },
-        );
-      },
-    );
+      ref.invalidate(lastCycleId);
+      ref.invalidate(idCycleCourant);
+      final async = await ref.read(lastCycleId.future);
+      async.fold((l) => showSnackbarCycleFailure(context, l), (id) {
+        ref.read(idCycleCourant.notifier).state = id;
+      });
+    });
   }
 }

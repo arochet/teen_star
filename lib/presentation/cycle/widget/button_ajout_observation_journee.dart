@@ -68,17 +68,16 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
 
       await Future.delayed(Duration(milliseconds: 50));
 
-      print("???????");
       final idLastCycle =
           (await ref.read(lastCycleId.future)).fold((l) => showSnackbarCycleFailure(context, l), (r) => r);
-      //On recharge le cycle courant
-      if (idLastCycle != null && continuerCycle == true) {
-        ref.invalidate(cycleProvider(idLastCycle));
-        ref.read(idCycleCourant.notifier).state = idLastCycle;
-      } else {
-        print('Error ! idLastCycle is null');
+
+      if (idLastCycle == null) {
         throw Exception("idLastCycle is null");
       }
+
+      //On recharge le cycle courant
+      ref.invalidate(cycleProvider(idLastCycle));
+      ref.read(idCycleCourant.notifier).state = idLastCycle;
     }
   }
 }

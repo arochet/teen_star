@@ -10,15 +10,11 @@ import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
-import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
-import 'package:teenstar/PRESENTATION/cycle/pdf/generate_cycle_pdf.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'widget/app_bar_cycle.dart';
-import 'widget/app_bar_analyse_deprecated.dart';
 import 'widget/button_ajout_observation_journee.dart';
 import 'widget/button_modification_observation.dart';
 import 'widget/tableau_cycle.dart';
@@ -190,7 +186,7 @@ class _Cycle extends ConsumerWidget {
 
 //Première utilisation de l'application
 class _PagePasDeCycle extends StatelessWidget {
-  const _PagePasDeCycle({
+  _PagePasDeCycle({
     Key? key,
   }) : super(key: key);
 

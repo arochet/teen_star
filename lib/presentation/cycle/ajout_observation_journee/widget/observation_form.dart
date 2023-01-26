@@ -10,6 +10,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_main_navigation/bottom_bar_navigation.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/text_utils.dart';
 import 'package:teenstar/providers.dart';
@@ -49,8 +50,21 @@ class ObservationFormProvider extends ConsumerWidget {
               }, (_) {
                 //Création réussie !
                 Future.delayed(Duration.zero, () async {
-                  ref.refresh(allCycleProvider);
-                  context.router.pop();
+                  //L'observation a été ajoutée, on recharge les données
+                  ref.invalidate(allCycleProvider);
+                  ref.invalidate(lastCycleId);
+
+                  await Future.delayed(Duration(milliseconds: 50));
+                  final async = await ref.read(allCycleProvider.future);
+                  async.fold((l) => showSnackbarCycleFailure(context, l), (listCycleDTO) {
+                    final idLastCycle = Cycle.lastId(listCycleDTO.map((e) => e.toDomain([])).toList());
+                    if (idLastCycle != null) {
+                      //On recharge le cycle courant
+                      ref.invalidate(cycleProvider(idLastCycle));
+                      ref.read(idCycleCourant.notifier).state = idLastCycle;
+                      context.router.pop();
+                    }
+                  });
                 });
               }));
     });

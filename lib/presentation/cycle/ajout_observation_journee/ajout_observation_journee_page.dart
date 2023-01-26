@@ -9,12 +9,10 @@ class ObservationAddPage extends StatelessWidget {
   Cycle? cycle;
   DateTime date;
   ObservationAddPage(this.cycle, this.date, {Key? key}) : super(key: key);
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      key: _scaffoldKey,
       title: 'Nouvelle Observation',
       child: ShowComponentFile(
         title: '/PRESENTATION/./resume/ajout_observation_journee/ajout_observation_journee_page.dart',

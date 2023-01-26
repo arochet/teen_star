@@ -39,8 +39,8 @@ import '../../reglages/account/utils/utils_page.dart';
     children: [
       RedirectRoute(path: '', redirectTo: 'resume-route'),
       AutoRoute(
-        path: 'resume-route',
-        name: 'ResumeRoute',
+        path: 'cycles-route',
+        name: 'CyclesRoute',
         page: CyclesPage,
       ),
       AutoRoute(

@@ -18,12 +18,6 @@ class MainNavigationPage extends ConsumerStatefulWidget {
 }
 
 class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with WidgetsBindingObserver {
-  final listRoute = [
-    ResumeRoute(),
-    HistoriqueRoute(),
-    AccountRoute(),
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -52,6 +46,11 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
 
   @override
   Widget build(BuildContext context) {
+    final listRoute = [
+      CyclesRoute(),
+      HistoriqueRoute(),
+      AccountRoute(),
+    ];
     final listMenu = [
       {
         "title": "Cycles",

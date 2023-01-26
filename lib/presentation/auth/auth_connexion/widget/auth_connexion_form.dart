@@ -27,7 +27,7 @@ class FormConnexionProvider extends ConsumerWidget {
                 //Authentification réussie !
                 Future.delayed(Duration.zero, () async {
                   ref.read(authNotifierProvider.notifier).authCheckRequested();
-                  context.router.replaceAll([ResumeRoute()]);
+                  context.router.replaceAll([CyclesRoute()]);
                 });
               }));
     });

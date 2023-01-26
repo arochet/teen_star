@@ -5,7 +5,7 @@ import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/providers.dart';
 
-import '../resume_page.dart';
+import '../cycles_page.dart';
 
 class ModifierCouleurDialog extends StatelessWidget {
   final Observation observation;

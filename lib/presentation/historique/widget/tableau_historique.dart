@@ -14,7 +14,7 @@ import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
-import 'package:teenstar/PRESENTATION/cycle/resume_page.dart';
+import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/providers.dart';
 
 import '../../core/_utils/app_date_utils.dart';

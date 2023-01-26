@@ -7,7 +7,7 @@ import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/providers.dart';
 
-import '../resume_page.dart';
+import '../cycles_page.dart';
 import 'modifier_couleur_dialog.dart';
 import 'show_observation_notes.dart';
 

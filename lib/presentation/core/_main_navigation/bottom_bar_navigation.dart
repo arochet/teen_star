@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../cycle/resume_page.dart';
+import '../../cycle/cycles_page.dart';
 
 class BottomBarNavigation extends ConsumerStatefulWidget {
   final listRoute;

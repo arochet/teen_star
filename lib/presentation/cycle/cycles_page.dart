@@ -28,14 +28,14 @@ final showAnalyse = StateProvider<bool>((ref) => false);
 final isSelection = StateProvider<bool>((ref) => false);
 final observationSectionne = StateProvider<List<Observation>>((ref) => []);
 
-class ResumePage extends ConsumerStatefulWidget {
-  const ResumePage({Key? key}) : super(key: key);
+class CyclesPage extends ConsumerStatefulWidget {
+  const CyclesPage({Key? key}) : super(key: key);
 
   @override
-  _ResumePageState createState() => _ResumePageState();
+  _CyclesPageState createState() => _CyclesPageState();
 }
 
-class _ResumePageState extends ConsumerState<ResumePage> {
+class _CyclesPageState extends ConsumerState<CyclesPage> {
   @override
   void initState() {
     super.initState();

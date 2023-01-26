@@ -36,7 +36,7 @@ import '../../reglages/modify_account/modify_account_page.dart' as _i7;
 import '../../reglages/new_password/new_password_page.dart' as _i10;
 import '../../reglages/reauthenticate/reauthenticate_page.dart' as _i8;
 import '../../cycle/ajout_observation_journee/ajout_observation_journee_page.dart' as _i16;
-import '../../cycle/resume_page.dart' as _i22;
+import '../../cycle/cycles_page.dart' as _i22;
 import '../_main_navigation/main_navigation_page.dart' as _i2;
 import '../_splash/splash_page.dart' as _i1;
 
@@ -188,7 +188,7 @@ class AppRouter extends _i25.RootStackRouter {
     ResumeRoute.name: (routeData) {
       return _i25.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i22.ResumePage(),
+        child: const _i22.CyclesPage(),
       );
     },
     HistoriqueRoute.name: (routeData) {
@@ -657,7 +657,7 @@ class Info_applicationRoute extends _i25.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.ResumePage]
+/// [_i22.CyclesPage]
 class ResumeRoute extends _i25.PageRouteInfo<void> {
   const ResumeRoute()
       : super(

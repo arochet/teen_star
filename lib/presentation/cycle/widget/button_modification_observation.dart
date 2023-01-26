@@ -11,7 +11,7 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/providers.dart';
 
-import '../resume_page.dart';
+import '../cycles_page.dart';
 
 class ButtonModificationObservation extends ConsumerWidget {
   Cycle? cycle;

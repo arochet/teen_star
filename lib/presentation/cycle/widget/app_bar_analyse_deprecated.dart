@@ -9,7 +9,7 @@ import 'package:teenstar/providers.dart';
 
 import '../../core/_core/theme_button.dart';
 import '../pdf/generate_cycle_pdf.dart';
-import '../resume_page.dart';
+import '../cycles_page.dart';
 import 'dialog_pdf.dart';
 /* 
 class AppBarAnalyse extends ConsumerWidget {

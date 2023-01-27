@@ -19,6 +19,7 @@ class AuthInitPage extends StatelessWidget {
       //Application Mobile
       return Scaffold(
         body: Container(
+          width: 1050,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -30,8 +31,11 @@ class AuthInitPage extends StatelessWidget {
             ),
           ),
           child: SafeArea(
-            child: ShowEnvironment(
-                child: ShowComponentFile(title: 'auth/auth_init/auth_init.dart', child: PanelInit())),
+            child: Container(
+              width: 90,
+              child: ShowEnvironment(
+                  child: ShowComponentFile(title: 'auth/auth_init/auth_init.dart', child: PanelInit())),
+            ),
           ),
         ),
       );
@@ -71,6 +75,7 @@ class PanelInit extends StatelessWidget {
             children: [
               Text("Bienvenue sur",
                   style: Theme.of(context).textTheme.headline4?.copyWith(color: colorpanel(900))),
+              SizedBox(height: 20),
               Text("TeenSTAR",
                   style: Theme.of(context).textTheme.headline1?.copyWith(color: colorpanel(900))),
               SizedBox(height: 20),

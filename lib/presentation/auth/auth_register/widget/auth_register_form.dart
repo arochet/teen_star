@@ -62,237 +62,241 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
   Widget build(BuildContext context) {
     ref.watch(registerFormNotifierProvider);
     return ContrainedBoxMaxWidth(
-      center: kIsWeb,
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Form(
-          autovalidateMode: AutovalidateMode.always,
-          child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
-            Center(child: Text("Etape 3/3", style: Theme.of(context).textTheme.headline5)),
-            SpaceH10(),
-            if (ref.watch(environment).name == Environment.dev)
-              ElevatedButton(
-                onPressed: () {
-                  final _formatter = new DateFormat('dd.MM.yy');
-                  ref.read(registerFormNotifierProvider.notifier).nomUtilisateurChanged('azer');
-                  ref
-                      .read(registerFormNotifierProvider.notifier)
-                      .dateNaissanceChanged(_formatter.parse('03.01.97'));
-                  ref.read(registerFormNotifierProvider.notifier).anneePremiereRegleChanged(2000);
-                  ref.read(registerFormNotifierProvider.notifier).passwordAppliChanged('azerazer');
-                  ref
-                      .read(registerFormNotifierProvider.notifier)
-                      .passwordAppliConfirmationChanged('azerazer');
-                  ref.read(registerFormNotifierProvider.notifier).passwordPDFChanged('qsdfqsdf');
-                  ref.read(registerFormNotifierProvider.notifier).passwordPDFConfirmationChanged('qsdfqsdf');
-                },
-                child: Text("[DEV] fill form"),
-                style: buttonPrimaryHide,
-              ),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.nomutilisateur,
-              ),
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              controller: _controllerNom,
-              onChanged: (value) {
-                ref.read(registerFormNotifierProvider.notifier).nomUtilisateurChanged(value);
-              },
-              validator: (_) {
-                final registerData = ref.read(registerFormNotifierProvider);
-
-                if (registerData.showErrorMessages) {
-                  return registerData.nomUtilisateur.value.fold(
-                    (f) => f.maybeMap(
-                      exceedingLenghtOrNull: (_) => AppLocalizations.of(context)!.nominvalide,
-                      orElse: () => null,
-                    ),
-                    (_) => null,
-                  );
-                } else
-                  return null;
-              },
-            ),
-            SpaceH10(),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: "Date de naissance (jj.mm.aa)",
-              ),
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.datetime,
-              controller: _controllerDateNaissance,
-              onChanged: (value) {
-                final _formatter = new DateFormat('dd.MM.yy');
-                try {
-                  ref
-                      .read(registerFormNotifierProvider.notifier)
-                      .dateNaissanceChanged(_formatter.parse(value));
-                } catch (e) {}
-              },
-              validator: (_) {
-                final registerData = ref.read(registerFormNotifierProvider);
-
-                if (registerData.showErrorMessages) {
-                  if (registerData.dateNaissance == null) {
-                    return 'Date invalide';
-                  } else {
-                    return null;
-                  }
-                } else
-                  return null;
-              },
-            ),
-            SpaceH10(),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: "Année des 1ère règles",
-              ),
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.number,
-              controller: _controllerAnneeRegle,
-              onChanged: (value) {
-                ref
-                    .read(registerFormNotifierProvider.notifier)
-                    .anneePremiereRegleChanged(int.tryParse(value) ?? 0);
-              },
-              validator: (_) {
-                final registerData = ref.read(registerFormNotifierProvider);
-
-                if (registerData.showErrorMessages) {
-                  if (registerData.annePremiereRegle < 1900 || registerData.annePremiereRegle > 3000)
-                    return "Année invalide";
-                  else
-                    return null;
-                } else
-                  return null;
-              },
-            ),
-            SpaceH40(),
-            Text("Ce mot de passe sera demandé à chaque ouverture d'application",
-                style: Theme.of(context).textTheme.bodyText1),
-            SpaceH10(),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Mot de Passe Appli',
-              ),
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              obscureText: true,
-              onChanged: (value) =>
-                  ref.read(registerFormNotifierProvider.notifier).passwordAppliChanged(value),
-              validator: (_) {
-                final registerData = ref.read(registerFormNotifierProvider);
-                if (registerData.showErrorMessages) {
-                  return registerData.passwordAppli.value.fold(
-                    (f) => f.maybeMap(
-                      shortPassword: (_) => AppLocalizations.of(context)!.motdepassetropcourt,
-                      orElse: () => null,
-                    ),
-                    (_) => null,
-                  );
-                } else
-                  return null;
-              },
-            ),
-            SpaceH10(),
-            //MOT DE PASSE DE CONFIRMATION
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Mot de Passe Appli Confirmation',
-              ),
-              autocorrect: false,
-              textInputAction: TextInputAction.done,
-              obscureText: true,
-              onChanged: (value) =>
-                  ref.read(registerFormNotifierProvider.notifier).passwordAppliConfirmationChanged(value),
-              validator: (_) {
-                final registerData = ref.read(registerFormNotifierProvider);
-                if (registerData.showErrorMessages) {
-                  return registerData.passwordAppliConfirmation.value.fold(
-                    (f) => f.maybeMap(
-                      confirmationPasswordFail: (_) =>
-                          AppLocalizations.of(context)!.motdepasseconfirmationdifferent,
-                      orElse: () => null,
-                    ),
-                    (_) => null,
-                  );
-                } else
-                  return null;
-              },
-            ),
-            SpaceH40(),
-            Text("Ce mot de passe sera demandé à chaque ouverture d'un PDF",
-                style: Theme.of(context).textTheme.bodyText1),
-            SpaceH10(),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Mot de Passe PDF',
-              ),
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              obscureText: true,
-              onChanged: (value) => ref.read(registerFormNotifierProvider.notifier).passwordPDFChanged(value),
-              validator: (_) {
-                final registerData = ref.read(registerFormNotifierProvider);
-                if (registerData.showErrorMessages) {
-                  return registerData.passwordPDF.value.fold(
-                    (f) => f.maybeMap(
-                      shortPassword: (_) => AppLocalizations.of(context)!.motdepassetropcourt,
-                      orElse: () => null,
-                    ),
-                    (_) => null,
-                  );
-                } else
-                  return null;
-              },
-            ),
-            SpaceH10(),
-            //MOT DE PASSE DE CONFIRMATION
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Mot de Passe PDF Confirmation',
-              ),
-              autocorrect: false,
-              textInputAction: TextInputAction.done,
-              obscureText: true,
-              onChanged: (value) =>
-                  ref.read(registerFormNotifierProvider.notifier).passwordPDFConfirmationChanged(value),
-              validator: (_) {
-                final registerData = ref.read(registerFormNotifierProvider);
-                if (registerData.showErrorMessages) {
-                  return registerData.passwordPDFConfirmation.value.fold(
-                    (f) => f.maybeMap(
-                      confirmationPasswordFail: (_) =>
-                          AppLocalizations.of(context)!.motdepasseconfirmationdifferent,
-                      orElse: () => null,
-                    ),
-                    (_) => null,
-                  );
-                } else
-                  return null;
-              },
-            ),
-            SpaceH30(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  ref.read(registerFormNotifierProvider.notifier).registerWithEmailAndPasswordPressed();
-                },
-                style: buttonNormalPrimary,
-                child: Text("S'inscrire"),
-              ),
-            ),
-            const SizedBox(height: 12),
-            if (ref.read(registerFormNotifierProvider).isSubmitting) ...[
+      child: Center(
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Form(
+            autovalidateMode: AutovalidateMode.always,
+            child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
+              Center(child: Text("Etape 3/3", style: Theme.of(context).textTheme.headline5)),
               SpaceH10(),
-              const LinearProgressIndicator(value: null)
-            ],
-            SpaceH40()
-          ]),
+              if (ref.watch(environment).name == Environment.dev)
+                ElevatedButton(
+                  onPressed: () {
+                    final _formatter = new DateFormat('dd.MM.yy');
+                    ref.read(registerFormNotifierProvider.notifier).nomUtilisateurChanged('azer');
+                    ref
+                        .read(registerFormNotifierProvider.notifier)
+                        .dateNaissanceChanged(_formatter.parse('03.01.97'));
+                    ref.read(registerFormNotifierProvider.notifier).anneePremiereRegleChanged(2000);
+                    ref.read(registerFormNotifierProvider.notifier).passwordAppliChanged('azerazer');
+                    ref
+                        .read(registerFormNotifierProvider.notifier)
+                        .passwordAppliConfirmationChanged('azerazer');
+                    ref.read(registerFormNotifierProvider.notifier).passwordPDFChanged('qsdfqsdf');
+                    ref
+                        .read(registerFormNotifierProvider.notifier)
+                        .passwordPDFConfirmationChanged('qsdfqsdf');
+                  },
+                  child: Text("[DEV] fill form"),
+                  style: buttonPrimaryHide,
+                ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.nomutilisateur,
+                ),
+                autocorrect: false,
+                textInputAction: TextInputAction.next,
+                controller: _controllerNom,
+                onChanged: (value) {
+                  ref.read(registerFormNotifierProvider.notifier).nomUtilisateurChanged(value);
+                },
+                validator: (_) {
+                  final registerData = ref.read(registerFormNotifierProvider);
+
+                  if (registerData.showErrorMessages) {
+                    return registerData.nomUtilisateur.value.fold(
+                      (f) => f.maybeMap(
+                        exceedingLenghtOrNull: (_) => AppLocalizations.of(context)!.nominvalide,
+                        orElse: () => null,
+                      ),
+                      (_) => null,
+                    );
+                  } else
+                    return null;
+                },
+              ),
+              SpaceH10(),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Date de naissance (jj.mm.aa)",
+                ),
+                autocorrect: false,
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.datetime,
+                controller: _controllerDateNaissance,
+                onChanged: (value) {
+                  final _formatter = new DateFormat('dd.MM.yy');
+                  try {
+                    ref
+                        .read(registerFormNotifierProvider.notifier)
+                        .dateNaissanceChanged(_formatter.parse(value));
+                  } catch (e) {}
+                },
+                validator: (_) {
+                  final registerData = ref.read(registerFormNotifierProvider);
+
+                  if (registerData.showErrorMessages) {
+                    if (registerData.dateNaissance == null) {
+                      return 'Date invalide';
+                    } else {
+                      return null;
+                    }
+                  } else
+                    return null;
+                },
+              ),
+              SpaceH10(),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Année des 1ère règles",
+                ),
+                autocorrect: false,
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.number,
+                controller: _controllerAnneeRegle,
+                onChanged: (value) {
+                  ref
+                      .read(registerFormNotifierProvider.notifier)
+                      .anneePremiereRegleChanged(int.tryParse(value) ?? 0);
+                },
+                validator: (_) {
+                  final registerData = ref.read(registerFormNotifierProvider);
+
+                  if (registerData.showErrorMessages) {
+                    if (registerData.annePremiereRegle < 1900 || registerData.annePremiereRegle > 3000)
+                      return "Année invalide";
+                    else
+                      return null;
+                  } else
+                    return null;
+                },
+              ),
+              SpaceH40(),
+              Text("Ce mot de passe sera demandé à chaque ouverture d'application",
+                  style: Theme.of(context).textTheme.bodyText1),
+              SpaceH10(),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Mot de Passe Appli',
+                ),
+                autocorrect: false,
+                textInputAction: TextInputAction.next,
+                obscureText: true,
+                onChanged: (value) =>
+                    ref.read(registerFormNotifierProvider.notifier).passwordAppliChanged(value),
+                validator: (_) {
+                  final registerData = ref.read(registerFormNotifierProvider);
+                  if (registerData.showErrorMessages) {
+                    return registerData.passwordAppli.value.fold(
+                      (f) => f.maybeMap(
+                        shortPassword: (_) => AppLocalizations.of(context)!.motdepassetropcourt,
+                        orElse: () => null,
+                      ),
+                      (_) => null,
+                    );
+                  } else
+                    return null;
+                },
+              ),
+              SpaceH10(),
+              //MOT DE PASSE DE CONFIRMATION
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Mot de Passe Appli Confirmation',
+                ),
+                autocorrect: false,
+                textInputAction: TextInputAction.done,
+                obscureText: true,
+                onChanged: (value) =>
+                    ref.read(registerFormNotifierProvider.notifier).passwordAppliConfirmationChanged(value),
+                validator: (_) {
+                  final registerData = ref.read(registerFormNotifierProvider);
+                  if (registerData.showErrorMessages) {
+                    return registerData.passwordAppliConfirmation.value.fold(
+                      (f) => f.maybeMap(
+                        confirmationPasswordFail: (_) =>
+                            AppLocalizations.of(context)!.motdepasseconfirmationdifferent,
+                        orElse: () => null,
+                      ),
+                      (_) => null,
+                    );
+                  } else
+                    return null;
+                },
+              ),
+              SpaceH40(),
+              Text("Ce mot de passe sera demandé à chaque ouverture d'un PDF",
+                  style: Theme.of(context).textTheme.bodyText1),
+              SpaceH10(),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Mot de Passe PDF',
+                ),
+                autocorrect: false,
+                textInputAction: TextInputAction.next,
+                obscureText: true,
+                onChanged: (value) =>
+                    ref.read(registerFormNotifierProvider.notifier).passwordPDFChanged(value),
+                validator: (_) {
+                  final registerData = ref.read(registerFormNotifierProvider);
+                  if (registerData.showErrorMessages) {
+                    return registerData.passwordPDF.value.fold(
+                      (f) => f.maybeMap(
+                        shortPassword: (_) => AppLocalizations.of(context)!.motdepassetropcourt,
+                        orElse: () => null,
+                      ),
+                      (_) => null,
+                    );
+                  } else
+                    return null;
+                },
+              ),
+              SpaceH10(),
+              //MOT DE PASSE DE CONFIRMATION
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Mot de Passe PDF Confirmation',
+                ),
+                autocorrect: false,
+                textInputAction: TextInputAction.done,
+                obscureText: true,
+                onChanged: (value) =>
+                    ref.read(registerFormNotifierProvider.notifier).passwordPDFConfirmationChanged(value),
+                validator: (_) {
+                  final registerData = ref.read(registerFormNotifierProvider);
+                  if (registerData.showErrorMessages) {
+                    return registerData.passwordPDFConfirmation.value.fold(
+                      (f) => f.maybeMap(
+                        confirmationPasswordFail: (_) =>
+                            AppLocalizations.of(context)!.motdepasseconfirmationdifferent,
+                        orElse: () => null,
+                      ),
+                      (_) => null,
+                    );
+                  } else
+                    return null;
+                },
+              ),
+              SpaceH30(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    ref.read(registerFormNotifierProvider.notifier).registerWithEmailAndPasswordPressed();
+                  },
+                  style: buttonNormalPrimary,
+                  child: Text("S'inscrire"),
+                ),
+              ),
+              const SizedBox(height: 12),
+              if (ref.read(registerFormNotifierProvider).isSubmitting) ...[
+                SpaceH10(),
+                const LinearProgressIndicator(value: null)
+              ],
+              SpaceH40()
+            ]),
+          ),
         ),
       ),
     );

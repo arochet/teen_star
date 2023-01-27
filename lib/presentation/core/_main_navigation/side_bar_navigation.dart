@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_home_title.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SideBarNavigation extends StatelessWidget {
   const SideBarNavigation({Key? key, required this.listRoute, required this.listMenu}) : super(key: key);
@@ -68,9 +66,17 @@ class NavLink extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4.0),
       child: ListTile(
           leading: Icon(icon),
-          title: Text(title),
-          tileColor: idCurrentPage == route ? colorpanel(600) : null,
-          hoverColor: colorpanel(700),
+          iconColor: idCurrentPage == route ? colorpanel(900) : colorpanel(50),
+          title: Text(title,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  ?.copyWith(color: idCurrentPage == route ? colorpanel(900) : colorpanel(50))),
+          tileColor: idCurrentPage == route ? actioncolor['primary'] : null,
+          /* hoverColor: actioncolor['primary'],
+          selectedColor: actioncolor['primary'],
+          focusColor: actioncolor['primary'],
+          selected: true, */
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),

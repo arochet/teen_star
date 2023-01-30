@@ -62,21 +62,18 @@ class NavLink extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final idCurrentPage = ref.watch(currentPageNavProvider.notifier).state;
+    bool selected = idCurrentPage == route;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4.0),
       child: ListTile(
           leading: Icon(icon),
-          iconColor: idCurrentPage == route ? colorpanel(900) : colorpanel(50),
+          iconColor: selected ? colorpanel(900) : colorpanel(50),
           title: Text(title,
               style: Theme.of(context)
                   .textTheme
                   .headline5
-                  ?.copyWith(color: idCurrentPage == route ? colorpanel(900) : colorpanel(50))),
-          tileColor: idCurrentPage == route ? actioncolor['primary'] : null,
-          /* hoverColor: actioncolor['primary'],
-          selectedColor: actioncolor['primary'],
-          focusColor: actioncolor['primary'],
-          selected: true, */
+                  ?.copyWith(color: selected ? colorpanel(900) : colorpanel(50))),
+          tileColor: selected ? actioncolor['primary'] : null,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),

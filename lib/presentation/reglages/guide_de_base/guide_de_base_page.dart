@@ -17,6 +17,10 @@ class Guide_de_basePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final styleBold = Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold);
+    final styleUnderline =
+        Theme.of(context).textTheme.bodyText1!.copyWith(decoration: TextDecoration.underline);
+    final styleBlue = Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.blue);
     return MainScaffold(
       title: 'Guide de base',
       child: ShowComponentFile(
@@ -24,37 +28,95 @@ class Guide_de_basePage extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(10),
           child: ListView(children: [
+            DefaultPanel(
+                child: RichText(
+              text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                TextSpan(text: "«  Mon corps c’est moi, j’écoute ce qu’il me dit ». ", style: styleBold),
+                TextSpan(text: "Mieux le connaître, c’est découvrir la merveille que je suis !")
+              ]),
+            )),
             DisplayTitle(title: "Objectifs"),
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
                 TextSpan(
-                    text: "Lorem Ipsum "
-                        "Dolor Sit Amet [A complété]")
+                    text:
+                        "Faciliter vos enregistrements quotidiens afin d'apprendre l’auto-observation pour découvrir votre fertilité et vos cycles (profil personnel des signes de fertilité, période de l’ovulation, date prévisible des prochaines règles, variation d’humeur et de forme physique en lien avec les changements hormonaux, impact de certains évènements sur le déroulement du cycle, anomalies éventuelles, ...).")
               ]),
             )),
             DisplayTitle(title: "Comment s'observer"),
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                TextSpan(text: "Ce que je sens à la vulve sans regarder", style: styleUnderline),
                 TextSpan(
-                    text: "Lorem Ipsum "
-                        "Dolor Sit Amet [A complété]")
+                    text:
+                        "(SENSATION) : pendant mes activités quotidiennes (marche, escaliers, …) ou en contractant/relâchant plusieurs fois le périnée (exercice de Kegel).\n\n"),
+                TextSpan(text: "Ce que je vois ", style: styleUnderline),
+                TextSpan(
+                    text:
+                        "(OBSERVATION) : ce qui s’écoule de la vulve, sur le sous-vêtement, aux toilettes, sur le papier toilette (que je peux replier /déplier pour évaluer l’élasticité d’une éventuelle sécrétion). "),
+                TextSpan(text: "Ne rien rechercher à l’intérieur du vagin \n\n", style: styleBold),
+                TextSpan(
+                    text:
+                        "Attention : en cas de pertes anormales (sales ou malodorantes) et/ou douleur, démangeaisons, petites plaies proches de la vulve, etc., consulter un médecin afin de ne pas méconnaître une infection (sexuellement transmissible ou autre) qui doit être soignée très rapidement."),
               ]),
             )),
             DisplayTitle(title: "Comment noter"),
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                TextSpan(text: "Sélectionner le bouton rouge "),
+                TextSpan(text: "Débuter un nouveau cycle", style: styleBlue),
+                TextSpan(text: " dès le 1er jour des règles, sinon continuer le cycle en cours."),
+              ]),
+            )),
+            DisplayTitle(title: "Synthèse du cycle"),
+            DefaultPanel(
+                child: RichText(
+              text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                TextSpan(text: "L’onglet "),
+                TextSpan(text: "Résumé ", style: styleBlue),
+                TextSpan(text: "récapitule le cycle, en y ajoutant des couleurs par défaut, mais qui "),
                 TextSpan(
-                    text: "Lorem Ipsum "
-                        "Dolor Sit Amet [A complété]")
+                    text:
+                        "ne correspondent PAS à un repérage des périodes fertiles ou infertiles du cycle.\n\n",
+                    style: styleBold),
+                TextSpan(text: "Cliquer sur un ? permet de relire une note.\n\n", style: styleBold),
+                TextSpan(text: "Le bouton "),
+                TextSpan(text: "Analyser le cycle ", style: styleBlue),
+                TextSpan(
+                  text:
+                      "permet, avec l’aide de votre accompagnatrice, d'interpréter manuellement le cycle (cf Guide avancé § 4). ",
+                ),
+              ]),
+            )),
+            DisplayTitle(title: "Conservation des enregistrements"),
+            DefaultPanel(
+                child: RichText(
+              text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                TextSpan(text: "Les données ne figurent que sur votre appareil "),
+                TextSpan(text: "(portable perdu = données perdues).\n\n", style: styleBold),
+                TextSpan(
+                    text:
+                        "Conseil : exportez régulièrement vos cycles en PDF pour l’archivage sur un ordinateur (utile plus tard ou en cas de consultation médicale), l’impression sur papier ou l'envoi à votre accompagnatrice. \n\n"),
+                TextSpan(text: "Les PDF sont protégés par votre mot de passe. "),
+                TextSpan(text: "Attention ", style: styleUnderline),
+                TextSpan(
+                    text:
+                        " : si vous l'oubliez, vous pourrez en choisir un nouveau pour les PDF à venir, mais ne pourrez plus lire les fichiers "),
+                TextSpan(text: "déjà ", style: styleUnderline),
+                TextSpan(text: "exportés.\n\n"),
+                TextSpan(
+                    text: "Notes confidentielles (*) et prise de médicament sont lisibles uniquement dans "),
+                TextSpan(text: "Réglages ", style: styleBlue),
+                TextSpan(text: "avec mot de passe (et non exportés dans les PDF). "),
               ]),
             )),
             SpaceH20(),
 
-            //BOUTON DE VALIDATION
-            _BoutonDeValidation(),
+            //BOUTON PDF
+            //_BoutonPDF(),
             SizedBox(height: 30),
           ]),
         ),
@@ -63,8 +125,8 @@ class Guide_de_basePage extends StatelessWidget {
   }
 }
 
-class _BoutonDeValidation extends StatelessWidget {
-  const _BoutonDeValidation({
+class _BoutonPDF extends StatelessWidget {
+  const _BoutonPDF({
     Key? key,
   }) : super(key: key);
 

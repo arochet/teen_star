@@ -1,16 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
-import 'package:teenstar/PRESENTATION/reglages/account/widget/diplay_title.dart';
-import 'package:teenstar/providers.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Guide_de_basePage extends StatelessWidget {
   const Guide_de_basePage({Key? key}) : super(key: key);
@@ -35,7 +29,7 @@ class Guide_de_basePage extends StatelessWidget {
                 TextSpan(text: "Mieux le connaître, c’est découvrir la merveille que je suis !")
               ]),
             )),
-            DisplayTitle(title: "Objectifs"),
+            _DisplayTitle(title: "Objectifs"),
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
@@ -44,7 +38,7 @@ class Guide_de_basePage extends StatelessWidget {
                         "Faciliter vos enregistrements quotidiens afin d'apprendre l’auto-observation pour découvrir votre fertilité et vos cycles (profil personnel des signes de fertilité, période de l’ovulation, date prévisible des prochaines règles, variation d’humeur et de forme physique en lien avec les changements hormonaux, impact de certains évènements sur le déroulement du cycle, anomalies éventuelles, ...).")
               ]),
             )),
-            DisplayTitle(title: "Comment s'observer"),
+            _DisplayTitle(title: "Comment s'observer"),
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
@@ -62,7 +56,7 @@ class Guide_de_basePage extends StatelessWidget {
                         "Attention : en cas de pertes anormales (sales ou malodorantes) et/ou douleur, démangeaisons, petites plaies proches de la vulve, etc., consulter un médecin afin de ne pas méconnaître une infection (sexuellement transmissible ou autre) qui doit être soignée très rapidement."),
               ]),
             )),
-            DisplayTitle(title: "Comment noter"),
+            _DisplayTitle(title: "Comment noter"),
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
@@ -71,7 +65,7 @@ class Guide_de_basePage extends StatelessWidget {
                 TextSpan(text: " dès le 1er jour des règles, sinon continuer le cycle en cours."),
               ]),
             )),
-            DisplayTitle(title: "Synthèse du cycle"),
+            _DisplayTitle(title: "Synthèse du cycle"),
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
@@ -91,7 +85,7 @@ class Guide_de_basePage extends StatelessWidget {
                 ),
               ]),
             )),
-            DisplayTitle(title: "Conservation des enregistrements"),
+            _DisplayTitle(title: "Conservation des enregistrements"),
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
@@ -139,6 +133,19 @@ class _BoutonPDF extends StatelessWidget {
         icon: Icon(Icons.picture_as_pdf),
         style: buttonLittleSecondary,
       ),
+    );
+  }
+}
+
+class _DisplayTitle extends StatelessWidget {
+  final String title;
+  const _DisplayTitle({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+      child: Text(title, style: Theme.of(context).textTheme.headline5!.copyWith(color: colorpanel(50))),
     );
   }
 }

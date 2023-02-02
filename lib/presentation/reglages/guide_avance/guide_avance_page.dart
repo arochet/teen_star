@@ -87,108 +87,109 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: " (bouton "),
                   TextSpan(text: " Analyser le cycle ", style: styleBlue),
                   TextSpan(text: " ) : \n\n"),
+                  TextSpan(text: " -> par défaut en "),
+                  TextSpan(text: " BLEU ", style: styleBold),
+                  TextSpan(text: "  (“eau”) =  toute présence d’humidité (SENSATION ou OBSERVATION) \n"),
+                  TextSpan(text: " -> par défaut en "),
+                  TextSpan(text: " JAUNE ", style: styleBold),
+                  TextSpan(text: "  (“sable”) =  Sec + mucus de type non-œstrogénique \n"),
+                  TextSpan(text: " -> par défaut en "),
+                  TextSpan(text: " BRUN ", style: styleBold),
+                  TextSpan(text: "  (“terre”) =  Sec + aucun mucus  \n"),
+                  TextSpan(text: " -> par défaut en "),
+                  TextSpan(text: " BLANC avec  un ? ", style: styleBold),
+                  TextSpan(
+                      text:
+                          "  = doute sur l’observation ou la sensation. Ex. sensation « Non perçue »  ou mucus « Dépôt séché » (perte vaginale ou mucus séché ?) ou sélection « Autre ».  \n"),
+                  TextSpan(text: " ->"),
+                  TextSpan(text: " ROUGE DENSE ", style: styleBold),
+                  TextSpan(text: " = saignement franc (règles ou autre) \n"),
+                  TextSpan(text: " ->"),
+                  TextSpan(text: " ROUGE LEGER ", style: styleBold),
+                  TextSpan(text: " = saignement moins abondant (début/fin des règles ; autre) \n"),
+                  TextSpan(text: " ->"),
+                  TextSpan(text: " TRACES ", style: styleBold),
+                  TextSpan(text: " = traces de sang, rouges ou brunes \n"),
+                  TextSpan(text: " ->"),
+                  TextSpan(text: " POINTILLÉS ", style: styleBold),
+                  TextSpan(text: " = absence d’enregistrement  \n"),
                 ]),
               )),
-              _DisplayTitle(title: "4. Complément info onglet (Résumé)"),
+              _DisplayTitle(title: "4. Complément info bouton Analyser le cycle"),
               DefaultPanel(
-                child: Column(children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("Icon", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                      Expanded(
-                        child: Text("Explication", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("Icon", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                      Expanded(
-                        child: Text("Explication", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                    ],
-                  ),
-                ]),
+                child: RichText(
+                  text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                    TextSpan(
+                        text:
+                            "La colonne ANALYSE, duplication de la colonne COULEUR, permet l’interprétation manuelle du cycle en cliquant sur une ou plusieurs cases à modifier. Facultatif, laissé au discernement de l’accompagnatrice ou pour utilisatrices avancées.  \n\n"),
+                    TextSpan(text: "- Fleur ", style: styleBold),
+                    TextSpan(
+                        text:
+                            "sommet du cycle, maximum de fertilité, ovulation imminente (reconnu a posteriori le jour du tarissement de la montée fertile)\n"),
+                    TextSpan(text: "- 1, 2, 3", style: styleBold),
+                    TextSpan(
+                        text: " : jours après sommet (ou après un épisode de changement dans le PIB) \n"),
+                    TextSpan(text: "- hachures ", style: styleBold),
+                    TextSpan(
+                        text:
+                            ": périodes infertiles (PIB pré-ovulatoire, période infertile de phase lutéale)\n"),
+                    TextSpan(text: "- BLEU ", style: styleBold),
+                    TextSpan(text: ": poussée œstrogénique (aboutissant ou non à un sommet)\n"),
+                    TextSpan(text: "- JAUNE ", style: styleBold),
+                    TextSpan(text: "Sec + opaque non élastique ou"),
+                    TextSpan(text: "ou situation évoquant un profil infertile de type sécrétoire"),
+                    TextSpan(text: "(voir \"cas particuliers\")\n"),
+                    TextSpan(text: "- BRUN ", style: styleBold),
+                    TextSpan(text: "Sec + aucun mucus"),
+                    TextSpan(
+                        text: " ou situation évoquant un profil infertile de type non sécrétoire",
+                        style: styleBold),
+                  ]),
+                ),
               ),
-              _DisplayTitle(title: "5. Complément info onglet (Analyse)"),
+              _DisplayTitle(title: "CAS PARTICULIERS"),
               DefaultPanel(
-                child: Column(children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("Icon", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                      Expanded(
-                        child: Text("Explication", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("Icon", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                      Expanded(
-                        child: Text("Explication", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                    ],
-                  ),
+                  child: RichText(
+                text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                  TextSpan(text: "Toutes les cases sont blanches avec ?", style: styleUnderline),
+                  TextSpan(
+                      text:
+                          " car  l'utilisatrice n’arrive jamais à reconnaître les sensations (sensation « Non perçue »). Si elle se repère facilement grâce à des profils de sécrétions très caractéristiques et très francs, elle pourrait colorer les cases en fonction du mucus seul, en faisant abstraction de la sensation (tout en continuant à s’exercer à la ressentir) : BLEU pour les poussées de mucus œstrogénique, JAUNE pour mucus non œstrogénique et BRUN pour absence de mucus.\n"),
+                  TextSpan(text: "Une case blanche avec ?", style: styleUnderline),
+                  TextSpan(
+                      text:
+                          " car l'utilisatrice a enregistré « Autre » (sensation ou observation). L'échange avec l’accompagnatrice permettra de préciser la nature de cette \"autre\" situation et de colorer la case en conséquence. De même lors de « Dépôt séché », pour éventuellement distinguer des sécrétions vaginales d’une sécrétion de glaire cervicale de tel ou tel type.\n"),
+                  TextSpan(text: "PIB pré-ovulatoire et hachurage", style: styleUnderline),
+                  TextSpan(
+                      text:
+                          " l’utilisatrice avancée en auto-observation peut arriver à repérer son PIB. Rappel : PIB = Profil Infertile de Base = séquence non changeante jour après jour en pré-ovulatoire (sensation et aspect visuel qui restent identiques, témoignant de l’inactivité du col)"),
+                  TextSpan(
+                      text: "Il peut être de type :\n"
+                          "- non sécrétoire  sec + aucun mucus (cases brunes, à hachurer)\n"
+                          "- sécrétoire  sec + mucus opaque (cases jaunes, à hachurer) ou sensation d’humidité + mucus opaque (cases bleues par défaut, qu’elle pourra colorer en jaune, et hachurer).\n"
+                          "N.B. Cas d’un PIB  sec + dépôt séché (cases blanches avec ?)\n"
+                          "a) Le dépôt séché est identifié clairement comme "
+                          "glaire cervicale séchée à cases blanches à colorer en jaune et hachurer"
+                          "pertes vaginales séchées (sans glaire cervicale) à cases blanches à colorer en brun et hachurer\n"
+                          "b) Le dépôt n’est pas identifié clairement à laisser blanc, enlever le ? et hachurer "),
                 ]),
-              ),
-              _DisplayTitle(title: "6. Complément info onglet (Historique)"),
+              )),
+              _DisplayTitle(title: "5. Onglet Historique "),
               DefaultPanel(
-                child: Column(children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("Icon", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                      Expanded(
-                        child: Text("Explication", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("Icon", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                      Expanded(
-                        child: Text("Explication", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                    ],
-                  ),
+                  child: RichText(
+                text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                  TextSpan(
+                      text:
+                          "Récapitule les colonnes ANALYSE (ou COULEUR, par défaut) de chacun des cycles. Cliquer sur le numéro du cycle pour accéder à son Résumé et pouvoir le (ré)analyser si besoin."
+                          "Un cycle n de plus de 35 jours s’affichera en plusieurs colonnes de 35 jours, de gauche à droite :  ..., n.3, n.2, n.1."
+                          " \n\n"),
+                  TextSpan(text: "Le bouton"),
+                  TextSpan(text: " Renvoi vers cycle précédent ", style: styleBlue),
+                  TextSpan(
+                      text:
+                          " permet d'annuler la création par erreur d'un nouveau cycle, par ex. lors d'un saignement qui avait été confondu avec des règles.  "),
                 ]),
-              ),
-              _DisplayTitle(title: "7. Sécurité / Protection des données"),
-              DefaultPanel(
-                child: Column(children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("Icon", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                      Expanded(
-                        child: Text("Explication", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("Icon", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                      Expanded(
-                        child: Text("Explication", style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                    ],
-                  ),
-                ]),
-              ),
+              )),
             ],
           ),
         ),

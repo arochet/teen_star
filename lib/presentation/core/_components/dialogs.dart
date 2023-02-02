@@ -70,7 +70,7 @@ Future<bool?> showDialogPassword<bool>(
   String? textError;
   return showDialog<bool>(
     context: context,
-    barrierDismissible: dissmissable == false,
+    barrierDismissible: dissmissable == true,
     barrierColor: dissmissable == false ? colorpanel(700) : null,
     builder: (BuildContext context) {
       return StatefulBuilder(builder: (context, setState) {
@@ -90,6 +90,7 @@ Future<bool?> showDialogPassword<bool>(
                     hintStyle: TextStyle(color: colorpanel(200)),
                     errorText: textError,
                   ),
+                  keyboardType: TextInputType.text,
                   controller: controller,
                   obscureText: true,
                   onChanged: (value) {

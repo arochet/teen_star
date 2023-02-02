@@ -162,7 +162,7 @@ class _Cell extends StatelessWidget {
         info = LittleBox(
           width: 40,
           height: 35,
-          color: observation.couleur?.getOrCrash().toColor(),
+          color: observation.couleurGeneree.toColor(),
           child: Padding(
             padding: const EdgeInsets.all(2.0),
             child: Stack(
@@ -171,6 +171,10 @@ class _Cell extends StatelessWidget {
                   Center(child: Image.asset(AssetsPath.icon_fleur_sommet, color: colorpanel(50))),
                 if (observation.marque != null && observation.marque! > 0)
                   Center(child: Text("${observation.marque}", style: Theme.of(context).textTheme.headline5)),
+                if (observation.sensation?.getOrCrash() == SensationState.autre ||
+                    observation.sensation?.getOrCrash() == SensationState.nonpercu ||
+                    observation.mucus?.getOrCrash() == MucusState.autre)
+                  Center(child: Text("?", style: Theme.of(context).textTheme.headline5)),
               ],
             ),
           ),

@@ -94,4 +94,26 @@ abstract class Observation with _$Observation {
       commentaireAnimatrice == null &&
       marque == null &&
       jourFertile == null;
+
+  CouleurAnalyseState get couleurGeneree {
+    if (sensation?.getOrCrash() == SensationState.humide ||
+        sensation?.getOrCrash() == SensationState.mouille ||
+        sensation?.getOrCrash() == SensationState.glissantLubrifie ||
+        mucus?.getOrCrash() == MucusState.opaqueAvecTransparent_UnPeuEtirable ||
+        mucus?.getOrCrash() == MucusState.nuageuxATransparent_Elastique ||
+        mucus?.getOrCrash() == MucusState.transparentFilantOuTresFluide) {
+      return CouleurAnalyseState.bleue;
+    } else if (sensation?.getOrCrash() == SensationState.sec &&
+        mucus?.getOrCrash() == MucusState.aucunMucusVisible &&
+        sang?.getOrCrash() == SangState.rien) {
+      return CouleurAnalyseState.brun;
+    } else if (sensation?.getOrCrash() == SensationState.sec &&
+        (mucus?.getOrCrash() == MucusState.opaqueBlancOuJaune ||
+            mucus?.getOrCrash() == MucusState.depotSecheBlancOuJaune) &&
+        sang?.getOrCrash() == SangState.rien) {
+      return CouleurAnalyseState.jaune;
+    } else {
+      return CouleurAnalyseState.none;
+    }
+  }
 }

@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:teenstar/DOMAIN/cycle/cycle_historique.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
@@ -10,7 +9,6 @@ import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'cycle_dtos.dart';
-import 'observation_historique_dtos.dart';
 import 'observation_dtos.dart';
 
 abstract class ICycleRepository {
@@ -18,7 +16,7 @@ abstract class ICycleRepository {
   Future<Either<CycleFailure, Cycle>> readCycle(UniqueId id);
   Future<Either<CycleFailure, List<CycleDTO>>> readAllCycles();
   Future<Either<CycleFailure, List<Cycle>>> readListCycles(int start, int finish);
-  Future<Either<CycleFailure, List<ObservationHistoriqueDTO>>> readAllCyclesHistorique();
+  Future<Either<CycleFailure, List<ObservationDTO>>> readAllCyclesHistorique();
   Future<Either<ObservationFailure, Unit>> createObservation(Cycle? cycle, Observation observation);
   Future<Either<ObservationFailure, Unit>> update(Observation observation);
   Future<Either<ObservationFailure, Unit>> delete(UniqueId id);
@@ -184,15 +182,17 @@ class CycleRepository implements ICycleRepository {
   }
 
   @override
-  Future<Either<CycleFailure, List<ObservationHistoriqueDTO>>> readAllCyclesHistorique() async {
+  Future<Either<CycleFailure, List<ObservationDTO>>> readAllCyclesHistorique() async {
     printDev('readAllCyclesHistorique()');
     try {
       //Récupère les CyclesDTO (DataTransferObject)
       String sql =
           "SELECT * FROM $db_cycle INNER JOIN $db_observation ON $db_cycle.id = $db_observation.idCycle";
       final List<Map<String, dynamic>> mapsCycle = await _database.rawQuery(sql);
-      List<ObservationHistoriqueDTO> cycleDTO = List.generate(mapsCycle.length, (index) {
-        return ObservationHistoriqueDTO.fromJson(mapsCycle[index]);
+      print('cycleDTO ${mapsCycle[0]}');
+      List<ObservationDTO> cycleDTO = List.generate(mapsCycle.length, (index) {
+        print('cycleDTO ${mapsCycle[index]}');
+        return ObservationDTO.fromJson(mapsCycle[index]);
       });
 
       return right(cycleDTO);

@@ -1,26 +1,16 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_historique.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
-import 'package:teenstar/INFRASTRUCTURE/cycle/observation_historique_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/little_box.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
-import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
-import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
-import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
-import 'package:teenstar/providers.dart';
-
-import '../../core/_utils/app_date_utils.dart';
 
 class TableauHistorique extends ConsumerWidget {
-  final List<CycleHistorique> listHistorique;
+  final List<Cycle> listHistorique;
   TableauHistorique(this.listHistorique, {Key? key}) : super(key: key);
 
   @override
@@ -34,17 +24,18 @@ class TableauHistorique extends ConsumerWidget {
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) => _CellHeader(title[colulmnIndex]), //Titre des colonnes
         contentCellBuilder: (int columnIndex, int rowIndex) {
+          List<Observation> listObservation = listHistorique[columnIndex].observations;
           // Cellule observation
           if (columnIndex < listHistorique.length) {
-            if (rowIndex < listHistorique[columnIndex].observations.length) {
-              if (listHistorique[columnIndex].observations[rowIndex].isEmpty)
+            if (rowIndex < listObservation.length) {
+              if (listObservation[rowIndex].isNone)
                 return _CellEmpty();
               else
                 return _Cell(
-                  observation: listHistorique[columnIndex].observations[rowIndex],
+                  observation: listObservation[rowIndex],
                   isJourSommet: listHistorique[columnIndex].idJourneeSoleil.getOrCrash() ==
-                      listHistorique[columnIndex].observations[rowIndex].id.getOrCrash(),
-                  isInfertile: listHistorique[columnIndex].observations[rowIndex].jourFertile == false,
+                      listObservation[rowIndex].id.getOrCrash(),
+                  isInfertile: listObservation[rowIndex].jourFertile == false,
                 );
             } else {
               return _CellEmpty();
@@ -65,12 +56,12 @@ class TableauHistorique extends ConsumerWidget {
     );
   }
 
-  int _getCyclePlusLong(List<CycleHistorique> listHistorique) {
+  int _getCyclePlusLong(List<Cycle> listHistorique) {
     int lenght = 0;
 
     for (var cycle in listHistorique) {
-      if (cycle.observations.length > lenght) {
-        lenght = cycle.observations.length;
+      if (cycle.getObservationsWithEmptyDays(allowDoubleDays: false).length > lenght) {
+        lenght = cycle.getObservationsWithEmptyDays(allowDoubleDays: false).length;
       }
     }
 
@@ -79,7 +70,7 @@ class TableauHistorique extends ConsumerWidget {
 }
 
 class _Cell extends StatelessWidget {
-  final ObservationHistorique observation;
+  final Observation observation;
   final bool isJourSommet;
   final bool isInfertile;
   _Cell({
@@ -91,6 +82,10 @@ class _Cell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CouleurAnalyseState? couleurAnalyse = observation.analyse?.getOrCrash();
+    Color? couleur = couleurAnalyse?.toColor();
+    if (couleurAnalyse == CouleurAnalyseState.none) couleur = null;
+
     return Stack(
       children: [
         if (isJourSommet)
@@ -100,7 +95,7 @@ class _Cell extends StatelessWidget {
           child: LittleBox(
             width: 40,
             height: 35,
-            color: observation.couleur?.getOrCrash().toColor() ?? Colors.white,
+            color: couleur ?? observation.couleurGeneree.toColor(),
             child: Stack(
               children: [
                 if (isJourSommet)
@@ -108,7 +103,11 @@ class _Cell extends StatelessWidget {
                       child: Image.asset(AssetsPath.icon_fleur_sommet,
                           color: Colors.white, width: 30, height: 30)),
                 if (isInfertile)
-                  Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40)
+                  Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40),
+                if (observation.sensation?.getOrCrash() == SensationState.autre ||
+                    observation.sensation?.getOrCrash() == SensationState.nonpercu ||
+                    observation.mucus?.getOrCrash() == MucusState.autre)
+                  Center(child: Text("?", style: Theme.of(context).textTheme.headline5)),
               ],
             ),
           ),

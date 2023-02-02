@@ -33,31 +33,32 @@ abstract class ObservationDTO implements _$ObservationDTO {
     required int? marque,
     required int? jourFertile,
     required int? idCycle,
+    required int? idJourneeSoleil,
   }) = _ObservationDTO;
 
   factory ObservationDTO.fromDomain(Observation obj, int idCycle) {
     return ObservationDTO(
-      id: obj.id.getOrCrash(),
-      date: obj.date?.toDate().millisecondsSinceEpoch,
-      couleur: obj.couleur?.getOrCrash().toShortString(),
-      analyse: obj.analyse?.getOrCrash().toShortString(),
-      sensation: obj.sensation?.getOrCrash().toShortString(),
-      sensationsAutre: obj.sensationsAutre,
-      sang: obj.sang?.getOrCrash().toShortString(),
-      mucus: obj.mucus?.getOrCrash().toShortString(),
-      mucusAutre: obj.mucusAutre,
-      douleurs: jsonEncode(obj.douleurs?.map((e) => e.getOrCrash().toShortString()).toList()),
-      douleursAutre: obj.douleursAutre,
-      evenements: jsonEncode(obj.evenements?.map((e) => e.getOrCrash().toShortString()).toList()),
-      temperatureBasale: obj.temperatureBasale,
-      humeur: obj.humeur?.getOrCrash().toShortString(),
-      humeurAutre: obj.humeurAutre,
-      notesConfidentielles: obj.notesConfidentielles,
-      commentaireAnimatrice: obj.commentaireAnimatrice,
-      marque: obj.marque,
-      jourFertile: obj.jourFertile == false ? 0 : 1,
-      idCycle: idCycle,
-    );
+        id: obj.id.getOrCrash(),
+        date: obj.date?.toDate().millisecondsSinceEpoch,
+        couleur: obj.couleur?.getOrCrash().toShortString(),
+        analyse: obj.analyse?.getOrCrash().toShortString(),
+        sensation: obj.sensation?.getOrCrash().toShortString(),
+        sensationsAutre: obj.sensationsAutre,
+        sang: obj.sang?.getOrCrash().toShortString(),
+        mucus: obj.mucus?.getOrCrash().toShortString(),
+        mucusAutre: obj.mucusAutre,
+        douleurs: jsonEncode(obj.douleurs?.map((e) => e.getOrCrash().toShortString()).toList()),
+        douleursAutre: obj.douleursAutre,
+        evenements: jsonEncode(obj.evenements?.map((e) => e.getOrCrash().toShortString()).toList()),
+        temperatureBasale: obj.temperatureBasale,
+        humeur: obj.humeur?.getOrCrash().toShortString(),
+        humeurAutre: obj.humeurAutre,
+        notesConfidentielles: obj.notesConfidentielles,
+        commentaireAnimatrice: obj.commentaireAnimatrice,
+        marque: obj.marque,
+        jourFertile: obj.jourFertile == false ? 0 : 1,
+        idCycle: idCycle,
+        idJourneeSoleil: null);
   }
 
   Observation toDomain() {

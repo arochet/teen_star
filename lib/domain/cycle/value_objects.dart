@@ -8,7 +8,7 @@ import 'package:teenstar/DOMAIN/core/value_validators.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 
-enum CouleurAnalyseState { rouge, brun, vert, jaune, none, invalide }
+enum CouleurAnalyseState { rouge, brun, vert, jaune, bleue, none, invalide }
 
 extension ParseToSringTA on CouleurAnalyseState {
   String toShortString() {
@@ -24,9 +24,11 @@ extension ParseToSringTA on CouleurAnalyseState {
       case CouleurAnalyseState.vert:
         return Color.fromARGB(255, 100, 197, 104);
       case CouleurAnalyseState.jaune:
-        return Color.fromARGB(255, 100, 197, 104);
+        return Color.fromARGB(255, 220, 206, 75);
+      case CouleurAnalyseState.bleue:
+        return Color.fromARGB(255, 100, 134, 197);
       case CouleurAnalyseState.none:
-        return colorpanel(700)!;
+        return colorpanel(900)!;
       case CouleurAnalyseState.invalide:
         return Color.fromARGB(255, 186, 88, 210);
     }
@@ -42,8 +44,10 @@ extension ParseToSringTA on CouleurAnalyseState {
         return PdfBrushes.green; //green;
       case CouleurAnalyseState.jaune:
         return PdfBrushes.yellow; //yellow;
+      case CouleurAnalyseState.bleue:
+        return PdfBrushes.blue; //yellow;
       case CouleurAnalyseState.none:
-        return PdfBrushes.beige; //amber50;
+        return PdfBrushes.white; //amber50;
       case CouleurAnalyseState.invalide:
         return PdfBrushes.beige;
     }

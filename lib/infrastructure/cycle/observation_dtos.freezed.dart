@@ -40,6 +40,7 @@ mixin _$ObservationDTO {
   int? get marque => throw _privateConstructorUsedError;
   int? get jourFertile => throw _privateConstructorUsedError;
   int? get idCycle => throw _privateConstructorUsedError;
+  int? get idJourneeSoleil => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -73,7 +74,8 @@ abstract class $ObservationDTOCopyWith<$Res> {
       String? commentaireAnimatrice,
       int? marque,
       int? jourFertile,
-      int? idCycle});
+      int? idCycle,
+      int? idJourneeSoleil});
 }
 
 /// @nodoc
@@ -109,6 +111,7 @@ class _$ObservationDTOCopyWithImpl<$Res, $Val extends ObservationDTO>
     Object? marque = freezed,
     Object? jourFertile = freezed,
     Object? idCycle = freezed,
+    Object? idJourneeSoleil = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -191,6 +194,10 @@ class _$ObservationDTOCopyWithImpl<$Res, $Val extends ObservationDTO>
           ? _value.idCycle
           : idCycle // ignore: cast_nullable_to_non_nullable
               as int?,
+      idJourneeSoleil: freezed == idJourneeSoleil
+          ? _value.idJourneeSoleil
+          : idJourneeSoleil // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -223,7 +230,8 @@ abstract class _$$_ObservationDTOCopyWith<$Res>
       String? commentaireAnimatrice,
       int? marque,
       int? jourFertile,
-      int? idCycle});
+      int? idCycle,
+      int? idJourneeSoleil});
 }
 
 /// @nodoc
@@ -257,6 +265,7 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
     Object? marque = freezed,
     Object? jourFertile = freezed,
     Object? idCycle = freezed,
+    Object? idJourneeSoleil = freezed,
   }) {
     return _then(_$_ObservationDTO(
       id: freezed == id
@@ -339,6 +348,10 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
           ? _value.idCycle
           : idCycle // ignore: cast_nullable_to_non_nullable
               as int?,
+      idJourneeSoleil: freezed == idJourneeSoleil
+          ? _value.idJourneeSoleil
+          : idJourneeSoleil // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -366,7 +379,8 @@ class _$_ObservationDTO extends _ObservationDTO {
       required this.commentaireAnimatrice,
       required this.marque,
       required this.jourFertile,
-      required this.idCycle})
+      required this.idCycle,
+      required this.idJourneeSoleil})
       : super._();
 
   factory _$_ObservationDTO.fromJson(Map<String, dynamic> json) =>
@@ -412,10 +426,12 @@ class _$_ObservationDTO extends _ObservationDTO {
   final int? jourFertile;
   @override
   final int? idCycle;
+  @override
+  final int? idJourneeSoleil;
 
   @override
   String toString() {
-    return 'ObservationDTO(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice, marque: $marque, jourFertile: $jourFertile, idCycle: $idCycle)';
+    return 'ObservationDTO(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice, marque: $marque, jourFertile: $jourFertile, idCycle: $idCycle, idJourneeSoleil: $idJourneeSoleil)';
   }
 
   @override
@@ -453,7 +469,9 @@ class _$_ObservationDTO extends _ObservationDTO {
             (identical(other.marque, marque) || other.marque == marque) &&
             (identical(other.jourFertile, jourFertile) ||
                 other.jourFertile == jourFertile) &&
-            (identical(other.idCycle, idCycle) || other.idCycle == idCycle));
+            (identical(other.idCycle, idCycle) || other.idCycle == idCycle) &&
+            (identical(other.idJourneeSoleil, idJourneeSoleil) ||
+                other.idJourneeSoleil == idJourneeSoleil));
   }
 
   @JsonKey(ignore: true)
@@ -479,7 +497,8 @@ class _$_ObservationDTO extends _ObservationDTO {
         commentaireAnimatrice,
         marque,
         jourFertile,
-        idCycle
+        idCycle,
+        idJourneeSoleil
       ]);
 
   @JsonKey(ignore: true)
@@ -517,7 +536,8 @@ abstract class _ObservationDTO extends ObservationDTO {
       required final String? commentaireAnimatrice,
       required final int? marque,
       required final int? jourFertile,
-      required final int? idCycle}) = _$_ObservationDTO;
+      required final int? idCycle,
+      required final int? idJourneeSoleil}) = _$_ObservationDTO;
   const _ObservationDTO._() : super._();
 
   factory _ObservationDTO.fromJson(Map<String, dynamic> json) =
@@ -563,6 +583,8 @@ abstract class _ObservationDTO extends ObservationDTO {
   int? get jourFertile;
   @override
   int? get idCycle;
+  @override
+  int? get idJourneeSoleil;
   @override
   @JsonKey(ignore: true)
   _$$_ObservationDTOCopyWith<_$_ObservationDTO> get copyWith =>

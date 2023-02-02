@@ -17,7 +17,7 @@ import 'DOMAIN/core/value_objects.dart';
 import 'DOMAIN/cycle/cycle_failure.dart';
 import 'INFRASTRUCTURE/auth/auth_repository.dart';
 import 'INFRASTRUCTURE/cycle/cycle_repository.dart';
-import 'INFRASTRUCTURE/cycle/observation_historique_dtos.dart';
+import 'INFRASTRUCTURE/cycle/observation_dtos.dart';
 import 'injection.dart';
 
 //ENVIRONNEMENT
@@ -97,9 +97,24 @@ final lastCycleId = FutureProvider<Either<CycleFailure, UniqueId?>>((ref) async 
 });
 
 //Page Historique
-final allCycleHistoriqueProvider =
-    FutureProvider<Either<CycleFailure, List<ObservationHistoriqueDTO>>>((ref) {
+final allCycleHistoriqueProvider = FutureProvider<Either<CycleFailure, List<ObservationDTO>>>((ref) {
   return ref.read(cycleRepositoryProvider).readAllCyclesHistorique();
+});
+
+final allCycleFullProvider = FutureProvider<Either<CycleFailure, List<Cycle>>>((ref) async {
+  final listDTOasync = await ref.read(cycleRepositoryProvider).readAllCycles();
+  return listDTOasync.fold((l) => left(l), (List<CycleDTO> list) async {
+    List<Cycle> listCycle = [];
+    for (int i = 0; i < list.length; i++) {
+      final listCycleAsync =
+          await ref.read(cycleRepositoryProvider).readCycle(UniqueId.fromUniqueInt(list[i].id!));
+      listCycleAsync.fold((l) => left(l), (cycle) {
+        listCycle.add(cycle.copyWith(observations: cycle.getObservationsWithEmptyDays()));
+      });
+    }
+
+    return right(listCycle);
+  });
 });
 
 //Un cycle par id

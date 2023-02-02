@@ -1,8 +1,9 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+/* import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
-import 'package:teenstar/INFRASTRUCTURE/cycle/observation_historique_dtos.dart';
+import 'package:teenstar/INFRASTRUCTURE/cycle/observation_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 
+import 'observation.dart';
 import 'value_objects.dart';
 
 part 'cycle_historique.freezed.dart';
@@ -13,7 +14,7 @@ abstract class CycleHistorique with _$CycleHistorique {
 
   const factory CycleHistorique({
     required UniqueId id,
-    required List<ObservationHistorique> observations,
+    required List<Observation> observations,
     required UniqueId idJourneeSoleil,
   }) = _CycleHistorique;
 
@@ -23,9 +24,9 @@ abstract class CycleHistorique with _$CycleHistorique {
         idJourneeSoleil: UniqueId(),
       );
 
-  factory CycleHistorique.fromListDTOwithEmptyDays(List<ObservationHistoriqueDTO> listAll, int id) {
-    List<ObservationHistorique> observationsWithEmptyDays = [];
-    List<ObservationHistoriqueDTO> list = listAll.where((element) => element.idCycle == id).toList();
+  factory CycleHistorique.fromListDTOwithEmptyDays(List<ObservationDTO> listAll, int id) {
+    List<Observation> observationsWithEmptyDays = [];
+    List<ObservationDTO> list = listAll.where((element) => element.idCycle == id).toList();
     DateTime? firstDayOfCycle = list.first.toDomain().date!.toDate();
 
     DateTime lastDayOfCycleWithEmptyDays = firstDayOfCycle;
@@ -38,12 +39,12 @@ abstract class CycleHistorique with _$CycleHistorique {
     int nbDays = AppDateUtils.diffInDaysWith(lastDayOfCycleWithEmptyDays, firstDayOfCycle) + 1;
     for (int i = 0; i < nbDays; i++) {
       DateTime day = firstDayOfCycle.add(Duration(days: i));
-      List<ObservationHistorique> obs = list
+      List<Observation> obs = list
           .map((e) => e.toDomain())
           .where((element) => element.date?.toDate().isSameDayAs(day) == true)
           .toList();
       if (obs.length == 0) {
-        observationsWithEmptyDays.add(ObservationHistorique.empty());
+        observationsWithEmptyDays.add(Observation.empty());
       } else {
         observationsWithEmptyDays.add(obs.last);
         /* for (var o in obs) {
@@ -69,24 +70,4 @@ abstract class CycleHistorique with _$CycleHistorique {
     return lastId;
   }
 }
-
-@freezed
-abstract class ObservationHistorique with _$ObservationHistorique {
-  const ObservationHistorique._();
-
-  const factory ObservationHistorique({
-    required UniqueId id,
-    required CouleurAnalyse? couleur,
-    required bool? jourFertile,
-    required DateTime? date,
-  }) = _ObservationHistorique;
-
-  factory ObservationHistorique.empty() => ObservationHistorique(
-        id: UniqueId(),
-        couleur: null,
-        date: null,
-        jourFertile: false,
-      );
-
-  bool get isEmpty => couleur == null && date == null;
-}
+ */

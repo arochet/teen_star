@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Observation {
   UniqueId get id => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
-  CouleurAnalyse? get couleur => throw _privateConstructorUsedError;
+  CouleurAnalyse? get couleur =>
+      throw _privateConstructorUsedError; //Ce champ ne sert à rien, on prend la couleur générée en fonction des paramètres (mucus , sang , ...)
   CouleurAnalyse? get analyse => throw _privateConstructorUsedError;
   Sensation? get sensation => throw _privateConstructorUsedError;
   String? get sensationsAutre => throw _privateConstructorUsedError;
@@ -33,7 +34,7 @@ mixin _$Observation {
   String? get humeurAutre => throw _privateConstructorUsedError;
   String? get notesConfidentielles => throw _privateConstructorUsedError;
   String? get commentaireAnimatrice => throw _privateConstructorUsedError;
-  int? get marque => throw _privateConstructorUsedError;
+  int? get marque => throw _privateConstructorUsedError; //Jour marqué 1,2,3
   bool? get jourFertile => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -358,6 +359,7 @@ class _$_Observation extends _Observation {
   final DateTime? date;
   @override
   final CouleurAnalyse? couleur;
+//Ce champ ne sert à rien, on prend la couleur générée en fonction des paramètres (mucus , sang , ...)
   @override
   final CouleurAnalyse? analyse;
   @override
@@ -402,6 +404,7 @@ class _$_Observation extends _Observation {
   final String? commentaireAnimatrice;
   @override
   final int? marque;
+//Jour marqué 1,2,3
   @override
   final bool? jourFertile;
 
@@ -506,7 +509,7 @@ abstract class _Observation extends Observation {
   DateTime? get date;
   @override
   CouleurAnalyse? get couleur;
-  @override
+  @override //Ce champ ne sert à rien, on prend la couleur générée en fonction des paramètres (mucus , sang , ...)
   CouleurAnalyse? get analyse;
   @override
   Sensation? get sensation;
@@ -536,7 +539,7 @@ abstract class _Observation extends Observation {
   String? get commentaireAnimatrice;
   @override
   int? get marque;
-  @override
+  @override //Jour marqué 1,2,3
   bool? get jourFertile;
   @override
   @JsonKey(ignore: true)

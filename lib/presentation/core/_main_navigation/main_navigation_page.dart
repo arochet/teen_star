@@ -2,13 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:teenstar/PRESENTATION/auth/widget/check_connexion_widget.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
-import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_main_navigation/bottom_bar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/providers.dart';
 import 'side_bar_navigation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainNavigationPage extends ConsumerStatefulWidget {
   MainNavigationPage({Key? key}) : super(key: key);

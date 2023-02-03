@@ -75,15 +75,11 @@ class PanelInit extends StatelessWidget {
             children: [
               Text("Bienvenue sur",
                   style: Theme.of(context).textTheme.headline4?.copyWith(color: colorpanel(900))),
-              SizedBox(height: 20),
+              SizedBox(height: 3),
               Text("TeenSTAR",
                   style: Theme.of(context).textTheme.headline1?.copyWith(color: colorpanel(900))),
               SizedBox(height: 20),
-              /* Image(
-                image: AssetImage(AssetsPath.icon),
-                height: 160,
-              ), */
-              Icon(Icons.local_florist, size: 120, color: colorpanel(900)),
+              Image.asset(AssetsPath.main_flower, height: 320),
             ],
           ),
         ),

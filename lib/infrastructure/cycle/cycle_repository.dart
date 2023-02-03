@@ -189,9 +189,7 @@ class CycleRepository implements ICycleRepository {
       String sql =
           "SELECT * FROM $db_cycle INNER JOIN $db_observation ON $db_cycle.id = $db_observation.idCycle";
       final List<Map<String, dynamic>> mapsCycle = await _database.rawQuery(sql);
-      print('cycleDTO ${mapsCycle[0]}');
       List<ObservationDTO> cycleDTO = List.generate(mapsCycle.length, (index) {
-        print('cycleDTO ${mapsCycle[index]}');
         return ObservationDTO.fromJson(mapsCycle[index]);
       });
 

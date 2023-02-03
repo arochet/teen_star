@@ -13,7 +13,8 @@ abstract class Observation with _$Observation {
   const factory Observation({
     required UniqueId id,
     required DateTime? date,
-    required CouleurAnalyse? couleur,
+    required CouleurAnalyse?
+        couleur, //Ce champ ne sert à rien, on prend la couleur générée en fonction des paramètres (mucus , sang , ...)
     required CouleurAnalyse? analyse,
     required Sensation? sensation,
     required String? sensationsAutre,
@@ -28,8 +29,8 @@ abstract class Observation with _$Observation {
     required String? humeurAutre,
     required String? notesConfidentielles,
     required String? commentaireAnimatrice,
-    required int? marque,
-    required bool? jourFertile,
+    required int? marque, //Jour marqué 1,2,3
+    required bool? jourFertile, //Jour de certitude d'infertilité, sinon il y'a toujours le doute.
   }) = _Observation;
 
   factory Observation.empty() => Observation(

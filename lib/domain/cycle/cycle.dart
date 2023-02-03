@@ -15,7 +15,7 @@ abstract class Cycle with _$Cycle {
   const factory Cycle({
     required UniqueId id,
     required List<Observation> observations,
-    required UniqueId idJourneeSoleil,
+    required UniqueId idJourneeSoleil, //Jour sommet du cycle.
   }) = _Cycle;
 
   factory Cycle.empty() => Cycle(
@@ -24,11 +24,14 @@ abstract class Cycle with _$Cycle {
         idJourneeSoleil: UniqueId(),
       );
 
+  //Renvoie ne numéro du jour de l'observation dans le cycle. Exemple 5 pour le 5ème jour du cycle.
   int getDayOfObservation(Observation obs) {
     DateTime? firstDayOfCycle = this.observations.first.date;
     return AppDateUtils.diffInDaysWith(obs.date!, firstDayOfCycle!) + 1;
   }
 
+  //Renvoie la liste des observations avec les jours vides entre les observations.
+  //La fille peut renseigner après coup les jours vides.
   List<Observation> getObservationsWithEmptyDays({allowDoubleDays = true}) {
     List<Observation> observationsWithEmptyDays = [];
     if (this.observations.length == 0) return [];
@@ -59,44 +62,6 @@ abstract class Cycle with _$Cycle {
       }
     }
     return observationsWithEmptyDays;
-  }
-
-  factory Cycle.fromListDTOwithEmptyDays(List<ObservationDTO> listAll) {
-    int id = listAll.first.idCycle!;
-    List<Observation> observationsWithEmptyDays = [];
-    List<ObservationDTO> list = listAll.where((element) => element.idCycle == id).toList();
-    DateTime? firstDayOfCycle = list.first.toDomain().date!.toDate();
-
-    DateTime lastDayOfCycleWithEmptyDays = firstDayOfCycle;
-    for (var observation in list) {
-      if (observation.toDomain().date!.isAfter(lastDayOfCycleWithEmptyDays)) {
-        lastDayOfCycleWithEmptyDays = observation.toDomain().date!;
-      }
-    }
-
-    int nbDays = AppDateUtils.diffInDaysWith(lastDayOfCycleWithEmptyDays, firstDayOfCycle) + 1;
-    for (int i = 0; i < nbDays; i++) {
-      DateTime day = firstDayOfCycle.add(Duration(days: i));
-      List<Observation> obs = list
-          .map((e) => e.toDomain())
-          .where((element) => element.date?.toDate().isSameDayAs(day) == true)
-          .toList();
-      if (obs.length == 0) {
-        observationsWithEmptyDays.add(Observation.empty());
-      } else {
-        observationsWithEmptyDays.add(obs.last);
-        /* for (var o in obs) {
-          observationsWithEmptyDays.add(o);
-        } */
-      }
-    }
-
-    return Cycle(
-      id: UniqueId.fromUniqueInt(id),
-      observations: observationsWithEmptyDays,
-      idJourneeSoleil:
-          list.length > 0 ? UniqueId.fromUniqueInt(list.first.idJourneeSoleil!) : UniqueId.fromUniqueInt(-1),
-    );
   }
 
   static UniqueId? lastId(List<Cycle> list) {

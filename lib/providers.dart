@@ -97,10 +97,6 @@ final lastCycleId = FutureProvider<Either<CycleFailure, UniqueId?>>((ref) async 
 });
 
 //Page Historique
-final allCycleHistoriqueProvider = FutureProvider<Either<CycleFailure, List<ObservationDTO>>>((ref) {
-  return ref.read(cycleRepositoryProvider).readAllCyclesHistorique();
-});
-
 final allCycleFullProvider = FutureProvider<Either<CycleFailure, List<Cycle>>>((ref) async {
   final listDTOasync = await ref.read(cycleRepositoryProvider).readAllCycles();
   return listDTOasync.fold((l) => left(l), (List<CycleDTO> list) async {

@@ -103,7 +103,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                   if (id != null) ref.invalidate(cycleProvider(id));
                 }
                 if (id == 1) {
-                  ref.invalidate(allCycleHistoriqueProvider);
+                  ref.invalidate(allCycleFullProvider);
                 }
                 tabsRouter.setActiveIndex(id);
               },
@@ -272,7 +272,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                   final result = await ref.read(cycleRepositoryProvider).renvoieDernierCycle();
                   print('renvoie derneir cycle');
                   result.fold((l) => showSnackbarCycleFailure(context, l),
-                      (_) => ref.refresh(allCycleHistoriqueProvider));
+                      (_) => ref.invalidate(allCycleFullProvider));
                 }
                 Navigator.pop(context);
               },

@@ -25,3 +25,6 @@ CORE > VALUE_VALIDATORS
     validateTelephone(String input)
     validatePassword(String input)
     validatePasswordConfirmation(String input, String input2)
+
+DOMAIN > CYCLE 
+    Correspond au cyles de l'utilisatrice

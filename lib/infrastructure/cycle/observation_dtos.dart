@@ -33,7 +33,6 @@ abstract class ObservationDTO implements _$ObservationDTO {
     required int? marque,
     required int? jourFertile,
     required int? idCycle,
-    required int? idJourneeSoleil,
   }) = _ObservationDTO;
 
   factory ObservationDTO.fromDomain(Observation obj, int idCycle) {
@@ -57,8 +56,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
         commentaireAnimatrice: obj.commentaireAnimatrice,
         marque: obj.marque,
         jourFertile: obj.jourFertile == false ? 0 : 1,
-        idCycle: idCycle,
-        idJourneeSoleil: null);
+        idCycle: idCycle);
   }
 
   Observation toDomain() {

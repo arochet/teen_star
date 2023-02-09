@@ -85,7 +85,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
                 ? <_Cell>[
                     _CellText('J${cycle.getDayOfObservation(observation)}'),
                     _CellText(AppDateUtils.formatDate(observation.date)),
-                    _CellColor(observation.couleur?.getOrCrash().toColorPDF()),
+                    _CellColor(observation.couleurGeneree.toColorPDF()),
                     _CellColor(observation.analyse?.getOrCrash().toColorPDF()),
                     _CellIcon(observation.sensation?.getOrCrash().toDisplayShort() ?? ''),
                     _CellImage(listImageSang[observation.sang?.getOrCrash()]!),

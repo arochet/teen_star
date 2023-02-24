@@ -259,7 +259,8 @@ class _Cell extends StatelessWidget {
                   observation.notesConfidentielles!.length > 1) ...[
                 SizedBox(width: 5),
                 _LittleBoxText('*'),
-              ]
+              ],
+              const SizedBox(width: 1, height: 1),
             ],
           ),
         );

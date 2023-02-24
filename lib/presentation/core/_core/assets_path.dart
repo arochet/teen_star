@@ -29,6 +29,8 @@ class AssetsPath {
   static const String icon_vide = 'assets/icon_observation/icon_vide.png';
   static const String icon_humeur_autre = 'assets/icon_observation/icon_humeur_autre.png';
   static const String icon_humeur_bonne = 'assets/icon_observation/icon_humeur_bonne.png';
+  static const String icon_humeur_pas_emotion_particuliere =
+      'assets/icon_observation/icon_humeur_pas_emotion.png';
   static const String icon_humeur_changeante = 'assets/icon_observation/icon_humeur_changeante.png';
   static const String icon_humeur_envie_tranquille =
       'assets/icon_observation/icon_humeur_envie_tranquille.png';

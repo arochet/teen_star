@@ -525,7 +525,7 @@ extension ParseToSringHumeur on HumeurState {
       case HumeurState.bonne:
         return AssetsPath.icon_humeur_bonne;
       case HumeurState.pasEmotionParticuliere:
-        return AssetsPath.icon_humeur_autre;
+        return AssetsPath.icon_humeur_pas_emotion_particuliere;
       case HumeurState.EnvieEtreTranquille:
         return AssetsPath.icon_humeur_envie_tranquille;
       case HumeurState.humeurChangeante:

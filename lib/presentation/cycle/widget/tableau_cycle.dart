@@ -254,6 +254,11 @@ class _Cell extends StatelessWidget {
               if (observation.temperatureBasale != null) ...[
                 SizedBox(width: 5),
                 _LittleBoxText('${observation.temperatureBasale}°'),
+              ],
+              if (observation.notesConfidentielles != null &&
+                  observation.notesConfidentielles!.length > 1) ...[
+                SizedBox(width: 5),
+                _LittleBoxText('*'),
               ]
             ],
           ),

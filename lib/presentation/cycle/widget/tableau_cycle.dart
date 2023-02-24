@@ -247,11 +247,16 @@ class _Cell extends StatelessWidget {
         if (observation.evenements?.length != null && observation.evenements!.length > 0)
           info = SingleChildScrollView(
             child: Row(
-              children: observation.evenements
-                      ?.map((Evenement evt) => _LittleBoxChild(
-                          IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 60)))
-                      .toList() ??
-                  [],
+              children: [
+                ...?observation.evenements
+                    ?.map((Evenement evt) => _LittleBoxChild(
+                        IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 60)))
+                    .toList(),
+                if (observation.temperatureBasale != null) ...[
+                  SizedBox(width: 5),
+                  _LittleBoxText('${observation.temperatureBasale}°'),
+                ]
+              ],
             ),
           );
         else
@@ -281,6 +286,7 @@ class _LittleBoxText extends StatelessWidget {
       height: 35,
       child: Center(
         child: Text(titre,
+            overflow: TextOverflow.fade,
             style: Theme.of(context).textTheme.headline6?.copyWith(color: colorpanel(100), fontSize: 13)),
       ),
     );

@@ -145,6 +145,10 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                           width: widget.cellDimensions.stickyLegendWidth,
                           height: widget.cellDimensions.contentCellHeight,
                           decoration: BoxDecoration(
+                            border: Border.all(
+                              color: colorpanel(300)!,
+                              width: 0.5,
+                            ),
                             color: widget.isRowSelected != null
                                 ? (widget.isRowSelected!(i)
                                     ? actioncolor['primary']
@@ -203,16 +207,20 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                                         height: widget.cellDimensions.contentCellHeight,
                                         //Arrondis + Couleur
                                         decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: colorpanel(300)!,
+                                            width: 0.5,
+                                          ),
                                           color: widget.isRowSelected != null
                                               ? (widget.isRowSelected!(i)
                                                   ? actioncolor['primary']
                                                   : (i % 2 == 1 ? colorRow : null))
                                               : (i % 2 == 1 ? colorRow : null),
-                                          borderRadius: j == widget.columnsLength - 1
+                                          /*borderRadius: j == widget.columnsLength - 1
                                               ? BorderRadius.only(
                                                   topRight: Radius.circular(10),
                                                   bottomRight: Radius.circular(10))
-                                              : null,
+                                              : null, */
                                         ),
                                         child: FittedBox(
                                           fit: widget.cellFit,

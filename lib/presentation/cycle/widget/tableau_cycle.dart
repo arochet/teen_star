@@ -60,7 +60,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
     ];
 
     //Largeur des colonnes
-    Map cellsWidth = {'Douleur': 120, 'Evenements': 120};
+    Map cellsWidth = {'Douleur': 120, 'Evenements': 160};
 
     return ShowComponentFile(
       title: 'tableau_cycle.dart',

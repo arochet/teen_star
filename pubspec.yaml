@@ -85,6 +85,15 @@ flutter_native_splash:
 flutter:
   uses-material-design: true
   generate: true 
+
+  fonts:
+    - family: DejaVu
+      fonts:
+        - asset: assets/fonts/DejaVuSans.ttf
+        - asset: assets/fonts/DejaVuSans-Oblique.ttf
+          style: italic
+        - asset: assets/fonts/DejaVuSans-Bold.ttf
+          weight: 700
   assets:
     - assets/logo_vide.png
     - assets/icon/logo.png

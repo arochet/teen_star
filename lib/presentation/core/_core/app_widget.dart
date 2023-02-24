@@ -40,41 +40,50 @@ class AppWidget extends StatelessWidget {
         textTheme: theme.textTheme.copyWith(
           headline1: TextStyle(
             fontSize: 38.0,
+            fontFamily: 'DejaVu',
             fontWeight: FontWeight.bold,
             color: colorpanel(50),
           ),
           headline2: TextStyle(
+            fontFamily: 'DejaVu',
             fontSize: 28.0,
             fontWeight: FontWeight.bold,
             color: colorpanel(50),
           ),
           headline3: TextStyle(
+            fontFamily: 'DejaVu',
             fontSize: 24.0,
             fontWeight: FontWeight.bold,
             color: colorpanel(50),
           ),
           headline4: TextStyle(
+            fontFamily: 'DejaVu',
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
             color: colorpanel(50),
           ),
           headline5: TextStyle(
+            fontFamily: 'DejaVu',
             fontSize: 16.0,
             fontWeight: FontWeight.bold,
             color: colorpanel(50),
           ),
           headline6: TextStyle(
+            fontFamily: 'DejaVu',
             fontSize: 12.0,
             fontWeight: FontWeight.bold,
             color: colorpanel(50),
           ),
           subtitle1: TextStyle(
+            fontFamily: 'DejaVu',
             color: colorpanel(50),
           ),
           button: TextStyle(
+            fontFamily: 'DejaVu',
             color: colorpanel(50),
           ),
           bodyText1: TextStyle(
+            fontFamily: 'DejaVu',
             color: colorpanel(50),
           ),
         ),

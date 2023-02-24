@@ -21,8 +21,8 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      if (ref.read(environment).name == Environment.prod)
-        showDialogPassword(context: context, ref: ref, dissmissable: false);
+      /* if (ref.read(environment).name == Environment.prod)
+        showDialogPassword(context: context, ref: ref, dissmissable: false); */
     });
   }
 
@@ -31,7 +31,7 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
     super.didChangeAppLifecycleState(state);
 
     if (state == AppLifecycleState.resumed) {
-      if (ref.read(environment).name == Environment.prod)
+      if (/* ref.read(environment).name == Environment.prod */ false)
         await showDialogPassword(context: context, ref: ref, dissmissable: false);
     }
   }

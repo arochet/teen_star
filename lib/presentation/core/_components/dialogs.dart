@@ -93,10 +93,23 @@ Future<bool?> showDialogPassword<bool>(
                   keyboardType: TextInputType.text,
                   controller: controller,
                   obscureText: true,
+                  autofocus: true,
                   onChanged: (value) {
                     setState(() {
                       textError = null;
                     });
+                  },
+                  onFieldSubmitted: (value) async {
+                    final passwordOK =
+                        await ref.read(authRepositoryProvider).checkPasswordAppli(controller.text);
+                    if (passwordOK)
+                      Navigator.of(context).pop(true);
+                    else {
+                      setState(() {
+                        textError = "Mot de passe incorrect";
+                      });
+                      controller.clear();
+                    }
                   },
                 ),
               ],

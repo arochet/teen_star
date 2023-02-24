@@ -89,7 +89,7 @@ class _CyclesPageState extends ConsumerState<CyclesPage> {
     );
 
     return ShowComponentFile(
-      title: './lib/PRESENTATION/resume/resume_page.dart',
+      title: './lib/PRESENTATION/cycle/cycle_page.dart',
       child: Padding(
         padding: EdgeInsets.all(10),
         child: listCycleWidget,
@@ -225,7 +225,6 @@ class __ShowAnalyseState extends ConsumerState<_ShowAnalyse> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(ref.watch(showAnalyse) ? Icons.check_box : Icons.check_box_outline_blank,
                 color: ref.watch(showAnalyse) ? actioncolor['primary'] : colorpanel(50)),

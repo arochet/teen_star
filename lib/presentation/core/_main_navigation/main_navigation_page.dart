@@ -20,10 +20,7 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      /* if (ref.read(environment).name == Environment.prod)
-        showDialogPassword(context: context, ref: ref, dissmissable: false); */
-    });
+    WidgetsBinding.instance!.addPostFrameCallback((_) {});
   }
 
   @override

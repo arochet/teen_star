@@ -30,12 +30,12 @@ class PanelReglagesAutre extends StatelessWidget {
             context.router.push(Guide_avanceRoute());
           },
         ),
-        ItemPanelList(
+        /* ItemPanelList(
           title: 'Notification de rappel',
           icon: Icons.notifications,
           onTap: () {},
           enable: false,
-        ),
+        ), */
         ItemPanelList(
           title: 'Lire mes notes confidentielles',
           icon: Icons.mail_rounded,

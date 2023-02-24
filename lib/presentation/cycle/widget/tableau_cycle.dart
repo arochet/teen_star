@@ -244,23 +244,21 @@ class _Cell extends StatelessWidget {
             iconPath: observation.humeur?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30);
         break;
       case 'Evenements':
-        if (observation.evenements?.length != null && observation.evenements!.length > 0)
-          info = SingleChildScrollView(
-            child: Row(
-              children: [
-                ...?observation.evenements
-                    ?.map((Evenement evt) => _LittleBoxChild(
-                        IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 60)))
-                    .toList(),
-                if (observation.temperatureBasale != null) ...[
-                  SizedBox(width: 5),
-                  _LittleBoxText('${observation.temperatureBasale}°'),
-                ]
-              ],
-            ),
-          );
-        else
-          info = Container(width: 1, height: 1);
+        info = SingleChildScrollView(
+          child: Row(
+            children: [
+              ...?observation.evenements
+                  ?.map((Evenement evt) =>
+                      _LittleBoxChild(IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 60)))
+                  .toList(),
+              if (observation.temperatureBasale != null) ...[
+                SizedBox(width: 5),
+                _LittleBoxText('${observation.temperatureBasale}°'),
+              ]
+            ],
+          ),
+        );
+
         break;
       default:
         info = Text(' ?? ', style: Theme.of(context).textTheme.headline5);
@@ -287,7 +285,7 @@ class _LittleBoxText extends StatelessWidget {
       child: Center(
         child: Text(titre,
             overflow: TextOverflow.fade,
-            style: Theme.of(context).textTheme.headline6?.copyWith(color: colorpanel(100), fontSize: 13)),
+            style: Theme.of(context).textTheme.headline6?.copyWith(color: colorpanel(100), fontSize: 11)),
       ),
     );
   }

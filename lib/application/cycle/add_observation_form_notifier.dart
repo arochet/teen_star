@@ -24,7 +24,7 @@ class AddObservationFormData with _$AddObservationFormData {
     required List<Douleur> douleurs,
     required String? douleursAutre,
     required List<Evenement> evenements,
-    required int? temperatureBasale,
+    required double? temperatureBasale,
     required Humeur humeur,
     required String humeurAutre,
     required String notesConfidentielles,
@@ -107,7 +107,7 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
     state = state.copyWith(evenements: newList, authFailureOrSuccessOption: none());
   }
 
-  temperatureBasaleChanged(int param) {
+  temperatureBasaleChanged(double param) {
     state = state.copyWith(temperatureBasale: param, authFailureOrSuccessOption: none());
   }
 

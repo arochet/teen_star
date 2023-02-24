@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'observation.dart';
 
@@ -29,7 +29,7 @@ mixin _$Observation {
   List<Douleur>? get douleurs => throw _privateConstructorUsedError;
   String? get douleursAutre => throw _privateConstructorUsedError;
   List<Evenement>? get evenements => throw _privateConstructorUsedError;
-  int? get temperatureBasale => throw _privateConstructorUsedError;
+  double? get temperatureBasale => throw _privateConstructorUsedError;
   Humeur? get humeur => throw _privateConstructorUsedError;
   String? get humeurAutre => throw _privateConstructorUsedError;
   String? get notesConfidentielles => throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $ObservationCopyWith<$Res> {
       List<Douleur>? douleurs,
       String? douleursAutre,
       List<Evenement>? evenements,
-      int? temperatureBasale,
+      double? temperatureBasale,
       Humeur? humeur,
       String? humeurAutre,
       String? notesConfidentielles,
@@ -155,7 +155,7 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       humeur: freezed == humeur
           ? _value.humeur
           : humeur // ignore: cast_nullable_to_non_nullable
@@ -205,7 +205,7 @@ abstract class _$$_ObservationCopyWith<$Res>
       List<Douleur>? douleurs,
       String? douleursAutre,
       List<Evenement>? evenements,
-      int? temperatureBasale,
+      double? temperatureBasale,
       Humeur? humeur,
       String? humeurAutre,
       String? notesConfidentielles,
@@ -297,7 +297,7 @@ class __$$_ObservationCopyWithImpl<$Res>
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       humeur: freezed == humeur
           ? _value.humeur
           : humeur // ignore: cast_nullable_to_non_nullable
@@ -377,6 +377,7 @@ class _$_Observation extends _Observation {
   List<Douleur>? get douleurs {
     final value = _douleurs;
     if (value == null) return null;
+    if (_douleurs is EqualUnmodifiableListView) return _douleurs;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -388,12 +389,13 @@ class _$_Observation extends _Observation {
   List<Evenement>? get evenements {
     final value = _evenements;
     if (value == null) return null;
+    if (_evenements is EqualUnmodifiableListView) return _evenements;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int? temperatureBasale;
+  final double? temperatureBasale;
   @override
   final Humeur? humeur;
   @override
@@ -494,7 +496,7 @@ abstract class _Observation extends Observation {
       required final List<Douleur>? douleurs,
       required final String? douleursAutre,
       required final List<Evenement>? evenements,
-      required final int? temperatureBasale,
+      required final double? temperatureBasale,
       required final Humeur? humeur,
       required final String? humeurAutre,
       required final String? notesConfidentielles,
@@ -528,7 +530,7 @@ abstract class _Observation extends Observation {
   @override
   List<Evenement>? get evenements;
   @override
-  int? get temperatureBasale;
+  double? get temperatureBasale;
   @override
   Humeur? get humeur;
   @override

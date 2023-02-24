@@ -12,12 +12,12 @@ import 'package:sqflite/sqflite.dart' as _i5;
 import 'package:teenstar/INFRASTRUCTURE/auth/auth_repository.dart' as _i3;
 import 'package:teenstar/INFRASTRUCTURE/core/firebase_injectable_module.dart'
     as _i7;
-import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_repository.dart' as _i4;
+import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_repository.dart'
+    as _i4; // ignore_for_file: unnecessary_lambdas
 
-/// ignore_for_file: unnecessary_lambdas
-/// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: lines_longer_than_80_chars
 extension GetItInjectableX on _i1.GetIt {
-  /// initializes the registration of main-scope dependencies inside of [GetIt]
+  // initializes the registration of main-scope dependencies inside of GetIt
   _i1.GetIt init({
     String? environment,
     _i2.EnvironmentFilter? environmentFilter,

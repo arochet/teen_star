@@ -25,7 +25,7 @@ abstract class ObservationDTO implements _$ObservationDTO {
     required String douleurs,
     required String? douleursAutre,
     required String evenements,
-    required int? temperatureBasale,
+    required double? temperatureBasale,
     required String? humeur,
     required String? humeurAutre,
     required String? notesConfidentielles,

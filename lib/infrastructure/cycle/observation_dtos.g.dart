@@ -20,7 +20,7 @@ _$_ObservationDTO _$$_ObservationDTOFromJson(Map<String, dynamic> json) =>
       douleurs: json['douleurs'] as String,
       douleursAutre: json['douleursAutre'] as String?,
       evenements: json['evenements'] as String,
-      temperatureBasale: json['temperatureBasale'] as int?,
+      temperatureBasale: (json['temperatureBasale'] as num?)?.toDouble(),
       humeur: json['humeur'] as String?,
       humeurAutre: json['humeurAutre'] as String?,
       notesConfidentielles: json['notesConfidentielles'] as String?,

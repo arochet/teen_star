@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'add_observation_form_notifier.dart';
 
@@ -25,7 +25,7 @@ mixin _$AddObservationFormData {
   List<Douleur> get douleurs => throw _privateConstructorUsedError;
   String? get douleursAutre => throw _privateConstructorUsedError;
   List<Evenement> get evenements => throw _privateConstructorUsedError;
-  int? get temperatureBasale => throw _privateConstructorUsedError;
+  double? get temperatureBasale => throw _privateConstructorUsedError;
   Humeur get humeur => throw _privateConstructorUsedError;
   String get humeurAutre => throw _privateConstructorUsedError;
   String get notesConfidentielles => throw _privateConstructorUsedError;
@@ -55,7 +55,7 @@ abstract class $AddObservationFormDataCopyWith<$Res> {
       List<Douleur> douleurs,
       String? douleursAutre,
       List<Evenement> evenements,
-      int? temperatureBasale,
+      double? temperatureBasale,
       Humeur humeur,
       String humeurAutre,
       String notesConfidentielles,
@@ -135,7 +135,7 @@ class _$AddObservationFormDataCopyWithImpl<$Res,
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       humeur: null == humeur
           ? _value.humeur
           : humeur // ignore: cast_nullable_to_non_nullable
@@ -182,7 +182,7 @@ abstract class _$$_AddObservationFormDataCopyWith<$Res>
       List<Douleur> douleurs,
       String? douleursAutre,
       List<Evenement> evenements,
-      int? temperatureBasale,
+      double? temperatureBasale,
       Humeur humeur,
       String humeurAutre,
       String notesConfidentielles,
@@ -260,7 +260,7 @@ class __$$_AddObservationFormDataCopyWithImpl<$Res>
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       humeur: null == humeur
           ? _value.humeur
           : humeur // ignore: cast_nullable_to_non_nullable
@@ -327,6 +327,7 @@ class _$_AddObservationFormData implements _AddObservationFormData {
   final List<Douleur> _douleurs;
   @override
   List<Douleur> get douleurs {
+    if (_douleurs is EqualUnmodifiableListView) return _douleurs;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_douleurs);
   }
@@ -336,12 +337,13 @@ class _$_AddObservationFormData implements _AddObservationFormData {
   final List<Evenement> _evenements;
   @override
   List<Evenement> get evenements {
+    if (_evenements is EqualUnmodifiableListView) return _evenements;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_evenements);
   }
 
   @override
-  final int? temperatureBasale;
+  final double? temperatureBasale;
   @override
   final Humeur humeur;
   @override
@@ -435,7 +437,7 @@ abstract class _AddObservationFormData implements AddObservationFormData {
       required final List<Douleur> douleurs,
       required final String? douleursAutre,
       required final List<Evenement> evenements,
-      required final int? temperatureBasale,
+      required final double? temperatureBasale,
       required final Humeur humeur,
       required final String humeurAutre,
       required final String notesConfidentielles,
@@ -463,7 +465,7 @@ abstract class _AddObservationFormData implements AddObservationFormData {
   @override
   List<Evenement> get evenements;
   @override
-  int? get temperatureBasale;
+  double? get temperatureBasale;
   @override
   Humeur get humeur;
   @override

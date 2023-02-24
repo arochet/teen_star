@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'observation_dtos.dart';
 
@@ -32,7 +32,7 @@ mixin _$ObservationDTO {
   String get douleurs => throw _privateConstructorUsedError;
   String? get douleursAutre => throw _privateConstructorUsedError;
   String get evenements => throw _privateConstructorUsedError;
-  int? get temperatureBasale => throw _privateConstructorUsedError;
+  double? get temperatureBasale => throw _privateConstructorUsedError;
   String? get humeur => throw _privateConstructorUsedError;
   String? get humeurAutre => throw _privateConstructorUsedError;
   String? get notesConfidentielles => throw _privateConstructorUsedError;
@@ -66,7 +66,7 @@ abstract class $ObservationDTOCopyWith<$Res> {
       String douleurs,
       String? douleursAutre,
       String evenements,
-      int? temperatureBasale,
+      double? temperatureBasale,
       String? humeur,
       String? humeurAutre,
       String? notesConfidentielles,
@@ -162,7 +162,7 @@ class _$ObservationDTOCopyWithImpl<$Res, $Val extends ObservationDTO>
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       humeur: freezed == humeur
           ? _value.humeur
           : humeur // ignore: cast_nullable_to_non_nullable
@@ -216,7 +216,7 @@ abstract class _$$_ObservationDTOCopyWith<$Res>
       String douleurs,
       String? douleursAutre,
       String evenements,
-      int? temperatureBasale,
+      double? temperatureBasale,
       String? humeur,
       String? humeurAutre,
       String? notesConfidentielles,
@@ -310,7 +310,7 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       humeur: freezed == humeur
           ? _value.humeur
           : humeur // ignore: cast_nullable_to_non_nullable
@@ -397,7 +397,7 @@ class _$_ObservationDTO extends _ObservationDTO {
   @override
   final String evenements;
   @override
-  final int? temperatureBasale;
+  final double? temperatureBasale;
   @override
   final String? humeur;
   @override
@@ -510,7 +510,7 @@ abstract class _ObservationDTO extends ObservationDTO {
       required final String douleurs,
       required final String? douleursAutre,
       required final String evenements,
-      required final int? temperatureBasale,
+      required final double? temperatureBasale,
       required final String? humeur,
       required final String? humeurAutre,
       required final String? notesConfidentielles,
@@ -548,7 +548,7 @@ abstract class _ObservationDTO extends ObservationDTO {
   @override
   String get evenements;
   @override
-  int? get temperatureBasale;
+  double? get temperatureBasale;
   @override
   String? get humeur;
   @override

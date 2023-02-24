@@ -24,7 +24,7 @@ abstract class Observation with _$Observation {
     required List<Douleur>? douleurs,
     required String? douleursAutre,
     required List<Evenement>? evenements,
-    required int? temperatureBasale,
+    required double? temperatureBasale,
     required Humeur? humeur,
     required String? humeurAutre,
     required String? notesConfidentielles,

@@ -159,26 +159,30 @@ class _Cell extends StatelessWidget {
         );
         break;
       case 'Couleur':
-        info = LittleBox(
-          width: 40,
-          height: 35,
-          color: observation.couleurGeneree.toColor(),
-          child: Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: Stack(
-              children: [
-                if (isJourSommet)
-                  Center(child: Image.asset(AssetsPath.icon_fleur_sommet, color: colorpanel(50))),
-                if (observation.marque != null && observation.marque! > 0)
-                  Center(child: Text("${observation.marque}", style: Theme.of(context).textTheme.headline5)),
-                if (observation.sensation?.getOrCrash() == SensationState.autre ||
-                    observation.sensation?.getOrCrash() == SensationState.nonpercu ||
-                    observation.mucus?.getOrCrash() == MucusState.autre)
-                  Center(child: Text("?", style: Theme.of(context).textTheme.headline5)),
-              ],
+        if (observation.couleurGeneree == CouleurAnalyseState.none)
+          info = _CellNone();
+        else
+          info = LittleBox(
+            width: 40,
+            height: 35,
+            color: observation.couleurGeneree.toColor(),
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Stack(
+                children: [
+                  if (isJourSommet)
+                    Center(child: Image.asset(AssetsPath.icon_fleur_sommet, color: colorpanel(50))),
+                  if (observation.marque != null && observation.marque! > 0)
+                    Center(
+                        child: Text("${observation.marque}", style: Theme.of(context).textTheme.headline5)),
+                  if (observation.sensation?.getOrCrash() == SensationState.autre ||
+                      observation.sensation?.getOrCrash() == SensationState.nonpercu ||
+                      observation.mucus?.getOrCrash() == MucusState.autre)
+                    Center(child: Text("?", style: Theme.of(context).textTheme.headline5)),
+                ],
+              ),
             ),
-          ),
-        );
+          );
         break;
       case 'Analyse':
         info = LittleBox(
@@ -194,7 +198,10 @@ class _Cell extends StatelessWidget {
             ));
         break;
       case 'Sensation':
-        info = _LittleBoxText(observation.sensation?.getOrCrash().toDisplayShort() ?? '');
+        if (observation.mucus?.getOrCrash() == MucusState.none)
+          info = _CellNone();
+        else
+          info = _LittleBoxText(observation.sensation?.getOrCrash().toDisplayShort() ?? '');
         break;
       case 'Observation':
         info = SingleChildScrollView(
@@ -211,16 +218,22 @@ class _Cell extends StatelessWidget {
         );
         break;
       case 'Sang':
-        info = _LittleBoxChild(
-          IconObservation(
-              iconPath: observation.sang?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 60),
-        );
+        if (observation.sang?.getOrCrash() == SangState.none)
+          info = _CellNone();
+        else
+          info = _LittleBoxChild(
+            IconObservation(
+                iconPath: observation.sang?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 60),
+          );
         break;
       case 'Mucus':
-        info = _LittleBoxChild(
-          IconObservation(
-              iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 60),
-        );
+        if (observation.mucus?.getOrCrash() == MucusState.none)
+          info = _CellNone();
+        else
+          info = _LittleBoxChild(
+            IconObservation(
+                iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 60),
+          );
         break;
       case 'Douleur':
         if (observation.douleurs?.length != null && observation.douleurs!.length > 0)
@@ -240,8 +253,11 @@ class _Cell extends StatelessWidget {
           info = Container(width: 1, height: 1);
         break;
       case 'Humeur':
-        info = IconObservation(
-            iconPath: observation.humeur?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30);
+        if (observation.humeur?.getOrCrash() == HumeurState.none)
+          info = _CellNone();
+        else
+          info = IconObservation(
+              iconPath: observation.humeur?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30);
         break;
       case 'Evenements':
         info = SingleChildScrollView(
@@ -348,5 +364,19 @@ class _CellDay extends StatelessWidget {
     ]); */
     return Center(
         child: Text('${selection ? " - " : ""}J$value', style: Theme.of(context).textTheme.headline5));
+  }
+}
+
+class _CellNone extends StatelessWidget {
+  _CellNone({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 1,
+      height: 1,
+    );
   }
 }

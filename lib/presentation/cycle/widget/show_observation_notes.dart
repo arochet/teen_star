@@ -23,6 +23,8 @@ class ShowObservationNotes extends ConsumerWidget {
       txt += 'Autre mucus : ${observation.mucusAutre}\n';
     if (observation.douleursAutre != null && observation.douleursAutre!.length > 0)
       txt += 'Autre douleur : ${observation.douleursAutre}\n';
+    if (observation.evenementsAutre != null && observation.evenementsAutre!.length > 0)
+      txt += 'Autre évènement : ${observation.evenementsAutre}\n';
     if (observation.humeurAutre != null && observation.humeurAutre!.length > 0)
       txt += 'Autre humeur : ${observation.humeurAutre}\n';
     if (txt == '') txt = 'Pas de note';

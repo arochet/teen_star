@@ -25,6 +25,7 @@ mixin _$AddObservationFormData {
   List<Douleur> get douleurs => throw _privateConstructorUsedError;
   String? get douleursAutre => throw _privateConstructorUsedError;
   List<Evenement> get evenements => throw _privateConstructorUsedError;
+  String get evenementsAutre => throw _privateConstructorUsedError;
   double? get temperatureBasale => throw _privateConstructorUsedError;
   Humeur get humeur => throw _privateConstructorUsedError;
   String get humeurAutre => throw _privateConstructorUsedError;
@@ -55,6 +56,7 @@ abstract class $AddObservationFormDataCopyWith<$Res> {
       List<Douleur> douleurs,
       String? douleursAutre,
       List<Evenement> evenements,
+      String evenementsAutre,
       double? temperatureBasale,
       Humeur humeur,
       String humeurAutre,
@@ -87,6 +89,7 @@ class _$AddObservationFormDataCopyWithImpl<$Res,
     Object? douleurs = null,
     Object? douleursAutre = freezed,
     Object? evenements = null,
+    Object? evenementsAutre = null,
     Object? temperatureBasale = freezed,
     Object? humeur = null,
     Object? humeurAutre = null,
@@ -132,6 +135,10 @@ class _$AddObservationFormDataCopyWithImpl<$Res,
           ? _value.evenements
           : evenements // ignore: cast_nullable_to_non_nullable
               as List<Evenement>,
+      evenementsAutre: null == evenementsAutre
+          ? _value.evenementsAutre
+          : evenementsAutre // ignore: cast_nullable_to_non_nullable
+              as String,
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
@@ -182,6 +189,7 @@ abstract class _$$_AddObservationFormDataCopyWith<$Res>
       List<Douleur> douleurs,
       String? douleursAutre,
       List<Evenement> evenements,
+      String evenementsAutre,
       double? temperatureBasale,
       Humeur humeur,
       String humeurAutre,
@@ -212,6 +220,7 @@ class __$$_AddObservationFormDataCopyWithImpl<$Res>
     Object? douleurs = null,
     Object? douleursAutre = freezed,
     Object? evenements = null,
+    Object? evenementsAutre = null,
     Object? temperatureBasale = freezed,
     Object? humeur = null,
     Object? humeurAutre = null,
@@ -257,6 +266,10 @@ class __$$_AddObservationFormDataCopyWithImpl<$Res>
           ? _value._evenements
           : evenements // ignore: cast_nullable_to_non_nullable
               as List<Evenement>,
+      evenementsAutre: null == evenementsAutre
+          ? _value.evenementsAutre
+          : evenementsAutre // ignore: cast_nullable_to_non_nullable
+              as String,
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
@@ -302,6 +315,7 @@ class _$_AddObservationFormData implements _AddObservationFormData {
       required final List<Douleur> douleurs,
       required this.douleursAutre,
       required final List<Evenement> evenements,
+      required this.evenementsAutre,
       required this.temperatureBasale,
       required this.humeur,
       required this.humeurAutre,
@@ -343,6 +357,8 @@ class _$_AddObservationFormData implements _AddObservationFormData {
   }
 
   @override
+  final String evenementsAutre;
+  @override
   final double? temperatureBasale;
   @override
   final Humeur humeur;
@@ -359,7 +375,7 @@ class _$_AddObservationFormData implements _AddObservationFormData {
 
   @override
   String toString() {
-    return 'AddObservationFormData(date: $date, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'AddObservationFormData(date: $date, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, evenementsAutre: $evenementsAutre, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -381,6 +397,8 @@ class _$_AddObservationFormData implements _AddObservationFormData {
                 other.douleursAutre == douleursAutre) &&
             const DeepCollectionEquality()
                 .equals(other._evenements, _evenements) &&
+            (identical(other.evenementsAutre, evenementsAutre) ||
+                other.evenementsAutre == evenementsAutre) &&
             (identical(other.temperatureBasale, temperatureBasale) ||
                 other.temperatureBasale == temperatureBasale) &&
             (identical(other.humeur, humeur) || other.humeur == humeur) &&
@@ -410,6 +428,7 @@ class _$_AddObservationFormData implements _AddObservationFormData {
       const DeepCollectionEquality().hash(_douleurs),
       douleursAutre,
       const DeepCollectionEquality().hash(_evenements),
+      evenementsAutre,
       temperatureBasale,
       humeur,
       humeurAutre,
@@ -437,6 +456,7 @@ abstract class _AddObservationFormData implements AddObservationFormData {
       required final List<Douleur> douleurs,
       required final String? douleursAutre,
       required final List<Evenement> evenements,
+      required final String evenementsAutre,
       required final double? temperatureBasale,
       required final Humeur humeur,
       required final String humeurAutre,
@@ -464,6 +484,8 @@ abstract class _AddObservationFormData implements AddObservationFormData {
   String? get douleursAutre;
   @override
   List<Evenement> get evenements;
+  @override
+  String get evenementsAutre;
   @override
   double? get temperatureBasale;
   @override

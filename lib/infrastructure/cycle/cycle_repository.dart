@@ -26,6 +26,7 @@ abstract class ICycleRepository {
   Future<Unit> marquerComme(Observation observation, int i);
   Future<Unit> modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state);
   Future<Unit> marquerJourFertile(List<Observation> observation, bool fertile);
+  Future showTables();
 }
 
 @LazySingleton(as: ICycleRepository)
@@ -37,6 +38,13 @@ class CycleRepository implements ICycleRepository {
   CycleRepository(
     this._database,
   );
+
+  @override
+  Future showTables() async {
+    (await _database.query('sqlite_master')).forEach((row) {
+      print(row.values);
+    });
+  }
 
   @override
   Future<Either<ObservationFailure, Unit>> createObservation(Cycle? cycle, Observation observation) async {

@@ -24,6 +24,7 @@ class AddObservationFormData with _$AddObservationFormData {
     required List<Douleur> douleurs,
     required String? douleursAutre,
     required List<Evenement> evenements,
+    required String evenementsAutre,
     required double? temperatureBasale,
     required Humeur humeur,
     required String humeurAutre,
@@ -43,6 +44,7 @@ class AddObservationFormData with _$AddObservationFormData {
       douleurs: [],
       douleursAutre: '',
       evenements: [],
+      evenementsAutre: '',
       temperatureBasale: null,
       humeur: Humeur.init(),
       humeurAutre: '',
@@ -107,6 +109,10 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
     state = state.copyWith(evenements: newList, authFailureOrSuccessOption: none());
   }
 
+  evenementsAutreChanged(String param) {
+    state = state.copyWith(evenementsAutre: param, authFailureOrSuccessOption: none());
+  }
+
   temperatureBasaleChanged(double param) {
     state = state.copyWith(temperatureBasale: param, authFailureOrSuccessOption: none());
   }
@@ -150,6 +156,7 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
             douleurs: state.douleurs,
             douleursAutre: state.douleursAutre,
             evenements: state.evenements,
+            evenementsAutre: state.evenementsAutre,
             temperatureBasale: state.temperatureBasale,
             humeur: state.humeur,
             humeurAutre: state.humeurAutre,

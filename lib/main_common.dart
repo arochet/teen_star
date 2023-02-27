@@ -39,6 +39,7 @@ Future<void> mainCommon(Environment env) async {
           'douleurs TEXT,'
           'douleursAutre TEXT,'
           'evenements TEXT,'
+          'evenementsAutre TEXT,'
           'temperatureBasale DOUBLE,'
           'humeur TEXT,'
           'humeurAutre TEXT,'

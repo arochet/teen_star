@@ -146,16 +146,18 @@ class _Cycle extends ConsumerWidget {
                           child: Text("Exporter PDF"),
                           style: buttonLittleSecondary),
                     ), */
-                  if (ref.watch(environment).name == Environment.dev)
+                  //BOUTON DEVELOPPEUR
+                  /* if (ref.watch(environment).name == Environment.dev)
                     Center(
                       child: ElevatedButton(
                           onPressed: () async {
                             //DEV !!
-                            context.router.push(AuthInitRoute());
+                            // context.router.push(AuthInitRoute());
+                            ref.read(cycleRepositoryProvider).showTables();
                           },
-                          child: Text("Première page"),
+                          child: Text("Print Nom des tables"),
                           style: buttonLittleSecondary),
-                    ),
+                    ), */
                   _ShowAnalyse(),
                   if (selection)
                     Padding(

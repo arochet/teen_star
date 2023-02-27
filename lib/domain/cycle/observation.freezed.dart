@@ -29,6 +29,7 @@ mixin _$Observation {
   List<Douleur>? get douleurs => throw _privateConstructorUsedError;
   String? get douleursAutre => throw _privateConstructorUsedError;
   List<Evenement>? get evenements => throw _privateConstructorUsedError;
+  String? get evenementsAutre => throw _privateConstructorUsedError;
   double? get temperatureBasale => throw _privateConstructorUsedError;
   Humeur? get humeur => throw _privateConstructorUsedError;
   String? get humeurAutre => throw _privateConstructorUsedError;
@@ -61,6 +62,7 @@ abstract class $ObservationCopyWith<$Res> {
       List<Douleur>? douleurs,
       String? douleursAutre,
       List<Evenement>? evenements,
+      String? evenementsAutre,
       double? temperatureBasale,
       Humeur? humeur,
       String? humeurAutre,
@@ -95,6 +97,7 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
     Object? douleurs = freezed,
     Object? douleursAutre = freezed,
     Object? evenements = freezed,
+    Object? evenementsAutre = freezed,
     Object? temperatureBasale = freezed,
     Object? humeur = freezed,
     Object? humeurAutre = freezed,
@@ -152,6 +155,10 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
           ? _value.evenements
           : evenements // ignore: cast_nullable_to_non_nullable
               as List<Evenement>?,
+      evenementsAutre: freezed == evenementsAutre
+          ? _value.evenementsAutre
+          : evenementsAutre // ignore: cast_nullable_to_non_nullable
+              as String?,
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
@@ -205,6 +212,7 @@ abstract class _$$_ObservationCopyWith<$Res>
       List<Douleur>? douleurs,
       String? douleursAutre,
       List<Evenement>? evenements,
+      String? evenementsAutre,
       double? temperatureBasale,
       Humeur? humeur,
       String? humeurAutre,
@@ -237,6 +245,7 @@ class __$$_ObservationCopyWithImpl<$Res>
     Object? douleurs = freezed,
     Object? douleursAutre = freezed,
     Object? evenements = freezed,
+    Object? evenementsAutre = freezed,
     Object? temperatureBasale = freezed,
     Object? humeur = freezed,
     Object? humeurAutre = freezed,
@@ -294,6 +303,10 @@ class __$$_ObservationCopyWithImpl<$Res>
           ? _value._evenements
           : evenements // ignore: cast_nullable_to_non_nullable
               as List<Evenement>?,
+      evenementsAutre: freezed == evenementsAutre
+          ? _value.evenementsAutre
+          : evenementsAutre // ignore: cast_nullable_to_non_nullable
+              as String?,
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
@@ -342,6 +355,7 @@ class _$_Observation extends _Observation {
       required final List<Douleur>? douleurs,
       required this.douleursAutre,
       required final List<Evenement>? evenements,
+      required this.evenementsAutre,
       required this.temperatureBasale,
       required this.humeur,
       required this.humeurAutre,
@@ -395,6 +409,8 @@ class _$_Observation extends _Observation {
   }
 
   @override
+  final String? evenementsAutre;
+  @override
   final double? temperatureBasale;
   @override
   final Humeur? humeur;
@@ -412,7 +428,7 @@ class _$_Observation extends _Observation {
 
   @override
   String toString() {
-    return 'Observation(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice, marque: $marque, jourFertile: $jourFertile)';
+    return 'Observation(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, evenementsAutre: $evenementsAutre, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice, marque: $marque, jourFertile: $jourFertile)';
   }
 
   @override
@@ -437,6 +453,8 @@ class _$_Observation extends _Observation {
                 other.douleursAutre == douleursAutre) &&
             const DeepCollectionEquality()
                 .equals(other._evenements, _evenements) &&
+            (identical(other.evenementsAutre, evenementsAutre) ||
+                other.evenementsAutre == evenementsAutre) &&
             (identical(other.temperatureBasale, temperatureBasale) ||
                 other.temperatureBasale == temperatureBasale) &&
             (identical(other.humeur, humeur) || other.humeur == humeur) &&
@@ -466,6 +484,7 @@ class _$_Observation extends _Observation {
         const DeepCollectionEquality().hash(_douleurs),
         douleursAutre,
         const DeepCollectionEquality().hash(_evenements),
+        evenementsAutre,
         temperatureBasale,
         humeur,
         humeurAutre,
@@ -496,6 +515,7 @@ abstract class _Observation extends Observation {
       required final List<Douleur>? douleurs,
       required final String? douleursAutre,
       required final List<Evenement>? evenements,
+      required final String? evenementsAutre,
       required final double? temperatureBasale,
       required final Humeur? humeur,
       required final String? humeurAutre,
@@ -529,6 +549,8 @@ abstract class _Observation extends Observation {
   String? get douleursAutre;
   @override
   List<Evenement>? get evenements;
+  @override
+  String? get evenementsAutre;
   @override
   double? get temperatureBasale;
   @override

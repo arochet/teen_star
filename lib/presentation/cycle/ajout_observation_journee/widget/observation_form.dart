@@ -86,6 +86,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
   late TextEditingController _controllerSensationAutre;
   late TextEditingController _controllerMucusAutre;
   late TextEditingController _controllerDouleursAutre;
+  late TextEditingController _controllerEvenementAutre;
   late TextEditingController _controllerHumeurAutre;
   late TextEditingController _controllerNotesConfidentielles;
   @override
@@ -95,6 +96,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
     _controllerSensationAutre = TextEditingController();
     _controllerMucusAutre = TextEditingController();
     _controllerDouleursAutre = TextEditingController();
+    _controllerEvenementAutre = TextEditingController();
     _controllerHumeurAutre = TextEditingController();
     _controllerNotesConfidentielles = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -243,6 +245,12 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             titre: (state) => (state as EvenementState).toDisplayString(),
             iconPath: (state) => (state as EvenementState).toIconPath(),
           ),
+          if (form.evenements.where((evt) => evt.getOrCrash() == EvenementState.autre).length > 0)
+            TextFormField(
+              autocorrect: false,
+              onChanged: (String value) => notifierForm.evenementsAutreChanged(value),
+              controller: _controllerEvenementAutre,
+            ),
           SpaceH10(),
 
           //TEMPERATURE BASALE

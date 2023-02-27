@@ -32,6 +32,7 @@ mixin _$ObservationDTO {
   String get douleurs => throw _privateConstructorUsedError;
   String? get douleursAutre => throw _privateConstructorUsedError;
   String get evenements => throw _privateConstructorUsedError;
+  String? get evenementsAutre => throw _privateConstructorUsedError;
   double? get temperatureBasale => throw _privateConstructorUsedError;
   String? get humeur => throw _privateConstructorUsedError;
   String? get humeurAutre => throw _privateConstructorUsedError;
@@ -66,6 +67,7 @@ abstract class $ObservationDTOCopyWith<$Res> {
       String douleurs,
       String? douleursAutre,
       String evenements,
+      String? evenementsAutre,
       double? temperatureBasale,
       String? humeur,
       String? humeurAutre,
@@ -101,6 +103,7 @@ class _$ObservationDTOCopyWithImpl<$Res, $Val extends ObservationDTO>
     Object? douleurs = null,
     Object? douleursAutre = freezed,
     Object? evenements = null,
+    Object? evenementsAutre = freezed,
     Object? temperatureBasale = freezed,
     Object? humeur = freezed,
     Object? humeurAutre = freezed,
@@ -159,6 +162,10 @@ class _$ObservationDTOCopyWithImpl<$Res, $Val extends ObservationDTO>
           ? _value.evenements
           : evenements // ignore: cast_nullable_to_non_nullable
               as String,
+      evenementsAutre: freezed == evenementsAutre
+          ? _value.evenementsAutre
+          : evenementsAutre // ignore: cast_nullable_to_non_nullable
+              as String?,
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
@@ -216,6 +223,7 @@ abstract class _$$_ObservationDTOCopyWith<$Res>
       String douleurs,
       String? douleursAutre,
       String evenements,
+      String? evenementsAutre,
       double? temperatureBasale,
       String? humeur,
       String? humeurAutre,
@@ -249,6 +257,7 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
     Object? douleurs = null,
     Object? douleursAutre = freezed,
     Object? evenements = null,
+    Object? evenementsAutre = freezed,
     Object? temperatureBasale = freezed,
     Object? humeur = freezed,
     Object? humeurAutre = freezed,
@@ -307,6 +316,10 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
           ? _value.evenements
           : evenements // ignore: cast_nullable_to_non_nullable
               as String,
+      evenementsAutre: freezed == evenementsAutre
+          ? _value.evenementsAutre
+          : evenementsAutre // ignore: cast_nullable_to_non_nullable
+              as String?,
       temperatureBasale: freezed == temperatureBasale
           ? _value.temperatureBasale
           : temperatureBasale // ignore: cast_nullable_to_non_nullable
@@ -359,6 +372,7 @@ class _$_ObservationDTO extends _ObservationDTO {
       required this.douleurs,
       required this.douleursAutre,
       required this.evenements,
+      required this.evenementsAutre,
       required this.temperatureBasale,
       required this.humeur,
       required this.humeurAutre,
@@ -397,6 +411,8 @@ class _$_ObservationDTO extends _ObservationDTO {
   @override
   final String evenements;
   @override
+  final String? evenementsAutre;
+  @override
   final double? temperatureBasale;
   @override
   final String? humeur;
@@ -415,7 +431,7 @@ class _$_ObservationDTO extends _ObservationDTO {
 
   @override
   String toString() {
-    return 'ObservationDTO(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice, marque: $marque, jourFertile: $jourFertile, idCycle: $idCycle)';
+    return 'ObservationDTO(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, evenementsAutre: $evenementsAutre, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice, marque: $marque, jourFertile: $jourFertile, idCycle: $idCycle)';
   }
 
   @override
@@ -441,6 +457,8 @@ class _$_ObservationDTO extends _ObservationDTO {
                 other.douleursAutre == douleursAutre) &&
             (identical(other.evenements, evenements) ||
                 other.evenements == evenements) &&
+            (identical(other.evenementsAutre, evenementsAutre) ||
+                other.evenementsAutre == evenementsAutre) &&
             (identical(other.temperatureBasale, temperatureBasale) ||
                 other.temperatureBasale == temperatureBasale) &&
             (identical(other.humeur, humeur) || other.humeur == humeur) &&
@@ -472,6 +490,7 @@ class _$_ObservationDTO extends _ObservationDTO {
         douleurs,
         douleursAutre,
         evenements,
+        evenementsAutre,
         temperatureBasale,
         humeur,
         humeurAutre,
@@ -510,6 +529,7 @@ abstract class _ObservationDTO extends ObservationDTO {
       required final String douleurs,
       required final String? douleursAutre,
       required final String evenements,
+      required final String? evenementsAutre,
       required final double? temperatureBasale,
       required final String? humeur,
       required final String? humeurAutre,
@@ -547,6 +567,8 @@ abstract class _ObservationDTO extends ObservationDTO {
   String? get douleursAutre;
   @override
   String get evenements;
+  @override
+  String? get evenementsAutre;
   @override
   double? get temperatureBasale;
   @override

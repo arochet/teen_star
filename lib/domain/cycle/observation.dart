@@ -106,6 +106,9 @@ abstract class Observation with _$Observation {
       return CouleurAnalyseState.rougePlus;
     } else if (sang?.getOrCrash() == SangState.traces) {
       return CouleurAnalyseState.rougeClair;
+    } else if (mucus?.getOrCrash() == MucusState.depotSecheBlancOuJaune &&
+        sensation?.getOrCrash() == SensationState.sec) {
+      return CouleurAnalyseState.none;
     } else if (sensation?.getOrCrash() == SensationState.humide ||
         sensation?.getOrCrash() == SensationState.mouille ||
         sensation?.getOrCrash() == SensationState.glissantLubrifie ||

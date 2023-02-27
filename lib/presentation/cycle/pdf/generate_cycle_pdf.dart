@@ -152,22 +152,31 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
   ];
 
   int maxRow = 0;
-  for (Cycle cycle in listCycles) {
-    if (cycle.observations.length > maxRow) {
-      maxRow = cycle.observations.length;
+  List<List<Observation>> observations = [];
+  for (int i = 0; i < listCycles.length; i++ /* Cycle cycle in listCycles */) {
+    observations.add(listCycles[i].getObservationsWithEmptyDays());
+    if (observations[i].length > maxRow) {
+      maxRow = observations[i].length;
     }
   }
 
   List<List<_Cell>> data = [];
   for (int i = 0; i < maxRow; i++) {
     List<_Cell> day = [_CellText('J${i + 1}')];
-    for (Cycle cycle in listCycles) {
-      if (i < cycle.observations.length) {
-        day.add(_CellColor(cycle.observations[i].analyse?.getOrCrash().toColorPDF()));
+    for (int u = 0; u < observations.length; u++) {
+      if (i < observations[u].length) {
+        final obs = observations[u][i];
+        final couleurAnalyse = obs.analyse?.getOrCrash();
+        if (couleurAnalyse == null || couleurAnalyse == CouleurAnalyseState.none) {
+          day.add(_CellColor(obs.couleurGeneree.toColorPDF()));
+        } else {
+          day.add(_CellColor(obs.analyse!.getOrCrash().toColorPDF()));
+        }
       } else {
         day.add(_CellNone());
       }
     }
+
     data.add(day);
   }
 

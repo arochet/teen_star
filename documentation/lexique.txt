@@ -27,4 +27,6 @@ CORE > VALUE_VALIDATORS
     validatePasswordConfirmation(String input, String input2)
 
 DOMAIN > CYCLE 
-    Correspond au cyles de l'utilisatrice
+    Correspond au cyles de l'utilisatrice;
+    Dans un cycle on peut trouver la liste des observations qui sont enregistrés par l'utilisateur. A ne pas confondre 
+    avec la liste des observations + les jours manquants !

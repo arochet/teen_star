@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_historique.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
@@ -8,6 +10,9 @@ import 'package:teenstar/PRESENTATION/core/_components/little_box.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+
+import '../../../providers.dart';
 
 class TableauHistorique extends ConsumerWidget {
   final List<Cycle> listHistorique;
@@ -19,10 +24,11 @@ class TableauHistorique extends ConsumerWidget {
     final List<String> title = listHistorique.map((e) => 'Cycle ${e.id.getOrCrash()}').toList();
 
     return ShowComponentFile(
-      title: 'tableau_historique.dart',
+      title: 'TableauHistorique',
       child: StickyHeadersTable(
         columnsLength: title.length,
-        columnsTitleBuilder: (int colulmnIndex) => _CellHeader(title[colulmnIndex]), //Titre des colonnes
+        columnsTitleBuilder: (int colulmnIndex) =>
+            _CellHeader(title[colulmnIndex], listHistorique[colulmnIndex].id), //Titre des colonnes
         contentCellBuilder: (int columnIndex, int rowIndex) {
           List<Observation> listObservation = listHistorique[columnIndex].observations;
           // Cellule observation
@@ -108,6 +114,8 @@ class _Cell extends StatelessWidget {
                     observation.sensation?.getOrCrash() == SensationState.nonpercu ||
                     observation.mucus?.getOrCrash() == MucusState.autre)
                   Center(child: Text("?", style: Theme.of(context).textTheme.headline5)),
+                if (observation.marque != null && observation.marque! > 0)
+                  Center(child: Text('${observation.marque}', style: Theme.of(context).textTheme.headline5)),
               ],
             ),
           ),
@@ -136,16 +144,26 @@ class _CellEmpty extends StatelessWidget {
   }
 }
 
-class _CellHeader extends StatelessWidget {
+class _CellHeader extends ConsumerWidget {
   String value;
+  UniqueId id;
   _CellHeader(
-    this.value, {
+    this.value,
+    this.id, {
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Center(child: Text(value, style: Theme.of(context).textTheme.headline6));
+  Widget build(BuildContext context, WidgetRef ref) {
+    return InkWell(
+        onTap: () {
+          ref.invalidate(cycleProvider(id));
+          ref.read(idCycleCourant.notifier).state = id;
+          context.router.navigate(CyclesRoute());
+        },
+        child: Container(
+            constraints: BoxConstraints(minWidth: 60, minHeight: 50),
+            child: Center(child: Text(value, style: Theme.of(context).textTheme.headline6))));
   }
 }
 

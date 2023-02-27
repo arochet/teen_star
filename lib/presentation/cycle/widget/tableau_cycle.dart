@@ -171,7 +171,8 @@ class _Cell extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (isJourSommet) Image.asset(AssetsPath.icon_fleur_sommet, color: colorpanel(50)),
+                  if (isJourSommet)
+                    Image.asset(AssetsPath.icon_fleur_sommet, color: colorpanel(50), width: 22, height: 22),
                   if (observation.marque != null && observation.marque! > 0)
                     Text("${observation.marque}", style: Theme.of(context).textTheme.headline5),
                   if (observation.sensation?.getOrCrash() == SensationState.autre ||

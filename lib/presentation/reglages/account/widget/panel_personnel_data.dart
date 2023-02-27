@@ -30,7 +30,7 @@ class PanelPersonnelData extends StatelessWidget {
           icon: Icons.local_florist,
         ),
         ItemPanelList(
-          title: 'Date de naissance: ${AppDateUtils.formatDate(userData?.dateNaissance)}',
+          title: 'Date de naissance: ${AppDateUtils.formatDate(userData?.dateNaissance, 'dd/MM/yyyy')}',
           icon: Icons.child_friendly,
         ),
         ItemPanelList(

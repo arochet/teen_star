@@ -73,7 +73,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               if (ref.watch(environment).name == Environment.dev)
                 ElevatedButton(
                   onPressed: () {
-                    final _formatter = new DateFormat('dd.MM.yy');
+                    final _formatter = new DateFormat('dd/MM/yyyy');
                     ref.read(registerFormNotifierProvider.notifier).nomUtilisateurChanged('azer');
                     ref
                         .read(registerFormNotifierProvider.notifier)
@@ -119,14 +119,14 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               SpaceH10(),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: "Date de naissance (jj.mm.aa)",
+                  labelText: "Date de naissance (jj/mm/aaaa)",
                 ),
                 autocorrect: false,
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.datetime,
                 controller: _controllerDateNaissance,
                 onChanged: (value) {
-                  final _formatter = new DateFormat('dd.MM.yy');
+                  final _formatter = new DateFormat('dd/MM/yyyy');
                   try {
                     ref
                         .read(registerFormNotifierProvider.notifier)

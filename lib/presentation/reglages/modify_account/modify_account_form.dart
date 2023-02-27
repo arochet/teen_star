@@ -72,8 +72,8 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
             _controllerUserName = new TextEditingController(text: dataUser.userName.getOrCrash());
             _controllerAnneePremiereRegle =
                 new TextEditingController(text: dataUser.anneePremiereRegle.toString());
-            _controllerDateNaissance =
-                new TextEditingController(text: AppDateUtils.formatDate(dataUser.dateNaissance));
+            _controllerDateNaissance = new TextEditingController(
+                text: AppDateUtils.formatDate(dataUser.dateNaissance, 'dd/MM/yyyy'));
           });
           ref.read(modifyFormNotifierProvider.notifier).nomUtilisateurChanged(_controllerUserName.text);
           ref
@@ -150,12 +150,12 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
             //DATE DE NAISSANCE
             TextFormField(
               decoration: InputDecoration(
-                labelText: "Date de naissance (jj.mm.aa)",
+                labelText: "Date de naissance (jj/mm/aaaa)",
               ),
               autocorrect: false,
               keyboardType: TextInputType.datetime,
               onChanged: (value) {
-                final _formatter = new DateFormat('dd.MM.yy');
+                final _formatter = new DateFormat('dd/MM/yyyy');
                 try {
                   ref.read(modifyFormNotifierProvider.notifier).dateNaissanceChanged(_formatter.parse(value));
                 } catch (e) {}

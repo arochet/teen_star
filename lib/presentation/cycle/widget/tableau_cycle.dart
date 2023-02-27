@@ -54,13 +54,13 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
       'Sensation',
       'Sang',
       'Mucus',
-      'Douleur',
+      //'Douleur',
       'Humeur',
       'Evenements'
     ];
 
     //Largeur des colonnes
-    Map cellsWidth = {'Douleur': 120, 'Evenements': 160};
+    Map cellsWidth = {'Douleur': 120, 'Evenements': 300};
 
     return ShowComponentFile(
       title: 'tableau_cycle.dart',
@@ -233,7 +233,7 @@ class _Cell extends StatelessWidget {
                 iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 60),
           );
         break;
-      case 'Douleur':
+      /* case 'Douleur':
         if (observation.douleurs?.length != null && observation.douleurs!.length > 0)
           info = SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -249,7 +249,7 @@ class _Cell extends StatelessWidget {
           );
         else
           info = Container(width: 1, height: 1);
-        break;
+        break; */
       case 'Humeur':
         if (observation.humeur?.getOrCrash() == HumeurState.none)
           info = _CellNone();
@@ -260,7 +260,16 @@ class _Cell extends StatelessWidget {
       case 'Evenements':
         info = SingleChildScrollView(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              ...(observation.douleurs
+                      ?.map((Douleur douleur) => Padding(
+                            padding: const EdgeInsets.only(right: 2),
+                            child: _LittleBoxText(douleur.getOrCrash().toDisplayShort()),
+                          ))
+                      .toList() ??
+                  []),
               ...?observation.evenements
                   ?.map((Evenement evt) =>
                       _LittleBoxChild(IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 60)))
@@ -285,7 +294,7 @@ class _Cell extends StatelessWidget {
         break;
     }
 
-    return Center(child: info);
+    return info;
   }
 }
 

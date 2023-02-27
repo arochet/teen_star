@@ -168,17 +168,15 @@ class _Cell extends StatelessWidget {
             color: observation.couleurGeneree.toColor(),
             child: Padding(
               padding: const EdgeInsets.all(2.0),
-              child: Stack(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (isJourSommet)
-                    Center(child: Image.asset(AssetsPath.icon_fleur_sommet, color: colorpanel(50))),
+                  if (isJourSommet) Image.asset(AssetsPath.icon_fleur_sommet, color: colorpanel(50)),
                   if (observation.marque != null && observation.marque! > 0)
-                    Center(
-                        child: Text("${observation.marque}", style: Theme.of(context).textTheme.headline5)),
+                    Text("${observation.marque}", style: Theme.of(context).textTheme.headline5),
                   if (observation.sensation?.getOrCrash() == SensationState.autre ||
-                      observation.sensation?.getOrCrash() == SensationState.nonpercu ||
                       observation.mucus?.getOrCrash() == MucusState.autre)
-                    Center(child: Text("?", style: Theme.of(context).textTheme.headline5)),
+                    Text("?", style: Theme.of(context).textTheme.headline5),
                 ],
               ),
             ),

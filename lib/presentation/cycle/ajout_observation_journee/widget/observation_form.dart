@@ -101,6 +101,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
     _controllerNotesConfidentielles = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(cycleFormNotifierProvider.notifier).dateChanged(widget.date);
+      ref.read(cycleFormNotifierProvider.notifier).sangChanged(Sang(SangState.rien));
     });
   }
 

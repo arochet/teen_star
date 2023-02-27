@@ -100,7 +100,13 @@ abstract class Observation with _$Observation {
       jourFertile == null;
 
   CouleurAnalyseState get couleurGeneree {
-    if (sensation?.getOrCrash() == SensationState.humide ||
+    if (sang?.getOrCrash() == SangState.fluxPP) {
+      return CouleurAnalyseState.rougePlusPlus;
+    } else if (sang?.getOrCrash() == SangState.fluxP) {
+      return CouleurAnalyseState.rougePlus;
+    } else if (sang?.getOrCrash() == SangState.traces) {
+      return CouleurAnalyseState.rougeClair;
+    } else if (sensation?.getOrCrash() == SensationState.humide ||
         sensation?.getOrCrash() == SensationState.mouille ||
         sensation?.getOrCrash() == SensationState.glissantLubrifie ||
         mucus?.getOrCrash() == MucusState.opaqueAvecTransparent_UnPeuEtirable ||

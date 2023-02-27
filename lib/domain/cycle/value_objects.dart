@@ -8,7 +8,7 @@ import 'package:teenstar/DOMAIN/core/value_validators.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 
-enum CouleurAnalyseState { rouge, brun, vert, jaune, bleue, none, invalide }
+enum CouleurAnalyseState { rougePlusPlus, rougePlus, rougeClair, brun, vert, jaune, bleue, none, invalide }
 
 extension ParseToSringTA on CouleurAnalyseState {
   String toShortString() {
@@ -17,8 +17,12 @@ extension ParseToSringTA on CouleurAnalyseState {
 
   Color toColor() {
     switch (this) {
-      case CouleurAnalyseState.rouge:
-        return Color.fromARGB(255, 224, 101, 92);
+      case CouleurAnalyseState.rougePlusPlus:
+        return Color.fromARGB(255, 221, 43, 30);
+      case CouleurAnalyseState.rougePlus:
+        return Color.fromARGB(255, 223, 85, 75);
+      case CouleurAnalyseState.rougeClair:
+        return Color.fromARGB(255, 225, 168, 164);
       case CouleurAnalyseState.brun:
         return Color.fromARGB(255, 142, 105, 91);
       case CouleurAnalyseState.vert:
@@ -36,8 +40,12 @@ extension ParseToSringTA on CouleurAnalyseState {
 
   PdfBrush toColorPDF() {
     switch (this) {
-      case CouleurAnalyseState.rouge:
+      case CouleurAnalyseState.rougePlusPlus:
         return PdfBrushes.red; //red;
+      case CouleurAnalyseState.rougePlus:
+        return PdfBrushes.red; //red;
+      case CouleurAnalyseState.rougeClair:
+        return PdfBrushes.pink; //red;
       case CouleurAnalyseState.brun:
         return PdfBrushes.brown; //brown;
       case CouleurAnalyseState.vert:
@@ -66,11 +74,16 @@ class CouleurAnalyse extends ValueObject<CouleurAnalyseState> {
   factory CouleurAnalyse.fromString(String? input) {
     if (input == null) return CouleurAnalyse._(right(CouleurAnalyseState.none));
     try {
-      final CouleurAnalyseState state = CouleurAnalyseState.values.firstWhere((e) => e.toString() == input);
-      if (state == null) return CouleurAnalyse._(left(ValueFailure.invalidEnum(failedValue: state)));
-      return CouleurAnalyse._(right(state));
+      try {
+        final CouleurAnalyseState state = CouleurAnalyseState.values
+            .firstWhere((e) => e.toString() == input, orElse: () => CouleurAnalyseState.invalide);
+        return CouleurAnalyse._(right(state));
+      } catch (e) {
+        print('Error la couleur $input n\'existe pas');
+        return CouleurAnalyse._(left(ValueFailure.invalidEnum(failedValue: CouleurAnalyseState.none)));
+      }
     } catch (e) {
-      return CouleurAnalyse._(left(ValueFailure.invalidEnum(failedValue: CouleurAnalyseState.rouge)));
+      return CouleurAnalyse._(left(ValueFailure.invalidEnum(failedValue: CouleurAnalyseState.rougePlusPlus)));
     }
   }
 

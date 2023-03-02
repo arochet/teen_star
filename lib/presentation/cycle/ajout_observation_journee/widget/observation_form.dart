@@ -262,9 +262,16 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               Container(
                 width: 60,
                 child: TextFormField(
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                   autocorrect: false,
-                  onChanged: (value) => notifierForm.temperatureBasaleChanged(double.parse(value)),
+                  onChanged: (value) {
+                    try {
+                      notifierForm
+                          .temperatureBasaleChanged(double.parse(value.replaceAll(RegExp(r','), '.')));
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
                   controller: _controllerTempBasale,
                 ),
               ),

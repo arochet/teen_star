@@ -119,7 +119,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
                 ),
                 autocorrect: false,
                 textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                keyboardType: TextInputType.text,
                 controller: _controllerDateNaissance,
                 onChanged: (value) {
                   final _formatter = new DateFormat('dd.MM.yyyy');

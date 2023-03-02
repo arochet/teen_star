@@ -153,7 +153,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
                 labelText: "Date de naissance (jj.mm.aaaa)",
               ),
               autocorrect: false,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              keyboardType: TextInputType.text,
               onChanged: (value) {
                 final _formatter = new DateFormat('dd.MM.yyyy');
                 try {

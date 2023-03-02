@@ -166,21 +166,7 @@ class _Cell extends StatelessWidget {
             width: 40,
             height: 35,
             color: observation.couleurGeneree.toColor(),
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (isJourSommet)
-                    Image.asset(AssetsPath.icon_fleur_sommet, color: colorpanel(50), width: 22, height: 22),
-                  if (observation.marque != null && observation.marque! > 0)
-                    Text("${observation.marque}", style: Theme.of(context).textTheme.headline5),
-                  if (observation.sensation?.getOrCrash() == SensationState.autre ||
-                      observation.mucus?.getOrCrash() == MucusState.autre)
-                    Text("?", style: Theme.of(context).textTheme.headline5),
-                ],
-              ),
-            ),
+            child: null,
           );
         break;
       case 'Analyse':
@@ -197,6 +183,24 @@ class _Cell extends StatelessWidget {
                 if (observation.jourFertile == false)
                   Image.asset(AssetsPath.icon_hachurage,
                       color: colorpanel(50), width: 40, height: 35, fit: BoxFit.fill),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (isJourSommet)
+                          Image.asset(AssetsPath.icon_fleur_sommet,
+                              color: colorpanel(50), width: 22, height: 22),
+                        if (observation.marque != null && observation.marque! > 0)
+                          Text("${observation.marque}", style: Theme.of(context).textTheme.headline5),
+                        if (observation.sensation?.getOrCrash() == SensationState.autre ||
+                            observation.mucus?.getOrCrash() == MucusState.autre)
+                          Text("?", style: Theme.of(context).textTheme.headline5),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ));
         break;

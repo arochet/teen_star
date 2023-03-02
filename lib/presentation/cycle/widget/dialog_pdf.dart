@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
@@ -21,6 +22,8 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
   late TextEditingController controllerPremierCycle;
   late TextEditingController controllerDernierCycle;
 
+  bool isLoading = false;
+
   @override
   void initState() {
     controllerPremierCycle = TextEditingController(text: '${widget.listCycle.first.id}');
@@ -30,6 +33,8 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) return Container(height: 100, child: Center(child: CircularProgressIndicator()));
+
     return ShowComponentFile(
       title: '_DialogModificationCycle',
       child: Container(
@@ -72,8 +77,6 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
             SpaceH30(),
             ElevatedButton(
               onPressed: () async {
-                print('Premier Cycle ${controllerPremierCycle.text}');
-                print('Dernier Cycle ${controllerDernierCycle.text}');
                 final userData = await ref.read(currentUserData.future);
                 final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
 
@@ -81,14 +84,15 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
                     /* widget.listCycle.first.id! */ int.parse(controllerPremierCycle.text),
                     int.parse(controllerDernierCycle.text) /* widget.listCycle.last.id! */);
 
-                listCycleAsync.fold((l) => showSnackbarCycleFailure(context, l), (list) {
-                  if (list.length > 0)
-                    generatePDF(userData, list, passwordPdf);
-                  else
+                listCycleAsync.fold((l) => showSnackbarCycleFailure(context, l), (list) async {
+                  if (list.length > 0) {
+                    setState(() => isLoading = true);
+                    await generatePDF(userData, list, passwordPdf);
+                    Navigator.of(context).pop();
+                  } else
                     showSnackbar(context,
                         "Aucun cycle à exporter dans ces bornes [${controllerPremierCycle.text} - ${controllerDernierCycle.text}]");
                 });
-                Navigator.of(context).pop();
               },
               child: Text("Exportation PDF"),
               style: buttonNormalPrimaryFull,

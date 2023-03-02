@@ -8,9 +8,9 @@ import 'package:teenstar/DOMAIN/auth/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
-import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
+import 'dart:io' show Platform;
 
 generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async {
   final PdfDocument pdf = PdfDocument();
@@ -183,15 +183,24 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
   tableauCycle(page, headerHistorique, data, listImageMucus[MucusState.none]!, layoutResult!);
 
   //CREATION DU FICHIER
+  String nomFichier =
+      '${userData!.userName.getOrCrash()}-${AppDateUtils.formatDate(userData?.dateNaissance, 'dd_MM_yyyy')}-${userData.anneePremiereRegle}-Cycle${listCycles.first.id.getOrCrash()}_a_${listCycles.last.id.getOrCrash()}';
   Directory appDocDirectory = await getApplicationDocumentsDirectory();
   PdfSecurity security = pdf.security;
   security.algorithm = PdfEncryptionAlgorithm.rc4x128Bit;
   security.userPassword = password.getOrCrash(); //Set user password
-  final File file = File('${appDocDirectory.path}/cycles.pdf');
+  String path = '';
+  if (Platform.isAndroid) {
+    path = '/storage/emulated/0/Download/$nomFichier.pdf';
+  } else {
+    path = appDocDirectory.path + '/$nomFichier.pdf';
+  }
+
+  final File file = File(path);
 
   await file.writeAsBytes(await pdf.save());
 
-  OpenFilex.open('${appDocDirectory.path}/cycles.pdf');
+  await OpenFilex.open(path);
   pdf.dispose();
 }
 

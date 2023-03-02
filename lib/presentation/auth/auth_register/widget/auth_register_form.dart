@@ -77,16 +77,12 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
                     ref.read(registerFormNotifierProvider.notifier).nomUtilisateurChanged('azer');
                     ref
                         .read(registerFormNotifierProvider.notifier)
-                        .dateNaissanceChanged(_formatter.parse('03.01.97'));
+                        .dateNaissanceChanged(_formatter.parse('03/01/97'));
                     ref.read(registerFormNotifierProvider.notifier).anneePremiereRegleChanged(2000);
-                    ref.read(registerFormNotifierProvider.notifier).passwordAppliChanged('azerazer');
-                    ref
-                        .read(registerFormNotifierProvider.notifier)
-                        .passwordAppliConfirmationChanged('azerazer');
-                    ref.read(registerFormNotifierProvider.notifier).passwordPDFChanged('qsdfqsdf');
-                    ref
-                        .read(registerFormNotifierProvider.notifier)
-                        .passwordPDFConfirmationChanged('qsdfqsdf');
+                    ref.read(registerFormNotifierProvider.notifier).passwordAppliChanged('azer');
+                    ref.read(registerFormNotifierProvider.notifier).passwordAppliConfirmationChanged('azer');
+                    ref.read(registerFormNotifierProvider.notifier).passwordPDFChanged('azer');
+                    ref.read(registerFormNotifierProvider.notifier).passwordPDFConfirmationChanged('azer');
                   },
                   child: Text("[DEV] fill form"),
                   style: buttonPrimaryHide,

@@ -15,7 +15,7 @@ extension ParseToSringTA on CouleurAnalyseState {
     return this.toString().toLowerCase();
   }
 
-  Color toColor() {
+  Color? toColor() {
     switch (this) {
       case CouleurAnalyseState.rougePlusPlus:
         return Color.fromARGB(255, 221, 43, 30);
@@ -32,7 +32,7 @@ extension ParseToSringTA on CouleurAnalyseState {
       case CouleurAnalyseState.bleue:
         return Color.fromARGB(255, 100, 134, 197);
       case CouleurAnalyseState.none:
-        return colorpanel(900)!;
+        return null;
       case CouleurAnalyseState.invalide:
         return Color.fromARGB(255, 186, 88, 210);
     }

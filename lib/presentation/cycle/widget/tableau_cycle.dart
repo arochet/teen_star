@@ -189,7 +189,11 @@ class _Cell extends StatelessWidget {
             height: 35,
             child: Stack(
               children: [
-                LittleBox(width: 40, height: 35, color: observation.analyse?.getOrCrash().toColor()),
+                LittleBox(
+                    width: 40,
+                    height: 35,
+                    color:
+                        observation.analyse?.getOrCrash().toColor() ?? observation.couleurGeneree.toColor()),
                 if (observation.jourFertile == false)
                   Image.asset(AssetsPath.icon_hachurage,
                       color: colorpanel(50), width: 40, height: 35, fit: BoxFit.fill),

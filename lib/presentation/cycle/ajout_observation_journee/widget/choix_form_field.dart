@@ -25,9 +25,9 @@ class ChoixFormField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ShowComponentFile(
-      title: 'ChoixMultipleFormField',
+      title: 'ChoixFormField',
       child: Container(
-        height: choix.length * 40,
+        height: choix.length * 41,
         child: Column(
             children: choix
                 .map((state) => InkWell(

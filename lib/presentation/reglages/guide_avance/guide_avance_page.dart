@@ -30,11 +30,12 @@ class Guide_avancePage extends StatelessWidget {
                 text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
                   TextSpan(
                       text:
-                          "L'auto-observation proposée ici est en lien avec la sécrétion de mucus produit par le col utérin (appelé aussi 'glaire cervicale') qui s'écoule à la vulve."
+                          "L'auto-observation proposée ici est en lien avec la sécrétion de mucus produit par le col utérin (appelé aussi 'glaire cervicale'), et qui s'écoule à la vulve."
                           "Ses propriétés ont été découvertes en 1953 et étudiées de manière scientifique par 2 médecins (Professor Erik Odeblad, specialist in medical bio-physics at Umea University, Sweden ; Professor James B. Brown, professor of endocrinology, New Zealand). \n\n"),
                   TextSpan(
                       text:
-                          "Il n’est pas recommandé de rechercher cette glaire à l’intérieur du vagin, ce qui aurait pour conséquence, entre autres, de fausser l’observation ou la sensation.")
+                          "Il n’est pas recommandé de rechercher cette glaire à l’intérieur du vagin, ce qui aurait pour conséquence, entre autres, de fausser l’observation ou la sensation.",
+                      style: styleBold)
                 ]),
               )),
               _DisplayTitle(title: "2. Complément info Observation du mucus"),
@@ -97,7 +98,7 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: " BRUN ", style: styleBold),
                   TextSpan(text: "  (“terre”) =  Sec + aucun mucus  \n"),
                   TextSpan(text: " -> par défaut en "),
-                  TextSpan(text: " BLANC avec  un ? ", style: styleBold),
+                  TextSpan(text: " INCOLORE avec  un ? ", style: styleBold),
                   TextSpan(
                       text:
                           "  = doute sur l’observation ou la sensation. Ex. sensation « Non perçue »  ou mucus « Dépôt séché » (perte vaginale ou mucus séché ?) ou sélection « Autre ».  \n"),
@@ -110,9 +111,6 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: " ->"),
                   TextSpan(text: " TRACES ", style: styleBold),
                   TextSpan(text: " = traces de sang, rouges ou brunes \n"),
-                  TextSpan(text: " ->"),
-                  TextSpan(text: " POINTILLÉS ", style: styleBold),
-                  TextSpan(text: " = absence d’enregistrement  \n"),
                 ]),
               )),
               _DisplayTitle(title: "4. Complément info bouton Analyser le cycle"),

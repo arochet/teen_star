@@ -37,7 +37,7 @@ class Guide_de_basePage extends StatelessWidget {
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
                 TextSpan(
                     text:
-                        "Faciliter vos enregistrements quotidiens afin d'apprendre l’auto-observation pour découvrir votre fertilité et vos cycles (profil personnel des signes de fertilité, période de l’ovulation, date prévisible des prochaines règles, variation d’humeur et de forme physique en lien avec les changements hormonaux, impact de certains évènements sur le déroulement du cycle, anomalies éventuelles, ...).")
+                        "Faciliter vos enregistrements quotidiens afin d'apprendre l’auto-observation pour découvrir votre fertilité et vos cycles (mise en place progressive du cycle à partir de la puberté, profil personnel des signes de fertilité, période de l’ovulation, date prévisible des prochaines règles, variation d’humeur et de forme physique en lien avec les changements hormonaux, impact de certains évènements sur le déroulement du cycle, anomalies éventuelles, ...).")
               ]),
             )),
             _DisplayTitle(title: "Comment s'observer"),
@@ -62,9 +62,17 @@ class Guide_de_basePage extends StatelessWidget {
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
-                TextSpan(text: "Sélectionner le bouton rouge "),
-                TextSpan(text: "Débuter un nouveau cycle", style: styleBlue),
+                TextSpan(text: "Observations de la journée ", style: styleBlue),
+                TextSpan(
+                    text: "enregistrer LE SOIR le signe le plus fertile de la journée"
+                        "(SENSATION et OBSERVATION)."
+                        "Parmi les NOTES possibles, #1 et #1 sont deux types d'évènements de votre choix toujours les"
+                        "mêmes et --> correspond à voyage ou horaires inhabituels (décalage horaire, coucher tardif,"
+                        "travail de nuit, ...). "),
                 TextSpan(text: " dès le 1er jour des règles, sinon continuer le cycle en cours."),
+                /* TextSpan(text: "Sélectionner le bouton rouge "),
+                TextSpan(text: "Débuter un nouveau cycle", style: styleBlue),
+                TextSpan(text: " dès le 1er jour des règles, sinon continuer le cycle en cours."), */
               ]),
             )),
             _DisplayTitle(title: "Synthèse du cycle"),
@@ -72,13 +80,12 @@ class Guide_de_basePage extends StatelessWidget {
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
                 TextSpan(text: "L’onglet "),
-                TextSpan(text: "Résumé ", style: styleBlue),
+                TextSpan(text: "Cycle ", style: styleBlue),
                 TextSpan(text: "récapitule le cycle, en y ajoutant des couleurs par défaut, mais qui "),
                 TextSpan(
                     text:
                         "ne correspondent PAS à un repérage des périodes fertiles ou infertiles du cycle.\n\n",
                     style: styleBold),
-                TextSpan(text: "Cliquer sur un ? permet de relire une note.\n\n", style: styleBold),
                 TextSpan(text: "Le bouton "),
                 TextSpan(text: "Analyser le cycle ", style: styleBlue),
                 TextSpan(
@@ -106,7 +113,14 @@ class Guide_de_basePage extends StatelessWidget {
                 TextSpan(
                     text: "Notes confidentielles (*) et prise de médicament sont lisibles uniquement dans "),
                 TextSpan(text: "Réglages ", style: styleBlue),
-                TextSpan(text: "avec mot de passe (et non exportés dans les PDF). "),
+                TextSpan(text: "avec mot de passe (et non exportés dans les PDF). \n\n"),
+                TextSpan(
+                    text: "Conditions d'utilisation : J’ai lu les points ci-dessus et j’ai"
+                        "compris que cette application m’aidera à enregistrer mes observations quotidiennes au cours"
+                        "des cycles menstruels, mais ne peut absolument pas me suffire telle quelle pour éviter (ou"
+                        "favoriser) une grossesse. Je comprends que si tel était mon objectif, je devrais impérativement"
+                        "suivre une formation approfondie avec une monitrice spécialisée en méthode naturelle de"
+                        "régulation des naissances. "),
               ]),
             )),
             SpaceH20(),

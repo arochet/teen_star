@@ -142,17 +142,17 @@ extension ParseToSringSensation on SensationState {
   String toIconPath() {
     switch (this) {
       case SensationState.sec:
-        return AssetsPath.icon_vide;
+        return AssetsPath.icon_sensation_sec;
       case SensationState.humide:
-        return AssetsPath.icon_vide;
+        return AssetsPath.icon_sensation_humide;
       case SensationState.mouille:
-        return AssetsPath.icon_vide;
+        return AssetsPath.icon_sensation_mouille;
       case SensationState.glissantLubrifie:
-        return AssetsPath.icon_vide;
+        return AssetsPath.icon_sensation_glissant_lubrifie;
       case SensationState.nonpercu:
-        return AssetsPath.icon_vide;
+        return AssetsPath.icon_sensation_np;
       case SensationState.autre:
-        return AssetsPath.icon_vide;
+        return AssetsPath.icon_sensation_autre;
       case SensationState.none:
         return AssetsPath.icon_vide;
     }
@@ -378,15 +378,15 @@ extension ParseToSringDouleur on DouleurState {
   String toIconPath() {
     switch (this) {
       case DouleurState.seins:
-        return AssetsPath.icon_vide;
+        return AssetsPath.icon_douleur_ds;
       case DouleurState.ventre:
-        return AssetsPath.icon_vide;
+        return AssetsPath.icon_douleur_dv;
       case DouleurState.malDeTete:
-        return AssetsPath.icon_vide;
+        return AssetsPath.icon_douleur_mt;
       case DouleurState.autre:
-        return AssetsPath.icon_autre;
+        return AssetsPath.icon_douleur_autre;
       case DouleurState.aucune:
-        return AssetsPath.icon_vide;
+        return AssetsPath.icon_douleur_aucune;
       case DouleurState.none:
         return AssetsPath.icon_vide;
     }

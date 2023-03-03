@@ -208,7 +208,11 @@ class _Cell extends StatelessWidget {
         if (observation.mucus?.getOrCrash() == MucusState.none)
           info = _CellNone();
         else
-          info = _LittleBoxText(observation.sensation?.getOrCrash().toDisplayShort() ?? '');
+          info = _LittleBoxChild(
+            IconObservation(
+                iconPath: observation.sensation?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide,
+                iconSize: 60),
+          );
         break;
       case 'Observation':
         info = SingleChildScrollView(
@@ -275,7 +279,8 @@ class _Cell extends StatelessWidget {
               ...(observation.douleurs
                       ?.map((Douleur douleur) => Padding(
                             padding: const EdgeInsets.only(right: 2),
-                            child: _LittleBoxText(douleur.getOrCrash().toDisplayShort()),
+                            child: _LittleBoxChild(
+                                IconObservation(iconPath: douleur.getOrCrash().toIconPath(), iconSize: 60)),
                           ))
                       .toList() ??
                   []),

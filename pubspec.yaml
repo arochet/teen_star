@@ -139,6 +139,18 @@ flutter:
     - assets/icon_app/icon_pdf.png
     - assets/icon_app/icon_principe_de_base.png
     - assets/icon/icon-assets/main_flower.png
+    - assets/icon_observation/sensation/sensation_autre.png
+    - assets/icon_observation/sensation/sensation_H.png
+    - assets/icon_observation/sensation/sensation_L.png
+    - assets/icon_observation/sensation/sensation_M.png
+    - assets/icon_observation/sensation/sensation_np.png
+    - assets/icon_observation/sensation/sensation_S.png
+    - assets/icon_observation/douleurs/douleur_Autre.png
+    - assets/icon_observation/douleurs/douleur_DS.png
+    - assets/icon_observation/douleurs/douleur_DV.png
+    - assets/icon_observation/douleurs/douleur_MT.png
+    - assets/icon_observation/douleurs/douleur_Aucune.png
+
 
 
   

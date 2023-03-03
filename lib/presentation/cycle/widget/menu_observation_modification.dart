@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
+import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/providers.dart';
@@ -43,6 +44,19 @@ afficherModalModificationObservation(
             Navigator.pop(context);
           },
           child: Text('Modifier la couleur'),
+        ),
+        CupertinoActionSheetAction(
+          onPressed: () async {
+            await ref
+                .read(cycleRepositoryProvider)
+                .modifierCouleurAnalyse(observation, CouleurAnalyseState.none);
+            ref.read(showAnalyse.notifier).state = true;
+            ref.refresh(allCycleProvider);
+            final id = ref.read(idCycleCourant);
+            if (id != null) ref.refresh(cycleProvider(id));
+            Navigator.pop(context);
+          },
+          child: Text('Supprimer analyse'),
         ),
         CupertinoActionSheetAction(
           child: Text('Annuler marquage'),

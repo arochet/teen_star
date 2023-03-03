@@ -177,7 +177,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             currentStates: [form.sensation.getOrCrash()],
             titre: (state) => TextUtils.toFirstLettersUpperCase((state as SensationState).toDisplayString()),
             iconPath: (state) => (state as SensationState).toIconPath(),
-            iconTxt: (state) => (state as SensationState).toDisplayShort(),
+            iconTxt: null,
           ),
           if (form.sensation.getOrCrash() == SensationState.autre)
             TextFormField(
@@ -226,7 +226,6 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             currentStates: form.douleurs.map((e) => e.getOrCrash()).toList(),
             titre: (state) => (state as DouleurState).toDisplayString(),
             iconPath: (state) => (state as DouleurState).toIconPath(),
-            iconTxt: (state) => (state as DouleurState).toDisplayShort(),
           ),
           if (form.douleurs.contains(Douleur(DouleurState.autre)))
             TextFormField(

@@ -45,4 +45,15 @@ class AssetsPath {
   static const String icon = "assets/icon/logo.png";
   static const String icon_hachurage = "assets/icon_app/icon_hachurage.png";
   static const String main_flower = "assets/icon/icon-assets/main_flower.png";
+  static const String icon_sensation_sec = "assets/icon_observation/sensation/sensation_S.png";
+  static const String icon_sensation_humide = "assets/icon_observation/sensation/sensation_H.png";
+  static const String icon_sensation_mouille = "assets/icon_observation/sensation/sensation_M.png";
+  static const String icon_sensation_glissant_lubrifie = "assets/icon_observation/sensation/sensation_L.png";
+  static const String icon_sensation_np = "assets/icon_observation/sensation/sensation_np.png";
+  static const String icon_sensation_autre = "assets/icon_observation/sensation/sensation_autre.png";
+  static const String icon_douleur_autre = "assets/icon_observation/douleurs/douleur_Autre.png";
+  static const String icon_douleur_ds = "assets/icon_observation/douleurs/douleur_DS.png";
+  static const String icon_douleur_dv = "assets/icon_observation/douleurs/douleur_DV.png";
+  static const String icon_douleur_mt = "assets/icon_observation/douleurs/douleur_MT.png";
+  static const String icon_douleur_aucune = "assets/icon_observation/douleurs/douleur_Aucune.png";
 }

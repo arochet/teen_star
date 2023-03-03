@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
-import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
+
+import 'widget/bouton_PDF.dart';
 
 class Guide_de_basePage extends StatelessWidget {
   const Guide_de_basePage({Key? key}) : super(key: key);
@@ -110,28 +112,10 @@ class Guide_de_basePage extends StatelessWidget {
             SpaceH20(),
 
             //BOUTON PDF
-            //_BoutonPDF(),
+            BoutonPDF(),
             SizedBox(height: 30),
           ]),
         ),
-      ),
-    );
-  }
-}
-
-class _BoutonPDF extends StatelessWidget {
-  const _BoutonPDF({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton.icon(
-        onPressed: () {},
-        label: Text("Version PDF"),
-        icon: Icon(Icons.picture_as_pdf),
-        style: buttonLittleSecondary,
       ),
     );
   }

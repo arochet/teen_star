@@ -112,9 +112,9 @@ extension ParseToSringSensation on SensationState {
       case SensationState.glissantLubrifie:
         return 'glissant lubrifié';
       case SensationState.nonpercu:
-        return 'non perçu';
+        return 'non perçue';
       case SensationState.autre:
-        return 'autre';
+        return 'autre sensation';
       case SensationState.none:
         return '';
     }
@@ -268,15 +268,15 @@ extension ParseToSringMucus on MucusState {
   String toDisplayString() {
     switch (this) {
       case MucusState.opaqueBlancOuJaune:
-        return 'Opaque blanc ou jaune';
+        return 'Opaque blanc ou jaune; épais, pâteux ou grumeleux; collant (non étirable)';
       case MucusState.depotSecheBlancOuJaune:
         return 'Dépôt séché blanc ou jaune';
       case MucusState.opaqueAvecTransparent_UnPeuEtirable:
-        return 'Opaque avec transparent. Un peu étirable';
+        return 'Opaque avec transparent; un peu étirable';
       case MucusState.nuageuxATransparent_Elastique:
         return 'Nuageux (blanc) à transparent; élastique';
       case MucusState.transparentFilantOuTresFluide:
-        return 'Transparent; filant ou très fluide';
+        return 'Transparent filant (± blanc d\'oeuf), ou très fluide (±eau)';
       case MucusState.aucunMucusVisible:
         return 'Aucun mucus visible';
       case MucusState.autre:

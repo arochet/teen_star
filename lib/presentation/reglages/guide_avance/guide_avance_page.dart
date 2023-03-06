@@ -13,6 +13,10 @@ class Guide_avancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final styleBold = Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold);
+    final styleBoldItalic = Theme.of(context)
+        .textTheme
+        .bodyText1!
+        .copyWith(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic);
     final styleUnderline =
         Theme.of(context).textTheme.bodyText1!.copyWith(decoration: TextDecoration.underline);
     final styleBlue = Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.blue);
@@ -134,8 +138,10 @@ class Guide_avancePage extends StatelessWidget {
                     TextSpan(text: "- BLEU ", style: styleBold),
                     TextSpan(text: ": poussée œstrogénique (aboutissant ou non à un sommet)\n"),
                     TextSpan(text: "- JAUNE ", style: styleBold),
-                    TextSpan(text: "Sec + opaque non élastique ou"),
-                    TextSpan(text: "ou situation évoquant un profil infertile de type sécrétoire"),
+                    TextSpan(text: "Sec + opaque non élastique "),
+                    TextSpan(text: "ou", style: styleUnderline),
+                    TextSpan(
+                        text: " situation évoquant un profil infertile de type sécrétoire", style: styleBold),
                     TextSpan(text: "(voir \"cas particuliers\")\n"),
                     TextSpan(text: "- BRUN ", style: styleBold),
                     TextSpan(text: "Sec + aucun mucus"),
@@ -149,27 +155,39 @@ class Guide_avancePage extends StatelessWidget {
               DefaultPanel(
                   child: RichText(
                 text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
-                  TextSpan(text: "Toutes les cases sont blanches avec ?", style: styleUnderline),
+                  TextSpan(text: "Nombreuses cases incolores ", style: styleUnderline),
                   TextSpan(
                       text:
-                          " car  l'utilisatrice n’arrive jamais à reconnaître les sensations (sensation « Non perçue »). Si elle se repère facilement grâce à des profils de sécrétions très caractéristiques et très francs, elle pourrait colorer les cases en fonction du mucus seul, en faisant abstraction de la sensation (tout en continuant à s’exercer à la ressentir) : BLEU pour les poussées de mucus œstrogénique, JAUNE pour mucus non œstrogénique et BRUN pour absence de mucus.\n"),
-                  TextSpan(text: "Une case blanche avec ?", style: styleUnderline),
+                          " car  l'utilisatrice n’arrive jamais à reconnaître les sensations (sensation « Non perçue »). Si elle se repère facilement grâce à des profils de sécrétions très caractéristiques et très francs, elle pourrait colorer les cases en fonction du mucus seul, en faisant abstraction de la sensation (tout en continuant à s’exercer à la ressentir) : BLEU pour les poussées de mucus œstrogénique, JAUNE pour mucus non œstrogénique et BRUN pour absence de mucus.\n\n"),
+                  TextSpan(text: "Une case avec ?", style: styleUnderline),
                   TextSpan(
                       text:
-                          " car l'utilisatrice a enregistré « Autre » (sensation ou observation). L'échange avec l’accompagnatrice permettra de préciser la nature de cette \"autre\" situation et de colorer la case en conséquence. De même lors de « Dépôt séché », pour éventuellement distinguer des sécrétions vaginales d’une sécrétion de glaire cervicale de tel ou tel type.\n"),
+                          " car l'utilisatrice a enregistré « Autre » (sensation ou observation). L'échange avec l’accompagnatrice permettra de préciser la nature de cette \"autre\" situation et de colorer la case en conséquence. De même lors de « Dépôt séché », pour éventuellement distinguer des sécrétions vaginales d’une sécrétion de glaire cervicale de tel ou tel type.\n\n"),
                   TextSpan(text: "PIB pré-ovulatoire et hachurage", style: styleUnderline),
                   TextSpan(
                       text:
                           " l’utilisatrice avancée en auto-observation peut arriver à repérer son PIB. Rappel : PIB = Profil Infertile de Base = séquence non changeante jour après jour en pré-ovulatoire (sensation et aspect visuel qui restent identiques, témoignant de l’inactivité du col)"),
+                  TextSpan(text: "Il peut être de type :\n\n"),
+                  TextSpan(text: "- non sécrétoire:", style: styleUnderline),
+                  TextSpan(text: " sec + aucun mucus ", style: styleBoldItalic),
+                  TextSpan(text: " (cases brunes, à hachurer)\n\n"),
+                  TextSpan(text: "- sécrétoire:", style: styleUnderline),
+                  TextSpan(text: " sec + mucus opaque ", style: styleBoldItalic),
+                  TextSpan(text: " (cases jaunes, à hachurer) "),
+                  TextSpan(text: "ou", style: styleUnderline),
                   TextSpan(
-                      text: "Il peut être de type :\n"
-                          "- non sécrétoire  sec + aucun mucus (cases brunes, à hachurer)\n"
-                          "- sécrétoire  sec + mucus opaque (cases jaunes, à hachurer) ou sensation d’humidité + mucus opaque (cases bleues par défaut, qu’elle pourra colorer en jaune, et hachurer).\n"
-                          "N.B. Cas d’un PIB  sec + dépôt séché (cases blanches avec ?)\n"
-                          "a) Le dépôt séché est identifié clairement comme "
-                          "glaire cervicale séchée à cases blanches à colorer en jaune et hachurer"
+                      text:
+                          " sensation d’humidité + mucus opaque (cases bleues par défaut, qu’elle pourra colorer en jaune, et hachurer).\n"),
+                  TextSpan(text: "N.B. Cas d’un PIB "),
+                  TextSpan(text: "sec + dépôt séché", style: styleBoldItalic),
+                  TextSpan(text: ""),
+                  TextSpan(text: ""),
+                  TextSpan(
+                      text: " (cases blanches avec ?)\n"
+                          "a) Le dépôt séché est identifié clairement comme : \n"
+                          "glaire cervicale séchée à cases incolores à colorer en jaune et hachurer\n"
                           "pertes vaginales séchées (sans glaire cervicale) à cases blanches à colorer en brun et hachurer\n"
-                          "b) Le dépôt n’est pas identifié clairement à laisser blanc, enlever le ? et hachurer "),
+                          "b) Le dépôt n’est pas identifié clairement -> à laisser incolore, enlever le ? et hachurer \n"),
                 ]),
               )),
               _DisplayTitle(title: "5. Onglet Historique "),

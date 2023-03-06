@@ -27,7 +27,7 @@ class ChoixFormField extends ConsumerWidget {
     return ShowComponentFile(
       title: 'ChoixFormField',
       child: Container(
-        height: choix.length * 41,
+        height: choix.length * 43,
         child: Column(
             children: choix
                 .map((state) => InkWell(

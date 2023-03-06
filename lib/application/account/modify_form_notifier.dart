@@ -56,12 +56,12 @@ class ModifyFormNotifier extends StateNotifier<ModifyFormData> {
     Either<AuthFailure, Unit>? failureOrSuccess;
 
     final isUserNameValid = state.nomUtilisateur.isValid();
-    if (isUserNameValid && state.dateNaissance != null) {
+    if (isUserNameValid) {
       state = state.copyWith(isSubmitting: true, authFailureOrSuccessOption: none());
       failureOrSuccess = await this._authRepository.modifyAccount(
             nomUtilisateur: state.nomUtilisateur,
             annePremiereRegle: state.annePremiereRegle,
-            dateNaissance: state.dateNaissance!,
+            dateNaissance: state.dateNaissance,
           );
     }
 

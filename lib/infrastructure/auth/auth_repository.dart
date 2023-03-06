@@ -18,7 +18,7 @@ abstract class AuthRepository {
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
       {required UserData userData, required Password passwordAppli, required Password passwordPDF});
   Future<Either<AuthFailure, Unit>> modifyAccount(
-      {required Nom nomUtilisateur, required int annePremiereRegle, required DateTime dateNaissance});
+      {required Nom nomUtilisateur, required int annePremiereRegle, required DateTime? dateNaissance});
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({required Password password});
   Future<Either<ReauthenticateFailure, Unit>> reauthenticateWithPassword({required Password password});
   Future<Either<AuthFailure, Unit>> deleteALL();
@@ -96,10 +96,10 @@ class FirebaseAuthFacade implements AuthRepository {
   Future<Either<AuthFailure, Unit>> modifyAccount({
     required Nom nomUtilisateur,
     required int annePremiereRegle,
-    required DateTime dateNaissance,
+    required DateTime? dateNaissance,
   }) async {
     printDev(
-        'modifyAccount({required Nom nomUtilisateur, required int annePremiereRegle, required DateTime dateNaissance,})');
+        'modifyAccount({required Nom nomUtilisateur, required int annePremiereRegle, required DateTime? dateNaissance,})');
     final prefs = await _preferences;
 
     try {

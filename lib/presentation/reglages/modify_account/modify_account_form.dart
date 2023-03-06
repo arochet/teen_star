@@ -12,6 +12,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 
+import '../../core/_components/spacing.dart';
+
 class ModifyAccountForm extends ConsumerWidget {
   const ModifyAccountForm({Key? key}) : super(key: key);
 
@@ -124,7 +126,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
             //ANNEE PREMIERE REGLE
             TextFormField(
               decoration: InputDecoration(
-                labelText: "Année des premières règles",
+                labelText: "Année des premières règles *",
               ),
               autocorrect: false,
               keyboardType: TextInputType.number,
@@ -137,10 +139,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
                 final registerData = ref.read(modifyFormNotifierProvider);
 
                 if (registerData.showErrorMessages) {
-                  if (registerData.annePremiereRegle < 1900 || registerData.annePremiereRegle > 3000)
-                    return "Année invalide";
-                  else
-                    return null;
+                  return null;
                 } else
                   return null;
               },
@@ -150,7 +149,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
             //DATE DE NAISSANCE
             TextFormField(
               decoration: InputDecoration(
-                labelText: "Date de naissance (jj.mm.aaaa)",
+                labelText: "Date de naissance (jj.mm.aaaa) *",
               ),
               autocorrect: false,
               keyboardType: TextInputType.text,
@@ -167,16 +166,14 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
                 final registerData = ref.read(modifyFormNotifierProvider);
 
                 if (registerData.showErrorMessages) {
-                  if (registerData.dateNaissance == null) {
-                    return 'Date invalide';
-                  } else {
-                    return null;
-                  }
+                  return null;
                 } else
                   return null;
               },
               controller: _controllerDateNaissance,
             ),
+            SpaceH10(),
+            Text("* Champs optionnels", style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: 8),
             //BOUTON MODIFIER
             Align(

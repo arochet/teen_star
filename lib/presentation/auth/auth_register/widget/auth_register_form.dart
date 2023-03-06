@@ -115,7 +115,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               SpaceH10(),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: "Date de naissance (jj.mm.aaaa)",
+                  labelText: "Date de naissance (jj.mm.aaaa) *",
                 ),
                 autocorrect: false,
                 textInputAction: TextInputAction.next,
@@ -134,8 +134,6 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
 
                   if (registerData.showErrorMessages) {
                     if (registerData.dateNaissance == null) {
-                      return 'Date invalide';
-                    } else {
                       return null;
                     }
                   } else
@@ -145,7 +143,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               SpaceH10(),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: "Année des 1ère règles",
+                  labelText: "Année des 1ère règles *",
                 ),
                 autocorrect: false,
                 textInputAction: TextInputAction.next,
@@ -160,14 +158,13 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
                   final registerData = ref.read(registerFormNotifierProvider);
 
                   if (registerData.showErrorMessages) {
-                    if (registerData.annePremiereRegle < 1900 || registerData.annePremiereRegle > 3000)
-                      return "Année invalide";
-                    else
-                      return null;
+                    return null;
                   } else
                     return null;
                 },
               ),
+              SpaceH10(),
+              Text("* Champs optionnels", style: Theme.of(context).textTheme.bodyMedium),
               SpaceH40(),
               Text("Ce mot de passe sera demandé à chaque ouverture d'application",
                   style: Theme.of(context).textTheme.bodyText1),

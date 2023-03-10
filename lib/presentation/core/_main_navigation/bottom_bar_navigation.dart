@@ -99,6 +99,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                 if (id == 0) {
                   ref.invalidate(allCycleProvider);
                   ref.invalidate(lastCycleId);
+                  ref.invalidate(rangeDisplayObservation);
                   final id = ref.read(idCycleCourant);
                   if (id != null) ref.invalidate(cycleProvider(id));
                 }

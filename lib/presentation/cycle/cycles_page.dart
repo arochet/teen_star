@@ -24,8 +24,8 @@ import 'widget/tableau_cycle.dart';
 final showAnalyse = StateProvider<bool>((ref) => false);
 final isSelection = StateProvider<bool>((ref) => false);
 final observationSectionne = StateProvider<List<Observation>>((ref) => []);
-final rangeDisplayObservation = StateProvider<RangeValues?>(
-    (ref) => null); //On affiche les observations entre les jours 1 et 10 (par exemple)
+final rangeDisplayObservation =
+    StateProvider<int?>((ref) => null); //On affiche les observations entre les jours 1 et 10 (par exemple)
 
 class CyclesPage extends ConsumerStatefulWidget {
   const CyclesPage({Key? key}) : super(key: key);
@@ -273,13 +273,12 @@ class __BarLongCycleState extends ConsumerState<_BarLongCycle> {
                       style: Theme.of(context).textTheme.headline6),
                 )),
         onValueChanged: (int value) {
-          ref.read(rangeDisplayObservation.notifier).state = RangeValues((value - 1) * 30, value * 30);
+          ref.read(rangeDisplayObservation.notifier).state = value;
         },
         pressedColor: colorpanel(700),
         //selectedColor: colorpanel(700),
         borderColor: colorpanel(600),
         unselectedColor: colorpanel(900),
-        groupValue: 1,
       );
     }
   }

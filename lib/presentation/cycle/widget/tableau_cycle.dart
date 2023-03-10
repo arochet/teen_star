@@ -38,14 +38,15 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
 
   @override
   Widget build(BuildContext context) {
-    List<Observation> observationsAndEmpty = widget.cycle.getObservationsWithEmptyDays().toList();
+    List<Observation> observationsAndEmpty;
 
     //Affichage du tableau avec une plage de date quand il y'a trop d'observation
-    final range = ref.watch(rangeDisplayObservation);
-    if (range != null && observationsAndEmpty.length < 30) {
-      final end = range.end.toInt();
-      observationsAndEmpty = observationsAndEmpty.sublist(
-          range.start.toInt(), end > observationsAndEmpty.length ? observationsAndEmpty.length : end);
+    final int? range = ref.watch(rangeDisplayObservation);
+    if (range != null) {
+      List<List<Observation>> observationsByRange = widget.cycle.getListObservationByRange().toList();
+      observationsAndEmpty = observationsByRange[range - 1];
+    } else {
+      observationsAndEmpty = widget.cycle.getObservationsWithEmptyDays().toList();
     }
 
     //On inverse la liste

@@ -6,6 +6,7 @@ import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/providers.dart';
 
 class AppBarCycle extends ConsumerWidget {
@@ -85,6 +86,7 @@ class AppBarCycle extends ConsumerWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           ref.invalidate(cycleProvider(UniqueId.fromUniqueInt(cyclePrecedent!.id!)));
+                          ref.invalidate(rangeDisplayObservation);
                           ref.read(idCycleCourant.notifier).state =
                               UniqueId.fromUniqueInt(cyclePrecedent!.id!);
                         },
@@ -108,6 +110,7 @@ class AppBarCycle extends ConsumerWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           ref.invalidate(cycleProvider(UniqueId.fromUniqueInt(cycleSuivant!.id!)));
+                          ref.invalidate(rangeDisplayObservation);
                           ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(cycleSuivant!.id!);
                         },
                         child: Icon(Icons.arrow_forward_ios, size: 18, color: colorpanel(50)),

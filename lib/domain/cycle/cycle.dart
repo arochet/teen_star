@@ -41,10 +41,12 @@ abstract class Cycle with _$Cycle {
     for (var observation in this.observations) {
       if (observation.date!.isAfter(lastDayOfCycleWithEmptyDays)) {
         lastDayOfCycleWithEmptyDays = observation.date!;
+      } else if (observation.date!.isBefore(firstDayOfCycle!)) {
+        firstDayOfCycle = observation.date;
       }
     }
 
-    int nbDays = AppDateUtils.diffInDaysWith(lastDayOfCycleWithEmptyDays, firstDayOfCycle) + 1;
+    int nbDays = AppDateUtils.diffInDaysWith(lastDayOfCycleWithEmptyDays, firstDayOfCycle!) + 1;
     for (int i = 0; i < nbDays; i++) {
       DateTime day = firstDayOfCycle.add(Duration(days: i));
       List<Observation> obs =

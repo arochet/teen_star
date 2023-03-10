@@ -126,10 +126,20 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             children: [
               Text("Date:", style: Theme.of(context).textTheme.headline4),
               Expanded(child: Container()),
-              DefaultPanel(
-                child: Text(
-                    AppDateUtils.isToday(form.date) ? 'Aujourd\'hui' : AppDateUtils.formatDate(form.date),
-                    style: Theme.of(context).textTheme.headline5),
+              InkWell(
+                onTap: () async {
+                  DateTime? date = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2021),
+                      lastDate: DateTime(2071));
+                  if (date != null) notifierForm.dateChanged(date);
+                },
+                child: DefaultPanel(
+                  child: Text(
+                      AppDateUtils.isToday(form.date) ? 'Aujourd\'hui' : AppDateUtils.formatDate(form.date),
+                      style: Theme.of(context).textTheme.headline5),
+                ),
               )
             ],
           ),

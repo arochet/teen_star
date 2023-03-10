@@ -64,6 +64,22 @@ abstract class Cycle with _$Cycle {
     return observationsWithEmptyDays;
   }
 
+  //Nombre de jours de cycle
+  int getNumberOfDays() {
+    List<Observation> observationsWithEmptyDays = [];
+    if (this.observations.length == 0) return 0;
+    DateTime? firstDayOfCycle = this.observations.first.date?.toDate();
+
+    DateTime lastDayOfCycleWithEmptyDays = firstDayOfCycle!;
+    for (var observation in this.observations) {
+      if (observation.date!.isAfter(lastDayOfCycleWithEmptyDays)) {
+        lastDayOfCycleWithEmptyDays = observation.date!;
+      }
+    }
+    int nbDays = AppDateUtils.diffInDaysWith(lastDayOfCycleWithEmptyDays, firstDayOfCycle) + 1;
+    return nbDays;
+  }
+
   static UniqueId? lastId(List<Cycle> list) {
     if (list.length == 0) {
       print('List is empty for lastId');

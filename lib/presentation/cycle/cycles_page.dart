@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
@@ -23,6 +24,8 @@ import 'widget/tableau_cycle.dart';
 final showAnalyse = StateProvider<bool>((ref) => false);
 final isSelection = StateProvider<bool>((ref) => false);
 final observationSectionne = StateProvider<List<Observation>>((ref) => []);
+final rangeDisplayObservation = StateProvider<RangeValues?>(
+    (ref) => null); //On affiche les observations entre les jours 1 et 10 (par exemple)
 
 class CyclesPage extends ConsumerStatefulWidget {
   const CyclesPage({Key? key}) : super(key: key);
@@ -159,6 +162,7 @@ class _Cycle extends ConsumerWidget {
                           style: buttonLittleSecondary),
                     ), */
                   _ShowAnalyse(),
+                  _BarLongCycle(cycle),
                   if (selection)
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -238,5 +242,45 @@ class __ShowAnalyseState extends ConsumerState<_ShowAnalyse> {
         ),
       ),
     );
+  }
+}
+
+class _BarLongCycle extends ConsumerStatefulWidget {
+  final Cycle cycle;
+  const _BarLongCycle(this.cycle, {Key? key}) : super(key: key);
+
+  @override
+  __BarLongCycleState createState() => __BarLongCycleState();
+}
+
+class __BarLongCycleState extends ConsumerState<_BarLongCycle> {
+  @override
+  Widget build(BuildContext context) {
+    int nbDays = widget.cycle.getNumberOfDays(); //Lourd en calcul !
+    if (nbDays < 31)
+      return Container();
+    else {
+      final List<int> list = List.generate(
+        (nbDays / 30).ceil(),
+        (index) => index + 1,
+      );
+      return CupertinoSegmentedControl<int>(
+        children: Map<int, Widget>.fromIterable(list,
+            key: (v) => v,
+            value: (v) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 4),
+                  child: Text("${widget.cycle.id.getOrCrash()}.$v",
+                      style: Theme.of(context).textTheme.headline6),
+                )),
+        onValueChanged: (int value) {
+          ref.read(rangeDisplayObservation.notifier).state = RangeValues((value - 1) * 30, value * 30);
+        },
+        pressedColor: colorpanel(700),
+        //selectedColor: colorpanel(700),
+        borderColor: colorpanel(600),
+        unselectedColor: colorpanel(900),
+        groupValue: 1,
+      );
+    }
   }
 }

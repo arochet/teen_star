@@ -13,6 +13,7 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_main_navigation/bottom_bar_navigation.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/text_utils.dart';
+import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -53,6 +54,7 @@ class ObservationFormProvider extends ConsumerWidget {
                   //L'observation a été ajoutée, on recharge les données
                   ref.invalidate(allCycleProvider);
                   ref.invalidate(lastCycleId);
+                  ref.invalidate(rangeDisplayObservation);
 
                   await Future.delayed(Duration(milliseconds: 50));
                   final async = await ref.read(allCycleProvider.future);

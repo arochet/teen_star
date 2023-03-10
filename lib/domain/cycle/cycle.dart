@@ -80,6 +80,26 @@ abstract class Cycle with _$Cycle {
     return nbDays;
   }
 
+  List<List<Observation>> getListObservationByRange() {
+    List<List<Observation>> list = [];
+    int nbDays = this.getNumberOfDays();
+    List<Observation> listObservation = this.getObservationsWithEmptyDays();
+
+    //Return list observation by range of 30
+    int nbRange = (nbDays / 30).ceil();
+
+    for (int i = 0; i < nbRange; i++) {
+      int start = i * 30;
+      int end = (i + 1) * 30;
+      if (end > nbDays) {
+        end = nbDays;
+      }
+      list.add(listObservation.sublist(start, end));
+    }
+
+    return list;
+  }
+
   static UniqueId? lastId(List<Cycle> list) {
     if (list.length == 0) {
       print('List is empty for lastId');

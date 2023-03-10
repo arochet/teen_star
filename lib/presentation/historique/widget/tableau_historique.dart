@@ -20,25 +20,36 @@ class TableauHistorique extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //Titre des colonnes. Exemple : Cycle 1, Cycle 2, Cycle 3
-    final List<String> title = listHistorique.map((e) => 'Cycle ${e.id.getOrCrash()}').toList();
+    List<String> title = [];
+    List<Cycle> tmpListCycle = [];
+    for (var cycle in listHistorique) {
+      List<List<Observation>> listObservation = cycle.getListObservationByRange();
+      for (int i = 0; i < listObservation.length; i++) {
+        title.add(listObservation.length == 1
+            ? ' Cycle ${cycle.id.getOrCrash()} '
+            : ' Cycle ${cycle.id.getOrCrash()}.${i + 1} ');
+        tmpListCycle.add(
+            Cycle(id: cycle.id, observations: listObservation[i], idJourneeSoleil: cycle.idJourneeSoleil));
+      }
+    }
 
     return ShowComponentFile(
       title: 'TableauHistorique',
       child: StickyHeadersTable(
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) =>
-            _CellHeader(title[colulmnIndex], listHistorique[colulmnIndex].id), //Titre des colonnes
+            _CellHeader(title[colulmnIndex], tmpListCycle[colulmnIndex].id), //Titre des colonnes
         contentCellBuilder: (int columnIndex, int rowIndex) {
-          List<Observation> listObservation = listHistorique[columnIndex].observations;
+          List<Observation> listObservation = tmpListCycle[columnIndex].observations;
           // Cellule observation
-          if (columnIndex < listHistorique.length) {
+          if (columnIndex < tmpListCycle.length) {
             if (rowIndex < listObservation.length) {
               if (listObservation[rowIndex].isNone)
                 return _CellEmpty();
               else
                 return _Cell(
                   observation: listObservation[rowIndex],
-                  isJourSommet: listHistorique[columnIndex].idJourneeSoleil.getOrCrash() ==
+                  isJourSommet: tmpListCycle[columnIndex].idJourneeSoleil.getOrCrash() ==
                       listObservation[rowIndex].id.getOrCrash(),
                   isInfertile: listObservation[rowIndex].jourFertile == false,
                 );
@@ -49,7 +60,7 @@ class TableauHistorique extends ConsumerWidget {
             return _CellEmpty();
           }
         },
-        rowsLength: _getCyclePlusLong(listHistorique),
+        rowsLength: /* _getCyclePlusLong(listHistorique) */ 30,
         rowsTitleBuilder: (int rowIndex) => _CellObservation('${rowIndex + 1}'),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
@@ -61,17 +72,18 @@ class TableauHistorique extends ConsumerWidget {
     );
   }
 
-  int _getCyclePlusLong(List<Cycle> listHistorique) {
+  /* int _getCyclePlusLong(List<Cycle> listHistorique) {
     int lenght = 0;
 
     for (var cycle in listHistorique) {
-      if (cycle.getObservationsWithEmptyDays(allowDoubleDays: false).length > lenght) {
-        lenght = cycle.getObservationsWithEmptyDays(allowDoubleDays: false).length;
+      int nbDays = cycle.getNumberOfDays();
+      if (nbDays > lenght) {
+        lenght = nbDays;
       }
     }
 
     return lenght;
-  }
+  } */
 }
 
 class _Cell extends StatelessWidget {

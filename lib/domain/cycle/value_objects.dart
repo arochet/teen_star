@@ -129,7 +129,7 @@ extension ParseToSringSensation on SensationState {
       case SensationState.mouille:
         return 'M';
       case SensationState.glissantLubrifie:
-        return 'GL';
+        return 'L';
       case SensationState.nonpercu:
         return 'np';
       case SensationState.autre:

@@ -257,11 +257,12 @@ class __BarLongCycleState extends ConsumerState<_BarLongCycle> {
   @override
   Widget build(BuildContext context) {
     int nbDays = widget.cycle.getNumberOfDays(); //Lourd en calcul !
-    if (nbDays < 31)
+    const nbCyleDisplay = 35;
+    if (nbDays < nbCyleDisplay + 1)
       return Container();
     else {
       final List<int> list = List.generate(
-        (nbDays / 30).ceil(),
+        (nbDays / nbCyleDisplay).ceil(),
         (index) => index + 1,
       );
       return CupertinoSegmentedControl<int>(

@@ -86,13 +86,14 @@ abstract class Cycle with _$Cycle {
     List<List<Observation>> list = [];
     int nbDays = this.getNumberOfDays();
     List<Observation> listObservation = this.getObservationsWithEmptyDays();
+    const nbCyleDisplay = 35;
 
-    //Return list observation by range of 30
-    int nbRange = (nbDays / 30).ceil();
+    //Return list observation by range of 35
+    int nbRange = (nbDays / nbCyleDisplay).ceil();
 
     for (int i = 0; i < nbRange; i++) {
-      int start = i * 30;
-      int end = (i + 1) * 30;
+      int start = i * nbCyleDisplay;
+      int end = (i + 1) * nbCyleDisplay;
       if (end > nbDays) {
         end = nbDays;
       }

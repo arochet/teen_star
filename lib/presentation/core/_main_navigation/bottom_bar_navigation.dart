@@ -165,7 +165,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
             (List<CycleDTO> listCyclesDTO) {
               if (listCyclesDTO.length == 0) {
                 //PAGE : Pas de cycle
-                return Text("TeenSTAR", style: Theme.of(context).textTheme.headline4);
+                return Text("CEPP", style: Theme.of(context).textTheme.headline4);
               } else {
                 if (idCourant == null) {
                   //PAGE : Erreur sur l'id du cycle courant

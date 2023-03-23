@@ -1,6 +1,6 @@
 {
     "language": "Français",
-    "nomprojet": "TeenSTAR",
+    "nomprojet": "CEPP",
     "helloworld": "Bonjour le monde",
     "seconnecter": "Se connecter",
     "sinscrire": "S'inscrire",
@@ -23,7 +23,7 @@
     "informationspersonnelles": "Informations personnelles",
     "modifier": "Modifier",
     "sedeconnecter": "Se déconnecter",
-    "modifierprofil": "Modifier le profile",
+    "modifierprofil": "Modifier le profil",
     "modifiermotdepasse": "Modifier le mot de passe",
     "supprimerlecompte" : "Supprimer le compte",
     "confirmervotremotdepasse" : "Confirmez votre mot de passe",

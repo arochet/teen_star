@@ -233,7 +233,9 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
           Text("Douleurs", style: Theme.of(context).textTheme.headline4),
           const SizedBox(height: 5),
           ChoixFormField(
-            choix: DouleurState.values.where((state) => state != DouleurState.none).toList(),
+            choix: DouleurState.values
+                .where((state) => state != DouleurState.none && state != DouleurState.aucune)
+                .toList(),
             onSelect: (state) => notifierForm.douleursChanged(state as DouleurState),
             currentStates: form.douleurs.map((e) => e.getOrCrash()).toList(),
             titre: (state) => (state as DouleurState).toDisplayString(),

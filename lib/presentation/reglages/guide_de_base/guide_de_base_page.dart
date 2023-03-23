@@ -66,7 +66,7 @@ class Guide_de_basePage extends StatelessWidget {
                 TextSpan(
                     text: "enregistrer LE SOIR le signe le plus fertile de la journée"
                         "(SENSATION et OBSERVATION)."
-                        "Parmi les NOTES possibles, #1 et #1 sont deux types d'évènements de votre choix toujours les"
+                        "Parmi les NOTES possibles, #1 et #2 sont deux types d'évènements de votre choix toujours les "
                         "mêmes et --> correspond à voyage ou horaires inhabituels (décalage horaire, coucher tardif,"
                         "travail de nuit, ...). "),
                 TextSpan(text: " dès le 1er jour des règles, sinon continuer le cycle en cours."),

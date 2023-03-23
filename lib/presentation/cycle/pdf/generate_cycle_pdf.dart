@@ -60,7 +60,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
 
   //IMAGE
   final PdfBitmap image = PdfBitmap(
-    (await rootBundle.load(AssetsPath.icon_humeur_neutre)).buffer.asUint8List(),
+    (await rootBundle.load(AssetsPath.icon_humeur_pas_emotion_particuliere)).buffer.asUint8List(),
   );
 
   //POUR CHAQUE CYCLE

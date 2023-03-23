@@ -35,7 +35,7 @@ class BoutonPDF extends StatelessWidget {
 
           await OpenFilex.open(path);
         },
-        label: Text("Version PDF"),
+        label: Text("Version PDF sur les 2 guides"),
         icon: Icon(Icons.picture_as_pdf),
         style: buttonLittleSecondary,
       ),

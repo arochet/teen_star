@@ -276,7 +276,7 @@ extension ParseToSringMucus on MucusState {
       case MucusState.nuageuxATransparent_Elastique:
         return 'Nuageux (blanc) à transparent; élastique';
       case MucusState.transparentFilantOuTresFluide:
-        return 'Transparent filant (± blanc d\'oeuf), ou très fluide (±eau)';
+        return 'Transparent filant (~ blanc d\'oeuf), ou très fluide (~eau)';
       case MucusState.aucunMucusVisible:
         return 'Aucun mucus visible';
       case MucusState.autre:
@@ -515,7 +515,7 @@ extension ParseToSringHumeur on HumeurState {
       case HumeurState.bonne:
         return 'Bonne';
       case HumeurState.pasEmotionParticuliere:
-        return 'Pas d\'émotion particulière';
+        return 'Pas d\'émotion particulière, équilibre';
       case HumeurState.EnvieEtreTranquille:
         return 'Envie d\'être tranquille';
       case HumeurState.humeurChangeante:
@@ -523,7 +523,7 @@ extension ParseToSringHumeur on HumeurState {
       case HumeurState.nervositeIrritable:
         return 'Nervosité Irritable';
       case HumeurState.tristesse:
-        return 'Tristesse';
+        return 'Tristesse Découragement Hypersensibilité';
       case HumeurState.autre:
         return 'Autre';
       case HumeurState.none:

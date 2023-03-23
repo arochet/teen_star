@@ -35,7 +35,6 @@ class AssetsPath {
   static const String icon_humeur_envie_tranquille =
       'assets/icon_observation/icon_humeur_envie_tranquille.png';
   static const String icon_humeur_nervosite = 'assets/icon_observation/icon_humeur_nervosite.png';
-  static const String icon_humeur_neutre = 'assets/icon_observation/icon_humeur_neutre.png';
   static const String icon_humeur_tres_bonne = 'assets/icon_observation/icon_humeur_tres_bonne.png';
   static const String icon_humeur_tristesse = 'assets/icon_observation/icon_humeur_tristesse.png';
   static const String icon_fleur_sommet = 'assets/icon_app/icon_fleur_sommet.png';

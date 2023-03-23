@@ -36,12 +36,12 @@ class PanelReglagesAutre extends StatelessWidget {
           onTap: () {},
           enable: false,
         ), */
-        ItemPanelList(
+        /* ItemPanelList(
           title: 'Lire mes notes confidentielles',
           icon: Icons.mail_rounded,
           onTap: () {},
           enable: false,
-        ),
+        ), */
         ItemPanelList(
           title: 'Info sur l\'application',
           icon: Icons.info,

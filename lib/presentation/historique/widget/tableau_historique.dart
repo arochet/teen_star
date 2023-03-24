@@ -23,11 +23,11 @@ class TableauHistorique extends ConsumerWidget {
     List<String> title = [];
     List<Cycle> tmpListCycle = [];
     for (var cycle in listHistorique) {
-      List<List<Observation>> listObservation = cycle.getListObservationByRange();
+      List<List<Observation>> listObservation = cycle.getListObservationByRange().reversed.toList();
       for (int i = 0; i < listObservation.length; i++) {
         title.add(listObservation.length == 1
             ? ' Cycle ${cycle.id.getOrCrash()} '
-            : ' Cycle ${cycle.id.getOrCrash()}.${i + 1} ');
+            : ' Cycle ${cycle.id.getOrCrash()}.${listObservation.length - i} ');
         tmpListCycle.add(
             Cycle(id: cycle.id, observations: listObservation[i], idJourneeSoleil: cycle.idJourneeSoleil));
       }
@@ -60,7 +60,7 @@ class TableauHistorique extends ConsumerWidget {
             return _CellEmpty();
           }
         },
-        rowsLength: /* _getCyclePlusLong(listHistorique) */ 30,
+        rowsLength: /* _getCyclePlusLong(listHistorique) */ 35,
         rowsTitleBuilder: (int rowIndex) => _CellObservation('${rowIndex + 1}'),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
@@ -107,7 +107,7 @@ class _Cell extends StatelessWidget {
       children: [
         if (isJourSommet)
           Center(
-              child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.white, width: 30, height: 30)),
+              child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.black, width: 30, height: 30)),
         Center(
           child: LittleBox(
             width: 40,
@@ -118,7 +118,7 @@ class _Cell extends StatelessWidget {
                 if (isJourSommet)
                   Center(
                       child: Image.asset(AssetsPath.icon_fleur_sommet,
-                          color: Colors.white, width: 30, height: 30)),
+                          color: Colors.black, width: 30, height: 30)),
                 if (isInfertile)
                   Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40),
                 if (observation.sensation?.getOrCrash() == SensationState.autre ||

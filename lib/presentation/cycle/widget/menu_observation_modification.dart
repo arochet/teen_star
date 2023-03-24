@@ -17,7 +17,8 @@ afficherModalModificationObservation(
   showCupertinoModalPopup<void>(
     context: context,
     builder: (BuildContext context) => CupertinoActionSheet(
-      title: Text("Observation du J${cycle.getDayOfObservation(observation)}"),
+      title: Text(
+          "Observation du J${cycle.getDayOfObservation(observation, cycle.getDateObservationFirstDay())}"),
       message: Text("${AppDateUtils.formatDate(observation.date, "EEEE d MMMM yyyy")}"),
       cancelButton: CupertinoActionSheetAction(
         onPressed: () async {
@@ -29,7 +30,7 @@ afficherModalModificationObservation(
         CupertinoActionSheetAction(
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerJourSommet(cycle, observation.id);
-            ref.read(showAnalyse.notifier).state = false;
+            ref.read(showAnalyse.notifier).state = true;
             refreshAndPop(context, ref);
           },
           child: Text('Marquer comme jour Sommet'),

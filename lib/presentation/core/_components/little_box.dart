@@ -1,5 +1,3 @@
-import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class LittleBox extends StatelessWidget {
@@ -24,7 +22,7 @@ class LittleBox extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(5)),
           child: Container(
             child: child,
-            color: color ?? colorpanel(700),
+            color: color /* ?? colorpanel(700) */,
           )),
     );
   }

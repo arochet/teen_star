@@ -26,6 +26,7 @@ abstract class ICycleRepository {
   Future<Unit> marquerComme(Observation observation, int i);
   Future<Unit> modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state);
   Future<Unit> marquerJourFertile(List<Observation> observation, bool fertile);
+  Future<Unit> enleverPointInterrogation(List<Observation> observation, bool pointInterrogation);
   Future showTables();
 }
 
@@ -267,6 +268,16 @@ class CycleRepository implements ICycleRepository {
     printDev('marquerJourInfertile(List<Observation> observation)');
     for (var obs in observation) {
       await _database.update(db_observation, {'jourFertile': fertile ? 1 : 0},
+          where: 'id = ?', whereArgs: [obs.id.getOrCrash()]);
+    }
+    return unit;
+  }
+
+  @override
+  Future<Unit> enleverPointInterrogation(List<Observation> observation, bool pointInterrogation) async {
+    printDev('enleverPointInterrogation(List<Observation> observation, bool pointInterrogation)');
+    for (var obs in observation) {
+      await _database.update(db_observation, {'enleverPointInterrogation': pointInterrogation ? 1 : 0},
           where: 'id = ?', whereArgs: [obs.id.getOrCrash()]);
     }
     return unit;

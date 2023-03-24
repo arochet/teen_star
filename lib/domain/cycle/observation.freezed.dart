@@ -36,7 +36,9 @@ mixin _$Observation {
   String? get notesConfidentielles => throw _privateConstructorUsedError;
   String? get commentaireAnimatrice => throw _privateConstructorUsedError;
   int? get marque => throw _privateConstructorUsedError; //Jour marqué 1,2,3
-  bool? get jourFertile => throw _privateConstructorUsedError;
+  bool? get jourFertile =>
+      throw _privateConstructorUsedError; //Jour de certitude d'infertilité, sinon il y'a toujours le doute.
+  bool? get enleverPointInterrogation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ObservationCopyWith<Observation> get copyWith =>
@@ -69,7 +71,8 @@ abstract class $ObservationCopyWith<$Res> {
       String? notesConfidentielles,
       String? commentaireAnimatrice,
       int? marque,
-      bool? jourFertile});
+      bool? jourFertile,
+      bool? enleverPointInterrogation});
 }
 
 /// @nodoc
@@ -105,6 +108,7 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
     Object? commentaireAnimatrice = freezed,
     Object? marque = freezed,
     Object? jourFertile = freezed,
+    Object? enleverPointInterrogation = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -187,6 +191,10 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
           ? _value.jourFertile
           : jourFertile // ignore: cast_nullable_to_non_nullable
               as bool?,
+      enleverPointInterrogation: freezed == enleverPointInterrogation
+          ? _value.enleverPointInterrogation
+          : enleverPointInterrogation // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -219,7 +227,8 @@ abstract class _$$_ObservationCopyWith<$Res>
       String? notesConfidentielles,
       String? commentaireAnimatrice,
       int? marque,
-      bool? jourFertile});
+      bool? jourFertile,
+      bool? enleverPointInterrogation});
 }
 
 /// @nodoc
@@ -253,6 +262,7 @@ class __$$_ObservationCopyWithImpl<$Res>
     Object? commentaireAnimatrice = freezed,
     Object? marque = freezed,
     Object? jourFertile = freezed,
+    Object? enleverPointInterrogation = freezed,
   }) {
     return _then(_$_Observation(
       id: null == id
@@ -335,6 +345,10 @@ class __$$_ObservationCopyWithImpl<$Res>
           ? _value.jourFertile
           : jourFertile // ignore: cast_nullable_to_non_nullable
               as bool?,
+      enleverPointInterrogation: freezed == enleverPointInterrogation
+          ? _value.enleverPointInterrogation
+          : enleverPointInterrogation // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -362,7 +376,8 @@ class _$_Observation extends _Observation {
       required this.notesConfidentielles,
       required this.commentaireAnimatrice,
       required this.marque,
-      required this.jourFertile})
+      required this.jourFertile,
+      required this.enleverPointInterrogation})
       : _douleurs = douleurs,
         _evenements = evenements,
         super._();
@@ -425,11 +440,9 @@ class _$_Observation extends _Observation {
 //Jour marqué 1,2,3
   @override
   final bool? jourFertile;
-
+//Jour de certitude d'infertilité, sinon il y'a toujours le doute.
   @override
-  String toString() {
-    return 'Observation(id: $id, date: $date, couleur: $couleur, analyse: $analyse, sensation: $sensation, sensationsAutre: $sensationsAutre, sang: $sang, mucus: $mucus, mucusAutre: $mucusAutre, douleurs: $douleurs, douleursAutre: $douleursAutre, evenements: $evenements, evenementsAutre: $evenementsAutre, temperatureBasale: $temperatureBasale, humeur: $humeur, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice, marque: $marque, jourFertile: $jourFertile)';
-  }
+  final bool? enleverPointInterrogation;
 
   @override
   bool operator ==(dynamic other) {
@@ -466,7 +479,10 @@ class _$_Observation extends _Observation {
                 other.commentaireAnimatrice == commentaireAnimatrice) &&
             (identical(other.marque, marque) || other.marque == marque) &&
             (identical(other.jourFertile, jourFertile) ||
-                other.jourFertile == jourFertile));
+                other.jourFertile == jourFertile) &&
+            (identical(other.enleverPointInterrogation,
+                    enleverPointInterrogation) ||
+                other.enleverPointInterrogation == enleverPointInterrogation));
   }
 
   @override
@@ -491,7 +507,8 @@ class _$_Observation extends _Observation {
         notesConfidentielles,
         commentaireAnimatrice,
         marque,
-        jourFertile
+        jourFertile,
+        enleverPointInterrogation
       ]);
 
   @JsonKey(ignore: true)
@@ -522,7 +539,8 @@ abstract class _Observation extends Observation {
       required final String? notesConfidentielles,
       required final String? commentaireAnimatrice,
       required final int? marque,
-      required final bool? jourFertile}) = _$_Observation;
+      required final bool? jourFertile,
+      required final bool? enleverPointInterrogation}) = _$_Observation;
   const _Observation._() : super._();
 
   @override
@@ -565,6 +583,8 @@ abstract class _Observation extends Observation {
   int? get marque;
   @override //Jour marqué 1,2,3
   bool? get jourFertile;
+  @override //Jour de certitude d'infertilité, sinon il y'a toujours le doute.
+  bool? get enleverPointInterrogation;
   @override
   @JsonKey(ignore: true)
   _$$_ObservationCopyWith<_$_Observation> get copyWith =>

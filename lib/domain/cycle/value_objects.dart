@@ -419,7 +419,17 @@ class Douleur extends ValueObject<DouleurState> {
   const Douleur._(this.value);
 }
 
-enum EvenementState { fatigue, stress, voyage, personnelType1, personnelType2, autre, none }
+enum EvenementState {
+  fatigue,
+  stress,
+  voyage,
+  personnelType1,
+  personnelType2,
+  maladie,
+  medicament,
+  autre,
+  none
+}
 
 extension ParseToSringEvenement on EvenementState {
   String toShortString() {
@@ -433,13 +443,40 @@ extension ParseToSringEvenement on EvenementState {
       case EvenementState.stress:
         return 'Stress';
       case EvenementState.voyage:
-        return 'Voyage';
+        return 'Voyage; horaires inhabituels';
       case EvenementState.personnelType1:
         return 'Personnel Type 1';
       case EvenementState.personnelType2:
         return 'Personnel Type 2';
+      case EvenementState.maladie:
+        return 'Maladie ou fièvre';
+      case EvenementState.medicament:
+        return 'Médicament';
       case EvenementState.autre:
         return 'Autre';
+      case EvenementState.none:
+        return '';
+    }
+  }
+
+  String toDisplayShort() {
+    switch (this) {
+      case EvenementState.fatigue:
+        return 'Fat';
+      case EvenementState.stress:
+        return 'Str';
+      case EvenementState.voyage:
+        return 'Voy';
+      case EvenementState.personnelType1:
+        return 'PersT1';
+      case EvenementState.personnelType2:
+        return 'PersT2';
+      case EvenementState.maladie:
+        return 'Mal';
+      case EvenementState.medicament:
+        return 'Méd';
+      case EvenementState.autre:
+        return 'Aut';
       case EvenementState.none:
         return '';
     }
@@ -457,6 +494,10 @@ extension ParseToSringEvenement on EvenementState {
         return AssetsPath.icon_evt_perso1;
       case EvenementState.personnelType2:
         return AssetsPath.icon_evt_perso2;
+      case EvenementState.maladie:
+        return AssetsPath.icon_evt_maladie;
+      case EvenementState.medicament:
+        return AssetsPath.icon_evt_medicament;
       case EvenementState.autre:
         return AssetsPath.icon_evt_autre;
       case EvenementState.none:

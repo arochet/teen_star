@@ -55,14 +55,22 @@ Future<void> mainCommon(Environment env) async {
           'FOREIGN KEY (idJourneeSoleil) REFERENCES Observation (id) ON DELETE NO ACTION ON UPDATE NO ACTION)');
       return;
     },
+    onUpgrade: _onUpgrade,
     // Set the version. This executes the onCreate function and provides a
     // path to perform database upgrades and downgrades.
-    version: 1,
+    version: 2,
   );
 
   getIt.registerSingleton<Database>(await database);
 
   runApp(MainApp(env: env));
+}
+
+void _onUpgrade(Database db, int oldVersion, int newVersion) {
+  if (oldVersion < newVersion) {
+    // you can execute drop table and create table
+    db.execute("ALTER TABLE Observation ADD COLUMN enleverPointInterrogation INTEGER;");
+  }
 }
 
 class MainApp extends StatelessWidget {

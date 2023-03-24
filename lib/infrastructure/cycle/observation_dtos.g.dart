@@ -29,6 +29,7 @@ _$_ObservationDTO _$$_ObservationDTOFromJson(Map<String, dynamic> json) =>
       marque: json['marque'] as int?,
       jourFertile: json['jourFertile'] as int?,
       idCycle: json['idCycle'] as int?,
+      enleverPointInterrogation: json['enleverPointInterrogation'] as int?,
     );
 
 Map<String, dynamic> _$$_ObservationDTOToJson(_$_ObservationDTO instance) =>
@@ -54,4 +55,5 @@ Map<String, dynamic> _$$_ObservationDTOToJson(_$_ObservationDTO instance) =>
       'marque': instance.marque,
       'jourFertile': instance.jourFertile,
       'idCycle': instance.idCycle,
+      'enleverPointInterrogation': instance.enleverPointInterrogation,
     };

@@ -6,6 +6,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
 
 import '../pdf/generate_cycle_pdf.dart';
@@ -36,11 +37,14 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
     if (isLoading) return Container(height: 100, child: Center(child: CircularProgressIndicator()));
 
     return ShowComponentFile(
-      title: '_DialogModificationCycle',
+      title: 'DialogPDF',
       child: Container(
-        height: 200,
+        height: 210,
         child: Column(
           children: [
+            Text("Maximum 15 cycles autorisés",
+                style: Theme.of(context).textTheme.headline6?.copyWith(color: colorpanel(200))),
+            const SpaceH10(),
             Row(
               children: [
                 Text("Du cycle ", style: Theme.of(context).textTheme.headline5),

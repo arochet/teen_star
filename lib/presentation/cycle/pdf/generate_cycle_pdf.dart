@@ -40,22 +40,22 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
 
   //Entete du tableau
   final List<CellHeader> tabTitleCycle = [
-    CellHeader('Jour', width: 20),
+    CellHeader('Jour', width: 25),
     CellHeader('Date'),
     CellHeader('Couleur'),
     CellHeader('Analyse'),
     CellHeader('Sensation'),
     CellHeader('Sang'),
     CellHeader('Mucus'),
-    CellHeader('Douleurs', width: 80),
+    CellHeader('Douleurs', width: 70),
     CellHeader('Humeur'),
-    CellHeader('Evénement', width: 80),
+    CellHeader('Evénement', width: 130),
   ];
 
   final List<CellHeader> tabTitleCycleCommentaire = [
     CellHeader('Jour', width: 20),
     CellHeader('Date', width: 40),
-    CellHeader('Commentaires animatrice'),
+    CellHeader('Commentaires'),
   ];
 
   //IMAGE
@@ -70,11 +70,13 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
     //Entete du text Cycle
     PdfTextElement textElement = PdfTextElement(
         text: 'Cycle ${cycle.id.getOrCrash()}',
-        font: PdfStandardFont(PdfFontFamily.helvetica, 16),
+        font: PdfStandardFont(PdfFontFamily.helvetica, 12),
         brush: PdfBrushes.black);
 
     PdfLayoutResult? layoutResult = textElement.draw(
         page: page, bounds: Rect.fromLTWH(0, 0, page.getClientSize().width, page.getClientSize().height))!;
+
+    DateTime? datePremierJourCycle = cycle.getDateObservationFirstDay();
 
     layoutResult = tableauCycle(
         page,
@@ -83,25 +85,27 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
             .getObservationsWithEmptyDays()
             .map((Observation observation) => !observation.isNone
                 ? <_Cell>[
-                    _CellText('J${cycle.getDayOfObservation(observation)}'),
+                    _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                     _CellText(AppDateUtils.formatDate(observation.date)),
                     _CellColor(observation.couleurGeneree.toColorPDF()),
                     _CellColor(observation.analyse?.getOrCrash().toColorPDF()),
                     _CellIcon(observation.sensation?.getOrCrash().toDisplayShort() ?? ''),
                     _CellImage(listImageSang[observation.sang?.getOrCrash()]!),
                     _CellImage(listImageMucus[observation.mucus?.getOrCrash()]!),
-                    _CellList(observation.douleurs
-                            ?.map<String>((douleur) => douleur.getOrCrash().toDisplayString())
-                            .toList() ??
-                        []),
+                    _CellText((observation.douleurs
+                                ?.map<String>((douleur) => douleur.getOrCrash().toDisplayShort())
+                                .toList() ??
+                            [])
+                        .join(' ')),
                     _CellImage(listImageHumeur[observation.humeur?.getOrCrash()]!),
-                    _CellList(observation.evenements
-                            ?.map<String>((evenement) => evenement.getOrCrash().toDisplayString())
-                            .toList() ??
-                        []),
+                    _CellText((observation.evenements
+                                ?.map<String>((evenement) => evenement.getOrCrash().toDisplayShort())
+                                .toList() ??
+                            [])
+                        .join(' ')),
                   ]
                 : <_Cell>[
-                    _CellText('J${cycle.getDayOfObservation(observation)}'),
+                    _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                     _CellNone(),
                     _CellNone(),
                     _CellNone(),
@@ -131,9 +135,10 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
         tabTitleCycleCommentaire,
         cycle.observations
             .map((Observation observation) => <_Cell>[
-                  _CellText('J${cycle.getDayOfObservation(observation)}'),
+                  _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                   _CellText(AppDateUtils.formatDate(observation.date)),
-                  _CellText('${observation.commentaireAnimatrice ?? "-"}'),
+                  _CellText(
+                      '${observation.commentaireAnimatrice ?? '-'}/${observation.sensationsAutre ?? '-'}/${observation.mucusAutre ?? '-'}/${observation.douleursAutre ?? '-'}/${observation.evenementsAutre ?? '-'}/${observation.notesConfidentielles != null && observation.notesConfidentielles!.length > 1 ? '*Notes Confidentielle*' : ''}'),
                 ])
             .toList(),
         listImageMucus[MucusState.none]!,
@@ -205,7 +210,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
 }
 
 header(PdfDocument pdf, UserData? userData, List<Cycle> listCycle) {
-  final PdfPageTemplateElement headerTemplate = PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 500, 70));
+  final PdfPageTemplateElement headerTemplate = PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 500, 60));
   //Résumé / Analyse du cycle 1 au cycle 2
   headerTemplate.graphics.drawString(
       listCycle.length > 1
@@ -245,18 +250,20 @@ PdfLayoutResult? tableauCycle(PdfPage page, List<CellHeader> tabTitleHeader, Lis
   //DATA
   for (List<_Cell> rowData in data) {
     PdfGridRow row = grid.rows.add();
-    row.height = 30;
+    row.height = 18;
     for (int i = 0; i < tabTitleHeader.length; i++) {
       final cell = rowData[i];
       if (cell is _CellText)
         row.cells[i].value = cell.display();
       else if (cell is _CellColor) {
+        //CASE COULEUR
         row.cells[i].style.backgroundBrush = cell.display();
       } else if (cell is _CellIcon) {
+        //CASE ICON
         row.cells[i].imagePosition = PdfGridImagePosition.stretch;
         row.cells[i].style.backgroundImage = iconEmpty;
         row.cells[i].value = cell.display();
-        double paddH = 6;
+        double paddH = 2;
         double paddV = 12;
         row.cells[i].style.font = PdfStandardFont(PdfFontFamily.helvetica, 13);
         row.cells[i].style.cellPadding = PdfPaddings(bottom: paddH, top: paddH, right: paddV, left: paddV);
@@ -265,14 +272,17 @@ PdfLayoutResult? tableauCycle(PdfPage page, List<CellHeader> tabTitleHeader, Lis
           lineAlignment: PdfVerticalAlignment.middle,
         );
       } else if (cell is _CellImage) {
+        //CASE IMAGE
         row.cells[i].imagePosition = PdfGridImagePosition.stretch;
         row.cells[i].style.backgroundImage = cell.display();
-        double paddH = 6;
+        double paddH = 2;
         double paddV = 14;
         row.cells[i].style.cellPadding = PdfPaddings(bottom: paddH, top: paddH, right: paddV, left: paddV);
       } else if (cell is _CellNone) {
+        //CASE RIEN
         row.cells[i].value = '';
       } else {
+        //CASE AUTRE
         row.cells[i].value = cell.display();
       }
     }

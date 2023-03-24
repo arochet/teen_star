@@ -102,6 +102,13 @@ class _DialogModificationCycle extends ConsumerWidget {
             SpaceH5(),
             ElevatedButton(
               onPressed: () {
+                final listObservationSelectionnee = ref.read(observationSectionne);
+                ref
+                    .read(cycleRepositoryProvider)
+                    .enleverPointInterrogation(listObservationSelectionnee, true);
+                ref.watch(isSelection.notifier).state = false;
+                ref.watch(showAnalyse.notifier).state = true;
+                _rafraichirPage(ref);
                 Navigator.of(context).pop();
               },
               child: Text("Enlever ?"),

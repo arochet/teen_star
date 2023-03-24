@@ -50,12 +50,17 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
     }
 
     //On inverse la liste
-    observationsAndEmpty = observationsAndEmpty.reversed.toList();
+    //observationsAndEmpty = observationsAndEmpty.reversed.toList();
 
     final selection = ref.watch(isSelection);
     //Si le tableau a changé, on réinitialise la liste de sélection
     if (_selected.length != observationsAndEmpty.length || !selection) {
       _selected = List.generate(observationsAndEmpty.length, (index) => false);
+    }
+
+    //Affiche les observations
+    for (var obs in observationsAndEmpty) {
+      print('${obs.toString()}}');
     }
 
     //Titre du tableau
@@ -74,6 +79,9 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
     //Largeur des colonnes
     Map cellsWidth = {'Douleur': 120, 'Evenements': 300};
 
+    //Date du premier jour du cycle
+    DateTime? datePremierJourCycle = widget.cycle.getDateObservationFirstDay();
+
     return ShowComponentFile(
       title: 'tableau_cycle.dart',
       child: StickyHeadersTable(
@@ -83,12 +91,14 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
           underline: colulmnIndex == 1 && ref.watch(showAnalyse),
         ),
         contentCellBuilder: (int columnIndex, int rowIndex) => _Cell(
-            observationsAndEmpty[rowIndex],
-            title[columnIndex],
-            observationsAndEmpty[rowIndex].id.getOrCrash() == widget.cycle.idJourneeSoleil.getOrCrash()),
+          observationsAndEmpty[rowIndex],
+          title[columnIndex],
+          observationsAndEmpty[rowIndex].id.getOrCrash() == widget.cycle.idJourneeSoleil.getOrCrash(),
+        ),
         rowsLength: observationsAndEmpty.length,
-        rowsTitleBuilder: (int rowIndex) =>
-            _CellDay('${widget.cycle.getDayOfObservation(observationsAndEmpty[rowIndex])}', selection),
+        rowsTitleBuilder: (int rowIndex) => _CellDay(
+            '${widget.cycle.getDayOfObservation(observationsAndEmpty[rowIndex], datePremierJourCycle)}',
+            selection),
         widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 50,
@@ -201,13 +211,17 @@ class _Cell extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        //JOUR SOMMET
                         if (isJourSommet)
                           Image.asset(AssetsPath.icon_fleur_sommet,
-                              color: colorpanel(50), width: 22, height: 22),
+                              color: Colors.black, width: 22, height: 22),
+                        //MARQUE 1 2 3
                         if (observation.marque != null && observation.marque! > 0)
                           Text("${observation.marque}", style: Theme.of(context).textTheme.headline5),
+                        //POINT D'INTERROGATION
                         if (observation.sensation?.getOrCrash() == SensationState.autre ||
-                            observation.mucus?.getOrCrash() == MucusState.autre)
+                            observation.mucus?.getOrCrash() == MucusState.autre &&
+                                observation.enleverPointInterrogation != true)
                           Text("?", style: Theme.of(context).textTheme.headline5),
                       ],
                     ),
@@ -217,14 +231,14 @@ class _Cell extends StatelessWidget {
             ));
         break;
       case 'Sensation':
-        if (observation.mucus?.getOrCrash() == MucusState.none)
+        /* if (observation.mucus?.getOrCrash() == MucusState.none)
           info = _CellNone();
-        else
-          info = _LittleBoxChild(
-            IconObservation(
-                iconPath: observation.sensation?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide,
-                iconSize: 60),
-          );
+        else */
+        info = _LittleBoxChild(
+          IconObservation(
+              iconPath: observation.sensation?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide,
+              iconSize: 60),
+        );
         break;
       case 'Observation':
         info = SingleChildScrollView(
@@ -283,34 +297,37 @@ class _Cell extends StatelessWidget {
               iconPath: observation.humeur?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30);
         break;
       case 'Evenements':
-        info = SingleChildScrollView(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ...(observation.douleurs
-                      ?.map((Douleur douleur) => Padding(
-                            padding: const EdgeInsets.only(right: 2),
-                            child: _LittleBoxChild(
-                                IconObservation(iconPath: douleur.getOrCrash().toIconPath(), iconSize: 60)),
-                          ))
-                      .toList() ??
-                  []),
-              ...?observation.evenements
-                  ?.map((Evenement evt) =>
-                      _LittleBoxChild(IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 60)))
-                  .toList(),
-              if (observation.temperatureBasale != null) ...[
-                SizedBox(width: 5),
-                _LittleBoxText('${observation.temperatureBasale}°'),
+        info = Container(
+          width: 290,
+          child: SingleChildScrollView(
+            child: Wrap(
+              //mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: WrapCrossAlignment.start,
+              children: [
+                ...(observation.douleurs
+                        ?.map((Douleur douleur) => Padding(
+                              padding: const EdgeInsets.only(right: 2),
+                              child: _LittleBoxChild(
+                                  IconObservation(iconPath: douleur.getOrCrash().toIconPath(), iconSize: 60)),
+                            ))
+                        .toList() ??
+                    []),
+                ...?observation.evenements
+                    ?.map((Evenement evt) => _LittleBoxChild(
+                        IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 60)))
+                    .toList(),
+                if (observation.temperatureBasale != null) ...[
+                  SizedBox(width: 5),
+                  _LittleBoxText('${observation.temperatureBasale}°'),
+                ],
+                if (observation.notesConfidentielles != null &&
+                    observation.notesConfidentielles!.length > 1) ...[
+                  SizedBox(width: 5),
+                  _LittleBoxText('*'),
+                ],
+                const SizedBox(width: 1, height: 1),
               ],
-              if (observation.notesConfidentielles != null &&
-                  observation.notesConfidentielles!.length > 1) ...[
-                SizedBox(width: 5),
-                _LittleBoxText('*'),
-              ],
-              const SizedBox(width: 1, height: 1),
-            ],
+            ),
           ),
         );
 

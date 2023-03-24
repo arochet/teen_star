@@ -25,9 +25,22 @@ abstract class Cycle with _$Cycle {
       );
 
   //Renvoie ne numéro du jour de l'observation dans le cycle. Exemple 5 pour le 5ème jour du cycle.
-  int getDayOfObservation(Observation obs) {
-    DateTime? firstDayOfCycle = this.observations.first.date;
+  int getDayOfObservation(Observation obs, DateTime? dateFirstDayOfCycle) {
+    DateTime? firstDayOfCycle = dateFirstDayOfCycle ?? this.observations.first.date;
     return AppDateUtils.diffInDaysWith(obs.date!, firstDayOfCycle!) + 1;
+  }
+
+  DateTime? getDateObservationFirstDay() {
+    if (this.observations.length == 0) {
+      return null;
+    }
+    Observation? firstObs = this.observations.first;
+    for (var obs in this.observations) {
+      if (firstObs?.date?.isAfter(obs.date!) == true) {
+        firstObs = obs;
+      }
+    }
+    return firstObs?.date;
   }
 
   //Renvoie la liste des observations avec les jours vides entre les observations.

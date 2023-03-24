@@ -32,6 +32,7 @@ abstract class Observation with _$Observation {
     required String? commentaireAnimatrice,
     required int? marque, //Jour marqué 1,2,3
     required bool? jourFertile, //Jour de certitude d'infertilité, sinon il y'a toujours le doute.
+    required bool? enleverPointInterrogation,
   }) = _Observation;
 
   factory Observation.empty() => Observation(
@@ -55,6 +56,7 @@ abstract class Observation with _$Observation {
         commentaireAnimatrice: '',
         marque: 0,
         jourFertile: true,
+        enleverPointInterrogation: false,
       );
 
   factory Observation.none(DateTime date) => Observation(
@@ -78,6 +80,7 @@ abstract class Observation with _$Observation {
         commentaireAnimatrice: null,
         marque: null,
         jourFertile: null,
+        enleverPointInterrogation: null,
       );
 
   bool get isNone =>
@@ -128,5 +131,11 @@ abstract class Observation with _$Observation {
     } else {
       return CouleurAnalyseState.none;
     }
+  }
+
+  //Overide toString
+  @override
+  String toString() {
+    return 'Observation{id: $id, date: $date, couleur: ${couleur?.getOrCrash()}, analyse: ${analyse?.getOrCrash()}, sensation: ${sensation?.getOrCrash()}, sensationsAutre: $sensationsAutre, sang: ${sang?.getOrCrash()}, mucus: ${mucus?.getOrCrash()}, mucusAutre: $mucusAutre, douleurs: ${douleurs?.map((e) => e.getOrCrash())}, douleursAutre: $douleursAutre, evenements: ${evenements?.map((e) => e.getOrCrash())}, evenementsAutre: $evenementsAutre, temperatureBasale: $temperatureBasale, humeur: ${humeur?.getOrCrash()}, humeurAutre: $humeurAutre, notesConfidentielles: $notesConfidentielles, commentaireAnimatrice: $commentaireAnimatrice, marque: $marque, jourFertile: $jourFertile, enleverPointInterrogation: $enleverPointInterrogation}';
   }
 }

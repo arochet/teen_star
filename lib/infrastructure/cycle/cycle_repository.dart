@@ -45,6 +45,11 @@ class CycleRepository implements ICycleRepository {
     (await _database.query('sqlite_master')).forEach((row) {
       print(row.values);
     });
+
+    print('[DEV] db_observation');
+    (await _database.query(db_observation)).forEach((row) {
+      print(row.values);
+    });
   }
 
   @override
@@ -53,7 +58,8 @@ class CycleRepository implements ICycleRepository {
     try {
       //Supprime les observations du même jour
       await _database.delete(db_observation,
-          where: 'date = ?', whereArgs: [ObservationDTO.fromDomain(observation, 0).date]);
+          where: 'date = ? AND idCycle = ?',
+          whereArgs: [ObservationDTO.fromDomain(observation, 0).date, cycle?.id.getOrCrash()]);
 
       late UniqueId idCycle;
       if (cycle == null) {
@@ -63,8 +69,8 @@ class CycleRepository implements ICycleRepository {
           return left(resultCycle.foldLeft(ObservationFailure.unexpected(), (previous, r) => previous));
         }
         //Si tout va bien, on ajoute met à jour idCycle
-        resultCycle.foldRight(null, (r, previous) {
-          idCycle = UniqueId.fromUniqueInt(r);
+        resultCycle.foldRight(null, (id, previous) {
+          idCycle = UniqueId.fromUniqueInt(id);
         });
       } else {
         idCycle = cycle.id;

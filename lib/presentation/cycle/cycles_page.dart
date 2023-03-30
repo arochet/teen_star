@@ -150,7 +150,7 @@ class _Cycle extends ConsumerWidget {
                           style: buttonLittleSecondary),
                     ), */
                   //BOUTON DEVELOPPEUR
-                  /* if (ref.watch(environment).name == Environment.dev)
+                  if (ref.watch(environment).name == Environment.dev)
                     Center(
                       child: ElevatedButton(
                           onPressed: () async {
@@ -160,7 +160,7 @@ class _Cycle extends ConsumerWidget {
                           },
                           child: Text("Print Nom des tables"),
                           style: buttonLittleSecondary),
-                    ), */
+                    ),
                   _ShowAnalyse(),
                   _BarLongCycle(cycle),
                   if (selection)

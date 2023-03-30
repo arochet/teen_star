@@ -58,11 +58,6 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
       _selected = List.generate(observationsAndEmpty.length, (index) => false);
     }
 
-    //Affiche les observations
-    for (var obs in observationsAndEmpty) {
-      print('${obs.toString()}}');
-    }
-
     //Titre du tableau
     final title = [
       'Date',

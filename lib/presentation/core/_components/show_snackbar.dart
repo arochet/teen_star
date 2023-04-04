@@ -12,7 +12,7 @@ showSnackbar(BuildContext context, String text) {
 }
 
 showSnackbarCycleFailure(BuildContext context, CycleFailure failure) {
-  printDev('Erreur FATALE : $failure');
+  printDev();
   final snackBar = SnackBar(
     content: Text(failure.map(
         unexpected: (e) => 'Erreur Inattendue : ${e.erreur ?? ''}',

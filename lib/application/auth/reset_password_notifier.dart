@@ -33,7 +33,7 @@ class ResetPasswordFormNotifier extends StateNotifier<ResetPasswordFormData> {
   }
 
   resetPasswordPressed() async {
-    printDev('resetPasswordPressed()');
+    printDev();
     Either<ResetPasswordFailure, Unit>? failureOrSuccess;
 
     final isEmailValid = state.emailAddress.isValid();

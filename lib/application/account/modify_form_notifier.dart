@@ -52,7 +52,7 @@ class ModifyFormNotifier extends StateNotifier<ModifyFormData> {
   }
 
   modifyPressed() async {
-    printDev('modifyPressed');
+    printDev();
     Either<AuthFailure, Unit>? failureOrSuccess;
 
     final isUserNameValid = state.nomUtilisateur.isValid();

@@ -33,7 +33,7 @@ class SignInFormNotifier extends StateNotifier<SignInFormData> {
   }
 
   signInWithEmailAndPasswordPressed() async {
-    printDev('signInWithEmailAndPasswordPressed()');
+    printDev();
     Either<AuthFailure, Unit>? failureOrSuccess;
     final isPasswordValid = state.password.isValid();
     if (isPasswordValid) {

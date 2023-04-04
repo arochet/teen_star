@@ -33,7 +33,7 @@ class ReauthenticateFormNotifier extends StateNotifier<ReauthenticateFormData> {
   }
 
   reauthenticatePressed() async {
-    printDev('reauthenticatePressed()');
+    printDev();
     Either<ReauthenticateFailure, Unit>? failureOrSuccess;
 
     final isPasswordValid = state.password.isValid();

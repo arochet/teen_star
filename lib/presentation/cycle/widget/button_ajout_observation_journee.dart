@@ -26,7 +26,7 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
         title: 'ButtonAjoutObservationJournee',
         child: ElevatedButton(
           onPressed: () async {
-            printDev("ButtonAjoutObservationJournee onPressed");
+            printDev();
             //Affiche une boite de dialogue pour choisir si on continue le cycle ou non
             final idLastCycle = (await ref.read(lastCycleId.future)).fold((l) => null, (r) => r);
             print('idLastCycle $idLastCycle');

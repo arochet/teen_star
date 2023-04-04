@@ -74,7 +74,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                                   color: colorpanel(50)),
                               SizedBox(width: 15),
                               Flexible(
-                                child: Text("J'ai lu et j'accepte les \nconditions d'utilisations",
+                                child: Text("J'ai lu et j'accepte les \nconditions d'utilisation",
                                     style: Theme.of(context).textTheme.headline6),
                               ),
                             ],

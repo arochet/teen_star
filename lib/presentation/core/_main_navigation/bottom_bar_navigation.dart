@@ -12,6 +12,7 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/app_bar_cycle.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/dialog_pdf.dart';
+import 'package:teenstar/injection.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -60,6 +61,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                   onTap: () {
                     final notifier = ref.read(showFilePath.notifier);
                     notifier.state = !ref.read(showFilePath);
+                    getIt<AppLog>().can = ref.read(showFilePath);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -94,7 +96,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
               unselectedItemColor: colorpanel(100),
               elevation: 0,
               onTap: (id) {
-                printDev("Page: ${widget.listMenu[id]["title"]}");
+                printDev();
                 ref.read(isSelection.notifier).state = false;
                 if (id == 0) {
                   ref.invalidate(allCycleProvider);
@@ -150,7 +152,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
   }
 
   _buildAppBar(BuildContext context, WidgetRef ref, int index) {
-    //PAGE RESUME
+    //PAGE CYCLE
     if (index == 0) {
       //Id du cycle en cours
       UniqueId? idCourant = ref.watch(idCycleCourant);

@@ -8,6 +8,7 @@ import 'package:teenstar/injection.dart';
 import 'package:teenstar/PRESENTATION/core/_core/app_widget.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
+import 'PRESENTATION/core/_utils/dev_utils.dart';
 import 'config_reader.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
@@ -62,7 +63,10 @@ Future<void> mainCommon(Environment env) async {
     version: 2,
   );
 
+  //Sert à injecter la database dans l'application
   getIt.registerSingleton<Database>(await database);
+  //Sert à afficher les logs en mode dev
+  getIt.registerSingleton<AppLog>(AppLog());
 
   runApp(MainApp(env: env));
 }

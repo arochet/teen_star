@@ -32,7 +32,7 @@ class ButtonModificationObservation extends ConsumerWidget {
           children: [
             ElevatedButton(
               onPressed: () async {
-                printDev("ButtonAnnulerObservation onPressed");
+                printDev();
                 ref.watch(isSelection.notifier).state = !ref.read(isSelection);
               },
               child: Text("Annuler"),
@@ -40,7 +40,7 @@ class ButtonModificationObservation extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () async {
-                printDev("ButtonModificationObservation onPressed");
+                printDev();
                 final int nombreObservation = ref.read(observationSectionne).length;
                 //DIALOG pour la modification du cycle
                 await showDialogApp(

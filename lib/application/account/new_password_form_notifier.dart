@@ -41,7 +41,7 @@ class NewPasswordFormNotifier extends StateNotifier<NewPasswordFormData> {
   }
 
   newPasswordPressed(bool isMotDePasseAppli) async {
-    printDev('newPasswordPressed()');
+    printDev();
     Unit? failureOrSuccess;
 
     final isPasswordValid = state.password.isValid();

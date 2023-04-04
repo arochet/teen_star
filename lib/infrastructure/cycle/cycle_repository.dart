@@ -8,6 +8,8 @@ import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
+import 'package:teenstar/injection.dart';
+import 'package:teenstar/main_common.dart';
 import 'cycle_dtos.dart';
 import 'observation_dtos.dart';
 
@@ -42,11 +44,12 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future showTables() async {
+    printDev();
+
     (await _database.query('sqlite_master')).forEach((row) {
       print(row.values);
     });
 
-    print('[DEV] db_observation');
     (await _database.query(db_observation)).forEach((row) {
       print(row.values);
     });
@@ -54,7 +57,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<ObservationFailure, Unit>> createObservation(Cycle? cycle, Observation observation) async {
-    printDev('createObservation(Cycle? cycle, Observation observation)');
+    printDev();
     try {
       //Supprime les observations du même jour
       await _database.delete(db_observation,
@@ -89,7 +92,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, int>> createCycle() async {
-    printDev('createCycle()');
+    printDev();
     try {
       CycleDTO newCycle = CycleDTO(idJourneeSoleil: -1);
       int idCycle = await _database.insert(db_cycle, newCycle.toJson());
@@ -102,7 +105,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<ObservationFailure, Unit>> delete(UniqueId id) async {
-    printDev('delete(UniqueId id)');
+    printDev();
     print('id: ${id.getOrCrash()}');
     await _database.delete(db_observation, where: 'id = ?', whereArgs: [id.getOrCrash()]);
     return right(unit);
@@ -110,13 +113,13 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<ObservationFailure, Unit>> update(Observation observation) async {
-    printDev('update(Observation observation)');
+    printDev();
     return left(const ObservationFailure.unexpected());
   }
 
   @override
   Future<Either<CycleFailure, Cycle>> readCycle(UniqueId idCycle) async {
-    printDev('readCycle(UniqueId idCycle)');
+    printDev();
     try {
       //Récupère les CyclesDTO (DataTransferObject)
       final List<Map<String, dynamic>> mapsCycle =
@@ -152,7 +155,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, List<CycleDTO>>> readAllCycles() async {
-    printDev('readAllCycles()');
+    printDev();
     try {
       //Récupère les CyclesDTO (DataTransferObject)
       final List<Map<String, dynamic>> mapsCycle = await _database.query(db_cycle);
@@ -170,7 +173,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, List<Cycle>>> readListCycles(int start, int finish) async {
-    printDev('readListCycles(UniqueId start, UniqueId finish)');
+    printDev();
     try {
       //Récupère les CyclesDTO (DataTransferObject) sans les observations
       final List<Map<String, dynamic>> mapsCycle =
@@ -198,7 +201,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, List<ObservationDTO>>> readAllCyclesHistorique() async {
-    printDev('readAllCyclesHistorique()');
+    printDev();
     try {
       //Récupère les CyclesDTO (DataTransferObject)
       String sql =
@@ -218,7 +221,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, Unit>> resetAll() async {
-    printDev('resetAll()');
+    printDev();
     //Supprimer toutes les données de la base
     await _database.delete(db_cycle);
     await _database.delete(db_observation);
@@ -227,7 +230,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, Unit>> renvoieDernierCycle() async {
-    printDev('renvoieDernierCycle()');
+    printDev();
     final Either<CycleFailure, List<CycleDTO>> list = await readAllCycles();
     return list.fold((l) => left(l), (listCycle) async {
       //Il n'y a pas assez de cycle
@@ -247,7 +250,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Either<CycleFailure, Unit>> marquerJourSommet(Cycle cycle, UniqueId id) async {
-    printDev('marquerJourSommet(Cycle cycle, UniqueId id)');
+    printDev();
     await _database.update(db_cycle, {'idJourneeSoleil': id.getOrCrash()},
         where: 'id = ?', whereArgs: [cycle.id.getOrCrash()]);
     return right(unit);
@@ -255,7 +258,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Unit> marquerComme(Observation observation, int i) async {
-    printDev('marquerComme(Observation observation, int i)');
+    printDev();
     await _database.update(db_observation, {'marque': i},
         where: 'id = ?', whereArgs: [observation.id.getOrCrash()]);
     return unit;
@@ -263,7 +266,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Unit> modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state) async {
-    printDev('modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state)');
+    printDev();
     await _database.update(db_observation, {'analyse': state.toString()},
         where: 'id = ?', whereArgs: [observation.id.getOrCrash()]);
     return unit;
@@ -271,7 +274,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Unit> marquerJourFertile(List<Observation> observation, bool fertile) async {
-    printDev('marquerJourInfertile(List<Observation> observation)');
+    printDev();
     for (var obs in observation) {
       await _database.update(db_observation, {'jourFertile': fertile ? 1 : 0},
           where: 'id = ?', whereArgs: [obs.id.getOrCrash()]);
@@ -281,7 +284,7 @@ class CycleRepository implements ICycleRepository {
 
   @override
   Future<Unit> enleverPointInterrogation(List<Observation> observation, bool pointInterrogation) async {
-    printDev('enleverPointInterrogation(List<Observation> observation, bool pointInterrogation)');
+    printDev();
     for (var obs in observation) {
       await _database.update(db_observation, {'enleverPointInterrogation': pointInterrogation ? 1 : 0},
           where: 'id = ?', whereArgs: [obs.id.getOrCrash()]);

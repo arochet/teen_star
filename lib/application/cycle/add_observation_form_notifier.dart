@@ -131,7 +131,7 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
 //insert-changed
 
   addObservationPressed(Cycle? cycle) async {
-    printDev('addObservationPressed(Cycle? cycle)');
+    printDev();
     Either<ObservationFailure, Unit>? failureOrSuccess;
 
     //insert-valid-params

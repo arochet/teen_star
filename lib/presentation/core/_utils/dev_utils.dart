@@ -1,9 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:teenstar/providers.dart';
+import 'package:teenstar/injection.dart';
 
-printDev(String message) {
-  if (false) {
-    print('[DEV] $message');
+//Cette fonction affiche le nom de la fonction appelante des repositories
+printDev() {
+  bool can = getIt<AppLog>().can;
+  if (can) print('[DEV] ${getCallingFunctionName()}');
+}
+
+String? getCallingFunctionName() {
+  StackTrace stackTrace = StackTrace.current;
+  List<String> traceLines = stackTrace.toString().trim().split('\n');
+  String callerLine = traceLines[2].trim();
+  RegExp regExp = RegExp(r'#\d+\s+(.+)');
+  Match match = regExp.firstMatch(callerLine) as Match;
+  String? functionName = match.group(1);
+  return functionName;
+}
+
+class AppLog {
+  bool can = false;
+  AppLog();
+
+  void log(String message) {
+    if (can) print('AppLog: $message');
   }
 }

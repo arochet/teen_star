@@ -77,7 +77,7 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormData> {
   }
 
   registerWithEmailAndPasswordPressed() async {
-    printDev('registerWithEmailAndPasswordPressed');
+    printDev();
     Either<AuthFailure, Unit>? failureOrSuccess;
 
     final isUserNameValid = state.nomUtilisateur.isValid();

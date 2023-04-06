@@ -21,7 +21,10 @@ class ShowComponentFile extends ConsumerWidget {
       }
       return Stack(
         children: [
-          child,
+          Container(
+            child: child,
+            decoration: BoxDecoration(border: Border.all()),
+          ),
           Center(
               heightFactor: 1,
               child: Text(
@@ -29,7 +32,7 @@ class ShowComponentFile extends ConsumerWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!
-                    .copyWith(color: Colors.white, backgroundColor: Colors.black45),
+                    .copyWith(color: Colors.white, backgroundColor: Colors.black45, fontSize: 12),
                 selectionColor: Colors.red,
               )),
         ],

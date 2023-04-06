@@ -167,7 +167,7 @@ class _Cycle extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
-                        child: Text("Touchez une observation pour la sélectionner",
+                        child: Text("Toucher l'observation à compléter ou modifier",
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6

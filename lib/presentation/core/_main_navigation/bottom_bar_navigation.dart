@@ -6,6 +6,7 @@ import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
@@ -89,43 +90,46 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
         backgroundColor: colorpanel(900),
         routes: widget.listRoute,
         bottomNavigationBuilder: (_, tabsRouter) {
-          return BottomNavigationBar(
-              backgroundColor: tabsRouter.activeIndex == 2 ? colorScaffoldBarReglage : colorScaffoldBar,
-              currentIndex: tabsRouter.activeIndex,
-              selectedItemColor: actioncolor["primary"],
-              unselectedItemColor: colorpanel(100),
-              elevation: 0,
-              onTap: (id) {
-                printDev();
-                ref.read(isSelection.notifier).state = false;
-                if (id == 0) {
-                  ref.invalidate(allCycleProvider);
-                  ref.invalidate(lastCycleId);
-                  ref.invalidate(rangeDisplayObservation);
-                  final id = ref.read(idCycleCourant);
-                  if (id != null) ref.invalidate(cycleProvider(id));
-                }
-                if (id == 1) {
-                  ref.invalidate(allCycleFullProvider);
-                }
-                tabsRouter.setActiveIndex(id);
-              },
-              selectedLabelStyle: TextStyle(
-                fontFamily: Theme.of(context).textTheme.headline3?.fontFamily,
-                fontWeight: FontWeight.w600,
-              ),
-              unselectedLabelStyle: TextStyle(
-                fontFamily: Theme.of(context).textTheme.headline3?.fontFamily,
-                fontWeight: FontWeight.w600,
-              ),
-              items: widget.listMenu
-                  .map(
-                    (element) => BottomNavigationBarItem(
-                      icon: Icon(element["icon"]),
-                      label: element["title"],
-                    ),
-                  )
-                  .toList());
+          return ShowComponentFile(
+            title: 'core/_main_navigation/bottom_bar_navigation.dart',
+            child: BottomNavigationBar(
+                backgroundColor: tabsRouter.activeIndex == 2 ? colorScaffoldBarReglage : colorScaffoldBar,
+                currentIndex: tabsRouter.activeIndex,
+                selectedItemColor: actioncolor["primary"],
+                unselectedItemColor: colorpanel(100),
+                elevation: 0,
+                onTap: (id) {
+                  printDev();
+                  ref.read(isSelection.notifier).state = false;
+                  if (id == 0) {
+                    ref.invalidate(allCycleProvider);
+                    ref.invalidate(lastCycleId);
+                    ref.invalidate(rangeDisplayObservation);
+                    final id = ref.read(idCycleCourant);
+                    if (id != null) ref.invalidate(cycleProvider(id));
+                  }
+                  if (id == 1) {
+                    ref.invalidate(allCycleFullProvider);
+                  }
+                  tabsRouter.setActiveIndex(id);
+                },
+                selectedLabelStyle: TextStyle(
+                  fontFamily: Theme.of(context).textTheme.headline3?.fontFamily,
+                  fontWeight: FontWeight.w600,
+                ),
+                unselectedLabelStyle: TextStyle(
+                  fontFamily: Theme.of(context).textTheme.headline3?.fontFamily,
+                  fontWeight: FontWeight.w600,
+                ),
+                items: widget.listMenu
+                    .map(
+                      (element) => BottomNavigationBarItem(
+                        icon: Icon(element["icon"]),
+                        label: element["title"],
+                      ),
+                    )
+                    .toList()),
+          );
         },
       ),
     );

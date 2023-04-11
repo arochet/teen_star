@@ -166,12 +166,13 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               SpaceH10(),
               Text("* Champs optionnels", style: Theme.of(context).textTheme.bodyMedium),
               SpaceH40(),
-              Text("Ce mot de passe sera demandé à chaque ouverture d'application",
+              Text("Ce mot de passe sera demandé pour toute action verrouillée",
                   style: Theme.of(context).textTheme.bodyText1),
+
               SpaceH10(),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Mot de Passe Appli',
+                  labelText: 'Mot de Passe Appli (optionnel)',
                 ),
                 autocorrect: false,
                 textInputAction: TextInputAction.next,
@@ -196,7 +197,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               //MOT DE PASSE DE CONFIRMATION
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Mot de Passe Appli Confirmation',
+                  labelText: 'Mot de Passe Appli Confirmation (optionnel)',
                 ),
                 autocorrect: false,
                 textInputAction: TextInputAction.done,
@@ -218,13 +219,14 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
                     return null;
                 },
               ),
+
               SpaceH40(),
               Text("Ce mot de passe sera demandé à chaque ouverture d'un PDF",
                   style: Theme.of(context).textTheme.bodyText1),
               SpaceH10(),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Mot de Passe PDF',
+                  labelText: 'Mot de Passe PDF (optionnel)',
                 ),
                 autocorrect: false,
                 textInputAction: TextInputAction.next,
@@ -249,7 +251,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               //MOT DE PASSE DE CONFIRMATION
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Mot de Passe PDF Confirmation',
+                  labelText: 'Mot de Passe PDF Confirmation (optionnel)',
                 ),
                 autocorrect: false,
                 textInputAction: TextInputAction.done,
@@ -271,6 +273,9 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
                     return null;
                 },
               ),
+              SpaceH10(),
+              Text("Attention, aucune possibilité de récupération de mot de passe perdu",
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(fontStyle: FontStyle.italic)),
               SpaceH30(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -287,6 +292,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
                 SpaceH10(),
                 const LinearProgressIndicator(value: null)
               ],
+
               SpaceH40()
             ]),
           ),

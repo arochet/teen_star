@@ -1,12 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:teenstar/DOMAIN/core/failures.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
-import 'package:teenstar/DOMAIN/core/value_validators.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
-import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 
 enum CouleurAnalyseState { rougePlusPlus, rougePlus, rougeClair, brun, vert, jaune, bleue, none, invalide }
 
@@ -18,19 +15,19 @@ extension ParseToSringTA on CouleurAnalyseState {
   Color? toColor() {
     switch (this) {
       case CouleurAnalyseState.rougePlusPlus:
-        return Color.fromARGB(255, 221, 43, 30);
+        return Color.fromARGB(255, 197, 52, 29);
       case CouleurAnalyseState.rougePlus:
-        return Color.fromARGB(255, 223, 85, 75);
+        return Color.fromARGB(255, 202, 75, 55);
       case CouleurAnalyseState.rougeClair:
         return Color.fromARGB(255, 225, 168, 164);
       case CouleurAnalyseState.brun:
-        return Color.fromARGB(255, 142, 105, 91);
+        return Color.fromARGB(255, 198, 148, 115);
       case CouleurAnalyseState.vert:
-        return Color.fromARGB(255, 100, 197, 104);
+        return Color.fromARGB(255, 164, 187, 67);
       case CouleurAnalyseState.jaune:
-        return Color.fromARGB(255, 220, 206, 75);
+        return Color.fromARGB(255, 252, 221, 146);
       case CouleurAnalyseState.bleue:
-        return Color.fromARGB(255, 100, 134, 197);
+        return Color.fromARGB(255, 135, 178, 210);
       case CouleurAnalyseState.none:
         return null;
       case CouleurAnalyseState.invalide:

@@ -99,7 +99,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
           stickyLegendWidth: 50,
           stickyLegendHeight: 50,
           contentCellWidth: 60, //Sert à rien car il y'a widthCell
-          contentCellHeight: 50,
+          contentCellHeight: 35,
         ),
         rowSelect: (rowIndex) async {
           //Séléction de la ligne
@@ -162,6 +162,28 @@ class _Cell extends StatelessWidget {
       if (column != 'Date') return Container(width: 10, height: 10);
     }
 
+    final widgetShowTrucChelou = Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //JOUR SOMMET
+            if (isJourSommet)
+              Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.black, width: 22, height: 22),
+            //MARQUE 1 2 3
+            if (observation.marque != null && observation.marque! > 0)
+              Text("${observation.marque}", style: Theme.of(context).textTheme.headline5),
+            //POINT D'INTERROGATION
+            if (observation.sensation?.getOrCrash() == SensationState.autre ||
+                observation.mucus?.getOrCrash() == MucusState.autre &&
+                    observation.enleverPointInterrogation != true)
+              Text("?", style: Theme.of(context).textTheme.headline5),
+          ],
+        ),
+      ),
+    );
+
     switch (column) {
       case 'Date':
         info = Center(
@@ -177,51 +199,38 @@ class _Cell extends StatelessWidget {
         break;
       case 'Couleur':
         if (observation.couleurGeneree == CouleurAnalyseState.none)
-          info = _CellNone();
+          info = Stack(
+            children: [
+              _CellNone(),
+              widgetShowTrucChelou,
+            ],
+          );
         else
           info = LittleBox(
-            width: 40,
-            height: 35,
-            color: observation.couleurGeneree.toColor(),
-            child: null,
-          );
+              width: 40,
+              height: 30,
+              child: Stack(
+                children: [
+                  LittleBox(width: 40, height: 30, color: observation.couleurGeneree.toColor()),
+                  widgetShowTrucChelou,
+                ],
+              ));
         break;
       case 'Analyse':
         info = LittleBox(
             width: 40,
-            height: 35,
+            height: 30,
             child: Stack(
               children: [
                 LittleBox(
                     width: 40,
-                    height: 35,
+                    height: 30,
                     color:
                         observation.analyse?.getOrCrash().toColor() ?? observation.couleurGeneree.toColor()),
                 if (observation.jourFertile == false)
                   Image.asset(AssetsPath.icon_hachurage,
                       color: colorpanel(50), width: 40, height: 35, fit: BoxFit.fill),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        //JOUR SOMMET
-                        if (isJourSommet)
-                          Image.asset(AssetsPath.icon_fleur_sommet,
-                              color: Colors.black, width: 22, height: 22),
-                        //MARQUE 1 2 3
-                        if (observation.marque != null && observation.marque! > 0)
-                          Text("${observation.marque}", style: Theme.of(context).textTheme.headline5),
-                        //POINT D'INTERROGATION
-                        if (observation.sensation?.getOrCrash() == SensationState.autre ||
-                            observation.mucus?.getOrCrash() == MucusState.autre &&
-                                observation.enleverPointInterrogation != true)
-                          Text("?", style: Theme.of(context).textTheme.headline5),
-                      ],
-                    ),
-                  ),
-                ),
+                widgetShowTrucChelou,
               ],
             ));
         break;
@@ -232,7 +241,7 @@ class _Cell extends StatelessWidget {
         info = _LittleBoxChild(
           IconObservation(
               iconPath: observation.sensation?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide,
-              iconSize: 60),
+              iconSize: 30),
         );
         break;
       case 'Observation':
@@ -255,7 +264,7 @@ class _Cell extends StatelessWidget {
         else
           info = _LittleBoxChild(
             IconObservation(
-                iconPath: observation.sang?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 60),
+                iconPath: observation.sang?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30),
           );
         break;
       case 'Mucus':
@@ -264,7 +273,7 @@ class _Cell extends StatelessWidget {
         else
           info = _LittleBoxChild(
             IconObservation(
-                iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 60),
+                iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30),
           );
         break;
       /* case 'Douleur':
@@ -299,26 +308,32 @@ class _Cell extends StatelessWidget {
               //mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: WrapCrossAlignment.start,
               children: [
+                //Température basale
+                _LittleBoxText(
+                  observation.temperatureBasale != null ? '${observation.temperatureBasale}' : '',
+                  width: 50,
+                  fontSize: 18,
+                ),
+                // Les douleurs
                 ...(observation.douleurs
                         ?.map((Douleur douleur) => Padding(
                               padding: const EdgeInsets.only(right: 2),
                               child: _LittleBoxChild(
-                                  IconObservation(iconPath: douleur.getOrCrash().toIconPath(), iconSize: 60)),
+                                  IconObservation(iconPath: douleur.getOrCrash().toIconPath(), iconSize: 30)),
                             ))
                         .toList() ??
                     []),
+                // Les evenements
                 ...?observation.evenements
                     ?.map((Evenement evt) => _LittleBoxChild(
-                        IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 60)))
+                        IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 30)))
                     .toList(),
-                if (observation.temperatureBasale != null) ...[
-                  SizedBox(width: 5),
-                  _LittleBoxText('${observation.temperatureBasale}°'),
-                ],
+                // Les notes confidentielles
                 if (observation.notesConfidentielles != null &&
                     observation.notesConfidentielles!.length > 1) ...[
                   SizedBox(width: 5),
-                  _LittleBoxText('*'),
+                  _LittleBoxChild(
+                      IconObservation(iconPath: AssetsPath.icon_evt_confidentielle, iconSize: 30)),
                 ],
                 const SizedBox(width: 1, height: 1),
               ],
@@ -337,8 +352,12 @@ class _Cell extends StatelessWidget {
 }
 
 class _LittleBoxText extends StatelessWidget {
+  final double? width;
+  final double? fontSize;
   const _LittleBoxText(
     this.titre, {
+    this.width,
+    this.fontSize,
     Key? key,
   }) : super(key: key);
 
@@ -347,12 +366,15 @@ class _LittleBoxText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LittleBox(
-      width: 35,
+      width: width ?? 35,
       height: 35,
       child: Center(
         child: Text(titre,
             overflow: TextOverflow.fade,
-            style: Theme.of(context).textTheme.headline6?.copyWith(color: colorpanel(100), fontSize: 11)),
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                ?.copyWith(color: colorpanel(100), fontSize: fontSize ?? 11)),
       ),
     );
   }

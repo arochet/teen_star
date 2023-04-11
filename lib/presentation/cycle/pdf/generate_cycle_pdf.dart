@@ -193,7 +193,9 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
   Directory appDocDirectory = await getApplicationDocumentsDirectory();
   PdfSecurity security = pdf.security;
   security.algorithm = PdfEncryptionAlgorithm.rc4x128Bit;
-  security.userPassword = password.getOrCrash(); //Set user password
+  if (password.getOrCrash().length > 1) {
+    security.userPassword = password.getOrCrash(); //Set user password
+  }
   String path = '';
   if (Platform.isAndroid) {
     path = '/storage/emulated/0/Download/$nomFichier.pdf';

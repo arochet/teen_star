@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 
 class DefaultPanel extends StatelessWidget {
   final String? componentName;
+  final Color? color;
   const DefaultPanel({
     Key? key,
     required this.child,
+    this.color,
     this.componentName,
   }) : super(key: key);
 
@@ -21,7 +23,7 @@ class DefaultPanel extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: colorpanel(900),
+            color: color ?? colorpanel(900),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
           child: child,

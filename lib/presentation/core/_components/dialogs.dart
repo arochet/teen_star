@@ -63,11 +63,17 @@ Future<bool?> showDialogChoix(BuildContext context, String titre,
 }
 
 //PASSWORD
-Future<bool?> showDialogPassword<bool>(
+Future<Object> showDialogPassword<bool>(
     {required BuildContext context, required WidgetRef ref, required bool dissmissable}) async {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController? controller = TextEditingController();
   String? textError;
+
+  final passwordOK = await ref.read(authRepositoryProvider).checkPasswordAppli('');
+  if (passwordOK) {
+    return true;
+  }
+
   return showDialog<bool>(
     context: context,
     barrierDismissible: dissmissable == true,

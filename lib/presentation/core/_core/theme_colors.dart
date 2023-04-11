@@ -12,9 +12,9 @@ final palettecolor = [
 Color? colorpanel(int tint) {
   switch (tint) {
     case 900:
-      return Color.fromARGB(255, 239, 251, 252);
+      return Color.fromARGB(255, 243, 248, 250);
     case 800:
-      return Color.fromARGB(255, 216, 230, 237);
+      return Color.fromARGB(255, 230, 236, 238);
     case 700:
       return Color.fromARGB(255, 185, 201, 215);
     case 600:
@@ -33,7 +33,7 @@ Color? colorpanel(int tint) {
 }
 
 final actioncolor = {
-  "primary": Color(0xFF004FFF),
+  "primary": Color.fromARGB(255, 00, 69, 130),
   "secondary": Color(0xFF846A6A),
   "tertiary": Color(0xffFBFBFB),
   "confirm": Color(0xff2AFC98),

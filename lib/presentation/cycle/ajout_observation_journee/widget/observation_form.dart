@@ -136,9 +136,10 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                   if (date != null) notifierForm.dateChanged(date);
                 },
                 child: DefaultPanel(
+                  color: Color.fromARGB(255, 202, 82, 52),
                   child: Text(
                       AppDateUtils.isToday(form.date) ? 'Aujourd\'hui' : AppDateUtils.formatDate(form.date),
-                      style: Theme.of(context).textTheme.headline5),
+                      style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.white)),
                 ),
               )
             ],

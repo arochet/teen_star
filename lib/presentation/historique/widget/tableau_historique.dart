@@ -122,7 +122,6 @@ class _Cell extends StatelessWidget {
                 if (isInfertile)
                   Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40),
                 if (observation.sensation?.getOrCrash() == SensationState.autre ||
-                    observation.sensation?.getOrCrash() == SensationState.nonpercu ||
                     observation.mucus?.getOrCrash() == MucusState.autre)
                   Center(child: Text("?", style: Theme.of(context).textTheme.headline5)),
                 if (observation.marque != null && observation.marque! > 0)

@@ -65,7 +65,7 @@ Either<ValueFailure<String>, String> validateTelephone(String input) {
 
 Either<ValueFailure<String>, String> validatePassword(String input) {
   printDev();
-  if (input.length > 3) {
+  if (input.length > 3 || input.length == 0) {
     return right(input);
   } else {
     return left(ValueFailure.shortPassword(failedValue: input));

@@ -150,7 +150,7 @@ class _Cycle extends ConsumerWidget {
                           style: buttonLittleSecondary),
                     ), */
                   //BOUTON DEVELOPPEUR
-                  if (ref.watch(environment).name == Environment.dev)
+                  if (ref.watch(environment).name == Environment.dev && false)
                     Center(
                       child: ElevatedButton(
                           onPressed: () async {
@@ -232,12 +232,11 @@ class __ShowAnalyseState extends ConsumerState<_ShowAnalyse> {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
+            Expanded(child: Container()),
             Icon(ref.watch(showAnalyse) ? Icons.check_box : Icons.check_box_outline_blank,
                 color: ref.watch(showAnalyse) ? actioncolor['primary'] : colorpanel(50)),
-            SizedBox(width: 15),
-            Flexible(
-              child: Text("Afficher l'analyse", style: Theme.of(context).textTheme.headline5),
-            ),
+            SizedBox(width: 10),
+            Text("Afficher l'analyse", style: Theme.of(context).textTheme.headline5),
           ],
         ),
       ),

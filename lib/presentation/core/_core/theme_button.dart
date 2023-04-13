@@ -27,7 +27,7 @@ ButtonStyle buttonNormal(Color color, bool isWhite, bool fullWidth) => ElevatedB
       foregroundColor: isWhite ? Colors.white : Colors.black,
       elevation: 0,
       minimumSize: fullWidth ? Size(double.infinity, 30) : null,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3.0))),
     );
 
 final buttonNormalPrimary = buttonNormal(actioncolor["primary"]!, true, false);

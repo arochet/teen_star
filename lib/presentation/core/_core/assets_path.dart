@@ -27,6 +27,7 @@ class AssetsPath {
   static const String icon_sang_vide = 'assets/icon_observation/icon_sang_vide.png';
   static const String icon_temperature_basale = 'assets/icon_observation/icon_temperature_basale.png';
   static const String icon_vide = 'assets/icon_observation/icon_vide.png';
+  static const String icon_vide_verte = 'assets/icon_observation/icon_vide_verte.png';
   static const String icon_humeur_autre = 'assets/icon_observation/icon_humeur_autre.png';
   static const String icon_humeur_bonne = 'assets/icon_observation/icon_humeur_bonne.png';
   static const String icon_humeur_pas_emotion_particuliere =

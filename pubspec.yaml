@@ -127,6 +127,7 @@ flutter:
     - assets/icon_observation/icon_sang_vide.png
     - assets/icon_observation/icon_temperature_basale.png
     - assets/icon_observation/icon_vide.png
+    - assets/icon_observation/icon_vide_verte.png
     - assets/icon_observation/icon_humeur_autre.png
     - assets/icon_observation/icon_humeur_bonne.png
     - assets/icon_observation/icon_humeur_changeante.png

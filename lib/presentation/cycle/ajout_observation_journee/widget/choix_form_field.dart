@@ -11,6 +11,7 @@ class ChoixFormField extends ConsumerWidget {
   String Function(Enum) titre;
   String Function(Enum) iconPath;
   String Function(Enum)? iconTxt;
+  double Function(Enum)? height;
   List<Enum> currentStates;
   ChoixFormField(
       {Key? key,
@@ -19,6 +20,7 @@ class ChoixFormField extends ConsumerWidget {
       required this.currentStates,
       required this.titre,
       required this.iconPath,
+      this.height,
       this.iconTxt})
       : super(key: key);
 
@@ -27,8 +29,8 @@ class ChoixFormField extends ConsumerWidget {
     return ShowComponentFile(
       title: 'ChoixFormField',
       child: Container(
-        height: choix.length * 46,
-        child: Column(
+        //height: choix.length * 246,
+        child: Wrap(
             children: choix
                 .map((state) => InkWell(
                       onTap: () => onSelect(state),
@@ -38,6 +40,7 @@ class ChoixFormField extends ConsumerWidget {
                         isSelected: currentStates.contains(state),
                         iconPath: iconPath,
                         iconText: iconTxt,
+                        height: height,
                       ),
                     ))
                 .toList()),
@@ -52,12 +55,14 @@ class _Field extends StatelessWidget {
   final String Function(Enum p1) titre;
   final String Function(Enum p1) iconPath;
   final String Function(Enum p1)? iconText;
+  final double? Function(Enum p1)? height;
   _Field({
     Key? key,
     required this.titre,
     required this.state,
     required this.isSelected,
     required this.iconPath,
+    required this.height,
     this.iconText,
   }) : super(key: key);
 
@@ -66,30 +71,48 @@ class _Field extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(1.0),
       child: Container(
-        decoration: BoxDecoration(
-          color: isSelected ? actioncolor['primary'] : Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
-        ),
         child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Row(children: [
-            SizedBox(width: 2),
-            IconObservation(
-                iconPath: iconPath(state),
-                iconText: iconText != null ? iconText!(state) : null,
-                iconSize: 28),
-            SizedBox(width: 10),
-            Expanded(
-                child: Text(titre(state),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.copyWith(color: isSelected ? Colors.white : Colors.black))),
-            if (isSelected) Icon(Icons.check, size: 20),
-            SizedBox(width: 5),
-          ]),
+          padding: const EdgeInsets.all(2.0),
+          child: Container(
+            height: _getHeight(titre(state)),
+            width: 85,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: isSelected ? Color.fromARGB(255, 12, 177, 53) : Colors.transparent,
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: IconObservation(
+                      iconPath: iconPath(state),
+                      iconText: iconText != null ? iconText!(state) : null,
+                      iconSize: 70,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Expanded(
+                    child: Text(titre(state),
+                        style:
+                            Theme.of(context).textTheme.bodyText1?.copyWith(color: actioncolor['primary']))),
+                SizedBox(width: 5),
+              ],
+            ),
+          ),
         ),
       ),
     );
+  }
+
+  double _getHeight(String? title) {
+    if (title == null) {
+      return 100;
+    }
+    final double heightLine = (((title.length ~/ 8) + 1) * 15).toDouble();
+    return title != null ? (85 + heightLine).toDouble() : 100;
   }
 }

@@ -10,8 +10,10 @@ import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_main_navigation/bottom_bar_navigation.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/object_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/text_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/providers.dart';
@@ -21,6 +23,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:auto_route/src/router/auto_router_x.dart';
 
 import 'choix_form_field.dart';
+
+final isFirstPage = StateProvider<bool>((ref) => true);
 
 class ObservationFormProvider extends ConsumerWidget {
   Cycle? cycle;
@@ -111,42 +115,17 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
   Widget build(BuildContext context) {
     final form = ref.watch(cycleFormNotifierProvider);
     final notifierForm = ref.read(cycleFormNotifierProvider.notifier);
+
+    bool first = ref.watch(isFirstPage);
     //Formulaire de l'observation
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Form(
         autovalidateMode: AutovalidateMode.always,
         child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
-          Center(
-              child: Text(widget.cycle != null ? "Cycle ${widget.cycle!.id.getOrCrash()}" : "Nouveau cycle",
-                  style: Theme.of(context).textTheme.headline3)),
-          const SizedBox(height: 8),
-          //Date de l'observation
-          Row(
-            children: [
-              Text("Date:", style: Theme.of(context).textTheme.headline4),
-              Expanded(child: Container()),
-              InkWell(
-                onTap: () async {
-                  DateTime? date = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2021),
-                      lastDate: DateTime(2071));
-                  if (date != null) notifierForm.dateChanged(date);
-                },
-                child: DefaultPanel(
-                  color: Color.fromARGB(255, 202, 82, 52),
-                  child: Text(
-                      AppDateUtils.isToday(form.date) ? 'Aujourd\'hui' : AppDateUtils.formatDate(form.date),
-                      style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.white)),
-                ),
-              )
-            ],
-          ),
-          SpaceH30(),
+          SpaceH10(),
           //Bouton pour enregistrer l'observation en mode dev
-          if (ref.watch(environment).name == Environment.dev)
+          if (ref.watch(environment).name == Environment.dev && false)
             Align(
               child: ElevatedButton(
                 onPressed: () async {
@@ -181,179 +160,239 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 child: const Text("[DEV] Enregistrer l'Observation"),
               ),
             ),
-          //SENSATION
-          Text("Sensation", style: Theme.of(context).textTheme.headline4),
-          const SizedBox(height: 5),
-          ChoixFormField(
-            choix: SensationState.values.where((state) => state != SensationState.none).toList(),
-            onSelect: (state) => notifierForm.sensationChanged(Sensation(state as SensationState)),
-            currentStates: [form.sensation.getOrCrash()],
-            titre: (state) => TextUtils.toFirstLettersUpperCase((state as SensationState).toDisplayString()),
-            iconPath: (state) => (state as SensationState).toIconPath(),
-            iconTxt: null,
-          ),
-          if (form.sensation.getOrCrash() == SensationState.autre)
-            TextFormField(
-              autocorrect: false,
-              onChanged: (String value) => notifierForm.sensationsAutreChanged(value),
-              controller: _controllerSensationAutre,
-            ),
-          SpaceH10(),
-
-          //SANG
-          Text("Sang", style: Theme.of(context).textTheme.headline4),
-          const SizedBox(height: 5),
-          ChoixFormField(
-            choix: SangState.values.where((state) => state != SangState.none).toList(),
-            onSelect: (state) => notifierForm.sangChanged(Sang(state as SangState)),
-            currentStates: [form.sang.getOrCrash()],
-            titre: (state) => TextUtils.toFirstLettersUpperCase((state as SangState).toDisplayString()),
-            iconPath: (state) => (state as SangState).toIconPath(),
-          ),
-          SpaceH10(),
-
-          //MUCUS
-          Text("Mucus", style: Theme.of(context).textTheme.headline4),
-          const SizedBox(height: 5),
-          ChoixFormField(
-            choix: MucusState.values.where((state) => state != MucusState.none).toList(),
-            onSelect: (state) => notifierForm.mucusChanged(Mucus(state as MucusState)),
-            currentStates: [form.mucus.getOrCrash()],
-            titre: (state) => (state as MucusState).toDisplayString(),
-            iconPath: (state) => (state as MucusState).toIconPath(),
-          ),
-          if (form.mucus.getOrCrash() == MucusState.autre)
-            TextFormField(
-              autocorrect: false,
-              onChanged: (String value) => notifierForm.mucusAutreChanged(value),
-              controller: _controllerMucusAutre,
-            ),
-          SpaceH10(),
-
-          //DOULEURS
-          Text("Douleurs", style: Theme.of(context).textTheme.headline4),
-          const SizedBox(height: 5),
-          ChoixFormField(
-            choix: DouleurState.values
-                .where((state) => state != DouleurState.none && state != DouleurState.aucune)
-                .toList(),
-            onSelect: (state) => notifierForm.douleursChanged(state as DouleurState),
-            currentStates: form.douleurs.map((e) => e.getOrCrash()).toList(),
-            titre: (state) => (state as DouleurState).toDisplayString(),
-            iconPath: (state) => (state as DouleurState).toIconPath(),
-          ),
-          if (form.douleurs.contains(Douleur(DouleurState.autre)))
-            TextFormField(
-              autocorrect: false,
-              onChanged: (String value) => notifierForm.douleursAutreChanged(value),
-              controller: _controllerDouleursAutre,
-            ),
-          SpaceH10(),
-
-          //EVENEMENTS
-          Text("Evénements", style: Theme.of(context).textTheme.headline4),
-          const SizedBox(height: 5),
-          ChoixFormField(
-            choix: EvenementState.values.where((state) => state != EvenementState.none).toList(),
-            onSelect: (state) => notifierForm.evenementsChanged(state as EvenementState),
-            currentStates: form.evenements.map((e) => e.getOrCrash()).toList(),
-            titre: (state) => (state as EvenementState).toDisplayString(),
-            iconPath: (state) => (state as EvenementState).toIconPath(),
-          ),
-          if (form.evenements.where((evt) => evt.getOrCrash() == EvenementState.autre).length > 0)
-            TextFormField(
-              autocorrect: false,
-              onChanged: (String value) => notifierForm.evenementsAutreChanged(value),
-              controller: _controllerEvenementAutre,
-            ),
-          SpaceH10(),
-
-          //TEMPERATURE BASALE
-          Row(
-            children: [
-              Text("Température Basale", style: Theme.of(context).textTheme.headline5),
-              Expanded(child: Container()),
-              Container(
-                width: 60,
-                child: TextFormField(
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  autocorrect: false,
-                  onChanged: (value) {
-                    try {
-                      notifierForm
-                          .temperatureBasaleChanged(double.parse(value.replaceAll(RegExp(r','), '.')));
-                    } catch (e) {
-                      print(e);
-                    }
+          if (first) ...[
+            //Date de l'observation
+            Row(
+              children: [
+                Text("Date:", style: Theme.of(context).textTheme.headline4),
+                Expanded(child: Container()),
+                InkWell(
+                  onTap: () async {
+                    DateTime? date = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2021),
+                        lastDate: DateTime(2071));
+                    if (date != null) notifierForm.dateChanged(date);
                   },
-                  controller: _controllerTempBasale,
-                ),
+                  child: DefaultPanel(
+                    color: Color.fromARGB(255, 202, 82, 52),
+                    child: Text(
+                        AppDateUtils.isToday(form.date) ? 'Aujourd\'hui' : AppDateUtils.formatDate(form.date),
+                        style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.white)),
+                  ),
+                )
+              ],
+            ),
+            //SENSATION
+            Text("SENSATION", style: Theme.of(context).textTheme.headline4),
+            Divider(color: colorpanel(50), thickness: 1),
+            const SizedBox(height: 5),
+            ChoixFormField(
+              choix: SensationState.values.where((state) => state != SensationState.none).toList(),
+              onSelect: (state) => notifierForm.sensationChanged(Sensation(state as SensationState)),
+              currentStates: [form.sensation.getOrCrash()],
+              titre: (state) =>
+                  TextUtils.toFirstLettersUpperCase((state as SensationState).toDisplayString()),
+              iconPath: (state) => (state as SensationState).toIconPath(),
+              iconTxt: null,
+            ),
+            if (form.sensation.getOrCrash() == SensationState.autre)
+              TextFormField(
+                autocorrect: false,
+                onChanged: (String value) => notifierForm.sensationsAutreChanged(value),
+                controller: _controllerSensationAutre,
+                decoration: InputDecoration(labelText: 'Autre sensation'),
               ),
-            ],
-          ),
-          SpaceH20(),
+            SpaceH10(),
 
-          //HUMEUR
-          Text("Humeur", style: Theme.of(context).textTheme.headline4),
-          const SizedBox(height: 5),
-          ChoixFormField(
-            choix: HumeurState.values.where((state) => state != HumeurState.none).toList(),
-            onSelect: (state) => notifierForm.humeurChanged(Humeur(state as HumeurState)),
-            currentStates: [form.humeur.getOrCrash()],
-            titre: (state) => (state as HumeurState).toDisplayString(),
-            iconPath: (state) => (state as HumeurState).toIconPath(),
-          ),
-          if (form.humeur.getOrCrash() == HumeurState.autre)
+            //SANG
+            Text("SANG", style: Theme.of(context).textTheme.headline4),
+            Divider(color: colorpanel(50), thickness: 1),
+            const SizedBox(height: 5),
+            ChoixFormField(
+              choix: SangState.values.where((state) => state != SangState.none).toList(),
+              onSelect: (state) => notifierForm.sangChanged(Sang(state as SangState)),
+              currentStates: [form.sang.getOrCrash()],
+              titre: (state) => TextUtils.toFirstLettersUpperCase((state as SangState).toDisplayString()),
+              iconPath: (state) => (state as SangState).toIconPath(),
+            ),
+            SpaceH10(),
+
+            //MUCUS
+            Text("MUCUS", style: Theme.of(context).textTheme.headline4),
+            Divider(color: colorpanel(50), thickness: 1),
+            const SizedBox(height: 5),
+            ChoixFormField(
+              choix: MucusState.values.where((state) => state != MucusState.none).toList(),
+              onSelect: (state) => notifierForm.mucusChanged(Mucus(state as MucusState)),
+              currentStates: [form.mucus.getOrCrash()],
+              titre: (state) => (state as MucusState).toDisplayString(),
+              iconPath: (state) => (state as MucusState).toIconPath(),
+              height: (state) => (95 + ((state as MucusState).toDisplayString().length * 2.2)).toDouble(),
+            ),
+            if (form.mucus.getOrCrash() == MucusState.autre)
+              TextFormField(
+                autocorrect: false,
+                onChanged: (String value) => notifierForm.mucusAutreChanged(value),
+                controller: _controllerMucusAutre,
+                decoration: InputDecoration(labelText: 'Autre mucus'),
+              ),
+            SpaceH10(),
+            ElevatedButton(
+              onPressed: () async {
+                ref.read(isFirstPage.notifier).state = false;
+              },
+              style: buttonNormalPrimary,
+              child: Icon(Icons.arrow_forward_ios),
+            ),
+            SpaceH30(),
+          ],
+          if (!first) ...[
+            Container(
+              width: 30,
+              child: ElevatedButton(
+                onPressed: () async {
+                  ref.read(isFirstPage.notifier).state = true;
+                },
+                style: buttonNormalPrimary,
+                child: Icon(Icons.arrow_back_ios),
+              ),
+            ),
+            SpaceH30(),
+            //EVENEMENTS
+            Text("EVENEMENTS", style: Theme.of(context).textTheme.headline4),
+            Divider(color: colorpanel(50), thickness: 1),
+            const SizedBox(height: 5),
+            ChoixFormField(
+              choix: EvenementState.values.where((state) => state != EvenementState.none).toList(),
+              onSelect: (state) => notifierForm.evenementsChanged(state as EvenementState),
+              currentStates: form.evenements.map((e) => e.getOrCrash()).toList(),
+              titre: (state) => (state as EvenementState).toDisplayString(),
+              iconPath: (state) => (state as EvenementState).toIconPath(),
+            ),
+            if (form.evenements.where((evt) => evt.getOrCrash() == EvenementState.autre).length > 0)
+              TextFormField(
+                autocorrect: false,
+                onChanged: (String value) => notifierForm.evenementsAutreChanged(value),
+                controller: _controllerEvenementAutre,
+                decoration: InputDecoration(labelText: 'Autre évènement'),
+              ),
+            SpaceH10(),
+
+            //HUMEUR
+            Text("HUMEUR", style: Theme.of(context).textTheme.headline4),
+            Divider(color: colorpanel(50), thickness: 1),
+            const SizedBox(height: 5),
+            ChoixFormField(
+              choix: HumeurState.values.where((state) => state != HumeurState.none).toList(),
+              onSelect: (state) => notifierForm.humeurChanged(Humeur(state as HumeurState)),
+              currentStates: [form.humeur.getOrCrash()],
+              titre: (state) => (state as HumeurState).toDisplayString(),
+              iconPath: (state) => (state as HumeurState).toIconPath(),
+            ),
+            if (form.humeur.getOrCrash() == HumeurState.autre)
+              TextFormField(
+                autocorrect: false,
+                onChanged: (String value) => notifierForm.humeurAutreChanged(value),
+                controller: _controllerHumeurAutre,
+                decoration: InputDecoration(labelText: 'Autre humeur'),
+              ),
+            SpaceH10(),
+
+            //DOULEURS
+            Text("SIGNE ASSOCIE", style: Theme.of(context).textTheme.headline4),
+            Divider(color: colorpanel(50), thickness: 1),
+            const SizedBox(height: 5),
+            ChoixFormField(
+              choix: DouleurState.values
+                  .where((state) => state != DouleurState.none && state != DouleurState.aucune)
+                  .toList(),
+              onSelect: (state) => notifierForm.douleursChanged(state as DouleurState),
+              currentStates: form.douleurs.map((e) => e.getOrCrash()).toList(),
+              titre: (state) => (state as DouleurState).toDisplayString(),
+              iconPath: (state) => (state as DouleurState).toIconPath(),
+              iconTxt: (state) => (state as DouleurState).toDisplayShort(),
+            ),
+            if (form.douleurs.contains(Douleur(DouleurState.autre)))
+              TextFormField(
+                autocorrect: false,
+                onChanged: (String value) => notifierForm.douleursAutreChanged(value),
+                controller: _controllerDouleursAutre,
+                decoration: InputDecoration(labelText: 'Autre douleurs'),
+              ),
+            SpaceH10(),
+
+            //TEMPERATURE BASALE
+            Row(
+              children: [
+                Text("TEMPERATURE BASALE", style: Theme.of(context).textTheme.headline5),
+                Expanded(child: Container()),
+                Container(
+                  width: 160,
+                  child: TextFormField(
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                    autocorrect: false,
+                    decoration: InputDecoration(labelText: 'Température'),
+                    onChanged: (value) {
+                      try {
+                        notifierForm
+                            .temperatureBasaleChanged(double.parse(value.replaceAll(RegExp(r','), '.')));
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                    controller: _controllerTempBasale,
+                  ),
+                ),
+              ],
+            ),
+            SpaceH20(),
+
+            //NOTES CONFIDENTIELLES
+            Text("NOTES CONFIDENTIELLES", style: Theme.of(context).textTheme.headline5),
+            const SizedBox(height: 5),
             TextFormField(
               autocorrect: false,
-              onChanged: (String value) => notifierForm.humeurAutreChanged(value),
-              controller: _controllerHumeurAutre,
+              keyboardType: TextInputType.multiline,
+              maxLines: 5,
+              maxLength: 500,
+              onChanged: (String value) => notifierForm.notesConfidentiellesChanged(value),
+              controller: _controllerNotesConfidentielles,
             ),
-          SpaceH10(),
 
-          //NOTES CONFIDENTIELLES
-          Text("Notes Confidentielles", style: Theme.of(context).textTheme.headline5),
-          const SizedBox(height: 5),
-          TextFormField(
-            autocorrect: false,
-            keyboardType: TextInputType.multiline,
-            maxLines: 5,
-            maxLength: 500,
-            onChanged: (String value) => notifierForm.notesConfidentiellesChanged(value),
-            controller: _controllerNotesConfidentielles,
-          ),
+            //insert-field-complete
 
-          //insert-field-complete
+            const SizedBox(height: 14),
+            SpaceH10(),
+            Align(
+              child: ElevatedButton(
+                onPressed: () async {
+                  final List<Observation> obs = widget.cycle?.observations
+                          .where((obs) => obs.date?.isSameDayAs(form.date) == true)
+                          .toList() ??
+                      [];
+                  if (obs.length > 0) {
+                    final ok = await showDialogChoix(context,
+                        "Attention, une observation existe déjà pour cette date, voulez-vous la remplacer ?",
+                        positiveText: "Remplacer", negativeText: "Annuler", isDanger: true);
 
-          const SizedBox(height: 14),
-          SpaceH10(),
-          Align(
-            child: ElevatedButton(
-              onPressed: () async {
-                final List<Observation> obs = widget.cycle?.observations
-                        .where((obs) => obs.date?.isSameDayAs(form.date) == true)
-                        .toList() ??
-                    [];
-                if (obs.length > 0) {
-                  final ok = await showDialogChoix(context,
-                      "Attention, une observation existe déjà pour cette date, voulez-vous la remplacer ?",
-                      positiveText: "Remplacer", negativeText: "Annuler", isDanger: true);
-
-                  if (ok == true) {
+                    if (ok == true) {
+                      notifierForm.addObservationPressed(widget.cycle);
+                    }
+                  } else {
                     notifierForm.addObservationPressed(widget.cycle);
                   }
-                } else {
-                  notifierForm.addObservationPressed(widget.cycle);
-                }
-              },
-              style: buttonNormalConfirm,
-              child: const Text("Enregistrer l'Observation"),
+                },
+                style: buttonNormalConfirm,
+                child: const Text("ok"),
+              ),
             ),
-          ),
-          const SizedBox(height: 12),
-          if (ref.read(cycleFormNotifierProvider).isSubmitting) ...[
-            const SizedBox(height: 8),
-            const LinearProgressIndicator(value: null)
+            const SizedBox(height: 12),
+            if (ref.read(cycleFormNotifierProvider).isSubmitting) ...[
+              const SizedBox(height: 8),
+              const LinearProgressIndicator(value: null)
+            ]
           ]
         ]),
       ),

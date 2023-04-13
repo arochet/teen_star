@@ -303,6 +303,27 @@ extension ParseToSringMucus on MucusState {
         return AssetsPath.icon_vide;
     }
   }
+
+  double toHeight() {
+    switch (this) {
+      case MucusState.opaqueBlancOuJaune:
+        return 100;
+      case MucusState.depotSecheBlancOuJaune:
+        return 100;
+      case MucusState.opaqueAvecTransparent_UnPeuEtirable:
+        return 100;
+      case MucusState.nuageuxATransparent_Elastique:
+        return 100;
+      case MucusState.transparentFilantOuTresFluide:
+        return 100;
+      case MucusState.aucunMucusVisible:
+        return 100;
+      case MucusState.autre:
+        return 100;
+      case MucusState.none:
+        return 100;
+    }
+  }
 }
 
 @immutable
@@ -375,15 +396,15 @@ extension ParseToSringDouleur on DouleurState {
   String toIconPath() {
     switch (this) {
       case DouleurState.seins:
-        return AssetsPath.icon_douleur_ds;
+        return AssetsPath.icon_vide_verte;
       case DouleurState.ventre:
-        return AssetsPath.icon_douleur_dv;
+        return AssetsPath.icon_vide_verte;
       case DouleurState.malDeTete:
-        return AssetsPath.icon_douleur_mt;
+        return AssetsPath.icon_vide_verte;
       case DouleurState.autre:
-        return AssetsPath.icon_douleur_autre;
+        return AssetsPath.icon_vide_verte;
       case DouleurState.aucune:
-        return AssetsPath.icon_douleur_aucune;
+        return AssetsPath.icon_vide_verte;
       case DouleurState.none:
         return AssetsPath.icon_vide;
     }

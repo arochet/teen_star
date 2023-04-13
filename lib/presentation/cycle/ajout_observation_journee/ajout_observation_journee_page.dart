@@ -13,13 +13,10 @@ class ObservationAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      title: 'Nouvelle Observation',
+      title: 'Nouvelle Observation - ${cycle != null ? "Cycle ${cycle!.id.getOrCrash()}" : "Nouveau cycle"}',
       child: ShowComponentFile(
         title: '/PRESENTATION/./resume/ajout_observation_journee/ajout_observation_journee_page.dart',
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: ObservationFormProvider(cycle, date),
-        ),
+        child: ObservationFormProvider(cycle, date),
       ),
     );
   }

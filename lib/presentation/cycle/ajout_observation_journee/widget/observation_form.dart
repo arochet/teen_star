@@ -368,6 +368,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             Align(
               child: ElevatedButton(
                 onPressed: () async {
+                  ref.read(isFirstPage.notifier).state = true;
                   final List<Observation> obs = widget.cycle?.observations
                           .where((obs) => obs.date?.isSameDayAs(form.date) == true)
                           .toList() ??

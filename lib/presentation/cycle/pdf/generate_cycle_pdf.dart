@@ -49,6 +49,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
     CellHeader('Mucus'),
     CellHeader('Douleurs', width: 70),
     CellHeader('Humeur'),
+    CellHeader('Température'),
     CellHeader('Evénement', width: 130),
   ];
 
@@ -88,7 +89,10 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
                     _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                     _CellText(AppDateUtils.formatDate(observation.date)),
                     _CellColor(observation.couleurGeneree.toColorPDF()),
-                    _CellColor(observation.analyse?.getOrCrash().toColorPDF()),
+                    _CellColor(observation.analyse?.getOrCrash() == CouleurAnalyseState.none
+                        ? observation.couleurGeneree.toColorPDF()
+                        : observation.analyse?.getOrCrash().toColorPDF() ??
+                            observation.couleurGeneree.toColorPDF()),
                     _CellIcon(observation.sensation?.getOrCrash().toDisplayShort() ?? ''),
                     _CellImage(listImageSang[observation.sang?.getOrCrash()]!),
                     _CellImage(listImageMucus[observation.mucus?.getOrCrash()]!),
@@ -98,6 +102,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
                             [])
                         .join(' ')),
                     _CellImage(listImageHumeur[observation.humeur?.getOrCrash()]!),
+                    _CellText('${observation.temperatureBasale ?? ''}'),
                     _CellText((observation.evenements
                                 ?.map<String>((evenement) => evenement.getOrCrash().toDisplayShort())
                                 .toList() ??
@@ -106,6 +111,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
                   ]
                 : <_Cell>[
                     _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
+                    _CellNone(),
                     _CellNone(),
                     _CellNone(),
                     _CellNone(),

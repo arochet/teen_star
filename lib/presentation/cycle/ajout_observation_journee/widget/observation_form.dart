@@ -95,6 +95,8 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
   late TextEditingController _controllerEvenementAutre;
   late TextEditingController _controllerHumeurAutre;
   late TextEditingController _controllerNotesConfidentielles;
+  final ScrollController _controller = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -111,6 +113,10 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
     });
   }
 
+  void _scrollUp() {
+    _controller.jumpTo(_controller.position.minScrollExtent);
+  }
+
   @override
   Widget build(BuildContext context) {
     final form = ref.watch(cycleFormNotifierProvider);
@@ -122,7 +128,8 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Form(
         autovalidateMode: AutovalidateMode.always,
-        child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
+        child:
+            ListView(controller: _controller, padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
           SpaceH10(),
           //Bouton pour enregistrer l'observation en mode dev
           if (ref.watch(environment).name == Environment.dev && false)
@@ -239,9 +246,11 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 decoration: InputDecoration(labelText: 'Autre mucus'),
               ),
             SpaceH10(),
+            //BUTON NEXT PAGE
             ElevatedButton(
               onPressed: () async {
                 ref.read(isFirstPage.notifier).state = false;
+                _scrollUp();
               },
               style: buttonNormalPrimary,
               child: Icon(Icons.arrow_forward_ios),

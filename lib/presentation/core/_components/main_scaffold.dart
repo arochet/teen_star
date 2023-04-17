@@ -46,16 +46,16 @@ class MainScaffold extends ConsumerWidget {
     final env = ref.watch(environment.notifier).state.name;
     return AppBar(
       toolbarHeight: 55,
-      backgroundColor: colorpanel(800),
+      backgroundColor: colorpanel(900),
       shadowColor: Colors.transparent,
       iconTheme: IconThemeData(
-        color: colorpanel(50),
+        color: actioncolor['primary'],
         size: 24,
       ),
       title: title != null
           ? Text(
               title,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headline5?.copyWith(color: actioncolor['primary']),
               overflow: TextOverflow.fade,
             )
           : null,

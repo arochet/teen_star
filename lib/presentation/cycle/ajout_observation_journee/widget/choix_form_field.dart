@@ -75,14 +75,14 @@ class _Field extends StatelessWidget {
           padding: const EdgeInsets.all(2.0),
           child: Container(
             height: _getHeight(titre(state)),
-            width: 85,
+            width: 75,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: isSelected ? Color.fromARGB(255, 12, 177, 53) : Colors.transparent,
+                    color: isSelected ? Color.fromARGB(255, 164, 187, 67) : Colors.transparent,
                     borderRadius: BorderRadius.circular(3),
                   ),
                   child: Padding(
@@ -90,15 +90,17 @@ class _Field extends StatelessWidget {
                     child: IconObservation(
                       iconPath: iconPath(state),
                       iconText: iconText != null ? iconText!(state) : null,
-                      iconSize: 70,
+                      iconSize: 64,
                     ),
                   ),
                 ),
                 SizedBox(height: 5),
                 Expanded(
                     child: Text(titre(state),
-                        style:
-                            Theme.of(context).textTheme.bodyText1?.copyWith(color: actioncolor['primary']))),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            ?.copyWith(color: actioncolor['primary'], fontSize: 12))),
                 SizedBox(width: 5),
               ],
             ),
@@ -112,7 +114,7 @@ class _Field extends StatelessWidget {
     if (title == null) {
       return 100;
     }
-    final double heightLine = (((title.length ~/ 8) + 1) * 15).toDouble();
+    final double heightLine = (((title.length ~/ 8) + 1) * 10).toDouble();
     return title != null ? (85 + heightLine).toDouble() : 100;
   }
 }

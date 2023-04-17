@@ -277,7 +277,7 @@ extension ParseToSringMucus on MucusState {
       case MucusState.aucunMucusVisible:
         return 'Aucun mucus visible';
       case MucusState.autre:
-        return 'Autre';
+        return 'Autre observation';
       case MucusState.none:
         return '';
     }

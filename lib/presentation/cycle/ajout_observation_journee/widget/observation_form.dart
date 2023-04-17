@@ -1,4 +1,5 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:injectable/injectable.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
@@ -8,19 +9,15 @@ import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
-import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
-import 'package:teenstar/PRESENTATION/core/_main_navigation/bottom_bar_navigation.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
-import 'package:teenstar/PRESENTATION/core/_utils/object_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/text_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:auto_route/src/router/auto_router_x.dart';
 
 import 'choix_form_field.dart';
 
@@ -121,6 +118,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
   Widget build(BuildContext context) {
     final form = ref.watch(cycleFormNotifierProvider);
     final notifierForm = ref.read(cycleFormNotifierProvider.notifier);
+    TextStyle? styleTitre = Theme.of(context).textTheme.headline4?.copyWith(color: actioncolor['primary']);
 
     bool first = ref.watch(isFirstPage);
     //Formulaire de l'observation
@@ -171,7 +169,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             //Date de l'observation
             Row(
               children: [
-                Text("Date:", style: Theme.of(context).textTheme.headline4),
+                Text("Date:", style: styleTitre),
                 Expanded(child: Container()),
                 InkWell(
                   onTap: () async {
@@ -192,7 +190,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               ],
             ),
             //SENSATION
-            Text("SENSATION", style: Theme.of(context).textTheme.headline4),
+            Text("SENSATION", style: styleTitre),
             Divider(color: colorpanel(50), thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -214,7 +212,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             SpaceH10(),
 
             //SANG
-            Text("SANG", style: Theme.of(context).textTheme.headline4),
+            Text("SANG", style: styleTitre),
             Divider(color: colorpanel(50), thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -227,7 +225,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             SpaceH10(),
 
             //MUCUS
-            Text("MUCUS", style: Theme.of(context).textTheme.headline4),
+            Text("MUCUS", style: styleTitre),
             Divider(color: colorpanel(50), thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -270,7 +268,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             ),
             SpaceH30(),
             //EVENEMENTS
-            Text("EVENEMENTS", style: Theme.of(context).textTheme.headline4),
+            Text("EVENEMENTS", style: styleTitre),
             Divider(color: colorpanel(50), thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -290,7 +288,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             SpaceH10(),
 
             //HUMEUR
-            Text("HUMEUR", style: Theme.of(context).textTheme.headline4),
+            Text("HUMEUR", style: styleTitre),
             Divider(color: colorpanel(50), thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -310,7 +308,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             SpaceH10(),
 
             //DOULEURS
-            Text("SIGNE ASSOCIE", style: Theme.of(context).textTheme.headline4),
+            Text("SIGNE ASSOCIÉ", style: styleTitre),
             Divider(color: colorpanel(50), thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -335,10 +333,11 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             //TEMPERATURE BASALE
             Row(
               children: [
-                Text("TEMPERATURE BASALE", style: Theme.of(context).textTheme.headline5),
+                Text("TEMPERATURE BASALE",
+                    style: Theme.of(context).textTheme.headline5?.copyWith(color: actioncolor['primary'])),
                 Expanded(child: Container()),
                 Container(
-                  width: 160,
+                  width: 140,
                   child: TextFormField(
                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                     autocorrect: false,
@@ -359,7 +358,8 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             SpaceH20(),
 
             //NOTES CONFIDENTIELLES
-            Text("NOTES CONFIDENTIELLES", style: Theme.of(context).textTheme.headline5),
+            Text("NOTES CONFIDENTIELLES",
+                style: Theme.of(context).textTheme.headline5?.copyWith(color: actioncolor['primary'])),
             const SizedBox(height: 5),
             TextFormField(
               autocorrect: false,

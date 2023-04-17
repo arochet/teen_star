@@ -17,11 +17,11 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         primaryColor: Colors.red,
-        scaffoldBackgroundColor: colorpanel(800),
+        scaffoldBackgroundColor: colorpanel(900),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: colorpanel(200)),
           iconColor: colorpanel(200),
-          fillColor: colorpanel(900),
+          fillColor: colorpanel(800),
           floatingLabelStyle: TextStyle(color: colorpanel(100)),
           filled: true,
           focusColor: Colors.red,

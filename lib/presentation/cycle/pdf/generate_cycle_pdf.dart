@@ -272,7 +272,7 @@ PdfLayoutResult? tableauCycle(PdfPage page, List<CellHeader> tabTitleHeader, Lis
         row.cells[i].style.backgroundImage = iconEmpty;
         row.cells[i].value = cell.display();
         double paddH = 2;
-        double paddV = 12;
+        double paddV = 10;
         row.cells[i].style.font = PdfStandardFont(PdfFontFamily.helvetica, 13);
         row.cells[i].style.cellPadding = PdfPaddings(bottom: paddH, top: paddH, right: paddV, left: paddV);
         row.cells[i].style.stringFormat = PdfStringFormat(
@@ -284,7 +284,7 @@ PdfLayoutResult? tableauCycle(PdfPage page, List<CellHeader> tabTitleHeader, Lis
         row.cells[i].imagePosition = PdfGridImagePosition.stretch;
         row.cells[i].style.backgroundImage = cell.display();
         double paddH = 2;
-        double paddV = 14;
+        double paddV = 11;
         row.cells[i].style.cellPadding = PdfPaddings(bottom: paddH, top: paddH, right: paddV, left: paddV);
       } else if (cell is _CellNone) {
         //CASE RIEN

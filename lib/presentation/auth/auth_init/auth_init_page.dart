@@ -74,7 +74,7 @@ class PanelInit extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text("Bienvenue sur",
-                  style: Theme.of(context).textTheme.headline4?.copyWith(color: colorpanel(900))),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: colorpanel(900))),
               SizedBox(height: 3),
               Text("CEPP", style: Theme.of(context).textTheme.headline1?.copyWith(color: colorpanel(900))),
               SizedBox(height: 20),

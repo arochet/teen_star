@@ -173,12 +173,12 @@ class _Cell extends StatelessWidget {
               Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.black, width: 22, height: 22),
             //MARQUE 1 2 3
             if (observation.marque != null && observation.marque! > 0)
-              Text("${observation.marque}", style: Theme.of(context).textTheme.headline5),
+              Text("${observation.marque}", style: Theme.of(context).textTheme.titleSmall),
             //POINT D'INTERROGATION
             if (observation.sensation?.getOrCrash() == SensationState.autre ||
                 observation.mucus?.getOrCrash() == MucusState.autre &&
                     observation.enleverPointInterrogation != true)
-              Text("?", style: Theme.of(context).textTheme.headline5),
+              Text("?", style: Theme.of(context).textTheme.titleSmall),
           ],
         ),
       ),
@@ -190,9 +190,9 @@ class _Cell extends StatelessWidget {
           child: Column(
             children: [
               Text(AppDateUtils.formatDate(observation.date, 'dd'),
-                  style: Theme.of(context).textTheme.headline6?.copyWith(fontSize: 14)),
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(fontSize: 14)),
               Text(AppDateUtils.formatDate(observation.date, 'MMM'),
-                  style: Theme.of(context).textTheme.headline6),
+                  style: Theme.of(context).textTheme.labelMedium),
             ],
           ),
         );
@@ -343,7 +343,7 @@ class _Cell extends StatelessWidget {
 
         break;
       default:
-        info = Text(' ?? ', style: Theme.of(context).textTheme.headline5);
+        info = Text(' ?? ', style: Theme.of(context).textTheme.titleSmall);
         break;
     }
 
@@ -373,7 +373,7 @@ class _LittleBoxText extends StatelessWidget {
             overflow: TextOverflow.fade,
             style: Theme.of(context)
                 .textTheme
-                .headline6
+                .labelMedium
                 ?.copyWith(color: colorpanel(100), fontSize: fontSize ?? 11)),
       ),
     );
@@ -407,10 +407,9 @@ class _CellHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Text(value,
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(decoration: underline == true ? TextDecoration.underline : null)));
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                decoration: underline == true ? TextDecoration.underline : null,
+                fontWeight: FontWeight.bold)));
   }
 }
 
@@ -427,10 +426,10 @@ class _CellDay extends StatelessWidget {
   Widget build(BuildContext context) {
     /* return Row(children: [
 
-      Text('J$value', style: Theme.of(context).textTheme.headline5),
+      Text('J$value', style: Theme.of(context).textTheme.titleSmall),
     ]); */
     return Center(
-        child: Text('${selection ? " - " : ""}J$value', style: Theme.of(context).textTheme.headline5));
+        child: Text('${selection ? " - " : ""}J$value', style: Theme.of(context).textTheme.titleSmall));
   }
 }
 

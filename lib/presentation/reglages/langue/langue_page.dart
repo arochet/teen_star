@@ -26,7 +26,7 @@ class LanguePage extends StatelessWidget {
               width: 280,
               child: Column(
                 children: [
-                  Text("Etape 1/3", style: Theme.of(context).textTheme.headline5),
+                  Text("Etape 1/3", style: Theme.of(context).textTheme.titleSmall),
                   Expanded(child: Container()),
                   //CHOIX DES LANGUES
                   _ChoixLangue("Français", true),
@@ -75,7 +75,7 @@ class _ChoixLangue extends StatelessWidget {
             langue,
             style: Theme.of(context)
                 .textTheme
-                .headline4
+                .titleMedium
                 ?.copyWith(color: enable ? colorpanel(50) : colorpanel(600)),
           ),
         ),

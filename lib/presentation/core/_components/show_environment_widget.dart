@@ -25,7 +25,7 @@ class ShowEnvironment extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Center(
-                    child: Text(txtEnv, style: Theme.of(context).textTheme.headline5),
+                    child: Text(txtEnv, style: Theme.of(context).textTheme.titleSmall),
                   ),
                 ),
                 /* InkWell(

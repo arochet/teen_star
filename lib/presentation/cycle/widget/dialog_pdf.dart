@@ -43,11 +43,11 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
         child: Column(
           children: [
             Text("Maximum 15 cycles autorisés",
-                style: Theme.of(context).textTheme.headline6?.copyWith(color: colorpanel(200))),
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(color: colorpanel(100))),
             const SpaceH10(),
             Row(
               children: [
-                Text("Du cycle ", style: Theme.of(context).textTheme.headline5),
+                Text("Du cycle ", style: Theme.of(context).textTheme.titleSmall),
                 Expanded(child: Container()),
                 Container(
                   width: 50,
@@ -64,7 +64,7 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
             SpaceH10(),
             Row(
               children: [
-                Text("Au cycle ", style: Theme.of(context).textTheme.headline5),
+                Text("Au cycle ", style: Theme.of(context).textTheme.titleSmall),
                 Expanded(child: Container()),
                 Container(
                   width: 50,

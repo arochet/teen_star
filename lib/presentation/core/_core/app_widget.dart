@@ -38,7 +38,70 @@ class AppWidget extends StatelessWidget {
           TargetPlatform.linux: NonePageTransitionsBuilder(),
         }),
         textTheme: theme.textTheme.copyWith(
-          headline1: TextStyle(
+          displayLarge: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          displayMedium: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          displaySmall: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          headlineLarge: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          headlineMedium: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          headlineSmall: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          titleLarge: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+            fontWeight: FontWeight.bold,
+          ),
+          titleMedium: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+            fontWeight: FontWeight.bold,
+          ),
+          titleSmall: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+            fontWeight: FontWeight.bold,
+          ),
+          bodyLarge: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          bodyMedium: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          bodySmall: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          labelLarge: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          labelMedium: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          labelSmall: TextStyle(
+            fontFamily: 'MyriadPro',
+            color: colorpanel(50),
+          ),
+          /* headline1: TextStyle(
             fontSize: 38.0,
             fontFamily: 'MyriadPro',
             fontWeight: FontWeight.bold,
@@ -85,7 +148,7 @@ class AppWidget extends StatelessWidget {
           bodyText1: TextStyle(
             fontFamily: 'MyriadPro',
             color: colorpanel(50),
-          ),
+          ), */
         ),
       ),
       supportedLocales: L10n.all,

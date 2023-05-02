@@ -68,7 +68,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
           child: Form(
             autovalidateMode: AutovalidateMode.always,
             child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
-              Center(child: Text("Etape 3/3", style: Theme.of(context).textTheme.headline5)),
+              Center(child: Text("Etape 3/3", style: Theme.of(context).textTheme.titleSmall)),
               SpaceH10(),
               if (ref.watch(environment).name == Environment.dev)
                 ElevatedButton(
@@ -167,7 +167,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               Text("* Champs optionnels", style: Theme.of(context).textTheme.bodyMedium),
               SpaceH40(),
               Text("Ce mot de passe sera demandé pour toute action verrouillée",
-                  style: Theme.of(context).textTheme.bodyText1),
+                  style: Theme.of(context).textTheme.bodyMedium),
 
               SpaceH10(),
               TextFormField(
@@ -222,7 +222,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
 
               SpaceH40(),
               Text("Ce mot de passe sera demandé à chaque ouverture d'un PDF",
-                  style: Theme.of(context).textTheme.bodyText1),
+                  style: Theme.of(context).textTheme.bodyMedium),
               SpaceH10(),
               TextFormField(
                 decoration: InputDecoration(
@@ -275,7 +275,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               ),
               SpaceH10(),
               Text("Attention, aucune possibilité de récupération de mot de passe perdu",
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(fontStyle: FontStyle.italic)),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic)),
               SpaceH30(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),

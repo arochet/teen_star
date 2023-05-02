@@ -17,12 +17,12 @@ Future<dynamic> showDialogApp<T>(
         title: titre != null
             ? Text(
                 titre,
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               )
             : null,
         content: child,
-        backgroundColor: colorpanel(800),
+        backgroundColor: colorpanel(900),
         actionsAlignment: MainAxisAlignment.center,
         actions: actions,
       );
@@ -83,7 +83,7 @@ Future<Object> showDialogPassword<bool>(
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           title: Text('Entrez le mot de passe',
-              style: Theme.of(context).textTheme.headline4, textAlign: TextAlign.center),
+              style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center),
           content: Form(
             key: _formKey,
             child: Column(

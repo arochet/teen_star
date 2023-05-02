@@ -114,11 +114,11 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                   tabsRouter.setActiveIndex(id);
                 },
                 selectedLabelStyle: TextStyle(
-                  fontFamily: Theme.of(context).textTheme.headline3?.fontFamily,
+                  fontFamily: Theme.of(context).textTheme.titleLarge?.fontFamily,
                   fontWeight: FontWeight.w600,
                 ),
                 unselectedLabelStyle: TextStyle(
-                  fontFamily: Theme.of(context).textTheme.headline3?.fontFamily,
+                  fontFamily: Theme.of(context).textTheme.titleLarge?.fontFamily,
                   fontWeight: FontWeight.w600,
                 ),
                 items: widget.listMenu
@@ -171,16 +171,16 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
             (List<CycleDTO> listCyclesDTO) {
               if (listCyclesDTO.length == 0) {
                 //PAGE : Pas de cycle
-                return Text("CEPP", style: Theme.of(context).textTheme.headline4);
+                return Text("CEPP", style: Theme.of(context).textTheme.titleMedium);
               } else {
                 if (idCourant == null) {
                   //PAGE : Erreur sur l'id du cycle courant
-                  return Center(child: Text("...", style: Theme.of(context).textTheme.headline4));
+                  return Center(child: Text("...", style: Theme.of(context).textTheme.titleMedium));
                 } else {
                   if (selection)
                     return Center(
                         child: Text("Cycle ${idCourant.getOrCrash()}",
-                            style: Theme.of(context).textTheme.headline4));
+                            style: Theme.of(context).textTheme.titleMedium));
                   else
                     return AppBarCycle(listCyclesDTO: listCyclesDTO, idCycle: idCourant);
                 }
@@ -194,9 +194,9 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
 
       return listCycleWidget;
     } else if (index == 1) {
-      return Text(widget.listMenu[index]["title"], style: Theme.of(context).textTheme.headline4);
+      return Text(widget.listMenu[index]["title"], style: Theme.of(context).textTheme.titleMedium);
     } else if (index == 2) {
-      return Text(widget.listMenu[index]["title"], style: Theme.of(context).textTheme.headline4);
+      return Text(widget.listMenu[index]["title"], style: Theme.of(context).textTheme.titleMedium);
     } else {
       return Container();
     }

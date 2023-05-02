@@ -12,14 +12,14 @@ class Guide_avancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styleBold = Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold);
+    final styleBold = Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold);
     final styleBoldItalic = Theme.of(context)
         .textTheme
-        .bodyText1!
+        .bodyMedium!
         .copyWith(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic);
     final styleUnderline =
-        Theme.of(context).textTheme.bodyText1!.copyWith(decoration: TextDecoration.underline);
-    final styleBlue = Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.blue);
+        Theme.of(context).textTheme.bodyMedium!.copyWith(decoration: TextDecoration.underline);
+    final styleBlue = Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.blue);
     return MainScaffold(
       title: 'Guide Avancé',
       child: ShowComponentFile(
@@ -31,7 +31,7 @@ class Guide_avancePage extends StatelessWidget {
               _DisplayTitle(title: "1. Bases scientifiques"),
               DefaultPanel(
                   child: RichText(
-                text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                   TextSpan(
                       text:
                           "L'auto-observation proposée ici est en lien avec la sécrétion de mucus produit par le col utérin (appelé aussi 'glaire cervicale'), et qui s'écoule à la vulve."
@@ -83,7 +83,7 @@ class Guide_avancePage extends StatelessWidget {
               _DisplayTitle(title: "3. Complément info  Résumé du cycle"),
               DefaultPanel(
                   child: RichText(
-                text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                   TextSpan(text: "Les couleurs dans la 3e colonne, automatiques selon la combinaison "),
                   TextSpan(text: "sensation à la vulve + observation", style: styleUnderline),
                   TextSpan(text: " choisie, sont appliquées "),
@@ -120,7 +120,7 @@ class Guide_avancePage extends StatelessWidget {
               _DisplayTitle(title: "4. Complément info bouton Analyser le cycle"),
               DefaultPanel(
                 child: RichText(
-                  text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                  text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                     TextSpan(
                         text:
                             "La colonne ANALYSE, duplication de la colonne COULEUR, permet l’interprétation manuelle du cycle en cliquant sur une ou plusieurs cases à modifier. Facultatif, laissé au discernement de l’accompagnatrice ou pour utilisatrices avancées.  \n\n"),
@@ -154,7 +154,7 @@ class Guide_avancePage extends StatelessWidget {
               _DisplayTitle(title: "CAS PARTICULIERS"),
               DefaultPanel(
                   child: RichText(
-                text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                   TextSpan(text: "Nombreuses cases incolores ", style: styleUnderline),
                   TextSpan(
                       text:
@@ -193,7 +193,7 @@ class Guide_avancePage extends StatelessWidget {
               _DisplayTitle(title: "5. Onglet Historique "),
               DefaultPanel(
                   child: RichText(
-                text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                   TextSpan(
                       text:
                           "Récapitule les colonnes ANALYSE (ou COULEUR, par défaut) de chacun des cycles. Cliquer sur le numéro du cycle pour accéder à son Résumé et pouvoir le (ré)analyser si besoin."
@@ -236,7 +236,7 @@ class Line extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            Text(" $num ", style: Theme.of(context).textTheme.bodyText1),
+            Text(" $num ", style: Theme.of(context).textTheme.bodyMedium),
             SizedBox(width: 5),
             if (iconPath != null)
               IconObservation(
@@ -246,11 +246,11 @@ class Line extends StatelessWidget {
             if (iconPath == null) SizedBox(width: 30),
             SizedBox(width: 5),
             Expanded(
-              child: Text(titre1, style: Theme.of(context).textTheme.bodyText1),
+              child: Text(titre1, style: Theme.of(context).textTheme.bodyMedium),
             ),
             Expanded(
               flex: 2,
-              child: Text(titre2, style: Theme.of(context).textTheme.bodyText1),
+              child: Text(titre2, style: Theme.of(context).textTheme.bodyMedium),
             ),
           ],
         ),
@@ -267,7 +267,7 @@ class _DisplayTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
-      child: Text(title, style: Theme.of(context).textTheme.headline5!.copyWith(color: colorpanel(50))),
+      child: Text(title, style: Theme.of(context).textTheme.titleSmall!.copyWith(color: colorpanel(50))),
     );
   }
 }

@@ -248,11 +248,11 @@ class Sang extends ValueObject<SangState> {
 
 enum MucusState {
   opaqueBlancOuJaune,
-  depotSecheBlancOuJaune,
   opaqueAvecTransparent_UnPeuEtirable,
   nuageuxATransparent_Elastique,
   transparentFilantOuTresFluide,
   aucunMucusVisible,
+  depotSecheBlancOuJaune,
   autre,
   none,
 }

@@ -55,7 +55,7 @@ class MainScaffold extends ConsumerWidget {
       title: title != null
           ? Text(
               title,
-              style: Theme.of(context).textTheme.headline5?.copyWith(color: actioncolor['primary']),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary']),
               overflow: TextOverflow.fade,
             )
           : null,

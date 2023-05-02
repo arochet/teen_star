@@ -22,7 +22,8 @@ class IconObservation extends StatelessWidget {
           if (iconText != null)
             Center(
                 child: Text(iconText!,
-                    style: Theme.of(context).textTheme.headline2?.copyWith(color: actioncolor['primary']))),
+                    style:
+                        Theme.of(context).textTheme.headlineMedium?.copyWith(color: actioncolor['primary']))),
         ],
       ),
       width: iconSize,

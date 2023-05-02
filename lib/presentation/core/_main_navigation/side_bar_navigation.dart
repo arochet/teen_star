@@ -71,7 +71,7 @@ class NavLink extends ConsumerWidget {
           title: Text(title,
               style: Theme.of(context)
                   .textTheme
-                  .headline5
+                  .titleSmall
                   ?.copyWith(color: selected ? colorpanel(900) : colorpanel(50))),
           tileColor: selected ? actioncolor['primary'] : null,
           shape: RoundedRectangleBorder(

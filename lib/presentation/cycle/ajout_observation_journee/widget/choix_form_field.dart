@@ -99,7 +99,7 @@ class _Field extends StatelessWidget {
                     child: Text(titre(state),
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1
+                            .bodyMedium
                             ?.copyWith(color: actioncolor['primary'], fontSize: 12))),
                 SizedBox(width: 5),
               ],

@@ -47,7 +47,7 @@ class AppBarCycle extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.headline4),
+                Text("Cycle ${cycleCourant?.id}", style: Theme.of(context).textTheme.titleMedium),
                 Icon(Icons.keyboard_arrow_down, size: 30, color: colorpanel(50)),
               ],
             ),
@@ -96,7 +96,7 @@ class AppBarCycle extends ConsumerWidget {
                   Flexible(
                     child: Text(
                       "Cycle ${cycleCourant?.id}",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.titleMedium,
                       overflow: TextOverflow.fade,
                     ),
                   ),

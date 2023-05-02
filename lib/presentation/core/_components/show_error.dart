@@ -7,7 +7,7 @@ class ShowError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(err ?? 'Erreur Iconnu', style: Theme.of(context).textTheme.headline4),
+      child: Text(err ?? 'Erreur Iconnu', style: Theme.of(context).textTheme.titleMedium),
     );
   }
 }

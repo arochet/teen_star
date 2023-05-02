@@ -123,9 +123,9 @@ class _Cell extends StatelessWidget {
                   Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40),
                 if (observation.sensation?.getOrCrash() == SensationState.autre ||
                     observation.mucus?.getOrCrash() == MucusState.autre)
-                  Center(child: Text("?", style: Theme.of(context).textTheme.headline5)),
+                  Center(child: Text("?", style: Theme.of(context).textTheme.titleSmall)),
                 if (observation.marque != null && observation.marque! > 0)
-                  Center(child: Text('${observation.marque}', style: Theme.of(context).textTheme.headline5)),
+                  Center(child: Text('${observation.marque}', style: Theme.of(context).textTheme.titleSmall)),
               ],
             ),
           ),
@@ -148,7 +148,7 @@ class _CellEmpty extends StatelessWidget {
           width: 40,
           height: 35,
           child: Center(
-            child: Text('', style: Theme.of(context).textTheme.headline5),
+            child: Text('', style: Theme.of(context).textTheme.titleSmall),
           )),
     );
   }
@@ -173,7 +173,7 @@ class _CellHeader extends ConsumerWidget {
         },
         child: Container(
             constraints: BoxConstraints(minWidth: 60, minHeight: 50),
-            child: Center(child: Text(value, style: Theme.of(context).textTheme.headline6))));
+            child: Center(child: Text(value, style: Theme.of(context).textTheme.labelMedium))));
   }
 }
 
@@ -186,6 +186,6 @@ class _CellObservation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('J$value', style: Theme.of(context).textTheme.headline5));
+    return Center(child: Text('J$value', style: Theme.of(context).textTheme.titleSmall));
   }
 }

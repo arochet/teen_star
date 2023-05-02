@@ -19,7 +19,7 @@ class Info_applicationPage extends StatelessWidget {
           child: ListView(children: [
             DefaultPanel(
               child: RichText(
-                text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                   TextSpan(
                     text: "Cette application créée en 2020 par des médecins est :\n"
                         "-  utilisable par toute femme\n"
@@ -44,7 +44,7 @@ class Info_applicationPage extends StatelessWidget {
             DefaultPanel(
               child: Column(children: [
                 RichText(
-                  text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+                  text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                     TextSpan(text: "Fondamentaux :", style: TextStyle(decoration: TextDecoration.underline)),
                     TextSpan(
                         text: " Drs S.P., G.D., B. de N. et A.J., animatrices au CEPP/TeenSTAR France \n"),

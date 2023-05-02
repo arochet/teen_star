@@ -118,7 +118,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
   Widget build(BuildContext context) {
     final form = ref.watch(cycleFormNotifierProvider);
     final notifierForm = ref.read(cycleFormNotifierProvider.notifier);
-    TextStyle? styleTitre = Theme.of(context).textTheme.headline4?.copyWith(color: actioncolor['primary']);
+    TextStyle? styleTitre = Theme.of(context).textTheme.titleMedium?.copyWith(color: actioncolor['primary']);
 
     bool first = ref.watch(isFirstPage);
     //Formulaire de l'observation
@@ -165,7 +165,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 child: const Text("[DEV] Enregistrer l'Observation"),
               ),
             ),
-          if (first) ...[
+          if (/* first */ true) ...[
             //Date de l'observation
             Row(
               children: [
@@ -184,7 +184,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                     color: Color.fromARGB(255, 202, 82, 52),
                     child: Text(
                         AppDateUtils.isToday(form.date) ? 'Aujourd\'hui' : AppDateUtils.formatDate(form.date),
-                        style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.white)),
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Colors.white)),
                   ),
                 )
               ],
@@ -244,7 +244,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 decoration: InputDecoration(labelText: 'Autre mucus'),
               ),
             SpaceH10(),
-            //BUTON NEXT PAGE
+            /* //BUTON NEXT PAGE
             ElevatedButton(
               onPressed: () async {
                 ref.read(isFirstPage.notifier).state = false;
@@ -253,10 +253,11 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               style: buttonNormalPrimary,
               child: Icon(Icons.arrow_forward_ios),
             ),
-            SpaceH30(),
+            SpaceH30(), */
           ],
-          if (!first) ...[
-            Container(
+          if (/* !first */ true) ...[
+            //BUTON PREVIOUS PAGE
+            /* Container(
               width: 30,
               child: ElevatedButton(
                 onPressed: () async {
@@ -265,7 +266,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 style: buttonNormalPrimary,
                 child: Icon(Icons.arrow_back_ios),
               ),
-            ),
+            ), */
             SpaceH30(),
             //EVENEMENTS
             Text("EVENEMENTS", style: styleTitre),
@@ -334,7 +335,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             Row(
               children: [
                 Text("TEMPERATURE BASALE",
-                    style: Theme.of(context).textTheme.headline5?.copyWith(color: actioncolor['primary'])),
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary'])),
                 Expanded(child: Container()),
                 Container(
                   width: 140,
@@ -359,7 +360,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
 
             //NOTES CONFIDENTIELLES
             Text("NOTES CONFIDENTIELLES",
-                style: Theme.of(context).textTheme.headline5?.copyWith(color: actioncolor['primary'])),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary'])),
             const SizedBox(height: 5),
             TextFormField(
               autocorrect: false,

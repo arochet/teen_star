@@ -55,7 +55,7 @@ ouvrirNoteConfidentielles(BuildContext context, WidgetRef ref, Observation obser
               child: SingleChildScrollView(
             child: Text(
               txtObservation,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
           ))),
       actions: <Widget>[

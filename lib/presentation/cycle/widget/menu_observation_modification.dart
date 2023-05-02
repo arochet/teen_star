@@ -154,7 +154,7 @@ class MenuObservationModification extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("${AppDateUtils.formatDate(observation.date, "EEEE d MMMM yyyy")}",
-              style: Theme.of(context).textTheme.headline5?.copyWith(color: colorpanel(400))),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(color: colorpanel(400))),
           SpaceH10(),
           ElevatedButton(
             onPressed: () async {
@@ -179,7 +179,7 @@ class MenuObservationModification extends ConsumerWidget {
             style: buttonNormalPrimaryFull,
           ),
           SpaceH10(),
-          Text("Marquer comme", style: Theme.of(context).textTheme.headline5),
+          Text("Marquer comme", style: Theme.of(context).textTheme.titleSmall),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

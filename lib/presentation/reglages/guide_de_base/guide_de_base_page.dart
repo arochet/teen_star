@@ -13,10 +13,10 @@ class Guide_de_basePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styleBold = Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold);
+    final styleBold = Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold);
     final styleUnderline =
-        Theme.of(context).textTheme.bodyText1!.copyWith(decoration: TextDecoration.underline);
-    final styleBlue = Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.blue);
+        Theme.of(context).textTheme.bodyMedium!.copyWith(decoration: TextDecoration.underline);
+    final styleBlue = Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.blue);
     return MainScaffold(
       title: 'Guide de base',
       child: ShowComponentFile(
@@ -26,7 +26,7 @@ class Guide_de_basePage extends StatelessWidget {
           child: ListView(children: [
             DefaultPanel(
                 child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                 TextSpan(text: "«  Mon corps c’est moi, j’écoute ce qu’il me dit ». ", style: styleBold),
                 TextSpan(text: "Mieux le connaître, c’est découvrir la merveille que je suis !")
               ]),
@@ -34,7 +34,7 @@ class Guide_de_basePage extends StatelessWidget {
             _DisplayTitle(title: "Objectifs"),
             DefaultPanel(
                 child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                 TextSpan(
                     text:
                         "Faciliter vos enregistrements quotidiens afin d'apprendre l’auto-observation pour découvrir votre fertilité et vos cycles (mise en place progressive du cycle à partir de la puberté, profil personnel des signes de fertilité, période de l’ovulation, date prévisible des prochaines règles, variation d’humeur et de forme physique en lien avec les changements hormonaux, impact de certains évènements sur le déroulement du cycle, anomalies éventuelles, ...).")
@@ -43,7 +43,7 @@ class Guide_de_basePage extends StatelessWidget {
             _DisplayTitle(title: "Comment s'observer"),
             DefaultPanel(
                 child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                 TextSpan(text: "Ce que je sens à la vulve sans regarder", style: styleUnderline),
                 TextSpan(
                     text:
@@ -61,7 +61,7 @@ class Guide_de_basePage extends StatelessWidget {
             _DisplayTitle(title: "Comment noter"),
             DefaultPanel(
                 child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                 TextSpan(text: "Observations de la journée ", style: styleBlue),
                 TextSpan(
                     text: "enregistrer LE SOIR le signe le plus fertile de la journée"
@@ -78,7 +78,7 @@ class Guide_de_basePage extends StatelessWidget {
             _DisplayTitle(title: "Synthèse du cycle"),
             DefaultPanel(
                 child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                 TextSpan(text: "L’onglet "),
                 TextSpan(text: "Cycle ", style: styleBlue),
                 TextSpan(text: "récapitule le cycle, en y ajoutant des couleurs par défaut, mais qui "),
@@ -97,7 +97,7 @@ class Guide_de_basePage extends StatelessWidget {
             _DisplayTitle(title: "Conservation des enregistrements"),
             DefaultPanel(
                 child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
+              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                 TextSpan(text: "Les données ne figurent que sur votre appareil "),
                 TextSpan(text: "(portable perdu = données perdues).\n\n", style: styleBold),
                 TextSpan(
@@ -143,7 +143,7 @@ class _DisplayTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
-      child: Text(title, style: Theme.of(context).textTheme.headline5!.copyWith(color: colorpanel(50))),
+      child: Text(title, style: Theme.of(context).textTheme.titleSmall!.copyWith(color: colorpanel(50))),
     );
   }
 }

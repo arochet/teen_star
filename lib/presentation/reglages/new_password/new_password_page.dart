@@ -55,7 +55,7 @@ class FormReauthenticate extends ConsumerWidget {
         padding: const EdgeInsets.all(28.0),
         child: Center(
           child: Text(AppLocalizations.of(context)!.motdepassemisajouravecsucces,
-              style: Theme.of(context).textTheme.headline4),
+              style: Theme.of(context).textTheme.titleMedium),
         ),
       );
 
@@ -68,7 +68,7 @@ class FormReauthenticate extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 0),
             child: Text(
               "${AppLocalizations.of(context)!.votrenouveaumotdepasse} ${isMotDePasseAppli ? 'Appli' : 'PDF'}",
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           const SizedBox(height: 14),

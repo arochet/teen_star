@@ -79,7 +79,7 @@ class _CyclesPageState extends ConsumerState<CyclesPage> {
             } else {
               if (idCourant == null) {
                 //PAGE : Erreur sur l'id du cycle courant
-                return Center(child: Text("...", style: Theme.of(context).textTheme.headline4));
+                return Center(child: Text("...", style: Theme.of(context).textTheme.titleMedium));
               } else {
                 return _Cycle(listCyclesDTO, id: idCourant);
               }
@@ -170,7 +170,7 @@ class _Cycle extends ConsumerWidget {
                         child: Text("Toucher l'observation à compléter ou modifier",
                             style: Theme.of(context)
                                 .textTheme
-                                .headline6
+                                .labelMedium
                                 ?.copyWith(color: actioncolor['primary'])),
                       ),
                     ),
@@ -205,7 +205,7 @@ class _PagePasDeCycle extends StatelessWidget {
           Expanded(
             child: Center(
                 child: Text("Ajoutez votre première observation !",
-                    style: Theme.of(context).textTheme.bodyText1, textAlign: TextAlign.center)),
+                    style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center)),
           ),
           ButtonAjoutObservationJournee(),
         ],
@@ -233,10 +233,10 @@ class __ShowAnalyseState extends ConsumerState<_ShowAnalyse> {
         child: Row(
           children: [
             Expanded(child: Container()),
+            Text("Afficher l'analyse", style: Theme.of(context).textTheme.titleSmall),
+            SizedBox(width: 10),
             Icon(ref.watch(showAnalyse) ? Icons.check_box : Icons.check_box_outline_blank,
                 color: ref.watch(showAnalyse) ? actioncolor['primary'] : colorpanel(50)),
-            SizedBox(width: 10),
-            Text("Afficher l'analyse", style: Theme.of(context).textTheme.headline5),
           ],
         ),
       ),
@@ -271,7 +271,7 @@ class __BarLongCycleState extends ConsumerState<_BarLongCycle> {
             value: (v) => Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 4),
                   child: Text("${widget.cycle.id.getOrCrash()}.$v",
-                      style: Theme.of(context).textTheme.headline6),
+                      style: Theme.of(context).textTheme.labelMedium),
                 )),
         onValueChanged: (int value) {
           ref.read(rangeDisplayObservation.notifier).state = value;

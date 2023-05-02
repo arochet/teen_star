@@ -154,8 +154,8 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                                     ? actioncolor['primary']
                                     : (i % 2 == 1 ? colorRow : null))
                                 : (i % 2 == 1 ? colorRow : null),
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
+                            /* borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)) ,*/
                           ),
                           child: SizedBox(
                             width: widget.cellDimensions.stickyLegendWidth,

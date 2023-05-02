@@ -170,7 +170,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             Row(
               children: [
                 Text("Date:", style: styleTitre),
-                Expanded(child: Container()),
+                SizedBox(width: 10),
                 InkWell(
                   onTap: () async {
                     DateTime? date = await showDatePicker(
@@ -180,15 +180,22 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                         lastDate: DateTime(2071));
                     if (date != null) notifierForm.dateChanged(date);
                   },
-                  child: DefaultPanel(
-                    color: Color.fromARGB(255, 202, 82, 52),
-                    child: Text(
-                        AppDateUtils.isToday(form.date) ? 'Aujourd\'hui' : AppDateUtils.formatDate(form.date),
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Colors.white)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 202, 82, 52), border: Border.all(color: colorpanel(50)!)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                          AppDateUtils.isToday(form.date)
+                              ? 'Aujourd\'hui'
+                              : AppDateUtils.formatDate(form.date),
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Colors.white)),
+                    ),
                   ),
                 )
               ],
             ),
+            SpaceH10(),
             //SENSATION
             Text("SENSATION", style: styleTitre),
             Divider(color: colorpanel(50), thickness: 1),
@@ -268,25 +275,6 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               ),
             ), */
             SpaceH30(),
-            //EVENEMENTS
-            Text("EVENEMENTS", style: styleTitre),
-            Divider(color: colorpanel(50), thickness: 1),
-            const SizedBox(height: 5),
-            ChoixFormField(
-              choix: EvenementState.values.where((state) => state != EvenementState.none).toList(),
-              onSelect: (state) => notifierForm.evenementsChanged(state as EvenementState),
-              currentStates: form.evenements.map((e) => e.getOrCrash()).toList(),
-              titre: (state) => (state as EvenementState).toDisplayString(),
-              iconPath: (state) => (state as EvenementState).toIconPath(),
-            ),
-            if (form.evenements.where((evt) => evt.getOrCrash() == EvenementState.autre).length > 0)
-              TextFormField(
-                autocorrect: false,
-                onChanged: (String value) => notifierForm.evenementsAutreChanged(value),
-                controller: _controllerEvenementAutre,
-                decoration: InputDecoration(labelText: 'Autre évènement'),
-              ),
-            SpaceH10(),
 
             //HUMEUR
             Text("HUMEUR", style: styleTitre),
@@ -308,7 +296,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               ),
             SpaceH10(),
 
-            //DOULEURS
+            //SIGNE ASSOCIE
             Text("SIGNE ASSOCIÉ", style: styleTitre),
             Divider(color: colorpanel(50), thickness: 1),
             const SizedBox(height: 5),
@@ -331,6 +319,26 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               ),
             SpaceH10(),
 
+            //EVENEMENTS
+            Text("EVENEMENTS", style: styleTitre),
+            Divider(color: colorpanel(50), thickness: 1),
+            const SizedBox(height: 5),
+            ChoixFormField(
+              choix: EvenementState.values.where((state) => state != EvenementState.none).toList(),
+              onSelect: (state) => notifierForm.evenementsChanged(state as EvenementState),
+              currentStates: form.evenements.map((e) => e.getOrCrash()).toList(),
+              titre: (state) => (state as EvenementState).toDisplayString(),
+              iconPath: (state) => (state as EvenementState).toIconPath(),
+            ),
+            if (form.evenements.where((evt) => evt.getOrCrash() == EvenementState.autre).length > 0)
+              TextFormField(
+                autocorrect: false,
+                onChanged: (String value) => notifierForm.evenementsAutreChanged(value),
+                controller: _controllerEvenementAutre,
+                decoration: InputDecoration(labelText: 'Autre évènement'),
+              ),
+            SpaceH10(),
+
             //TEMPERATURE BASALE
             Row(
               children: [
@@ -342,7 +350,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                   child: TextFormField(
                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                     autocorrect: false,
-                    decoration: InputDecoration(labelText: 'Température'),
+                    decoration: InputDecoration(labelText: 'C°'),
                     onChanged: (value) {
                       try {
                         notifierForm
@@ -358,7 +366,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             ),
             SpaceH20(),
 
-            //NOTES CONFIDENTIELLES
+            /* //NOTES CONFIDENTIELLES
             Text("NOTES CONFIDENTIELLES",
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary'])),
             const SizedBox(height: 5),
@@ -369,7 +377,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               maxLength: 500,
               onChanged: (String value) => notifierForm.notesConfidentiellesChanged(value),
               controller: _controllerNotesConfidentielles,
-            ),
+            ), */
 
             //insert-field-complete
 
@@ -395,7 +403,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                     notifierForm.addObservationPressed(widget.cycle);
                   }
                 },
-                style: buttonNormalConfirm,
+                style: buttonNormalPrimary,
                 child: const Text("ok"),
               ),
             ),

@@ -72,7 +72,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
     ];
 
     //Largeur des colonnes
-    Map cellsWidth = {'Douleur': 120, 'Evenements': 300};
+    Map cellsWidth = {'Douleur': 120, 'Evenements': 220};
 
     //Date du premier jour du cycle
     DateTime? datePremierJourCycle = widget.cycle.getDateObservationFirstDay();
@@ -94,11 +94,11 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
         rowsTitleBuilder: (int rowIndex) => _CellDay(
             '${widget.cycle.getDayOfObservation(observationsAndEmpty[rowIndex], datePremierJourCycle)}',
             selection),
-        widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 60.0),
+        widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 50.0),
         cellDimensions: CellDimensions(
-          stickyLegendWidth: 50,
+          stickyLegendWidth: 35,
           stickyLegendHeight: 50,
-          contentCellWidth: 60, //Sert à rien car il y'a widthCell
+          contentCellWidth: 40, //Sert à rien car il y'a widthCell
           contentCellHeight: 35,
         ),
         rowSelect: (rowIndex) async {

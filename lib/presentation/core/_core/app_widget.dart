@@ -19,7 +19,11 @@ class AppWidget extends StatelessWidget {
         primaryColor: Colors.red,
         scaffoldBackgroundColor: colorpanel(900),
         inputDecorationTheme: InputDecorationTheme(
-          labelStyle: TextStyle(color: colorpanel(200)),
+          labelStyle: TextStyle(
+            color: colorpanel(200),
+            fontFamily: 'MyriadPro',
+            fontSize: 14,
+          ),
           iconColor: colorpanel(200),
           fillColor: colorpanel(800),
           floatingLabelStyle: TextStyle(color: colorpanel(100)),
@@ -101,54 +105,6 @@ class AppWidget extends StatelessWidget {
             fontFamily: 'MyriadPro',
             color: colorpanel(50),
           ),
-          /* headline1: TextStyle(
-            fontSize: 38.0,
-            fontFamily: 'MyriadPro',
-            fontWeight: FontWeight.bold,
-            color: colorpanel(50),
-          ),
-          headline2: TextStyle(
-            fontFamily: 'MyriadPro',
-            fontSize: 28.0,
-            fontWeight: FontWeight.bold,
-            color: colorpanel(50),
-          ),
-          headline3: TextStyle(
-            fontFamily: 'MyriadPro',
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-            color: colorpanel(50),
-          ),
-          headline4: TextStyle(
-            fontFamily: 'MyriadPro',
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-            color: colorpanel(50),
-          ),
-          headline5: TextStyle(
-            fontFamily: 'MyriadPro',
-            fontSize: 16.0,
-            fontWeight: FontWeight.bold,
-            color: colorpanel(50),
-          ),
-          headline6: TextStyle(
-            fontFamily: 'MyriadPro',
-            fontSize: 12.0,
-            fontWeight: FontWeight.bold,
-            color: colorpanel(50),
-          ),
-          subtitle1: TextStyle(
-            fontFamily: 'MyriadPro',
-            color: colorpanel(50),
-          ),
-          button: TextStyle(
-            fontFamily: 'MyriadPro',
-            color: colorpanel(50),
-          ),
-          bodyText1: TextStyle(
-            fontFamily: 'MyriadPro',
-            color: colorpanel(50),
-          ), */
         ),
       ),
       supportedLocales: L10n.all,

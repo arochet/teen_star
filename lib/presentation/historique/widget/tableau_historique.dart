@@ -63,10 +63,10 @@ class TableauHistorique extends ConsumerWidget {
         rowsLength: /* _getCyclePlusLong(listHistorique) */ 35,
         rowsTitleBuilder: (int rowIndex) => _CellObservation('${rowIndex + 1}'),
         cellDimensions: CellDimensions(
-          stickyLegendWidth: 40,
+          stickyLegendWidth: 35,
           stickyLegendHeight: 50,
           contentCellWidth: 60, //Sert à rien car il y'a widthCell
-          contentCellHeight: 50,
+          contentCellHeight: 35,
         ),
       ),
     );
@@ -110,8 +110,8 @@ class _Cell extends StatelessWidget {
               child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.black, width: 30, height: 30)),
         Center(
           child: LittleBox(
-            width: 40,
-            height: 35,
+            width: 35,
+            height: 30,
             color: couleur ?? observation.couleurGeneree.toColor(),
             child: Stack(
               children: [
@@ -173,7 +173,9 @@ class _CellHeader extends ConsumerWidget {
         },
         child: Container(
             constraints: BoxConstraints(minWidth: 60, minHeight: 50),
-            child: Center(child: Text(value, style: Theme.of(context).textTheme.labelMedium))));
+            child: Center(
+                child: Text(value,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold)))));
   }
 }
 

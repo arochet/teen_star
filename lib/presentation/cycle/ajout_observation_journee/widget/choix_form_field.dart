@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/cycle/shared/icon_observation.dart';
 
@@ -68,6 +69,16 @@ class _Field extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BoxDecoration decorationRounded = BoxDecoration(
+      color: isSelected ? Color.fromARGB(255, 164, 187, 67) : Colors.transparent,
+      borderRadius: BorderRadius.circular(40),
+    );
+
+    BoxDecoration decorationSquared = BoxDecoration(
+      color: isSelected ? Color.fromARGB(255, 164, 187, 67) : Colors.transparent,
+      borderRadius: BorderRadius.circular(3),
+    );
+
     return Padding(
       padding: const EdgeInsets.all(1.0),
       child: Container(
@@ -81,10 +92,7 @@ class _Field extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                    color: isSelected ? Color.fromARGB(255, 164, 187, 67) : Colors.transparent,
-                    borderRadius: BorderRadius.circular(3),
-                  ),
+                  decoration: state is HumeurState ? decorationRounded : decorationSquared,
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: IconObservation(
@@ -97,10 +105,11 @@ class _Field extends StatelessWidget {
                 SizedBox(height: 5),
                 Expanded(
                     child: Text(titre(state),
+                        textAlign: TextAlign.center,
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium
-                            ?.copyWith(color: actioncolor['primary'], fontSize: 12))),
+                            ?.copyWith(color: colorpanel(50), fontSize: 12, fontWeight: FontWeight.w500))),
                 SizedBox(width: 5),
               ],
             ),

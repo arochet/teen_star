@@ -10,9 +10,21 @@ import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'dart:io' show Platform;
 
 generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async {
+  //VERIFICATION DES PERMISSIONS !
+  PermissionStatus status = await Permission.storage.status;
+
+  if (status.isDenied) {
+    final permission = await Permission.storage.request();
+
+    if (permission.isDenied) {
+      return;
+    }
+  }
+
   final PdfDocument pdf = PdfDocument();
   header(pdf, userData, listCycles);
 

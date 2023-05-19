@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.1.0+19
+version: 1.1.1+20
 
 environment:
   sdk: ">=2.15.0 <3.0.0"
@@ -91,12 +91,12 @@ flutter:
   generate: true 
 
   fonts:
-    - family: DejaVu
+    - family: MyriadPro
       fonts:
-        - asset: assets/fonts/DejaVuSans.ttf
-        - asset: assets/fonts/DejaVuSans-Oblique.ttf
+        - asset: assets/fonts/myriadpro/MYRIADPRO-REGULAR.OTF
+        - asset: assets/fonts/myriadpro/MYRIADPRO-SEMIBOLDIT.OTF
           style: italic
-        - asset: assets/fonts/DejaVuSans-Bold.ttf
+        - asset: assets/fonts/myriadpro/MYRIADPRO-BOLD.OTF
           weight: 700
   assets:
     - assets/guide.pdf

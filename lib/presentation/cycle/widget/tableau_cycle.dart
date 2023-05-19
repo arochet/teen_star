@@ -175,10 +175,7 @@ class _Cell extends StatelessWidget {
             if (observation.marque != null && observation.marque! > 0)
               Text("${observation.marque}", style: Theme.of(context).textTheme.titleSmall),
             //POINT D'INTERROGATION
-            if (observation.sensation?.getOrCrash() == SensationState.autre ||
-                observation.mucus?.getOrCrash() == MucusState.autre &&
-                    observation.enleverPointInterrogation != true)
-              Text("?", style: Theme.of(context).textTheme.titleSmall),
+            if (observation.isPointInterrogation) Text("?", style: Theme.of(context).textTheme.titleSmall),
           ],
         ),
       ),

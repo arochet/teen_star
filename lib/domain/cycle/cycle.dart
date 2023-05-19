@@ -24,7 +24,12 @@ abstract class Cycle with _$Cycle {
         idJourneeSoleil: UniqueId(),
       );
 
-  //Renvoie ne numéro du jour de l'observation dans le cycle. Exemple 5 pour le 5ème jour du cycle.
+  ///Renvoie si l'observation est le jour de sommet du cycle.
+  bool isJourneeSoleil(Observation obs) {
+    return obs.id == this.idJourneeSoleil;
+  }
+
+  /// Renvoie ne numéro du jour de l'observation dans le cycle. Exemple 5 pour le 5ème jour du cycle.
   int getDayOfObservation(Observation obs, DateTime? dateFirstDayOfCycle) {
     DateTime? firstDayOfCycle = dateFirstDayOfCycle ?? this.observations.first.date;
     return AppDateUtils.diffInDaysWith(obs.date!, firstDayOfCycle!) + 1;

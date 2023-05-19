@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
+import 'package:teenstar/PRESENTATION/cycle/pdf/generate_cycle_pdf.dart';
 
 import 'value_objects.dart';
 
@@ -132,6 +133,37 @@ abstract class Observation with _$Observation {
       return CouleurAnalyseState.none;
     }
   }
+
+  ///Pour le PDF, créer la cellule couleur
+  CellPDFColor toCellColor() {
+    return CellPDFColor(
+      couleur: this.couleurGeneree.toColorPDF(),
+      pointInterrogation: this.isPointInterrogation,
+      chiffre: this.marque,
+      hachure: false,
+    ); //Cellule couleur
+  }
+
+  ///Pour le PDF, créer la cellule Analyse
+  CellPDFColor toCellAnalyse(bool isJourSommet) {
+    return CellPDFColor(
+      couleur: this.analyse?.getOrCrash() == CouleurAnalyseState.none
+          ? this.couleurGeneree.toColorPDF()
+          : this.analyse?.getOrCrash().toColorPDF() ?? this.couleurGeneree.toColorPDF(),
+      pointInterrogation: false,
+      chiffre: this.marque,
+      hachure: this.displayHachure,
+      jourSommet: isJourSommet,
+    ); //Cellule couleur
+  }
+
+  ///Est-ce qu'on affiche les hachures
+  bool get displayHachure => this.jourFertile == false;
+
+  ///Point d'interrogation -> doute sur le renseignemnt de l'observation
+  bool get isPointInterrogation =>
+      this.sensation?.getOrCrash() == SensationState.autre ||
+      this.mucus?.getOrCrash() == MucusState.autre && this.enleverPointInterrogation != true;
 
   //Overide toString
   @override

@@ -42,11 +42,11 @@ class Guide_avancePage extends StatelessWidget {
                       style: styleBold)
                 ]),
               )),
-              _DisplayTitle(title: "2. Complément info Observation du mucus"),
+              _DisplayTitle(title: "2. Observation du mucus"),
               DefaultPanel(
                   child: Column(
                 children: [
-                  Line(1, AssetsPath.icon_vide, "Aucun mucus observé", ""),
+                  Line(1, AssetsPath.icon_mucus_visible, "Aucun mucus observé", ""),
                   Line(
                       2,
                       AssetsPath.icon_mucus_opaque_blanc_jaune,
@@ -76,11 +76,11 @@ class Guide_avancePage extends StatelessWidget {
                     "Dépôt séché, blanc ou jaune",
                     "Dépôt sec dans le sous-vêtement, en grande ou faible quantité. Peut correspondre à de simples pertes vaginales, mais aussi à de la glaire séchée, raison pour laquelle elle est considérée par défaut comme un mucus observé, jusqu’à éventuelle preuve du contraire après discussion avec l’accompagnatrice (N.B. la distinction entre les 2 est difficile).",
                   ),
-                  Line(7, null, "Autre observation",
+                  Line(7, AssetsPath.icon_autre, "Autre observation",
                       "En cas de doute sur l’observation, ou pour toute observation inhabituelle, qui pourrait être autre chose que de la glaire, voire traduire une infection (sexuellement transmissible ou non)"),
                 ],
               )),
-              _DisplayTitle(title: "3. Complément info  Résumé du cycle"),
+              _DisplayTitle(title: "3.  Résumé du cycle"),
               DefaultPanel(
                   child: RichText(
                 text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
@@ -102,10 +102,10 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: " BRUN ", style: styleBold),
                   TextSpan(text: "  (“terre”) =  Sec + aucun mucus  \n"),
                   TextSpan(text: " -> par défaut en "),
-                  TextSpan(text: " INCOLORE avec  un ? ", style: styleBold),
-                  TextSpan(
-                      text:
-                          "  = doute sur l’observation ou la sensation. Ex. sensation « Non perçue »  ou mucus « Dépôt séché » (perte vaginale ou mucus séché ?) ou sélection « Autre ».  \n"),
+                  TextSpan(text: " INCOLORE", style: styleBold),
+                  TextSpan(text: " = autres situations\n"),
+                  TextSpan(text: " Avec  un ? ", style: styleBold),
+                  TextSpan(text: "  = sensation ou observation « Autre ».  \n"),
                   TextSpan(text: " ->"),
                   TextSpan(text: " ROUGE DENSE ", style: styleBold),
                   TextSpan(text: " = saignement franc (règles ou autre) \n"),
@@ -117,13 +117,17 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: " = traces de sang, rouges ou brunes \n"),
                 ]),
               )),
-              _DisplayTitle(title: "4. Complément info bouton Analyser le cycle"),
+              _DisplayTitle(title: "4. bouton Analyser le cycle"),
               DefaultPanel(
                 child: RichText(
                   text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                     TextSpan(
                         text:
-                            "La colonne ANALYSE, duplication de la colonne COULEUR, permet l’interprétation manuelle du cycle en cliquant sur une ou plusieurs cases à modifier. Facultatif, laissé au discernement de l’accompagnatrice ou pour utilisatrices avancées.  \n\n"),
+                            "La colonne ANALYSE, duplication de la colonne COULEUR, permet l’interprétation manuelle du cycle en cliquant sur une ou plusieurs cases à modifier."),
+                    TextSpan(text: " Facultatif", style: styleBold),
+                    TextSpan(
+                        text:
+                            ", laissé au discernement de l’accompagnatrice ou pour utilisatrices avancées.  \n\n"),
                     TextSpan(text: "- Fleur ", style: styleBold),
                     TextSpan(
                         text:
@@ -166,28 +170,29 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: "PIB pré-ovulatoire et hachurage", style: styleUnderline),
                   TextSpan(
                       text:
-                          " l’utilisatrice avancée en auto-observation peut arriver à repérer son PIB. Rappel : PIB = Profil Infertile de Base = séquence non changeante jour après jour en pré-ovulatoire (sensation et aspect visuel qui restent identiques, témoignant de l’inactivité du col)"),
+                          " l’utilisatrice avancée en auto-observation peut arriver à repérer son PIB. Rappel : PIB = Profil Infertile de Base = séquence non changeante jour après jour en pré-ovulatoire (sensation et aspect visuel qui restent identiques, témoignant de l’inactivité du col)\n"),
                   TextSpan(text: "Il peut être de type :\n\n"),
                   TextSpan(text: "- non sécrétoire:", style: styleUnderline),
                   TextSpan(text: " sec + aucun mucus ", style: styleBoldItalic),
                   TextSpan(text: " (cases brunes, à hachurer)\n\n"),
-                  TextSpan(text: "- sécrétoire:", style: styleUnderline),
+                  TextSpan(text: "- sécrétoire: ", style: styleUnderline),
                   TextSpan(text: " sec + mucus opaque ", style: styleBoldItalic),
                   TextSpan(text: " (cases jaunes, à hachurer) "),
                   TextSpan(text: "ou", style: styleUnderline),
+                  TextSpan(text: " sensation "),
+                  TextSpan(text: "d’humidité + mucus opaque", style: styleBoldItalic),
                   TextSpan(
-                      text:
-                          " sensation d’humidité + mucus opaque (cases bleues par défaut, qu’elle pourra colorer en jaune, et hachurer).\n"),
+                      text: " (cases bleues par défaut, qu’elle pourra colorer en jaune, et hachurer).\n"),
                   TextSpan(text: "N.B. Cas d’un PIB "),
                   TextSpan(text: "sec + dépôt séché", style: styleBoldItalic),
                   TextSpan(text: ""),
                   TextSpan(text: ""),
                   TextSpan(
-                      text: " (cases blanches avec ?)\n"
+                      text: " (cases blanches avec ?)\n\n"
                           "a) Le dépôt séché est identifié clairement comme : \n"
-                          "glaire cervicale séchée à cases incolores à colorer en jaune et hachurer\n"
-                          "pertes vaginales séchées (sans glaire cervicale) à cases blanches à colorer en brun et hachurer\n"
-                          "b) Le dépôt n’est pas identifié clairement -> à laisser incolore, enlever le ? et hachurer \n"),
+                          " - glaire cervicale séchée → cases incolores à colorer en jaune et hachurer\n"
+                          " - pertes vaginales séchées (sans glaire cervicale) à cases blanches à colorer en brun et hachurer\n\n"
+                          "b) Le dépôt n’est pas identifié clairement → à laisser incolore, enlever le ? et hachurer \n"),
                 ]),
               )),
               _DisplayTitle(title: "5. Onglet Historique "),

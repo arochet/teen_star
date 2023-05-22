@@ -16,23 +16,8 @@ class TextUtils {
       return '';
     }
 
-    List<String> split = text!.split(' ');
-    StringBuffer buffer = StringBuffer();
-
-    for (int i = 0; i != split.length; i++) {
-      String part = split[i];
-
-      if (part.isNotEmpty) {
-        buffer.write(part[0].toUpperCase());
-        buffer.write(part.substring(1).toLowerCase());
-
-        if (i < split.length - 1) {
-          buffer.write(' ');
-        }
-      }
-    }
-
-    return buffer.toString();
+    String str = text![0].toUpperCase() + text.substring(1).toLowerCase();
+    return str;
   }
 
   static String? parseNullableString(dynamic value) {

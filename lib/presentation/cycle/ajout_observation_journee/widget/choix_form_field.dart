@@ -32,6 +32,9 @@ class ChoixFormField extends ConsumerWidget {
       child: Container(
         //height: choix.length * 246,
         child: Wrap(
+            alignment: WrapAlignment.start,
+            crossAxisAlignment: WrapCrossAlignment.start,
+            runAlignment: WrapAlignment.spaceAround,
             children: choix
                 .map((state) => InkWell(
                       onTap: () => onSelect(state),
@@ -79,51 +82,51 @@ class _Field extends StatelessWidget {
       borderRadius: BorderRadius.circular(3),
     );
 
-    return Padding(
-      padding: const EdgeInsets.all(1.0),
+    return Container(
       child: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: Container(
-            height: _getHeight(titre(state)),
-            width: 75,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: state is HumeurState ? decorationRounded : decorationSquared,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: IconObservation(
-                      iconPath: iconPath(state),
-                      iconText: iconText != null ? iconText!(state) : null,
-                      iconSize: 64,
-                    ),
-                  ),
+        height: _getHeight(titre(state)),
+        width: (MediaQuery.of(context).size.width / 4) - 10,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              decoration: state is HumeurState ? decorationRounded : decorationSquared,
+              child: Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: IconObservation(
+                  iconPath: iconPath(state),
+                  iconText: iconText != null ? iconText!(state) : null,
+                  iconSize: 64,
                 ),
-                SizedBox(height: 5),
-                Expanded(
-                    child: Text(titre(state),
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(color: colorpanel(50), fontSize: 12, fontWeight: FontWeight.w500))),
-                SizedBox(width: 5),
-              ],
+              ),
             ),
-          ),
+            SizedBox(height: 3),
+            Expanded(
+                child: Text(titre(state),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(color: colorpanel(50), fontSize: 12, fontWeight: FontWeight.w500))),
+          ],
         ),
       ),
     );
   }
 
   double _getHeight(String? title) {
+    print('title length : ${title?.length}');
     if (title == null) {
-      return 100;
+      return 90;
     }
-    final double heightLine = (((title.length ~/ 8) + 1) * 10).toDouble();
-    return title != null ? (85 + heightLine).toDouble() : 100;
+
+    //Méthode de manouch
+    if (title.length < 17 || title == "Glissant lubrifié") {
+      return 90;
+    }
+
+    final double heightLine = (((title.length ~/ 17) + 1) * 15).toDouble();
+    return (85 + heightLine).toDouble();
   }
 }

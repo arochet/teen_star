@@ -19,11 +19,11 @@ class NoAccountLink extends StatelessWidget {
           children: [
             new TextSpan(
               text: "${AppLocalizations.of(context)!.pasdecompte}  ",
-              style: new TextStyle(color: colorpanel(50)),
+              style: TextStyle(color: colorpanel(50)),
             ),
             new TextSpan(
               text: AppLocalizations.of(context)!.sinscrire,
-              style: new TextStyle(color: Colors.blue),
+              style: TextStyle(color: Colors.blue),
               recognizer: new TapGestureRecognizer()
                 ..onTap = () {
                   context.router.push(AuthRegisterRoute());

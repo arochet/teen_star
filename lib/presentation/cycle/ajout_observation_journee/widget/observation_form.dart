@@ -198,7 +198,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             SpaceH10(),
             //SENSATION
             Text("SENSATION", style: styleTitre),
-            Divider(color: colorpanel(50), thickness: 1),
+            Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
               choix: SensationState.values.where((state) => state != SensationState.none).toList(),
@@ -220,7 +220,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
 
             //SANG
             Text("SANG", style: styleTitre),
-            Divider(color: colorpanel(50), thickness: 1),
+            Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
               choix: SangState.values.where((state) => state != SangState.none).toList(),
@@ -233,7 +233,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
 
             //MUCUS
             Text("MUCUS", style: styleTitre),
-            Divider(color: colorpanel(50), thickness: 1),
+            Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
               choix: MucusState.values.where((state) => state != MucusState.none).toList(),
@@ -278,7 +278,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
 
             //HUMEUR
             Text("HUMEUR", style: styleTitre),
-            Divider(color: colorpanel(50), thickness: 1),
+            Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
               choix: HumeurState.values.where((state) => state != HumeurState.none).toList(),
@@ -298,7 +298,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
 
             //SIGNE ASSOCIE
             Text("SIGNE ASSOCIÉ", style: styleTitre),
-            Divider(color: colorpanel(50), thickness: 1),
+            Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
               choix: DouleurState.values
@@ -321,7 +321,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
 
             //EVENEMENTS
             Text("EVENEMENTS", style: styleTitre),
-            Divider(color: colorpanel(50), thickness: 1),
+            Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
               choix: EvenementState.values.where((state) => state != EvenementState.none).toList(),

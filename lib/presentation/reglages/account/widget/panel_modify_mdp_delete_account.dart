@@ -68,7 +68,6 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
       onPressed: () async {
         await context.router.pop();
         final ok = await showDialogPassword(context: context, ref: ref, dissmissable: true);
-
         if (ok == true) {
           final result = await ref.read(cycleRepositoryProvider).resetAll();
           ref.invalidate(allCycleProvider);

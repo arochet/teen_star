@@ -22,7 +22,7 @@ class DefaultPanel extends StatelessWidget {
         title: componentName,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: BorderRadius.all(Radius.circular(3)),
             color: color ?? colorpanel(900),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),

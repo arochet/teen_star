@@ -31,7 +31,7 @@ class PanelList extends StatelessWidget {
                     child: Row(
                       children: [
                         if (item.icon != null)
-                          Icon(item.icon, color: item.enable ? colorpanel(100) : colorpanel(400)),
+                          Icon(item.icon, color: item.enable ? actioncolor['primary'] : colorpanel(400)),
                         SizedBox(width: 10),
                         Text(item.title,
                             style: Theme.of(context)

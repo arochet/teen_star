@@ -13,7 +13,7 @@ Future<dynamic> showDialogApp<T>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
         title: titre != null
             ? Text(
                 titre,
@@ -63,8 +63,11 @@ Future<bool?> showDialogChoix(BuildContext context, String titre,
 }
 
 //PASSWORD
-Future<Object> showDialogPassword<bool>(
-    {required BuildContext context, required WidgetRef ref, required bool dissmissable}) async {
+Future<Object> showDialogPassword<bool>({
+  required BuildContext context,
+  required WidgetRef ref,
+  required bool dissmissable,
+}) async {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController? controller = TextEditingController();
   String? textError;
@@ -74,14 +77,14 @@ Future<Object> showDialogPassword<bool>(
     return true;
   }
 
-  return showDialog<bool>(
+  final res = await showDialog<bool>(
     context: context,
     barrierDismissible: dissmissable == true,
     barrierColor: dissmissable == false ? colorpanel(700) : null,
     builder: (BuildContext context) {
       return StatefulBuilder(builder: (context, setState) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
           title: Text('Entrez le mot de passe',
               style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center),
           content: Form(
@@ -153,4 +156,6 @@ Future<Object> showDialogPassword<bool>(
       });
     },
   );
+
+  return res ?? false;
 }

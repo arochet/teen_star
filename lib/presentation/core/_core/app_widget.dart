@@ -12,16 +12,17 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    String fontFamily = 'MyriadPro';
     return MaterialApp.router(
       title: 'TeenSTAR',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
+      theme: ThemeData(
+        fontFamily: fontFamily,
         primaryColor: Colors.red,
         scaffoldBackgroundColor: colorpanel(900),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(
             color: colorpanel(200),
-            fontFamily: 'MyriadPro',
             fontSize: 14,
           ),
           iconColor: colorpanel(200),
@@ -30,7 +31,7 @@ class AppWidget extends StatelessWidget {
           filled: true,
           focusColor: Colors.red,
           border: UnderlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(3),
             borderSide: BorderSide.none,
           ),
         ),
@@ -43,66 +44,51 @@ class AppWidget extends StatelessWidget {
         }),
         textTheme: theme.textTheme.copyWith(
           displayLarge: TextStyle(
-            fontFamily: 'MyriadPro',
             color: colorpanel(50),
           ),
           displayMedium: TextStyle(
-            fontFamily: 'MyriadPro',
             color: colorpanel(50),
           ),
           displaySmall: TextStyle(
-            fontFamily: 'MyriadPro',
             color: colorpanel(50),
           ),
           headlineLarge: TextStyle(
-            fontFamily: 'MyriadPro',
-            color: colorpanel(50),
+            color: actioncolor['primary'],
           ),
           headlineMedium: TextStyle(
-            fontFamily: 'MyriadPro',
-            color: colorpanel(50),
+            color: actioncolor['primary'],
           ),
           headlineSmall: TextStyle(
-            fontFamily: 'MyriadPro',
-            color: colorpanel(50),
+            color: actioncolor['primary'],
           ),
           titleLarge: TextStyle(
-            fontFamily: 'MyriadPro',
-            color: colorpanel(50),
+            color: actioncolor['primary'],
             fontWeight: FontWeight.bold,
           ),
           titleMedium: TextStyle(
-            fontFamily: 'MyriadPro',
-            color: colorpanel(50),
+            color: actioncolor['primary'],
             fontWeight: FontWeight.bold,
           ),
           titleSmall: TextStyle(
-            fontFamily: 'MyriadPro',
-            color: colorpanel(50),
+            color: actioncolor['primary'],
             fontWeight: FontWeight.bold,
           ),
           bodyLarge: TextStyle(
-            fontFamily: 'MyriadPro',
             color: colorpanel(50),
           ),
           bodyMedium: TextStyle(
-            fontFamily: 'MyriadPro',
             color: colorpanel(50),
           ),
           bodySmall: TextStyle(
-            fontFamily: 'MyriadPro',
             color: colorpanel(50),
           ),
           labelLarge: TextStyle(
-            fontFamily: 'MyriadPro',
             color: colorpanel(50),
           ),
           labelMedium: TextStyle(
-            fontFamily: 'MyriadPro',
             color: colorpanel(50),
           ),
           labelSmall: TextStyle(
-            fontFamily: 'MyriadPro',
             color: colorpanel(50),
           ),
         ),

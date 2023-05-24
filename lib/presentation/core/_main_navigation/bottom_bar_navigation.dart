@@ -273,7 +273,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
             CupertinoActionSheetAction(
               onPressed: () async {
                 final onRenvoie = await showDialogChoix(context,
-                    'Etes-vous sûr de vouloir renvoyer le cycle $idDernierCycle vers ${idDernierCycle - 1} ?',
+                    'Êtes-vous sûre de vouloir renvoyer le cycle $idDernierCycle vers ${idDernierCycle - 1} ?',
                     positiveText: 'Renvoyer', negativeText: 'Annuler');
                 if (onRenvoie == true) {
                   final result = await ref.read(cycleRepositoryProvider).renvoieDernierCycle();

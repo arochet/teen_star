@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
@@ -14,6 +15,7 @@ class ChoixFormField extends ConsumerWidget {
   String Function(Enum)? iconTxt;
   double Function(Enum)? height;
   List<Enum> currentStates;
+  bool? isRed;
   ChoixFormField(
       {Key? key,
       required this.choix,
@@ -22,6 +24,7 @@ class ChoixFormField extends ConsumerWidget {
       required this.titre,
       required this.iconPath,
       this.height,
+      this.isRed,
       this.iconTxt})
       : super(key: key);
 
@@ -45,6 +48,7 @@ class ChoixFormField extends ConsumerWidget {
                         iconPath: iconPath,
                         iconText: iconTxt,
                         height: height,
+                        isRed: isRed ?? false,
                       ),
                     ))
                 .toList()),
@@ -60,6 +64,7 @@ class _Field extends StatelessWidget {
   final String Function(Enum p1) iconPath;
   final String Function(Enum p1)? iconText;
   final double? Function(Enum p1)? height;
+  final bool isRed;
   _Field({
     Key? key,
     required this.titre,
@@ -68,6 +73,7 @@ class _Field extends StatelessWidget {
     required this.iconPath,
     required this.height,
     this.iconText,
+    this.isRed = false,
   }) : super(key: key);
 
   @override
@@ -82,10 +88,15 @@ class _Field extends StatelessWidget {
       borderRadius: BorderRadius.circular(3),
     );
 
+    TextStyle? styleText = Theme.of(context).textTheme.bodyMedium?.copyWith(
+        color: isRed ? actioncolor['red'] : colorpanel(50), fontSize: 10, fontWeight: FontWeight.w500);
+
+    double? widthCell = (MediaQuery.of(context).size.width / 4) - 9;
+
     return Container(
       child: Container(
-        height: _getHeight(titre(state)),
-        width: (MediaQuery.of(context).size.width / 4) - 10,
+        height: _textSize(titre(state), styleText!, widthCell).height + 81,
+        width: widthCell,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -103,30 +114,23 @@ class _Field extends StatelessWidget {
             ),
             SizedBox(height: 3),
             Expanded(
-                child: Text(titre(state),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: colorpanel(50), fontSize: 12, fontWeight: FontWeight.w500))),
+              child: AutoSizeText(
+                titre(state),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.visible,
+              ),
+            )
           ],
         ),
       ),
     );
   }
 
-  double _getHeight(String? title) {
-    print('title length : ${title?.length}');
-    if (title == null) {
-      return 90;
-    }
-
-    //Méthode de manouch
-    if (title.length < 17 || title == "Glissant lubrifié") {
-      return 90;
-    }
-
-    final double heightLine = (((title.length ~/ 17) + 1) * 15).toDouble();
-    return (85 + heightLine).toDouble();
+  Size _textSize(String text, TextStyle style, double maxWidth) {
+    final TextPainter textPainter = TextPainter(
+        text: TextSpan(text: text, style: style.copyWith(letterSpacing: 1.1)),
+        textDirection: TextDirection.ltr)
+      ..layout(minWidth: 0, maxWidth: maxWidth - 4);
+    return textPainter.size;
   }
 }

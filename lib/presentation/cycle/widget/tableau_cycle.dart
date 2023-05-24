@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -96,7 +97,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
             selection),
         widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 50.0),
         cellDimensions: CellDimensions(
-          stickyLegendWidth: 35,
+          stickyLegendWidth: 40,
           stickyLegendHeight: 50,
           contentCellWidth: 40, //Sert à rien car il y'a widthCell
           contentCellHeight: 35,
@@ -162,7 +163,16 @@ class _Cell extends StatelessWidget {
       if (column != 'Date') return Container(width: 10, height: 10);
     }
 
-    final widgetShowTrucChelou = Padding(
+    final widgetShowTrucChelouCouleur = Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Center(
+        child: (observation.isPointInterrogation(false))
+            ? Text("?", style: Theme.of(context).textTheme.titleSmall)
+            : Container(),
+      ),
+    );
+
+    final widgetShowTrucChelouAnalyse = Padding(
       padding: const EdgeInsets.all(2.0),
       child: Center(
         child: Row(
@@ -175,7 +185,8 @@ class _Cell extends StatelessWidget {
             if (observation.marque != null && observation.marque! > 0)
               Text("${observation.marque}", style: Theme.of(context).textTheme.titleSmall),
             //POINT D'INTERROGATION
-            if (observation.isPointInterrogation) Text("?", style: Theme.of(context).textTheme.titleSmall),
+            if (observation.isPointInterrogation(true))
+              Text("?", style: Theme.of(context).textTheme.titleSmall),
           ],
         ),
       ),
@@ -197,10 +208,7 @@ class _Cell extends StatelessWidget {
       case 'Couleur':
         if (observation.couleurGeneree == CouleurAnalyseState.none)
           info = Stack(
-            children: [
-              _CellNone(),
-              widgetShowTrucChelou,
-            ],
+            children: [_CellNone(), widgetShowTrucChelouCouleur],
           );
         else
           info = LittleBox(
@@ -209,7 +217,7 @@ class _Cell extends StatelessWidget {
               child: Stack(
                 children: [
                   LittleBox(width: 40, height: 30, color: observation.couleurGeneree.toColor()),
-                  widgetShowTrucChelou,
+                  widgetShowTrucChelouCouleur
                 ],
               ));
         break;
@@ -227,19 +235,17 @@ class _Cell extends StatelessWidget {
                 if (observation.jourFertile == false)
                   Image.asset(AssetsPath.icon_hachurage,
                       color: colorpanel(50), width: 40, height: 35, fit: BoxFit.fill),
-                widgetShowTrucChelou,
+                widgetShowTrucChelouAnalyse,
               ],
             ));
         break;
       case 'Sensation':
-        /* if (observation.mucus?.getOrCrash() == MucusState.none)
+        if (observation.sensation != null && observation.sensation!.getOrCrash() != SensationState.none)
+          info = _LittleBoxChild(
+            IconObservation(iconPath: observation.sensation!.getOrCrash().toIconPath(), iconSize: 30),
+          );
+        else
           info = _CellNone();
-        else */
-        info = _LittleBoxChild(
-          IconObservation(
-              iconPath: observation.sensation?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide,
-              iconSize: 30),
-        );
         break;
       case 'Observation':
         info = SingleChildScrollView(
@@ -315,15 +321,20 @@ class _Cell extends StatelessWidget {
                 ...(observation.douleurs
                         ?.map((Douleur douleur) => Padding(
                               padding: const EdgeInsets.only(right: 2),
-                              child: _LittleBoxChild(
-                                  IconObservation(iconPath: douleur.getOrCrash().toIconPath(), iconSize: 30)),
+                              child: _LittleBoxChild(IconObservation(
+                                iconPath: douleur.getOrCrash().toIconPath(),
+                                iconText: douleur.getOrCrash().toDisplayShort(),
+                                iconSize: 30,
+                              )),
                             ))
                         .toList() ??
                     []),
                 // Les evenements
                 ...?observation.evenements
-                    ?.map((Evenement evt) => _LittleBoxChild(
-                        IconObservation(iconPath: evt.getOrCrash().toIconPath(), iconSize: 30)))
+                    ?.map((Evenement evt) => _LittleBoxChild(IconObservation(
+                          iconPath: evt.getOrCrash().toIconPath(),
+                          iconSize: 30,
+                        )))
                     .toList(),
                 // Les notes confidentielles
                 if (observation.notesConfidentielles != null &&
@@ -405,6 +416,7 @@ class _CellHeader extends StatelessWidget {
     return Center(
         child: Text(value,
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                color: actioncolor['primary'],
                 decoration: underline == true ? TextDecoration.underline : null,
                 fontWeight: FontWeight.bold)));
   }
@@ -426,7 +438,8 @@ class _CellDay extends StatelessWidget {
       Text('J$value', style: Theme.of(context).textTheme.titleSmall),
     ]); */
     return Center(
-        child: Text('${selection ? " - " : ""}J$value', style: Theme.of(context).textTheme.titleSmall));
+        child: AutoSizeText('${selection ? " - " : ""}J$value',
+            style: Theme.of(context).textTheme.titleSmall, maxLines: 1));
   }
 }
 

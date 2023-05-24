@@ -72,9 +72,9 @@ class _DialogModificationCycle extends ConsumerWidget {
           children: [
             SpaceH20(),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 final listObservationSelectionnee = ref.read(observationSectionne);
-                ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
+                await ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
                 ref.watch(isSelection.notifier).state = false;
                 ref.watch(showAnalyse.notifier).state = true;
                 _rafraichirPage(ref);
@@ -85,9 +85,11 @@ class _DialogModificationCycle extends ConsumerWidget {
             ),
             SpaceH5(),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 final listObservationSelectionnee = ref.read(observationSectionne);
-                ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, false);
+                await ref
+                    .read(cycleRepositoryProvider)
+                    .marquerJourFertile(listObservationSelectionnee, false);
                 ref.watch(isSelection.notifier).state = false;
                 ref.watch(showAnalyse.notifier).state = true;
                 _rafraichirPage(ref);
@@ -98,9 +100,9 @@ class _DialogModificationCycle extends ConsumerWidget {
             ),
             SpaceH5(),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 final listObservationSelectionnee = ref.read(observationSectionne);
-                ref
+                await ref
                     .read(cycleRepositoryProvider)
                     .enleverPointInterrogation(listObservationSelectionnee, true);
                 ref.watch(isSelection.notifier).state = false;
@@ -108,7 +110,7 @@ class _DialogModificationCycle extends ConsumerWidget {
                 _rafraichirPage(ref);
                 Navigator.of(context).pop();
               },
-              child: Text("Enlever ?"),
+              child: Text("Enlever le \"?\""),
               style: buttonNormalSecondaryFull,
             ),
           ],
@@ -121,8 +123,8 @@ class _DialogModificationCycle extends ConsumerWidget {
     //Vider la selection
     ref.read(observationSectionne.notifier).state = [];
     //Rafraichir les données de la page Cycle
-    ref.refresh(allCycleProvider);
+    ref.invalidate(allCycleProvider);
     final id = ref.read(idCycleCourant);
-    if (id != null) ref.refresh(cycleProvider(id));
+    if (id != null) ref.invalidate(cycleProvider(id));
   }
 }

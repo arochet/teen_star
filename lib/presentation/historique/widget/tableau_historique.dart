@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
@@ -63,7 +64,7 @@ class TableauHistorique extends ConsumerWidget {
         rowsLength: /* _getCyclePlusLong(listHistorique) */ 35,
         rowsTitleBuilder: (int rowIndex) => _CellObservation('${rowIndex + 1}'),
         cellDimensions: CellDimensions(
-          stickyLegendWidth: 35,
+          stickyLegendWidth: 40,
           stickyLegendHeight: 50,
           contentCellWidth: 60, //Sert à rien car il y'a widthCell
           contentCellHeight: 35,
@@ -188,6 +189,6 @@ class _CellObservation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('J$value', style: Theme.of(context).textTheme.titleSmall));
+    return Center(child: AutoSizeText('J$value', style: Theme.of(context).textTheme.titleSmall));
   }
 }

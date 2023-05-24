@@ -138,7 +138,7 @@ abstract class Observation with _$Observation {
   CellPDFColor toCellColor() {
     return CellPDFColor(
       couleur: this.couleurGeneree.toColorPDF(),
-      pointInterrogation: this.isPointInterrogation,
+      pointInterrogation: isPointInterrogation(false),
       chiffre: this.marque,
       hachure: false,
     ); //Cellule couleur
@@ -160,10 +160,16 @@ abstract class Observation with _$Observation {
   ///Est-ce qu'on affiche les hachures
   bool get displayHachure => this.jourFertile == false;
 
-  ///Point d'interrogation -> doute sur le renseignemnt de l'observation
-  bool get isPointInterrogation =>
-      this.sensation?.getOrCrash() == SensationState.autre ||
-      this.mucus?.getOrCrash() == MucusState.autre && this.enleverPointInterrogation != true;
+  ///Point d'interrogation -> Doute sur le renseignemnt de l'observation
+  bool isPointInterrogation(bool analyse) {
+    if (analyse)
+      return (this.sensation?.getOrCrash() == SensationState.autre ||
+              this.mucus?.getOrCrash() == MucusState.autre) &&
+          this.enleverPointInterrogation != true;
+    else
+      return (this.sensation?.getOrCrash() == SensationState.autre ||
+          this.mucus?.getOrCrash() == MucusState.autre);
+  }
 
   //Overide toString
   @override

@@ -352,7 +352,7 @@ class Mucus extends ValueObject<MucusState> {
   const Mucus._(this.value);
 }
 
-enum DouleurState { aucune, seins, ventre, malDeTete, autre, none }
+enum DouleurState { aucune, seins, ventre, malDeTete, acne, none }
 
 extension ParseToSringDouleur on DouleurState {
   String toShortString() {
@@ -362,15 +362,15 @@ extension ParseToSringDouleur on DouleurState {
   String toDisplayString() {
     switch (this) {
       case DouleurState.seins:
-        return 'Douleurs seins';
+        return 'Tension seins';
       case DouleurState.ventre:
-        return 'Douleurs ventre';
+        return 'Douleur ventre';
       case DouleurState.malDeTete:
         return 'Mal de tête';
       case DouleurState.aucune:
         return 'Aucune';
-      case DouleurState.autre:
-        return 'Autre';
+      case DouleurState.acne:
+        return 'Acné';
       case DouleurState.none:
         return '';
     }
@@ -384,8 +384,8 @@ extension ParseToSringDouleur on DouleurState {
         return 'DV';
       case DouleurState.malDeTete:
         return 'MT';
-      case DouleurState.autre:
-        return '?';
+      case DouleurState.acne:
+        return 'Ac';
       case DouleurState.aucune:
         return '-';
       case DouleurState.none:
@@ -401,7 +401,7 @@ extension ParseToSringDouleur on DouleurState {
         return AssetsPath.icon_vide_verte;
       case DouleurState.malDeTete:
         return AssetsPath.icon_vide_verte;
-      case DouleurState.autre:
+      case DouleurState.acne:
         return AssetsPath.icon_vide_verte;
       case DouleurState.aucune:
         return AssetsPath.icon_vide_verte;
@@ -440,9 +440,9 @@ class Douleur extends ValueObject<DouleurState> {
 enum EvenementState {
   fatigue,
   stress,
-  voyage,
   personnelType1,
   personnelType2,
+  voyage,
   maladie,
   medicament,
   autre,
@@ -471,7 +471,7 @@ extension ParseToSringEvenement on EvenementState {
       case EvenementState.medicament:
         return 'Médicament';
       case EvenementState.autre:
-        return 'Autre';
+        return 'Autre note';
       case EvenementState.none:
         return '';
     }
@@ -582,7 +582,7 @@ extension ParseToSringHumeur on HumeurState {
       case HumeurState.nervositeIrritable:
         return 'Nervosité Irritable';
       case HumeurState.tristesse:
-        return 'Tristesse Découragement Hypersensibilité';
+        return 'Tristesse\nDécouragement Hypersensibilité';
       case HumeurState.autre:
         return 'Autre';
       case HumeurState.none:

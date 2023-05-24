@@ -21,7 +21,7 @@ import 'widget/button_modification_observation.dart';
 import 'widget/tableau_cycle.dart';
 
 //Analyse
-final showAnalyse = StateProvider<bool>((ref) => false);
+final showAnalyse = StateProvider<bool>((ref) => true);
 final isSelection = StateProvider<bool>((ref) => false);
 final observationSectionne = StateProvider<List<Observation>>((ref) => []);
 final rangeDisplayObservation =

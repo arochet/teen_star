@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 
@@ -21,9 +22,11 @@ class IconObservation extends StatelessWidget {
           Center(child: Image.asset(iconPath, width: iconSize, height: iconSize)),
           if (iconText != null)
             Center(
-                child: Text(iconText!,
-                    style:
-                        Theme.of(context).textTheme.headlineMedium?.copyWith(color: actioncolor['primary']))),
+                child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: AutoSizeText(iconText!,
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(color: actioncolor['primary'])),
+            )),
         ],
       ),
       width: iconSize,

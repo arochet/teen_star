@@ -228,6 +228,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               currentStates: [form.sang.getOrCrash()],
               titre: (state) => TextUtils.toFirstLettersUpperCase((state as SangState).toDisplayString()),
               iconPath: (state) => (state as SangState).toIconPath(),
+              isRed: true,
             ),
             SpaceH10(),
 
@@ -248,7 +249,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 autocorrect: false,
                 onChanged: (String value) => notifierForm.mucusAutreChanged(value),
                 controller: _controllerMucusAutre,
-                decoration: InputDecoration(labelText: 'Autre mucus'),
+                decoration: InputDecoration(labelText: 'Autre observation'),
               ),
             SpaceH10(),
             /* //BUTON NEXT PAGE
@@ -310,7 +311,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               iconPath: (state) => (state as DouleurState).toIconPath(),
               iconTxt: (state) => (state as DouleurState).toDisplayShort(),
             ),
-            if (form.douleurs.contains(Douleur(DouleurState.autre)))
+            if (form.douleurs.contains(Douleur(DouleurState.acne)))
               TextFormField(
                 autocorrect: false,
                 onChanged: (String value) => notifierForm.douleursAutreChanged(value),
@@ -320,11 +321,13 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             SpaceH10(),
 
             //EVENEMENTS
-            Text("EVENEMENTS", style: styleTitre),
+            Text("ÉVÉNEMENT", style: styleTitre),
             Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
-              choix: EvenementState.values.where((state) => state != EvenementState.none).toList(),
+              choix: EvenementState.values
+                  .where((state) => state != EvenementState.none && state != EvenementState.medicament)
+                  .toList(),
               onSelect: (state) => notifierForm.evenementsChanged(state as EvenementState),
               currentStates: form.evenements.map((e) => e.getOrCrash()).toList(),
               titre: (state) => (state as EvenementState).toDisplayString(),
@@ -335,22 +338,21 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 autocorrect: false,
                 onChanged: (String value) => notifierForm.evenementsAutreChanged(value),
                 controller: _controllerEvenementAutre,
-                decoration: InputDecoration(labelText: 'Autre évènement'),
+                decoration: InputDecoration(labelText: 'Autre note'),
               ),
             SpaceH10(),
 
             //TEMPERATURE BASALE
             Row(
               children: [
-                Text("TEMPERATURE BASALE",
+                Text("TEMPERATURE ",
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary'])),
-                Expanded(child: Container()),
-                Container(
-                  width: 140,
+                SizedBox(width: 15),
+                Expanded(
                   child: TextFormField(
                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                     autocorrect: false,
-                    decoration: InputDecoration(labelText: 'C°'),
+                    decoration: InputDecoration(labelText: '°C'),
                     onChanged: (value) {
                       try {
                         notifierForm

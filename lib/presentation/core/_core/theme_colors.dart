@@ -39,5 +39,6 @@ final actioncolor = {
   "confirm": Color(0xff2AFC98),
   "warning": Colors.amber[700],
   "remove": Colors.red[800],
+  "red": Color(0xffCA5834),
   "help": Colors.deepPurple[500],
 };

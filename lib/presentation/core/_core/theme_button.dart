@@ -44,7 +44,7 @@ final buttonNormalSecondary = ElevatedButton.styleFrom(
   backgroundColor: Color.fromARGB(255, 163, 205, 238),
   foregroundColor: actioncolor["primary"],
   elevation: 0,
-  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3.0))),
 );
 
 final buttonNormalSecondaryFull = ElevatedButton.styleFrom(
@@ -54,7 +54,7 @@ final buttonNormalSecondaryFull = ElevatedButton.styleFrom(
   foregroundColor: actioncolor["primary"],
   elevation: 0,
   minimumSize: Size(double.infinity, 30),
-  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3.0))),
 );
 
 ButtonStyle buttonLittle(Color color, bool isWhite) => ElevatedButton.styleFrom(
@@ -63,7 +63,7 @@ ButtonStyle buttonLittle(Color color, bool isWhite) => ElevatedButton.styleFrom(
       backgroundColor: color,
       foregroundColor: isWhite ? Colors.white : Colors.black,
       elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3.0))),
     );
 
 final buttonLittlePrimary = buttonLittle(actioncolor["primary"]!, true);

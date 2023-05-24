@@ -6,12 +6,14 @@ class IconObservation extends StatelessWidget {
   final String iconPath;
   final String? iconText;
   final double iconSize;
+  final TextStyle? textStyle;
 
   const IconObservation({
     Key? key,
     required this.iconPath,
     required this.iconSize,
     this.iconText,
+    this.textStyle,
   }) : super(key: key);
 
   @override
@@ -25,7 +27,8 @@ class IconObservation extends StatelessWidget {
                 child: Padding(
               padding: const EdgeInsets.all(2.0),
               child: AutoSizeText(iconText!,
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(color: actioncolor['primary'])),
+                  style: textStyle ??
+                      Theme.of(context).textTheme.labelLarge?.copyWith(color: actioncolor['primary'])),
             )),
         ],
       ),

@@ -578,9 +578,9 @@ extension ParseToSringHumeur on HumeurState {
       case HumeurState.EnvieEtreTranquille:
         return 'Envie d\'être tranquille';
       case HumeurState.humeurChangeante:
-        return 'Humeur Changeante';
+        return 'Humeur changeante';
       case HumeurState.nervositeIrritable:
-        return 'Nervosité Irritable';
+        return 'Nervosité irritable';
       case HumeurState.tristesse:
         return 'Tristesse\nDécouragement Hypersensibilité';
       case HumeurState.autre:

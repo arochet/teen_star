@@ -104,34 +104,27 @@ class _Cell extends StatelessWidget {
     Color? couleur = couleurAnalyse?.toColor();
     if (couleurAnalyse == CouleurAnalyseState.none) couleur = null;
 
-    return Stack(
-      children: [
-        if (isJourSommet)
-          Center(
-              child: Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.black, width: 30, height: 30)),
-        Center(
-          child: LittleBox(
-            width: 35,
-            height: 30,
-            color: couleur ?? observation.couleurGeneree.toColor(),
-            child: Stack(
-              children: [
-                if (isJourSommet)
-                  Center(
-                      child: Image.asset(AssetsPath.icon_fleur_sommet,
-                          color: Colors.black, width: 30, height: 30)),
-                if (isInfertile)
-                  Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40),
-                if (observation.sensation?.getOrCrash() == SensationState.autre ||
-                    observation.mucus?.getOrCrash() == MucusState.autre)
-                  Center(child: Text("?", style: Theme.of(context).textTheme.titleSmall)),
-                if (observation.marque != null && observation.marque! > 0)
-                  Center(child: Text('${observation.marque}', style: Theme.of(context).textTheme.titleSmall)),
-              ],
-            ),
-          ),
+    return Center(
+      child: LittleBox(
+        width: 35,
+        height: 30,
+        color: couleur ?? observation.couleurGeneree.toColor(),
+        child: Stack(
+          children: [
+            if (isJourSommet)
+              Center(
+                  child:
+                      Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.black, width: 30, height: 30)),
+            if (isInfertile)
+              Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40),
+            if (observation.sensation?.getOrCrash() == SensationState.autre ||
+                observation.mucus?.getOrCrash() == MucusState.autre)
+              Center(child: Text("?", style: Theme.of(context).textTheme.titleSmall)),
+            if (observation.marque != null && observation.marque! > 0)
+              Center(child: Text('${observation.marque}', style: Theme.of(context).textTheme.titleSmall)),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

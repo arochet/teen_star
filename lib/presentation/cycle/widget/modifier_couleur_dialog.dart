@@ -21,6 +21,10 @@ class ModifierCouleurDialog extends StatelessWidget {
             child: Wrap(
               alignment: WrapAlignment.spaceAround,
               children: CouleurAnalyseState.values
+                  .where((element) =>
+                      element != CouleurAnalyseState.none &&
+                      element != CouleurAnalyseState.vert &&
+                      element != CouleurAnalyseState.invalide)
                   .map((CouleurAnalyseState state) => _ButtonCouleur(observation, state))
                   .toList(),
             ),

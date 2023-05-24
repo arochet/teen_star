@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/providers.dart';
 
 import '../cycles_page.dart';
@@ -14,6 +16,7 @@ import 'show_observation_notes.dart';
 
 afficherModalModificationObservation(
     BuildContext context, WidgetRef ref, Observation observation, Cycle cycle) {
+  printDev();
   showCupertinoModalPopup<void>(
     context: context,
     builder: (BuildContext context) => CupertinoActionSheet(
@@ -27,6 +30,33 @@ afficherModalModificationObservation(
         child: Text('Annuler'),
       ),
       actions: <CupertinoActionSheetAction>[
+        CupertinoActionSheetAction(
+          child: Text('Lire les notes'),
+          onPressed: () async {
+            await showDialogApp<void>(
+              context: context,
+              titre: "Observation du ${AppDateUtils.formatDate(observation.date)}",
+              child: ShowObservationNotes(observation: observation),
+              actions: <Widget>[
+                /* TextButton(
+                  style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
+                  child: const Text('Notes confidentielles'),
+                  onPressed: () {
+                    ouvrirNoteConfidentielles(context, ref, observation);
+                  },
+                ),
+                SizedBox(width: 20), */
+                TextButton(
+                    style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
+                    child: const Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+              ],
+            );
+            Navigator.pop(context);
+          },
+        ),
         CupertinoActionSheetAction(
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerJourSommet(cycle, observation.id);
@@ -47,31 +77,10 @@ afficherModalModificationObservation(
           child: Text('Modifier la couleur'),
         ),
         CupertinoActionSheetAction(
-          onPressed: () async {
-            await ref
-                .read(cycleRepositoryProvider)
-                .modifierCouleurAnalyse(observation, CouleurAnalyseState.none);
-            ref.read(showAnalyse.notifier).state = true;
-            ref.refresh(allCycleProvider);
-            final id = ref.read(idCycleCourant);
-            if (id != null) ref.refresh(cycleProvider(id));
-            Navigator.pop(context);
-          },
-          child: Text('Supprimer analyse'),
-        ),
-        CupertinoActionSheetAction(
-          child: Text('Annuler marquage'),
-          onPressed: () async {
-            await ref.read(cycleRepositoryProvider).marquerComme(observation, 0);
-            ref.read(showAnalyse.notifier).state = false;
-            refreshAndPop(context, ref);
-          },
-        ),
-        CupertinoActionSheetAction(
           child: Text('Marquer 1'),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 1);
-            ref.read(showAnalyse.notifier).state = false;
+            ref.read(showAnalyse.notifier).state = true;
             refreshAndPop(context, ref);
           },
         ),
@@ -79,7 +88,7 @@ afficherModalModificationObservation(
           child: Text('Marquer 2'),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 2);
-            ref.read(showAnalyse.notifier).state = false;
+            ref.read(showAnalyse.notifier).state = true;
             refreshAndPop(context, ref);
           },
         ),
@@ -87,35 +96,37 @@ afficherModalModificationObservation(
           child: Text('Marquer 3'),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 3);
-            ref.read(showAnalyse.notifier).state = false;
+            ref.read(showAnalyse.notifier).state = true;
             refreshAndPop(context, ref);
           },
         ),
         CupertinoActionSheetAction(
-          child: Text('Voir les notes'),
           onPressed: () async {
-            await showDialogApp<void>(
-              context: context,
-              titre: "Observation du ${AppDateUtils.formatDate(observation.date)}",
-              child: ShowObservationNotes(observation: observation),
-              actions: <Widget>[
-                TextButton(
-                  style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-                  child: const Text('Notes confidentielles'),
-                  onPressed: () {
-                    ouvrirNoteConfidentielles(context, ref, observation);
-                  },
-                ),
-                SizedBox(width: 20),
-                TextButton(
-                    style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-                    child: const Text('OK'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    }),
-              ],
-            );
+            await ref.read(cycleRepositoryProvider).marquerJourSommet(cycle, UniqueId.fromUniqueInt(-1));
+            ref.read(showAnalyse.notifier).state = true;
+            ref.refresh(allCycleProvider);
+            final id = ref.read(idCycleCourant);
+            if (id != null) ref.refresh(cycleProvider(id));
             Navigator.pop(context);
+          },
+          child: Text('Annuler sommet'),
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Annuler couleur'),
+          onPressed: () async {
+            await ref
+                .read(cycleRepositoryProvider)
+                .modifierCouleurAnalyse(observation, CouleurAnalyseState.none);
+            ref.read(showAnalyse.notifier).state = true;
+            refreshAndPop(context, ref);
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Annuler marquage'),
+          onPressed: () async {
+            await ref.read(cycleRepositoryProvider).marquerComme(observation, 0);
+            ref.read(showAnalyse.notifier).state = true;
+            refreshAndPop(context, ref);
           },
         ),
         CupertinoActionSheetAction(

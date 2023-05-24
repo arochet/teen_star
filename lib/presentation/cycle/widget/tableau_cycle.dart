@@ -12,6 +12,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/PRESENTATION/cycle/shared/icon_observation.dart';
@@ -103,6 +104,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
           contentCellHeight: 35,
         ),
         rowSelect: (rowIndex) async {
+          printDev();
           //Séléction de la ligne
           if (selection) {
             setState(() {
@@ -180,7 +182,7 @@ class _Cell extends StatelessWidget {
           children: [
             //JOUR SOMMET
             if (isJourSommet)
-              Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.black, width: 22, height: 22),
+              Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.black, width: 30, height: 30),
             //MARQUE 1 2 3
             if (observation.marque != null && observation.marque! > 0)
               Text("${observation.marque}", style: Theme.of(context).textTheme.titleSmall),

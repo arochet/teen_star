@@ -109,7 +109,7 @@ class _Field extends StatelessWidget {
                   iconPath: iconPath(state),
                   iconText: iconText != null ? iconText!(state) : null,
                   textStyle:
-                      Theme.of(context).textTheme.headlineMedium?.copyWith(color: actioncolor['primary']),
+                      Theme.of(context).textTheme.headlineSmall?.copyWith(color: actioncolor['primary']),
                   iconSize: 64,
                 ),
               ),

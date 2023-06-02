@@ -44,6 +44,7 @@ class AssetsPath {
   static const String icon_principe_de_base = 'assets/icon_app/icon_principe_de_base.png';
   static const String icon = "assets/icon/logo.png";
   static const String icon_hachurage = "assets/icon_app/icon_hachurage.png";
+  static const String icon_hachurage_noir = "assets/icon_app/icon_hachurage_noir.png";
   static const String main_flower = "assets/icon/icon-assets/main_flower.png";
   static const String icon_sensation_sec = "assets/icon_observation/sensation/sensation_S.png";
   static const String icon_sensation_humide = "assets/icon_observation/sensation/sensation_H.png";

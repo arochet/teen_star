@@ -50,28 +50,28 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
     listImageHumeur[humeur] = PdfBitmap((await rootBundle.load(humeur.toIconPath())).buffer.asUint8List());
   }
 
-  PdfBitmap imgHachurage = PdfBitmap((await rootBundle.load(AssetsPath.icon_hachurage)).buffer.asUint8List());
+  PdfBitmap imgHachurage =
+      PdfBitmap((await rootBundle.load(AssetsPath.icon_hachurage_noir)).buffer.asUint8List());
   PdfBitmap imgJourSommet =
       PdfBitmap((await rootBundle.load(AssetsPath.icon_fleur_sommet)).buffer.asUint8List());
 
   //Entete du tableau
   final List<CellHeader> tabTitleCycle = [
     CellHeader('Jour', width: 35),
-    CellHeader('Date'),
+    CellHeader('Date', width: 45),
     CellHeader('Couleur'),
     CellHeader('Analyse'),
     CellHeader('Sensation'),
     CellHeader('Sang'),
     CellHeader('Mucus'),
-    CellHeader('Douleurs', width: 70),
     CellHeader('Humeur'),
     CellHeader('Température'),
-    CellHeader('Evénement', width: 130),
+    CellHeader('Evénement', width: 170),
   ];
 
   final List<CellHeader> tabTitleCycleCommentaire = [
     CellHeader('Jour', width: 35),
-    CellHeader('Date', width: 40),
+    CellHeader('Date', width: 45),
     CellHeader('Commentaires'),
   ];
 
@@ -99,46 +99,44 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
     layoutResult = tableauCycle(
       page: page,
       tabTitleHeader: tabTitleCycle,
-      data: cycle
-          .getObservationsWithEmptyDays()
-          .map((Observation observation) => !observation.isNone
-              ? <_Cell>[
-                  _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
-                  _CellText(AppDateUtils.formatDate(observation.date)),
-                  observation.toCellColor(), //Cellule couleur
-                  observation.toCellAnalyse(cycle.isJourneeSoleil(observation)), //Cellule analyse
-                  _CellIcon(observation.sensation?.getOrCrash().toDisplayShort() ?? ''), //Cellule sensation
-                  _CellImage(listImageSang[observation.sang?.getOrCrash()]!), //Cellule sang
-                  _CellImage(listImageMucus[observation.mucus?.getOrCrash()]!), //Cellule mucus
-                  _CellText((observation.douleurs
-                              ?.map<String>((douleur) => douleur.getOrCrash().toDisplayShort())
-                              .toList() ??
-                          []) //Cellule douleurs
-                      .join(' ')),
-                  _CellImage(listImageHumeur[observation.humeur?.getOrCrash()]!), //Cellule humeur
-                  _CellText('${observation.temperatureBasale ?? ''}'), //Cellule temperature
-                  _CellText((observation.evenements
-                              ?.map<String>((evenement) => evenement.getOrCrash().toDisplayShort())
-                              .toList() ??
-                          [])
-                      .join(' ')), //Cellule evenement
-                ]
-              :
-              //Ligne Vide
-              <_Cell>[
-                  _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
-                  _CellNone(),
-                  _CellNone(),
-                  _CellNone(),
-                  _CellNone(),
-                  _CellNone(),
-                  _CellNone(),
-                  _CellNone(),
-                  _CellNone(),
-                  _CellNone(),
-                  _CellNone(),
-                ])
-          .toList(),
+      data: cycle.getObservationsWithEmptyDays().map((Observation observation) {
+        String evenements = (observation.evenements
+                    ?.map<String>((evenement) => evenement.getOrCrash().toDisplayShort())
+                    .toList() ??
+                [])
+            .join(' ');
+        String douleurs =
+            (observation.douleurs?.map<String>((douleur) => douleur.getOrCrash().toDisplayShort()).toList() ??
+                    [])
+                .join(' ');
+        return !observation.isNone
+            ? <_Cell>[
+                _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
+                _CellText(AppDateUtils.formatDate(observation.date)),
+                observation.toCellColor(), //Cellule couleur
+                observation.toCellAnalyse(cycle.isJourneeSoleil(observation)), //Cellule analyse
+                _CellIcon(observation.sensation?.getOrCrash().toDisplayShort() ?? ''), //Cellule sensation
+                _CellImage(listImageSang[observation.sang?.getOrCrash()]!), //Cellule sang
+                _CellImage(listImageMucus[observation.mucus?.getOrCrash()]!), //Cellule mucus
+                _CellImage(listImageHumeur[observation.humeur?.getOrCrash()]!), //Cellule humeur
+                _CellText('${observation.temperatureBasale ?? ''}'), //Cellule temperature
+                _CellText('$evenements $douleurs'), //Cellule evenement
+              ]
+            :
+            //Ligne Vide
+            <_Cell>[
+                _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
+                _CellNone(),
+                _CellNone(),
+                _CellNone(),
+                _CellNone(),
+                _CellNone(),
+                _CellNone(),
+                _CellNone(),
+                _CellNone(),
+                _CellNone(),
+              ];
+      }).toList(),
       iconEmpty: listImageMucus[MucusState.none]!,
       imgHachurage: imgHachurage,
       imgJourSommet: imgJourSommet,
@@ -180,7 +178,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
       page: page, bounds: Rect.fromLTWH(0, 0, page.getClientSize().width, page.getClientSize().height))!;
   List<CellHeader> headerHistorique = [
     CellHeader('Jour', width: 30),
-    ...listCycles.map((Cycle cycle) => CellHeader('${cycle.id.getOrCrash()}')).toList()
+    ...listCycles.map((Cycle cycle) => CellHeader('${cycle.id.getOrCrash()}', width: 35)).toList()
   ];
 
   int maxRow = 0;
@@ -298,7 +296,7 @@ PdfLayoutResult? tableauCycle({
       else if (cellData is CellPDFColor) {
         //CASE COULEUR
         row.cells[i].style.backgroundBrush = cellData.display();
-        if (cellData.chiffre != null && cellData.chiffre != 0) {
+        if (cellData.chiffre != null && cellData.chiffre != 0 && i != 2) {
           row.cells[i].value = '${cellData.chiffre}';
         }
         if (cellData.pointInterrogation == true) {

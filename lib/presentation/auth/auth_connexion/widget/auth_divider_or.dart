@@ -13,12 +13,12 @@ class DividerOR extends StatelessWidget {
       child: Row(children: <Widget>[
         Expanded(
             child: Divider(
-          color: colorpanel(50),
+          color: actioncolor['primary'],
         )),
         SizedBox(width: 10),
         Text("OR", style: Theme.of(context).textTheme.labelMedium),
         SizedBox(width: 10),
-        Expanded(child: Divider(color: colorpanel(50))),
+        Expanded(child: Divider(color: actioncolor['primary'])),
       ]),
     );
   }

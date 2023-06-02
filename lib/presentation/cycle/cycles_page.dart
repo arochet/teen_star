@@ -162,7 +162,7 @@ class _Cycle extends ConsumerWidget {
                           style: buttonLittleSecondary),
                     ),
                   _ShowAnalyse(),
-                  _BarLongCycle(cycle),
+                  //_BarLongCycle(cycle),
                   if (selection)
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -236,7 +236,7 @@ class __ShowAnalyseState extends ConsumerState<_ShowAnalyse> {
             Text("Afficher l'analyse", style: Theme.of(context).textTheme.titleSmall),
             SizedBox(width: 10),
             Icon(ref.watch(showAnalyse) ? Icons.check_box : Icons.check_box_outline_blank,
-                color: ref.watch(showAnalyse) ? actioncolor['primary'] : colorpanel(50)),
+                color: ref.watch(showAnalyse) ? actioncolor['primary'] : actioncolor['primary']),
           ],
         ),
       ),
@@ -276,8 +276,8 @@ class __BarLongCycleState extends ConsumerState<_BarLongCycle> {
         onValueChanged: (int value) {
           ref.read(rangeDisplayObservation.notifier).state = value;
         },
-        pressedColor: colorpanel(700),
-        //selectedColor: colorpanel(700),
+        pressedColor: actioncolor['primary'],
+        selectedColor: colorpanel(700),
         borderColor: colorpanel(600),
         unselectedColor: colorpanel(900),
       );

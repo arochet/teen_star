@@ -70,13 +70,14 @@ class Guide_avancePage extends StatelessWidget {
                     "Transparent ; filant (≈ blanc d’œuf) ou très fluide (≈ eau)",
                     "Mucus filant, complètement transparent, qui peut même s’écouler comme un ruban d’eau à la vulve.",
                   ),
+                  LineDE_FDP(),
                   Line(
                     6,
                     AssetsPath.icon_mucus_depot_seche_blanc,
                     "Dépôt séché, blanc ou jaune",
                     "Dépôt sec dans le sous-vêtement, en grande ou faible quantité. Peut correspondre à de simples pertes vaginales, mais aussi à de la glaire séchée, raison pour laquelle elle est considérée par défaut comme un mucus observé, jusqu’à éventuelle preuve du contraire après discussion avec l’accompagnatrice (N.B. la distinction entre les 2 est difficile).",
                   ),
-                  Line(7, AssetsPath.icon_autre, "Autre observation",
+                  Line(7, AssetsPath.icon_autre, "Autre\nobservation",
                       "En cas de doute sur l’observation, ou pour toute observation inhabituelle, qui pourrait être autre chose que de la glaire, voire traduire une infection (sexuellement transmissible ou non)"),
                 ],
               )),
@@ -89,9 +90,6 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: " choisie, sont appliquées "),
                   TextSpan(
                       text: " par défaut en attendant l’interprétation manuelle du cycle ", style: styleBold),
-                  TextSpan(text: " (bouton "),
-                  TextSpan(text: " Analyser le cycle ", style: styleBlue),
-                  TextSpan(text: " ) : \n\n"),
                   TextSpan(text: " -> par défaut en "),
                   TextSpan(text: " BLEU ", style: styleBold),
                   TextSpan(text: "  (“eau”) =  toute présence d’humidité (SENSATION ou OBSERVATION) \n"),
@@ -103,9 +101,9 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: "  (“terre”) =  Sec + aucun mucus  \n"),
                   TextSpan(text: " -> par défaut en "),
                   TextSpan(text: " INCOLORE", style: styleBold),
-                  TextSpan(text: " = autres situations\n"),
+                  TextSpan(text: " = autres situations\n ->"),
                   TextSpan(text: " Avec  un ? ", style: styleBold),
-                  TextSpan(text: "  = sensation ou observation « Autre ».  \n"),
+                  TextSpan(text: "  = sensation ou observation «Autre».  \n"),
                   TextSpan(text: " ->"),
                   TextSpan(text: " ROUGE DENSE ", style: styleBold),
                   TextSpan(text: " = saignement franc (règles ou autre) \n"),
@@ -117,7 +115,7 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: " = traces de sang, rouges ou brunes \n"),
                 ]),
               )),
-              _DisplayTitle(title: "4. bouton Analyser le cycle"),
+              _DisplayTitle(title: "4. Analyser le cycle"),
               DefaultPanel(
                 child: RichText(
                   text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
@@ -138,7 +136,7 @@ class Guide_avancePage extends StatelessWidget {
                     TextSpan(text: "- hachures ", style: styleBold),
                     TextSpan(
                         text:
-                            ": périodes infertiles (PIB pré-ovulatoire, période infertile de phase lutéale)\n"),
+                            ": périodes infertiles (PIB pré-ovulatoire; période infertile de phase lutéale)\n"),
                     TextSpan(text: "- BLEU ", style: styleBold),
                     TextSpan(text: ": poussée œstrogénique (aboutissant ou non à un sommet)\n"),
                     TextSpan(text: "- JAUNE ", style: styleBold),
@@ -188,10 +186,10 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: ""),
                   TextSpan(text: ""),
                   TextSpan(
-                      text: " (cases blanches avec ?)\n\n"
+                      text: " (cases incolores ?)\n\n"
                           "a) Le dépôt séché est identifié clairement comme : \n"
                           " - glaire cervicale séchée → cases incolores à colorer en jaune et hachurer\n"
-                          " - pertes vaginales séchées (sans glaire cervicale) à cases blanches à colorer en brun et hachurer\n\n"
+                          " - pertes vaginales séchées (sans glaire cervicale) → cases blanches à colorer en brun et hachurer\n\n"
                           "b) Le dépôt n’est pas identifié clairement → à laisser incolore, enlever le ? et hachurer \n"),
                 ]),
               )),
@@ -201,8 +199,7 @@ class Guide_avancePage extends StatelessWidget {
                 text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                   TextSpan(
                       text:
-                          "Récapitule les colonnes ANALYSE (ou COULEUR, par défaut) de chacun des cycles. Cliquer sur le numéro du cycle pour accéder à son Résumé et pouvoir le (ré)analyser si besoin."
-                          "Un cycle n de plus de 35 jours s’affichera en plusieurs colonnes de 35 jours, de gauche à droite :  ..., n.3, n.2, n.1."
+                          "Récapitule les colonnes ANALYSE de chacun des cycles. Cliquer sur le numéro du cycle pour accéder à son Résumé et pouvoir le (ré)analyser si besoin."
                           " \n\n"),
                   TextSpan(text: "Le bouton"),
                   TextSpan(text: " Renvoi vers cycle précédent ", style: styleBlue),
@@ -264,6 +261,39 @@ class Line extends StatelessWidget {
   }
 }
 
+class LineDE_FDP extends StatelessWidget {
+  const LineDE_FDP({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.black,
+            width: 1,
+          ),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Row(
+          children: [
+            SizedBox(width: 5),
+            Expanded(
+              child: Text(
+                  'Les mucus 3 à 5 évoquent une imprégnation œstrogénique dominante (débutante ou établie) :\n'
+                  ' - poussée œstrogénique pré-ovulatoire, avec ou sans montée vers une ovulation\n'
+                  ' - épisode de dominance œstrogénique en post-ovulatoire (parfois observée en milieu ou fin de phase lutéale)',
+                  style: Theme.of(context).textTheme.bodyMedium),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _DisplayTitle extends StatelessWidget {
   final String title;
   const _DisplayTitle({Key? key, required this.title}) : super(key: key);
@@ -272,7 +302,8 @@ class _DisplayTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
-      child: Text(title, style: Theme.of(context).textTheme.titleSmall!.copyWith(color: colorpanel(50))),
+      child:
+          Text(title, style: Theme.of(context).textTheme.titleSmall!.copyWith(color: actioncolor['primary'])),
     );
   }
 }

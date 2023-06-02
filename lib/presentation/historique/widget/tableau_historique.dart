@@ -11,6 +11,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 
 import '../../../providers.dart';
 
@@ -117,11 +118,13 @@ class _Cell extends StatelessWidget {
                       Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.black, width: 30, height: 30)),
             if (isInfertile)
               Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40),
-            if (observation.sensation?.getOrCrash() == SensationState.autre ||
-                observation.mucus?.getOrCrash() == MucusState.autre)
+            if (observation.isPointInterrogation(true))
               Center(child: Text("?", style: Theme.of(context).textTheme.titleSmall)),
             if (observation.marque != null && observation.marque! > 0)
-              Center(child: Text('${observation.marque}', style: Theme.of(context).textTheme.titleSmall)),
+              Center(
+                  child: Text('${observation.marque}',
+                      style:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary']))),
           ],
         ),
       ),
@@ -169,7 +172,10 @@ class _CellHeader extends ConsumerWidget {
             constraints: BoxConstraints(minWidth: 60, minHeight: 50),
             child: Center(
                 child: Text(value,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.bold)))));
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelMedium
+                        ?.copyWith(fontWeight: FontWeight.bold, color: actioncolor['primary'])))));
   }
 }
 

@@ -311,7 +311,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               iconPath: (state) => (state as DouleurState).toIconPath(),
               iconTxt: (state) => (state as DouleurState).toDisplayShort(),
             ),
-            if (form.douleurs.contains(Douleur(DouleurState.acne)))
+            if (/* form.douleurs.contains(Douleur(DouleurState.acne)) */ false)
               TextFormField(
                 autocorrect: false,
                 onChanged: (String value) => notifierForm.douleursAutreChanged(value),

@@ -71,7 +71,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(conditionAccecpte ? Icons.check_box : Icons.check_box_outline_blank,
-                                  color: colorpanel(50)),
+                                  color: actioncolor['primary']),
                               SizedBox(width: 15),
                               Flexible(
                                 child: Text("J'ai lu et j'accepte les \nconditions d'utilisation",

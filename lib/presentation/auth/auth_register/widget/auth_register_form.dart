@@ -166,6 +166,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               SpaceH10(),
               Text("* Champs optionnels", style: Theme.of(context).textTheme.bodyMedium),
               SpaceH40(),
+              /* 
               Text("Ce mot de passe sera demandé pour toute action verrouillée",
                   style: Theme.of(context).textTheme.bodyMedium),
 
@@ -276,7 +277,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               SpaceH10(),
               Text("Attention, aucune possibilité de récupération de mot de passe perdu",
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic)),
-              SpaceH30(),
+              SpaceH30(), */
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: ElevatedButton(
@@ -292,7 +293,6 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
                 SpaceH10(),
                 const LinearProgressIndicator(value: null)
               ],
-
               SpaceH40()
             ]),
           ),

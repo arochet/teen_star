@@ -37,7 +37,7 @@ class PanelList extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!
-                                .copyWith(color: item.enable ? colorpanel(50) : colorpanel(400))),
+                                .copyWith(color: item.enable ? actioncolor['primary'] : colorpanel(400))),
                         Expanded(child: Container()),
                         SizedBox(width: 10),
                         if (item.onTap != null)

@@ -22,12 +22,12 @@ class Guide_de_basePage extends StatelessWidget {
       child: ShowComponentFile(
         title: './lib/PRESENTATION/reglages/principes_de_base/guide_de_base_page.dart',
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(8),
           child: ListView(children: [
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
-                TextSpan(text: "«  Mon corps c’est moi, j’écoute ce qu’il me dit ». ", style: styleBold),
+                TextSpan(text: "«  Mon corps c’est moi, j’écoute ce qu’il me dit » . ", style: styleBold),
                 TextSpan(text: "Mieux le connaître, c’est découvrir la merveille que je suis !")
               ]),
             )),
@@ -47,7 +47,7 @@ class Guide_de_basePage extends StatelessWidget {
                 TextSpan(text: "Ce que je sens à la vulve sans regarder", style: styleUnderline),
                 TextSpan(
                     text:
-                        "(SENSATION) : pendant mes activités quotidiennes (marche, escaliers, …) ou en contractant/relâchant plusieurs fois le périnée (exercice de Kegel).\n\n"),
+                        " (SENSATION) : pendant mes activités quotidiennes (marche, escaliers, …) ou en contractant/relâchant plusieurs fois le périnée (exercice de Kegel).\n\n"),
                 TextSpan(text: "Ce que je vois ", style: styleUnderline),
                 TextSpan(
                     text:
@@ -86,11 +86,10 @@ class Guide_de_basePage extends StatelessWidget {
                     text:
                         "ne correspondent PAS à un repérage des périodes fertiles ou infertiles du cycle.\n\n",
                     style: styleBold),
-                TextSpan(text: "Le bouton "),
-                TextSpan(text: "Analyser le cycle ", style: styleBlue),
+                TextSpan(text: "Toucher une ligne permet de relire une note ou"),
                 TextSpan(
                   text:
-                      "permet, avec l’aide de votre accompagnatrice, d'interpréter manuellement le cycle (cf Guide avancé § 4). ",
+                      ", avec l’aide de votre accompagnatrice, d'interpréter manuellement le cycle (cf Guide avancé § 4). ",
                 ),
               ]),
             )),
@@ -103,13 +102,13 @@ class Guide_de_basePage extends StatelessWidget {
                 TextSpan(
                     text:
                         "Conseil : exportez régulièrement vos cycles en PDF pour l’archivage sur un ordinateur (utile plus tard ou en cas de consultation médicale), l’impression sur papier ou l'envoi à votre accompagnatrice. \n\n"),
-                TextSpan(text: "Les PDF sont protégés par votre mot de passe. "),
+                /* TextSpan(text: "Les PDF sont protégés par votre mot de passe. "),
                 TextSpan(text: "Attention ", style: styleUnderline),
                 TextSpan(
                     text:
                         " : si vous l'oubliez, vous pourrez en choisir un nouveau pour les PDF à venir, mais ne pourrez plus lire les fichiers "),
                 TextSpan(text: "déjà ", style: styleUnderline),
-                TextSpan(text: "exportés.\n\n"),
+                TextSpan(text: "exportés.\n\n"), */
                 TextSpan(
                     text: "Conditions d'utilisation : J’ai lu les points ci-dessus et j’ai "
                         "compris que cette application m’aidera à enregistrer mes observations quotidiennes au cours "

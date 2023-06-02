@@ -88,7 +88,7 @@ class AppBarCycle extends ConsumerWidget {
                           ref.invalidate(rangeDisplayObservation);
                           ref.read(idCycleCourant.notifier).state = UniqueId.fromUniqueInt(cycleSuivant!.id!);
                         },
-                        child: Icon(Icons.arrow_back_ios, size: 18, color: colorpanel(50)),
+                        child: Icon(Icons.arrow_back_ios, size: 18, color: actioncolor['primary']),
                         style: style,
                       ),
                     ),
@@ -112,7 +112,7 @@ class AppBarCycle extends ConsumerWidget {
                           ref.read(idCycleCourant.notifier).state =
                               UniqueId.fromUniqueInt(cyclePrecedent!.id!);
                         },
-                        child: Icon(Icons.arrow_forward_ios, size: 18, color: colorpanel(50)),
+                        child: Icon(Icons.arrow_forward_ios, size: 18, color: actioncolor['primary']),
                         style: style,
                       ),
                     )

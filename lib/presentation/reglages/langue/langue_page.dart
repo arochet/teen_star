@@ -68,7 +68,7 @@ class _ChoixLangue extends StatelessWidget {
       // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(enable ? Icons.check_box : Icons.check_box_outline_blank,
-            color: enable ? colorpanel(50) : colorpanel(600)),
+            color: enable ? actioncolor['primary'] : colorpanel(600)),
         SizedBox(width: 10),
         Flexible(
           child: Text(
@@ -76,7 +76,7 @@ class _ChoixLangue extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
-                ?.copyWith(color: enable ? colorpanel(50) : colorpanel(600)),
+                ?.copyWith(color: enable ? actioncolor['primary'] : colorpanel(600)),
           ),
         ),
       ],

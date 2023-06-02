@@ -74,19 +74,6 @@ class _DialogModificationCycle extends ConsumerWidget {
             ElevatedButton(
               onPressed: () async {
                 final listObservationSelectionnee = ref.read(observationSectionne);
-                await ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
-                ref.watch(isSelection.notifier).state = false;
-                ref.watch(showAnalyse.notifier).state = true;
-                _rafraichirPage(ref);
-                Navigator.of(context).pop();
-              },
-              child: Text("Enlever infertile"),
-              style: buttonNormalSecondaryFull,
-            ),
-            SpaceH5(),
-            ElevatedButton(
-              onPressed: () async {
-                final listObservationSelectionnee = ref.read(observationSectionne);
                 await ref
                     .read(cycleRepositoryProvider)
                     .marquerJourFertile(listObservationSelectionnee, false);
@@ -102,6 +89,19 @@ class _DialogModificationCycle extends ConsumerWidget {
             ElevatedButton(
               onPressed: () async {
                 final listObservationSelectionnee = ref.read(observationSectionne);
+                await ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
+                ref.watch(isSelection.notifier).state = false;
+                ref.watch(showAnalyse.notifier).state = true;
+                _rafraichirPage(ref);
+                Navigator.of(context).pop();
+              },
+              child: Text("Effacer infertile"),
+              style: buttonNormalSecondaryFull,
+            ),
+            SpaceH5(),
+            ElevatedButton(
+              onPressed: () async {
+                final listObservationSelectionnee = ref.read(observationSectionne);
                 await ref
                     .read(cycleRepositoryProvider)
                     .enleverPointInterrogation(listObservationSelectionnee, true);
@@ -110,7 +110,7 @@ class _DialogModificationCycle extends ConsumerWidget {
                 _rafraichirPage(ref);
                 Navigator.of(context).pop();
               },
-              child: Text("Enlever le \"?\""),
+              child: Text("Effacer le \"?\""),
               style: buttonNormalSecondaryFull,
             ),
           ],

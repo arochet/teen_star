@@ -26,14 +26,14 @@ class Info_applicationPage extends StatelessWidget {
                         "-  spécialement adaptée aux jeunes filles pubères ou pré-pubères\n"
                         "-  utilisable hors-ligne (données internes à l'application)\n"
                         "-  confidentielle : aucun lien avec site traceur, serveur ou banque de données ; ne divulgue"
-                        "AUCUNE donnée à des tiers à l'insu de l'utilisatrice *. N.B. pour une confidentialité la"
-                        "plus grande possible dans la sphère numérique de ces données de santé qui sont"
-                        "intimes, privilégier l’envoi des PDF des cycles via Bluetooth ou messagerie chiffrée, et"
-                        "leur archivage sur un disque dur personnel plutôt qu’un Cloud.\n"
+                        " AUCUNE donnée à des tiers à l'insu de l'utilisatrice *. N.B. pour une confidentialité la"
+                        " plus grande possible dans la sphère numérique de ces données de santé qui sont"
+                        " intimes, privilégier l’envoi des PDF des cycles via Bluetooth ou messagerie chiffrée, et"
+                        " leur archivage sur un disque dur personnel plutôt qu’un Cloud.\n"
                         "-  gratuite \n*sans aucune source de revenus ! Faites-la perdurer sur les stores par un don ! Merci ! (",
                   ),
                   TextSpan(
-                    text: "www.teenstar.fr !",
+                    text: "www.teenstar.fr",
                     style: TextStyle(color: Colors.blue),
                     recognizer: new TapGestureRecognizer()
                       ..onTap = () async {
@@ -53,7 +53,8 @@ class Info_applicationPage extends StatelessWidget {
                   text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
                     TextSpan(text: "Fondamentaux :", style: TextStyle(decoration: TextDecoration.underline)),
                     TextSpan(
-                        text: " Drs S.P., G.D., B. de N. et A.J., animatrices au CEPP/TeenSTAR France \n"),
+                        text:
+                            " Drs GD, BdN, AJ et autre, médecins et animatrices au CEPP/TeenSTAR France \n"),
                     TextSpan(
                         text: "Conception et maquette :",
                         style: TextStyle(decoration: TextDecoration.underline)),
@@ -63,9 +64,7 @@ class Info_applicationPage extends StatelessWidget {
                         style: TextStyle(decoration: TextDecoration.underline)),
                     TextSpan(text: "Inès de Chefdebien (Paris)\n"),
                     TextSpan(text: "Contact :", style: TextStyle(decoration: TextDecoration.underline)),
-                    TextSpan(
-                        text: " app@teenstar.fr\n",
-                        style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline)),
+                    TextSpan(text: " app@teenstar.fr\n", style: TextStyle(color: Colors.blue)),
                     TextSpan(
                       text: "Tous droits réservés",
                       style: TextStyle(fontStyle: FontStyle.italic),

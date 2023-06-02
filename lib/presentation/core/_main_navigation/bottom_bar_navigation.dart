@@ -66,7 +66,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.remove_red_eye, size: 25, color: colorpanel(200)),
+                    child: Icon(Icons.remove_red_eye, size: 25, color: actioncolor["primary"]),
                   ),
                 ),
               if (tabsRouter.activeIndex == 0)
@@ -74,7 +74,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                   onTap: () => _showActionSheetCycle(context, ref),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.more_vert, size: 25, color: colorpanel(200)),
+                    child: Icon(Icons.more_vert, size: 25, color: actioncolor["primary"]),
                   ),
                 ),
               if (tabsRouter.activeIndex == 1)
@@ -82,7 +82,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                   onTap: () => _showActionSheetHistorique(context, ref),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.more_vert, size: 25, color: colorpanel(200)),
+                    child: Icon(Icons.more_vert, size: 25, color: actioncolor["primary"]),
                   ),
                 ),
               SizedBox(width: 10),
@@ -277,7 +277,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                     positiveText: 'Renvoyer', negativeText: 'Annuler');
                 if (onRenvoie == true) {
                   final result = await ref.read(cycleRepositoryProvider).renvoieDernierCycle();
-                  print('renvoie derneir cycle');
+                  print('renvoie dernier cycle');
                   result.fold((l) => showSnackbarCycleFailure(context, l),
                       (_) => ref.invalidate(allCycleFullProvider));
                 }

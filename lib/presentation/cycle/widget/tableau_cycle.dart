@@ -200,9 +200,12 @@ class _Cell extends StatelessWidget {
           child: Column(
             children: [
               Text(AppDateUtils.formatDate(observation.date, 'dd'),
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(fontSize: 14)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium
+                      ?.copyWith(fontSize: 14, color: actioncolor['primary'])),
               Text(AppDateUtils.formatDate(observation.date, 'MMM'),
-                  style: Theme.of(context).textTheme.labelMedium),
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(color: actioncolor['primary'])),
             ],
           ),
         );
@@ -236,7 +239,7 @@ class _Cell extends StatelessWidget {
                         observation.analyse?.getOrCrash().toColor() ?? observation.couleurGeneree.toColor()),
                 if (observation.jourFertile == false)
                   Image.asset(AssetsPath.icon_hachurage,
-                      color: colorpanel(50), width: 40, height: 35, fit: BoxFit.fill),
+                      color: actioncolor['primary'], width: 40, height: 35, fit: BoxFit.fill),
                 widgetShowTrucChelouAnalyse,
               ],
             ));

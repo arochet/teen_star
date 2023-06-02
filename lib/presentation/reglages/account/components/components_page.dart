@@ -88,7 +88,7 @@ class ComponentsPage extends StatelessWidget {
               //SHOW DIALOG CHOIX
               ElevatedButton(
                 onPressed: () {
-                  showDialogChoix(context, 'Êtes-vous sûr de vouloir ... ?',
+                  showDialogChoix(context, 'Êtes-vous sûre de vouloir ... ?',
                       positiveText: 'OK', negativeText: 'Annuler');
                 },
                 child: Text("showDialogChoix()"),

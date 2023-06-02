@@ -19,7 +19,7 @@ class NoAccountLink extends StatelessWidget {
           children: [
             new TextSpan(
               text: "${AppLocalizations.of(context)!.pasdecompte}  ",
-              style: TextStyle(color: colorpanel(50)),
+              style: TextStyle(color: actioncolor['primary']),
             ),
             new TextSpan(
               text: AppLocalizations.of(context)!.sinscrire,

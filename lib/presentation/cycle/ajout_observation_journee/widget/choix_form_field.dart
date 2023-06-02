@@ -89,13 +89,15 @@ class _Field extends StatelessWidget {
     );
 
     TextStyle? styleText = Theme.of(context).textTheme.bodyMedium?.copyWith(
-        color: isRed ? actioncolor['red'] : colorpanel(50), fontSize: 10, fontWeight: FontWeight.w500);
+        color: isRed ? actioncolor['red'] : actioncolor['primary'],
+        fontSize: 10,
+        fontWeight: FontWeight.w500);
 
     double? widthCell = (MediaQuery.of(context).size.width / 4) - 9;
 
     return Container(
       child: Container(
-        height: _textSize(titre(state), styleText!, widthCell).height + 81,
+        height: _textSize(titre(state), styleText!, widthCell).height + 90,
         width: widthCell,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +106,7 @@ class _Field extends StatelessWidget {
             Container(
               decoration: state is HumeurState ? decorationRounded : decorationSquared,
               child: Padding(
-                padding: const EdgeInsets.all(2.0),
+                padding: const EdgeInsets.all(4.0),
                 child: IconObservation(
                   iconPath: iconPath(state),
                   iconText: iconText != null ? iconText!(state) : null,
@@ -118,6 +120,7 @@ class _Field extends StatelessWidget {
             Expanded(
               child: AutoSizeText(
                 titre(state),
+                style: styleText,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.visible,
               ),

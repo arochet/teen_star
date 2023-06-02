@@ -582,7 +582,7 @@ extension ParseToSringHumeur on HumeurState {
       case HumeurState.nervositeIrritable:
         return 'Nervosité irritable';
       case HumeurState.tristesse:
-        return 'Tristesse\nDécouragement Hypersensibilité';
+        return 'Tristesse\nDécouragement\nHypersensibilité';
       case HumeurState.autre:
         return 'Autre';
       case HumeurState.none:

@@ -23,7 +23,7 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
   Widget build(BuildContext context) {
     return PanelList(title: 'PanelModifyMdpDeleteAccount', list: [
       //Modifier le mot de passe Appli
-      ItemPanelList(
+      /* ItemPanelList(
         title: 'Modifier le mot de passe Appli',
         icon: Icons.lock,
         onTap: () {
@@ -37,7 +37,7 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
         onTap: () {
           context.router.push(ReauthenticateRoute(route: NewPasswordRoute(isMotDePasseAppli: false)));
         },
-      ),
+      ), */
       //Supprimer le compte
       ItemPanelList(
         title: 'Réinitialiser l\'application',

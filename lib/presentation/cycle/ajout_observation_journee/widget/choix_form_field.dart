@@ -97,7 +97,7 @@ class _Field extends StatelessWidget {
 
     return Container(
       child: Container(
-        height: _textSize(titre(state), styleText!, widthCell).height + 90,
+        height: _textSize(titre(state), styleText!, widthCell).height + 93,
         width: widthCell,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

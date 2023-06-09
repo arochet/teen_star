@@ -24,15 +24,12 @@ class TableauHistorique extends ConsumerWidget {
     //Titre des colonnes. Exemple : Cycle 1, Cycle 2, Cycle 3
     List<String> title = [];
     List<Cycle> tmpListCycle = [];
+    List<int> tmpListCycleLength = []; //Longeur de chaque cycle
     for (var cycle in listHistorique) {
-      List<List<Observation>> listObservation = cycle.getListObservationByRange().reversed.toList();
-      for (int i = 0; i < listObservation.length; i++) {
-        title.add(listObservation.length == 1
-            ? ' Cycle ${cycle.id.getOrCrash()} '
-            : ' Cycle ${cycle.id.getOrCrash()}.${listObservation.length - i} ');
-        tmpListCycle.add(
-            Cycle(id: cycle.id, observations: listObservation[i], idJourneeSoleil: cycle.idJourneeSoleil));
-      }
+      title.add(' Cycle ${cycle.id.getOrCrash()} ');
+      List<Observation> listObs = cycle.getObservationsWithEmptyDays(allowDoubleDays: false);
+      tmpListCycle.add(Cycle(id: cycle.id, observations: listObs, idJourneeSoleil: cycle.idJourneeSoleil));
+      tmpListCycleLength.add(listObs.length);
     }
 
     return ShowComponentFile(
@@ -40,20 +37,20 @@ class TableauHistorique extends ConsumerWidget {
       child: StickyHeadersTable(
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) =>
-            _CellHeader(title[colulmnIndex], tmpListCycle[colulmnIndex].id), //Titre des colonnes
+            _CellHeader(title[colulmnIndex], listHistorique[colulmnIndex].id), //Titre des colonnes
         contentCellBuilder: (int columnIndex, int rowIndex) {
-          List<Observation> listObservation = tmpListCycle[columnIndex].observations;
           // Cellule observation
-          if (columnIndex < tmpListCycle.length) {
-            if (rowIndex < listObservation.length) {
-              if (listObservation[rowIndex].isNone)
+          if (columnIndex < listHistorique.length) {
+            if (rowIndex < tmpListCycleLength[columnIndex]) {
+              final Observation listObservation = tmpListCycle[columnIndex].observations[rowIndex];
+              if (listObservation.isNone)
                 return _CellEmpty();
               else
                 return _Cell(
-                  observation: listObservation[rowIndex],
+                  observation: listObservation,
                   isJourSommet: tmpListCycle[columnIndex].idJourneeSoleil.getOrCrash() ==
-                      listObservation[rowIndex].id.getOrCrash(),
-                  isInfertile: listObservation[rowIndex].jourFertile == false,
+                      listObservation.id.getOrCrash(),
+                  isInfertile: listObservation.jourFertile == false,
                 );
             } else {
               return _CellEmpty();
@@ -62,7 +59,7 @@ class TableauHistorique extends ConsumerWidget {
             return _CellEmpty();
           }
         },
-        rowsLength: /* _getCyclePlusLong(listHistorique) */ 35,
+        rowsLength: _getCyclePlusLong(listHistorique),
         rowsTitleBuilder: (int rowIndex) => _CellObservation('${rowIndex + 1}'),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
@@ -74,7 +71,7 @@ class TableauHistorique extends ConsumerWidget {
     );
   }
 
-  /* int _getCyclePlusLong(List<Cycle> listHistorique) {
+  int _getCyclePlusLong(List<Cycle> listHistorique) {
     int lenght = 0;
 
     for (var cycle in listHistorique) {
@@ -85,7 +82,7 @@ class TableauHistorique extends ConsumerWidget {
     }
 
     return lenght;
-  } */
+  }
 }
 
 class _Cell extends StatelessWidget {

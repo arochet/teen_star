@@ -120,7 +120,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
                 _CellImage(listImageMucus[observation.mucus?.getOrCrash()]!), //Cellule mucus
                 _CellImage(listImageHumeur[observation.humeur?.getOrCrash()]!), //Cellule humeur
                 _CellText('${observation.temperatureBasale ?? ''}'), //Cellule temperature
-                _CellText('$evenements $douleurs'), //Cellule evenement
+                _CellText('$douleurs $evenements'), //Cellule evenement
               ]
             :
             //Ligne Vide
@@ -207,6 +207,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
     data.add(day);
   }
 
+  //TABLEAU HISTORIQUE
   tableauCycle(
       page: page,
       tabTitleHeader: headerHistorique,
@@ -214,7 +215,8 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
       iconEmpty: listImageMucus[MucusState.none]!,
       imgHachurage: imgHachurage,
       imgJourSommet: imgJourSommet,
-      layout: layoutResult!);
+      layout: layoutResult!,
+      isHistorique: true);
 
   //CREATION DU FICHIER
   String nomFichier =
@@ -266,6 +268,7 @@ PdfLayoutResult? tableauCycle({
   required PdfBitmap imgHachurage,
   required PdfBitmap imgJourSommet,
   required PdfLayoutResult layout,
+  bool isHistorique = false,
 }) {
   final PdfGrid grid = PdfGrid();
   grid.columns.add(count: tabTitleHeader.length); // Specify the grid column count.
@@ -296,16 +299,22 @@ PdfLayoutResult? tableauCycle({
       else if (cellData is CellPDFColor) {
         //CASE COULEUR
         row.cells[i].style.backgroundBrush = cellData.display();
-        if (cellData.chiffre != null && cellData.chiffre != 0 && i != 2) {
+        //Chiffre
+        if (cellData.chiffre != null &&
+            cellData.chiffre != 0 &&
+            (i != 2 || isHistorique) /* Truc de porcasse */) {
           row.cells[i].value = '${cellData.chiffre}';
         }
+        //Point d'interrrogation
         if (cellData.pointInterrogation == true) {
           row.cells[i].value = '?';
         }
+        //Hachurage
         if (cellData.hachure == true) {
           row.cells[i].style.backgroundImage = imgHachurage;
           row.cells[i].style.cellPadding = PdfPaddings(bottom: 0, top: 0, right: 0, left: 0);
         }
+        //Jour sommet
         if (cellData.jourSommet == true) {
           row.cells[i].style.backgroundImage = imgJourSommet;
           row.cells[i].style.cellPadding = PdfPaddings(bottom: 2, top: 2, right: 10, left: 10);

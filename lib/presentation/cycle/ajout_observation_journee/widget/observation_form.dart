@@ -216,7 +216,6 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 controller: _controllerSensationAutre,
                 decoration: InputDecoration(labelText: 'Autre sensation'),
               ),
-            SpaceH10(),
 
             //SANG
             Text("SANG", style: styleTitre),
@@ -230,7 +229,6 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               iconPath: (state) => (state as SangState).toIconPath(),
               isRed: true,
             ),
-            SpaceH10(),
 
             //MUCUS
             Text("MUCUS", style: styleTitre),
@@ -251,7 +249,6 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 controller: _controllerMucusAutre,
                 decoration: InputDecoration(labelText: 'Autre observation'),
               ),
-            SpaceH10(),
             /* //BUTON NEXT PAGE
             ElevatedButton(
               onPressed: () async {
@@ -295,7 +292,6 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 controller: _controllerHumeurAutre,
                 decoration: InputDecoration(labelText: 'Autre humeur'),
               ),
-            SpaceH10(),
 
             //SIGNE ASSOCIE
             Text("SIGNE ASSOCIÉ", style: styleTitre),
@@ -318,7 +314,6 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 controller: _controllerDouleursAutre,
                 decoration: InputDecoration(labelText: 'Autre douleurs'),
               ),
-            SpaceH10(),
 
             //EVENEMENTS
             Text("ÉVÉNEMENT", style: styleTitre),
@@ -340,7 +335,6 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 controller: _controllerEvenementAutre,
                 decoration: InputDecoration(labelText: 'Autre note'),
               ),
-            SpaceH10(),
 
             //TEMPERATURE BASALE
             Row(
@@ -366,7 +360,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 ),
               ],
             ),
-            SpaceH20(),
+            SpaceH10(),
 
             /* //NOTES CONFIDENTIELLES
             Text("NOTES CONFIDENTIELLES",

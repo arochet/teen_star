@@ -89,7 +89,8 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: "sensation à la vulve + observation", style: styleUnderline),
                   TextSpan(text: " choisie, sont appliquées "),
                   TextSpan(
-                      text: " par défaut en attendant l’interprétation manuelle du cycle ", style: styleBold),
+                      text: " par défaut en attendant l’interprétation manuelle du cycle. \n",
+                      style: styleBold),
                   TextSpan(text: " -> par défaut en "),
                   TextSpan(text: " BLEU ", style: styleBold),
                   TextSpan(text: "  (“eau”) =  toute présence d’humidité (SENSATION ou OBSERVATION) \n"),
@@ -186,10 +187,10 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: ""),
                   TextSpan(text: ""),
                   TextSpan(
-                      text: " (cases incolores ?)\n\n"
+                      text: " (cases incolores)\n\n"
                           "a) Le dépôt séché est identifié clairement comme : \n"
                           " - glaire cervicale séchée → cases incolores à colorer en jaune et hachurer\n"
-                          " - pertes vaginales séchées (sans glaire cervicale) → cases blanches à colorer en brun et hachurer\n\n"
+                          " - pertes vaginales séchées (sans glaire cervicale) → cases incolores à colorer en brun et hachurer\n\n"
                           "b) Le dépôt n’est pas identifié clairement → à laisser incolore, enlever le ? et hachurer \n"),
                 ]),
               )),

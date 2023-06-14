@@ -67,7 +67,9 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
     Widget continueButton = ElevatedButton(
       onPressed: () async {
         await context.router.pop();
-        final ok = await showDialogPassword(context: context, ref: ref, dissmissable: true);
+
+        final ok = await showDialogChoix(context, 'Tous vos enregistrements seront définitivement effacés',
+            positiveText: 'Tout effacer');
         if (ok == true) {
           final result = await ref.read(cycleRepositoryProvider).resetAll();
           ref.invalidate(allCycleProvider);
@@ -84,7 +86,7 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
       style: buttonNormalRemove,
     );
 
-    // show the dialog
+    // DIALOG : Etes-vous sûr de vouloir supprimer votre compte ?
     showDialogApp(
       context: context,
       titre: AppLocalizations.of(context)!.attention,

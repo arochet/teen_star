@@ -160,6 +160,8 @@ class _Cell extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget info;
 
+    final widthSquare = 35.0;
+
     //Cas ou c'est une observation vide
     if (observation.isNone) {
       if (column != 'Date') return Container(width: 10, height: 10);
@@ -217,29 +219,29 @@ class _Cell extends StatelessWidget {
           );
         else
           info = LittleBox(
-              width: 40,
+              width: widthSquare,
               height: 30,
               child: Stack(
                 children: [
-                  LittleBox(width: 40, height: 30, color: observation.couleurGeneree.toColor()),
+                  LittleBox(width: widthSquare, height: 30, color: observation.couleurGeneree.toColor()),
                   widgetShowTrucChelouCouleur
                 ],
               ));
         break;
       case 'Analyse':
         info = LittleBox(
-            width: 40,
+            width: widthSquare,
             height: 30,
             child: Stack(
               children: [
                 LittleBox(
-                    width: 40,
+                    width: widthSquare,
                     height: 30,
                     color:
                         observation.analyse?.getOrCrash().toColor() ?? observation.couleurGeneree.toColor()),
                 if (observation.jourFertile == false)
                   Image.asset(AssetsPath.icon_hachurage,
-                      color: actioncolor['primary'], width: 40, height: 35, fit: BoxFit.fill),
+                      color: actioncolor['primary'], width: widthSquare, height: 35, fit: BoxFit.fill),
                 widgetShowTrucChelouAnalyse,
               ],
             ));

@@ -178,7 +178,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
       page: page, bounds: Rect.fromLTWH(0, 0, page.getClientSize().width, page.getClientSize().height))!;
   List<CellHeader> headerHistorique = [
     CellHeader('Jour', width: 30),
-    ...listCycles.map((Cycle cycle) => CellHeader('${cycle.id.getOrCrash()}', width: 35)).toList()
+    ...listCycles.map((Cycle cycle) => CellHeader('${cycle.id.getOrCrash()}', width: 32)).toList()
   ];
 
   int maxRow = 0;

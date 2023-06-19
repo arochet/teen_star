@@ -54,7 +54,7 @@ class Info_applicationPage extends StatelessWidget {
                     TextSpan(text: "Fondamentaux :", style: TextStyle(decoration: TextDecoration.underline)),
                     TextSpan(
                         text:
-                            " Drs GD, BdN, AJ et autre, médecins et animatrices au CEPP/TeenSTAR France \n"),
+                            " Drs GD, BdN, AJ et autre, médecins et animatrices au Kyklos/TeenSTAR France \n"),
                     TextSpan(
                         text: "Conception et maquette :",
                         style: TextStyle(decoration: TextDecoration.underline)),

@@ -7,7 +7,7 @@ Mis à jour : 24/11/2022
 DESCRIPTION DE L'APPLICATION
 ****************************
 
-L'application TeenSTAR est une application pour l'association TeenSTAR destinée au jeune filles souhaitants suivre leurs cycles. 
+L'application Kyklos est une application pour l'association TeenSTAR destinée au jeune filles souhaitants suivre leurs cycles. 
 Les filles renseignent quotidienement leurs observations. Une animatrice TeenSTAR va pouvoir analyser les comptes rendus. 
 
 

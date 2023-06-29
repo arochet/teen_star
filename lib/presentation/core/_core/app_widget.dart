@@ -14,7 +14,7 @@ class AppWidget extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     String fontFamily = 'MyriadPro';
     return MaterialApp.router(
-      title: 'TeenSTAR',
+      title: 'Kyklos',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: fontFamily,

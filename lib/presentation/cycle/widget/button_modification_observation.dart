@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
+import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
@@ -43,7 +44,7 @@ class ButtonModificationObservation extends ConsumerWidget {
                 //DIALOG pour la modification du cycle
                 await showDialogApp(
                   context: context,
-                  titre: "Modifier $nombreObservation observation${nombreObservation > 1 ? 's' : ''}",
+                  titre: "Analyser $nombreObservation observation${nombreObservation > 1 ? 's' : ''}",
                   child: _DialogModificationCycle(),
                 );
               },
@@ -68,10 +69,11 @@ class _DialogModificationCycle extends ConsumerWidget {
     return ShowComponentFile(
       title: '_DialogModificationCycle',
       child: Container(
-        height: 280,
+        height: 320,
         child: Column(
           children: [
             SpaceH20(),
+            //MODIFIER COULEUR
             ElevatedButton(
               onPressed: () async {
                 final listObservationSelectionnee = ref.read(observationSectionne);
@@ -105,19 +107,7 @@ class _DialogModificationCycle extends ConsumerWidget {
               style: buttonNormalSecondaryFull,
             ),
             SpaceH5(),
-            ElevatedButton(
-              onPressed: () async {
-                final listObservationSelectionnee = ref.read(observationSectionne);
-                await ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
-                ref.watch(isSelection.notifier).state = false;
-                ref.watch(showAnalyse.notifier).state = true;
-                _rafraichirPage(ref);
-                Navigator.of(context).pop();
-              },
-              child: Text("Effacer infertile"),
-              style: buttonNormalSecondaryFull,
-            ),
-            SpaceH5(),
+            //EFFACER LE POINT D'INTERROGATION
             ElevatedButton(
               onPressed: () async {
                 final listObservationSelectionnee = ref.read(observationSectionne);
@@ -132,6 +122,39 @@ class _DialogModificationCycle extends ConsumerWidget {
               child: Text("Effacer le \"?\""),
               style: buttonNormalSecondaryFull,
             ),
+            SpaceH5(),
+            //ANNULER COULEUR
+            ElevatedButton(
+              onPressed: () async {
+                final listObservationSelectionnee = ref.read(observationSectionne);
+                listObservationSelectionnee.forEach((element) async {
+                  await ref
+                      .read(cycleRepositoryProvider)
+                      .modifierCouleurAnalyse(element, CouleurAnalyseState.none);
+                });
+                ref.watch(isSelection.notifier).state = false;
+                ref.watch(showAnalyse.notifier).state = true;
+                _rafraichirPage(ref);
+                Navigator.of(context).pop();
+              },
+              child: Text("Annuler couleur"),
+              style: buttonNormalSecondaryFull,
+            ),
+            SpaceH5(),
+            //ANNULER INFERTILE
+            ElevatedButton(
+              onPressed: () async {
+                final listObservationSelectionnee = ref.read(observationSectionne);
+                await ref.read(cycleRepositoryProvider).marquerJourFertile(listObservationSelectionnee, true);
+                ref.watch(isSelection.notifier).state = false;
+                ref.watch(showAnalyse.notifier).state = true;
+                _rafraichirPage(ref);
+                Navigator.of(context).pop();
+              },
+              child: Text("Annuler infertile"),
+              style: buttonNormalSecondaryFull,
+            ),
+            SpaceH5(),
           ],
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
+import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
@@ -239,6 +240,47 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
               );
             },
             child: const Text('Exporter en PDF'),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () async {
+              final response = await showDialogChoix(
+                  context, 'Toutes les interprétations faites sur ce cycle seront effacées',
+                  positiveText: 'Effacer tout', negativeText: 'Annuler');
+
+              if (response == true) {
+                final asyncCycle = ref.watch(cycleProvider(idCourant));
+                asyncCycle.when(
+                  data: (cycleEither) {
+                    cycleEither.fold(
+                      (l) => showSnackbarCycleFailure(context, l),
+                      (cycle) async {
+                        //Suppression de toute l'analyse du cycle !
+                        await ref
+                            .read(cycleRepositoryProvider)
+                            .marquerJourSommet(cycle, UniqueId.fromUniqueInt(-1));
+                        cycle.observations.forEach((obs) async {
+                          await ref
+                              .read(cycleRepositoryProvider)
+                              .modifierCouleurAnalyse(obs, CouleurAnalyseState.none);
+                          await ref.read(cycleRepositoryProvider).marquerComme(obs, 0);
+                        });
+
+                        //Rafraichissment de la page
+                        ref.invalidate(allCycleProvider);
+                        final id = ref.read(idCycleCourant);
+                        if (id != null) ref.invalidate(cycleProvider(id));
+                      },
+                    );
+                  },
+                  error: (err, stack) {
+                    showDialogChoix(context, 'Une erreur s\'est produite');
+                  },
+                  loading: () {},
+                );
+              }
+              Navigator.pop(context);
+            },
+            child: Text('Annuler toute l\'analyse '),
           ),
           CupertinoActionSheetAction(
             onPressed: () {

@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';

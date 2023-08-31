@@ -17,7 +17,7 @@ extension ParseToSringTA on CouleurAnalyseState {
       case CouleurAnalyseState.rougePlusPlus:
         return Color.fromARGB(255, 197, 52, 29);
       case CouleurAnalyseState.rougePlus:
-        return Color.fromARGB(255, 202, 75, 55);
+        return Color.fromARGB(255, 214, 97, 96);
       case CouleurAnalyseState.rougeClair:
         return Color.fromARGB(255, 225, 168, 164);
       case CouleurAnalyseState.brun:

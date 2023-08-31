@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +11,7 @@ import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/providers.dart';
 
+import '../../core/_core/router.gr.dart';
 import '../cycles_page.dart';
 import 'modifier_couleur_dialog.dart';
 import 'show_observation_notes.dart';
@@ -97,6 +99,24 @@ afficherModalModificationObservation(
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 3);
             ref.read(showAnalyse.notifier).state = true;
+            refreshAndPop(context, ref);
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Effacer le "?"'),
+          onPressed: () async {
+            printDev();
+            await ref.read(cycleRepositoryProvider).enleverPointInterrogation([observation], true);
+            ref.read(showAnalyse.notifier).state = true;
+            refreshAndPop(context, ref);
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Modifier observation du jour'),
+          onPressed: () async {
+            printDev();
+            //On ouvre la page d'ajout d'observation
+            await context.router.push(ObservationAddRoute(cycle: cycle, date: observation.date!));
             refreshAndPop(context, ref);
           },
         ),

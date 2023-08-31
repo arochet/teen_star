@@ -15,6 +15,7 @@ import 'package:auto_route/auto_route.dart' as _i25;
 import 'package:flutter/material.dart' as _i26;
 
 import '../../../DOMAIN/cycle/cycle.dart' as _i27;
+import '../../../DOMAIN/cycle/observation.dart' as _i28;
 import '../../auth/auth_connexion/auth_connexion_page.dart' as _i4;
 import '../../auth/auth_init/auth_init_page.dart' as _i3;
 import '../../auth/auth_register/auth_register_page.dart' as _i5;
@@ -157,6 +158,7 @@ class AppRouter extends _i25.RootStackRouter {
           args.cycle,
           args.date,
           key: args.key,
+          observation: args.observation,
         ),
       );
     },
@@ -569,6 +571,7 @@ class ObservationAddRoute extends _i25.PageRouteInfo<ObservationAddRouteArgs> {
     required _i27.Cycle? cycle,
     required DateTime date,
     _i26.Key? key,
+    _i28.Observation? observation,
   }) : super(
           ObservationAddRoute.name,
           path: '/observation-add-route',
@@ -576,6 +579,7 @@ class ObservationAddRoute extends _i25.PageRouteInfo<ObservationAddRouteArgs> {
             cycle: cycle,
             date: date,
             key: key,
+            observation: observation,
           ),
         );
 
@@ -587,6 +591,7 @@ class ObservationAddRouteArgs {
     required this.cycle,
     required this.date,
     this.key,
+    this.observation,
   });
 
   final _i27.Cycle? cycle;
@@ -595,9 +600,11 @@ class ObservationAddRouteArgs {
 
   final _i26.Key? key;
 
+  final _i28.Observation? observation;
+
   @override
   String toString() {
-    return 'ObservationAddRouteArgs{cycle: $cycle, date: $date, key: $key}';
+    return 'ObservationAddRouteArgs{cycle: $cycle, date: $date, key: $key, observation: $observation}';
   }
 }
 

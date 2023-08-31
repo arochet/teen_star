@@ -25,11 +25,13 @@ final isFirstPage = StateProvider<bool>((ref) => true);
 
 class ObservationFormProvider extends ConsumerWidget {
   Cycle? cycle;
+  Observation? observation;
   DateTime date;
   ObservationFormProvider(
     this.cycle,
     this.date, {
     Key? key,
+    this.observation,
   }) : super(key: key);
 
   @override
@@ -71,14 +73,19 @@ class ObservationFormProvider extends ConsumerWidget {
                 });
               }));
     });
-    return ObservationForm(cycle, date);
+    return ObservationForm(
+      cycle,
+      date,
+      observation: observation,
+    );
   }
 }
 
 class ObservationForm extends ConsumerStatefulWidget {
   Cycle? cycle; //Le cycle est null si c'est la première observation
+  Observation? observation;
   DateTime date;
-  ObservationForm(this.cycle, this.date, {Key? key}) : super(key: key);
+  ObservationForm(this.cycle, this.date, {Key? key, this.observation}) : super(key: key);
 
   @override
   _ObservationFormState createState() => _ObservationFormState();

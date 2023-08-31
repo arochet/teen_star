@@ -116,7 +116,8 @@ afficherModalModificationObservation(
           onPressed: () async {
             printDev();
             //On ouvre la page d'ajout d'observation
-            await context.router.push(ObservationAddRoute(cycle: cycle, date: observation.date!));
+            await context.router
+                .push(ObservationAddRoute(cycle: cycle, date: observation.date!, observation: observation));
             refreshAndPop(context, ref);
           },
         ),

@@ -114,6 +114,33 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(cycleFormNotifierProvider.notifier).dateChanged(widget.date);
       ref.read(cycleFormNotifierProvider.notifier).sangChanged(Sang(SangState.rien));
+
+      if (widget.observation != null) {
+        ref.read(cycleFormNotifierProvider.notifier).dateChanged(widget.observation!.date!);
+        ref.read(cycleFormNotifierProvider.notifier).sensationChanged(widget.observation!.sensation!);
+        ref
+            .read(cycleFormNotifierProvider.notifier)
+            .sensationsAutreChanged(widget.observation!.sensationsAutre!);
+        ref.read(cycleFormNotifierProvider.notifier).sangChanged(widget.observation!.sang!);
+        ref.read(cycleFormNotifierProvider.notifier).mucusChanged(widget.observation!.mucus!);
+        ref.read(cycleFormNotifierProvider.notifier).mucusAutreChanged(widget.observation!.mucusAutre!);
+        ref.read(cycleFormNotifierProvider.notifier).humeurChanged(widget.observation!.humeur!);
+        ref.read(cycleFormNotifierProvider.notifier).humeurAutreChanged(widget.observation!.humeurAutre!);
+        widget.observation!.douleurs!.forEach((douleur) {
+          ref.read(cycleFormNotifierProvider.notifier).douleursChanged(douleur.getOrCrash());
+        });
+        ref.read(cycleFormNotifierProvider.notifier).douleursAutreChanged(widget.observation!.douleursAutre!);
+        widget.observation!.evenements!.forEach((element) {
+          ref.read(cycleFormNotifierProvider.notifier).evenementsChanged(element.getOrCrash());
+        });
+        ref
+            .read(cycleFormNotifierProvider.notifier)
+            .evenementsAutreChanged(widget.observation!.evenementsAutre!);
+        ref
+            .read(cycleFormNotifierProvider.notifier)
+            .temperatureBasaleChanged(widget.observation!.temperatureBasale!);
+        _controllerTempBasale.text = widget.observation!.temperatureBasale!.toString();
+      }
     });
   }
 

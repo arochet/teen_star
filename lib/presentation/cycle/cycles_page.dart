@@ -167,11 +167,11 @@ class _Cycle extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
-                        child: Text("Toucher l'observation à compléter ou modifier",
+                        child: Text("Toucher les lignes à analyser",
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium
-                                ?.copyWith(color: actioncolor['primary'])),
+                                ?.copyWith(color: actioncolor['remove'], fontWeight: FontWeight.bold)),
                       ),
                     ),
                   //TABLEAU

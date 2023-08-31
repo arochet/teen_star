@@ -71,7 +71,7 @@ afficherModalModificationObservation(
           onPressed: () async {
             await showDialogApp<void>(
               context: context,
-              child: ModifierCouleurDialog(observation),
+              child: ModifierCouleurDialog([observation]),
               titre: "Choisir une couleur",
             );
             Navigator.pop(context);

@@ -6,6 +6,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
+import 'package:teenstar/PRESENTATION/cycle/widget/modifier_couleur_dialog.dart';
 import 'package:teenstar/providers.dart';
 
 import '../cycles_page.dart';
@@ -46,7 +47,7 @@ class ButtonModificationObservation extends ConsumerWidget {
                   child: _DialogModificationCycle(),
                 );
               },
-              child: Text("Modifier"),
+              child: Text("Analyser"),
               style: buttonNormalPrimary,
             ),
           ],
@@ -67,10 +68,28 @@ class _DialogModificationCycle extends ConsumerWidget {
     return ShowComponentFile(
       title: '_DialogModificationCycle',
       child: Container(
-        height: 180,
+        height: 280,
         child: Column(
           children: [
             SpaceH20(),
+            ElevatedButton(
+              onPressed: () async {
+                final listObservationSelectionnee = ref.read(observationSectionne);
+                await showDialogApp<void>(
+                  context: context,
+                  child: ModifierCouleurDialog(listObservationSelectionnee),
+                  titre: "Choisir une couleur",
+                );
+
+                ref.watch(isSelection.notifier).state = false;
+                ref.watch(showAnalyse.notifier).state = true;
+                _rafraichirPage(ref);
+                Navigator.of(context).pop();
+              },
+              child: Text("Modifier couleur"),
+              style: buttonNormalSecondaryFull,
+            ),
+            SpaceH5(),
             ElevatedButton(
               onPressed: () async {
                 final listObservationSelectionnee = ref.read(observationSectionne);

@@ -8,8 +8,8 @@ import 'package:teenstar/providers.dart';
 import '../cycles_page.dart';
 
 class ModifierCouleurDialog extends StatelessWidget {
-  final Observation observation;
-  const ModifierCouleurDialog(this.observation, {Key? key}) : super(key: key);
+  final List<Observation> observations;
+  const ModifierCouleurDialog(this.observations, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class ModifierCouleurDialog extends StatelessWidget {
                       element != CouleurAnalyseState.none &&
                       element != CouleurAnalyseState.vert &&
                       element != CouleurAnalyseState.invalide)
-                  .map((CouleurAnalyseState state) => _ButtonCouleur(observation, state))
+                  .map((CouleurAnalyseState state) => _ButtonCouleur(observations, state))
                   .toList(),
             ),
           ),
@@ -34,10 +34,10 @@ class ModifierCouleurDialog extends StatelessWidget {
 }
 
 class _ButtonCouleur extends ConsumerWidget {
-  final Observation observation;
+  final List<Observation> observations;
   CouleurAnalyseState state;
   _ButtonCouleur(
-    this.observation,
+    this.observations,
     this.state, {
     Key? key,
   }) : super(key: key);
@@ -48,7 +48,9 @@ class _ButtonCouleur extends ConsumerWidget {
       padding: const EdgeInsets.all(5.0),
       child: InkWell(
         onTap: () async {
-          await ref.read(cycleRepositoryProvider).modifierCouleurAnalyse(observation, state);
+          observations.forEach((element) async {
+            await ref.read(cycleRepositoryProvider).modifierCouleurAnalyse(element, state);
+          });
           Navigator.of(context).pop(state);
           ref.read(showAnalyse.notifier).state = true;
           ref.refresh(allCycleProvider);

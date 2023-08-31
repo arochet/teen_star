@@ -245,7 +245,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
               Navigator.pop(context);
               ref.read(isSelection.notifier).state = !ref.read(isSelection);
             },
-            child: Text('Modifier Cycle ${idCourant?.getOrCrash()}'),
+            child: Text('Analyse groupée cycle ${idCourant?.getOrCrash()}'),
           ),
         ],
       ),

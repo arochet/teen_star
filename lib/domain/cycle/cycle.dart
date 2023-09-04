@@ -134,4 +134,17 @@ abstract class Cycle with _$Cycle {
     }
     return lastId;
   }
+
+  DateTime? getDateOfLastObservation() {
+    if (this.observations.length == 0) {
+      return null;
+    }
+    DateTime? lastDate = this.observations.first.date;
+    for (var obs in this.observations) {
+      if (obs.date!.isAfter(lastDate!)) {
+        lastDate = obs.date;
+      }
+    }
+    return lastDate;
+  }
 }

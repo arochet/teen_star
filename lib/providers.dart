@@ -85,7 +85,7 @@ final allCycleProvider = FutureProvider.autoDispose<Either<CycleFailure, List<Cy
   return ref.read(cycleRepositoryProvider).readAllCycles();
 });
 
-//Dernier Cycle
+//Identifiant Dernier Cycle
 final lastCycleId = FutureProvider<Either<CycleFailure, UniqueId?>>((ref) async {
   ref.invalidate(allCycleProvider);
 

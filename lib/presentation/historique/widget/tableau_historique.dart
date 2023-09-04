@@ -42,15 +42,15 @@ class TableauHistorique extends ConsumerWidget {
           // Cellule observation
           if (columnIndex < listHistorique.length) {
             if (rowIndex < tmpListCycleLength[columnIndex]) {
-              final Observation listObservation = tmpListCycle[columnIndex].observations[rowIndex];
-              if (listObservation.isNone)
+              final Observation observation = tmpListCycle[columnIndex].observations[rowIndex];
+              if (observation.isNone)
                 return _CellEmpty();
               else
                 return _Cell(
-                  observation: listObservation,
-                  isJourSommet: tmpListCycle[columnIndex].idJourneeSoleil.getOrCrash() ==
-                      listObservation.id.getOrCrash(),
-                  isInfertile: listObservation.jourFertile == false,
+                  observation: observation,
+                  isJourSommet:
+                      tmpListCycle[columnIndex].idJourneeSoleil.getOrCrash() == observation.id.getOrCrash(),
+                  isInfertile: observation.jourFertile == false,
                 );
             } else {
               return _CellEmpty();
@@ -122,6 +122,9 @@ class _Cell extends StatelessWidget {
                   child: Text('${observation.marque}',
                       style:
                           Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary']))),
+            if (observation.couleurGeneree.toColor() == null &&
+                observation.analyse?.getOrCrash().toColor() == null)
+              Center(child: Text('/', style: Theme.of(context).textTheme.titleSmall)),
           ],
         ),
       ),

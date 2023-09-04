@@ -215,7 +215,11 @@ class _Cell extends StatelessWidget {
       case 'Couleur':
         if (observation.couleurGeneree == CouleurAnalyseState.none)
           info = Stack(
-            children: [_CellNone(), widgetShowTrucChelouCouleur],
+            children: [
+              //Case vide
+              Center(child: Text('/', style: Theme.of(context).textTheme.titleSmall)),
+              widgetShowTrucChelouCouleur
+            ],
           );
         else
           info = LittleBox(
@@ -234,6 +238,7 @@ class _Cell extends StatelessWidget {
             height: 30,
             child: Stack(
               children: [
+                Center(child: Text('/', style: Theme.of(context).textTheme.titleSmall)),
                 LittleBox(
                     width: widthSquare,
                     height: 30,

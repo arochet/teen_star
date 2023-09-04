@@ -146,6 +146,7 @@ afficherModalModificationObservation(
           child: Text('Annuler marquage'),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 0);
+            await ref.read(cycleRepositoryProvider).enleverPointInterrogation([observation], false);
             ref.read(showAnalyse.notifier).state = true;
             refreshAndPop(context, ref);
           },

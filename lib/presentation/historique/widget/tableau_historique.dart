@@ -175,7 +175,7 @@ class _CellHeader extends ConsumerWidget {
                 child: Text(value,
                     style: Theme.of(context)
                         .textTheme
-                        .labelMedium
+                        .titleMedium
                         ?.copyWith(fontWeight: FontWeight.bold, color: actioncolor['primary'])))));
   }
 }

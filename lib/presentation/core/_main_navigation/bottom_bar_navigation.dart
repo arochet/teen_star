@@ -258,6 +258,9 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                         await ref
                             .read(cycleRepositoryProvider)
                             .marquerJourSommet(cycle, UniqueId.fromUniqueInt(-1));
+                        await ref
+                            .read(cycleRepositoryProvider)
+                            .enleverPointInterrogation(cycle.observations, false);
                         cycle.observations.forEach((obs) async {
                           await ref
                               .read(cycleRepositoryProvider)

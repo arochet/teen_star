@@ -424,38 +424,41 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                       [];
 
                   //Ajout de la vérification si la date ne se superpose pas avec les cycles précédents
-                  final lastCycleEither = await ref.read(lastCycleId.future);
-                  bool dispAlertDate = false;
-                  await lastCycleEither.fold((l) => showSnackbarCycleFailure(context, l),
-                      (idLastCycle) async {
-                    if (idLastCycle != null) {
-                      final lastCycle = ref.read(cycleProvider(idLastCycle));
-                      lastCycle.whenData((cycleAsync) async {
-                        cycleAsync.fold((l) => showSnackbarCycleFailure(context, l), (Cycle lastCycle) async {
-                          DateTime? lastDate = lastCycle.getDateOfLastObservation();
+                  if (widget.observation == null) {
+                    final lastCycleEither = await ref.read(lastCycleId.future);
+                    bool dispAlertDate = false;
+                    await lastCycleEither.fold((l) => showSnackbarCycleFailure(context, l),
+                        (idLastCycle) async {
+                      if (idLastCycle != null) {
+                        final lastCycle = ref.read(cycleProvider(idLastCycle));
+                        lastCycle.whenData((cycleAsync) async {
+                          cycleAsync.fold((l) => showSnackbarCycleFailure(context, l),
+                              (Cycle lastCycle) async {
+                            DateTime? lastDate = lastCycle.getDateOfLastObservation();
 
-                          if (lastDate != null) {
-                            if (form.date.toDate().isAfter(lastDate) == false) {
-                              dispAlertDate = true;
+                            if (lastDate != null) {
+                              if (form.date.toDate().isAfter(lastDate) == false) {
+                                dispAlertDate = true;
+                              }
                             }
-                          }
+                          });
                         });
-                      });
-                    }
-                  });
-                  if (dispAlertDate) {
-                    //Affichage d'un dialog pour confirmer l'ajout de l'observation
-                    final dateOK = await showDialogChoix(context,
-                        "Attention cette date existe déjà dans le cycle précédent. Vous devrez supprimer manuellement le doublon",
-                        positiveText: "Ajouter", negativeText: "Annuler", isDanger: true);
+                      }
+                    });
+                    if (dispAlertDate) {
+                      //Affichage d'un dialog pour confirmer l'ajout de l'observation
+                      final dateOK = await showDialogChoix(context,
+                          "Attention cette date existe déjà dans le cycle précédent. Vous devrez supprimer manuellement le doublon",
+                          positiveText: "Compris !", negativeText: "Annuler", isDanger: true);
 
-                    if (dateOK != true) {
-                      return;
+                      if (dateOK != true) {
+                        return;
+                      }
                     }
                   }
 
                   //Vérification si la date n'existe pas déjà
-                  if (obs.length > 0) {
+                  if (obs.length > 0 && widget.observation == null) {
                     final ok = await showDialogChoix(context,
                         "Attention, une observation existe déjà pour cette date, voulez-vous la remplacer ?",
                         positiveText: "Remplacer", negativeText: "Annuler", isDanger: true);

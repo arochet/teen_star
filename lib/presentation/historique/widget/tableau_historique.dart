@@ -26,7 +26,7 @@ class TableauHistorique extends ConsumerWidget {
     List<Cycle> tmpListCycle = [];
     List<int> tmpListCycleLength = []; //Longeur de chaque cycle
     for (var cycle in listHistorique) {
-      title.add(' Cycle ${cycle.id.getOrCrash()} ');
+      title.add(' ${cycle.id.getOrCrash()} ');
       List<Observation> listObs = cycle.getObservationsWithEmptyDays(allowDoubleDays: false);
       tmpListCycle.add(Cycle(id: cycle.id, observations: listObs, idJourneeSoleil: cycle.idJourneeSoleil));
       tmpListCycleLength.add(listObs.length);
@@ -35,6 +35,7 @@ class TableauHistorique extends ConsumerWidget {
     return ShowComponentFile(
       title: 'TableauHistorique',
       child: StickyHeadersTable(
+        legendCell: Text('Cycle n°', style: Theme.of(context).textTheme.titleSmall),
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) =>
             _CellHeader(title[colulmnIndex], listHistorique[colulmnIndex].id), //Titre des colonnes
@@ -64,7 +65,7 @@ class TableauHistorique extends ConsumerWidget {
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
           stickyLegendHeight: 50,
-          contentCellWidth: 60, //Sert à rien car il y'a widthCell
+          contentCellWidth: 50,
           contentCellHeight: 35,
         ),
       ),

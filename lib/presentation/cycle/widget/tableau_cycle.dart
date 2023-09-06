@@ -217,7 +217,6 @@ class _Cell extends StatelessWidget {
           info = Stack(
             children: [
               //Case vide
-              Center(child: Text('/', style: Theme.of(context).textTheme.titleSmall)),
               widgetShowTrucChelouCouleur
             ],
           );
@@ -238,7 +237,6 @@ class _Cell extends StatelessWidget {
             height: 30,
             child: Stack(
               children: [
-                Center(child: Text('/', style: Theme.of(context).textTheme.titleSmall)),
                 LittleBox(
                     width: widthSquare,
                     height: 30,

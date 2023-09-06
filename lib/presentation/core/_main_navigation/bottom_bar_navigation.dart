@@ -242,6 +242,13 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
             child: const Text('Exporter en PDF'),
           ),
           CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+              ref.read(isSelection.notifier).state = !ref.read(isSelection);
+            },
+            child: Text('Analyse groupée cycle ${idCourant?.getOrCrash()}'),
+          ),
+          CupertinoActionSheetAction(
             onPressed: () async {
               final response = await showDialogChoix(
                   context, 'Toutes les interprétations faites sur ce cycle seront effacées',
@@ -261,6 +268,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                         await ref
                             .read(cycleRepositoryProvider)
                             .enleverPointInterrogation(cycle.observations, false);
+                        await ref.read(cycleRepositoryProvider).marquerJourFertile(cycle.observations, true);
                         cycle.observations.forEach((obs) async {
                           await ref
                               .read(cycleRepositoryProvider)
@@ -284,13 +292,6 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
               Navigator.pop(context);
             },
             child: Text('Annuler toute l\'analyse '),
-          ),
-          CupertinoActionSheetAction(
-            onPressed: () {
-              Navigator.pop(context);
-              ref.read(isSelection.notifier).state = !ref.read(isSelection);
-            },
-            child: Text('Analyse groupée cycle ${idCourant?.getOrCrash()}'),
           ),
         ],
       ),

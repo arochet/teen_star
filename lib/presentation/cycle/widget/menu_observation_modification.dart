@@ -162,7 +162,7 @@ afficherModalModificationObservation(
               refreshAndPop(context, ref);
             }
           },
-          child: Text('Supprimer'),
+          child: Text('Supprimer observation du jour'),
         ),
       ],
     ),

@@ -104,29 +104,36 @@ class _Cell extends StatelessWidget {
     if (couleurAnalyse == CouleurAnalyseState.none) couleur = null;
 
     return Center(
-      child: LittleBox(
-        width: 35,
-        height: 30,
-        color: couleur ?? observation.couleurGeneree.toColor(),
-        child: Stack(
-          children: [
-            if (isJourSommet)
-              Center(
-                  child:
-                      Image.asset(AssetsPath.icon_fleur_sommet, color: Colors.black, width: 30, height: 30)),
-            if (isInfertile)
-              Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40),
-            if (observation.isPointInterrogation(true))
-              Center(child: Text("?", style: Theme.of(context).textTheme.titleSmall)),
-            if (observation.marque != null && observation.marque! > 0)
-              Center(
-                  child: Text('${observation.marque}',
-                      style:
-                          Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary']))),
-            if (observation.couleurGeneree.toColor() == null &&
+      child: Container(
+        //Ajout d'une bordure pour les case incolores
+        decoration: (observation.couleurGeneree.toColor() == null &&
                 observation.analyse?.getOrCrash().toColor() == null)
-              Center(child: Text('/', style: Theme.of(context).textTheme.titleSmall)),
-          ],
+            ? BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(5),
+              )
+            : null,
+        child: LittleBox(
+          width: 35,
+          height: 30,
+          color: couleur ?? observation.couleurGeneree.toColor(),
+          child: Stack(
+            children: [
+              if (isJourSommet)
+                Center(
+                    child: Image.asset(AssetsPath.icon_fleur_sommet,
+                        color: Colors.black, width: 30, height: 30)),
+              if (isInfertile)
+                Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40),
+              if (observation.isPointInterrogation(true))
+                Center(child: Text("?", style: Theme.of(context).textTheme.titleSmall)),
+              if (observation.marque != null && observation.marque! > 0)
+                Center(
+                    child: Text('${observation.marque}',
+                        style:
+                            Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary']))),
+            ],
+          ),
         ),
       ),
     );

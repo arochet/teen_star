@@ -200,11 +200,11 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
 }
 
 /// @nodoc
-abstract class _$$_ObservationCopyWith<$Res>
+abstract class _$$ObservationImplCopyWith<$Res>
     implements $ObservationCopyWith<$Res> {
-  factory _$$_ObservationCopyWith(
-          _$_Observation value, $Res Function(_$_Observation) then) =
-      __$$_ObservationCopyWithImpl<$Res>;
+  factory _$$ObservationImplCopyWith(
+          _$ObservationImpl value, $Res Function(_$ObservationImpl) then) =
+      __$$ObservationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -232,11 +232,11 @@ abstract class _$$_ObservationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ObservationCopyWithImpl<$Res>
-    extends _$ObservationCopyWithImpl<$Res, _$_Observation>
-    implements _$$_ObservationCopyWith<$Res> {
-  __$$_ObservationCopyWithImpl(
-      _$_Observation _value, $Res Function(_$_Observation) _then)
+class __$$ObservationImplCopyWithImpl<$Res>
+    extends _$ObservationCopyWithImpl<$Res, _$ObservationImpl>
+    implements _$$ObservationImplCopyWith<$Res> {
+  __$$ObservationImplCopyWithImpl(
+      _$ObservationImpl _value, $Res Function(_$ObservationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -264,7 +264,7 @@ class __$$_ObservationCopyWithImpl<$Res>
     Object? jourFertile = freezed,
     Object? enleverPointInterrogation = freezed,
   }) {
-    return _then(_$_Observation(
+    return _then(_$ObservationImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -355,8 +355,8 @@ class __$$_ObservationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Observation extends _Observation {
-  const _$_Observation(
+class _$ObservationImpl extends _Observation {
+  const _$ObservationImpl(
       {required this.id,
       required this.date,
       required this.couleur,
@@ -448,7 +448,7 @@ class _$_Observation extends _Observation {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Observation &&
+            other is _$ObservationImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.couleur, couleur) || other.couleur == couleur) &&
@@ -514,8 +514,8 @@ class _$_Observation extends _Observation {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ObservationCopyWith<_$_Observation> get copyWith =>
-      __$$_ObservationCopyWithImpl<_$_Observation>(this, _$identity);
+  _$$ObservationImplCopyWith<_$ObservationImpl> get copyWith =>
+      __$$ObservationImplCopyWithImpl<_$ObservationImpl>(this, _$identity);
 }
 
 abstract class _Observation extends Observation {
@@ -540,7 +540,7 @@ abstract class _Observation extends Observation {
       required final String? commentaireAnimatrice,
       required final int? marque,
       required final bool? jourFertile,
-      required final bool? enleverPointInterrogation}) = _$_Observation;
+      required final bool? enleverPointInterrogation}) = _$ObservationImpl;
   const _Observation._() : super._();
 
   @override
@@ -587,6 +587,6 @@ abstract class _Observation extends Observation {
   bool? get enleverPointInterrogation;
   @override
   @JsonKey(ignore: true)
-  _$$_ObservationCopyWith<_$_Observation> get copyWith =>
+  _$$ObservationImplCopyWith<_$ObservationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

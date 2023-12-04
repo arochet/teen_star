@@ -3,6 +3,7 @@ import 'package:teenstar/DOMAIN/auth/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'panel_list.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
@@ -38,7 +39,7 @@ class PanelPersonnelData extends StatelessWidget {
           icon: Icons.flag,
         ),
         ItemPanelList(
-          title: 'Thème: Clair',
+          title: 'Thème: ${ThemeAppExtension.fromIndex(userData?.theme).name}',
           icon: Icons.palette,
         ),
       ],

@@ -84,7 +84,7 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
 
   @override
   Widget build(BuildContext context) {
-    final colorRow = /* Color.fromARGB(112, 255, 255, 255) */ colorpanel(800);
+    final colorRow = /* Color.fromARGB(112, 255, 255, 255) */ Colors.black12;
     return Column(
       children: <Widget>[
         Row(

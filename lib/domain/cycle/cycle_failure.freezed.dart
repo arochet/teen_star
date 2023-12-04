@@ -94,20 +94,20 @@ class _$CycleFailureCopyWithImpl<$Res, $Val extends CycleFailure>
 }
 
 /// @nodoc
-abstract class _$$_UnexpectedCopyWith<$Res> {
-  factory _$$_UnexpectedCopyWith(
-          _$_Unexpected value, $Res Function(_$_Unexpected) then) =
-      __$$_UnexpectedCopyWithImpl<$Res>;
+abstract class _$$UnexpectedImplCopyWith<$Res> {
+  factory _$$UnexpectedImplCopyWith(
+          _$UnexpectedImpl value, $Res Function(_$UnexpectedImpl) then) =
+      __$$UnexpectedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String? erreur});
 }
 
 /// @nodoc
-class __$$_UnexpectedCopyWithImpl<$Res>
-    extends _$CycleFailureCopyWithImpl<$Res, _$_Unexpected>
-    implements _$$_UnexpectedCopyWith<$Res> {
-  __$$_UnexpectedCopyWithImpl(
-      _$_Unexpected _value, $Res Function(_$_Unexpected) _then)
+class __$$UnexpectedImplCopyWithImpl<$Res>
+    extends _$CycleFailureCopyWithImpl<$Res, _$UnexpectedImpl>
+    implements _$$UnexpectedImplCopyWith<$Res> {
+  __$$UnexpectedImplCopyWithImpl(
+      _$UnexpectedImpl _value, $Res Function(_$UnexpectedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$_UnexpectedCopyWithImpl<$Res>
   $Res call({
     Object? erreur = freezed,
   }) {
-    return _then(_$_Unexpected(
+    return _then(_$UnexpectedImpl(
       freezed == erreur
           ? _value.erreur
           : erreur // ignore: cast_nullable_to_non_nullable
@@ -126,8 +126,8 @@ class __$$_UnexpectedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Unexpected implements _Unexpected {
-  const _$_Unexpected(this.erreur);
+class _$UnexpectedImpl implements _Unexpected {
+  const _$UnexpectedImpl(this.erreur);
 
   @override
   final String? erreur;
@@ -141,7 +141,7 @@ class _$_Unexpected implements _Unexpected {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Unexpected &&
+            other is _$UnexpectedImpl &&
             (identical(other.erreur, erreur) || other.erreur == erreur));
   }
 
@@ -151,8 +151,8 @@ class _$_Unexpected implements _Unexpected {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UnexpectedCopyWith<_$_Unexpected> get copyWith =>
-      __$$_UnexpectedCopyWithImpl<_$_Unexpected>(this, _$identity);
+  _$$UnexpectedImplCopyWith<_$UnexpectedImpl> get copyWith =>
+      __$$UnexpectedImplCopyWithImpl<_$UnexpectedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -237,34 +237,34 @@ class _$_Unexpected implements _Unexpected {
 }
 
 abstract class _Unexpected implements CycleFailure {
-  const factory _Unexpected(final String? erreur) = _$_Unexpected;
+  const factory _Unexpected(final String? erreur) = _$UnexpectedImpl;
 
   String? get erreur;
   @JsonKey(ignore: true)
-  _$$_UnexpectedCopyWith<_$_Unexpected> get copyWith =>
+  _$$UnexpectedImplCopyWith<_$UnexpectedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_IdCycleUnfoundCopyWith<$Res> {
-  factory _$$_IdCycleUnfoundCopyWith(
-          _$_IdCycleUnfound value, $Res Function(_$_IdCycleUnfound) then) =
-      __$$_IdCycleUnfoundCopyWithImpl<$Res>;
+abstract class _$$IdCycleUnfoundImplCopyWith<$Res> {
+  factory _$$IdCycleUnfoundImplCopyWith(_$IdCycleUnfoundImpl value,
+          $Res Function(_$IdCycleUnfoundImpl) then) =
+      __$$IdCycleUnfoundImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_IdCycleUnfoundCopyWithImpl<$Res>
-    extends _$CycleFailureCopyWithImpl<$Res, _$_IdCycleUnfound>
-    implements _$$_IdCycleUnfoundCopyWith<$Res> {
-  __$$_IdCycleUnfoundCopyWithImpl(
-      _$_IdCycleUnfound _value, $Res Function(_$_IdCycleUnfound) _then)
+class __$$IdCycleUnfoundImplCopyWithImpl<$Res>
+    extends _$CycleFailureCopyWithImpl<$Res, _$IdCycleUnfoundImpl>
+    implements _$$IdCycleUnfoundImplCopyWith<$Res> {
+  __$$IdCycleUnfoundImplCopyWithImpl(
+      _$IdCycleUnfoundImpl _value, $Res Function(_$IdCycleUnfoundImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_IdCycleUnfound implements _IdCycleUnfound {
-  const _$_IdCycleUnfound();
+class _$IdCycleUnfoundImpl implements _IdCycleUnfound {
+  const _$IdCycleUnfoundImpl();
 
   @override
   String toString() {
@@ -274,7 +274,7 @@ class _$_IdCycleUnfound implements _IdCycleUnfound {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_IdCycleUnfound);
+        (other.runtimeType == runtimeType && other is _$IdCycleUnfoundImpl);
   }
 
   @override
@@ -363,29 +363,29 @@ class _$_IdCycleUnfound implements _IdCycleUnfound {
 }
 
 abstract class _IdCycleUnfound implements CycleFailure {
-  const factory _IdCycleUnfound() = _$_IdCycleUnfound;
+  const factory _IdCycleUnfound() = _$IdCycleUnfoundImpl;
 }
 
 /// @nodoc
-abstract class _$$_CycleUnfoundCopyWith<$Res> {
-  factory _$$_CycleUnfoundCopyWith(
-          _$_CycleUnfound value, $Res Function(_$_CycleUnfound) then) =
-      __$$_CycleUnfoundCopyWithImpl<$Res>;
+abstract class _$$CycleUnfoundImplCopyWith<$Res> {
+  factory _$$CycleUnfoundImplCopyWith(
+          _$CycleUnfoundImpl value, $Res Function(_$CycleUnfoundImpl) then) =
+      __$$CycleUnfoundImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CycleUnfoundCopyWithImpl<$Res>
-    extends _$CycleFailureCopyWithImpl<$Res, _$_CycleUnfound>
-    implements _$$_CycleUnfoundCopyWith<$Res> {
-  __$$_CycleUnfoundCopyWithImpl(
-      _$_CycleUnfound _value, $Res Function(_$_CycleUnfound) _then)
+class __$$CycleUnfoundImplCopyWithImpl<$Res>
+    extends _$CycleFailureCopyWithImpl<$Res, _$CycleUnfoundImpl>
+    implements _$$CycleUnfoundImplCopyWith<$Res> {
+  __$$CycleUnfoundImplCopyWithImpl(
+      _$CycleUnfoundImpl _value, $Res Function(_$CycleUnfoundImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_CycleUnfound implements _CycleUnfound {
-  const _$_CycleUnfound();
+class _$CycleUnfoundImpl implements _CycleUnfound {
+  const _$CycleUnfoundImpl();
 
   @override
   String toString() {
@@ -395,7 +395,7 @@ class _$_CycleUnfound implements _CycleUnfound {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_CycleUnfound);
+        (other.runtimeType == runtimeType && other is _$CycleUnfoundImpl);
   }
 
   @override
@@ -484,29 +484,31 @@ class _$_CycleUnfound implements _CycleUnfound {
 }
 
 abstract class _CycleUnfound implements CycleFailure {
-  const factory _CycleUnfound() = _$_CycleUnfound;
+  const factory _CycleUnfound() = _$CycleUnfoundImpl;
 }
 
 /// @nodoc
-abstract class _$$_InsufficientPermissionCopyWith<$Res> {
-  factory _$$_InsufficientPermissionCopyWith(_$_InsufficientPermission value,
-          $Res Function(_$_InsufficientPermission) then) =
-      __$$_InsufficientPermissionCopyWithImpl<$Res>;
+abstract class _$$InsufficientPermissionImplCopyWith<$Res> {
+  factory _$$InsufficientPermissionImplCopyWith(
+          _$InsufficientPermissionImpl value,
+          $Res Function(_$InsufficientPermissionImpl) then) =
+      __$$InsufficientPermissionImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InsufficientPermissionCopyWithImpl<$Res>
-    extends _$CycleFailureCopyWithImpl<$Res, _$_InsufficientPermission>
-    implements _$$_InsufficientPermissionCopyWith<$Res> {
-  __$$_InsufficientPermissionCopyWithImpl(_$_InsufficientPermission _value,
-      $Res Function(_$_InsufficientPermission) _then)
+class __$$InsufficientPermissionImplCopyWithImpl<$Res>
+    extends _$CycleFailureCopyWithImpl<$Res, _$InsufficientPermissionImpl>
+    implements _$$InsufficientPermissionImplCopyWith<$Res> {
+  __$$InsufficientPermissionImplCopyWithImpl(
+      _$InsufficientPermissionImpl _value,
+      $Res Function(_$InsufficientPermissionImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_InsufficientPermission implements _InsufficientPermission {
-  const _$_InsufficientPermission();
+class _$InsufficientPermissionImpl implements _InsufficientPermission {
+  const _$InsufficientPermissionImpl();
 
   @override
   String toString() {
@@ -517,7 +519,7 @@ class _$_InsufficientPermission implements _InsufficientPermission {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InsufficientPermission);
+            other is _$InsufficientPermissionImpl);
   }
 
   @override
@@ -606,29 +608,29 @@ class _$_InsufficientPermission implements _InsufficientPermission {
 }
 
 abstract class _InsufficientPermission implements CycleFailure {
-  const factory _InsufficientPermission() = _$_InsufficientPermission;
+  const factory _InsufficientPermission() = _$InsufficientPermissionImpl;
 }
 
 /// @nodoc
-abstract class _$$_UnableToUpdateCopyWith<$Res> {
-  factory _$$_UnableToUpdateCopyWith(
-          _$_UnableToUpdate value, $Res Function(_$_UnableToUpdate) then) =
-      __$$_UnableToUpdateCopyWithImpl<$Res>;
+abstract class _$$UnableToUpdateImplCopyWith<$Res> {
+  factory _$$UnableToUpdateImplCopyWith(_$UnableToUpdateImpl value,
+          $Res Function(_$UnableToUpdateImpl) then) =
+      __$$UnableToUpdateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_UnableToUpdateCopyWithImpl<$Res>
-    extends _$CycleFailureCopyWithImpl<$Res, _$_UnableToUpdate>
-    implements _$$_UnableToUpdateCopyWith<$Res> {
-  __$$_UnableToUpdateCopyWithImpl(
-      _$_UnableToUpdate _value, $Res Function(_$_UnableToUpdate) _then)
+class __$$UnableToUpdateImplCopyWithImpl<$Res>
+    extends _$CycleFailureCopyWithImpl<$Res, _$UnableToUpdateImpl>
+    implements _$$UnableToUpdateImplCopyWith<$Res> {
+  __$$UnableToUpdateImplCopyWithImpl(
+      _$UnableToUpdateImpl _value, $Res Function(_$UnableToUpdateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_UnableToUpdate implements _UnableToUpdate {
-  const _$_UnableToUpdate();
+class _$UnableToUpdateImpl implements _UnableToUpdate {
+  const _$UnableToUpdateImpl();
 
   @override
   String toString() {
@@ -638,7 +640,7 @@ class _$_UnableToUpdate implements _UnableToUpdate {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_UnableToUpdate);
+        (other.runtimeType == runtimeType && other is _$UnableToUpdateImpl);
   }
 
   @override
@@ -727,5 +729,5 @@ class _$_UnableToUpdate implements _UnableToUpdate {
 }
 
 abstract class _UnableToUpdate implements CycleFailure {
-  const factory _UnableToUpdate() = _$_UnableToUpdate;
+  const factory _UnableToUpdate() = _$UnableToUpdateImpl;
 }

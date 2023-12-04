@@ -1,16 +1,19 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
+import 'package:teenstar/providers.dart';
 import 'none_transition_builder.dart';
 
 final _appRouter = AppRouter();
 
-class AppWidget extends StatelessWidget {
+class AppWidget extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final ThemeData theme = Theme.of(context);
     String fontFamily = 'MyriadPro';
     return MaterialApp.router(
@@ -19,14 +22,14 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         fontFamily: fontFamily,
         primaryColor: Colors.red,
-        scaffoldBackgroundColor: colorpanel(900),
+        scaffoldBackgroundColor: ref.watch(themeApp).value?.color,
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(
             color: colorpanel(200),
             fontSize: 14,
           ),
           iconColor: colorpanel(200),
-          fillColor: colorpanel(800),
+          fillColor: ref.watch(themeApp).value?.color2,
           floatingLabelStyle: TextStyle(color: colorpanel(100)),
           filled: true,
           focusColor: Colors.red,

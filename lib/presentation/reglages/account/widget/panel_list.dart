@@ -1,6 +1,9 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
+import 'package:teenstar/providers.dart';
 
 class ItemPanelList {
   final IconData? icon;
@@ -11,14 +14,14 @@ class ItemPanelList {
   ItemPanelList({required this.title, this.icon, this.onTap, this.enable = true});
 }
 
-class PanelList extends StatelessWidget {
+class PanelList extends ConsumerWidget {
   final List<ItemPanelList> list;
   final ElevatedButton? button;
   final String title;
   const PanelList({Key? key, required this.list, required this.title, this.button}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return DefaultPanel(
       componentName: title,
       child: Column(children: [
@@ -26,7 +29,7 @@ class PanelList extends StatelessWidget {
             .map((item) => GestureDetector(
                   onTap: item.enable ? item.onTap : null,
                   child: Container(
-                    color: colorpanel(900),
+                    color: ref.watch(themeApp).value?.color,
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       children: [

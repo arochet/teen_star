@@ -210,11 +210,11 @@ class _$ObservationDTOCopyWithImpl<$Res, $Val extends ObservationDTO>
 }
 
 /// @nodoc
-abstract class _$$_ObservationDTOCopyWith<$Res>
+abstract class _$$ObservationDTOImplCopyWith<$Res>
     implements $ObservationDTOCopyWith<$Res> {
-  factory _$$_ObservationDTOCopyWith(
-          _$_ObservationDTO value, $Res Function(_$_ObservationDTO) then) =
-      __$$_ObservationDTOCopyWithImpl<$Res>;
+  factory _$$ObservationDTOImplCopyWith(_$ObservationDTOImpl value,
+          $Res Function(_$ObservationDTOImpl) then) =
+      __$$ObservationDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -243,11 +243,11 @@ abstract class _$$_ObservationDTOCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ObservationDTOCopyWithImpl<$Res>
-    extends _$ObservationDTOCopyWithImpl<$Res, _$_ObservationDTO>
-    implements _$$_ObservationDTOCopyWith<$Res> {
-  __$$_ObservationDTOCopyWithImpl(
-      _$_ObservationDTO _value, $Res Function(_$_ObservationDTO) _then)
+class __$$ObservationDTOImplCopyWithImpl<$Res>
+    extends _$ObservationDTOCopyWithImpl<$Res, _$ObservationDTOImpl>
+    implements _$$ObservationDTOImplCopyWith<$Res> {
+  __$$ObservationDTOImplCopyWithImpl(
+      _$ObservationDTOImpl _value, $Res Function(_$ObservationDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -276,7 +276,7 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
     Object? idCycle = freezed,
     Object? enleverPointInterrogation = freezed,
   }) {
-    return _then(_$_ObservationDTO(
+    return _then(_$ObservationDTOImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -371,8 +371,8 @@ class __$$_ObservationDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ObservationDTO extends _ObservationDTO {
-  const _$_ObservationDTO(
+class _$ObservationDTOImpl extends _ObservationDTO {
+  const _$ObservationDTOImpl(
       {required this.id,
       required this.date,
       required this.couleur,
@@ -397,8 +397,8 @@ class _$_ObservationDTO extends _ObservationDTO {
       required this.enleverPointInterrogation})
       : super._();
 
-  factory _$_ObservationDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_ObservationDTOFromJson(json);
+  factory _$ObservationDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ObservationDTOImplFromJson(json);
 
   @override
   final int? id;
@@ -454,7 +454,7 @@ class _$_ObservationDTO extends _ObservationDTO {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ObservationDTO &&
+            other is _$ObservationDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.couleur, couleur) || other.couleur == couleur) &&
@@ -524,12 +524,13 @@ class _$_ObservationDTO extends _ObservationDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ObservationDTOCopyWith<_$_ObservationDTO> get copyWith =>
-      __$$_ObservationDTOCopyWithImpl<_$_ObservationDTO>(this, _$identity);
+  _$$ObservationDTOImplCopyWith<_$ObservationDTOImpl> get copyWith =>
+      __$$ObservationDTOImplCopyWithImpl<_$ObservationDTOImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ObservationDTOToJson(
+    return _$$ObservationDTOImplToJson(
       this,
     );
   }
@@ -558,11 +559,11 @@ abstract class _ObservationDTO extends ObservationDTO {
       required final int? marque,
       required final int? jourFertile,
       required final int? idCycle,
-      required final int? enleverPointInterrogation}) = _$_ObservationDTO;
+      required final int? enleverPointInterrogation}) = _$ObservationDTOImpl;
   const _ObservationDTO._() : super._();
 
   factory _ObservationDTO.fromJson(Map<String, dynamic> json) =
-      _$_ObservationDTO.fromJson;
+      _$ObservationDTOImpl.fromJson;
 
   @override
   int? get id;
@@ -610,6 +611,6 @@ abstract class _ObservationDTO extends ObservationDTO {
   int? get enleverPointInterrogation;
   @override
   @JsonKey(ignore: true)
-  _$$_ObservationDTOCopyWith<_$_ObservationDTO> get copyWith =>
+  _$$ObservationDTOImplCopyWith<_$ObservationDTOImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

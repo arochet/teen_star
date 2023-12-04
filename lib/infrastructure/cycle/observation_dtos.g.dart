@@ -6,8 +6,8 @@ part of 'observation_dtos.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ObservationDTO _$$_ObservationDTOFromJson(Map<String, dynamic> json) =>
-    _$_ObservationDTO(
+_$ObservationDTOImpl _$$ObservationDTOImplFromJson(Map<String, dynamic> json) =>
+    _$ObservationDTOImpl(
       id: json['id'] as int?,
       date: json['date'] as int?,
       couleur: json['couleur'] as String?,
@@ -32,7 +32,8 @@ _$_ObservationDTO _$$_ObservationDTOFromJson(Map<String, dynamic> json) =>
       enleverPointInterrogation: json['enleverPointInterrogation'] as int?,
     );
 
-Map<String, dynamic> _$$_ObservationDTOToJson(_$_ObservationDTO instance) =>
+Map<String, dynamic> _$$ObservationDTOImplToJson(
+        _$ObservationDTOImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'date': instance.date,

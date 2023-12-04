@@ -19,6 +19,7 @@ mixin _$ModifyFormData {
   Nom get nomUtilisateur => throw _privateConstructorUsedError;
   int get annePremiereRegle => throw _privateConstructorUsedError;
   DateTime? get dateNaissance => throw _privateConstructorUsedError;
+  ThemeApp? get themeApp => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
@@ -39,6 +40,7 @@ abstract class $ModifyFormDataCopyWith<$Res> {
       {Nom nomUtilisateur,
       int annePremiereRegle,
       DateTime? dateNaissance,
+      ThemeApp? themeApp,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -60,6 +62,7 @@ class _$ModifyFormDataCopyWithImpl<$Res, $Val extends ModifyFormData>
     Object? nomUtilisateur = null,
     Object? annePremiereRegle = null,
     Object? dateNaissance = freezed,
+    Object? themeApp = freezed,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
@@ -77,6 +80,10 @@ class _$ModifyFormDataCopyWithImpl<$Res, $Val extends ModifyFormData>
           ? _value.dateNaissance
           : dateNaissance // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      themeApp: freezed == themeApp
+          ? _value.themeApp
+          : themeApp // ignore: cast_nullable_to_non_nullable
+              as ThemeApp?,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -94,28 +101,29 @@ class _$ModifyFormDataCopyWithImpl<$Res, $Val extends ModifyFormData>
 }
 
 /// @nodoc
-abstract class _$$_ModifyFormDataCopyWith<$Res>
+abstract class _$$ModifyFormDataImplCopyWith<$Res>
     implements $ModifyFormDataCopyWith<$Res> {
-  factory _$$_ModifyFormDataCopyWith(
-          _$_ModifyFormData value, $Res Function(_$_ModifyFormData) then) =
-      __$$_ModifyFormDataCopyWithImpl<$Res>;
+  factory _$$ModifyFormDataImplCopyWith(_$ModifyFormDataImpl value,
+          $Res Function(_$ModifyFormDataImpl) then) =
+      __$$ModifyFormDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {Nom nomUtilisateur,
       int annePremiereRegle,
       DateTime? dateNaissance,
+      ThemeApp? themeApp,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
-class __$$_ModifyFormDataCopyWithImpl<$Res>
-    extends _$ModifyFormDataCopyWithImpl<$Res, _$_ModifyFormData>
-    implements _$$_ModifyFormDataCopyWith<$Res> {
-  __$$_ModifyFormDataCopyWithImpl(
-      _$_ModifyFormData _value, $Res Function(_$_ModifyFormData) _then)
+class __$$ModifyFormDataImplCopyWithImpl<$Res>
+    extends _$ModifyFormDataCopyWithImpl<$Res, _$ModifyFormDataImpl>
+    implements _$$ModifyFormDataImplCopyWith<$Res> {
+  __$$ModifyFormDataImplCopyWithImpl(
+      _$ModifyFormDataImpl _value, $Res Function(_$ModifyFormDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -124,11 +132,12 @@ class __$$_ModifyFormDataCopyWithImpl<$Res>
     Object? nomUtilisateur = null,
     Object? annePremiereRegle = null,
     Object? dateNaissance = freezed,
+    Object? themeApp = freezed,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
   }) {
-    return _then(_$_ModifyFormData(
+    return _then(_$ModifyFormDataImpl(
       nomUtilisateur: null == nomUtilisateur
           ? _value.nomUtilisateur
           : nomUtilisateur // ignore: cast_nullable_to_non_nullable
@@ -141,6 +150,10 @@ class __$$_ModifyFormDataCopyWithImpl<$Res>
           ? _value.dateNaissance
           : dateNaissance // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      themeApp: freezed == themeApp
+          ? _value.themeApp
+          : themeApp // ignore: cast_nullable_to_non_nullable
+              as ThemeApp?,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -159,11 +172,12 @@ class __$$_ModifyFormDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ModifyFormData implements _ModifyFormData {
-  const _$_ModifyFormData(
+class _$ModifyFormDataImpl implements _ModifyFormData {
+  const _$ModifyFormDataImpl(
       {required this.nomUtilisateur,
       required this.annePremiereRegle,
       required this.dateNaissance,
+      required this.themeApp,
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.authFailureOrSuccessOption});
@@ -175,6 +189,8 @@ class _$_ModifyFormData implements _ModifyFormData {
   @override
   final DateTime? dateNaissance;
   @override
+  final ThemeApp? themeApp;
+  @override
   final bool showErrorMessages;
   @override
   final bool isSubmitting;
@@ -183,20 +199,22 @@ class _$_ModifyFormData implements _ModifyFormData {
 
   @override
   String toString() {
-    return 'ModifyFormData(nomUtilisateur: $nomUtilisateur, annePremiereRegle: $annePremiereRegle, dateNaissance: $dateNaissance, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'ModifyFormData(nomUtilisateur: $nomUtilisateur, annePremiereRegle: $annePremiereRegle, dateNaissance: $dateNaissance, themeApp: $themeApp, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ModifyFormData &&
+            other is _$ModifyFormDataImpl &&
             (identical(other.nomUtilisateur, nomUtilisateur) ||
                 other.nomUtilisateur == nomUtilisateur) &&
             (identical(other.annePremiereRegle, annePremiereRegle) ||
                 other.annePremiereRegle == annePremiereRegle) &&
             (identical(other.dateNaissance, dateNaissance) ||
                 other.dateNaissance == dateNaissance) &&
+            (identical(other.themeApp, themeApp) ||
+                other.themeApp == themeApp) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
             (identical(other.isSubmitting, isSubmitting) ||
@@ -213,6 +231,7 @@ class _$_ModifyFormData implements _ModifyFormData {
       nomUtilisateur,
       annePremiereRegle,
       dateNaissance,
+      themeApp,
       showErrorMessages,
       isSubmitting,
       authFailureOrSuccessOption);
@@ -220,8 +239,9 @@ class _$_ModifyFormData implements _ModifyFormData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ModifyFormDataCopyWith<_$_ModifyFormData> get copyWith =>
-      __$$_ModifyFormDataCopyWithImpl<_$_ModifyFormData>(this, _$identity);
+  _$$ModifyFormDataImplCopyWith<_$ModifyFormDataImpl> get copyWith =>
+      __$$ModifyFormDataImplCopyWithImpl<_$ModifyFormDataImpl>(
+          this, _$identity);
 }
 
 abstract class _ModifyFormData implements ModifyFormData {
@@ -229,10 +249,11 @@ abstract class _ModifyFormData implements ModifyFormData {
       {required final Nom nomUtilisateur,
       required final int annePremiereRegle,
       required final DateTime? dateNaissance,
+      required final ThemeApp? themeApp,
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<AuthFailure, Unit>>
-          authFailureOrSuccessOption}) = _$_ModifyFormData;
+          authFailureOrSuccessOption}) = _$ModifyFormDataImpl;
 
   @override
   Nom get nomUtilisateur;
@@ -241,6 +262,8 @@ abstract class _ModifyFormData implements ModifyFormData {
   @override
   DateTime? get dateNaissance;
   @override
+  ThemeApp? get themeApp;
+  @override
   bool get showErrorMessages;
   @override
   bool get isSubmitting;
@@ -248,6 +271,6 @@ abstract class _ModifyFormData implements ModifyFormData {
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ModifyFormDataCopyWith<_$_ModifyFormData> get copyWith =>
+  _$$ModifyFormDataImplCopyWith<_$ModifyFormDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

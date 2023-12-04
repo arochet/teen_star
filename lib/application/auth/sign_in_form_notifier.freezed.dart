@@ -80,11 +80,11 @@ class _$SignInFormDataCopyWithImpl<$Res, $Val extends SignInFormData>
 }
 
 /// @nodoc
-abstract class _$$_SignInFormDataCopyWith<$Res>
+abstract class _$$SignInFormDataImplCopyWith<$Res>
     implements $SignInFormDataCopyWith<$Res> {
-  factory _$$_SignInFormDataCopyWith(
-          _$_SignInFormData value, $Res Function(_$_SignInFormData) then) =
-      __$$_SignInFormDataCopyWithImpl<$Res>;
+  factory _$$SignInFormDataImplCopyWith(_$SignInFormDataImpl value,
+          $Res Function(_$SignInFormDataImpl) then) =
+      __$$SignInFormDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -95,11 +95,11 @@ abstract class _$$_SignInFormDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SignInFormDataCopyWithImpl<$Res>
-    extends _$SignInFormDataCopyWithImpl<$Res, _$_SignInFormData>
-    implements _$$_SignInFormDataCopyWith<$Res> {
-  __$$_SignInFormDataCopyWithImpl(
-      _$_SignInFormData _value, $Res Function(_$_SignInFormData) _then)
+class __$$SignInFormDataImplCopyWithImpl<$Res>
+    extends _$SignInFormDataCopyWithImpl<$Res, _$SignInFormDataImpl>
+    implements _$$SignInFormDataImplCopyWith<$Res> {
+  __$$SignInFormDataImplCopyWithImpl(
+      _$SignInFormDataImpl _value, $Res Function(_$SignInFormDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,7 +110,7 @@ class __$$_SignInFormDataCopyWithImpl<$Res>
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
   }) {
-    return _then(_$_SignInFormData(
+    return _then(_$SignInFormDataImpl(
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -133,8 +133,8 @@ class __$$_SignInFormDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SignInFormData implements _SignInFormData {
-  const _$_SignInFormData(
+class _$SignInFormDataImpl implements _SignInFormData {
+  const _$SignInFormDataImpl(
       {required this.password,
       required this.showErrorMessages,
       required this.isSubmitting,
@@ -158,7 +158,7 @@ class _$_SignInFormData implements _SignInFormData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SignInFormData &&
+            other is _$SignInFormDataImpl &&
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
@@ -178,8 +178,9 @@ class _$_SignInFormData implements _SignInFormData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignInFormDataCopyWith<_$_SignInFormData> get copyWith =>
-      __$$_SignInFormDataCopyWithImpl<_$_SignInFormData>(this, _$identity);
+  _$$SignInFormDataImplCopyWith<_$SignInFormDataImpl> get copyWith =>
+      __$$SignInFormDataImplCopyWithImpl<_$SignInFormDataImpl>(
+          this, _$identity);
 }
 
 abstract class _SignInFormData implements SignInFormData {
@@ -188,7 +189,7 @@ abstract class _SignInFormData implements SignInFormData {
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<AuthFailure, Unit>>
-          authFailureOrSuccessOption}) = _$_SignInFormData;
+          authFailureOrSuccessOption}) = _$SignInFormDataImpl;
 
   @override
   Password get password;
@@ -200,6 +201,6 @@ abstract class _SignInFormData implements SignInFormData {
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_SignInFormDataCopyWith<_$_SignInFormData> get copyWith =>
+  _$$SignInFormDataImplCopyWith<_$SignInFormDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,6 +6,7 @@ import 'package:teenstar/PRESENTATION/reglages/account/widget/panel_modify_mdp_d
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_environment_widget.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -58,7 +59,7 @@ class _AccountPageState extends ConsumerState<AccountPage> {
       return ShowComponentFile(
         title: 'reglages/account/account_pages.dart',
         child: Container(
-          color: colorpanel(800),
+          color: ref.watch(themeApp).value?.color2,
           child: ListView(
             children: <Widget>[
               SpaceH20(),

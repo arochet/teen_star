@@ -121,25 +121,32 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
         ref
             .read(cycleFormNotifierProvider.notifier)
             .sensationsAutreChanged(widget.observation!.sensationsAutre!);
+        _controllerSensationAutre.text = widget.observation!.sensationsAutre!;
         ref.read(cycleFormNotifierProvider.notifier).sangChanged(widget.observation!.sang!);
         ref.read(cycleFormNotifierProvider.notifier).mucusChanged(widget.observation!.mucus!);
         ref.read(cycleFormNotifierProvider.notifier).mucusAutreChanged(widget.observation!.mucusAutre!);
+        _controllerMucusAutre.text = widget.observation!.mucusAutre!;
         ref.read(cycleFormNotifierProvider.notifier).humeurChanged(widget.observation!.humeur!);
         ref.read(cycleFormNotifierProvider.notifier).humeurAutreChanged(widget.observation!.humeurAutre!);
+        _controllerHumeurAutre.text = widget.observation!.humeurAutre!;
         widget.observation!.douleurs!.forEach((douleur) {
           ref.read(cycleFormNotifierProvider.notifier).douleursChanged(douleur.getOrCrash());
         });
         ref.read(cycleFormNotifierProvider.notifier).douleursAutreChanged(widget.observation!.douleursAutre!);
+        _controllerDouleursAutre.text = widget.observation!.douleursAutre!;
         widget.observation!.evenements!.forEach((element) {
           ref.read(cycleFormNotifierProvider.notifier).evenementsChanged(element.getOrCrash());
         });
         ref
             .read(cycleFormNotifierProvider.notifier)
             .evenementsAutreChanged(widget.observation!.evenementsAutre!);
+        _controllerEvenementAutre.text = widget.observation!.evenementsAutre!;
         ref
             .read(cycleFormNotifierProvider.notifier)
-            .temperatureBasaleChanged(widget.observation!.temperatureBasale!);
-        _controllerTempBasale.text = widget.observation!.temperatureBasale!.toString();
+            .temperatureBasaleChanged(widget.observation!.temperatureBasale);
+        if (widget.observation!.temperatureBasale != null) {
+          _controllerTempBasale.text = widget.observation!.temperatureBasale.toString();
+        }
       }
     });
   }

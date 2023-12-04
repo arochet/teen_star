@@ -12,6 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 
 import 'DOMAIN/core/value_objects.dart';
 import 'DOMAIN/cycle/cycle_failure.dart';
@@ -73,6 +74,11 @@ final currentPageNavProvider = StateProvider<int?>((ref) => null);
 final currentUserData = FutureProvider.autoDispose<UserData?>((ref) async {
   final userOption = await ref.read(authRepositoryProvider).getUserData();
   return userOption.fold(() => null, (user) => user);
+});
+
+final themeApp = FutureProvider.autoDispose<ThemeApp?>((ref) async {
+  final userOption = await ref.read(authRepositoryProvider).getUserData();
+  return userOption.fold(() => null, (user) => ThemeAppExtension.fromIndex(user.theme));
 });
 
 //CYCLE

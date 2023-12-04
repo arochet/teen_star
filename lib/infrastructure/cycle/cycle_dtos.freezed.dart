@@ -67,21 +67,22 @@ class _$CycleDTOCopyWithImpl<$Res, $Val extends CycleDTO>
 }
 
 /// @nodoc
-abstract class _$$_CycleDTOCopyWith<$Res> implements $CycleDTOCopyWith<$Res> {
-  factory _$$_CycleDTOCopyWith(
-          _$_CycleDTO value, $Res Function(_$_CycleDTO) then) =
-      __$$_CycleDTOCopyWithImpl<$Res>;
+abstract class _$$CycleDTOImplCopyWith<$Res>
+    implements $CycleDTOCopyWith<$Res> {
+  factory _$$CycleDTOImplCopyWith(
+          _$CycleDTOImpl value, $Res Function(_$CycleDTOImpl) then) =
+      __$$CycleDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? id, int idJourneeSoleil});
 }
 
 /// @nodoc
-class __$$_CycleDTOCopyWithImpl<$Res>
-    extends _$CycleDTOCopyWithImpl<$Res, _$_CycleDTO>
-    implements _$$_CycleDTOCopyWith<$Res> {
-  __$$_CycleDTOCopyWithImpl(
-      _$_CycleDTO _value, $Res Function(_$_CycleDTO) _then)
+class __$$CycleDTOImplCopyWithImpl<$Res>
+    extends _$CycleDTOCopyWithImpl<$Res, _$CycleDTOImpl>
+    implements _$$CycleDTOImplCopyWith<$Res> {
+  __$$CycleDTOImplCopyWithImpl(
+      _$CycleDTOImpl _value, $Res Function(_$CycleDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +91,7 @@ class __$$_CycleDTOCopyWithImpl<$Res>
     Object? id = freezed,
     Object? idJourneeSoleil = null,
   }) {
-    return _then(_$_CycleDTO(
+    return _then(_$CycleDTOImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -105,11 +106,11 @@ class __$$_CycleDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CycleDTO extends _CycleDTO {
-  const _$_CycleDTO({this.id, required this.idJourneeSoleil}) : super._();
+class _$CycleDTOImpl extends _CycleDTO {
+  const _$CycleDTOImpl({this.id, required this.idJourneeSoleil}) : super._();
 
-  factory _$_CycleDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_CycleDTOFromJson(json);
+  factory _$CycleDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CycleDTOImplFromJson(json);
 
   @override
   final int? id;
@@ -125,7 +126,7 @@ class _$_CycleDTO extends _CycleDTO {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CycleDTO &&
+            other is _$CycleDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.idJourneeSoleil, idJourneeSoleil) ||
                 other.idJourneeSoleil == idJourneeSoleil));
@@ -138,12 +139,12 @@ class _$_CycleDTO extends _CycleDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CycleDTOCopyWith<_$_CycleDTO> get copyWith =>
-      __$$_CycleDTOCopyWithImpl<_$_CycleDTO>(this, _$identity);
+  _$$CycleDTOImplCopyWith<_$CycleDTOImpl> get copyWith =>
+      __$$CycleDTOImplCopyWithImpl<_$CycleDTOImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CycleDTOToJson(
+    return _$$CycleDTOImplToJson(
       this,
     );
   }
@@ -151,10 +152,11 @@ class _$_CycleDTO extends _CycleDTO {
 
 abstract class _CycleDTO extends CycleDTO {
   const factory _CycleDTO({final int? id, required final int idJourneeSoleil}) =
-      _$_CycleDTO;
+      _$CycleDTOImpl;
   const _CycleDTO._() : super._();
 
-  factory _CycleDTO.fromJson(Map<String, dynamic> json) = _$_CycleDTO.fromJson;
+  factory _CycleDTO.fromJson(Map<String, dynamic> json) =
+      _$CycleDTOImpl.fromJson;
 
   @override
   int? get id;
@@ -162,6 +164,6 @@ abstract class _CycleDTO extends CycleDTO {
   int get idJourneeSoleil;
   @override
   @JsonKey(ignore: true)
-  _$$_CycleDTOCopyWith<_$_CycleDTO> get copyWith =>
+  _$$CycleDTOImplCopyWith<_$CycleDTOImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

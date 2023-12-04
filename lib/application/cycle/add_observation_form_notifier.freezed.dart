@@ -172,11 +172,12 @@ class _$AddObservationFormDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AddObservationFormDataCopyWith<$Res>
+abstract class _$$AddObservationFormDataImplCopyWith<$Res>
     implements $AddObservationFormDataCopyWith<$Res> {
-  factory _$$_AddObservationFormDataCopyWith(_$_AddObservationFormData value,
-          $Res Function(_$_AddObservationFormData) then) =
-      __$$_AddObservationFormDataCopyWithImpl<$Res>;
+  factory _$$AddObservationFormDataImplCopyWith(
+          _$AddObservationFormDataImpl value,
+          $Res Function(_$AddObservationFormDataImpl) then) =
+      __$$AddObservationFormDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -200,12 +201,13 @@ abstract class _$$_AddObservationFormDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AddObservationFormDataCopyWithImpl<$Res>
+class __$$AddObservationFormDataImplCopyWithImpl<$Res>
     extends _$AddObservationFormDataCopyWithImpl<$Res,
-        _$_AddObservationFormData>
-    implements _$$_AddObservationFormDataCopyWith<$Res> {
-  __$$_AddObservationFormDataCopyWithImpl(_$_AddObservationFormData _value,
-      $Res Function(_$_AddObservationFormData) _then)
+        _$AddObservationFormDataImpl>
+    implements _$$AddObservationFormDataImplCopyWith<$Res> {
+  __$$AddObservationFormDataImplCopyWithImpl(
+      _$AddObservationFormDataImpl _value,
+      $Res Function(_$AddObservationFormDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -229,7 +231,7 @@ class __$$_AddObservationFormDataCopyWithImpl<$Res>
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
   }) {
-    return _then(_$_AddObservationFormData(
+    return _then(_$AddObservationFormDataImpl(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -304,8 +306,8 @@ class __$$_AddObservationFormDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddObservationFormData implements _AddObservationFormData {
-  const _$_AddObservationFormData(
+class _$AddObservationFormDataImpl implements _AddObservationFormData {
+  const _$AddObservationFormDataImpl(
       {required this.date,
       required this.sensation,
       required this.sensationsAutre,
@@ -382,7 +384,7 @@ class _$_AddObservationFormData implements _AddObservationFormData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddObservationFormData &&
+            other is _$AddObservationFormDataImpl &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.sensation, sensation) ||
                 other.sensation == sensation) &&
@@ -440,9 +442,9 @@ class _$_AddObservationFormData implements _AddObservationFormData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddObservationFormDataCopyWith<_$_AddObservationFormData> get copyWith =>
-      __$$_AddObservationFormDataCopyWithImpl<_$_AddObservationFormData>(
-          this, _$identity);
+  _$$AddObservationFormDataImplCopyWith<_$AddObservationFormDataImpl>
+      get copyWith => __$$AddObservationFormDataImplCopyWithImpl<
+          _$AddObservationFormDataImpl>(this, _$identity);
 }
 
 abstract class _AddObservationFormData implements AddObservationFormData {
@@ -464,7 +466,7 @@ abstract class _AddObservationFormData implements AddObservationFormData {
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<ObservationFailure, Unit>>
-          authFailureOrSuccessOption}) = _$_AddObservationFormData;
+          authFailureOrSuccessOption}) = _$AddObservationFormDataImpl;
 
   @override
   DateTime get date;
@@ -502,6 +504,6 @@ abstract class _AddObservationFormData implements AddObservationFormData {
   Option<Either<ObservationFailure, Unit>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_AddObservationFormDataCopyWith<_$_AddObservationFormData> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AddObservationFormDataImplCopyWith<_$AddObservationFormDataImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -113,8 +113,8 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
     state = state.copyWith(evenementsAutre: param, authFailureOrSuccessOption: none());
   }
 
-  temperatureBasaleChanged(double param) {
-    state = state.copyWith(temperatureBasale: param, authFailureOrSuccessOption: none());
+  temperatureBasaleChanged(double? param) {
+    if (param != null) state = state.copyWith(temperatureBasale: param, authFailureOrSuccessOption: none());
   }
 
   humeurChanged(Humeur param) {

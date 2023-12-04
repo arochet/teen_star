@@ -13,12 +13,16 @@ import 'package:teenstar/INFRASTRUCTURE/auth/user_data_dtos.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 
 abstract class AuthRepository {
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
       {required UserData userData, required Password passwordAppli, required Password passwordPDF});
   Future<Either<AuthFailure, Unit>> modifyAccount(
-      {required Nom nomUtilisateur, required int annePremiereRegle, required DateTime? dateNaissance});
+      {required Nom nomUtilisateur,
+      required int annePremiereRegle,
+      required DateTime? dateNaissance,
+      required ThemeApp? themeApp});
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({required Password password});
   Future<Either<ReauthenticateFailure, Unit>> reauthenticateWithPassword({required Password password});
   Future<Either<AuthFailure, Unit>> deleteALL();
@@ -92,11 +96,11 @@ class FirebaseAuthFacade implements AuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> modifyAccount({
-    required Nom nomUtilisateur,
-    required int annePremiereRegle,
-    required DateTime? dateNaissance,
-  }) async {
+  Future<Either<AuthFailure, Unit>> modifyAccount(
+      {required Nom nomUtilisateur,
+      required int annePremiereRegle,
+      required DateTime? dateNaissance,
+      required ThemeApp? themeApp}) async {
     printDev();
     final prefs = await _preferences;
 
@@ -107,7 +111,10 @@ class FirebaseAuthFacade implements AuthRepository {
         () => left(const AuthFailure.serverError()),
         (user) {
           final UserData u = user.copyWith(
-              userName: nomUtilisateur, anneePremiereRegle: annePremiereRegle, dateNaissance: dateNaissance);
+              userName: nomUtilisateur,
+              anneePremiereRegle: annePremiereRegle,
+              dateNaissance: dateNaissance,
+              theme: themeApp?.index ?? 0);
           prefs.setString(
             userPrefs,
             json.encode(UserDataDTO.fromDomain(u).toJson()),

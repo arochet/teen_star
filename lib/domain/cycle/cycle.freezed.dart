@@ -68,9 +68,10 @@ class _$CycleCopyWithImpl<$Res, $Val extends Cycle>
 }
 
 /// @nodoc
-abstract class _$$_CycleCopyWith<$Res> implements $CycleCopyWith<$Res> {
-  factory _$$_CycleCopyWith(_$_Cycle value, $Res Function(_$_Cycle) then) =
-      __$$_CycleCopyWithImpl<$Res>;
+abstract class _$$CycleImplCopyWith<$Res> implements $CycleCopyWith<$Res> {
+  factory _$$CycleImplCopyWith(
+          _$CycleImpl value, $Res Function(_$CycleImpl) then) =
+      __$$CycleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -78,9 +79,11 @@ abstract class _$$_CycleCopyWith<$Res> implements $CycleCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CycleCopyWithImpl<$Res> extends _$CycleCopyWithImpl<$Res, _$_Cycle>
-    implements _$$_CycleCopyWith<$Res> {
-  __$$_CycleCopyWithImpl(_$_Cycle _value, $Res Function(_$_Cycle) _then)
+class __$$CycleImplCopyWithImpl<$Res>
+    extends _$CycleCopyWithImpl<$Res, _$CycleImpl>
+    implements _$$CycleImplCopyWith<$Res> {
+  __$$CycleImplCopyWithImpl(
+      _$CycleImpl _value, $Res Function(_$CycleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +93,7 @@ class __$$_CycleCopyWithImpl<$Res> extends _$CycleCopyWithImpl<$Res, _$_Cycle>
     Object? observations = null,
     Object? idJourneeSoleil = null,
   }) {
-    return _then(_$_Cycle(
+    return _then(_$CycleImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -109,8 +112,8 @@ class __$$_CycleCopyWithImpl<$Res> extends _$CycleCopyWithImpl<$Res, _$_Cycle>
 
 /// @nodoc
 
-class _$_Cycle extends _Cycle {
-  const _$_Cycle(
+class _$CycleImpl extends _Cycle {
+  const _$CycleImpl(
       {required this.id,
       required final List<Observation> observations,
       required this.idJourneeSoleil})
@@ -139,7 +142,7 @@ class _$_Cycle extends _Cycle {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Cycle &&
+            other is _$CycleImpl &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._observations, _observations) &&
@@ -154,15 +157,15 @@ class _$_Cycle extends _Cycle {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CycleCopyWith<_$_Cycle> get copyWith =>
-      __$$_CycleCopyWithImpl<_$_Cycle>(this, _$identity);
+  _$$CycleImplCopyWith<_$CycleImpl> get copyWith =>
+      __$$CycleImplCopyWithImpl<_$CycleImpl>(this, _$identity);
 }
 
 abstract class _Cycle extends Cycle {
   const factory _Cycle(
       {required final UniqueId id,
       required final List<Observation> observations,
-      required final UniqueId idJourneeSoleil}) = _$_Cycle;
+      required final UniqueId idJourneeSoleil}) = _$CycleImpl;
   const _Cycle._() : super._();
 
   @override
@@ -173,6 +176,6 @@ abstract class _Cycle extends Cycle {
   UniqueId get idJourneeSoleil;
   @override
   @JsonKey(ignore: true)
-  _$$_CycleCopyWith<_$_Cycle> get copyWith =>
+  _$$CycleImplCopyWith<_$CycleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

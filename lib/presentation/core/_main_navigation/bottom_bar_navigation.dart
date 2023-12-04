@@ -14,6 +14,7 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/app_bar_cycle.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/dialog_pdf.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/injection.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +43,8 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
 
   @override
   Widget build(BuildContext context) {
-    Color? colorScaffoldBar = colorpanel(900);
-    Color? colorScaffoldBarReglage = colorpanel(800);
+    Color? colorScaffoldBar = ref.watch(themeApp).value?.color;
+    Color? colorScaffoldBarReglage = ref.watch(themeApp).value?.color;
     final env = ref.watch(environment.notifier).state.name;
     final showTabAnalyse = ref.watch(showAnalyse);
     _tabController.index = showTabAnalyse ? 1 : 0;
@@ -88,7 +89,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                 ),
               SizedBox(width: 10),
             ]),
-        backgroundColor: colorpanel(900),
+        backgroundColor: ref.watch(themeApp).value?.color,
         routes: widget.listRoute,
         bottomNavigationBuilder: (_, tabsRouter) {
           return ShowComponentFile(

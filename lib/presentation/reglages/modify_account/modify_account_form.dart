@@ -14,6 +14,66 @@ import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 
 import '../../core/_components/spacing.dart';
 
+enum ThemeApp { blue, pink }
+
+extension ThemeAppExtension on ThemeApp {
+  //Retourne le theme en fonction de l'index
+  static ThemeApp fromIndex(int? index) {
+    switch (index) {
+      case 0:
+        return ThemeApp.blue;
+      case 1:
+        return ThemeApp.pink;
+      default:
+        return ThemeApp.blue;
+    }
+  }
+
+  String get name {
+    switch (this) {
+      case ThemeApp.blue:
+        return 'Bleu';
+      case ThemeApp.pink:
+        return 'Rose';
+      default:
+        return 'Bleu';
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case ThemeApp.blue:
+        return Color.fromARGB(255, 238, 246, 250);
+      case ThemeApp.pink:
+        return Colors.pink;
+      default:
+        return Color.fromARGB(255, 238, 246, 250);
+    }
+  }
+
+  Color get color2 {
+    switch (this) {
+      case ThemeApp.blue:
+        return Color.fromARGB(255, 230, 236, 238);
+      case ThemeApp.pink:
+        return const Color.fromARGB(255, 206, 50, 102);
+      default:
+        return Colors.blue;
+    }
+  }
+
+  int get index {
+    switch (this) {
+      case ThemeApp.blue:
+        return 0;
+      case ThemeApp.pink:
+        return 1;
+      default:
+        return 0;
+    }
+  }
+}
+
 class ModifyAccountForm extends ConsumerWidget {
   const ModifyAccountForm({Key? key}) : super(key: key);
 
@@ -82,6 +142,9 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
               .read(modifyFormNotifierProvider.notifier)
               .anneePremiereRegleChanged(dataUser.anneePremiereRegle);
           ref.read(modifyFormNotifierProvider.notifier).dateNaissanceChanged(dataUser.dateNaissance);
+          ref
+              .read(modifyFormNotifierProvider.notifier)
+              .themeChanged(ThemeAppExtension.fromIndex(dataUser.theme));
         }
       },
     );
@@ -173,6 +236,25 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
               controller: _controllerDateNaissance,
             ),
             SpaceH10(),
+            DropdownButton(
+                isExpanded: true,
+                dropdownColor: Colors.white,
+                value: ref.read(modifyFormNotifierProvider).themeApp,
+                focusColor: Colors.black,
+                iconEnabledColor: Colors.white,
+                items: ThemeApp.values
+                    .map((ThemeApp e) => DropdownMenuItem(
+                          child: Text(e.name),
+                          value: e,
+                        ))
+                    .toList(),
+                onChanged: (ThemeApp? value) {
+                  if (value != null) {
+                    ref.read(modifyFormNotifierProvider.notifier).themeChanged(value);
+                  }
+                },
+                icon: Icon(Icons.arrow_downward)),
+            SpaceH10(),
             Text("* Champs optionnels", style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: 8),
             //BOUTON MODIFIER
@@ -180,6 +262,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
               child: ElevatedButton(
                 onPressed: () {
                   ref.read(modifyFormNotifierProvider.notifier).modifyPressed();
+                  ref.refresh(themeApp);
                 },
                 style: buttonNormalPrimary,
                 child: Text(AppLocalizations.of(context)!.modifier),

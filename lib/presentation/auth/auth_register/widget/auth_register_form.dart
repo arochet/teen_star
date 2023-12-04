@@ -5,6 +5,7 @@ import 'package:teenstar/PRESENTATION/auth/widget/flushbar_auth_failure.dart';
 import 'package:teenstar/PRESENTATION/core/_components/contrained_box_max_width.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,6 +57,12 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
     _controllerNom = TextEditingController();
     _controllerDateNaissance = TextEditingController();
     _controllerAnneeRegle = TextEditingController();
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      ref
+          .read(registerFormNotifierProvider.notifier)
+          .languageChanged(ref.read(languageApp).value ?? LanguageApp.anglais);
+    });
   }
 
   @override
@@ -68,7 +75,9 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
           child: Form(
             autovalidateMode: AutovalidateMode.always,
             child: ListView(padding: const EdgeInsets.all(18), shrinkWrap: true, children: [
-              Center(child: Text("Etape 3/3", style: Theme.of(context).textTheme.titleSmall)),
+              Center(
+                  child: Text("${AppLocalizations.of(context)!.etape} 3/3",
+                      style: Theme.of(context).textTheme.titleSmall)),
               SpaceH10(),
               if (ref.watch(environment).name == Environment.dev)
                 ElevatedButton(
@@ -285,7 +294,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
                     ref.read(registerFormNotifierProvider.notifier).registerWithEmailAndPasswordPressed();
                   },
                   style: buttonNormalPrimary,
-                  child: Text("S'inscrire"),
+                  child: Text(AppLocalizations.of(context)!.sinscrire),
                 ),
               ),
               const SizedBox(height: 12),

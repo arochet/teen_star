@@ -32,6 +32,7 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
 
   @override
   Widget build(BuildContext context) {
+    print('overrinde ${ref.watch(languageApp).value?.code}');
     return LayoutBuilder(builder: (context, constraints) {
       if (kIsWeb && constraints.maxWidth > 600)
         return Scaffold(
@@ -50,9 +51,13 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
           ),
         );
       else
-        return Scaffold(
-          appBar: _buildAppBar(context, ref, widget.title),
-          body: widget.child,
+        return Localizations.override(
+          context: context,
+          locale: Locale(/* ref.watch(languageApp).value?.code ?? */ 'en'),
+          child: Scaffold(
+            appBar: _buildAppBar(context, ref, widget.title),
+            body: widget.child,
+          ),
         );
     });
   }

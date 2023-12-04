@@ -25,6 +25,7 @@ mixin _$RegisterFormData {
   Password get passwordPDF => throw _privateConstructorUsedError;
   PasswordConfirmation get passwordPDFConfirmation =>
       throw _privateConstructorUsedError;
+  LanguageApp get languageApp => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
@@ -49,6 +50,7 @@ abstract class $RegisterFormDataCopyWith<$Res> {
       PasswordConfirmation passwordAppliConfirmation,
       Password passwordPDF,
       PasswordConfirmation passwordPDFConfirmation,
+      LanguageApp languageApp,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -74,6 +76,7 @@ class _$RegisterFormDataCopyWithImpl<$Res, $Val extends RegisterFormData>
     Object? passwordAppliConfirmation = null,
     Object? passwordPDF = null,
     Object? passwordPDFConfirmation = null,
+    Object? languageApp = null,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
@@ -107,6 +110,10 @@ class _$RegisterFormDataCopyWithImpl<$Res, $Val extends RegisterFormData>
           ? _value.passwordPDFConfirmation
           : passwordPDFConfirmation // ignore: cast_nullable_to_non_nullable
               as PasswordConfirmation,
+      languageApp: null == languageApp
+          ? _value.languageApp
+          : languageApp // ignore: cast_nullable_to_non_nullable
+              as LanguageApp,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -139,6 +146,7 @@ abstract class _$$RegisterFormDataImplCopyWith<$Res>
       PasswordConfirmation passwordAppliConfirmation,
       Password passwordPDF,
       PasswordConfirmation passwordPDFConfirmation,
+      LanguageApp languageApp,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -162,6 +170,7 @@ class __$$RegisterFormDataImplCopyWithImpl<$Res>
     Object? passwordAppliConfirmation = null,
     Object? passwordPDF = null,
     Object? passwordPDFConfirmation = null,
+    Object? languageApp = null,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
@@ -195,6 +204,10 @@ class __$$RegisterFormDataImplCopyWithImpl<$Res>
           ? _value.passwordPDFConfirmation
           : passwordPDFConfirmation // ignore: cast_nullable_to_non_nullable
               as PasswordConfirmation,
+      languageApp: null == languageApp
+          ? _value.languageApp
+          : languageApp // ignore: cast_nullable_to_non_nullable
+              as LanguageApp,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -222,6 +235,7 @@ class _$RegisterFormDataImpl implements _RegisterFormData {
       required this.passwordAppliConfirmation,
       required this.passwordPDF,
       required this.passwordPDFConfirmation,
+      required this.languageApp,
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.authFailureOrSuccessOption});
@@ -241,6 +255,8 @@ class _$RegisterFormDataImpl implements _RegisterFormData {
   @override
   final PasswordConfirmation passwordPDFConfirmation;
   @override
+  final LanguageApp languageApp;
+  @override
   final bool showErrorMessages;
   @override
   final bool isSubmitting;
@@ -249,7 +265,7 @@ class _$RegisterFormDataImpl implements _RegisterFormData {
 
   @override
   String toString() {
-    return 'RegisterFormData(nomUtilisateur: $nomUtilisateur, annePremiereRegle: $annePremiereRegle, dateNaissance: $dateNaissance, passwordAppli: $passwordAppli, passwordAppliConfirmation: $passwordAppliConfirmation, passwordPDF: $passwordPDF, passwordPDFConfirmation: $passwordPDFConfirmation, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'RegisterFormData(nomUtilisateur: $nomUtilisateur, annePremiereRegle: $annePremiereRegle, dateNaissance: $dateNaissance, passwordAppli: $passwordAppli, passwordAppliConfirmation: $passwordAppliConfirmation, passwordPDF: $passwordPDF, passwordPDFConfirmation: $passwordPDFConfirmation, languageApp: $languageApp, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -273,6 +289,8 @@ class _$RegisterFormDataImpl implements _RegisterFormData {
             (identical(
                     other.passwordPDFConfirmation, passwordPDFConfirmation) ||
                 other.passwordPDFConfirmation == passwordPDFConfirmation) &&
+            (identical(other.languageApp, languageApp) ||
+                other.languageApp == languageApp) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
             (identical(other.isSubmitting, isSubmitting) ||
@@ -293,6 +311,7 @@ class _$RegisterFormDataImpl implements _RegisterFormData {
       passwordAppliConfirmation,
       passwordPDF,
       passwordPDFConfirmation,
+      languageApp,
       showErrorMessages,
       isSubmitting,
       authFailureOrSuccessOption);
@@ -314,6 +333,7 @@ abstract class _RegisterFormData implements RegisterFormData {
       required final PasswordConfirmation passwordAppliConfirmation,
       required final Password passwordPDF,
       required final PasswordConfirmation passwordPDFConfirmation,
+      required final LanguageApp languageApp,
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<AuthFailure, Unit>>
@@ -333,6 +353,8 @@ abstract class _RegisterFormData implements RegisterFormData {
   Password get passwordPDF;
   @override
   PasswordConfirmation get passwordPDFConfirmation;
+  @override
+  LanguageApp get languageApp;
   @override
   bool get showErrorMessages;
   @override

@@ -66,7 +66,7 @@ class _AccountPageState extends ConsumerState<AccountPage> {
               //TEXTE COMPTE
               DisplayTitle(title: AppLocalizations.of(context)!.compte),
               //PANEL DONNEES PERSONNELES
-              PanelPersonnelData(user),
+              PanelPersonnelData(user, ref.watch(languageApp).value ?? LanguageApp.anglais),
               //PANEL MODIFIER MOT DE PASSE / SUPPRIMER COMPTE
               PanelModifyMdpDeleteAccount(),
 

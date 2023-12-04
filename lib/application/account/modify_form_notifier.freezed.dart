@@ -20,6 +20,7 @@ mixin _$ModifyFormData {
   int get annePremiereRegle => throw _privateConstructorUsedError;
   DateTime? get dateNaissance => throw _privateConstructorUsedError;
   ThemeApp? get themeApp => throw _privateConstructorUsedError;
+  LanguageApp? get languageApp => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
@@ -41,6 +42,7 @@ abstract class $ModifyFormDataCopyWith<$Res> {
       int annePremiereRegle,
       DateTime? dateNaissance,
       ThemeApp? themeApp,
+      LanguageApp? languageApp,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -63,6 +65,7 @@ class _$ModifyFormDataCopyWithImpl<$Res, $Val extends ModifyFormData>
     Object? annePremiereRegle = null,
     Object? dateNaissance = freezed,
     Object? themeApp = freezed,
+    Object? languageApp = freezed,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
@@ -84,6 +87,10 @@ class _$ModifyFormDataCopyWithImpl<$Res, $Val extends ModifyFormData>
           ? _value.themeApp
           : themeApp // ignore: cast_nullable_to_non_nullable
               as ThemeApp?,
+      languageApp: freezed == languageApp
+          ? _value.languageApp
+          : languageApp // ignore: cast_nullable_to_non_nullable
+              as LanguageApp?,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -113,6 +120,7 @@ abstract class _$$ModifyFormDataImplCopyWith<$Res>
       int annePremiereRegle,
       DateTime? dateNaissance,
       ThemeApp? themeApp,
+      LanguageApp? languageApp,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -133,6 +141,7 @@ class __$$ModifyFormDataImplCopyWithImpl<$Res>
     Object? annePremiereRegle = null,
     Object? dateNaissance = freezed,
     Object? themeApp = freezed,
+    Object? languageApp = freezed,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
@@ -154,6 +163,10 @@ class __$$ModifyFormDataImplCopyWithImpl<$Res>
           ? _value.themeApp
           : themeApp // ignore: cast_nullable_to_non_nullable
               as ThemeApp?,
+      languageApp: freezed == languageApp
+          ? _value.languageApp
+          : languageApp // ignore: cast_nullable_to_non_nullable
+              as LanguageApp?,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -178,6 +191,7 @@ class _$ModifyFormDataImpl implements _ModifyFormData {
       required this.annePremiereRegle,
       required this.dateNaissance,
       required this.themeApp,
+      required this.languageApp,
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.authFailureOrSuccessOption});
@@ -191,6 +205,8 @@ class _$ModifyFormDataImpl implements _ModifyFormData {
   @override
   final ThemeApp? themeApp;
   @override
+  final LanguageApp? languageApp;
+  @override
   final bool showErrorMessages;
   @override
   final bool isSubmitting;
@@ -199,7 +215,7 @@ class _$ModifyFormDataImpl implements _ModifyFormData {
 
   @override
   String toString() {
-    return 'ModifyFormData(nomUtilisateur: $nomUtilisateur, annePremiereRegle: $annePremiereRegle, dateNaissance: $dateNaissance, themeApp: $themeApp, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'ModifyFormData(nomUtilisateur: $nomUtilisateur, annePremiereRegle: $annePremiereRegle, dateNaissance: $dateNaissance, themeApp: $themeApp, languageApp: $languageApp, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -215,6 +231,8 @@ class _$ModifyFormDataImpl implements _ModifyFormData {
                 other.dateNaissance == dateNaissance) &&
             (identical(other.themeApp, themeApp) ||
                 other.themeApp == themeApp) &&
+            (identical(other.languageApp, languageApp) ||
+                other.languageApp == languageApp) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
             (identical(other.isSubmitting, isSubmitting) ||
@@ -232,6 +250,7 @@ class _$ModifyFormDataImpl implements _ModifyFormData {
       annePremiereRegle,
       dateNaissance,
       themeApp,
+      languageApp,
       showErrorMessages,
       isSubmitting,
       authFailureOrSuccessOption);
@@ -250,6 +269,7 @@ abstract class _ModifyFormData implements ModifyFormData {
       required final int annePremiereRegle,
       required final DateTime? dateNaissance,
       required final ThemeApp? themeApp,
+      required final LanguageApp? languageApp,
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<AuthFailure, Unit>>
@@ -263,6 +283,8 @@ abstract class _ModifyFormData implements ModifyFormData {
   DateTime? get dateNaissance;
   @override
   ThemeApp? get themeApp;
+  @override
+  LanguageApp? get languageApp;
   @override
   bool get showErrorMessages;
   @override

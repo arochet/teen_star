@@ -74,6 +74,55 @@ extension ThemeAppExtension on ThemeApp {
   }
 }
 
+enum LanguageApp { francais, anglais }
+
+extension LanguageAppExtention on LanguageApp {
+  //Retourne le theme en fonction de l'index
+  static LanguageApp fromIndex(int? index) {
+    switch (index) {
+      case 0:
+        return LanguageApp.francais;
+      case 1:
+        return LanguageApp.anglais;
+      default:
+        return LanguageApp.francais;
+    }
+  }
+
+  String get name {
+    switch (this) {
+      case LanguageApp.francais:
+        return 'Français';
+      case LanguageApp.anglais:
+        return 'Anglais';
+      default:
+        return 'Français';
+    }
+  }
+
+  String get code {
+    switch (this) {
+      case LanguageApp.francais:
+        return 'fr';
+      case LanguageApp.anglais:
+        return 'en';
+      default:
+        return 'en';
+    }
+  }
+
+  int get index {
+    switch (this) {
+      case LanguageApp.francais:
+        return 0;
+      case LanguageApp.anglais:
+        return 1;
+      default:
+        return 0;
+    }
+  }
+}
+
 class ModifyAccountForm extends ConsumerWidget {
   const ModifyAccountForm({Key? key}) : super(key: key);
 
@@ -90,6 +139,7 @@ class ModifyAccountForm extends ConsumerWidget {
                 Future.delayed(Duration.zero, () async {
                   ref.refresh(currentUserData);
                   ref.refresh(themeApp);
+                  ref.refresh(languageApp);
                   await context.router.replaceAll([
                     MainNavigationRoute(children: [AccountRoute()])
                   ]);
@@ -146,6 +196,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
           ref
               .read(modifyFormNotifierProvider.notifier)
               .themeChanged(ThemeAppExtension.fromIndex(dataUser.theme));
+          ref.read(modifyFormNotifierProvider.notifier).languageChanged(await ref.read(languageApp.future));
         }
       },
     );
@@ -236,6 +287,30 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
               },
               controller: _controllerDateNaissance,
             ),
+            SpaceH10(),
+            Text("Langue : ",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+            DropdownButton(
+                isExpanded: true,
+                dropdownColor: Colors.white,
+                value: ref.read(modifyFormNotifierProvider).languageApp,
+                focusColor: Colors.black,
+                iconEnabledColor: Colors.white,
+                items: LanguageApp.values
+                    .map((LanguageApp e) => DropdownMenuItem(
+                          child: Text(e.name),
+                          value: e,
+                        ))
+                    .toList(),
+                onChanged: (LanguageApp? value) {
+                  if (value != null) {
+                    ref.read(modifyFormNotifierProvider.notifier).languageChanged(value);
+                  }
+                },
+                icon: Icon(Icons.arrow_downward)),
+            SpaceH10(),
+            Text("Thème : ",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
             SpaceH10(),
             DropdownButton(
                 isExpanded: true,

@@ -88,7 +88,7 @@ void _onUpgrade(Database db, int oldVersion, int newVersion) {
   }
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   final Environment env;
   const MainApp({
     Key? key,
@@ -96,9 +96,14 @@ class MainApp extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      overrides: [environment.overrideWith((ref) => env)],
+      overrides: [environment.overrideWith((ref) => widget.env)],
       child: AppWidget(),
     );
   }

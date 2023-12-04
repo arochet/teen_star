@@ -94,7 +94,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                           showSnackbar(context, 'Vous devez accepter les conditions d\'utilisation');
                         }
                       },
-                      child: Text("Continuer"),
+                      child: Text(AppLocalizations.of(context)!.continuer),
                       style: conditionAccecpte ? buttonNormalPrimary : buttonNormalDesactivate,
                     ),
                   ),

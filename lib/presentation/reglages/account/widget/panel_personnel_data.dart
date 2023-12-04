@@ -11,9 +11,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PanelPersonnelData extends StatelessWidget {
   UserData? userData;
+  LanguageApp languageApp;
 
   PanelPersonnelData(
-    this.userData, {
+    this.userData,
+    this.languageApp, {
     Key? key,
   }) : super(key: key);
 
@@ -35,7 +37,7 @@ class PanelPersonnelData extends StatelessWidget {
           icon: Icons.child_friendly,
         ),
         ItemPanelList(
-          title: 'Langue: Français',
+          title: 'Langue: ${languageApp.name}',
           icon: Icons.flag,
         ),
         ItemPanelList(

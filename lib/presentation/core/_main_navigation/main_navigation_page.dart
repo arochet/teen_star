@@ -5,8 +5,10 @@ import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_main_navigation/bottom_bar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/providers.dart';
 import 'side_bar_navigation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainNavigationPage extends ConsumerStatefulWidget {
   MainNavigationPage({Key? key}) : super(key: key);
@@ -46,35 +48,42 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
       HistoriqueRoute(),
       AccountRoute(),
     ];
-    final listMenu = [
-      {
-        "title": "Cycles",
-        "icon": Icons.radio_button_checked,
-        "id": 0,
-      },
-      {
-        "title": "Historique",
-        "icon": Icons.assessment_outlined,
-        "id": 1,
-      },
-      {
-        "title": "Réglages",
-        "icon": Icons.settings,
-        "id": 2,
-      },
-    ];
-    return CheckUserConnected(
-      child: LayoutBuilder(builder: (context, constraints) {
-        if (constraints.maxWidth > 600)
-          return SideBarNavigation(
-            listRoute: listRoute,
-            listMenu: listMenu,
-          );
-        else
-          return BottomBarNavigation(
-            listRoute: listRoute,
-            listMenu: listMenu,
-          );
+
+    return Localizations.override(
+      context: context,
+      locale: Locale(ref.watch(languageApp).value?.code ?? 'en'),
+      child: Builder(builder: (context) {
+        final listMenu = [
+          {
+            "title": "Cycles",
+            "icon": Icons.radio_button_checked,
+            "id": 0,
+          },
+          {
+            "title": "Historique",
+            "icon": Icons.assessment_outlined,
+            "id": 1,
+          },
+          {
+            "title": AppLocalizations.of(context)!.reglages,
+            "icon": Icons.settings,
+            "id": 2,
+          },
+        ];
+        return CheckUserConnected(
+          child: LayoutBuilder(builder: (context, constraints) {
+            if (constraints.maxWidth > 600)
+              return SideBarNavigation(
+                listRoute: listRoute,
+                listMenu: listMenu,
+              );
+            else
+              return BottomBarNavigation(
+                listRoute: listRoute,
+                listMenu: listMenu,
+              );
+          }),
+        );
       }),
     );
   }

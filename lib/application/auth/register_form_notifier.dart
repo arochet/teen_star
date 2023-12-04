@@ -7,6 +7,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
+import 'package:url_launcher/url_launcher.dart';
 part 'register_form_notifier.freezed.dart';
 
 @freezed
@@ -19,6 +21,7 @@ class RegisterFormData with _$RegisterFormData {
     required PasswordConfirmation passwordAppliConfirmation,
     required Password passwordPDF,
     required PasswordConfirmation passwordPDFConfirmation,
+    required LanguageApp languageApp,
     required bool showErrorMessages,
     required bool isSubmitting,
     required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
@@ -32,6 +35,7 @@ class RegisterFormData with _$RegisterFormData {
       passwordAppliConfirmation: PasswordConfirmation('', ''),
       passwordPDF: Password(''),
       passwordPDFConfirmation: PasswordConfirmation('', ''),
+      languageApp: LanguageApp.anglais,
       showErrorMessages: false,
       isSubmitting: false,
       authFailureOrSuccessOption: none());
@@ -84,6 +88,10 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormData> {
         authFailureOrSuccessOption: none());
   }
 
+  languageChanged(LanguageApp language) {
+    state = state.copyWith(languageApp: language, authFailureOrSuccessOption: none());
+  }
+
   registerWithEmailAndPasswordPressed() async {
     printDev();
     Either<AuthFailure, Unit>? failureOrSuccess;
@@ -102,11 +110,12 @@ class RegisterFormNotifier extends StateNotifier<RegisterFormData> {
 
       failureOrSuccess = await this._authRepository.registerWithEmailAndPassword(
           userData: UserData(
-              id: UniqueId(),
-              userName: state.nomUtilisateur,
-              anneePremiereRegle: state.annePremiereRegle,
-              dateNaissance: state.dateNaissance,
-              theme: 0),
+            id: UniqueId(),
+            userName: state.nomUtilisateur,
+            anneePremiereRegle: state.annePremiereRegle,
+            dateNaissance: state.dateNaissance,
+            theme: 0,
+          ),
           passwordAppli: state.passwordAppli,
           passwordPDF: state.passwordPDF);
 

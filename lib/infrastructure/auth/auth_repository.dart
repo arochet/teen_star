@@ -18,17 +18,21 @@ import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_for
 abstract class AuthRepository {
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
       {required UserData userData, required Password passwordAppli, required Password passwordPDF});
-  Future<Either<AuthFailure, Unit>> modifyAccount(
-      {required Nom nomUtilisateur,
-      required int annePremiereRegle,
-      required DateTime? dateNaissance,
-      required ThemeApp? themeApp});
+  Future<Either<AuthFailure, Unit>> modifyAccount({
+    required Nom nomUtilisateur,
+    required int annePremiereRegle,
+    required DateTime? dateNaissance,
+    required ThemeApp? themeApp,
+    required LanguageApp? languageApp,
+  });
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({required Password password});
   Future<Either<ReauthenticateFailure, Unit>> reauthenticateWithPassword({required Password password});
   Future<Either<AuthFailure, Unit>> deleteALL();
   Future<Unit> newPassword({required Password newPassword, required bool isMotDePasseAppli});
   Future<Either<ResetPasswordFailure, Unit>> resetPassword({required EmailAddress emailAddress});
   Future<Option<UserData>> getUserData();
+  Future setLanguage(LanguageApp language);
+  Future<LanguageApp> getLanguage();
   Future<void> signOut();
   Future<bool> checkPasswordAppli(String appliPassword);
   Future<Password> getPasswordPDF();
@@ -37,6 +41,7 @@ abstract class AuthRepository {
 @LazySingleton(as: AuthRepository)
 class FirebaseAuthFacade implements AuthRepository {
   final String userPrefs = 'user';
+  final String languagePrefs = 'language';
   final String passwordAppliPrefs = 'passwordAppli';
   final String passwordPDFPrefs = 'passwordPDF';
   final Future<SharedPreferences> _preferences = SharedPreferences.getInstance();
@@ -96,16 +101,38 @@ class FirebaseAuthFacade implements AuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> modifyAccount(
-      {required Nom nomUtilisateur,
-      required int annePremiereRegle,
-      required DateTime? dateNaissance,
-      required ThemeApp? themeApp}) async {
+  Future<LanguageApp> getLanguage() async {
+    printDev();
+    final prefs = await _preferences;
+
+    final int? userJson = prefs.getInt(languagePrefs);
+    if (userJson == null) {
+      return LanguageApp.anglais;
+    }
+    return LanguageAppExtention.fromIndex(userJson);
+  }
+
+  @override
+  Future setLanguage(LanguageApp language) async {
+    final prefs = await _preferences;
+    prefs.setInt(languagePrefs, language.index);
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> modifyAccount({
+    required Nom nomUtilisateur,
+    required int annePremiereRegle,
+    required DateTime? dateNaissance,
+    required ThemeApp? themeApp,
+    required LanguageApp? languageApp,
+  }) async {
     printDev();
     final prefs = await _preferences;
 
     try {
       final userOption = await getUserData();
+
+      setLanguage(languageApp ?? LanguageApp.anglais);
 
       return userOption.fold(
         () => left(const AuthFailure.serverError()),

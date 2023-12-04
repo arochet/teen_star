@@ -10,7 +10,7 @@ class AuthRegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      title: "Informations personnelles",
+      title: /* "Informations personnelles" */ AppLocalizations.of(context)!.accueil,
       child: ShowComponentFile(
         title: 'auth/auth_register/auth_register.dart',
         child: FormRegisterProvide(),

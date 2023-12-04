@@ -48,6 +48,9 @@
     "permissioninsuffisante" : "Permission insuffisante",
     "adresseemaildejautilisee" : "Adresse email déjà utilisée",
     "pasinternet" : "Pas d'internet",
-    "retour" : "Retour"
+    "retour" : "Retour",
+    "reglages" : "Réglages",
+    "continuer" : "Continuer",
+    "etape" : "Etape"
 
 }

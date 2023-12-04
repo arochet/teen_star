@@ -76,9 +76,14 @@ final currentUserData = FutureProvider.autoDispose<UserData?>((ref) async {
   return userOption.fold(() => null, (user) => user);
 });
 
-final themeApp = FutureProvider.autoDispose<ThemeApp?>((ref) async {
+final themeApp = FutureProvider.autoDispose<ThemeApp>((ref) async {
   final userOption = await ref.read(authRepositoryProvider).getUserData();
-  return userOption.fold(() => null, (user) => ThemeAppExtension.fromIndex(user.theme));
+  return userOption.fold(() => ThemeApp.blue, (user) => ThemeAppExtension.fromIndex(user.theme));
+});
+
+final languageApp = FutureProvider.autoDispose<LanguageApp>((ref) async {
+  print('language 22: ${ref.read(authRepositoryProvider).getLanguage()}');
+  return await ref.read(authRepositoryProvider).getLanguage();
 });
 
 //CYCLE

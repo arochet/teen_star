@@ -17,6 +17,7 @@ class ModifyFormData with _$ModifyFormData {
     required int annePremiereRegle,
     required DateTime? dateNaissance,
     required ThemeApp? themeApp,
+    required LanguageApp? languageApp,
     required bool showErrorMessages,
     required bool isSubmitting,
     required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
@@ -27,6 +28,7 @@ class ModifyFormData with _$ModifyFormData {
       annePremiereRegle: 0,
       dateNaissance: null,
       themeApp: null,
+      languageApp: null,
       showErrorMessages: false,
       isSubmitting: false,
       authFailureOrSuccessOption: none());
@@ -55,6 +57,10 @@ class ModifyFormNotifier extends StateNotifier<ModifyFormData> {
     state = state.copyWith(themeApp: themeApp, authFailureOrSuccessOption: none());
   }
 
+  languageChanged(LanguageApp? languageApp) {
+    state = state.copyWith(languageApp: languageApp, authFailureOrSuccessOption: none());
+  }
+
   anneePremiereRegleChanged(int annee) {
     state = state.copyWith(annePremiereRegle: annee, authFailureOrSuccessOption: none());
   }
@@ -71,6 +77,7 @@ class ModifyFormNotifier extends StateNotifier<ModifyFormData> {
             annePremiereRegle: state.annePremiereRegle,
             dateNaissance: state.dateNaissance,
             themeApp: state.themeApp,
+            languageApp: state.languageApp,
           );
     }
 

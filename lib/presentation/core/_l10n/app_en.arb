@@ -51,5 +51,8 @@
     "permissioninsuffisante" : "Insufficient Permission",
     "adresseemaildejautilisee" : "Email adress already in use",
     "pasinternet" : "No internet",
-    "retour" : "Back"
+    "retour" : "Back",
+    "reglages" : "Settings",
+    "continuer" : "Continue",
+    "etape" : "Step"
 }

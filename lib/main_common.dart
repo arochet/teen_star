@@ -11,12 +11,22 @@ import 'package:path/path.dart';
 import 'PRESENTATION/core/_utils/dev_utils.dart';
 import 'config_reader.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 Future<void> mainCommon(Environment env) async {
   configurationInjection(env.name);
   WidgetsFlutterBinding.ensureInitialized();
   await ConfigReader.initialize();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  //Splash screen
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  Future.delayed(Duration(seconds: 3), () {
+    FlutterNativeSplash.remove();
+  });
+
+  //Pour afficher les erreurs de flutter dans la console
   FlutterError.demangleStackTrace = (StackTrace stack) {
     if (stack is stack_trace.Trace) return stack.vmTrace;
     if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;

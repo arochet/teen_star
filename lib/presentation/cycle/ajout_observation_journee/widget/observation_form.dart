@@ -424,13 +424,13 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                       [];
 
                   //Ajout de la vérification si la date ne se superpose pas avec les cycles précédents
-                  if (widget.observation == null) {
+                  if (widget.observation == null && widget.cycle == null) {
                     final lastCycleEither = await ref.read(lastCycleId.future);
                     bool dispAlertDate = false;
                     await lastCycleEither.fold((l) => showSnackbarCycleFailure(context, l),
                         (idLastCycle) async {
                       if (idLastCycle != null) {
-                        final lastCycle = ref.read(cycleProvider(idLastCycle));
+                        final lastCycle = ref.read(cycleProvider(idLastCycle)); //Recupère le dernier cycle
                         lastCycle.whenData((cycleAsync) async {
                           cycleAsync.fold((l) => showSnackbarCycleFailure(context, l),
                               (Cycle lastCycle) async {

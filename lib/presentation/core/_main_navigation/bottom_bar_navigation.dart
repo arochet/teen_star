@@ -217,7 +217,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
       builder: (BuildContext context) => CupertinoActionSheet(
         // title: const Text('Title'),
         actions: <CupertinoActionSheetAction>[
-          CupertinoActionSheetAction(
+          /* CupertinoActionSheetAction(
             onPressed: () async {
               Navigator.pop(context);
               final listeCycleEither = await ref.read(allCycleProvider.future);
@@ -241,7 +241,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
               );
             },
             child: const Text('Exporter en PDF'),
-          ),
+          ), */
           CupertinoActionSheetAction(
             onPressed: () {
               Navigator.pop(context);

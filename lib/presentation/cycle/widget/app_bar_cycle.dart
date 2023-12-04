@@ -1,9 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
+import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/providers.dart';
@@ -71,7 +74,15 @@ class AppBarCycle extends ConsumerWidget {
       child: //CYCLE COURANT
           Row(
         children: [
-          SizedBox(width: 50),
+          SizedBox(width: 10),
+          InkWell(
+            onTap: () => context.router.push(Guide_avanceRoute()),
+            child: Image(
+              width: 26,
+              height: 26,
+              image: AssetImage(AssetsPath.icon_principe_de_base),
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(12.0),

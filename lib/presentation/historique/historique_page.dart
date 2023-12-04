@@ -1,10 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
+import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 import 'package:teenstar/INFRASTRUCTURE/cycle/observation_dtos.dart';
+import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
+import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
+import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
+import 'package:teenstar/PRESENTATION/cycle/widget/dialog_pdf.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,7 +40,39 @@ class HistoriquePage extends ConsumerWidget {
                   listCycle = listCycle.reversed.toList();
 
                   //PAGE HISTORIQUE
-                  return TableauHistorique(listCycle);
+                  return Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: InkWell(
+                          onTap: () async {
+                            final listeCycleEither = await ref.read(allCycleProvider.future);
+
+                            listeCycleEither.fold(
+                              (l) => showSnackbarCycleFailure(context, l),
+                              (List<CycleDTO> listeCycle) async {
+                                final listCycleAsync = await ref
+                                    .read(cycleRepositoryProvider)
+                                    .readListCycles(listeCycle.first.id!, listeCycle.last.id!);
+
+                                final userData = await ref.read(currentUserData.future);
+                                final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
+
+                                showDialogApp(
+                                    context: context, titre: "Exporter PDF", child: DialogPDF(listeCycle));
+                              },
+                            );
+                          },
+                          child: Image(
+                            width: 30,
+                            height: 30,
+                            image: AssetImage(AssetsPath.icon_principe_de_base),
+                          ),
+                        ),
+                      ),
+                      Expanded(child: TableauHistorique(listCycle)),
+                    ],
+                  );
                 }
               });
             },

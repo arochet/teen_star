@@ -4,6 +4,7 @@ import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
+import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 
 import 'widget/bouton_PDF.dart';
@@ -24,6 +25,17 @@ class Guide_de_basePage extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(8),
           child: ListView(children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 36.0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Image(
+                  width: 30,
+                  height: 30,
+                  image: AssetImage(AssetsPath.icon_principe_de_base),
+                ),
+              ),
+            ),
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
@@ -62,17 +74,18 @@ class Guide_de_basePage extends StatelessWidget {
             DefaultPanel(
                 child: RichText(
               text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
-                TextSpan(text: "Sélectionner "),
-                TextSpan(text: "Débuter un nouveau cycle ", style: styleBlue),
-                TextSpan(text: "dès le 1er jour des règles, sinon continuer le cycle en cours. \n\n"),
                 TextSpan(text: "Observations de la journée ", style: styleBlue),
                 TextSpan(text: "enregistrer "),
                 TextSpan(text: "LE SOIR le signe le plus fertile de la journée ", style: styleBold),
+                TextSpan(text: "(SENSATION et OBSERVATION).\n\n"),
+                TextSpan(text: "Sélectionner "),
+                TextSpan(text: "Débuter un nouveau cycle ", style: styleBlue),
+                TextSpan(text: "dès le 1er jour des règles, sinon continuer le cycle en cours. \n\n"),
                 TextSpan(
-                    text: "(SENSATION et OBSERVATION).\n\n"
+                    text: ""
                         "Parmi les NOTES possibles, #1 et #2 sont deux types d'évènements de votre choix toujours les "
                         "mêmes et --> correspond à voyage ou horaires inhabituels (décalage horaire, coucher tardif,"
-                        "travail de nuit, ...). "),
+                        "travail de nuit, ...). il est aussi possible de noter sa température basale (prise chaque jour à la même heure, avant le lever) afin d'observer son élévation à la fin du cycle"),
               ]),
             )),
             _DisplayTitle(title: "Synthèse du cycle"),
@@ -101,7 +114,14 @@ class Guide_de_basePage extends StatelessWidget {
                 TextSpan(text: "(portable perdu = données perdues).\n\n", style: styleBold),
                 TextSpan(
                     text:
-                        "Conseil : exportez régulièrement vos cycles en PDF pour l’archivage sur un ordinateur (utile plus tard ou en cas de consultation médicale), l’impression sur papier ou l'envoi à votre accompagnatrice. \n\n"),
+                        "Conseil : exportez régulièrement vos cycles en PDF pour l’archivage sur un ordinateur (utile plus tard ou en cas de consultation médicale), l’impression sur papier ou l'envoi à votre accompagnatrice en cliquant sur l'icône   "),
+                WidgetSpan(
+                  child: Image(
+                    width: 30,
+                    height: 30,
+                    image: AssetImage(AssetsPath.icon_principe_de_base),
+                  ),
+                ),
                 /* TextSpan(text: "Les PDF sont protégés par votre mot de passe. "),
                 TextSpan(text: "Attention ", style: styleUnderline),
                 TextSpan(
@@ -110,7 +130,7 @@ class Guide_de_basePage extends StatelessWidget {
                 TextSpan(text: "déjà ", style: styleUnderline),
                 TextSpan(text: "exportés.\n\n"), */
                 TextSpan(
-                    text: "Conditions d'utilisation : J’ai lu les points ci-dessus et j’ai "
+                    text: "\n\nConditions d'utilisation : J’ai lu les points ci-dessus et j’ai "
                         "compris que cette application m’aidera à enregistrer mes observations quotidiennes au cours "
                         "des cycles menstruels, mais ne peut absolument pas me suffire telle quelle pour éviter (ou "
                         "favoriser) une grossesse. Je comprends que si tel était mon objectif, je devrais impérativement "

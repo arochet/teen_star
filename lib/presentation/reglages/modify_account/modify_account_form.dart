@@ -89,6 +89,7 @@ class ModifyAccountForm extends ConsumerWidget {
                 //Authentification réussie !
                 Future.delayed(Duration.zero, () async {
                   ref.refresh(currentUserData);
+                  ref.refresh(themeApp);
                   await context.router.replaceAll([
                     MainNavigationRoute(children: [AccountRoute()])
                   ]);
@@ -262,7 +263,6 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
               child: ElevatedButton(
                 onPressed: () {
                   ref.read(modifyFormNotifierProvider.notifier).modifyPressed();
-                  ref.refresh(themeApp);
                 },
                 style: buttonNormalPrimary,
                 child: Text(AppLocalizations.of(context)!.modifier),

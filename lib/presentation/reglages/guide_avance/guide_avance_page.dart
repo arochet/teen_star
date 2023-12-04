@@ -28,6 +28,17 @@ class Guide_avancePage extends StatelessWidget {
           padding: EdgeInsets.all(10),
           child: ListView(
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 36.0),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Image(
+                    width: 30,
+                    height: 30,
+                    image: AssetImage(AssetsPath.icon_principe_de_base),
+                  ),
+                ),
+              ),
               _DisplayTitle(title: "1. Bases scientifiques"),
               DefaultPanel(
                   child: RichText(
@@ -62,7 +73,7 @@ class Guide_avancePage extends StatelessWidget {
                     4,
                     AssetsPath.icon_mucus_nuageux,
                     "Nuageux (blanc) à transparent",
-                    "Mucus de type œstrogénique, qui peut être en partie blanc. Franchement élastique",
+                    "Mucus de type œstrogénique, qui peut être en partie blanc (du blanc mélangé à du transparents). Franchement élastique",
                   ),
                   Line(
                     5,
@@ -75,13 +86,13 @@ class Guide_avancePage extends StatelessWidget {
                     6,
                     AssetsPath.icon_mucus_depot_seche_blanc,
                     "Dépôt séché, blanc ou jaune",
-                    "Dépôt sec dans le sous-vêtement, en grande ou faible quantité. Peut correspondre à de simples pertes vaginales, mais aussi à de la glaire séchée, raison pour laquelle elle est considérée par défaut comme un mucus observé, jusqu’à éventuelle preuve du contraire après discussion avec l’accompagnatrice (N.B. la distinction entre les 2 est difficile).",
+                    "Dépôt sec dans le sous-vêtement, en grande ou faible quantité. Peut correspondre à de simples pertes vaginales, mais aussi à du mucus séché, raison pour laquelle elle est considérée par défaut comme un mucus observé, jusqu’à éventuelle preuve du contraire après discussion avec l’accompagnatrice (N.B. la distinction entre les 2 est difficile).",
                   ),
                   Line(7, AssetsPath.icon_autre, "Autre\nobservation",
-                      "En cas de doute sur l’observation, ou pour toute observation inhabituelle, qui pourrait être autre chose que de la glaire, voire traduire une infection (sexuellement transmissible ou non)"),
+                      "En cas de doute sur l’observation, ou pour toute observation inhabituelle, qui pourrait être autre chose que du mucus, voire traduire une infection (sexuellement transmissible ou non)"),
                 ],
               )),
-              _DisplayTitle(title: "3.  Résumé du cycle"),
+              _DisplayTitle(title: "3.  Onglets cycles (tableau récapitulatif, résumé du cycle)"),
               DefaultPanel(
                   child: RichText(
                 text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
@@ -93,13 +104,14 @@ class Guide_avancePage extends StatelessWidget {
                       style: styleBold),
                   TextSpan(text: " -> par défaut en "),
                   TextSpan(text: " BLEU ", style: styleBold),
-                  TextSpan(text: "  (“eau”) =  toute présence d’humidité (SENSATION ou OBSERVATION) \n"),
+                  TextSpan(
+                      text: "  (“couleur eau”) =  toute présence d’humidité (SENSATION ou OBSERVATION) \n"),
                   TextSpan(text: " -> par défaut en "),
                   TextSpan(text: " JAUNE ", style: styleBold),
-                  TextSpan(text: "  (“sable”) =  Sec + mucus de type non-œstrogénique \n"),
+                  TextSpan(text: "  (“couleur sable”) =  Sec + mucus de type non-œstrogénique \n"),
                   TextSpan(text: " -> par défaut en "),
                   TextSpan(text: " BRUN ", style: styleBold),
-                  TextSpan(text: "  (“terre”) =  Sec + aucun mucus  \n"),
+                  TextSpan(text: "  (“couleur terre”) =  Sec + aucun mucus  \n"),
                   TextSpan(text: " -> par défaut en "),
                   TextSpan(text: " INCOLORE", style: styleBold),
                   TextSpan(text: " = autres situations\n ->"),
@@ -109,10 +121,10 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: " ROUGE DENSE ", style: styleBold),
                   TextSpan(text: " = saignement franc (règles ou autre) \n"),
                   TextSpan(text: " ->"),
-                  TextSpan(text: " ROUGE LEGER ", style: styleBold),
+                  TextSpan(text: " ROUGE FONCE ", style: styleBold),
                   TextSpan(text: " = saignement moins abondant (début/fin des règles ; autre) \n"),
                   TextSpan(text: " ->"),
-                  TextSpan(text: " TRACES ", style: styleBold),
+                  TextSpan(text: " ROUGE PÂLE ", style: styleBold),
                   TextSpan(text: " = traces de sang, rouges ou brunes \n"),
                 ]),
               )),
@@ -130,7 +142,7 @@ class Guide_avancePage extends StatelessWidget {
                     TextSpan(text: "- Fleur ", style: styleBold),
                     TextSpan(
                         text:
-                            "sommet du cycle, maximum de fertilité, ovulation imminente (reconnu a posteriori le jour du tarissement de la montée fertile)\n"),
+                            "sommet du cycle, maximum de fertilité, ovulation imminente (reconnu a posteriori le jour du tarissement de la montée fertile du mucus)\n"),
                     TextSpan(text: "- 1, 2, 3", style: styleBold),
                     TextSpan(
                         text: " : jours après sommet (ou après un épisode de changement dans le PIB) \n"),
@@ -165,7 +177,7 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(text: "Une case avec ?", style: styleUnderline),
                   TextSpan(
                       text:
-                          " car l'utilisatrice a enregistré « Autre » (sensation ou observation). L'échange avec l’accompagnatrice permettra de préciser la nature de cette \"autre\" situation et de colorer la case en conséquence. De même lors de « Dépôt séché », pour éventuellement distinguer des sécrétions vaginales d’une sécrétion de glaire cervicale de tel ou tel type.\n\n"),
+                          " car l'utilisatrice a enregistré « Autre » (sensation ou observation). L'échange avec l’accompagnatrice permettra de préciser la nature de cette \"autre\" situation et de colorer la case en conséquence. De même lors de « Dépôt séché », pour éventuellement distinguer des sécrétions vaginales d’une sécrétion de mucus cervical de tel ou tel type.\n\n"),
                   TextSpan(text: "PIB pré-ovulatoire et hachurage", style: styleUnderline),
                   TextSpan(
                       text:
@@ -189,9 +201,9 @@ class Guide_avancePage extends StatelessWidget {
                   TextSpan(
                       text: " (cases incolores)\n\n"
                           "a) Le dépôt séché est identifié clairement comme : \n"
-                          " - glaire cervicale séchée → cases incolores à colorer en jaune et hachurer\n"
-                          " - pertes vaginales séchées (sans glaire cervicale) → cases incolores à colorer en brun et hachurer\n\n"
-                          "b) Le dépôt n’est pas identifié clairement → à laisser incolore, enlever le ? et hachurer \n"),
+                          " - mucus séchée → cases incolores à colorer en jaune et hachurer\n"
+                          " - pertes vaginales séchées (sans mucus) → cases incolores à colorer en brun et hachurer\n\n"
+                          "b) Le dépôt n’est pas identifié clairement → à laisser incolore et hachurer \n"),
                 ]),
               )),
               _DisplayTitle(title: "5. Onglet Historique "),

@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,25 @@ Future<void> mainCommon(Environment env) async {
   Future.delayed(Duration(seconds: 3), () {
     FlutterNativeSplash.remove();
   });
+
+  //Notifications
+  AwesomeNotifications().initialize(
+      // set the icon to null if you want to use the default app icon
+      'resource://drawable/res_app_icon',
+      [
+        NotificationChannel(
+            channelGroupKey: 'basic_channel_group',
+            channelKey: 'scheduled_channel',
+            channelName: 'Basic notifications',
+            channelDescription: 'Notification channel for basic tests',
+            defaultColor: Color(0xFF9D50DD),
+            ledColor: Colors.white)
+      ],
+      // Channel groups are only visual and are not required
+      channelGroups: [
+        NotificationChannelGroup(channelGroupKey: 'basic_channel_group', channelGroupName: 'Basic group')
+      ],
+      debug: true);
 
   //Pour afficher les erreurs de flutter dans la console
   FlutterError.demangleStackTrace = (StackTrace stack) {

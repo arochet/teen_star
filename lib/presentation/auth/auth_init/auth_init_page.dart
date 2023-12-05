@@ -20,28 +20,24 @@ class AuthInitPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     if (!kIsWeb) {
       //Application Mobile
-      return Localizations.override(
-        context: context,
-        locale: Locale(ref.watch(languageApp).value?.code ?? 'en'),
-        child: Scaffold(
-          body: Container(
-            width: 1050,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color.fromARGB(255, 76, 157, 215),
-                  /* Color.fromARGB(255, 39, 45, 215) */ actioncolor['primary']!,
-                ],
-              ),
+      return Scaffold(
+        body: Container(
+          width: 1050,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(255, 76, 157, 215),
+                /* Color.fromARGB(255, 39, 45, 215) */ actioncolor['primary']!,
+              ],
             ),
-            child: SafeArea(
-              child: Container(
-                width: 90,
-                child: ShowEnvironment(
-                    child: ShowComponentFile(title: 'auth/auth_init/auth_init.dart', child: PanelInit())),
-              ),
+          ),
+          child: SafeArea(
+            child: Container(
+              width: 90,
+              child: ShowEnvironment(
+                  child: ShowComponentFile(title: 'auth/auth_init/auth_init.dart', child: PanelInit())),
             ),
           ),
         ),

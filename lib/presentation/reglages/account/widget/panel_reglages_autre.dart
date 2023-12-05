@@ -47,6 +47,11 @@ class PanelReglagesAutre extends StatelessWidget {
           icon: Icons.info,
           onTap: () => context.router.push(Info_applicationRoute()),
         ),
+        ItemPanelList(
+          title: 'Notifications',
+          icon: Icons.notifications,
+          onTap: () => context.router.push(NotificationsRoute()),
+        ),
       ],
     );
   }

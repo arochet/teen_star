@@ -51,13 +51,9 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
           ),
         );
       else
-        return Localizations.override(
-          context: context,
-          locale: Locale(/* ref.watch(languageApp).value?.code ?? */ 'en'),
-          child: Scaffold(
-            appBar: _buildAppBar(context, ref, widget.title),
-            body: widget.child,
-          ),
+        return Scaffold(
+          appBar: _buildAppBar(context, ref, widget.title),
+          body: widget.child,
         );
     });
   }

@@ -20,6 +20,7 @@ import 'package:teenstar/PRESENTATION/core/_main_navigation/main_navigation_page
 import 'package:teenstar/PRESENTATION/core/_splash/splash_page.dart';
 import 'package:teenstar/PRESENTATION/cycle/ajout_observation_journee/ajout_observation_journee_page.dart';
 import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
+import 'package:teenstar/PRESENTATION/reglages/notifications/notifications_page.dart'; //insert-import
 
 import '../../reglages/account/buttons/buttons.dart';
 import '../../reglages/account/colors/colors.dart';
@@ -149,6 +150,10 @@ import '../../reglages/account/utils/utils_page.dart';
     path: '/info_application-route',
     name: 'Info_applicationRoute',
     page: Info_applicationPage,
+  ),
+  AutoRoute(
+    path: '/notifications-route',
+    page: NotificationsPage,
   ), //insert-route
 ])
 class $AppRouter {}

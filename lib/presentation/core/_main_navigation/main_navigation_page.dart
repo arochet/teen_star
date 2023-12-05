@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:teenstar/PRESENTATION/auth/widget/check_connexion_widget.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
+import 'package:teenstar/PRESENTATION/core/_core/app_widget.dart';
 import 'package:teenstar/PRESENTATION/core/_main_navigation/bottom_bar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
@@ -49,28 +50,26 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
       AccountRoute(),
     ];
 
-    return Localizations.override(
-      context: context,
-      locale: Locale(ref.watch(languageApp).value?.code ?? 'en'),
-      child: Builder(builder: (context) {
-        final listMenu = [
-          {
-            "title": "Cycles",
-            "icon": Icons.radio_button_checked,
-            "id": 0,
-          },
-          {
-            "title": "Historique",
-            "icon": Icons.assessment_outlined,
-            "id": 1,
-          },
-          {
-            "title": AppLocalizations.of(context)!.reglages,
-            "icon": Icons.settings,
-            "id": 2,
-          },
-        ];
-        return CheckUserConnected(
+    return Builder(builder: (context) {
+      final listMenu = [
+        {
+          "title": "Cycles",
+          "icon": Icons.radio_button_checked,
+          "id": 0,
+        },
+        {
+          "title": "Historique",
+          "icon": Icons.assessment_outlined,
+          "id": 1,
+        },
+        {
+          "title": AppLocalizations.of(context)!.reglages,
+          "icon": Icons.settings,
+          "id": 2,
+        },
+      ];
+      return InitNotifications(
+        child: CheckUserConnected(
           child: LayoutBuilder(builder: (context, constraints) {
             if (constraints.maxWidth > 600)
               return SideBarNavigation(
@@ -83,8 +82,8 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
                 listMenu: listMenu,
               );
           }),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }

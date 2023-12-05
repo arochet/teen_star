@@ -22,57 +22,53 @@ class _LanguePageState extends ConsumerState<LanguePage> {
   int currentLanguage = 1;
   @override
   Widget build(BuildContext context) {
-    return Localizations.override(
-      context: context,
-      locale: Locale(/* ref.watch(languageApp).value?.code ?? */ 'en'),
-      child: MainScaffold(
-        title: AppLocalizations.of(context)!.language,
-        child: ShowComponentFile(
-          title: './lib/PRESENTATION/reglages/langue/langue_page.dart',
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Center(
-              child: Container(
-                width: 280,
-                child: Column(
-                  children: [
-                    Text("Etape 1/3", style: Theme.of(context).textTheme.titleSmall),
-                    Expanded(child: Container()),
-                    //CHOIX DES LANGUES
-                    InkWell(
-                      child: _ChoixLangue("Français", currentLanguage == 0),
-                      onTap: () async {
-                        await ref.read(authRepositoryProvider).setLanguage(LanguageApp.francais);
-                        ref.refresh(languageApp);
-                        setState(() {
-                          currentLanguage = 0;
-                        });
-                      },
-                    ),
-                    SpaceH10(),
-                    InkWell(
-                      child: _ChoixLangue("English ", currentLanguage == 1),
-                      onTap: () async {
-                        await ref.read(authRepositoryProvider).setLanguage(LanguageApp.anglais);
-                        ref.refresh(languageApp);
-                        setState(() {
-                          currentLanguage = 1;
-                        });
-                      },
-                    ),
-                    SpaceH40(),
-                    SpaceH40(),
-                    //BOUTON VALIDATON
-                    ElevatedButton(
-                      onPressed: () {
-                        context.router.push(Condition_utilisationRoute());
-                      },
-                      child: Text(AppLocalizations.of(context)!.commencer),
-                      style: buttonNormalPrimary,
-                    ),
-                    Expanded(child: Container()),
-                  ],
-                ),
+    return MainScaffold(
+      title: AppLocalizations.of(context)!.language,
+      child: ShowComponentFile(
+        title: './lib/PRESENTATION/reglages/langue/langue_page.dart',
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Center(
+            child: Container(
+              width: 280,
+              child: Column(
+                children: [
+                  Text("Etape 1/3", style: Theme.of(context).textTheme.titleSmall),
+                  Expanded(child: Container()),
+                  //CHOIX DES LANGUES
+                  InkWell(
+                    child: _ChoixLangue("Français", currentLanguage == 0),
+                    onTap: () async {
+                      await ref.read(authRepositoryProvider).setLanguage(LanguageApp.francais);
+                      ref.refresh(languageApp);
+                      setState(() {
+                        currentLanguage = 0;
+                      });
+                    },
+                  ),
+                  SpaceH10(),
+                  InkWell(
+                    child: _ChoixLangue("English ", currentLanguage == 1),
+                    onTap: () async {
+                      await ref.read(authRepositoryProvider).setLanguage(LanguageApp.anglais);
+                      ref.refresh(languageApp);
+                      setState(() {
+                        currentLanguage = 1;
+                      });
+                    },
+                  ),
+                  SpaceH40(),
+                  SpaceH40(),
+                  //BOUTON VALIDATON
+                  ElevatedButton(
+                    onPressed: () {
+                      context.router.push(Condition_utilisationRoute());
+                    },
+                    child: Text(AppLocalizations.of(context)!.commencer),
+                    style: buttonNormalPrimary,
+                  ),
+                  Expanded(child: Container()),
+                ],
               ),
             ),
           ),

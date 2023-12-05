@@ -71,6 +71,7 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                         SpaceH10(),
                         ElevatedButton(
                           onPressed: () async {
+                            //await createPlantFoodNotification();
                             await cancelScheduledNotifications();
                             listNotifications = await AwesomeNotifications().listScheduledNotifications();
                             setState(() {});
@@ -99,8 +100,20 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
   }
 }
 
+Future<void> createPlantFoodNotification() async {
+  await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+          id: createUniqueId(),
+          channelKey: 'scheduled_channel',
+          title: ' Buy Plant Food !!',
+          icon: null,
+          body: 'Florist at 123, Main St. has 2 in stock',
+          bigPicture: 'asset://assets/notification_map.png',
+          notificationLayout: NotificationLayout.BigPicture));
+}
+
 Future<void> createReminderNotification(NotificationWeekAndTime notificationScheduled) async {
-  for (int i = 0; i < 7; i++) {
+  for (int i = 1; i < 8; i++) {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: createUniqueId(),

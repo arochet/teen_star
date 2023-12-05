@@ -174,6 +174,13 @@ class _Cycle extends ConsumerWidget {
                                 ?.copyWith(color: actioncolor['remove'], fontWeight: FontWeight.bold)),
                       ),
                     ),
+                  FutureBuilder(
+                      future: ref.read(cycleRepositoryProvider).dateTimeBeforeCycle(cycle),
+                      initialData: right(''),
+                      builder: (context, value) {
+                        final val = value.data;
+                        return Text("Jour précedant : ${val}", style: Theme.of(context).textTheme.bodyMedium);
+                      }),
                   //TABLEAU
                   Expanded(child: TableauCycle(cycle)),
                 ],

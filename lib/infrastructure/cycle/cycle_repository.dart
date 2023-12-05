@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
@@ -29,6 +30,7 @@ abstract class ICycleRepository {
   Future<Unit> modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state);
   Future<Unit> marquerJourFertile(List<Observation> observation, bool fertile);
   Future<Unit> enleverPointInterrogation(List<Observation> observation, bool pointInterrogation);
+  Future<Either<CycleFailure, DateTime?>> dateTimeBeforeCycle(Cycle cycle);
   Future showTables();
 }
 
@@ -164,6 +166,29 @@ class CycleRepository implements ICycleRepository {
       });
 
       return right(cycleDTO);
+    } catch (e, trace) {
+      print(e);
+      print(trace);
+      return left(CycleFailure.unexpected(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CycleFailure, DateTime?>> dateTimeBeforeCycle(Cycle cycle) async {
+    printDev();
+    try {
+      final list = await readAllCyclesHistorique();
+      return list.fold((l) => left(CycleFailure.unexpected('')), (listObservationDTO) {
+        listObservationDTO.sort((a, b) => a.date!.compareTo(b.date!));
+
+        for (var observation in listObservationDTO) {
+          if (cycle.id.getOrCrash() + 1 == observation.idCycle) {
+            return right(DateTime.fromMillisecondsSinceEpoch(observation.date!));
+          }
+        }
+
+        return right(null);
+      });
     } catch (e, trace) {
       print(e);
       print(trace);

@@ -1,8 +1,11 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
+import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/APPLICATION/cycle/add_observation_form_notifier.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
@@ -465,16 +468,38 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                   }
 
                   //Vérification si la date n'existe pas déjà
+                  bool addObservation = false;
                   if (obs.length > 0 && widget.observation == null) {
                     final ok = await showDialogChoix(context,
                         "Attention, une observation existe déjà pour cette date, voulez-vous la remplacer ?",
                         positiveText: "Remplacer", negativeText: "Annuler", isDanger: true);
 
                     if (ok == true) {
-                      notifierForm.addObservationPressed(widget.cycle);
+                      addObservation = true;
                     }
                   } else {
-                    notifierForm.addObservationPressed(widget.cycle);
+                    addObservation = true;
+                  }
+
+                  if (addObservation) {
+                    final Either<ObservationFailure, UniqueId?>? failureOrSuccess =
+                        (await notifierForm.addObservationPressed(widget.cycle));
+                    final UniqueId? idCycleOfObs = failureOrSuccess?.fold((l) => null, (r) => r);
+
+                    final bool hasExceed = await notifierForm.hasExceedDate(idCycleOfObs);
+                    bool? reporterObservations = false;
+
+                    if (hasExceed) {
+                      reporterObservations = await showDialogChoix(context,
+                          "Attention, les journées du Cycle précédant situées après la date de cette observation vont être reportées a ce nouveau cycle. Voulez vous confirmer ?",
+                          positiveText: "Reporter les observations", negativeText: "Annuler", isDanger: true);
+                    }
+
+                    if (reporterObservations == true) {
+                      await notifierForm.updateObservationInNewCycle(idCycleOfObs);
+                    }
+
+                    await notifierForm.backToMenu(failureOrSuccess);
                   }
                 },
                 style: buttonNormalPrimary,

@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
+import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
@@ -31,7 +32,7 @@ class AddObservationFormData with _$AddObservationFormData {
     required String notesConfidentielles,
     required bool showErrorMessages,
     required bool isSubmitting,
-    required Option<Either<ObservationFailure, Unit>> authFailureOrSuccessOption,
+    required Option<Either<ObservationFailure, UniqueId?>> authFailureOrSuccessOption,
   }) = _AddObservationFormData;
 
   factory AddObservationFormData.initial() => AddObservationFormData(
@@ -130,9 +131,9 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
   }
 //insert-changed
 
-  addObservationPressed(Cycle? cycle) async {
+  Future<Either<ObservationFailure, UniqueId?>?> addObservationPressed(Cycle? cycle) async {
     printDev();
-    Either<ObservationFailure, Unit>? failureOrSuccess;
+    Either<ObservationFailure, UniqueId?>? failureOrSuccess;
 
     //insert-valid-params
     if (state.sensation.isValid() &&
@@ -167,10 +168,22 @@ class ObservationFormNotifier extends StateNotifier<AddObservationFormData> {
             enleverPointInterrogation: null,
           ));
 
-      if (failureOrSuccess.isRight()) {
-        state = AddObservationFormData.initial();
-      }
+      return failureOrSuccess;
     }
+  }
+
+  Future<bool> hasExceedDate(UniqueId? idCycle) async {
+    final bool hasExceed =
+        await this._iObservationRepository.previousCycleHasObservationExceedDate(idCycle, state.date);
+    return hasExceed;
+  }
+
+  Future<Either<CycleFailure, Unit>> updateObservationInNewCycle(UniqueId? idCycle) async {
+    return await this._iObservationRepository.updateObservationInNewCycle(idCycle?.getOrCrash(), state.date);
+  }
+
+  backToMenu(Either<ObservationFailure, UniqueId?>? failureOrSuccess) {
+    state = AddObservationFormData.initial();
 
     state = state.copyWith(
         isSubmitting: false,

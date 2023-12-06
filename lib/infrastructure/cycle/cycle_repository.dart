@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
-import 'package:kt_dart/collection.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/observation_failure.dart';
@@ -9,8 +8,6 @@ import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
-import 'package:teenstar/injection.dart';
-import 'package:teenstar/main_common.dart';
 import 'cycle_dtos.dart';
 import 'observation_dtos.dart';
 
@@ -20,7 +17,7 @@ abstract class ICycleRepository {
   Future<Either<CycleFailure, List<CycleDTO>>> readAllCycles();
   Future<Either<CycleFailure, List<Cycle>>> readListCycles(int start, int finish);
   Future<Either<CycleFailure, List<ObservationDTO>>> readAllCyclesHistorique();
-  Future<Either<ObservationFailure, Unit>> createObservation(Cycle? cycle, Observation observation);
+  Future<Either<ObservationFailure, UniqueId?>> createObservation(Cycle? cycle, Observation observation);
   Future<Either<ObservationFailure, Unit>> update(Observation observation);
   Future<Either<ObservationFailure, Unit>> delete(UniqueId id);
   Future<Either<CycleFailure, Unit>> resetAll();
@@ -32,6 +29,8 @@ abstract class ICycleRepository {
   Future<Unit> enleverPointInterrogation(List<Observation> observation, bool pointInterrogation);
   Future<Either<CycleFailure, DateTime?>> firstDayOfNextCycle(CycleDTO cycle);
   Future showTables();
+  Future<bool> previousCycleHasObservationExceedDate(UniqueId? idCycle, DateTime dateObservation);
+  Future<Either<CycleFailure, Unit>> updateObservationInNewCycle(int? cycle, DateTime dateObservation);
 }
 
 @LazySingleton(as: ICycleRepository)
@@ -58,7 +57,8 @@ class CycleRepository implements ICycleRepository {
   }
 
   @override
-  Future<Either<ObservationFailure, Unit>> createObservation(Cycle? cycle, Observation observation) async {
+  Future<Either<ObservationFailure, UniqueId?>> createObservation(
+      Cycle? cycle, Observation observation) async {
     printDev();
     try {
       //Supprime les observations du même jour
@@ -67,6 +67,7 @@ class CycleRepository implements ICycleRepository {
           whereArgs: [ObservationDTO.fromDomain(observation, 0).date, cycle?.id.getOrCrash()]);
 
       late UniqueId idCycle;
+      //Nouveau cycle
       if (cycle == null) {
         //Création du cycle
         final resultCycle = await createCycle();
@@ -85,11 +86,51 @@ class CycleRepository implements ICycleRepository {
       final observationDTO = ObservationDTO.fromDomain(observation, idCycle.getOrCrash());
       _database.insert(db_observation, observationDTO.toJson());
 
-      return right(unit);
+      //Retourne l'id du cycle
+      return right(idCycle);
     } catch (e) {
       print("$e");
       return left(const ObservationFailure.unexpected());
     }
+  }
+
+  @override
+  Future<bool> previousCycleHasObservationExceedDate(UniqueId? idCycle, DateTime dateObservation) async {
+    printDev();
+    return (await readAllCyclesHistorique()).fold((l) => false, (listObservations) {
+      for (var observation in listObservations) {
+        if (observation.idCycle == (idCycle?.getOrCrash() ?? -1) - 1) {
+          if (observation.date! > dateObservation.millisecondsSinceEpoch) {
+            print('observation.idCycle: ${observation.idCycle}');
+            print('observation.date: ${observation.date}');
+            return true;
+          }
+        }
+      }
+      return false;
+    });
+  }
+
+  @override
+  Future<Either<CycleFailure, Unit>> updateObservationInNewCycle(
+      int? idCycle, DateTime dateObservation) async {
+    printDev();
+    return (await readAllCyclesHistorique()).fold((l) => left(l), (listObservations) async {
+      for (var observation in listObservations) {
+        if (observation.idCycle == (idCycle ?? -1) - 1) {
+          if (observation.date! > dateObservation.millisecondsSinceEpoch) {
+            await _database.update(db_observation, observation.copyWith(idCycle: idCycle).toJson(),
+                where: 'id = ?', whereArgs: [observation.id]);
+          }
+        }
+      }
+      return right(unit);
+    });
+  }
+
+  Future<Cycle?> getCyclePrecedant(CycleDTO cycle) async {
+    printDev();
+    return (await readCycle(UniqueId.fromUniqueInt((cycle.id ?? 0) - 1))).fold((l) => null, (cycle) => cycle);
   }
 
   @override

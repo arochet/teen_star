@@ -32,8 +32,8 @@ mixin _$AddObservationFormData {
   String get notesConfidentielles => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  Option<Either<ObservationFailure, Unit>> get authFailureOrSuccessOption =>
-      throw _privateConstructorUsedError;
+  Option<Either<ObservationFailure, UniqueId?>>
+      get authFailureOrSuccessOption => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddObservationFormDataCopyWith<AddObservationFormData> get copyWith =>
@@ -63,7 +63,8 @@ abstract class $AddObservationFormDataCopyWith<$Res> {
       String notesConfidentielles,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<ObservationFailure, Unit>> authFailureOrSuccessOption});
+      Option<Either<ObservationFailure, UniqueId?>>
+          authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -166,7 +167,7 @@ class _$AddObservationFormDataCopyWithImpl<$Res,
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ObservationFailure, Unit>>,
+              as Option<Either<ObservationFailure, UniqueId?>>,
     ) as $Val);
   }
 }
@@ -197,7 +198,8 @@ abstract class _$$AddObservationFormDataImplCopyWith<$Res>
       String notesConfidentielles,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<ObservationFailure, Unit>> authFailureOrSuccessOption});
+      Option<Either<ObservationFailure, UniqueId?>>
+          authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -299,7 +301,7 @@ class __$$AddObservationFormDataImplCopyWithImpl<$Res>
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ObservationFailure, Unit>>,
+              as Option<Either<ObservationFailure, UniqueId?>>,
     ));
   }
 }
@@ -373,7 +375,8 @@ class _$AddObservationFormDataImpl implements _AddObservationFormData {
   @override
   final bool isSubmitting;
   @override
-  final Option<Either<ObservationFailure, Unit>> authFailureOrSuccessOption;
+  final Option<Either<ObservationFailure, UniqueId?>>
+      authFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -465,7 +468,7 @@ abstract class _AddObservationFormData implements AddObservationFormData {
       required final String notesConfidentielles,
       required final bool showErrorMessages,
       required final bool isSubmitting,
-      required final Option<Either<ObservationFailure, Unit>>
+      required final Option<Either<ObservationFailure, UniqueId?>>
           authFailureOrSuccessOption}) = _$AddObservationFormDataImpl;
 
   @override
@@ -501,7 +504,7 @@ abstract class _AddObservationFormData implements AddObservationFormData {
   @override
   bool get isSubmitting;
   @override
-  Option<Either<ObservationFailure, Unit>> get authFailureOrSuccessOption;
+  Option<Either<ObservationFailure, UniqueId?>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$AddObservationFormDataImplCopyWith<_$AddObservationFormDataImpl>

@@ -24,15 +24,10 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      final notifier = ref.read(showFilePath.notifier);
-      notifier.state = !ref.read(showFilePath);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    print('overrinde ${ref.watch(languageApp).value?.code}');
     return LayoutBuilder(builder: (context, constraints) {
       if (kIsWeb && constraints.maxWidth > 600)
         return Scaffold(

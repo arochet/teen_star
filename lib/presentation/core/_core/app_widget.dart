@@ -108,7 +108,7 @@ class AppWidget extends ConsumerWidget {
         builder: (context, child) {
           return Localizations.override(
             context: context,
-            locale: Locale(/* ref.watch(languageApp).value?.code ?? */ 'en'),
+            locale: Locale(ref.watch(languageApp).value?.code ?? 'en'),
             child: child!,
           );
         });

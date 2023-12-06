@@ -252,6 +252,24 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
           CupertinoActionSheetAction(
             onPressed: () async {
               final response = await showDialogChoix(
+                  context, 'Etes vous sur de vouloir supprimer toutes les observations de ce Cycle ?',
+                  positiveText: 'Supprimer tout', negativeText: 'Annuler');
+
+              if (response == true) {
+                if (idCourant != null) {
+                  await ref.read(cycleRepositoryProvider).deleteObservationFromCycle(idCourant!);
+                  ref.invalidate(allCycleProvider);
+                  ref.invalidate(cycleProvider(idCourant));
+                } else
+                  showSnackbar(context, "Aucun cycle pour le moment !");
+              }
+              Navigator.pop(context);
+            },
+            child: Text('Supprimer toutes les observations du cycle ${idCourant?.getOrCrash()}'),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () async {
+              final response = await showDialogChoix(
                   context, 'Toutes les interprétations faites sur ce cycle seront effacées',
                   positiveText: 'Effacer tout', negativeText: 'Annuler');
 

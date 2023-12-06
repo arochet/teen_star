@@ -15,6 +15,7 @@ abstract class Cycle with _$Cycle {
     required List<Observation> observations,
     required UniqueId idJourneeSoleil, //Jour sommet du cycle.
     required DateTime? dateFirstDayOfNextCycle,
+    required DateTime? dateLastDayOfPreviousCycle,
   }) = _Cycle;
 
   factory Cycle.empty() => Cycle(
@@ -22,6 +23,7 @@ abstract class Cycle with _$Cycle {
         observations: [],
         idJourneeSoleil: UniqueId(),
         dateFirstDayOfNextCycle: null,
+        dateLastDayOfPreviousCycle: null,
       );
 
   ///Renvoie si l'observation est le jour de sommet du cycle.
@@ -36,6 +38,10 @@ abstract class Cycle with _$Cycle {
   }
 
   DateTime? getDateObservationFirstDay() {
+    if (dateLastDayOfPreviousCycle != null) {
+      return dateLastDayOfPreviousCycle;
+    }
+
     if (this.observations.length == 0) {
       return null;
     }
@@ -51,9 +57,17 @@ abstract class Cycle with _$Cycle {
   //Renvoie la liste des observations avec les jours vides entre les observations.
   //La fille peut renseigner après coup les jours vides.
   List<Observation> getObservationsWithEmptyDays({allowDoubleDays = true}) {
+    print('firt date ${dateFirstDayOfNextCycle}');
+    print('last date ${dateLastDayOfPreviousCycle}');
+
     List<Observation> observationsWithEmptyDays = [];
-    if (this.observations.length == 0) return [];
-    DateTime? firstDayOfCycle = this.observations.first.date?.toDate();
+    DateTime? firstDayOfCycle;
+    if (dateLastDayOfPreviousCycle != null) {
+      firstDayOfCycle = dateLastDayOfPreviousCycle?.add(Duration(days: 1));
+    } else if (this.observations.length > 0)
+      firstDayOfCycle = this.observations.first.date?.toDate();
+    else
+      return [];
 
     late DateTime lastDayOfCycleWithEmptyDays;
 
@@ -71,6 +85,7 @@ abstract class Cycle with _$Cycle {
     }
 
     int nbDays = AppDateUtils.diffInDaysWith(lastDayOfCycleWithEmptyDays, firstDayOfCycle!) + 1;
+    print('nbDays ${nbDays}');
     for (int i = 0; i < nbDays; i++) {
       DateTime day = firstDayOfCycle.add(Duration(days: i));
       List<Observation> obs =

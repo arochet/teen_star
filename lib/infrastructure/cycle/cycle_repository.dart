@@ -28,9 +28,11 @@ abstract class ICycleRepository {
   Future<Unit> marquerJourFertile(List<Observation> observation, bool fertile);
   Future<Unit> enleverPointInterrogation(List<Observation> observation, bool pointInterrogation);
   Future<Either<CycleFailure, DateTime?>> firstDayOfNextCycle(CycleDTO cycle);
+  Future<Either<CycleFailure, DateTime?>> lastDayOfPreviousCycle(CycleDTO cycle);
   Future showTables();
   Future<bool> previousCycleHasObservationExceedDate(UniqueId? idCycle, DateTime dateObservation);
   Future<Either<CycleFailure, Unit>> updateObservationInNewCycle(int? cycle, DateTime dateObservation);
+  Future<Either<ObservationFailure, Unit>> deleteObservationFromCycle(UniqueId idCycle);
 }
 
 @LazySingleton(as: ICycleRepository)
@@ -155,6 +157,13 @@ class CycleRepository implements ICycleRepository {
   }
 
   @override
+  Future<Either<ObservationFailure, Unit>> deleteObservationFromCycle(UniqueId idCycle) async {
+    printDev();
+    await _database.delete(db_observation, where: 'idCycle = ?', whereArgs: [idCycle.getOrCrash()]);
+    return right(unit);
+  }
+
+  @override
   Future<Either<ObservationFailure, Unit>> update(Observation observation) async {
     printDev();
     return left(const ObservationFailure.unexpected());
@@ -186,9 +195,15 @@ class CycleRepository implements ICycleRepository {
 
         //Charge la date du premier jour du prochain cycle
         final dateFirstDayOfNextCycle = await firstDayOfNextCycle(cycleDTO);
+        //Charge la date du premier jour du prochain cycle
+        final dateLastDayOfPreviousCycle = await lastDayOfPreviousCycle(cycleDTO);
 
         //Retourne le Cycle avec les observations liées
-        return right(cycleDTO.toDomain(listObservation, dateFirstDayOfNextCycle.getOrElse(() => null)));
+        return right(cycleDTO.toDomain(
+          listObservation,
+          dateFirstDayOfNextCycle.getOrElse(() => null),
+          dateLastDayOfPreviousCycle.getOrElse(() => null),
+        ));
       } else {
         return left(CycleFailure.idCycleUnfound());
       }
@@ -227,6 +242,29 @@ class CycleRepository implements ICycleRepository {
 
         for (var observation in listObservationDTO) {
           if ((cycle.id ?? -10) + 1 == observation.idCycle) {
+            return right(DateTime.fromMillisecondsSinceEpoch(observation.date!));
+          }
+        }
+
+        return right(null);
+      });
+    } catch (e, trace) {
+      print(e);
+      print(trace);
+      return left(CycleFailure.unexpected(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CycleFailure, DateTime?>> lastDayOfPreviousCycle(CycleDTO cycle) async {
+    printDev();
+    try {
+      final list = await readAllCyclesHistorique();
+      return list.fold((l) => left(CycleFailure.unexpected('')), (listObservationDTO) {
+        listObservationDTO.sort((a, b) => a.date!.compareTo(b.date!));
+
+        for (var observation in listObservationDTO.reversed) {
+          if ((cycle.id ?? -10) - 1 == observation.idCycle) {
             return right(DateTime.fromMillisecondsSinceEpoch(observation.date!));
           }
         }

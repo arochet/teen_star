@@ -29,10 +29,12 @@ class TableauHistorique extends ConsumerWidget {
       title.add(' ${cycle.id.getOrCrash()} ');
       List<Observation> listObs = cycle.getObservationsWithEmptyDays(allowDoubleDays: false);
       tmpListCycle.add(Cycle(
-          id: cycle.id,
-          observations: listObs,
-          idJourneeSoleil: cycle.idJourneeSoleil,
-          dateFirstDayOfNextCycle: cycle.dateFirstDayOfNextCycle));
+        id: cycle.id,
+        observations: listObs,
+        idJourneeSoleil: cycle.idJourneeSoleil,
+        dateFirstDayOfNextCycle: cycle.dateFirstDayOfNextCycle,
+        dateLastDayOfPreviousCycle: cycle.dateLastDayOfPreviousCycle,
+      ));
       tmpListCycleLength.add(listObs.length);
     }
 

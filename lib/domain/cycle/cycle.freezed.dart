@@ -21,6 +21,8 @@ mixin _$Cycle {
   UniqueId get idJourneeSoleil =>
       throw _privateConstructorUsedError; //Jour sommet du cycle.
   DateTime? get dateFirstDayOfNextCycle => throw _privateConstructorUsedError;
+  DateTime? get dateLastDayOfPreviousCycle =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CycleCopyWith<Cycle> get copyWith => throw _privateConstructorUsedError;
@@ -35,7 +37,8 @@ abstract class $CycleCopyWith<$Res> {
       {UniqueId id,
       List<Observation> observations,
       UniqueId idJourneeSoleil,
-      DateTime? dateFirstDayOfNextCycle});
+      DateTime? dateFirstDayOfNextCycle,
+      DateTime? dateLastDayOfPreviousCycle});
 }
 
 /// @nodoc
@@ -55,6 +58,7 @@ class _$CycleCopyWithImpl<$Res, $Val extends Cycle>
     Object? observations = null,
     Object? idJourneeSoleil = null,
     Object? dateFirstDayOfNextCycle = freezed,
+    Object? dateLastDayOfPreviousCycle = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -73,6 +77,10 @@ class _$CycleCopyWithImpl<$Res, $Val extends Cycle>
           ? _value.dateFirstDayOfNextCycle
           : dateFirstDayOfNextCycle // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      dateLastDayOfPreviousCycle: freezed == dateLastDayOfPreviousCycle
+          ? _value.dateLastDayOfPreviousCycle
+          : dateLastDayOfPreviousCycle // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -88,7 +96,8 @@ abstract class _$$CycleImplCopyWith<$Res> implements $CycleCopyWith<$Res> {
       {UniqueId id,
       List<Observation> observations,
       UniqueId idJourneeSoleil,
-      DateTime? dateFirstDayOfNextCycle});
+      DateTime? dateFirstDayOfNextCycle,
+      DateTime? dateLastDayOfPreviousCycle});
 }
 
 /// @nodoc
@@ -106,6 +115,7 @@ class __$$CycleImplCopyWithImpl<$Res>
     Object? observations = null,
     Object? idJourneeSoleil = null,
     Object? dateFirstDayOfNextCycle = freezed,
+    Object? dateLastDayOfPreviousCycle = freezed,
   }) {
     return _then(_$CycleImpl(
       id: null == id
@@ -124,6 +134,10 @@ class __$$CycleImplCopyWithImpl<$Res>
           ? _value.dateFirstDayOfNextCycle
           : dateFirstDayOfNextCycle // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      dateLastDayOfPreviousCycle: freezed == dateLastDayOfPreviousCycle
+          ? _value.dateLastDayOfPreviousCycle
+          : dateLastDayOfPreviousCycle // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -135,7 +149,8 @@ class _$CycleImpl extends _Cycle {
       {required this.id,
       required final List<Observation> observations,
       required this.idJourneeSoleil,
-      required this.dateFirstDayOfNextCycle})
+      required this.dateFirstDayOfNextCycle,
+      required this.dateLastDayOfPreviousCycle})
       : _observations = observations,
         super._();
 
@@ -154,10 +169,12 @@ class _$CycleImpl extends _Cycle {
 //Jour sommet du cycle.
   @override
   final DateTime? dateFirstDayOfNextCycle;
+  @override
+  final DateTime? dateLastDayOfPreviousCycle;
 
   @override
   String toString() {
-    return 'Cycle(id: $id, observations: $observations, idJourneeSoleil: $idJourneeSoleil, dateFirstDayOfNextCycle: $dateFirstDayOfNextCycle)';
+    return 'Cycle(id: $id, observations: $observations, idJourneeSoleil: $idJourneeSoleil, dateFirstDayOfNextCycle: $dateFirstDayOfNextCycle, dateLastDayOfPreviousCycle: $dateLastDayOfPreviousCycle)';
   }
 
   @override
@@ -172,7 +189,11 @@ class _$CycleImpl extends _Cycle {
                 other.idJourneeSoleil == idJourneeSoleil) &&
             (identical(
                     other.dateFirstDayOfNextCycle, dateFirstDayOfNextCycle) ||
-                other.dateFirstDayOfNextCycle == dateFirstDayOfNextCycle));
+                other.dateFirstDayOfNextCycle == dateFirstDayOfNextCycle) &&
+            (identical(other.dateLastDayOfPreviousCycle,
+                    dateLastDayOfPreviousCycle) ||
+                other.dateLastDayOfPreviousCycle ==
+                    dateLastDayOfPreviousCycle));
   }
 
   @override
@@ -181,7 +202,8 @@ class _$CycleImpl extends _Cycle {
       id,
       const DeepCollectionEquality().hash(_observations),
       idJourneeSoleil,
-      dateFirstDayOfNextCycle);
+      dateFirstDayOfNextCycle,
+      dateLastDayOfPreviousCycle);
 
   @JsonKey(ignore: true)
   @override
@@ -195,7 +217,8 @@ abstract class _Cycle extends Cycle {
       {required final UniqueId id,
       required final List<Observation> observations,
       required final UniqueId idJourneeSoleil,
-      required final DateTime? dateFirstDayOfNextCycle}) = _$CycleImpl;
+      required final DateTime? dateFirstDayOfNextCycle,
+      required final DateTime? dateLastDayOfPreviousCycle}) = _$CycleImpl;
   const _Cycle._() : super._();
 
   @override
@@ -206,6 +229,8 @@ abstract class _Cycle extends Cycle {
   UniqueId get idJourneeSoleil;
   @override //Jour sommet du cycle.
   DateTime? get dateFirstDayOfNextCycle;
+  @override
+  DateTime? get dateLastDayOfPreviousCycle;
   @override
   @JsonKey(ignore: true)
   _$$CycleImplCopyWith<_$CycleImpl> get copyWith =>

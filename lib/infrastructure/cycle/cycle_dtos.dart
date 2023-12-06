@@ -21,12 +21,14 @@ abstract class CycleDTO implements _$CycleDTO {
     );
   }
 
-  Cycle toDomain(List<Observation> observations, DateTime? dateFirstDayOfNextCycle) {
+  Cycle toDomain(List<Observation> observations, DateTime? dateFirstDayOfNextCycle,
+      DateTime? dateLastDayOfPreviousCycle) {
     return Cycle(
       id: UniqueId.fromUniqueInt(id!),
       observations: observations,
       idJourneeSoleil: UniqueId.fromUniqueInt(idJourneeSoleil),
       dateFirstDayOfNextCycle: dateFirstDayOfNextCycle,
+      dateLastDayOfPreviousCycle: dateLastDayOfPreviousCycle,
     );
   }
 
@@ -36,6 +38,7 @@ abstract class CycleDTO implements _$CycleDTO {
       observations: [],
       idJourneeSoleil: UniqueId.fromUniqueInt(idJourneeSoleil),
       dateFirstDayOfNextCycle: null,
+      dateLastDayOfPreviousCycle: null,
     );
   }
 

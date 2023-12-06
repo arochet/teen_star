@@ -102,7 +102,7 @@ final lastCycleId = FutureProvider<Either<CycleFailure, UniqueId?>>((ref) async 
 
   final async = await ref.read(allCycleProvider.future);
   return async.fold((l) => left(l), (r) {
-    final lastId = Cycle.lastId(r.map((e) => e.toDomain([])).toList());
+    final lastId = Cycle.lastId(r.map((e) => e.toDomainEmpty()).toList());
     return right(lastId);
   });
 });
@@ -110,11 +110,12 @@ final lastCycleId = FutureProvider<Either<CycleFailure, UniqueId?>>((ref) async 
 //Page Historique
 final allCycleFullProvider = FutureProvider<Either<CycleFailure, List<Cycle>>>((ref) async {
   final listDTOasync = await ref.read(cycleRepositoryProvider).readAllCycles();
-  return listDTOasync.fold((l) => left(l), (List<CycleDTO> list) async {
+  return listDTOasync.fold((l) => left(l), (List<CycleDTO> listCycleDTO) async {
     List<Cycle> listCycle = [];
-    for (int i = 0; i < list.length; i++) {
+    for (int i = 0; i < listCycleDTO.length; i++) {
       final listCycleAsync =
-          await ref.read(cycleRepositoryProvider).readCycle(UniqueId.fromUniqueInt(list[i].id!));
+          await ref.read(cycleRepositoryProvider).readCycle(UniqueId.fromUniqueInt(listCycleDTO[i].id!));
+
       listCycleAsync.fold((l) => left(l), (cycle) {
         listCycle.add(cycle.copyWith(observations: cycle.getObservationsWithEmptyDays()));
       });

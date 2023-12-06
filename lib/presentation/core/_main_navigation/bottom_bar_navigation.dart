@@ -303,7 +303,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
     //TEST
     final result = await ref.read(cycleRepositoryProvider).readAllCycles();
     result.fold((l) => showSnackbarCycleFailure(context, l), (listCycle) async {
-      final idDernierCycle = Cycle.lastId(listCycle.map((e) => e.toDomain([])).toList())?.getOrCrash();
+      final idDernierCycle = Cycle.lastId(listCycle.map((e) => e.toDomainEmpty()).toList())?.getOrCrash();
 
       if (idDernierCycle == 1 || idDernierCycle == null) {
         showSnackbar(context, "Il n'y a qu'un seul cycle : pas de renvoi possible");

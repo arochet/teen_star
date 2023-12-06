@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
-import 'package:teenstar/DOMAIN/auth/value_objects.dart';
-import 'package:teenstar/INFRASTRUCTURE/cycle/observation_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 
 import 'observation.dart';
@@ -16,12 +14,14 @@ abstract class Cycle with _$Cycle {
     required UniqueId id,
     required List<Observation> observations,
     required UniqueId idJourneeSoleil, //Jour sommet du cycle.
+    required DateTime? dateFirstDayOfNextCycle,
   }) = _Cycle;
 
   factory Cycle.empty() => Cycle(
         id: UniqueId(),
         observations: [],
         idJourneeSoleil: UniqueId(),
+        dateFirstDayOfNextCycle: null,
       );
 
   ///Renvoie si l'observation est le jour de sommet du cycle.
@@ -55,13 +55,19 @@ abstract class Cycle with _$Cycle {
     if (this.observations.length == 0) return [];
     DateTime? firstDayOfCycle = this.observations.first.date?.toDate();
 
-    DateTime lastDayOfCycleWithEmptyDays = firstDayOfCycle!;
-    for (var observation in this.observations) {
-      if (observation.date!.isAfter(lastDayOfCycleWithEmptyDays)) {
-        lastDayOfCycleWithEmptyDays = observation.date!;
-      } else if (observation.date!.isBefore(firstDayOfCycle!)) {
-        firstDayOfCycle = observation.date;
+    late DateTime lastDayOfCycleWithEmptyDays;
+
+    if (dateFirstDayOfNextCycle == null) {
+      lastDayOfCycleWithEmptyDays = firstDayOfCycle!;
+      for (var observation in this.observations) {
+        if (observation.date!.isAfter(lastDayOfCycleWithEmptyDays)) {
+          lastDayOfCycleWithEmptyDays = observation.date!;
+        } else if (observation.date!.isBefore(firstDayOfCycle!)) {
+          firstDayOfCycle = observation.date;
+        }
       }
+    } else {
+      lastDayOfCycleWithEmptyDays = dateFirstDayOfNextCycle!.subtract(Duration(days: 1));
     }
 
     int nbDays = AppDateUtils.diffInDaysWith(lastDayOfCycleWithEmptyDays, firstDayOfCycle!) + 1;

@@ -28,7 +28,11 @@ class TableauHistorique extends ConsumerWidget {
     for (var cycle in listHistorique) {
       title.add(' ${cycle.id.getOrCrash()} ');
       List<Observation> listObs = cycle.getObservationsWithEmptyDays(allowDoubleDays: false);
-      tmpListCycle.add(Cycle(id: cycle.id, observations: listObs, idJourneeSoleil: cycle.idJourneeSoleil));
+      tmpListCycle.add(Cycle(
+          id: cycle.id,
+          observations: listObs,
+          idJourneeSoleil: cycle.idJourneeSoleil,
+          dateFirstDayOfNextCycle: cycle.dateFirstDayOfNextCycle));
       tmpListCycleLength.add(listObs.length);
     }
 
@@ -45,7 +49,7 @@ class TableauHistorique extends ConsumerWidget {
             if (rowIndex < tmpListCycleLength[columnIndex]) {
               final Observation observation = tmpListCycle[columnIndex].observations[rowIndex];
               if (observation.isNone)
-                return _CellEmpty();
+                return _CellObservationNonRemplie();
               else
                 return _Cell(
                   observation: observation,
@@ -154,6 +158,25 @@ class _CellEmpty extends StatelessWidget {
           height: 35,
           child: Center(
             child: Text('', style: Theme.of(context).textTheme.titleSmall),
+          )),
+    );
+  }
+}
+
+//Cellule vide
+class _CellObservationNonRemplie extends StatelessWidget {
+  _CellObservationNonRemplie({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+          width: 40,
+          height: 35,
+          child: Center(
+            child: Text('...', style: Theme.of(context).textTheme.titleSmall),
           )),
     );
   }

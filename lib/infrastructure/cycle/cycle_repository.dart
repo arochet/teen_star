@@ -30,7 +30,7 @@ abstract class ICycleRepository {
   Future<Unit> modifierCouleurAnalyse(Observation observation, CouleurAnalyseState state);
   Future<Unit> marquerJourFertile(List<Observation> observation, bool fertile);
   Future<Unit> enleverPointInterrogation(List<Observation> observation, bool pointInterrogation);
-  Future<Either<CycleFailure, DateTime?>> dateTimeBeforeCycle(Cycle cycle);
+  Future<Either<CycleFailure, DateTime?>> firstDayOfNextCycle(CycleDTO cycle);
   Future showTables();
 }
 
@@ -143,8 +143,11 @@ class CycleRepository implements ICycleRepository {
           return ObservationDTO.fromJson(mapsObservation[i]).toDomain();
         });
 
+        //Charge la date du premier jour du prochain cycle
+        final dateFirstDayOfNextCycle = await firstDayOfNextCycle(cycleDTO);
+
         //Retourne le Cycle avec les observations liées
-        return right(cycleDTO.toDomain(listObservation));
+        return right(cycleDTO.toDomain(listObservation, dateFirstDayOfNextCycle.getOrElse(() => null)));
       } else {
         return left(CycleFailure.idCycleUnfound());
       }
@@ -174,7 +177,7 @@ class CycleRepository implements ICycleRepository {
   }
 
   @override
-  Future<Either<CycleFailure, DateTime?>> dateTimeBeforeCycle(Cycle cycle) async {
+  Future<Either<CycleFailure, DateTime?>> firstDayOfNextCycle(CycleDTO cycle) async {
     printDev();
     try {
       final list = await readAllCyclesHistorique();
@@ -182,7 +185,7 @@ class CycleRepository implements ICycleRepository {
         listObservationDTO.sort((a, b) => a.date!.compareTo(b.date!));
 
         for (var observation in listObservationDTO) {
-          if (cycle.id.getOrCrash() + 1 == observation.idCycle) {
+          if ((cycle.id ?? -10) + 1 == observation.idCycle) {
             return right(DateTime.fromMillisecondsSinceEpoch(observation.date!));
           }
         }
@@ -204,15 +207,15 @@ class CycleRepository implements ICycleRepository {
       final List<Map<String, dynamic>> mapsCycle =
           await _database.query(db_cycle, where: 'id >= ? AND id <= ?', whereArgs: [start, finish]);
       List<Cycle> cyclesVide = List.generate(mapsCycle.length, (index) {
-        return CycleDTO.fromJson(mapsCycle[index]).toDomain([]);
+        return CycleDTO.fromJson(mapsCycle[index]).toDomainEmpty();
       });
 
       //Pour chaque cycle, on récupère les observations
       List<Cycle> listCycle = [];
       for (var cycle in cyclesVide) {
         final asyncCycle = await readCycle(cycle.id);
-        asyncCycle.foldRight(null, (Cycle r, previous) {
-          listCycle.add(r);
+        asyncCycle.foldRight(null, (Cycle cyclePlein, previous) {
+          listCycle.add(cyclePlein);
         });
       }
 
@@ -262,7 +265,7 @@ class CycleRepository implements ICycleRepository {
       if (listCycle.length < 2) return left(CycleFailure.unexpected('Pas assez de cycle'));
 
       //Récupère le dernier cycle
-      final lastCycle = Cycle.lastId(listCycle.map((e) => e.toDomain([])).toList());
+      final lastCycle = Cycle.lastId(listCycle.map((e) => e.toDomainEmpty()).toList());
       if (lastCycle == null) return left(CycleFailure.cycleUnfound());
 
       //On met à jour les observations du cycle précédent

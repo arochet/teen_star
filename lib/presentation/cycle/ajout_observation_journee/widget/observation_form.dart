@@ -62,7 +62,7 @@ class ObservationFormProvider extends ConsumerWidget {
                   await Future.delayed(Duration(milliseconds: 50));
                   final async = await ref.read(allCycleProvider.future);
                   async.fold((l) => showSnackbarCycleFailure(context, l), (listCycleDTO) {
-                    final idLastCycle = Cycle.lastId(listCycleDTO.map((e) => e.toDomain([])).toList());
+                    final idLastCycle = Cycle.lastId(listCycleDTO.map((e) => e.toDomainEmpty()).toList());
                     if (idLastCycle != null) {
                       //On recharge le cycle courant
                       ref.invalidate(cycleProvider(idLastCycle));

@@ -164,7 +164,19 @@ class _Cell extends StatelessWidget {
 
     //Cas ou c'est une observation vide
     if (observation.isNone) {
-      if (column != 'Date') return Container(width: 10, height: 10);
+      if (column != 'Date') {
+        if (column == 'Couleur' || column == 'Analyse')
+          return Container(
+            width: 30,
+            height: 20,
+            child: Center(child: Text("...", style: Theme.of(context).textTheme.bodyMedium)),
+          );
+        else
+          return Container(
+            width: 1,
+            height: 1,
+          );
+      }
     }
 
     final widgetShowTrucChelouCouleur = Padding(
@@ -217,7 +229,8 @@ class _Cell extends StatelessWidget {
           info = Stack(
             children: [
               //Case vide
-              widgetShowTrucChelouCouleur
+              widgetShowTrucChelouCouleur,
+              Text("...", style: Theme.of(context).textTheme.bodyMedium),
             ],
           );
         else

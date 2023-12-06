@@ -21,11 +21,21 @@ abstract class CycleDTO implements _$CycleDTO {
     );
   }
 
-  Cycle toDomain(List<Observation> observations) {
+  Cycle toDomain(List<Observation> observations, DateTime? dateFirstDayOfNextCycle) {
     return Cycle(
       id: UniqueId.fromUniqueInt(id!),
       observations: observations,
       idJourneeSoleil: UniqueId.fromUniqueInt(idJourneeSoleil),
+      dateFirstDayOfNextCycle: dateFirstDayOfNextCycle,
+    );
+  }
+
+  Cycle toDomainEmpty() {
+    return Cycle(
+      id: UniqueId.fromUniqueInt(id!),
+      observations: [],
+      idJourneeSoleil: UniqueId.fromUniqueInt(idJourneeSoleil),
+      dateFirstDayOfNextCycle: null,
     );
   }
 

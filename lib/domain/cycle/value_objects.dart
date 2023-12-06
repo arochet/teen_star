@@ -38,21 +38,21 @@ extension ParseToSringTA on CouleurAnalyseState {
   PdfBrush toColorPDF() {
     switch (this) {
       case CouleurAnalyseState.rougePlusPlus:
-        return PdfBrushes.red; //red;
+        return PdfSolidBrush(PdfColor(197, 52, 29)); //red;
       case CouleurAnalyseState.rougePlus:
-        return PdfBrushes.red; //red;
+        return PdfSolidBrush(PdfColor(214, 97, 96)); //red;
       case CouleurAnalyseState.rougeClair:
-        return PdfBrushes.pink; //red;
+        return PdfSolidBrush(PdfColor(225, 168, 164)); //red;
       case CouleurAnalyseState.brun:
-        return PdfBrushes.brown; //brown;
+        return PdfSolidBrush(PdfColor(198, 148, 115)); //brown;
       case CouleurAnalyseState.vert:
-        return PdfBrushes.green; //green;
+        return PdfSolidBrush(PdfColor(198, 148, 115)); //green;
       case CouleurAnalyseState.jaune:
-        return PdfBrushes.yellow; //yellow;
+        return PdfSolidBrush(PdfColor(252, 221, 146)); //yellow;
       case CouleurAnalyseState.bleue:
-        return PdfBrushes.blue; //yellow;
+        return PdfSolidBrush(PdfColor(135, 178, 210)); //yellow;
       case CouleurAnalyseState.none:
-        return PdfBrushes.white; //amber50;
+        return PdfSolidBrush(PdfColor(210, 210, 210)); //amber50;
       case CouleurAnalyseState.invalide:
         return PdfBrushes.beige;
     }

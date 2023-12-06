@@ -42,6 +42,7 @@ class HistoriquePage extends ConsumerWidget {
                   //PAGE HISTORIQUE
                   return Column(
                     children: [
+                      //ICONE EXPORT PDF
                       Align(
                         alignment: Alignment.centerLeft,
                         child: InkWell(
@@ -64,9 +65,9 @@ class HistoriquePage extends ConsumerWidget {
                             );
                           },
                           child: Image(
-                            width: 30,
-                            height: 30,
-                            image: AssetImage(AssetsPath.icon_principe_de_base),
+                            width: 60,
+                            height: 35,
+                            image: AssetImage(AssetsPath.icon_pdf),
                           ),
                         ),
                       ),

@@ -57,9 +57,6 @@ abstract class Cycle with _$Cycle {
   //Renvoie la liste des observations avec les jours vides entre les observations.
   //La fille peut renseigner après coup les jours vides.
   List<Observation> getObservationsWithEmptyDays({allowDoubleDays = true}) {
-    print('firt date ${dateFirstDayOfNextCycle}');
-    print('last date ${dateLastDayOfPreviousCycle}');
-
     List<Observation> observationsWithEmptyDays = [];
     DateTime? firstDayOfCycle;
     if (dateLastDayOfPreviousCycle != null) {
@@ -85,7 +82,6 @@ abstract class Cycle with _$Cycle {
     }
 
     int nbDays = AppDateUtils.diffInDaysWith(lastDayOfCycleWithEmptyDays, firstDayOfCycle!) + 1;
-    print('nbDays ${nbDays}');
     for (int i = 0; i < nbDays; i++) {
       DateTime day = firstDayOfCycle.add(Duration(days: i));
       List<Observation> obs =

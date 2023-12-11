@@ -25,7 +25,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
   Widget build(BuildContext context) {
     final currentUserDataAsync = ref.watch(currentUserData);
     return MainScaffold(
-      title: 'Principe d\'utilisation',
+      title: AppLocalizations.of(context)!.principeutilisation,
       child: ShowComponentFile(
         title: './lib/PRESENTATION/auth/condition_utilisation/condition_utilisation_page.dart',
         child: Padding(
@@ -36,7 +36,9 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
               data: (data) {
                 if (data != null) return [];
                 return [
-                  Center(child: Text("Etape 2/3", style: Theme.of(context).textTheme.titleSmall)),
+                  Center(
+                      child: Text("${AppLocalizations.of(context)!.etape} 2/3",
+                          style: Theme.of(context).textTheme.titleSmall)),
                   SpaceH40(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -54,10 +56,8 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                       child: Column(
                     children: [
                       SpaceH20(),
-                      Text(
-                          "J’ai lu les points ci-dessus et j’ai compris que cette application m’aidera à enregistrer mes observations quotidiennes au cours des cycles menstruels, mais ne peut absolument pas me suffire telle quelle pour éviter (ou favoriser) une grossesse. Je comprends que si tel était mon objectif, je devrais impérativement suivre une formation approfondie avec une monitrice spécialisée en méthode naturelle de régulation des naissances.",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          textAlign: TextAlign.justify),
+                      Text(AppLocalizations.of(context)!.jailulespoints,
+                          style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.justify),
                       SpaceH20(),
                       Padding(
                         padding: const EdgeInsets.all(16.0),

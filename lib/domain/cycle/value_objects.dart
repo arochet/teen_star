@@ -19,7 +19,7 @@ extension ParseToSringTA on CouleurAnalyseState {
       case CouleurAnalyseState.rougePlus:
         return Color.fromARGB(255, 214, 97, 96);
       case CouleurAnalyseState.rougeClair:
-        return Color.fromARGB(255, 225, 168, 164);
+        return Color.fromARGB(255, 250, 174, 174);
       case CouleurAnalyseState.brun:
         return Color.fromARGB(255, 198, 148, 115);
       case CouleurAnalyseState.vert:
@@ -42,7 +42,7 @@ extension ParseToSringTA on CouleurAnalyseState {
       case CouleurAnalyseState.rougePlus:
         return PdfSolidBrush(PdfColor(214, 97, 96)); //red;
       case CouleurAnalyseState.rougeClair:
-        return PdfSolidBrush(PdfColor(225, 168, 164)); //red;
+        return PdfSolidBrush(PdfColor(250, 174, 174)); //red;
       case CouleurAnalyseState.brun:
         return PdfSolidBrush(PdfColor(198, 148, 115)); //brown;
       case CouleurAnalyseState.vert:

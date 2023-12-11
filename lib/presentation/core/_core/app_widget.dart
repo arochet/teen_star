@@ -130,7 +130,6 @@ class __MainState extends ConsumerState<InitNotifications> {
   void initState() {
     super.initState();
     AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-      print("Wesh alors $isAllowed");
       if (!isAllowed) {
         showDialog(
           context: context,

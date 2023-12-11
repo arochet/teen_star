@@ -51,6 +51,10 @@
     "retour" : "Retour",
     "reglages" : "Réglages",
     "continuer" : "Continuer",
-    "etape" : "Etape"
-
+    "etape" : "Etape",
+    "jailulespoints":"J’ai lu les points ci-dessus et j’ai compris que cette application m’aidera à enregistrer mes observations quotidiennes au cours des cycles menstruels, mais ne peut absolument pas me suffire telle quelle pour éviter (ou favoriser) une grossesse. Je comprends que si tel était mon objectif, je devrais impérativement suivre une formation approfondie avec une monitrice spécialisée en méthode naturelle de régulation des naissances.",
+	"etape":"Etape",
+	"principeutilisation":"Principe d'utilisation",
+    "textinformation":"Cette application créée en 2020 par des médecins est :<br>",
+	"insert" : "insert"
 }

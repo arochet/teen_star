@@ -32,9 +32,9 @@ extension ThemeAppExtension on ThemeApp {
   String get name {
     switch (this) {
       case ThemeApp.blue:
-        return 'Bleu';
+        return 'Ciel';
       case ThemeApp.pink:
-        return 'Rose';
+        return 'Corail';
       default:
         return 'Bleu';
     }
@@ -45,9 +45,9 @@ extension ThemeAppExtension on ThemeApp {
       case ThemeApp.blue:
         return Color.fromARGB(255, 238, 246, 250);
       case ThemeApp.pink:
-        return Colors.pink;
+        return Color.fromARGB(255, 240, 160, 141);
       default:
-        return Color.fromARGB(255, 238, 246, 250);
+        return Color.fromARGB(255, 11, 24, 31);
     }
   }
 
@@ -56,7 +56,7 @@ extension ThemeAppExtension on ThemeApp {
       case ThemeApp.blue:
         return Color.fromARGB(255, 230, 236, 238);
       case ThemeApp.pink:
-        return const Color.fromARGB(255, 206, 50, 102);
+        return Color.fromARGB(255, 218, 150, 133);
       default:
         return Colors.blue;
     }

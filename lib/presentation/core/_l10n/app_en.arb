@@ -54,5 +54,10 @@
     "retour" : "Back",
     "reglages" : "Settings",
     "continuer" : "Continue",
-    "etape" : "Step"
+    "etape" : "Step",
+    "jailulespoints":"I have read the above points and understand that this application will help me record my daily observations during my menstrual cycles, but is in no way sufficient on its own to prevent (or promote) pregnancy. I understand that if this were my goal, I would need to undergo in-depth training with an instructor specialising in natural birth control methods.",
+	"etape":"Step",
+	"principeutilisation":"Conditions of use",
+	"textinformation":"Kyklos, a cycle tracking app created in 2022 by doctors, is :<br>• usable by any woman<br>• specially adapted for pubescent or pre-pubescent girls<br>• is usable offline (data internal to the application)<br>• confidential: no link to any tracking site, server or database; does NOT disclose anydata to third parties without the user's knowledge*. N.B. For the greatest possibleconfidentiality in the digital sphere of this intimate health data, it is preferable to sendPDFs of cycles via Bluetooth or encrypted messaging, and to archive them on apersonal hard drive rather than in the Cloud.<br>• Free of charge<br>*with no source of revenue! Keep it on the stores with a donation, thank you!(<a href=\"https://www.teenstar.fr\">www.teenstar.fr</a> \"help us\" tab).<br><br><u>Fundamentals:</u> Drs G.D., B.deN., A.J., and other, doctors and facilitators at CEPP/TeenSTAR<br>France<br><u>Design, layout and coordination:</u> A.J.<br><u>Illustrations</u>: Inès de Chefdebien (Paris)<br><u>Contact</u>: app@teenstar.fr<br><i>All rights reserved<i>",
+	"insert" : "insert"
 }

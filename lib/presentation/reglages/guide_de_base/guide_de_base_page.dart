@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
@@ -6,7 +7,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
-
+import 'package:flutter/services.dart' show rootBundle;
 import 'widget/bouton_PDF.dart';
 
 class Guide_de_basePage extends StatelessWidget {
@@ -23,8 +24,22 @@ class Guide_de_basePage extends StatelessWidget {
       child: ShowComponentFile(
         title: './lib/PRESENTATION/reglages/principes_de_base/guide_de_base_page.dart',
         child: Padding(
-          padding: EdgeInsets.all(8),
-          child: ListView(children: [
+            padding: EdgeInsets.all(25),
+            child: FutureBuilder(
+              future: rootBundle.loadString('assets/html/guide_de_base_en.html'),
+              builder: (context, async) {
+                if (async.hasData) {
+                  return SingleChildScrollView(
+                      child: HtmlWidget(
+                    async.data.toString(),
+                  ));
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
+            )
+
+            /*ListView(children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 36.0),
               child: Align(
@@ -143,8 +158,8 @@ class Guide_de_basePage extends StatelessWidget {
             //BOUTON PDF
             BoutonPDF(),
             SizedBox(height: 30),
-          ]),
-        ),
+          ]),*/
+            ),
       ),
     );
   }

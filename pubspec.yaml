@@ -58,7 +58,8 @@ dependencies:
   auto_size_text: ^3.0.0
   awesome_notifications_core: ^0.8.1
   awesome_notifications: ^0.8.2
-
+  flutter_html: ^3.0.0-beta.2
+  flutter_widget_from_html_core: ^0.14.7
 
 dev_dependencies:
   build_runner: ^2.4.6
@@ -161,6 +162,8 @@ flutter:
     - assets/icon_observation/douleurs/douleur_DV.png
     - assets/icon_observation/douleurs/douleur_MT.png
     - assets/icon_observation/douleurs/douleur_Aucune.png
+    - assets/html/guide_de_base_en.html
+    - assets/html/guide_avance_en.html
 
 
 

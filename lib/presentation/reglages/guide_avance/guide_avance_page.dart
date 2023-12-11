@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
@@ -6,6 +7,7 @@ import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/cycle/shared/icon_observation.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/widget/diplay_title.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class Guide_avancePage extends StatelessWidget {
   const Guide_avancePage({Key? key}) : super(key: key);
@@ -25,8 +27,20 @@ class Guide_avancePage extends StatelessWidget {
       child: ShowComponentFile(
         title: './lib/PRESENTATION/reglages/guide_avance/guide_avance_page.dart',
         child: Padding(
-          padding: EdgeInsets.all(10),
-          child: ListView(
+            padding: EdgeInsets.all(10),
+            child: FutureBuilder(
+              future: rootBundle.loadString('assets/html/guide_avance_en.html'),
+              builder: (context, async) {
+                if (async.hasData) {
+                  return SingleChildScrollView(
+                      child: HtmlWidget(
+                    async.data.toString(),
+                  ));
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
+            ) /* ListView(
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 36.0),
@@ -222,8 +236,8 @@ class Guide_avancePage extends StatelessWidget {
                 ]),
               )),
             ],
-          ),
-        ),
+          ), */
+            ),
       ),
     );
   }

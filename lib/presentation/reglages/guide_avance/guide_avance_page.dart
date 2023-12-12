@@ -40,7 +40,7 @@ class Guide_avancePage extends StatelessWidget {
                   return Center(child: CircularProgressIndicator());
                 }
               },
-            ) /* ListView(
+            ) /*ListView(
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 36.0),

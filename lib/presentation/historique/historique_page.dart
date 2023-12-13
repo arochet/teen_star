@@ -35,9 +35,8 @@ class HistoriquePage extends ConsumerWidget {
                 if (listCycle.length == 0) {
                   //Pas de cycle
                   return Center(
-                      child: Text("Pas d'historique.", //pas d'historique
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          textAlign: TextAlign.center));
+                      child: Text(AppLocalizations.of(context)!.no_history,
+                          style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center));
                 } else {
                   listCycle = listCycle.reversed.toList();
 

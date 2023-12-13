@@ -236,8 +236,8 @@
     "day":"Jour",
     "date":"Date",
     "comments":"Commentaires",
-    "path_advanded_guide": "assets/html/guide_avance_en.html",
-    "path_basic_guide": "assets/html/guide_de_base_en.html",
+    "path_advanded_guide": "assets/html/guide_avance_fr.html",
+    "path_basic_guide": "assets/html/guide_de_base_fr.html",
     "path_guide_pdf": "assets/guide.pdf",
     "sky": "Ciel",
     "pink": "Corail",
@@ -272,5 +272,8 @@
     "no_notification_scheduled":"Aucune notification programmée",
     "schedule_a_reminder":"Me programmer un rappel",
     "cancel_all_reminders":"Annuler tous les rappels",
+    "add_first_observation":"Ajoutez votre première observation !",
+    "no_history":"Pas d'historique",
+    "display_analyse":"Afficher l'analyse",
     "insert":"insert"
 }

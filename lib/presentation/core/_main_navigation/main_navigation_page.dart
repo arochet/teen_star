@@ -58,7 +58,7 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
           "id": 0,
         },
         {
-          "title": "Historique",
+          "title": AppLocalizations.of(context)!.history,
           "icon": Icons.assessment_outlined,
           "id": 1,
         },

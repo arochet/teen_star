@@ -275,5 +275,8 @@
 "no_notification_scheduled":"No notification scheduled",
 "schedule_a_reminder":"Schedule a reminder",
 "cancel_all_reminders":"Cancel all reminders",
+"add_first_observation":"Add your first comment!",
+"no_history":"No history",
+"display_analyse":"Display analyse",
 "insert":"insert"
 }

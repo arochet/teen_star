@@ -19,6 +19,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'widget/button_ajout_observation_journee.dart';
 import 'widget/button_modification_observation.dart';
 import 'widget/tableau_cycle.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //Analyse
 final showAnalyse = StateProvider<bool>((ref) => true);
@@ -211,7 +212,7 @@ class _PagePasDeCycle extends StatelessWidget {
         children: [
           Expanded(
             child: Center(
-                child: Text("Ajoutez votre première observation !",
+                child: Text(AppLocalizations.of(context)!.add_first_observation,
                     style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center)),
           ),
           ButtonAjoutObservationJournee(),
@@ -240,7 +241,8 @@ class __ShowAnalyseState extends ConsumerState<_ShowAnalyse> {
         child: Row(
           children: [
             Expanded(child: Container()),
-            Text("Afficher l'analyse", style: Theme.of(context).textTheme.titleSmall),
+            Text(AppLocalizations.of(context)!.display_analysis,
+                style: Theme.of(context).textTheme.titleSmall),
             SizedBox(width: 10),
             Icon(ref.watch(showAnalyse) ? Icons.check_box : Icons.check_box_outline_blank,
                 color: ref.watch(showAnalyse) ? actioncolor['primary'] : actioncolor['primary']),

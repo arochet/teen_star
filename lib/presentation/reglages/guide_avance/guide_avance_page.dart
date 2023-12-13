@@ -9,6 +9,7 @@ import 'package:teenstar/PRESENTATION/cycle/shared/icon_observation.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/widget/diplay_title.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:teenstar/PRESENTATION/reglages/guide_de_base/widget/bouton_PDF.dart';
 
 class Guide_avancePage extends StatelessWidget {
   const Guide_avancePage({Key? key}) : super(key: key);
@@ -33,10 +34,10 @@ class Guide_avancePage extends StatelessWidget {
               future: rootBundle.loadString(AppLocalizations.of(context)!.path_advanded_guide),
               builder: (context, async) {
                 if (async.hasData) {
-                  return SingleChildScrollView(
-                      child: HtmlWidget(
-                    async.data.toString(),
-                  ));
+                  return ListView(children: [
+                    HtmlWidget(async.data.toString()),
+                    BoutonPDF(),
+                  ]);
                 } else {
                   return Center(child: CircularProgressIndicator());
                 }

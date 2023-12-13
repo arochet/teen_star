@@ -165,6 +165,8 @@ flutter:
     - assets/icon_observation/douleurs/douleur_Aucune.png
     - assets/html/guide_de_base_en.html
     - assets/html/guide_avance_en.html
+    - assets/html/guide_de_base_fr.html
+    - assets/html/guide_avance_fr.html
 
 
 

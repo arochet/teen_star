@@ -16,6 +16,7 @@ import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/PRESENTATION/cycle/shared/icon_observation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/_utils/app_date_utils.dart';
 import 'button_ajout_observation_journee.dart';
@@ -61,7 +62,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
     }
 
     //Titre du tableau
-    final title = [
+    final indexColumn = [
       'Date',
       if (!ref.watch(showAnalyse)) 'Couleur',
       if (ref.watch(showAnalyse)) 'Analyse',
@@ -71,6 +72,17 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
       //'Douleur',
       'Humeur',
       'Evenements'
+    ];
+    final _title = [
+      AppLocalizations.of(context)!.date,
+      if (!ref.watch(showAnalyse)) AppLocalizations.of(context)!.colour,
+      if (ref.watch(showAnalyse)) AppLocalizations.of(context)!.analyse,
+      AppLocalizations.of(context)!.sensation,
+      AppLocalizations.of(context)!.blood,
+      AppLocalizations.of(context)!.mucus,
+      //'Douleur',
+      AppLocalizations.of(context)!.mood,
+      AppLocalizations.of(context)!.event
     ];
 
     //Largeur des colonnes
@@ -82,21 +94,21 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
     return ShowComponentFile(
       title: 'tableau_cycle.dart',
       child: StickyHeadersTable(
-        columnsLength: title.length,
+        columnsLength: indexColumn.length,
         columnsTitleBuilder: (int colulmnIndex) => _CellHeader(
-          title[colulmnIndex],
+          _title[colulmnIndex],
           underline: colulmnIndex == 1 && ref.watch(showAnalyse),
         ),
         contentCellBuilder: (int columnIndex, int rowIndex) => _Cell(
           observationsAndEmpty[rowIndex],
-          title[columnIndex],
+          indexColumn[columnIndex],
           observationsAndEmpty[rowIndex].id.getOrCrash() == widget.cycle.idJourneeSoleil.getOrCrash(),
         ),
         rowsLength: observationsAndEmpty.length,
         rowsTitleBuilder: (int rowIndex) => _CellDay(
             '${widget.cycle.getDayOfObservation(observationsAndEmpty[rowIndex], datePremierJourCycle)}',
             selection),
-        widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[title[rowIndex]] ?? 50.0),
+        widthCell: (int rowIndex) => NumUtils.parseDouble(cellsWidth[indexColumn[rowIndex]] ?? 50.0),
         cellDimensions: CellDimensions(
           stickyLegendWidth: 40,
           stickyLegendHeight: 50,
@@ -120,8 +132,9 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
               DateTime dateObservation = observationsAndEmpty[rowIndex].date!;
               //Si l'observation est vide, on affiche un message
               if (await showDialogChoix(context,
-                      'Voulez-vous ajouter une observation pour le ${AppDateUtils.formatDate(dateObservation)} ?',
-                      positiveText: 'Ajouter', negativeText: 'Annuler') ==
+                      'Voulez-vous ajouter une observation pour le ${AppDateUtils.formatDate(dateObservation)} ?', //azer
+                      positiveText: 'Ajouter',
+                      negativeText: AppLocalizations.of(context)!.cancel) == //azer
                   true) openPageNouvelleObservation(context, widget.cycle, ref, true, dateObservation);
             }
           }
@@ -346,7 +359,7 @@ class _Cell extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 2),
                               child: _LittleBoxChild(IconObservation(
                                 iconPath: douleur.getOrCrash().toIconPath(),
-                                iconText: douleur.getOrCrash().toDisplayShort(),
+                                iconText: douleur.getOrCrash().toDisplayShort(context),
                                 iconSize: 30,
                               )),
                             ))

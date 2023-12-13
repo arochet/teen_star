@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -11,9 +12,10 @@ import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:io' show Platform;
 
-generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async {
+generatePDF(UserData? userData, List<Cycle> listCycles, Password password, BuildContext context) async {
   //VERIFICATION DES PERMISSIONS !
   PermissionStatus status = await Permission.storage.status;
 
@@ -26,7 +28,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
   }
 
   final PdfDocument pdf = PdfDocument();
-  header(pdf, userData, listCycles);
+  header(pdf, userData, listCycles, context);
 
   //CHARGEMENT LISTE DES ICONES
   Map<SangState, PdfBitmap> listImageSang = {};
@@ -57,22 +59,22 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
 
   //Entete du tableau
   final List<CellHeader> tabTitleCycle = [
-    CellHeader('Jour', width: 35),
-    CellHeader('Date', width: 45),
-    CellHeader('Couleur'),
-    CellHeader('Analyse'),
-    CellHeader('Sensation'),
-    CellHeader('Sang'),
-    CellHeader('Mucus'),
-    CellHeader('Humeur'),
-    CellHeader('Température'),
-    CellHeader('Evénement', width: 170),
+    CellHeader(AppLocalizations.of(context)!.day, width: 35),
+    CellHeader(AppLocalizations.of(context)!.date, width: 45),
+    CellHeader(AppLocalizations.of(context)!.colour),
+    CellHeader(AppLocalizations.of(context)!.analyse),
+    CellHeader(AppLocalizations.of(context)!.sensation),
+    CellHeader(AppLocalizations.of(context)!.blood),
+    CellHeader(AppLocalizations.of(context)!.mucus),
+    CellHeader(AppLocalizations.of(context)!.mood),
+    CellHeader(AppLocalizations.of(context)!.temperature),
+    CellHeader(AppLocalizations.of(context)!.event, width: 170),
   ];
 
   final List<CellHeader> tabTitleCycleCommentaire = [
-    CellHeader('Jour', width: 35),
-    CellHeader('Date', width: 45),
-    CellHeader('Commentaires'),
+    CellHeader(AppLocalizations.of(context)!.day, width: 35),
+    CellHeader(AppLocalizations.of(context)!.date, width: 45),
+    CellHeader(AppLocalizations.of(context)!.comments),
   ];
 
   //IMAGE
@@ -86,7 +88,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
 
     //Entete du text Cycle
     PdfTextElement textElement = PdfTextElement(
-        text: 'Cycle ${cycle.id.getOrCrash()}',
+        text: '${AppLocalizations.of(context)!.cycle} ${cycle.id.getOrCrash()}',
         font: PdfStandardFont(PdfFontFamily.helvetica, 12),
         brush: PdfBrushes.black);
 
@@ -105,17 +107,19 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
                     .toList() ??
                 [])
             .join(' ');
-        String douleurs =
-            (observation.douleurs?.map<String>((douleur) => douleur.getOrCrash().toDisplayShort()).toList() ??
-                    [])
-                .join(' ');
+        String douleurs = (observation.douleurs
+                    ?.map<String>((douleur) => douleur.getOrCrash().toDisplayShort(context))
+                    .toList() ??
+                [])
+            .join(' ');
         return !observation.isNone
             ? <_Cell>[
                 _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                 _CellText(AppDateUtils.formatDate(observation.date)),
                 observation.toCellColor(), //Cellule couleur
                 observation.toCellAnalyse(cycle.isJourneeSoleil(observation)), //Cellule analyse
-                _CellIcon(observation.sensation?.getOrCrash().toDisplayShort() ?? ''), //Cellule sensation
+                _CellIcon(
+                    observation.sensation?.getOrCrash().toDisplayShort(context) ?? ''), //Cellule sensation
                 _CellImage(listImageSang[observation.sang?.getOrCrash()]!), //Cellule sang
                 _CellImage(listImageMucus[observation.mucus?.getOrCrash()]!), //Cellule mucus
                 _CellImage(listImageHumeur[observation.humeur?.getOrCrash()]!), //Cellule humeur
@@ -146,7 +150,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
     //PAGE COMMENTAIRES
     page = pdf.pages.add();
     textElement = PdfTextElement(
-        text: 'Commentaire du cycle ${cycle.id.getOrCrash()}',
+        text: '${AppLocalizations.of(context)!.cycle_comments} ${cycle.id.getOrCrash()}',
         font: PdfStandardFont(PdfFontFamily.helvetica, 20),
         brush: PdfBrushes.black);
     layoutResult = textElement.draw(
@@ -158,10 +162,11 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
         tabTitleHeader: tabTitleCycleCommentaire,
         data: cycle.observations
             .map((Observation observation) => <_Cell>[
-                  _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
+                  _CellText(
+                      '${AppLocalizations.of(context)!.d_day_1_etc}${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                   _CellText(AppDateUtils.formatDate(observation.date)),
                   _CellText(
-                      '${observation.commentaireAnimatrice ?? '-'}/${observation.sensationsAutre ?? '-'}/${observation.mucusAutre ?? '-'}/${observation.douleursAutre ?? '-'}/${observation.humeurAutre ?? '-'}/${observation.evenementsAutre ?? '-'}/${observation.notesConfidentielles != null && observation.notesConfidentielles!.length > 1 ? '*Notes Confidentielle*' : ''}'),
+                      '${observation.commentaireAnimatrice ?? '-'}/${observation.sensationsAutre ?? '-'}/${observation.mucusAutre ?? '-'}/${observation.douleursAutre ?? '-'}/${observation.humeurAutre ?? '-'}/${observation.evenementsAutre ?? '-'}/${observation.notesConfidentielles != null && observation.notesConfidentielles!.length > 1 ? '*Notes Confidentielle*' : ''}'), //azer
                 ])
             .toList(),
         iconEmpty: listImageMucus[MucusState.none]!,
@@ -173,11 +178,13 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
   //PAGE HISTORIQUE
   PdfPage page = pdf.pages.add();
   PdfTextElement textElement = PdfTextElement(
-      text: 'Historique', font: PdfStandardFont(PdfFontFamily.helvetica, 16), brush: PdfBrushes.black);
+      text: AppLocalizations.of(context)!.history,
+      font: PdfStandardFont(PdfFontFamily.helvetica, 16),
+      brush: PdfBrushes.black);
   PdfLayoutResult layoutResult = textElement.draw(
       page: page, bounds: Rect.fromLTWH(0, 0, page.getClientSize().width, page.getClientSize().height))!;
   List<CellHeader> headerHistorique = [
-    CellHeader('Jour', width: 30),
+    CellHeader(AppLocalizations.of(context)!.day, width: 30),
     ...listCycles.map((Cycle cycle) => CellHeader('${cycle.id.getOrCrash()}', width: 32)).toList()
   ];
 
@@ -242,10 +249,11 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password) async
   pdf.dispose();
 }
 
-header(PdfDocument pdf, UserData? userData, List<Cycle> listCycle) {
+header(PdfDocument pdf, UserData? userData, List<Cycle> listCycle, BuildContext context) {
   final PdfPageTemplateElement headerTemplate = PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 500, 60));
   //Résumé / Analyse du cycle 1 au cycle 2
   headerTemplate.graphics.drawString(
+      //azer
       listCycle.length > 1
           ? 'Résumé / Analyse du cycle ${listCycle.first.id.getOrCrash()} au cycle ${listCycle.last.id.getOrCrash()}'
           : 'Résumé / Analyse du cycle ${listCycle.first.id.getOrCrash()}',

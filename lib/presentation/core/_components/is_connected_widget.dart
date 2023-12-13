@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IsConnected extends StatefulWidget {
   final Widget child;
@@ -59,7 +60,8 @@ class _IsConnectedState extends State<IsConnected> {
           Container(
             height: 40,
             child: Center(
-              child: Text("Pas de connexion internet", style: Theme.of(context).textTheme.titleSmall),
+              child: Text(AppLocalizations.of(context)!.pasinternet,
+                  style: Theme.of(context).textTheme.titleSmall),
             ),
           ),
         Expanded(child: widget.child),

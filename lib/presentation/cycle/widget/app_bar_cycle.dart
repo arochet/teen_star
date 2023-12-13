@@ -10,6 +10,7 @@ import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/providers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppBarCycle extends ConsumerWidget {
   List<CycleDTO> listCyclesDTO;
@@ -106,7 +107,7 @@ class AppBarCycle extends ConsumerWidget {
                   if (cycleSuivant == null) Container(width: widthVide),
                   Flexible(
                     child: Text(
-                      "Cycle ${cycleCourant?.id}",
+                      "${AppLocalizations.of(context)!.cycle} ${cycleCourant?.id}",
                       style: Theme.of(context).textTheme.titleMedium,
                       overflow: TextOverflow.fade,
                     ),
@@ -139,7 +140,7 @@ class AppBarCycle extends ConsumerWidget {
   Future<dynamic> _ouvrirChoixCycle(BuildContext context, WidgetRef ref) {
     return showDialogApp(
         context: context,
-        titre: "Choisir un cycle",
+        titre: "Choisir un cycle", //azer
         child: Container(
           height: 250,
           width: 130,
@@ -155,7 +156,7 @@ class AppBarCycle extends ConsumerWidget {
               },
               child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text("Cycle ${listCyclesDTO[index].id}"),
+                child: Text("${AppLocalizations.of(context)!.cycle} ${listCyclesDTO[index].id}"),
               ),
             ),
           ),

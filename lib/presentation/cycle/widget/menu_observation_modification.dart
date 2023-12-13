@@ -10,6 +10,7 @@ import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/providers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../core/_core/router.gr.dart';
 import '../cycles_page.dart';
@@ -23,21 +24,21 @@ afficherModalModificationObservation(
     context: context,
     builder: (BuildContext context) => CupertinoActionSheet(
       title: Text(
-          "Observation du J${cycle.getDayOfObservation(observation, cycle.getDateObservationFirstDay())}"),
+          "${AppLocalizations.of(context)!.observation_of_d}${cycle.getDayOfObservation(observation, cycle.getDateObservationFirstDay())}"),
       message: Text("${AppDateUtils.formatDate(observation.date, "EEEE d MMMM yyyy")}"),
       cancelButton: CupertinoActionSheetAction(
         onPressed: () async {
           Navigator.pop(context);
         },
-        child: Text('Annuler'),
+        child: Text(AppLocalizations.of(context)!.cancel),
       ),
       actions: <CupertinoActionSheetAction>[
         CupertinoActionSheetAction(
-          child: Text('Lire les notes'),
+          child: Text('Lire les notes'), //azer
           onPressed: () async {
             await showDialogApp<void>(
               context: context,
-              titre: "Observation du ${AppDateUtils.formatDate(observation.date)}",
+              titre: "Observation du ${AppDateUtils.formatDate(observation.date)}", //azer
               child: ShowObservationNotes(observation: observation),
               actions: <Widget>[
                 /* TextButton(
@@ -65,21 +66,21 @@ afficherModalModificationObservation(
             ref.read(showAnalyse.notifier).state = true;
             refreshAndPop(context, ref);
           },
-          child: Text('Marquer comme jour Sommet'),
+          child: Text(AppLocalizations.of(context)!.mark_as_peak_day),
         ),
         CupertinoActionSheetAction(
           onPressed: () async {
             await showDialogApp<void>(
               context: context,
               child: ModifierCouleurDialog([observation]),
-              titre: "Choisir une couleur",
+              titre: AppLocalizations.of(context)!.choose_colour,
             );
             Navigator.pop(context);
           },
-          child: Text('Modifier la couleur'),
+          child: Text(AppLocalizations.of(context)!.change_colour),
         ),
         CupertinoActionSheetAction(
-          child: Text('Marquer 1'),
+          child: Text(AppLocalizations.of(context)!.mark_1),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 1);
             ref.read(showAnalyse.notifier).state = true;
@@ -87,7 +88,7 @@ afficherModalModificationObservation(
           },
         ),
         CupertinoActionSheetAction(
-          child: Text('Marquer 2'),
+          child: Text(AppLocalizations.of(context)!.mark_2),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 2);
             ref.read(showAnalyse.notifier).state = true;
@@ -95,7 +96,7 @@ afficherModalModificationObservation(
           },
         ),
         CupertinoActionSheetAction(
-          child: Text('Marquer 3'),
+          child: Text(AppLocalizations.of(context)!.mark_3),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 3);
             ref.read(showAnalyse.notifier).state = true;
@@ -103,7 +104,7 @@ afficherModalModificationObservation(
           },
         ),
         CupertinoActionSheetAction(
-          child: Text('Effacer le "?"'),
+          child: Text(AppLocalizations.of(context)!.delete_point_interrogation),
           onPressed: () async {
             printDev();
             await ref.read(cycleRepositoryProvider).enleverPointInterrogation([observation], true);
@@ -112,7 +113,7 @@ afficherModalModificationObservation(
           },
         ),
         CupertinoActionSheetAction(
-          child: Text('Modifier observation du jour'),
+          child: Text(AppLocalizations.of(context)!.modify_daily_observation),
           onPressed: () async {
             printDev();
             //On ouvre la page d'ajout d'observation
@@ -130,10 +131,10 @@ afficherModalModificationObservation(
             if (id != null) ref.refresh(cycleProvider(id));
             Navigator.pop(context);
           },
-          child: Text('Annuler sommet'),
+          child: Text(AppLocalizations.of(context)!.cancel_peak_day),
         ),
         CupertinoActionSheetAction(
-          child: Text('Annuler couleur'),
+          child: Text(AppLocalizations.of(context)!.cancel_colour),
           onPressed: () async {
             await ref
                 .read(cycleRepositoryProvider)
@@ -143,7 +144,7 @@ afficherModalModificationObservation(
           },
         ),
         CupertinoActionSheetAction(
-          child: Text('Annuler marquage'),
+          child: Text(AppLocalizations.of(context)!.cancel_marking),
           onPressed: () async {
             await ref.read(cycleRepositoryProvider).marquerComme(observation, 0);
             await ref.read(cycleRepositoryProvider).enleverPointInterrogation([observation], false);
@@ -154,15 +155,18 @@ afficherModalModificationObservation(
         CupertinoActionSheetAction(
           isDestructiveAction: true,
           onPressed: () async {
-            final res = await showDialogChoix(context, "Voulez-vous vraiment supprimer cette observation ?",
-                positiveText: 'Supprimer', negativeText: 'Annuler', isDanger: true);
+            final res = await showDialogChoix(
+                context, AppLocalizations.of(context)!.do_you_really_want_to_delete_this_observation,
+                positiveText: AppLocalizations.of(context)!.delete,
+                negativeText: AppLocalizations.of(context)!.cancel,
+                isDanger: true);
 
             if (res == true) {
               await ref.read(cycleRepositoryProvider).delete(observation.id);
               refreshAndPop(context, ref);
             }
           },
-          child: Text('Supprimer observation du jour'),
+          child: Text('Supprimer observation du jour'), //azer
         ),
       ],
     ),

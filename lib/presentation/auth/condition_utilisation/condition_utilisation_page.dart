@@ -47,7 +47,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                       onPressed: () {
                         context.router.push(Principes_de_baseRoute());
                       },
-                      label: Text("Guide de base"),
+                      label: Text(AppLocalizations.of(context)!.basic_guide),
                       style: buttonLittleSecondary,
                     ),
                   ),
@@ -74,7 +74,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                                   color: actioncolor['primary']),
                               SizedBox(width: 15),
                               Flexible(
-                                child: Text("J'ai lu et j'accepte les \nconditions d'utilisation",
+                                child: Text("J'ai lu et j'accepte les \nconditions d'utilisation", //azer
                                     style: Theme.of(context).textTheme.labelMedium),
                               ),
                             ],
@@ -91,7 +91,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                         if (conditionAccecpte) {
                           context.router.push(AuthRegisterRoute());
                         } else {
-                          showSnackbar(context, 'Vous devez accepter les conditions d\'utilisation');
+                          showSnackbar(context, 'Vous devez accepter les conditions d\'utilisation'); //azer
                         }
                       },
                       child: Text(AppLocalizations.of(context)!.continuer),

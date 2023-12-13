@@ -29,19 +29,22 @@ class PanelPersonnelData extends StatelessWidget {
           icon: Icons.account_circle_rounded,
         ),
         ItemPanelList(
-          title: 'Année des 1ères règles: ${userData?.anneePremiereRegle ?? '--'}',
+          title:
+              '${AppLocalizations.of(context)!.year_of_first_period}: ${userData?.anneePremiereRegle ?? '--'}',
           icon: Icons.local_florist,
         ),
         ItemPanelList(
-          title: 'Date de naissance: ${AppDateUtils.formatDate(userData?.dateNaissance, 'dd.MM.yyyy')}',
+          title:
+              '${AppLocalizations.of(context)!.date_of_birth}: ${AppDateUtils.formatDate(userData?.dateNaissance, 'dd.MM.yyyy')}',
           icon: Icons.child_friendly,
         ),
         ItemPanelList(
-          title: 'Langue: ${languageApp.name}',
+          title: '${AppLocalizations.of(context)!.language}: ${languageApp.name}',
           icon: Icons.flag,
         ),
         ItemPanelList(
-          title: 'Thème: ${ThemeAppExtension.fromIndex(userData?.theme).name}',
+          title:
+              '${AppLocalizations.of(context)!.theme}: ${ThemeAppExtension.fromIndex(userData?.theme).name(context)}',
           icon: Icons.palette,
         ),
       ],

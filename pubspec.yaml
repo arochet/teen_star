@@ -108,6 +108,7 @@ flutter:
           weight: 700
   assets:
     - assets/guide.pdf
+    - assets/guide_en.pdf
     - assets/logo_vide.png
     - assets/icon/logo.png
     - assets/icon_app/icon_hachurage.png

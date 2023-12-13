@@ -11,6 +11,7 @@ import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/providers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonAjoutObservationJournee extends ConsumerWidget {
   ButtonAjoutObservationJournee({
@@ -37,7 +38,7 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
                 //3 options : true = continuer cycle | false = nouveau cyle | null = annulation
                 final bool? continuerCycle = await showDialogApp<bool?>(
                   context: context,
-                  titre: "Voulez-vous continuer le Cycle en cours ?",
+                  titre: AppLocalizations.of(context)!.do_you_want_to_continue_the_current_cycle,
                   child: _DialogChoixContinuationCycle(cycle),
                 );
 
@@ -48,7 +49,7 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
               openPageNouvelleObservation(context, null, ref, null, DateTime.now());
             }
           },
-          child: Text("Observation de la journée"),
+          child: Text(AppLocalizations.of(context)!.observation_of_the_day),
           style: buttonNormalPrimary,
         ),
       ),
@@ -84,7 +85,7 @@ class _DialogChoixContinuationCycle extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
-              child: Text("Nouveau Cycle"),
+              child: Text(AppLocalizations.of(context)!.new_cycle),
               style: buttonPrimaryHide,
             ),
             SpaceH10(),
@@ -92,7 +93,7 @@ class _DialogChoixContinuationCycle extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
-              child: Text("Continuer Cycle ${cycle.id.getOrCrash()}"),
+              child: Text("${AppLocalizations.of(context)!.continue_cycle} ${cycle.id.getOrCrash()}"),
               style: buttonNormalPrimary,
             ),
           ],

@@ -12,6 +12,7 @@ import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../providers.dart';
 
@@ -41,7 +42,8 @@ class TableauHistorique extends ConsumerWidget {
     return ShowComponentFile(
       title: 'TableauHistorique',
       child: StickyHeadersTable(
-        legendCell: Text('Cycle n°', style: Theme.of(context).textTheme.titleSmall),
+        legendCell:
+            Text('${AppLocalizations.of(context)!.cycle} n°', style: Theme.of(context).textTheme.titleSmall),
         columnsLength: title.length,
         columnsTitleBuilder: (int colulmnIndex) =>
             _CellHeader(title[colulmnIndex], listHistorique[colulmnIndex].id), //Titre des colonnes

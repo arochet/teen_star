@@ -4,6 +4,7 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:teenstar/DOMAIN/core/failures.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum CouleurAnalyseState { rougePlusPlus, rougePlus, rougeClair, brun, vert, jaune, bleue, none, invalide }
 
@@ -98,33 +99,33 @@ extension ParseToSringSensation on SensationState {
     return this.toString().toLowerCase();
   }
 
-  String toDisplayString() {
+  String toDisplayString(BuildContext context) {
     switch (this) {
       case SensationState.sec:
-        return 'sec';
+        return AppLocalizations.of(context)!.dry_legend_icon_d;
       case SensationState.humide:
-        return 'humide';
+        return AppLocalizations.of(context)!.humid;
       case SensationState.mouille:
-        return 'mouillé';
+        return AppLocalizations.of(context)!.wet;
       case SensationState.glissantLubrifie:
-        return 'glissant lubrifié';
+        return AppLocalizations.of(context)!.slippery_lubricated;
       case SensationState.nonpercu:
-        return 'non perçue';
+        return AppLocalizations.of(context)!.not_perceived;
       case SensationState.autre:
-        return 'autre sensation';
+        return AppLocalizations.of(context)!.other_sensation;
       case SensationState.none:
         return '';
     }
   }
 
-  String toDisplayShort() {
+  String toDisplayShort(BuildContext context) {
     switch (this) {
       case SensationState.sec:
-        return 'S';
+        return AppLocalizations.of(context)!.d_letter_in_icon;
       case SensationState.humide:
         return 'H';
       case SensationState.mouille:
-        return 'M';
+        return AppLocalizations.of(context)!.w;
       case SensationState.glissantLubrifie:
         return 'L';
       case SensationState.nonpercu:
@@ -189,16 +190,16 @@ extension ParseToSringSang on SangState {
     return this.toString().toLowerCase();
   }
 
-  String toDisplayString() {
+  String toDisplayString(BuildContext context) {
     switch (this) {
       case SangState.fluxPP:
-        return 'flux ++';
+        return AppLocalizations.of(context)!.flow_pp;
       case SangState.fluxP:
-        return 'flux +';
+        return AppLocalizations.of(context)!.flow_p;
       case SangState.traces:
-        return 'traces';
+        return AppLocalizations.of(context)!.traces;
       case SangState.rien:
-        return 'rien';
+        return AppLocalizations.of(context)!.nothing;
       case SangState.none:
         return '';
     }
@@ -262,22 +263,22 @@ extension ParseToSringMucus on MucusState {
     return this.toString().toLowerCase();
   }
 
-  String toDisplayString() {
+  String toDisplayString(BuildContext context) {
     switch (this) {
       case MucusState.opaqueBlancOuJaune:
-        return 'Opaque blanc ou jaune; épais, pâteux ou grumeleux; collant (non étirable)';
+        return AppLocalizations.of(context)!.white_or_yellow_opaque;
       case MucusState.depotSecheBlancOuJaune:
-        return 'Dépôt séché blanc ou jaune';
+        return AppLocalizations.of(context)!.dried_white_or_yellow_deposit;
       case MucusState.opaqueAvecTransparent_UnPeuEtirable:
-        return 'Opaque avec transparent; un peu étirable';
+        return AppLocalizations.of(context)!.opaque_with_transparency;
       case MucusState.nuageuxATransparent_Elastique:
-        return 'Nuageux (blanc) à transparent; élastique';
+        return AppLocalizations.of(context)!.cloudy_to_transparent;
       case MucusState.transparentFilantOuTresFluide:
-        return 'Transparent filant (~ blanc d\'oeuf), ou très fluide (~eau)';
+        return AppLocalizations.of(context)!.stringy_transparent;
       case MucusState.aucunMucusVisible:
-        return 'Aucun mucus visible';
+        return AppLocalizations.of(context)!.no_visible_mucus;
       case MucusState.autre:
-        return 'Autre observation';
+        return AppLocalizations.of(context)!.other_observation;
       case MucusState.none:
         return '';
     }
@@ -359,33 +360,33 @@ extension ParseToSringDouleur on DouleurState {
     return this.toString().toLowerCase();
   }
 
-  String toDisplayString() {
+  String toDisplayString(BuildContext context) {
     switch (this) {
       case DouleurState.seins:
-        return 'Tension seins';
+        return AppLocalizations.of(context)!.breast_tension;
       case DouleurState.ventre:
-        return 'Douleur ventre';
+        return AppLocalizations.of(context)!.belly_pain;
       case DouleurState.malDeTete:
-        return 'Mal de tête';
+        return AppLocalizations.of(context)!.headache;
       case DouleurState.aucune:
-        return 'Aucune';
+        return AppLocalizations.of(context)!.nothing;
       case DouleurState.acne:
-        return 'Acné';
+        return AppLocalizations.of(context)!.acne;
       case DouleurState.none:
         return '';
     }
   }
 
-  String toDisplayShort() {
+  String toDisplayShort(BuildContext context) {
     switch (this) {
       case DouleurState.seins:
-        return 'DS';
+        return AppLocalizations.of(context)!.bt;
       case DouleurState.ventre:
-        return 'DV';
+        return AppLocalizations.of(context)!.bp;
       case DouleurState.malDeTete:
-        return 'MT';
+        return AppLocalizations.of(context)!.ha;
       case DouleurState.acne:
-        return 'Ac';
+        return AppLocalizations.of(context)!.ac;
       case DouleurState.aucune:
         return '-';
       case DouleurState.none:
@@ -454,24 +455,24 @@ extension ParseToSringEvenement on EvenementState {
     return this.toString().toLowerCase();
   }
 
-  String toDisplayString() {
+  String toDisplayString(BuildContext context) {
     switch (this) {
       case EvenementState.fatigue:
-        return 'Fatigue';
+        return AppLocalizations.of(context)!.fatigue;
       case EvenementState.stress:
-        return 'Stress';
+        return AppLocalizations.of(context)!.stress;
       case EvenementState.voyage:
-        return 'Voyage; horaires inhabituels';
+        return AppLocalizations.of(context)!.travel_unusual_schedules;
       case EvenementState.personnelType1:
-        return 'Personnel Type 1';
+        return AppLocalizations.of(context)!.personal_1;
       case EvenementState.personnelType2:
-        return 'Personnel Type 2';
+        return AppLocalizations.of(context)!.personal_2;
       case EvenementState.maladie:
-        return 'Maladie ou fièvre';
+        return AppLocalizations.of(context)!.illness_or_fever;
       case EvenementState.medicament:
-        return 'Médicament';
+        return 'Médicament'; //azer
       case EvenementState.autre:
-        return 'Autre note';
+        return AppLocalizations.of(context)!.other_note;
       case EvenementState.none:
         return '';
     }
@@ -567,24 +568,24 @@ extension ParseToSringHumeur on HumeurState {
     return this.toString().toLowerCase();
   }
 
-  String toDisplayString() {
+  String toDisplayString(BuildContext context) {
     switch (this) {
       case HumeurState.tresBonne:
-        return 'Très bonne';
+        return AppLocalizations.of(context)!.very_good;
       case HumeurState.bonne:
-        return 'Bonne';
+        return AppLocalizations.of(context)!.good;
       case HumeurState.pasEmotionParticuliere:
-        return 'Pas d\'émotion particulière, équilibre';
+        return AppLocalizations.of(context)!.no_particular_emotion_balanced;
       case HumeurState.EnvieEtreTranquille:
-        return 'Envie d\'être tranquille';
+        return AppLocalizations.of(context)!.desire_to_be_undisturbed;
       case HumeurState.humeurChangeante:
-        return 'Humeur changeante';
+        return AppLocalizations.of(context)!.mood_swings;
       case HumeurState.nervositeIrritable:
-        return 'Nervosité irritable';
+        return AppLocalizations.of(context)!.nervous_irritable;
       case HumeurState.tristesse:
-        return 'Tristesse\nDécouragement\nHypersensibilité';
+        return AppLocalizations.of(context)!.sadness_discouragement_hypersensitivity;
       case HumeurState.autre:
-        return 'Autre';
+        return AppLocalizations.of(context)!.other;
       case HumeurState.none:
         return '';
     }

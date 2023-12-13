@@ -8,6 +8,7 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/cycle/shared/icon_observation.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/widget/diplay_title.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Guide_avancePage extends StatelessWidget {
   const Guide_avancePage({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class Guide_avancePage extends StatelessWidget {
         child: Padding(
             padding: EdgeInsets.all(10),
             child: FutureBuilder(
-              future: rootBundle.loadString('assets/html/guide_avance_en.html'),
+              future: rootBundle.loadString(AppLocalizations.of(context)!.path_advanded_guide),
               builder: (context, async) {
                 if (async.hasData) {
                   return SingleChildScrollView(

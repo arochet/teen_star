@@ -13,6 +13,7 @@ import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/dialog_pdf.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'widget/tableau_historique.dart';
 
@@ -34,8 +35,9 @@ class HistoriquePage extends ConsumerWidget {
                 if (listCycle.length == 0) {
                   //Pas de cycle
                   return Center(
-                      child: Text("Pas d'historique.",
-                          style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center));
+                      child: Text("Pas d'historique.", //pas d'historique
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center));
                 } else {
                   listCycle = listCycle.reversed.toList();
 
@@ -60,7 +62,9 @@ class HistoriquePage extends ConsumerWidget {
                                 final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
 
                                 showDialogApp(
-                                    context: context, titre: "Exporter PDF", child: DialogPDF(listeCycle));
+                                    context: context,
+                                    titre: AppLocalizations.of(context)!.export_as_pdf,
+                                    child: DialogPDF(listeCycle));
                               },
                             );
                           },

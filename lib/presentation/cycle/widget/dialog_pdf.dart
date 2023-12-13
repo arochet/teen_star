@@ -8,6 +8,7 @@ import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../pdf/generate_cycle_pdf.dart';
 
@@ -42,12 +43,12 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
         height: 210,
         child: Column(
           children: [
-            Text("Maximum 15 cycles autorisés",
+            Text(AppLocalizations.of(context)!.maximum_cycles_at_a_time,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(color: colorpanel(100))),
             const SpaceH10(),
             Row(
               children: [
-                Text("Du cycle ", style: Theme.of(context).textTheme.titleSmall),
+                Text(AppLocalizations.of(context)!.from_cycle, style: Theme.of(context).textTheme.titleSmall),
                 Expanded(child: Container()),
                 Container(
                   width: 50,
@@ -64,7 +65,7 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
             SpaceH10(),
             Row(
               children: [
-                Text("Au cycle ", style: Theme.of(context).textTheme.titleSmall),
+                Text(AppLocalizations.of(context)!.to_cycle, style: Theme.of(context).textTheme.titleSmall),
                 Expanded(child: Container()),
                 Container(
                   width: 50,
@@ -91,14 +92,15 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
                 listCycleAsync.fold((l) => showSnackbarCycleFailure(context, l), (list) async {
                   if (list.length > 0) {
                     setState(() => isLoading = true);
-                    await generatePDF(userData, list, passwordPdf);
+                    await generatePDF(userData, list, passwordPdf, context);
                     Navigator.of(context).pop();
                   } else
-                    showSnackbar(context,
+                    showSnackbar(
+                        context, //azer
                         "Aucun cycle à exporter dans ces bornes [${controllerPremierCycle.text} - ${controllerDernierCycle.text}]");
                 });
               },
-              child: Text("Exportation PDF"),
+              child: Text(AppLocalizations.of(context)!.export_as_pdf),
               style: buttonNormalPrimaryFull,
             ),
           ],

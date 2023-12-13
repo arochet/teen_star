@@ -40,7 +40,7 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
       ), */
       //Supprimer le compte
       ItemPanelList(
-        title: 'Réinitialiser l\'application',
+        title: AppLocalizations.of(context)!.reset_application,
         icon: Icons.cancel,
         onTap: () => _deleteAccount(ref),
       ),
@@ -68,8 +68,9 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
       onPressed: () async {
         await context.router.pop();
 
-        final ok = await showDialogChoix(context, 'Tous vos enregistrements seront définitivement effacés',
-            positiveText: 'Tout effacer');
+        final ok =
+            await showDialogChoix(context, 'Tous vos enregistrements seront définitivement effacés', //azer
+                positiveText: 'Tout effacer'); //azer
         if (ok == true) {
           final result = await ref.read(cycleRepositoryProvider).resetAll();
           ref.invalidate(allCycleProvider);

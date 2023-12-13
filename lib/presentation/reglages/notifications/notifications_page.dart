@@ -46,13 +46,13 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                       children: [
                         Text('Notifications', style: Theme.of(context).textTheme.titleSmall),
                         SpaceH10(),
-                        Text('Activer les notifications pour recevoir des alertes et des rappels',
+                        Text('Activer les notifications pour recevoir des alertes et des rappels', //azer
                             style: Theme.of(context).textTheme.bodyMedium),
                         SpaceH10(),
                         Text(
                             listNotifications.length > 0
-                                ? "Les notifications sont programmées"
-                                : "Aucune notification programmée",
+                                ? "Les notifications sont programmées" //azer
+                                : "Aucune notification programmée", //azer
                             style: Theme.of(context).textTheme.bodyMedium),
                         SpaceH10(),
                         ElevatedButton(
@@ -65,7 +65,7 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                               setState(() {});
                             }
                           },
-                          child: Text("Me programmer un rappel"),
+                          child: Text("Me programmer un rappel"), //azer
                           style: buttonNormalPrimary,
                         ),
                         SpaceH10(),
@@ -76,7 +76,7 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                             listNotifications = await AwesomeNotifications().listScheduledNotifications();
                             setState(() {});
                           },
-                          child: Text("Annuler tous les rappels"),
+                          child: Text("Annuler tous les rappels"), //azer
                           style: buttonNormalPrimary,
                         ),
                       ],

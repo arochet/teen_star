@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'show_component_file.dart';
 
@@ -85,8 +86,9 @@ Future<Object> showDialogPassword<bool>({
       return StatefulBuilder(builder: (context, setState) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
-          title: Text('Entrez le mot de passe',
-              style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center),
+          title: Text('Entrez le mot de passe', //azer
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center),
           content: Form(
             key: _formKey,
             child: Column(
@@ -94,7 +96,7 @@ Future<Object> showDialogPassword<bool>({
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: 'Mot de passe Application',
+                    hintText: AppLocalizations.of(context)!.motdepasse, //azer
                     border: OutlineInputBorder(),
                     hintStyle: TextStyle(color: colorpanel(200)),
                     errorText: textError,
@@ -115,7 +117,7 @@ Future<Object> showDialogPassword<bool>({
                       Navigator.of(context).pop(true);
                     else {
                       setState(() {
-                        textError = "Mot de passe incorrect";
+                        textError = AppLocalizations.of(context)!.motdepasseinvalid;
                       });
                       controller.clear();
                     }
@@ -130,7 +132,7 @@ Future<Object> showDialogPassword<bool>({
             if (dissmissable == true) ...[
               ElevatedButton(
                   style: buttonPrimaryHideLittle,
-                  child: const Text('Annuler'),
+                  child: Text(AppLocalizations.of(context)!.cancel),
                   onPressed: () {
                     Navigator.of(context).pop(false);
                   }),
@@ -138,7 +140,7 @@ Future<Object> showDialogPassword<bool>({
             ],
             ElevatedButton(
                 style: buttonLittlePrimary,
-                child: const Text('Accéder'),
+                child: const Text('Accéder'), //azer
                 onPressed: () async {
                   final passwordOK =
                       await ref.read(authRepositoryProvider).checkPasswordAppli(controller.text);
@@ -146,7 +148,7 @@ Future<Object> showDialogPassword<bool>({
                     Navigator.of(context).pop(true);
                   else {
                     setState(() {
-                      textError = "Mot de passe incorrect";
+                      textError = AppLocalizations.of(context)!.motdepasseinvalid;
                     });
                     controller.clear();
                   }

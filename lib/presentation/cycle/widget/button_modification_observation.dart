@@ -9,6 +9,7 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/modifier_couleur_dialog.dart';
 import 'package:teenstar/providers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../cycles_page.dart';
 
@@ -34,7 +35,7 @@ class ButtonModificationObservation extends ConsumerWidget {
                 printDev();
                 ref.watch(isSelection.notifier).state = !ref.read(isSelection);
               },
-              child: Text("Annuler"),
+              child: Text(AppLocalizations.of(context)!.cancel),
               style: buttonNormalSecondary,
             ),
             ElevatedButton(
@@ -44,11 +45,12 @@ class ButtonModificationObservation extends ConsumerWidget {
                 //DIALOG pour la modification du cycle
                 await showDialogApp(
                   context: context,
-                  titre: "Analyser $nombreObservation observation${nombreObservation > 1 ? 's' : ''}",
+                  titre:
+                      "${AppLocalizations.of(context)!.analyse} $nombreObservation ${AppLocalizations.of(context)!.observation} ${nombreObservation > 1 ? 's' : ''}",
                   child: _DialogModificationCycle(),
                 );
               },
-              child: Text("Analyser"),
+              child: Text(AppLocalizations.of(context)!.analyse),
               style: buttonNormalPrimary,
             ),
           ],
@@ -80,7 +82,7 @@ class _DialogModificationCycle extends ConsumerWidget {
                 await showDialogApp<void>(
                   context: context,
                   child: ModifierCouleurDialog(listObservationSelectionnee),
-                  titre: "Choisir une couleur",
+                  titre: AppLocalizations.of(context)!.choose_colour,
                 );
 
                 ref.watch(isSelection.notifier).state = false;
@@ -88,7 +90,7 @@ class _DialogModificationCycle extends ConsumerWidget {
                 _rafraichirPage(ref);
                 Navigator.of(context).pop();
               },
-              child: Text("Modifier couleur"),
+              child: Text(AppLocalizations.of(context)!.change_colour),
               style: buttonNormalSecondaryFull,
             ),
             SpaceH5(),
@@ -103,7 +105,7 @@ class _DialogModificationCycle extends ConsumerWidget {
                 _rafraichirPage(ref);
                 Navigator.of(context).pop();
               },
-              child: Text("Marquer infertile"),
+              child: Text(AppLocalizations.of(context)!.mark_infertile),
               style: buttonNormalSecondaryFull,
             ),
             SpaceH5(),
@@ -119,7 +121,7 @@ class _DialogModificationCycle extends ConsumerWidget {
                 _rafraichirPage(ref);
                 Navigator.of(context).pop();
               },
-              child: Text("Effacer le \"?\""),
+              child: Text(AppLocalizations.of(context)!.delete_point_interrogation),
               style: buttonNormalSecondaryFull,
             ),
             SpaceH5(),
@@ -137,7 +139,7 @@ class _DialogModificationCycle extends ConsumerWidget {
                 _rafraichirPage(ref);
                 Navigator.of(context).pop();
               },
-              child: Text("Annuler couleur"),
+              child: Text(AppLocalizations.of(context)!.cancel_colour),
               style: buttonNormalSecondaryFull,
             ),
             SpaceH5(),
@@ -151,7 +153,7 @@ class _DialogModificationCycle extends ConsumerWidget {
                 _rafraichirPage(ref);
                 Navigator.of(context).pop();
               },
-              child: Text("Annuler infertile"),
+              child: Text(AppLocalizations.of(context)!.cancel_infertile),
               style: buttonNormalSecondaryFull,
             ),
             SpaceH5(),

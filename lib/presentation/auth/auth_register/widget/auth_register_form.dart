@@ -124,7 +124,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               SpaceH10(),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: "Date de naissance (jj.mm.aaaa) *",
+                  labelText: "${AppLocalizations.of(context)!.date_of_birth_dd} *",
                 ),
                 autocorrect: false,
                 textInputAction: TextInputAction.next,
@@ -152,7 +152,7 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
               SpaceH10(),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: "Année des 1ère règles *",
+                  labelText: "${AppLocalizations.of(context)!.year_of_first_period} *",
                 ),
                 autocorrect: false,
                 textInputAction: TextInputAction.next,
@@ -173,7 +173,8 @@ class _FormRegisterState extends ConsumerState<FormRegister> {
                 },
               ),
               SpaceH10(),
-              Text("* Champs optionnels", style: Theme.of(context).textTheme.bodyMedium),
+              Text("* ${AppLocalizations.of(context)!.optional_fields}",
+                  style: Theme.of(context).textTheme.bodyMedium),
               SpaceH40(),
               /* 
               Text("Ce mot de passe sera demandé pour toute action verrouillée",

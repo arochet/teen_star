@@ -17,14 +17,14 @@ class PanelReglagesAutre extends StatelessWidget {
       title: 'Panel Reglages Autre',
       list: [
         ItemPanelList(
-          title: 'Guide de base',
+          title: AppLocalizations.of(context)!.basic_guide,
           icon: Icons.library_books,
           onTap: () {
             context.router.push(Principes_de_baseRoute());
           },
         ),
         ItemPanelList(
-          title: 'Guide avancé',
+          title: AppLocalizations.of(context)!.advanced_guide,
           icon: Icons.account_balance,
           onTap: () {
             context.router.push(Guide_avanceRoute());
@@ -43,7 +43,7 @@ class PanelReglagesAutre extends StatelessWidget {
           enable: false,
         ), */
         ItemPanelList(
-          title: 'Info sur l\'application',
+          title: AppLocalizations.of(context)!.app_info,
           icon: Icons.info,
           onTap: () => context.router.push(Info_applicationRoute()),
         ),

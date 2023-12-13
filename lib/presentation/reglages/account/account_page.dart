@@ -70,7 +70,7 @@ class _AccountPageState extends ConsumerState<AccountPage> {
               //PANEL MODIFIER MOT DE PASSE / SUPPRIMER COMPTE
               PanelModifyMdpDeleteAccount(),
 
-              DisplayTitle(title: 'Autre'),
+              DisplayTitle(title: AppLocalizations.of(context)!.other),
               PanelReglagesAutre(),
               //PANEL DEVELOPPEMENT
               if (env == Environment.dev) ...[DisplayTitle(title: 'Developpement'), PanelDevelopper()],

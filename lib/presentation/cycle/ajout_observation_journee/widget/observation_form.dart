@@ -213,7 +213,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             //Date de l'observation
             Row(
               children: [
-                Text("Date:", style: styleTitre),
+                Text("${AppLocalizations.of(context)!.date}:", style: styleTitre),
                 SizedBox(width: 10),
                 InkWell(
                   onTap: () async {
@@ -231,7 +231,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                           AppDateUtils.isToday(form.date)
-                              ? 'Aujourd\'hui'
+                              ? AppLocalizations.of(context)!.today
                               : AppDateUtils.formatDate(form.date),
                           style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Colors.white)),
                     ),
@@ -241,7 +241,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             ),
             SpaceH10(),
             //SENSATION
-            Text("SENSATION", style: styleTitre),
+            Text(AppLocalizations.of(context)!.sensation, style: styleTitre),
             Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -249,7 +249,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               onSelect: (state) => notifierForm.sensationChanged(Sensation(state as SensationState)),
               currentStates: [form.sensation.getOrCrash()],
               titre: (state) =>
-                  TextUtils.toFirstLettersUpperCase((state as SensationState).toDisplayString()),
+                  TextUtils.toFirstLettersUpperCase((state as SensationState).toDisplayString(context)),
               iconPath: (state) => (state as SensationState).toIconPath(),
               iconTxt: null,
             ),
@@ -258,40 +258,42 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 autocorrect: false,
                 onChanged: (String value) => notifierForm.sensationsAutreChanged(value),
                 controller: _controllerSensationAutre,
-                decoration: InputDecoration(labelText: 'Autre sensation'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context)!.other_sensation),
               ),
 
             //SANG
-            Text("SANG", style: styleTitre),
+            Text(AppLocalizations.of(context)!.blood, style: styleTitre),
             Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
               choix: SangState.values.where((state) => state != SangState.none).toList(),
               onSelect: (state) => notifierForm.sangChanged(Sang(state as SangState)),
               currentStates: [form.sang.getOrCrash()],
-              titre: (state) => TextUtils.toFirstLettersUpperCase((state as SangState).toDisplayString()),
+              titre: (state) =>
+                  TextUtils.toFirstLettersUpperCase((state as SangState).toDisplayString(context)),
               iconPath: (state) => (state as SangState).toIconPath(),
               isRed: true,
             ),
 
             //MUCUS
-            Text("MUCUS", style: styleTitre),
+            Text(AppLocalizations.of(context)!.mucus, style: styleTitre),
             Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
               choix: MucusState.values.where((state) => state != MucusState.none).toList(),
               onSelect: (state) => notifierForm.mucusChanged(Mucus(state as MucusState)),
               currentStates: [form.mucus.getOrCrash()],
-              titre: (state) => (state as MucusState).toDisplayString(),
+              titre: (state) => (state as MucusState).toDisplayString(context),
               iconPath: (state) => (state as MucusState).toIconPath(),
-              height: (state) => (95 + ((state as MucusState).toDisplayString().length * 2.2)).toDouble(),
+              height: (state) =>
+                  (95 + ((state as MucusState).toDisplayString(context).length * 2.2)).toDouble(),
             ),
             if (form.mucus.getOrCrash() == MucusState.autre)
               TextFormField(
                 autocorrect: false,
                 onChanged: (String value) => notifierForm.mucusAutreChanged(value),
                 controller: _controllerMucusAutre,
-                decoration: InputDecoration(labelText: 'Autre observation'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context)!.other_observation),
               ),
             /* //BUTON NEXT PAGE
             ElevatedButton(
@@ -319,14 +321,14 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             //SpaceH10(),
 
             //HUMEUR
-            Text("HUMEUR", style: styleTitre),
+            Text(AppLocalizations.of(context)!.mood, style: styleTitre),
             Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
               choix: HumeurState.values.where((state) => state != HumeurState.none).toList(),
               onSelect: (state) => notifierForm.humeurChanged(Humeur(state as HumeurState)),
               currentStates: [form.humeur.getOrCrash()],
-              titre: (state) => (state as HumeurState).toDisplayString(),
+              titre: (state) => (state as HumeurState).toDisplayString(context),
               iconPath: (state) => (state as HumeurState).toIconPath(),
             ),
             if (form.humeur.getOrCrash() == HumeurState.autre)
@@ -334,11 +336,11 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 autocorrect: false,
                 onChanged: (String value) => notifierForm.humeurAutreChanged(value),
                 controller: _controllerHumeurAutre,
-                decoration: InputDecoration(labelText: 'Autre humeur'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context)!.other_mood),
               ),
 
             //SIGNE ASSOCIE
-            Text("SIGNE ASSOCIÉ", style: styleTitre),
+            Text(AppLocalizations.of(context)!.associated_sign, style: styleTitre),
             Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -347,20 +349,12 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                   .toList(),
               onSelect: (state) => notifierForm.douleursChanged(state as DouleurState),
               currentStates: form.douleurs.map((e) => e.getOrCrash()).toList(),
-              titre: (state) => (state as DouleurState).toDisplayString(),
+              titre: (state) => (state as DouleurState).toDisplayString(context),
               iconPath: (state) => (state as DouleurState).toIconPath(),
-              iconTxt: (state) => (state as DouleurState).toDisplayShort(),
+              iconTxt: (state) => (state as DouleurState).toDisplayShort(context),
             ),
-            if (/* form.douleurs.contains(Douleur(DouleurState.acne)) */ false)
-              TextFormField(
-                autocorrect: false,
-                onChanged: (String value) => notifierForm.douleursAutreChanged(value),
-                controller: _controllerDouleursAutre,
-                decoration: InputDecoration(labelText: 'Autre douleurs'),
-              ),
-
             //EVENEMENTS
-            Text("ÉVÉNEMENT", style: styleTitre),
+            Text(AppLocalizations.of(context)!.event, style: styleTitre),
             Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -369,7 +363,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                   .toList(),
               onSelect: (state) => notifierForm.evenementsChanged(state as EvenementState),
               currentStates: form.evenements.map((e) => e.getOrCrash()).toList(),
-              titre: (state) => (state as EvenementState).toDisplayString(),
+              titre: (state) => (state as EvenementState).toDisplayString(context),
               iconPath: (state) => (state as EvenementState).toIconPath(),
             ),
             if (form.evenements.where((evt) => evt.getOrCrash() == EvenementState.autre).length > 0)
@@ -377,13 +371,13 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 autocorrect: false,
                 onChanged: (String value) => notifierForm.evenementsAutreChanged(value),
                 controller: _controllerEvenementAutre,
-                decoration: InputDecoration(labelText: 'Autre note'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context)!.other_note),
               ),
 
             //TEMPERATURE BASALE
             Row(
               children: [
-                Text("TEMPERATURE ",
+                Text(AppLocalizations.of(context)!.temperature,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary'])),
                 SizedBox(width: 15),
                 Expanded(
@@ -458,8 +452,10 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                     if (dispAlertDate) {
                       //Affichage d'un dialog pour confirmer l'ajout de l'observation
                       final dateOK = await showDialogChoix(context,
-                          "Attention cette date existe déjà dans le cycle précédent. Vous devrez supprimer manuellement le doublon",
-                          positiveText: "Compris !", negativeText: "Annuler", isDanger: true);
+                          "Attention cette date existe déjà dans le cycle précédent. Vous devrez supprimer manuellement le doublon", //azer
+                          positiveText: AppLocalizations.of(context)!.valider,
+                          negativeText: AppLocalizations.of(context)!.cancel,
+                          isDanger: true);
 
                       if (dateOK != true) {
                         return;
@@ -471,8 +467,10 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                   bool addObservation = false;
                   if (obs.length > 0 && widget.observation == null) {
                     final ok = await showDialogChoix(context,
-                        "Attention, une observation existe déjà pour cette date, voulez-vous la remplacer ?",
-                        positiveText: "Remplacer", negativeText: "Annuler", isDanger: true);
+                        "Attention, une observation existe déjà pour cette date, voulez-vous la remplacer ?", //azer
+                        positiveText: "Remplacer",
+                        negativeText: AppLocalizations.of(context)!.cancel,
+                        isDanger: true);
 
                     if (ok == true) {
                       addObservation = true;
@@ -490,9 +488,13 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                     bool? reporterObservations = false;
 
                     if (hasExceed) {
-                      reporterObservations = await showDialogChoix(context,
-                          "Attention, les journées du Cycle précédant situées après la date de cette observation vont être reportées a ce nouveau cycle. Voulez vous confirmer ?",
-                          positiveText: "Reporter les observations", negativeText: "Annuler", isDanger: true);
+                      reporterObservations = await showDialogChoix(
+                        context,
+                        "Attention, les journées du Cycle précédant situées après la date de cette observation vont être reportées a ce nouveau cycle. Voulez vous confirmer ?", //azer
+                        positiveText: "Reporter les observations", //azer
+                        negativeText: AppLocalizations.of(context)!.cancel,
+                        isDanger: true,
+                      );
                     }
 
                     if (reporterObservations == true) {

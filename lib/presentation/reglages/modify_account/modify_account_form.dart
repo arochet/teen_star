@@ -29,12 +29,12 @@ extension ThemeAppExtension on ThemeApp {
     }
   }
 
-  String get name {
+  String name(BuildContext context) {
     switch (this) {
       case ThemeApp.blue:
-        return 'Ciel';
+        return AppLocalizations.of(context)!.sky;
       case ThemeApp.pink:
-        return 'Corail';
+        return AppLocalizations.of(context)!.pink;
       default:
         return 'Bleu';
     }
@@ -94,7 +94,7 @@ extension LanguageAppExtention on LanguageApp {
       case LanguageApp.francais:
         return 'Français';
       case LanguageApp.anglais:
-        return 'Anglais';
+        return 'English';
       default:
         return 'Français';
     }
@@ -241,7 +241,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
             //ANNEE PREMIERE REGLE
             TextFormField(
               decoration: InputDecoration(
-                labelText: "Année des premières règles *",
+                labelText: "${AppLocalizations.of(context)!.year_of_first_period} *",
               ),
               autocorrect: false,
               keyboardType: TextInputType.number,
@@ -264,7 +264,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
             //DATE DE NAISSANCE
             TextFormField(
               decoration: InputDecoration(
-                labelText: "Date de naissance (jj.mm.aaaa) *",
+                labelText: "${AppLocalizations.of(context)!.date_of_birth_dd} *",
               ),
               autocorrect: false,
               keyboardType: TextInputType.text,
@@ -288,7 +288,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
               controller: _controllerDateNaissance,
             ),
             SpaceH10(),
-            Text("Langue : ",
+            Text("${AppLocalizations.of(context)!.language} : ",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
             DropdownButton(
                 isExpanded: true,
@@ -309,7 +309,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
                 },
                 icon: Icon(Icons.arrow_downward)),
             SpaceH10(),
-            Text("Thème : ",
+            Text("${AppLocalizations.of(context)!.theme} : ",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
             SpaceH10(),
             DropdownButton(
@@ -320,7 +320,7 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
                 iconEnabledColor: Colors.white,
                 items: ThemeApp.values
                     .map((ThemeApp e) => DropdownMenuItem(
-                          child: Text(e.name),
+                          child: Text(e.name(context)),
                           value: e,
                         ))
                     .toList(),
@@ -331,7 +331,8 @@ class _FormModifyAccountState extends ConsumerState<FormModifyAccount> {
                 },
                 icon: Icon(Icons.arrow_downward)),
             SpaceH10(),
-            Text("* Champs optionnels", style: Theme.of(context).textTheme.bodyMedium),
+            Text(AppLocalizations.of(context)!.optional_fields,
+                style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: 8),
             //BOUTON MODIFIER
             Align(

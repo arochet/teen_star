@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BoutonPDF extends StatelessWidget {
   const BoutonPDF({
@@ -17,7 +18,7 @@ class BoutonPDF extends StatelessWidget {
     return Center(
       child: ElevatedButton.icon(
         onPressed: () async {
-          final String assetPDFPath = 'assets/guide.pdf';
+          final String assetPDFPath = AppLocalizations.of(context)!.path_guide_pdf;
           final ByteData bytes = await rootBundle.load(assetPDFPath);
 
           String nomFichier = 'guide.pdf';
@@ -35,7 +36,7 @@ class BoutonPDF extends StatelessWidget {
 
           await OpenFilex.open(path);
         },
-        label: Text("Version PDF sur les 2 guides"),
+        label: Text("PDF"),
         icon: Icon(Icons.picture_as_pdf),
         style: buttonLittleSecondary,
       ),

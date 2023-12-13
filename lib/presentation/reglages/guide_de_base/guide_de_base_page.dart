@@ -8,6 +8,7 @@ import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widget/bouton_PDF.dart';
 
 class Guide_de_basePage extends StatelessWidget {
@@ -26,13 +27,17 @@ class Guide_de_basePage extends StatelessWidget {
         child: Padding(
             padding: EdgeInsets.all(25),
             child: FutureBuilder(
-              future: rootBundle.loadString('assets/html/guide_de_base_en.html'),
+              future: rootBundle.loadString(AppLocalizations.of(context)!.path_basic_guide),
               builder: (context, async) {
                 if (async.hasData) {
-                  return SingleChildScrollView(
-                      child: HtmlWidget(
-                    async.data.toString(),
-                  ));
+                  return ListView(
+                    children: [
+                      HtmlWidget(
+                        async.data.toString(),
+                      ),
+                      BoutonPDF(),
+                    ],
+                  );
                 } else {
                   return CircularProgressIndicator();
                 }

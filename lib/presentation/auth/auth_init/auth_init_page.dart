@@ -76,11 +76,8 @@ class PanelInit extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Bienvenue sur",
+              Text(AppLocalizations.of(context)!.bienvenuesurkyklos,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(color: colorpanel(900))),
-              SizedBox(height: 3),
-              Text("Kyklos",
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(color: colorpanel(900))),
               SizedBox(height: 20),
               Image.asset(AssetsPath.main_flower, height: 320),
             ],

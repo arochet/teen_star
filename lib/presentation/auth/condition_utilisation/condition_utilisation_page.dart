@@ -74,7 +74,9 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                                   color: actioncolor['primary']),
                               SizedBox(width: 15),
                               Flexible(
-                                child: Text("J'ai lu et j'accepte les \nconditions d'utilisation", //azer
+                                child: Text(
+                                    AppLocalizations.of(context)!
+                                        .i_have_read_and_accept_the_terms_and_conditions_of_use,
                                     style: Theme.of(context).textTheme.labelMedium),
                               ),
                             ],
@@ -91,7 +93,8 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                         if (conditionAccecpte) {
                           context.router.push(AuthRegisterRoute());
                         } else {
-                          showSnackbar(context, 'Vous devez accepter les conditions d\'utilisation'); //azer
+                          showSnackbar(
+                              context, AppLocalizations.of(context)!.you_must_accept_the_terms_of_use);
                         }
                       },
                       child: Text(AppLocalizations.of(context)!.continuer),

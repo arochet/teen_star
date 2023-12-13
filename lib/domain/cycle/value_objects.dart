@@ -470,7 +470,7 @@ extension ParseToSringEvenement on EvenementState {
       case EvenementState.maladie:
         return AppLocalizations.of(context)!.illness_or_fever;
       case EvenementState.medicament:
-        return 'Médicament'; //azer
+        return AppLocalizations.of(context)!.medication;
       case EvenementState.autre:
         return AppLocalizations.of(context)!.other_note;
       case EvenementState.none:

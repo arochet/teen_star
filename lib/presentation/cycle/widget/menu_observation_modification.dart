@@ -34,11 +34,12 @@ afficherModalModificationObservation(
       ),
       actions: <CupertinoActionSheetAction>[
         CupertinoActionSheetAction(
-          child: Text('Lire les notes'), //azer
+          child: Text(AppLocalizations.of(context)!.read_the_notes),
           onPressed: () async {
             await showDialogApp<void>(
               context: context,
-              titre: "Observation du ${AppDateUtils.formatDate(observation.date)}", //azer
+              titre:
+                  "${AppLocalizations.of(context)!.observation_of} ${AppDateUtils.formatDate(observation.date)}",
               child: ShowObservationNotes(observation: observation),
               actions: <Widget>[
                 /* TextButton(
@@ -166,7 +167,7 @@ afficherModalModificationObservation(
               refreshAndPop(context, ref);
             }
           },
-          child: Text('Supprimer observation du jour'), //azer
+          child: Text(AppLocalizations.of(context)!.delete_observation_of_the_day),
         ),
       ],
     ),

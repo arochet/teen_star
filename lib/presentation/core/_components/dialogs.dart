@@ -86,9 +86,8 @@ Future<Object> showDialogPassword<bool>({
       return StatefulBuilder(builder: (context, setState) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.0)),
-          title: Text('Entrez le mot de passe', //azer
-              style: Theme.of(context).textTheme.titleMedium,
-              textAlign: TextAlign.center),
+          title: Text(AppLocalizations.of(context)!.enter_the_password,
+              style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center),
           content: Form(
             key: _formKey,
             child: Column(
@@ -96,7 +95,7 @@ Future<Object> showDialogPassword<bool>({
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.motdepasse, //azer
+                    hintText: AppLocalizations.of(context)!.motdepasse,
                     border: OutlineInputBorder(),
                     hintStyle: TextStyle(color: colorpanel(200)),
                     errorText: textError,
@@ -140,7 +139,7 @@ Future<Object> showDialogPassword<bool>({
             ],
             ElevatedButton(
                 style: buttonLittlePrimary,
-                child: const Text('Accéder'), //azer
+                child: Text(AppLocalizations.of(context)!.go_to),
                 onPressed: () async {
                   final passwordOK =
                       await ref.read(authRepositoryProvider).checkPasswordAppli(controller.text);

@@ -166,7 +166,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
                       '${AppLocalizations.of(context)!.d_day_1_etc}${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                   _CellText(AppDateUtils.formatDate(observation.date)),
                   _CellText(
-                      '${observation.commentaireAnimatrice ?? '-'}/${observation.sensationsAutre ?? '-'}/${observation.mucusAutre ?? '-'}/${observation.douleursAutre ?? '-'}/${observation.humeurAutre ?? '-'}/${observation.evenementsAutre ?? '-'}/${observation.notesConfidentielles != null && observation.notesConfidentielles!.length > 1 ? '*Notes Confidentielle*' : ''}'), //azer
+                      '${observation.commentaireAnimatrice ?? '-'}/${observation.sensationsAutre ?? '-'}/${observation.mucusAutre ?? '-'}/${observation.douleursAutre ?? '-'}/${observation.humeurAutre ?? '-'}/${observation.evenementsAutre ?? '-'}/${observation.notesConfidentielles != null && observation.notesConfidentielles!.length > 1 ? AppLocalizations.of(context)!.notes_confidential : ''}'),
                 ])
             .toList(),
         iconEmpty: listImageMucus[MucusState.none]!,
@@ -253,10 +253,9 @@ header(PdfDocument pdf, UserData? userData, List<Cycle> listCycle, BuildContext 
   final PdfPageTemplateElement headerTemplate = PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 500, 60));
   //Résumé / Analyse du cycle 1 au cycle 2
   headerTemplate.graphics.drawString(
-      //azer
       listCycle.length > 1
-          ? 'Résumé / Analyse du cycle ${listCycle.first.id.getOrCrash()} au cycle ${listCycle.last.id.getOrCrash()}'
-          : 'Résumé / Analyse du cycle ${listCycle.first.id.getOrCrash()}',
+          ? '${AppLocalizations.of(context)!.summary_analysis_of_cycle_} ${listCycle.first.id.getOrCrash()} ${AppLocalizations.of(context)!.to_cycle} ${listCycle.last.id.getOrCrash()}'
+          : '${AppLocalizations.of(context)!.summary_analysis_of_cycle_} ${listCycle.first.id.getOrCrash()}',
       PdfStandardFont(PdfFontFamily.helvetica, 16, style: PdfFontStyle.bold),
       bounds: const Rect.fromLTWH(0, 15, 500, 20));
   //Nom - Age - PR 2001

@@ -140,7 +140,7 @@ class AppBarCycle extends ConsumerWidget {
   Future<dynamic> _ouvrirChoixCycle(BuildContext context, WidgetRef ref) {
     return showDialogApp(
         context: context,
-        titre: "Choisir un cycle", //azer
+        titre: AppLocalizations.of(context)!.choose_a_cycle,
         child: Container(
           height: 250,
           width: 130,

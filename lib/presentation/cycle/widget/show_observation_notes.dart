@@ -22,12 +22,12 @@ class ShowObservationNotes extends ConsumerWidget {
     if (observation.mucusAutre != null && observation.mucusAutre!.length > 0)
       txt += '${AppLocalizations.of(context)!.other_mucus} : ${observation.mucusAutre}\n';
     if (observation.douleursAutre != null && observation.douleursAutre!.length > 0)
-      txt += 'Autre douleur : ${observation.douleursAutre}\n'; //azer
+      txt += '${AppLocalizations.of(context)!.other_pain} : ${observation.douleursAutre}\n';
     if (observation.evenementsAutre != null && observation.evenementsAutre!.length > 0)
       txt += '${AppLocalizations.of(context)!.other_event} : ${observation.evenementsAutre}\n';
     if (observation.humeurAutre != null && observation.humeurAutre!.length > 0)
       txt += '${AppLocalizations.of(context)!.other_mood} : ${observation.humeurAutre}\n';
-    if (txt == '') txt = 'Pas de note'; //azer
+    if (txt == '') txt = AppLocalizations.of(context)!.no_note;
 
     return ShowComponentFile(title: '_ShowObservationNotes', child: Text(txt));
   }
@@ -45,10 +45,10 @@ ouvrirNoteConfidentielles(BuildContext context, WidgetRef ref, Observation obser
     if (observation.notesConfidentielles != null && observation.notesConfidentielles!.length > 0)
       txtObservation += '${observation.notesConfidentielles}\n';
     else
-      txtObservation += 'Pas de notes confidentielles\n';
+      txtObservation += 'Pas de ${AppLocalizations.of(context)!.other_pain}\n';
     showDialogApp<bool>(
       context: context,
-      titre: 'Notes confidentielles',
+      titre: AppLocalizations.of(context)!.notes_confidential,
       child: Container(
           height: 160,
           child: Center(

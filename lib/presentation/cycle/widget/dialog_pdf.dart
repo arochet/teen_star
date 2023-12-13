@@ -95,9 +95,8 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
                     await generatePDF(userData, list, passwordPdf, context);
                     Navigator.of(context).pop();
                   } else
-                    showSnackbar(
-                        context, //azer
-                        "Aucun cycle à exporter dans ces bornes [${controllerPremierCycle.text} - ${controllerDernierCycle.text}]");
+                    showSnackbar(context,
+                        "${AppLocalizations.of(context)!.no_cycle_to_be_exported_in_these_terminals} [${controllerPremierCycle.text} - ${controllerDernierCycle.text}]");
                 });
               },
               child: Text(AppLocalizations.of(context)!.export_as_pdf),

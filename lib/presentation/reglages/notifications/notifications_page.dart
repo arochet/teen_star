@@ -46,13 +46,15 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                       children: [
                         Text('Notifications', style: Theme.of(context).textTheme.titleSmall),
                         SpaceH10(),
-                        Text('Activer les notifications pour recevoir des alertes et des rappels', //azer
+                        Text(
+                            AppLocalizations.of(context)!
+                                .activate_notifications_to_receive_alerts_and_reminders,
                             style: Theme.of(context).textTheme.bodyMedium),
                         SpaceH10(),
                         Text(
                             listNotifications.length > 0
-                                ? "Les notifications sont programmées" //azer
-                                : "Aucune notification programmée", //azer
+                                ? AppLocalizations.of(context)!.notifications_are_scheduled
+                                : AppLocalizations.of(context)!.no_notification_scheduled,
                             style: Theme.of(context).textTheme.bodyMedium),
                         SpaceH10(),
                         ElevatedButton(
@@ -65,18 +67,17 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                               setState(() {});
                             }
                           },
-                          child: Text("Me programmer un rappel"), //azer
+                          child: Text(AppLocalizations.of(context)!.schedule_a_reminder),
                           style: buttonNormalPrimary,
                         ),
                         SpaceH10(),
                         ElevatedButton(
                           onPressed: () async {
-                            //await createPlantFoodNotification();
                             await cancelScheduledNotifications();
                             listNotifications = await AwesomeNotifications().listScheduledNotifications();
                             setState(() {});
                           },
-                          child: Text("Annuler tous les rappels"), //azer
+                          child: Text(AppLocalizations.of(context)!.cancel_all_reminders),
                           style: buttonNormalPrimary,
                         ),
                       ],

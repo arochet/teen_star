@@ -93,7 +93,7 @@ class FormReauthenticate extends ConsumerWidget {
                 ref.read(resetPasswordFormNotifierProvider.notifier).resetPasswordPressed();
               },
               style: buttonNormalPrimary,
-              child: const Text("Reinitialiser le mot de passe"), //azer
+              child: Text(AppLocalizations.of(context)!.reset_password),
             ),
           ),
           const SizedBox(height: 12),

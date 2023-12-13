@@ -451,8 +451,10 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                     });
                     if (dispAlertDate) {
                       //Affichage d'un dialog pour confirmer l'ajout de l'observation
-                      final dateOK = await showDialogChoix(context,
-                          "Attention cette date existe déjà dans le cycle précédent. Vous devrez supprimer manuellement le doublon", //azer
+                      final dateOK = await showDialogChoix(
+                          context,
+                          AppLocalizations.of(context)!
+                              .please_note_that_a_comment_already_exists_for_this_date_would_you_like_to_replace_it,
                           positiveText: AppLocalizations.of(context)!.valider,
                           negativeText: AppLocalizations.of(context)!.cancel,
                           isDanger: true);
@@ -466,9 +468,11 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                   //Vérification si la date n'existe pas déjà
                   bool addObservation = false;
                   if (obs.length > 0 && widget.observation == null) {
-                    final ok = await showDialogChoix(context,
-                        "Attention, une observation existe déjà pour cette date, voulez-vous la remplacer ?", //azer
-                        positiveText: "Remplacer",
+                    final ok = await showDialogChoix(
+                        context,
+                        AppLocalizations.of(context)!
+                            .please_note_that_a_comment_already_exists_for_this_date_would_you_like_to_replace_it,
+                        positiveText: AppLocalizations.of(context)!.replace,
                         negativeText: AppLocalizations.of(context)!.cancel,
                         isDanger: true);
 
@@ -490,8 +494,9 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                     if (hasExceed) {
                       reporterObservations = await showDialogChoix(
                         context,
-                        "Attention, les journées du Cycle précédant situées après la date de cette observation vont être reportées a ce nouveau cycle. Voulez vous confirmer ?", //azer
-                        positiveText: "Reporter les observations", //azer
+                        AppLocalizations.of(context)!
+                            .please_note_that_the_days_of_the_previous_cycle_after_the_date_of_this_observation_will_be_carried_over_to_this_new_cycle_would_you_like_to_confirm,
+                        positiveText: AppLocalizations.of(context)!.reporting_observations,
                         negativeText: AppLocalizations.of(context)!.cancel,
                         isDanger: true,
                       );

@@ -68,9 +68,9 @@ class _PanelModifyMdpDeleteAccountState extends ConsumerState<PanelModifyMdpDele
       onPressed: () async {
         await context.router.pop();
 
-        final ok =
-            await showDialogChoix(context, 'Tous vos enregistrements seront définitivement effacés', //azer
-                positiveText: 'Tout effacer'); //azer
+        final ok = await showDialogChoix(
+            context, AppLocalizations.of(context)!.all_your_recordings_will_be_permanently_deleted,
+            positiveText: AppLocalizations.of(context)!.erase_all);
         if (ok == true) {
           final result = await ref.read(cycleRepositoryProvider).resetAll();
           ref.invalidate(allCycleProvider);

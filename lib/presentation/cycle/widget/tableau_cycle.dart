@@ -132,9 +132,9 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
               DateTime dateObservation = observationsAndEmpty[rowIndex].date!;
               //Si l'observation est vide, on affiche un message
               if (await showDialogChoix(context,
-                      'Voulez-vous ajouter une observation pour le ${AppDateUtils.formatDate(dateObservation)} ?', //azer
-                      positiveText: 'Ajouter',
-                      negativeText: AppLocalizations.of(context)!.cancel) == //azer
+                      '${AppLocalizations.of(context)!.would_you_like_to_add_a_comment_for_the} ${AppDateUtils.formatDate(dateObservation)} ?',
+                      positiveText: AppLocalizations.of(context)!.add,
+                      negativeText: AppLocalizations.of(context)!.cancel) ==
                   true) openPageNouvelleObservation(context, widget.cycle, ref, true, dateObservation);
             }
           }

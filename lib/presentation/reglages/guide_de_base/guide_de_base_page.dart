@@ -19,11 +19,12 @@ class Guide_de_basePage extends StatelessWidget {
     final styleBold = Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold);
     final styleUnderline =
         Theme.of(context).textTheme.bodyMedium!.copyWith(decoration: TextDecoration.underline);
-    final styleBlue = Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.blue);
+    final styleBlue =
+        Theme.of(context).textTheme.bodyMedium!.copyWith(color: const Color.fromARGB(255, 33, 150, 243));
     return MainScaffold(
       title: 'Guide de base',
       child: ShowComponentFile(
-        title: './lib/PRESENTATION/reglages/principes_de_base/guide_de_base_page.dart',
+        title: './lib/PRESENTATION/reglages/guide_de_base/guide_de_base_page.dart',
         child: Padding(
             padding: EdgeInsets.all(25),
             child: FutureBuilder(
@@ -34,6 +35,7 @@ class Guide_de_basePage extends StatelessWidget {
                     children: [
                       HtmlWidget(
                         async.data.toString(),
+                        textStyle: Theme.of(context).textTheme.bodyMedium,
                       ),
                       BoutonPDF(),
                     ],

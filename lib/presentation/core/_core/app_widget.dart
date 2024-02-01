@@ -134,14 +134,14 @@ class __MainState extends ConsumerState<InitNotifications> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("Allow Notifications"),
-            content: Text("Our app would like to send Notifications"),
+            title: Text(AppLocalizations.of(context)!.allownotifications),
+            content: Text(AppLocalizations.of(context)!.ourappwouldliketosendnotifications),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Don't Allow",
+                child: Text(AppLocalizations.of(context)!.dontallow,
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
@@ -153,7 +153,7 @@ class __MainState extends ConsumerState<InitNotifications> {
                       .requestPermissionToSendNotifications()
                       .then((_) => Navigator.pop(context));
                 },
-                child: Text("Allow",
+                child: Text(AppLocalizations.of(context)!.allow,
                     style: TextStyle(
                       color: Colors.teal,
                       fontSize: 16,

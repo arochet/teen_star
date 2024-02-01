@@ -250,7 +250,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               currentStates: [form.sensation.getOrCrash()],
               titre: (state) =>
                   TextUtils.toFirstLettersUpperCase((state as SensationState).toDisplayString(context)),
-              iconPath: (state) => (state as SensationState).toIconPath(),
+              iconPath: (state) => (state as SensationState).toIconPath(context),
               iconTxt: null,
             ),
             if (form.sensation.getOrCrash() == SensationState.autre)

@@ -13,13 +13,13 @@ import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/app_bar_cycle.dart';
-import 'package:teenstar/PRESENTATION/cycle/widget/dialog_pdf.dart';
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/injection.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../cycle/cycles_page.dart';
 
@@ -53,6 +53,8 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
       length: 2,
       child: AutoTabsScaffold(
         appBarBuilder: (_, tabsRouter) => AppBar(
+            scrolledUnderElevation: 0,
+            shadowColor: null,
             backgroundColor: tabsRouter.activeIndex == 2 ? colorScaffoldBarReglage : colorScaffoldBar,
             title: _buildAppBar(context, ref, tabsRouter.activeIndex),
             centerTitle: true,
@@ -152,8 +154,8 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
           }
         },
         tabs: [
-          Tab(text: 'Résumé'),
-          Tab(text: 'Analyse'),
+          Tab(text: AppLocalizations.of(context)!.summary),
+          Tab(text: AppLocalizations.of(context)!.analysis),
         ]);
   }
 
@@ -181,7 +183,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                 } else {
                   if (selection)
                     return Center(
-                        child: Text("Cycle ${idCourant.getOrCrash()}",
+                        child: Text("${AppLocalizations.of(context)!.cycle} ${idCourant.getOrCrash()}",
                             style: Theme.of(context).textTheme.titleMedium));
                   else
                     return AppBarCycle(listCyclesDTO: listCyclesDTO, idCycle: idCourant);
@@ -208,7 +210,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
     UniqueId? idCourant = ref.watch(idCycleCourant);
 
     if (idCourant == null) {
-      showSnackbar(context, "Aucun cycle pour le moment !");
+      showSnackbar(context, AppLocalizations.of(context)!.nocycleforthemoment);
       return;
     }
 
@@ -217,43 +219,19 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
       builder: (BuildContext context) => CupertinoActionSheet(
         // title: const Text('Title'),
         actions: <CupertinoActionSheetAction>[
-          /* CupertinoActionSheetAction(
-            onPressed: () async {
-              Navigator.pop(context);
-              final listeCycleEither = await ref.read(allCycleProvider.future);
-
-              listeCycleEither.fold(
-                (l) => showSnackbarCycleFailure(context, l),
-                (List<CycleDTO> listeCycle) async {
-                  final listCycleAsync = await ref
-                      .read(cycleRepositoryProvider)
-                      .readListCycles(listeCycle.first.id!, listeCycle.last.id!);
-
-                  final userData = await ref.read(currentUserData.future);
-                  final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
-
-                  showDialogApp(
-                    context: context,
-                    titre: "Exporter PDF",
-                    child: DialogPDF(listeCycle),
-                  );
-                },
-              );
-            },
-            child: const Text('Exporter en PDF'),
-          ), */
           CupertinoActionSheetAction(
             onPressed: () {
               Navigator.pop(context);
               ref.read(isSelection.notifier).state = !ref.read(isSelection);
             },
-            child: Text('Analyse groupée cycle ${idCourant?.getOrCrash()}'),
+            child: Text('${AppLocalizations.of(context)!.groupedcycleanalysis} ${idCourant?.getOrCrash()}'),
           ),
           CupertinoActionSheetAction(
             onPressed: () async {
-              final response = await showDialogChoix(
-                  context, 'Etes vous sur de vouloir supprimer toutes les observations de ce Cycle ?',
-                  positiveText: 'Supprimer tout', negativeText: 'Annuler');
+              final response = await showDialogChoix(context,
+                  AppLocalizations.of(context)!.etes_vous_sur_de_vouloir_supprimer_toutes_les_observations,
+                  positiveText: AppLocalizations.of(context)!.delete_all,
+                  negativeText: AppLocalizations.of(context)!.cancel);
 
               if (response == true) {
                 if (idCourant != null) {
@@ -261,17 +239,19 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                   ref.invalidate(allCycleProvider);
                   ref.invalidate(cycleProvider(idCourant));
                 } else
-                  showSnackbar(context, "Aucun cycle pour le moment !");
+                  showSnackbar(context, AppLocalizations.of(context)!.nocycleforthemoment);
               }
               Navigator.pop(context);
             },
-            child: Text('Supprimer toutes les observations du cycle ${idCourant?.getOrCrash()}'),
+            child: Text(
+                '${AppLocalizations.of(context)!.deleteallobservationsfromthecycle} ${idCourant?.getOrCrash()}'),
           ),
           CupertinoActionSheetAction(
             onPressed: () async {
               final response = await showDialogChoix(
-                  context, 'Toutes les interprétations faites sur ce cycle seront effacées',
-                  positiveText: 'Effacer tout', negativeText: 'Annuler');
+                  context, AppLocalizations.of(context)!.allinterpretationsofthiscyclewillbeerased,
+                  positiveText: AppLocalizations.of(context)!.delete_all,
+                  negativeText: AppLocalizations.of(context)!.cancel);
 
               if (response == true) {
                 final asyncCycle = ref.watch(cycleProvider(idCourant));
@@ -303,14 +283,14 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                     );
                   },
                   error: (err, stack) {
-                    showDialogChoix(context, 'Une erreur s\'est produite');
+                    showDialogChoix(context, AppLocalizations.of(context)!.anerrorhasoccurred);
                   },
                   loading: () {},
                 );
               }
               Navigator.pop(context);
             },
-            child: Text('Annuler toute l\'analyse '),
+            child: Text(AppLocalizations.of(context)!.cancel_all_analysis),
           ),
         ],
       ),
@@ -324,11 +304,11 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
       final idDernierCycle = Cycle.lastId(listCycle.map((e) => e.toDomainEmpty()).toList())?.getOrCrash();
 
       if (idDernierCycle == 1 || idDernierCycle == null) {
-        showSnackbar(context, "Il n'y a qu'un seul cycle : pas de renvoi possible");
+        showSnackbar(context, AppLocalizations.of(context)!.thereisonlyonecyclenoreturnpossible);
         return;
       }
       if (idDernierCycle == 0) {
-        showSnackbar(context, "Il n'y a pas de cycle : pas de renvoi possible");
+        showSnackbar(context, AppLocalizations.of(context)!.thereisnocyclenoreferralpossible);
         return;
       }
       await showCupertinoModalPopup<void>(
@@ -338,8 +318,9 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
             CupertinoActionSheetAction(
               onPressed: () async {
                 final onRenvoie = await showDialogChoix(context,
-                    'Êtes-vous sûre de vouloir renvoyer le cycle $idDernierCycle vers ${idDernierCycle - 1} ?',
-                    positiveText: 'Renvoyer', negativeText: 'Annuler');
+                    '${AppLocalizations.of(context)!.areyousureyouwanttoreturnthecycle} $idDernierCycle ${AppLocalizations.of(context)!.to} ${idDernierCycle - 1} ?',
+                    positiveText: AppLocalizations.of(context)!.resend,
+                    negativeText: AppLocalizations.of(context)!.cancel);
                 if (onRenvoie == true) {
                   final result = await ref.read(cycleRepositoryProvider).renvoieDernierCycle();
                   print('renvoie dernier cycle');
@@ -348,7 +329,8 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                 }
                 Navigator.pop(context);
               },
-              child: Text('Renvoyer Cycle $idDernierCycle vers ${idDernierCycle - 1}'),
+              child: Text(
+                  '${AppLocalizations.of(context)!.returncycle} $idDernierCycle ${AppLocalizations.of(context)!.to} ${idDernierCycle - 1}'),
             ),
           ],
         ),

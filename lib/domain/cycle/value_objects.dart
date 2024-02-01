@@ -137,10 +137,10 @@ extension ParseToSringSensation on SensationState {
     }
   }
 
-  String toIconPath() {
+  String toIconPath(BuildContext context) {
     switch (this) {
       case SensationState.sec:
-        return AssetsPath.icon_sensation_sec;
+        return AppLocalizations.of(context)!.icon_dry;
       case SensationState.humide:
         return AssetsPath.icon_sensation_humide;
       case SensationState.mouille:

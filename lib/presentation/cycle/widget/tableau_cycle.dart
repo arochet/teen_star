@@ -278,7 +278,7 @@ class _Cell extends StatelessWidget {
       case 'Sensation':
         if (observation.sensation != null && observation.sensation!.getOrCrash() != SensationState.none)
           info = _LittleBoxChild(
-            IconObservation(iconPath: observation.sensation!.getOrCrash().toIconPath(), iconSize: 30),
+            IconObservation(iconPath: observation.sensation!.getOrCrash().toIconPath(context), iconSize: 30),
           );
         else
           info = _CellNone();

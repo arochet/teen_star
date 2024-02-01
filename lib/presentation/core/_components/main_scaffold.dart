@@ -59,7 +59,8 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
     return AppBar(
       toolbarHeight: 55,
       backgroundColor: ref.watch(themeApp).value?.color, //colorpanel(900),
-      shadowColor: Colors.transparent,
+      scrolledUnderElevation: 0,
+      shadowColor: null,
       iconTheme: IconThemeData(
         color: actioncolor['primary'],
         size: 24,

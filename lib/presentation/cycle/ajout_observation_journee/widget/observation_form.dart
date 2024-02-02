@@ -250,16 +250,18 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               currentStates: [form.sensation.getOrCrash()],
               titre: (state) =>
                   TextUtils.toFirstLettersUpperCase((state as SensationState).toDisplayString(context)),
-              iconPath: (state) => (state as SensationState).toIconPath(context),
-              iconTxt: null,
+              iconPath: (state) => (state as SensationState).toIconPath(),
+              iconTxt: (state) => (state as SensationState).toDisplayShort(context),
             ),
-            if (form.sensation.getOrCrash() == SensationState.autre)
+            if (form.sensation.getOrCrash() == SensationState.autre) ...[
               TextFormField(
                 autocorrect: false,
                 onChanged: (String value) => notifierForm.sensationsAutreChanged(value),
                 controller: _controllerSensationAutre,
                 decoration: InputDecoration(labelText: AppLocalizations.of(context)!.other_sensation),
               ),
+              SpaceH10()
+            ],
 
             //SANG
             Text(AppLocalizations.of(context)!.blood, style: styleTitre),
@@ -366,13 +368,15 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               titre: (state) => (state as EvenementState).toDisplayString(context),
               iconPath: (state) => (state as EvenementState).toIconPath(),
             ),
-            if (form.evenements.where((evt) => evt.getOrCrash() == EvenementState.autre).length > 0)
+            if (form.evenements.where((evt) => evt.getOrCrash() == EvenementState.autre).length > 0) ...[
               TextFormField(
                 autocorrect: false,
                 onChanged: (String value) => notifierForm.evenementsAutreChanged(value),
                 controller: _controllerEvenementAutre,
                 decoration: InputDecoration(labelText: AppLocalizations.of(context)!.other_note),
               ),
+              SpaceH10(),
+            ],
 
             //TEMPERATURE BASALE
             Row(

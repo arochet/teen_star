@@ -90,43 +90,45 @@ class _Field extends StatelessWidget {
 
     TextStyle? styleText = Theme.of(context).textTheme.bodyMedium?.copyWith(
         color: isRed ? actioncolor['red'] : actioncolor['primary'],
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: FontWeight.w500);
 
     double? widthCell = (MediaQuery.of(context).size.width / 4) - 9;
 
     return Container(
-      child: Container(
-        height: _textSize(titre(state), styleText!, widthCell).height + 93,
-        width: widthCell,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              decoration: state is HumeurState ? decorationRounded : decorationSquared,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: IconObservation(
-                  iconPath: iconPath(state),
-                  iconText: iconText != null ? iconText!(state) : null,
-                  textStyle:
-                      Theme.of(context).textTheme.headlineSmall?.copyWith(color: actioncolor['primary']),
-                  iconSize: 64,
-                ),
+      //color: Colors.red,
+      height: _textSize(titre(state), styleText!, widthCell).height + 83,
+      width: widthCell,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            decoration: state is HumeurState ? decorationRounded : decorationSquared,
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: IconObservation(
+                iconPath: iconPath(state),
+                iconText: iconText != null ? iconText!(state) : null,
+                textStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(color: actioncolor['primary']),
+                iconSize: 64,
               ),
             ),
-            SizedBox(height: 3),
-            Expanded(
+          ),
+          SizedBox(height: 3),
+          Expanded(
+            child: Container(
+              //color: Colors.amber,
               child: AutoSizeText(
                 titre(state),
                 style: styleText,
+                minFontSize: 8,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.visible,
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

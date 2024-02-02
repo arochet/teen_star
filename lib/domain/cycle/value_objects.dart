@@ -137,23 +137,8 @@ extension ParseToSringSensation on SensationState {
     }
   }
 
-  String toIconPath(BuildContext context) {
-    switch (this) {
-      case SensationState.sec:
-        return AppLocalizations.of(context)!.icon_dry;
-      case SensationState.humide:
-        return AssetsPath.icon_sensation_humide;
-      case SensationState.mouille:
-        return AssetsPath.icon_sensation_mouille;
-      case SensationState.glissantLubrifie:
-        return AssetsPath.icon_sensation_glissant_lubrifie;
-      case SensationState.nonpercu:
-        return AssetsPath.icon_sensation_np;
-      case SensationState.autre:
-        return AssetsPath.icon_sensation_autre;
-      case SensationState.none:
-        return AssetsPath.icon_vide;
-    }
+  String toIconPath() {
+    return AssetsPath.icon_sensation_vide;
   }
 }
 

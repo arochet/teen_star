@@ -33,7 +33,7 @@ abstract class Cycle with _$Cycle {
 
   /// Renvoie ne numéro du jour de l'observation dans le cycle. Exemple 5 pour le 5ème jour du cycle.
   int getDayOfObservation(Observation obs, DateTime? dateFirstDayOfCycle) {
-    DateTime? firstDayOfCycle = dateFirstDayOfCycle ?? this.observations.first.date;
+    DateTime? firstDayOfCycle = /* dateFirstDayOfCycle ??  */ this.observations.first.date;
     return AppDateUtils.diffInDaysWith(obs.date!, firstDayOfCycle!) + 1;
   }
 
@@ -59,12 +59,7 @@ abstract class Cycle with _$Cycle {
   List<Observation> getObservationsWithEmptyDays({allowDoubleDays = true}) {
     List<Observation> observationsWithEmptyDays = [];
     DateTime? firstDayOfCycle;
-    if (dateLastDayOfPreviousCycle != null) {
-      firstDayOfCycle = dateLastDayOfPreviousCycle?.add(Duration(days: 1));
-    } else if (this.observations.length > 0)
-      firstDayOfCycle = this.observations.first.date?.toDate();
-    else
-      return [];
+    firstDayOfCycle = this.observations.first.date?.toDate();
 
     late DateTime lastDayOfCycleWithEmptyDays;
 

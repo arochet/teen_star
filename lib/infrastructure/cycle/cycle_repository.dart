@@ -187,8 +187,8 @@ class CycleRepository implements ICycleRepository {
 
       if (cycleDTO.id != null) {
         //Charge les Observations du Cycle
-        final List<Map<String, dynamic>> mapsObservation =
-            await _database.query(db_observation, where: 'idCycle = ?', whereArgs: [cycleDTO.id]);
+        final List<Map<String, dynamic>> mapsObservation = await _database.query(db_observation,
+            where: 'idCycle = ?', whereArgs: [cycleDTO.id], orderBy: 'date ASC');
         List<Observation> listObservation = List.generate(mapsObservation.length, (i) {
           return ObservationDTO.fromJson(mapsObservation[i]).toDomain();
         });

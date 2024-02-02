@@ -52,6 +52,7 @@ class AssetsPath {
   static const String icon_sensation_glissant_lubrifie = "assets/icon_observation/sensation/sensation_L.png";
   static const String icon_sensation_np = "assets/icon_observation/sensation/sensation_np.png";
   static const String icon_sensation_autre = "assets/icon_observation/sensation/sensation_autre.png";
+  static const String icon_sensation_vide = "assets/icon_observation/sensation/sensation_vide.png";
   static const String icon_douleur_autre = "assets/icon_observation/douleurs/douleur_Autre.png";
   static const String icon_douleur_ds = "assets/icon_observation/douleurs/douleur_DS.png";
   static const String icon_douleur_dv = "assets/icon_observation/douleurs/douleur_DV.png";

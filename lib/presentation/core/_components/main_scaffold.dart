@@ -14,7 +14,8 @@ import 'main_home_title.dart';
 class MainScaffold extends ConsumerStatefulWidget {
   final Widget child;
   final String? title;
-  const MainScaffold({Key? key, required this.child, this.title});
+  final Widget? buttonAppBar;
+  const MainScaffold({Key? key, required this.child, this.title, this.buttonAppBar});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _MainScaffoldState();
@@ -47,13 +48,18 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
         );
       else
         return Scaffold(
-          appBar: _buildAppBar(context, ref, widget.title),
+          appBar: _buildAppBar(
+            context,
+            ref,
+            widget.title,
+            widget.buttonAppBar,
+          ),
           body: widget.child,
         );
     });
   }
 
-  AppBar? _buildAppBar(BuildContext context, WidgetRef ref, String? title) {
+  AppBar? _buildAppBar(BuildContext context, WidgetRef ref, String? title, Widget? buttonAppBar) {
     final env = ref.watch(environment.notifier).state.name;
     final dataAsync = ref.read(currentUserData.future);
     return AppBar(
@@ -72,20 +78,20 @@ class _MainScaffoldState extends ConsumerState<MainScaffold> {
               overflow: TextOverflow.fade,
             )
           : null,
-      actions: env == Environment.dev
-          ? [
-              InkWell(
-                onTap: () {
-                  final notifier = ref.read(showFilePath.notifier);
-                  notifier.state = !ref.read(showFilePath);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.remove_red_eye, size: 25),
-                ),
-              ),
-            ]
-          : null,
+      actions: [
+        if (env == Environment.dev)
+          InkWell(
+            onTap: () {
+              final notifier = ref.read(showFilePath.notifier);
+              notifier.state = !ref.read(showFilePath);
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.remove_red_eye, size: 25),
+            ),
+          ),
+        if (buttonAppBar != null) buttonAppBar,
+      ],
     );
   }
 }

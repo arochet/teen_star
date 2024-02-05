@@ -9,6 +9,7 @@ import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -25,7 +26,8 @@ afficherModalModificationObservation(
     builder: (BuildContext context) => CupertinoActionSheet(
       title: Text(
           "${AppLocalizations.of(context)!.observation_of_d}${cycle.getDayOfObservation(observation, cycle.getDateObservationFirstDay())}"),
-      message: Text("${AppDateUtils.formatDate(observation.date, "EEEE d MMMM yyyy")}"),
+      message: Text(
+          "${AppDateUtils.formatDate(observation.date, "EEEE d MMMM yyyy", ref.watch(languageApp).value?.code)}"),
       cancelButton: CupertinoActionSheetAction(
         onPressed: () async {
           Navigator.pop(context);
@@ -42,14 +44,6 @@ afficherModalModificationObservation(
                   "${AppLocalizations.of(context)!.observation_of} ${AppDateUtils.formatDate(observation.date)}",
               child: ShowObservationNotes(observation: observation),
               actions: <Widget>[
-                /* TextButton(
-                  style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-                  child: const Text('Notes confidentielles'),
-                  onPressed: () {
-                    ouvrirNoteConfidentielles(context, ref, observation);
-                  },
-                ),
-                SizedBox(width: 20), */
                 TextButton(
                     style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
                     child: const Text('OK'),

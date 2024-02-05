@@ -154,6 +154,7 @@ abstract class Observation with _$Observation {
       chiffre: this.marque,
       hachure: this.displayHachure,
       jourSommet: isJourSommet,
+      troisPoints: isNone,
     ); //Cellule couleur
   }
 

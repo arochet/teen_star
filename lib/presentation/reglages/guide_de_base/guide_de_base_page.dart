@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
@@ -7,7 +11,7 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widget/bouton_PDF.dart';
 
@@ -22,7 +26,35 @@ class Guide_de_basePage extends StatelessWidget {
     final styleBlue =
         Theme.of(context).textTheme.bodyMedium!.copyWith(color: const Color.fromARGB(255, 33, 150, 243));
     return MainScaffold(
-      title: 'Guide de base',
+      buttonAppBar: InkWell(
+        onTap: () async {
+          final String assetPDFPath = AppLocalizations.of(context)!.path_guide_pdf;
+          final ByteData bytes = await rootBundle.load(assetPDFPath);
+
+          String nomFichier = 'guide.pdf';
+          Directory appDocDirectory = await getApplicationDocumentsDirectory();
+          String path = '';
+          if (Platform.isAndroid) {
+            path = '/storage/emulated/0/Download/$nomFichier.pdf';
+          } else {
+            path = appDocDirectory.path + '/$nomFichier.pdf';
+          }
+
+          final File file = File(path);
+
+          await file.writeAsBytes(bytes.buffer.asUint8List(), flush: true);
+
+          await OpenFilex.open(path);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Image.asset(
+            'assets/icon_app/icon_principe_de_base.png',
+            width: 35,
+          ),
+        ),
+      ),
+      title: AppLocalizations.of(context)!.basic_guide,
       child: ShowComponentFile(
         title: './lib/PRESENTATION/reglages/guide_de_base/guide_de_base_page.dart',
         child: Padding(
@@ -44,143 +76,8 @@ class Guide_de_basePage extends StatelessWidget {
                   return CircularProgressIndicator();
                 }
               },
-            )
-
-            /*ListView(children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 36.0),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Image(
-                  width: 30,
-                  height: 30,
-                  image: AssetImage(AssetsPath.icon_principe_de_base),
-                ),
-              ),
-            ),
-            DefaultPanel(
-                child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
-                TextSpan(text: "«  Mon corps c’est moi, j’écoute ce qu’il me dit » . ", style: styleBold),
-                TextSpan(text: "Mieux le connaître, c’est découvrir la merveille que je suis !")
-              ]),
             )),
-            _DisplayTitle(title: "Objectifs"),
-            DefaultPanel(
-                child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
-                TextSpan(
-                    text:
-                        "Faciliter vos enregistrements quotidiens afin d'apprendre l’auto-observation pour découvrir votre fertilité et vos cycles (mise en place progressive du cycle à partir de la puberté, profil personnel des signes de fertilité, période de l’ovulation, date prévisible des prochaines règles, variation d’humeur et de forme physique en lien avec les changements hormonaux, impact de certains évènements sur le déroulement du cycle, anomalies éventuelles, ...).")
-              ]),
-            )),
-            _DisplayTitle(title: "Comment s'observer"),
-            DefaultPanel(
-                child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
-                TextSpan(text: "Ce que je sens à la vulve sans regarder", style: styleUnderline),
-                TextSpan(
-                    text:
-                        " (SENSATION) : pendant mes activités quotidiennes (marche, escaliers, …) ou en contractant/relâchant plusieurs fois le périnée (exercice de Kegel).\n\n"),
-                TextSpan(text: "Ce que je vois ", style: styleUnderline),
-                TextSpan(
-                    text:
-                        "(OBSERVATION) : ce qui s’écoule de la vulve, sur le sous-vêtement, aux toilettes, sur le papier toilette (que je peux replier /déplier pour évaluer l’élasticité d’une éventuelle sécrétion). "),
-                TextSpan(text: "Ne rien rechercher à l’intérieur du vagin \n\n", style: styleBold),
-                TextSpan(
-                    text:
-                        "Attention : en cas de pertes anormales (sales ou malodorantes) et/ou douleur, démangeaisons, petites plaies proches de la vulve, etc., consulter un médecin afin de ne pas méconnaître une infection (sexuellement transmissible ou autre) qui doit être soignée très rapidement."),
-              ]),
-            )),
-            _DisplayTitle(title: "Comment noter"),
-            DefaultPanel(
-                child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
-                TextSpan(text: "Observations de la journée ", style: styleBlue),
-                TextSpan(text: "enregistrer "),
-                TextSpan(text: "LE SOIR le signe le plus fertile de la journée ", style: styleBold),
-                TextSpan(text: "(SENSATION et OBSERVATION).\n\n"),
-                TextSpan(text: "Sélectionner "),
-                TextSpan(text: "Débuter un nouveau cycle ", style: styleBlue),
-                TextSpan(text: "dès le 1er jour des règles, sinon continuer le cycle en cours. \n\n"),
-                TextSpan(
-                    text: ""
-                        "Parmi les NOTES possibles, #1 et #2 sont deux types d'évènements de votre choix toujours les "
-                        "mêmes et --> correspond à voyage ou horaires inhabituels (décalage horaire, coucher tardif,"
-                        "travail de nuit, ...). il est aussi possible de noter sa température basale (prise chaque jour à la même heure, avant le lever) afin d'observer son élévation à la fin du cycle"),
-              ]),
-            )),
-            _DisplayTitle(title: "Synthèse du cycle"),
-            DefaultPanel(
-                child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
-                TextSpan(text: "L’onglet "),
-                TextSpan(text: "Cycle ", style: styleBlue),
-                TextSpan(text: "récapitule le cycle, en y ajoutant des couleurs par défaut, mais qui "),
-                TextSpan(
-                    text:
-                        "ne correspondent PAS à un repérage des périodes fertiles ou infertiles du cycle.\n\n",
-                    style: styleBold),
-                TextSpan(text: "Toucher une ligne permet de relire une note ou"),
-                TextSpan(
-                  text:
-                      ", avec l’aide de votre accompagnatrice, d'interpréter manuellement le cycle (cf Guide avancé § 4). ",
-                ),
-              ]),
-            )),
-            _DisplayTitle(title: "Conservation des enregistrements"),
-            DefaultPanel(
-                child: RichText(
-              text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, children: [
-                TextSpan(text: "Les données ne figurent que sur votre appareil "),
-                TextSpan(text: "(portable perdu = données perdues).\n\n", style: styleBold),
-                TextSpan(
-                    text:
-                        "Conseil : exportez régulièrement vos cycles en PDF pour l’archivage sur un ordinateur (utile plus tard ou en cas de consultation médicale), l’impression sur papier ou l'envoi à votre accompagnatrice en cliquant sur l'icône   "),
-                WidgetSpan(
-                  child: Image(
-                    width: 30,
-                    height: 30,
-                    image: AssetImage(AssetsPath.icon_principe_de_base),
-                  ),
-                ),
-                /* TextSpan(text: "Les PDF sont protégés par votre mot de passe. "),
-                TextSpan(text: "Attention ", style: styleUnderline),
-                TextSpan(
-                    text:
-                        " : si vous l'oubliez, vous pourrez en choisir un nouveau pour les PDF à venir, mais ne pourrez plus lire les fichiers "),
-                TextSpan(text: "déjà ", style: styleUnderline),
-                TextSpan(text: "exportés.\n\n"), */
-                TextSpan(
-                    text: "\n\nConditions d'utilisation : J’ai lu les points ci-dessus et j’ai "
-                        "compris que cette application m’aidera à enregistrer mes observations quotidiennes au cours "
-                        "des cycles menstruels, mais ne peut absolument pas me suffire telle quelle pour éviter (ou "
-                        "favoriser) une grossesse. Je comprends que si tel était mon objectif, je devrais impérativement "
-                        "suivre une formation approfondie avec une monitrice spécialisée en méthode naturelle de "
-                        "régulation des naissances. "),
-              ]),
-            )),
-            SpaceH20(),
-
-            //BOUTON PDF
-            BoutonPDF(),
-            SizedBox(height: 30),
-          ]),*/
-            ),
       ),
-    );
-  }
-}
-
-class _DisplayTitle extends StatelessWidget {
-  final String title;
-  const _DisplayTitle({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
-      child: Text(title, style: Theme.of(context).textTheme.titleSmall),
     );
   }
 }

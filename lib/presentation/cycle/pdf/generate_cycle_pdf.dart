@@ -312,6 +312,10 @@ PdfLayoutResult? tableauCycle({
             (i != 2 || isHistorique) /* Truc de porcasse */) {
           row.cells[i].value = '${cellData.chiffre}';
         }
+        //Trois points
+        if (cellData.troisPoints == true) {
+          row.cells[i].value = '...';
+        }
         //Point d'interrrogation
         if (cellData.pointInterrogation == true) {
           row.cells[i].value = '?';
@@ -391,6 +395,7 @@ class CellPDFColor extends _Cell {
   bool? jourSommet;
   int? chiffre;
   bool? hachure;
+  bool? troisPoints;
 
   CellPDFColor({
     this.couleur,
@@ -398,6 +403,7 @@ class CellPDFColor extends _Cell {
     this.jourSommet,
     this.chiffre,
     this.hachure,
+    this.troisPoints,
   });
 
   @override

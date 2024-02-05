@@ -14,12 +14,12 @@ class AppDateUtils {
 
   const AppDateUtils._();
 
-  static String formatDate(DateTime? date, [String? format]) {
+  static String formatDate(DateTime? date, [String? format, String? locale]) {
     if (date == null) {
       return '';
     }
 
-    DateFormat formatter = DateFormat(format ?? 'dd.MM.yy', 'fr');
+    DateFormat formatter = DateFormat(format ?? 'dd.MM.yy', locale ?? 'fr');
     return formatter.format(date);
   }
 

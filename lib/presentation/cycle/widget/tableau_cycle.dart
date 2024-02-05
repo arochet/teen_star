@@ -17,6 +17,8 @@ import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/PRESENTATION/cycle/shared/icon_observation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
+import 'package:teenstar/providers.dart';
 
 import '../../core/_utils/app_date_utils.dart';
 import 'button_ajout_observation_journee.dart';
@@ -158,7 +160,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
   }
 }
 
-class _Cell extends StatelessWidget {
+class _Cell extends ConsumerWidget {
   Observation observation;
   final bool isJourSommet;
   String column;
@@ -170,7 +172,7 @@ class _Cell extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Widget info;
 
     final widthSquare = 35.0;
@@ -231,7 +233,7 @@ class _Cell extends StatelessWidget {
                       .textTheme
                       .labelMedium
                       ?.copyWith(fontSize: 14, color: actioncolor['primary'])),
-              Text(AppDateUtils.formatDate(observation.date, 'MMM'),
+              Text(AppDateUtils.formatDate(observation.date, 'MMM', ref.watch(languageApp).value?.code),
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(color: actioncolor['primary'])),
             ],
           ),

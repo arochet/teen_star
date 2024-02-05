@@ -290,7 +290,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
               }
               Navigator.pop(context);
             },
-            child: Text(AppLocalizations.of(context)!.cancel_all_analysis),
+            child: Text('${AppLocalizations.of(context)!.cancel_all_analysis} ${idCourant?.getOrCrash()}'),
           ),
         ],
       ),

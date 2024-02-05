@@ -53,7 +53,7 @@ extension ParseToSringTA on CouleurAnalyseState {
       case CouleurAnalyseState.bleue:
         return PdfSolidBrush(PdfColor(135, 178, 210)); //yellow;
       case CouleurAnalyseState.none:
-        return PdfSolidBrush(PdfColor(210, 210, 210)); //amber50;
+        return PdfSolidBrush(PdfColor(250, 250, 250)); //blanc;
       case CouleurAnalyseState.invalide:
         return PdfBrushes.beige;
     }

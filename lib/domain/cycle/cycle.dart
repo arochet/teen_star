@@ -59,7 +59,11 @@ abstract class Cycle with _$Cycle {
   List<Observation> getObservationsWithEmptyDays({allowDoubleDays = true}) {
     List<Observation> observationsWithEmptyDays = [];
     DateTime? firstDayOfCycle;
-    firstDayOfCycle = this.observations.first.date?.toDate();
+    if (this.observations.length > 0) {
+      firstDayOfCycle = this.observations.first.date?.toDate();
+    } else {
+      return [];
+    }
 
     late DateTime lastDayOfCycleWithEmptyDays;
 

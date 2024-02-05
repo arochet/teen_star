@@ -426,6 +426,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               child: ElevatedButton(
                 onPressed: () async {
                   ref.read(isFirstPage.notifier).state = true;
+                  UniqueId? _idLastCycle;
                   final List<Observation> obs = widget.cycle?.observations
                           .where((obs) => obs.date?.isSameDayAs(form.date) == true)
                           .toList() ??
@@ -438,14 +439,16 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                     await lastCycleEither.fold((l) => showSnackbarCycleFailure(context, l),
                         (idLastCycle) async {
                       if (idLastCycle != null) {
+                        _idLastCycle = idLastCycle;
                         final lastCycle = ref.read(cycleProvider(idLastCycle)); //Recupère le dernier cycle
                         lastCycle.whenData((cycleAsync) async {
                           cycleAsync.fold((l) => showSnackbarCycleFailure(context, l),
                               (Cycle lastCycle) async {
-                            DateTime? lastDate = lastCycle.getDateOfLastObservation();
+                            DateTime? lastDateOfLastCycle =
+                                lastCycle.getDateOfLastObservation(); //Dernière date du dernier cycle
 
-                            if (lastDate != null) {
-                              if (form.date.toDate().isAfter(lastDate) == false) {
+                            if (lastDateOfLastCycle != null) {
+                              if (form.date.toDate().isAfter(lastDateOfLastCycle) == false) {
                                 dispAlertDate = true;
                               }
                             }
@@ -456,9 +459,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                     if (dispAlertDate) {
                       //Affichage d'un dialog pour confirmer l'ajout de l'observation
                       final dateOK = await showDialogChoix(
-                          context,
-                          AppLocalizations.of(context)!
-                              .please_note_that_a_comment_already_exists_for_this_date_would_you_like_to_replace_it,
+                          context, AppLocalizations.of(context)!.this_date_already_exist_in_previous_cycle,
                           positiveText: AppLocalizations.of(context)!.valider,
                           negativeText: AppLocalizations.of(context)!.cancel,
                           isDanger: true);
@@ -473,12 +474,13 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                   bool addObservation = false;
                   if (obs.length > 0 && widget.observation == null) {
                     final ok = await showDialogChoix(
-                        context,
-                        AppLocalizations.of(context)!
-                            .please_note_that_a_comment_already_exists_for_this_date_would_you_like_to_replace_it,
-                        positiveText: AppLocalizations.of(context)!.replace,
-                        negativeText: AppLocalizations.of(context)!.cancel,
-                        isDanger: true);
+                      context,
+                      AppLocalizations.of(context)!
+                          .please_note_that_a_comment_already_exists_for_this_date_would_you_like_to_replace_it,
+                      positiveText: AppLocalizations.of(context)!.replace,
+                      negativeText: AppLocalizations.of(context)!.cancel,
+                      isDanger: true,
+                    );
 
                     if (ok == true) {
                       addObservation = true;
@@ -488,12 +490,9 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                   }
 
                   if (addObservation) {
-                    final Either<ObservationFailure, UniqueId?>? failureOrSuccess =
-                        (await notifierForm.addObservationPressed(widget.cycle));
-                    final UniqueId? idCycleOfObs = failureOrSuccess?.fold((l) => null, (r) => r);
-
-                    final bool hasExceed = await notifierForm.hasExceedDate(idCycleOfObs);
-                    bool? reporterObservations = false;
+                    final bool hasExceed = await notifierForm
+                        .hasExceedDate(UniqueId.fromUniqueInt((_idLastCycle?.getOrCrash() ?? 0) + 1));
+                    bool? reporterObservations;
 
                     if (hasExceed) {
                       reporterObservations = await showDialogChoix(
@@ -506,11 +505,15 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                       );
                     }
 
-                    if (reporterObservations == true) {
-                      await notifierForm.updateObservationInNewCycle(idCycleOfObs);
-                    }
+                    if (reporterObservations == true || hasExceed == false) {
+                      final Either<ObservationFailure, UniqueId?>? failureOrSuccess =
+                          (await notifierForm.addObservationPressed(widget.cycle));
+                      final UniqueId? idCycleOfObs = failureOrSuccess?.fold((l) => null, (r) => r);
 
-                    await notifierForm.backToMenu(failureOrSuccess);
+                      if (reporterObservations == true)
+                        await notifierForm.updateObservationInNewCycle(idCycleOfObs);
+                      await notifierForm.backToMenu(failureOrSuccess);
+                    }
                   }
                 },
                 style: buttonNormalPrimary,

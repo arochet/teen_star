@@ -25,8 +25,15 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await _getAllNotifications();
       setState(() {});
     });
+  }
+
+  _getAllNotifications() async {
+    listNotifications = await AwesomeNotifications().listScheduledNotifications();
+    listNotifications.sort((a, b) => ((a.schedule as NotificationCalendar)?.weekday ?? 0)
+        .compareTo((b.schedule as NotificationCalendar)?.weekday ?? 0));
   }
 
   @override
@@ -41,8 +48,8 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                   color: ref.watch(themeApp).value?.color2,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                    child: ListView(
+                      //mainAxisSize: MainAxisSize.min,
                       children: [
                         Text('Notifications', style: Theme.of(context).textTheme.titleSmall),
                         SpaceH10(),
@@ -53,17 +60,28 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                         SpaceH10(),
                         Text(
                             listNotifications.length > 0
-                                ? AppLocalizations.of(context)!.notifications_are_scheduled
+                                ? 'Notifications programmées: \n\n${listNotifications.map((e) => '${([
+                                      '--',
+                                      'Lundi',
+                                      'Mardi',
+                                      'Mercredi',
+                                      'Jeudi',
+                                      'Vendredi',
+                                      'Samedi',
+                                      'Dimanche',
+                                    ])[(e.schedule as NotificationCalendar)?.weekday ?? 0]} ${(e.schedule as NotificationCalendar)?.hour}h${(e.schedule as NotificationCalendar)?.minute}').join('\n')} \n\n'
                                 : AppLocalizations.of(context)!.no_notification_scheduled,
                             style: Theme.of(context).textTheme.bodyMedium),
                         SpaceH10(),
+
+                        //Bouton Ajouter une nouvelle notification
                         ElevatedButton(
                           onPressed: () async {
                             NotificationWeekAndTime? pickedSchedule = await pickSchedule(context);
 
                             if (pickedSchedule != null) {
                               await createReminderNotification(pickedSchedule);
-                              listNotifications = await AwesomeNotifications().listScheduledNotifications();
+                              await _getAllNotifications();
                               setState(() {});
                             }
                           },
@@ -71,6 +89,8 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                           style: buttonNormalPrimary,
                         ),
                         SpaceH10(),
+
+                        //Bouton Supprimer les notifications
                         ElevatedButton(
                           onPressed: () async {
                             await cancelScheduledNotifications();

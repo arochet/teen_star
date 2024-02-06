@@ -223,6 +223,8 @@ class _CellObservation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: AutoSizeText('J$value', style: Theme.of(context).textTheme.titleSmall));
+    return Center(
+        child: AutoSizeText('${AppLocalizations.of(context)!.d_day}$value',
+            style: Theme.of(context).textTheme.titleSmall));
   }
 }

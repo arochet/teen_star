@@ -275,7 +275,7 @@
     "add_first_observation":"Ajoutez votre première observation !",
     "no_history":"Pas d'historique",
     "display_analyse":"Afficher l'analyse",
-    "etes_vous_sur_de_vouloir_supprimer_toutes_les_observations":"Etes vous sûr de vouloir supprimer toutes les observations de ce Cycle ?",
+    "etes_vous_sur_de_vouloir_supprimer_toutes_les_observations":"Êtes-vous sûre de vouloir supprimer toutes les observations de ce Cycle ?",
     "nocycleforthemoment":"No cycle for the moment !",
     "deleteallobservationsfromthecycle":"Supprimer toutes les observations du cycle",
     "groupedcycleanalysis":"Analyse groupée cycle",
@@ -296,5 +296,6 @@
     "ourappwouldliketosendnotifications":"Notre application souhaite envoyer des notifications",
     "icon_dry":"assets/icon_observation/sensation/sensation_S.png",
     "this_date_already_exist_in_previous_cycle":"Cette date exite déjà dans le cycle précédant. Voulez vous confirmer ?",
+    "d_day":"J",
     "insert":"insert"
 }

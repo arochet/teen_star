@@ -296,5 +296,6 @@
     "ourappwouldliketosendnotifications":"Our app would like to send Notifications",
     "icon_dry":"assets/icon_observation/sensation/sensation_D.png",
     "this_date_already_exist_in_previous_cycle":"This date already exists in previous cycle. Would you like to confirm ?",
+    "d_day":"D",
     "insert":"insert"
 }

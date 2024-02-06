@@ -52,7 +52,7 @@ class Guide_avancePage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Image.asset(
-            'assets/icon_app/icon_principe_de_base.png',
+            'assets/icon_app/icon_guide_avance.png',
             width: 35,
           ),
         ),

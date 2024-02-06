@@ -24,6 +24,9 @@ class AppWidget extends ConsumerWidget {
           fontFamily: fontFamily,
           primaryColor: Colors.red,
           scaffoldBackgroundColor: ref.watch(themeApp).value?.color,
+          dialogBackgroundColor: ref.watch(themeApp).value?.color,
+          canvasColor: ref.watch(themeApp).value?.color,
+          cardColor: ref.watch(themeApp).value?.color,
           inputDecorationTheme: InputDecorationTheme(
             labelStyle: TextStyle(
               color: colorpanel(200),

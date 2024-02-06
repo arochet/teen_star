@@ -41,42 +41,7 @@ class HistoriquePage extends ConsumerWidget {
                   listCycle = listCycle.reversed.toList();
 
                   //PAGE HISTORIQUE
-                  return Column(
-                    children: [
-                      //ICONE EXPORT PDF
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: InkWell(
-                          onTap: () async {
-                            final listeCycleEither = await ref.read(allCycleProvider.future);
-
-                            listeCycleEither.fold(
-                              (l) => showSnackbarCycleFailure(context, l),
-                              (List<CycleDTO> listeCycle) async {
-                                final listCycleAsync = await ref
-                                    .read(cycleRepositoryProvider)
-                                    .readListCycles(listeCycle.first.id!, listeCycle.last.id!);
-
-                                final userData = await ref.read(currentUserData.future);
-                                final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
-
-                                showDialogApp(
-                                    context: context,
-                                    titre: AppLocalizations.of(context)!.export_as_pdf,
-                                    child: DialogPDF(listeCycle));
-                              },
-                            );
-                          },
-                          child: Image(
-                            width: 60,
-                            height: 35,
-                            image: AssetImage(AssetsPath.icon_pdf),
-                          ),
-                        ),
-                      ),
-                      Expanded(child: TableauHistorique(listCycle)),
-                    ],
-                  );
+                  return TableauHistorique(listCycle);
                 }
               });
             },

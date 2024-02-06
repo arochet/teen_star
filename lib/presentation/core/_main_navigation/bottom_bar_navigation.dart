@@ -10,9 +10,11 @@ import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
+import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/app_bar_cycle.dart';
+import 'package:teenstar/PRESENTATION/cycle/widget/dialog_pdf.dart';
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/injection.dart';
 import 'package:teenstar/providers.dart';
@@ -198,7 +200,42 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
 
       return listCycleWidget;
     } else if (index == 1) {
-      return Text(widget.listMenu[index]["title"], style: Theme.of(context).textTheme.titleMedium);
+      return Row(
+        children: [
+          //ICONE EXPORT PDF
+          InkWell(
+            onTap: () async {
+              final listeCycleEither = await ref.read(allCycleProvider.future);
+
+              listeCycleEither.fold(
+                (l) => showSnackbarCycleFailure(context, l),
+                (List<CycleDTO> listeCycle) async {
+                  final listCycleAsync = await ref
+                      .read(cycleRepositoryProvider)
+                      .readListCycles(listeCycle.first.id!, listeCycle.last.id!);
+
+                  final userData = await ref.read(currentUserData.future);
+                  final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
+
+                  showDialogApp(
+                      context: context,
+                      titre: AppLocalizations.of(context)!.export_as_pdf,
+                      child: DialogPDF(listeCycle));
+                },
+              );
+            },
+            child: Image(
+              width: 60,
+              height: 35,
+              image: AssetImage(AssetsPath.icon_pdf),
+            ),
+          ),
+          Expanded(
+              child: Center(
+                  child:
+                      Text(widget.listMenu[index]["title"], style: Theme.of(context).textTheme.titleMedium))),
+        ],
+      );
     } else if (index == 2) {
       return Text(widget.listMenu[index]["title"], style: Theme.of(context).textTheme.titleMedium);
     } else {

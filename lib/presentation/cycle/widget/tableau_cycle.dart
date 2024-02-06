@@ -475,12 +475,8 @@ class _CellDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /* return Row(children: [
-
-      Text('J$value', style: Theme.of(context).textTheme.titleSmall),
-    ]); */
     return Center(
-        child: AutoSizeText('${selection ? " - " : ""}J$value',
+        child: AutoSizeText('${selection ? " - " : ""}${AppLocalizations.of(context)!.d_day}$value',
             style: Theme.of(context).textTheme.titleSmall, maxLines: 1));
   }
 }

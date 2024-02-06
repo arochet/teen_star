@@ -114,7 +114,8 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
             .join(' ');
         return !observation.isNone
             ? <_Cell>[
-                _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
+                _CellText(
+                    '${AppLocalizations.of(context)!.d_day}${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                 _CellText(AppDateUtils.formatDate(observation.date)),
                 observation.toCellColor(), //Cellule couleur
                 observation.toCellAnalyse(cycle.isJourneeSoleil(observation)), //Cellule analyse
@@ -129,7 +130,8 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
             :
             //Ligne Vide
             <_Cell>[
-                _CellText('J${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
+                _CellText(
+                    '${AppLocalizations.of(context)!.d_day}${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                 _CellNone(),
                 _CellNone(),
                 _CellNone(),
@@ -200,7 +202,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
   //Données du tableau de la page historique
   List<List<_Cell>> data = [];
   for (int u = 0; u < maxRow; u++) {
-    List<_Cell> day = [_CellText('J${u + 1}')];
+    List<_Cell> day = [_CellText('${AppLocalizations.of(context)!.d_day}${u + 1}')];
     for (int i = 0; i < observations.length; i++) {
       if (u < observations[i].length) {
         final obs = observations[i][u];

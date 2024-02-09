@@ -1,4 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
@@ -27,6 +28,8 @@ class AppWidget extends ConsumerWidget {
           dialogBackgroundColor: ref.watch(themeApp).value?.color,
           canvasColor: ref.watch(themeApp).value?.color,
           cardColor: ref.watch(themeApp).value?.color,
+          cupertinoOverrideTheme:
+              CupertinoTheme.of(context).copyWith(primaryColor: CupertinoColors.activeBlue),
           inputDecorationTheme: InputDecorationTheme(
             labelStyle: TextStyle(
               color: colorpanel(200),

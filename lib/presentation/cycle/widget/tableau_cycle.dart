@@ -17,6 +17,7 @@ import 'package:teenstar/PRESENTATION/core/_utils/num_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/cycles_page.dart';
 import 'package:teenstar/PRESENTATION/cycle/shared/icon_observation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:teenstar/PRESENTATION/historique/widget/tableau_historique.dart';
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/providers.dart';
 
@@ -260,22 +261,10 @@ class _Cell extends ConsumerWidget {
               ));
         break;
       case 'Analyse':
-        info = LittleBox(
-            width: widthSquare,
-            height: 30,
-            child: Stack(
-              children: [
-                LittleBox(
-                    width: widthSquare,
-                    height: 30,
-                    color:
-                        observation.analyse?.getOrCrash().toColor() ?? observation.couleurGeneree.toColor()),
-                if (observation.jourFertile == false)
-                  Image.asset(AssetsPath.icon_hachurage,
-                      color: actioncolor['primary'], width: widthSquare, height: 35, fit: BoxFit.fill),
-                widgetShowTrucChelouAnalyse,
-              ],
-            ));
+        info = CellAnalyse(
+          observation: observation,
+          isJourSommet: isJourSommet,
+        );
         break;
       case 'Sensation':
         if (observation.sensation != null && observation.sensation!.getOrCrash() != SensationState.none)
@@ -321,23 +310,6 @@ class _Cell extends ConsumerWidget {
                 iconPath: observation.mucus?.getOrCrash().toIconPath() ?? AssetsPath.icon_vide, iconSize: 30),
           );
         break;
-      /* case 'Douleur':
-        if (observation.douleurs?.length != null && observation.douleurs!.length > 0)
-          info = SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: observation.douleurs
-                      ?.map((Douleur douleur) => Padding(
-                            padding: const EdgeInsets.only(right: 2),
-                            child: _LittleBoxText(douleur.getOrCrash().toDisplayShort()),
-                          ))
-                      .toList() ??
-                  [],
-            ),
-          );
-        else
-          info = Container(width: 1, height: 1);
-        break; */
       case 'Humeur':
         if (observation.humeur?.getOrCrash() == HumeurState.none)
           info = _CellNone();

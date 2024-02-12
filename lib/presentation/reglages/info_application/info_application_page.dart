@@ -19,15 +19,17 @@ class Info_applicationPage extends StatelessWidget {
         title: './lib/PRESENTATION/reglages/info_application/info_application_page.dart',
         child: Padding(
             padding: EdgeInsets.all(30),
-            child: HtmlWidget(
-              AppLocalizations.of(context)!.textinformation,
-              onTapUrl: (url) async {
-                final _url = Uri.parse('https://www.teenstar.fr');
-                if (!await launchUrl(_url)) {
-                  throw 'Could not launch $url';
-                }
-                return Future.value(true);
-              },
+            child: SingleChildScrollView(
+              child: HtmlWidget(
+                AppLocalizations.of(context)!.textinformation,
+                onTapUrl: (url) async {
+                  final _url = Uri.parse('https://www.teenstar.fr');
+                  if (!await launchUrl(_url)) {
+                    throw 'Could not launch $url';
+                  }
+                  return Future.value(true);
+                },
+              ),
             ) /*ListView(children: [
             
             DefaultPanel(

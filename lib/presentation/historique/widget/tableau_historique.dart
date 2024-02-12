@@ -55,11 +55,10 @@ class TableauHistorique extends ConsumerWidget {
               if (observation.isNone)
                 return _CellObservationNonRemplie();
               else
-                return _Cell(
+                return CellAnalyse(
                   observation: observation,
                   isJourSommet:
                       tmpListCycle[columnIndex].idJourneeSoleil.getOrCrash() == observation.id.getOrCrash(),
-                  isInfertile: observation.jourFertile == false,
                 );
             } else {
               return _CellEmpty();
@@ -94,15 +93,13 @@ class TableauHistorique extends ConsumerWidget {
   }
 }
 
-class _Cell extends StatelessWidget {
+class CellAnalyse extends StatelessWidget {
   final Observation observation;
   final bool isJourSommet;
-  final bool isInfertile;
-  _Cell({
+  CellAnalyse({
     Key? key,
     required this.observation,
     required this.isJourSommet,
-    required this.isInfertile,
   }) : super(key: key);
 
   @override
@@ -131,7 +128,7 @@ class _Cell extends StatelessWidget {
                 Center(
                     child: Image.asset(AssetsPath.icon_fleur_sommet,
                         color: Colors.black, width: 30, height: 30)),
-              if (isInfertile)
+              if (observation.jourFertile == false)
                 Image.asset(AssetsPath.icon_hachurage, color: Colors.black, fit: BoxFit.fill, width: 40),
               if (observation.isPointInterrogation(true))
                 Center(child: Text("?", style: Theme.of(context).textTheme.titleSmall)),

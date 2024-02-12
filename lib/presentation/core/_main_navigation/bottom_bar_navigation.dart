@@ -54,45 +54,48 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
     return DefaultTabController(
       length: 2,
       child: AutoTabsScaffold(
-        appBarBuilder: (_, tabsRouter) => AppBar(
-            scrolledUnderElevation: 0,
-            shadowColor: null,
-            backgroundColor: tabsRouter.activeIndex == 2 ? colorScaffoldBarReglage : colorScaffoldBar,
-            title: _buildAppBar(context, ref, tabsRouter.activeIndex),
-            centerTitle: true,
-            bottom: /* tabsRouter.activeIndex == 0 ? _buildTabBarCycle(ref)  :*/ null,
-            elevation: /* tabsRouter.activeIndex == 0 ? 4 : */ 0,
-            actions: [
-              if (env == Environment.dev)
-                InkWell(
-                  onTap: () {
-                    final notifier = ref.read(showFilePath.notifier);
-                    notifier.state = !ref.read(showFilePath);
-                    getIt<AppLog>().can = ref.read(showFilePath);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.remove_red_eye, size: 25, color: actioncolor["primary"]),
+        appBarBuilder: (_, tabsRouter) => PreferredSize(
+          preferredSize: Size.fromHeight(40.0),
+          child: AppBar(
+              scrolledUnderElevation: 0,
+              shadowColor: null,
+              backgroundColor: tabsRouter.activeIndex == 2 ? colorScaffoldBarReglage : colorScaffoldBar,
+              title: _buildAppBar(context, ref, tabsRouter.activeIndex),
+              centerTitle: true,
+              bottom: /* tabsRouter.activeIndex == 0 ? _buildTabBarCycle(ref)  :*/ null,
+              elevation: /* tabsRouter.activeIndex == 0 ? 4 : */ 0,
+              actions: [
+                if (env == Environment.dev)
+                  InkWell(
+                    onTap: () {
+                      final notifier = ref.read(showFilePath.notifier);
+                      notifier.state = !ref.read(showFilePath);
+                      getIt<AppLog>().can = ref.read(showFilePath);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.remove_red_eye, size: 25, color: actioncolor["primary"]),
+                    ),
                   ),
-                ),
-              if (tabsRouter.activeIndex == 0)
-                InkWell(
-                  onTap: () => _showActionSheetCycle(context, ref),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.more_vert, size: 25, color: actioncolor["primary"]),
+                if (tabsRouter.activeIndex == 0)
+                  InkWell(
+                    onTap: () => _showActionSheetCycle(context, ref),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.more_vert, size: 25, color: actioncolor["primary"]),
+                    ),
                   ),
-                ),
-              if (tabsRouter.activeIndex == 1)
-                InkWell(
-                  onTap: () => _showActionSheetHistorique(context, ref),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.more_vert, size: 25, color: actioncolor["primary"]),
+                if (tabsRouter.activeIndex == 1)
+                  InkWell(
+                    onTap: () => _showActionSheetHistorique(context, ref),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.more_vert, size: 25, color: actioncolor["primary"]),
+                    ),
                   ),
-                ),
-              SizedBox(width: 10),
-            ]),
+                SizedBox(width: 10),
+              ]),
+        ),
         backgroundColor: ref.watch(themeApp).value?.color,
         routes: widget.listRoute,
         bottomNavigationBuilder: (_, tabsRouter) {
@@ -274,6 +277,8 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                 if (idCourant != null) {
                   await ref.read(cycleRepositoryProvider).deleteObservationFromCycle(idCourant!);
                   ref.invalidate(allCycleProvider);
+                  ref.read(idCycleCourant.notifier).state =
+                      await ref.read(lastCycleId.future).then((value) => value.fold((l) => null, (r) => r));
                   ref.invalidate(cycleProvider(idCourant));
                 } else
                   showSnackbar(context, AppLocalizations.of(context)!.nocycleforthemoment);

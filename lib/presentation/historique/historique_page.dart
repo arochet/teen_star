@@ -28,7 +28,7 @@ class HistoriquePage extends ConsumerWidget {
     return ShowComponentFile(
       title: './lib/PRESENTATION/historique/historique_page.dart',
       child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: listAsync.when(
             data: (Either<CycleFailure, List<Cycle>> data) {
               return data.fold((error) => ShowError(error.toString()), (List<Cycle> listCycle) {

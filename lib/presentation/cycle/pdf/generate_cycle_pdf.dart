@@ -229,7 +229,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
 
   //CREATION DU FICHIER
   String nomFichier =
-      '${userData!.userName.getOrCrash()}-${AppDateUtils.formatDate(userData?.dateNaissance, 'dd_MM_yyyy')}-${userData.anneePremiereRegle}-Cycle${listCycles.first.id.getOrCrash()}_a_${listCycles.last.id.getOrCrash()}';
+      '${userData!.userName.getOrCrash()}-${AppDateUtils.formatDate(userData?.dateNaissance, 'dd_MM_yyyy')}-${userData.anneePremiereRegle}-Cycle${listCycles.first.id.getOrCrash()}_${AppLocalizations.of(context)!.vers}_${listCycles.last.id.getOrCrash()}';
   Directory appDocDirectory = await getApplicationDocumentsDirectory();
   PdfSecurity security = pdf.security;
   security.algorithm = PdfEncryptionAlgorithm.rc4x128Bit;
@@ -262,7 +262,7 @@ header(PdfDocument pdf, UserData? userData, List<Cycle> listCycle, BuildContext 
       bounds: const Rect.fromLTWH(0, 15, 500, 20));
   //Nom - Age - PR 2001
   headerTemplate.graphics.drawString(
-      '${userData?.userName.getOrCrash()} - ${userData?.dateNaissance?.year} - PR ${userData?.anneePremiereRegle}',
+      '${userData?.userName.getOrCrash()} - ${userData?.dateNaissance?.year} - ${AppLocalizations.of(context)!.premier_regle} ${userData?.anneePremiereRegle}',
       PdfStandardFont(PdfFontFamily.helvetica, 14),
       bounds: const Rect.fromLTWH(0, 35, 500, 20));
   pdf.template.top = headerTemplate;

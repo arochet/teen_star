@@ -16,8 +16,9 @@ class ObservationAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      title:
-          '${AppLocalizations.of(context)!.new_observation_cycle} ${cycle != null ? "${cycle!.id.getOrCrash()}" : ""}',
+      title: cycle != null
+          ? '${AppLocalizations.of(context)!.new_observation_cycle} ${cycle!.id.getOrCrash()}'
+          : AppLocalizations.of(context)!.new_cycle,
       child: ShowComponentFile(
         title: '/PRESENTATION/cycle/ajout_observation_journee/ajout_observation_journee_page.dart',
         child: ObservationFormProvider(cycle, date, observation: observation),

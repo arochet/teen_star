@@ -62,14 +62,14 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                             listNotifications.length > 0
                                 ? 'Notifications programmées: \n\n${listNotifications.map((e) => '${([
                                       '--',
-                                      'Lundi',
-                                      'Mardi',
-                                      'Mercredi',
-                                      'Jeudi',
-                                      'Vendredi',
-                                      'Samedi',
-                                      'Dimanche',
-                                    ])[(e.schedule as NotificationCalendar)?.weekday ?? 0]} ${(e.schedule as NotificationCalendar)?.hour}h${(e.schedule as NotificationCalendar)?.minute}').join('\n')} \n\n'
+                                      AppLocalizations.of(context)!.monday,
+                                      AppLocalizations.of(context)!.tuesday,
+                                      AppLocalizations.of(context)!.wednesday,
+                                      AppLocalizations.of(context)!.thursday,
+                                      AppLocalizations.of(context)!.friday,
+                                      AppLocalizations.of(context)!.saturday,
+                                      AppLocalizations.of(context)!.sunday,
+                                    ])[(e.schedule as NotificationCalendar)?.weekday ?? 0]} ${(e.schedule as NotificationCalendar)?.hour}h${(e.schedule as NotificationCalendar)?.minute.toString().padLeft(2, '0')}').join('\n')} \n\n'
                                 : AppLocalizations.of(context)!.no_notification_scheduled,
                             style: Theme.of(context).textTheme.bodyMedium),
                         SpaceH10(),

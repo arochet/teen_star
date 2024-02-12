@@ -159,6 +159,7 @@ class CycleRepository implements ICycleRepository {
   @override
   Future<Either<ObservationFailure, Unit>> deleteObservationFromCycle(UniqueId idCycle) async {
     printDev();
+    await _database.delete(db_cycle, where: 'id = ?', whereArgs: [idCycle.getOrCrash()]);
     await _database.delete(db_observation, where: 'idCycle = ?', whereArgs: [idCycle.getOrCrash()]);
     return right(unit);
   }

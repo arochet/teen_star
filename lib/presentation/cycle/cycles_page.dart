@@ -95,7 +95,7 @@ class _CyclesPageState extends ConsumerState<CyclesPage> {
     return ShowComponentFile(
       title: './lib/PRESENTATION/cycle/cycle_page.dart',
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: listCycleWidget,
       ),
     );
@@ -168,7 +168,7 @@ class _Cycle extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
-                        child: Text("Toucher les lignes à analyser",
+                        child: Text(AppLocalizations.of(context)!.touch_the_lines_to_be_analysed,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium
@@ -184,6 +184,7 @@ class _Cycle extends ConsumerWidget {
                       }), */
                   //TABLEAU
                   Expanded(child: TableauCycle(cycle)),
+                  SizedBox(height: 20),
                 ],
               ),
               if (!selection) ButtonAjoutObservationJournee(),

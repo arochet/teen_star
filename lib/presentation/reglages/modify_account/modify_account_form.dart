@@ -1,4 +1,3 @@
-// import 'package:another_flushbar/flushbar.dart';
 import 'package:intl/intl.dart';
 import 'package:teenstar/APPLICATION/account/modify_form_notifier.dart';
 import 'package:teenstar/PRESENTATION/auth/widget/flushbar_auth_failure.dart';
@@ -74,7 +73,7 @@ extension ThemeAppExtension on ThemeApp {
   }
 }
 
-enum LanguageApp { francais, anglais }
+enum LanguageApp { francais, anglais, espagnol, allemand, portugais, italien, tcheque }
 
 extension LanguageAppExtention on LanguageApp {
   //Retourne le theme en fonction de l'index
@@ -84,6 +83,16 @@ extension LanguageAppExtention on LanguageApp {
         return LanguageApp.francais;
       case 1:
         return LanguageApp.anglais;
+      case 2:
+        return LanguageApp.espagnol;
+      case 3:
+        return LanguageApp.allemand;
+      case 4:
+        return LanguageApp.portugais;
+      case 5:
+        return LanguageApp.italien;
+      case 6:
+        return LanguageApp.tcheque;
       default:
         return LanguageApp.francais;
     }
@@ -95,6 +104,16 @@ extension LanguageAppExtention on LanguageApp {
         return 'Français';
       case LanguageApp.anglais:
         return 'English';
+      case LanguageApp.espagnol:
+        return 'Spanish';
+      case LanguageApp.allemand:
+        return 'Deutch';
+      case LanguageApp.portugais:
+        return 'Português';
+      case LanguageApp.italien:
+        return 'Italiano';
+      case LanguageApp.tcheque:
+        return 'Čeština';
       default:
         return 'Français';
     }
@@ -106,6 +125,16 @@ extension LanguageAppExtention on LanguageApp {
         return 'fr';
       case LanguageApp.anglais:
         return 'en';
+      case LanguageApp.espagnol:
+        return 'es';
+      case LanguageApp.allemand:
+        return 'de';
+      case LanguageApp.portugais:
+        return 'pt';
+      case LanguageApp.italien:
+        return 'it';
+      case LanguageApp.tcheque:
+        return 'cs';
       default:
         return 'en';
     }
@@ -117,6 +146,16 @@ extension LanguageAppExtention on LanguageApp {
         return 0;
       case LanguageApp.anglais:
         return 1;
+      case LanguageApp.espagnol:
+        return 2;
+      case LanguageApp.allemand:
+        return 3;
+      case LanguageApp.portugais:
+        return 4;
+      case LanguageApp.italien:
+        return 5;
+      case LanguageApp.tcheque:
+        return 6;
       default:
         return 0;
     }

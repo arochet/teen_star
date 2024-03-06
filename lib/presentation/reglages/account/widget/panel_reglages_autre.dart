@@ -14,7 +14,7 @@ class PanelReglagesAutre extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PanelList(
-      title: 'Panel Reglages Autre',
+      title: 'PanelReglagesAutre',
       list: [
         ItemPanelList(
           title: AppLocalizations.of(context)!.basic_guide,
@@ -30,25 +30,13 @@ class PanelReglagesAutre extends StatelessWidget {
             context.router.push(Guide_avanceRoute());
           },
         ),
-        /* ItemPanelList(
-          title: 'Notification de rappel',
-          icon: Icons.notifications,
-          onTap: () {},
-          enable: false,
-        ), */
-        /* ItemPanelList(
-          title: 'Lire mes notes confidentielles',
-          icon: Icons.mail_rounded,
-          onTap: () {},
-          enable: false,
-        ), */
         ItemPanelList(
           title: AppLocalizations.of(context)!.app_info,
           icon: Icons.info,
           onTap: () => context.router.push(Info_applicationRoute()),
         ),
         ItemPanelList(
-          title: 'Notifications',
+          title: AppLocalizations.of(context)!.notification,
           icon: Icons.notifications,
           onTap: () => context.router.push(NotificationsRoute()),
         ),

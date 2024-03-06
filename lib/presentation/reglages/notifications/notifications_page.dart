@@ -39,7 +39,7 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
-      title: 'Notifications',
+      title: AppLocalizations.of(context)!.notification,
       child: ShowComponentFile(
         child: Padding(
           padding: EdgeInsets.all(10),
@@ -51,7 +51,8 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                     child: ListView(
                       //mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('Notifications', style: Theme.of(context).textTheme.titleSmall),
+                        Text(AppLocalizations.of(context)!.notification,
+                            style: Theme.of(context).textTheme.titleSmall),
                         SpaceH10(),
                         Text(
                             AppLocalizations.of(context)!
@@ -60,7 +61,7 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
                         SpaceH10(),
                         Text(
                             listNotifications.length > 0
-                                ? 'Notifications programmées: \n\n${listNotifications.map((e) => '${([
+                                ? '${AppLocalizations.of(context)!.notification_scheduled} \n\n${listNotifications.map((e) => '${([
                                       '--',
                                       AppLocalizations.of(context)!.monday,
                                       AppLocalizations.of(context)!.tuesday,
@@ -114,7 +115,7 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
 
     return scheduledNotifications
         .map((notif) => DefaultPanel(
-              child: Text("Notifications: ${notif.content?.title}",
+              child: Text("${AppLocalizations.of(context)!.notification}: ${notif.content?.title}",
                   style: Theme.of(context).textTheme.bodyMedium),
             ))
         .toList();

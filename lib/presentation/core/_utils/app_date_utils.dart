@@ -18,7 +18,6 @@ class AppDateUtils {
     if (date == null) {
       return '';
     }
-
     DateFormat formatter = DateFormat(format ?? 'dd.MM.yy', locale ?? 'fr');
     return formatter.format(date);
   }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -11,8 +12,11 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
+import 'package:teenstar/providers.dart';
 import 'widget/bouton_PDF.dart';
 
 class Guide_de_basePage extends StatelessWidget {
@@ -28,7 +32,7 @@ class Guide_de_basePage extends StatelessWidget {
     return MainScaffold(
       buttonAppBar: InkWell(
         onTap: () async {
-          final String assetPDFPath = AppLocalizations.of(context)!.path_guide_pdf;
+          final String assetPDFPath = AppLocalizations.of(context)!.path_basic_guide;
           final ByteData bytes = await rootBundle.load(assetPDFPath);
 
           String nomFichier = 'guide.pdf';
@@ -57,27 +61,46 @@ class Guide_de_basePage extends StatelessWidget {
       title: AppLocalizations.of(context)!.basic_guide,
       child: ShowComponentFile(
         title: './lib/PRESENTATION/reglages/guide_de_base/guide_de_base_page.dart',
-        child: Padding(
-            padding: EdgeInsets.all(25),
-            child: FutureBuilder(
-              future: rootBundle.loadString(AppLocalizations.of(context)!.path_basic_guide),
-              builder: (context, async) {
-                if (async.hasData) {
-                  return ListView(
-                    children: [
-                      HtmlWidget(
-                        async.data.toString(),
-                        textStyle: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      BoutonPDF(),
-                    ],
-                  );
-                } else {
-                  return CircularProgressIndicator();
-                }
-              },
-            )),
+        child: FutureBuilder(
+          future: rootBundle.loadString(AppLocalizations.of(context)!.path_basic_guide),
+          builder: (context, async) {
+            return PDFView(async, true);
+          },
+        ),
       ),
     );
+  }
+}
+
+class PDFView extends ConsumerWidget {
+  AsyncSnapshot<Object?> async;
+  bool isBasicGuide; //Sinon guide avancée
+  PDFView(this.async, this.isBasicGuide, {key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final languageValue = ref.watch(languageApp).value;
+
+    if (languageValue != LanguageApp.francais && languageValue != LanguageApp.anglais) {
+      return PDF().fromAsset(
+        isBasicGuide
+            ? AppLocalizations.of(context)!.path_basic_guide
+            : AppLocalizations.of(context)!.path_advanded_guide,
+        loadingWidget: () => Center(child: Text('Progress')),
+        errorWidget: (error) => Center(child: Text(error.toString())),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(25.0),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: HtmlWidget(
+              async.data.toString(),
+              textStyle: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+        ),
+      );
+    }
   }
 }

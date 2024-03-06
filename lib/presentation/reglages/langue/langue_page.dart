@@ -11,6 +11,8 @@ import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+final choiceLanguage = StateProvider<LanguageApp>((ref) => LanguageApp.francais);
+
 class LanguePage extends ConsumerStatefulWidget {
   const LanguePage({Key? key}) : super(key: key);
 
@@ -19,7 +21,6 @@ class LanguePage extends ConsumerStatefulWidget {
 }
 
 class _LanguePageState extends ConsumerState<LanguePage> {
-  int currentLanguage = 1;
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
@@ -33,30 +34,11 @@ class _LanguePageState extends ConsumerState<LanguePage> {
               width: 280,
               child: Column(
                 children: [
-                  Text("Etape 1/3", style: Theme.of(context).textTheme.titleSmall),
+                  Text("${AppLocalizations.of(context)!.etape} 1/3",
+                      style: Theme.of(context).textTheme.titleSmall),
                   Expanded(child: Container()),
                   //CHOIX DES LANGUES
-                  InkWell(
-                    child: _ChoixLangue("Français", currentLanguage == 0),
-                    onTap: () async {
-                      await ref.read(authRepositoryProvider).setLanguage(LanguageApp.francais);
-                      ref.refresh(languageApp);
-                      setState(() {
-                        currentLanguage = 0;
-                      });
-                    },
-                  ),
-                  SpaceH10(),
-                  InkWell(
-                    child: _ChoixLangue("English ", currentLanguage == 1),
-                    onTap: () async {
-                      await ref.read(authRepositoryProvider).setLanguage(LanguageApp.anglais);
-                      ref.refresh(languageApp);
-                      setState(() {
-                        currentLanguage = 1;
-                      });
-                    },
-                  ),
+                  ...LanguageApp.values.map((e) => _ChoixLangue(e)),
                   SpaceH40(),
                   SpaceH40(),
                   //BOUTON VALIDATON
@@ -78,32 +60,41 @@ class _LanguePageState extends ConsumerState<LanguePage> {
   }
 }
 
-class _ChoixLangue extends StatelessWidget {
-  String langue;
-  bool enable;
+class _ChoixLangue extends ConsumerWidget {
+  LanguageApp langue;
   _ChoixLangue(
-    this.langue,
-    this.enable, {
+    this.langue, {
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(enable ? Icons.check_box : Icons.check_box_outline_blank, color: actioncolor['primary']),
-        SizedBox(width: 10),
-        Flexible(
-          child: Text(
-            langue,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(color: enable ? actioncolor['primary'] : colorpanel(600)),
-          ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isEnabled = ref.watch(languageApp).value == langue;
+    return InkWell(
+      onTap: () async {
+        await ref.read(authRepositoryProvider).setLanguage(langue);
+        ref.read(choiceLanguage.notifier).state = langue;
+        ref.refresh(languageApp);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(isEnabled ? Icons.check_box : Icons.check_box_outline_blank, color: actioncolor['primary']),
+            SizedBox(width: 10),
+            Flexible(
+              child: Text(
+                langue.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: isEnabled ? actioncolor['primary'] : colorpanel(600)),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

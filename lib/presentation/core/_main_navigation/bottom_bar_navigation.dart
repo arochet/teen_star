@@ -213,17 +213,17 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
               listeCycleEither.fold(
                 (l) => showSnackbarCycleFailure(context, l),
                 (List<CycleDTO> listeCycle) async {
-                  final listCycleAsync = await ref
-                      .read(cycleRepositoryProvider)
-                      .readListCycles(listeCycle.first.id!, listeCycle.last.id!);
+                  if (listeCycle.length > 0) {
+                    final userData = await ref.read(currentUserData.future);
+                    final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
 
-                  final userData = await ref.read(currentUserData.future);
-                  final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
-
-                  showDialogApp(
-                      context: context,
-                      titre: AppLocalizations.of(context)!.export_as_pdf,
-                      child: DialogPDF(listeCycle));
+                    showDialogApp(
+                        context: context,
+                        titre: AppLocalizations.of(context)!.export_as_pdf,
+                        child: DialogPDF(listeCycle));
+                  } else {
+                    showSnackbar(context, 'No History');
+                  }
                 },
               );
             },

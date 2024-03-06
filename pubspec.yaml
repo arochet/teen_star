@@ -60,6 +60,7 @@ dependencies:
   awesome_notifications: ^0.8.2
   flutter_html: ^3.0.0-beta.2
   flutter_widget_from_html_core: ^0.14.7
+  flutter_cached_pdfview: ^0.4.2
 
 dev_dependencies:
   build_runner: ^2.4.6
@@ -107,8 +108,6 @@ flutter:
         - asset: assets/fonts/myriadpro/MYRIADPRO-BOLD.OTF
           weight: 700
   assets:
-    - assets/guide.pdf
-    - assets/guide_en.pdf
     - assets/logo_vide.png
     - assets/icon/logo.png
     - assets/icon_app/icon_hachurage.png
@@ -167,9 +166,20 @@ flutter:
     - assets/icon_observation/douleurs/douleur_Aucune.png
     - assets/html/guide_de_base_en.html
     - assets/html/guide_avance_en.html
+    - assets/html/guide_avance_esp.html
     - assets/html/guide_de_base_fr.html
     - assets/html/guide_avance_fr.html
-
-
-
-  
+    - assets/guide_avance_pdf/guide_avance_cs.pdf
+    - assets/guide_avance_pdf/guide_avance_es.pdf
+    - assets/guide_avance_pdf/guide_avance_de.pdf
+    - assets/guide_avance_pdf/guide_avance_hr.pdf
+    - assets/guide_avance_pdf/guide_avance_it.pdf
+    - assets/guide_avance_pdf/guide_avance_pt.pdf
+    - assets/guide_de_base_pdf/guide_de_base_cs.pdf
+    - assets/guide_de_base_pdf/guide_de_base_es.pdf
+    - assets/guide_de_base_pdf/guide_de_base_de.pdf
+    - assets/guide_de_base_pdf/guide_de_base_hr.pdf
+    - assets/guide_de_base_pdf/guide_de_base_it.pdf
+    - assets/guide_de_base_pdf/guide_de_base_pt.pdf
+    - assets/guide_complet/guide_fr.pdf
+    - assets/guide_complet/guide_en.pdf

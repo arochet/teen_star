@@ -216,7 +216,7 @@
     "delete_all" : "Alles löschen",
     "delete_cycle" : "Zyklus (...) löschen",
     "history" : "Überblick",
-    "resend_cycle_3_to_2" : "Zyklus 3 auf 2 übertragen",
+    "resend_cycle_3_to_2" : "Zykl. 3 auf 2",
     "maximum_cycles_at_a_time" : "Maximal 15 Zyklen gleichzeitig",
     "from_cycle" : "Von Zyklus",
     "to_cycle" : "bis Zyklus  ",

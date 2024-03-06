@@ -25,7 +25,7 @@ class PanelPersonnelData extends StatelessWidget {
       title: 'PanelPersonnelData',
       list: [
         ItemPanelList(
-          title: 'Pseudo : ${userData?.userName.getOrCrash() ?? '--'}',
+          title: '${AppLocalizations.of(context)!.username} : ${userData?.userName.getOrCrash() ?? '--'}',
           icon: Icons.account_circle_rounded,
         ),
         ItemPanelList(

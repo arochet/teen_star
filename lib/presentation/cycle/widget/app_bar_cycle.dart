@@ -81,7 +81,7 @@ class AppBarCycle extends ConsumerWidget {
             child: Image(
               width: 26,
               height: 26,
-              image: AssetImage(AssetsPath.icon_principe_de_base),
+              image: AssetImage(AssetsPath.icon_guide_avance),
             ),
           ),
           Expanded(

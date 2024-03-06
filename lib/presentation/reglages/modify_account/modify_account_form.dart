@@ -73,7 +73,7 @@ extension ThemeAppExtension on ThemeApp {
   }
 }
 
-enum LanguageApp { francais, anglais, espagnol, allemand, portugais, italien, tcheque }
+enum LanguageApp { francais, anglais, espagnol, allemand, portugais, italien, tcheque, croate }
 
 extension LanguageAppExtention on LanguageApp {
   //Retourne le theme en fonction de l'index
@@ -93,6 +93,8 @@ extension LanguageAppExtention on LanguageApp {
         return LanguageApp.italien;
       case 6:
         return LanguageApp.tcheque;
+      case 7:
+        return LanguageApp.croate;
       default:
         return LanguageApp.francais;
     }
@@ -114,6 +116,8 @@ extension LanguageAppExtention on LanguageApp {
         return 'Italiano';
       case LanguageApp.tcheque:
         return 'Čeština';
+      case LanguageApp.croate:
+        return 'Hrvatski';
       default:
         return 'Français';
     }
@@ -135,6 +139,8 @@ extension LanguageAppExtention on LanguageApp {
         return 'it';
       case LanguageApp.tcheque:
         return 'cs';
+      case LanguageApp.croate:
+        return 'hr';
       default:
         return 'en';
     }
@@ -156,6 +162,8 @@ extension LanguageAppExtention on LanguageApp {
         return 5;
       case LanguageApp.tcheque:
         return 6;
+      case LanguageApp.croate:
+        return 7;
       default:
         return 0;
     }

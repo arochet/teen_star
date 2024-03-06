@@ -82,7 +82,6 @@ final themeApp = FutureProvider.autoDispose<ThemeApp>((ref) async {
 });
 
 final languageApp = FutureProvider.autoDispose<LanguageApp>((ref) async {
-  print('language 22: ${ref.read(authRepositoryProvider).getLanguage()}');
   return await ref.read(authRepositoryProvider).getLanguage();
 });
 

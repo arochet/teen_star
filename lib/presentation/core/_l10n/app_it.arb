@@ -216,7 +216,7 @@
     "delete_all" : "Cancella tutto",
     "delete_cycle" : "Cancella ciclo",
     "history" : "Cronologia",
-    "resend_cycle_3_to_2" : "Rimanda il ciclo 3 al 2",
+    "resend_cycle_3_to_2" : "Rimanda il ciclo {argument} al {argument2}",
     "maximum_cycles_at_a_time" : "Massimo 15 cicli alla volta",
     "from_cycle" : "Dal ciclo",
     "to_cycle" : "al ciclo",
@@ -302,5 +302,12 @@
     "d_day" : "X",
     "premier_regle" : "PM",
     "vers" : "a",
+    "@resend_cycle_3_to_2": {
+        "type": "text",
+        "placeholders": {
+            "argument": {},
+            "argument2": {}
+        }
+    },
     "insert" : ""
 }

@@ -216,7 +216,7 @@
     "delete_all" : "Borrar todo",
     "delete_cycle" : "Borrar ciclo ",
     "history" : "Historial",
-    "resend_cycle_3_to_2" : "Reenviar ciclo 3 a 2",
+    "resend_cycle_3_to_2" : "Reenviar ciclo {argument} a {argument2}",
     "maximum_cycles_at_a_time" : "Máximo 15 ciclos a la vez",
     "from_cycle" : "Desde el ciclo",
     "to_cycle" : "Al ciclo",
@@ -302,5 +302,12 @@
     "d_day" : "D",
     "premier_regle" : "PM",
     "vers" : "a",
+    "@resend_cycle_3_to_2": {
+        "type": "text",
+        "placeholders": {
+            "argument": {},
+            "argument2": {}
+        }
+    },
     "insert" : "insert"
 }

@@ -216,7 +216,7 @@
     "delete_all":"Effacer tout",
     "delete_cycle":"Effacer cycle ",
     "history":"Historique",
-    "resend_cycle_3_to_2":"Renvoyer cycle 3 vers 2",
+    "resend_cycle_3_to_2":"Renvoyer cycle {argument} vers {argument2}",
     "maximum_cycles_at_a_time":"Maximum 15 cycles à la fois",
     "from_cycle":"Du cycle ",
     "to_cycle":"au cycle ",
@@ -302,5 +302,12 @@
     "d_day":"J",
     "premier_regle":"PR",
     "vers": "a",
+    "@resend_cycle_3_to_2": {
+        "type": "text",
+        "placeholders": {
+            "argument": {},
+            "argument2": {}
+        }
+    },
     "insert":"insert"
 }

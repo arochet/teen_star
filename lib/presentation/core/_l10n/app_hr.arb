@@ -94,7 +94,7 @@
     "date" : "Datum:",
     "today" : "Danas:",
     "sensation" : "OSJET",
-    "d_letter_in_icon" : "D (slovo u ikoni)",
+    "d_letter_in_icon" : "D",
     "dry_legend_icon_d" : "Suho",
     "h" : "V",
     "humid" : "Vlažno",
@@ -216,7 +216,7 @@
     "delete_all" : "Izbriši sve",
     "delete_cycle" : "Izbriši ciklus ...",
     "history" : "Povijest",
-    "resend_cycle_3_to_2" : "Vrati cikluse 3 do 2",
+    "resend_cycle_3_to_2" : "Vrati cikluse {argument} do {argument2}",
     "maximum_cycles_at_a_time" : "Maksimalno 15 ciklusa odjednom",
     "from_cycle" : "Od ciklusa...",
     "to_cycle" : "do ciklusa...",
@@ -301,5 +301,12 @@
     "d_day" : "D",
     "premier_regle" : "PM",
     "vers" : "na",
+    "@resend_cycle_3_to_2": {
+        "type": "text",
+        "placeholders": {
+            "argument": {},
+            "argument2": {}
+        }
+    },
     "insert" : ""
 }

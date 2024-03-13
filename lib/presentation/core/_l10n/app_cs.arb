@@ -216,7 +216,7 @@
     "delete_all" : "Smazat vše",
     "delete_cycle" : "Smazat cyklus….",
     "history" : "Historie",
-    "resend_cycle_3_to_2" : "Přenést cyklus 3 na 2",
+    "resend_cycle_3_to_2" : "Přenést cyklus {argument} na {argument2}",
     "maximum_cycles_at_a_time" : "Maximálně 15 cyklů najednou",
     "from_cycle" : "Od cyklu …",
     "to_cycle" : "do cyklu …",
@@ -302,5 +302,12 @@
     "d_day" : "D",
     "premier_regle" : "PC",
     "vers" : "na",
+    "@resend_cycle_3_to_2": {
+        "type": "text",
+        "placeholders": {
+            "argument": {},
+            "argument2": {}
+        }
+    },
     "insert" : ""
 }

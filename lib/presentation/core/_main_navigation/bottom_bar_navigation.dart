@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'package:teenstar/DOMAIN/core/value_objects.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/cycle_failure.dart';
@@ -371,8 +372,8 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
                 }
                 Navigator.pop(context);
               },
-              child: Text(
-                  '${AppLocalizations.of(context)!.returncycle} $idDernierCycle ${AppLocalizations.of(context)!.to} ${idDernierCycle - 1}'),
+              child:
+                  Text(AppLocalizations.of(context)!.resend_cycle_3_to_2(idDernierCycle, idDernierCycle - 1)),
             ),
           ],
         ),

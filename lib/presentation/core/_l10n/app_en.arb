@@ -216,7 +216,7 @@
     "delete_all": "Delete all",
     "delete_cycle": "Delete cycle ",
     "history": "History",
-    "resend_cycle_3_to_2": "Resend cycle 3 to 2",
+    "resend_cycle_3_to_2": "Resend cycle {argument} to {argument2}",
     "maximum_cycles_at_a_time": "Maximum 15 cycles at a time",
     "from_cycle": "From cycle ",
     "to_cycle": "to cycle ",
@@ -302,5 +302,12 @@
     "d_day":"D",
     "premier_regle":"FP",
     "vers": "to",
+    "@resend_cycle_3_to_2": {
+        "type": "text",
+        "placeholders": {
+            "argument": {},
+            "argument2": {}
+        }
+    },
     "insert":"insert"
 }

@@ -216,7 +216,7 @@
     "delete_all" : "Alles löschen",
     "delete_cycle" : "Zyklus (...) löschen",
     "history" : "Überblick",
-    "resend_cycle_3_to_2" : "Zykl. 3 auf 2",
+    "resend_cycle_3_to_2" : "Zykl. {argument} auf {argument2}",
     "maximum_cycles_at_a_time" : "Maximal 15 Zyklen gleichzeitig",
     "from_cycle" : "Von Zyklus",
     "to_cycle" : "bis Zyklus  ",
@@ -302,5 +302,12 @@
     "d_day" : "X",
     "premier_regle" : "DE",
     "vers" : "zu",
+    "@resend_cycle_3_to_2": {
+        "type": "text",
+        "placeholders": {
+            "argument": {},
+            "argument2": {}
+        }
+    },
     "insert" : ""
 }

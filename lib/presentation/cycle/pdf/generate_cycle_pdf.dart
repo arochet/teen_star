@@ -103,7 +103,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
       tabTitleHeader: tabTitleCycle,
       data: cycle.getObservationsWithEmptyDays().map((Observation observation) {
         String evenements = (observation.evenements
-                    ?.map<String>((evenement) => evenement.getOrCrash().toDisplayShort())
+                    ?.map<String>((evenement) => evenement.getOrCrash().toDisplayShort(context))
                     .toList() ??
                 [])
             .join(' ');

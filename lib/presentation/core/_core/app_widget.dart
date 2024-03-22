@@ -26,7 +26,10 @@ class AppWidget extends ConsumerWidget {
           primaryColor: Colors.red,
           scaffoldBackgroundColor: ref.watch(themeApp).value?.color,
           dialogBackgroundColor: ref.watch(themeApp).value?.color,
-          datePickerTheme: DatePickerThemeData(backgroundColor: ref.watch(themeApp).value?.color),
+          datePickerTheme: DatePickerThemeData(
+            backgroundColor: ref.watch(themeApp).value?.color,
+            rangePickerBackgroundColor: colorpanel(50),
+          ),
           canvasColor: ref.watch(themeApp).value?.color,
           cardColor: ref.watch(themeApp).value?.color,
           cupertinoOverrideTheme:

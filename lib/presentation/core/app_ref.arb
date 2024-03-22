@@ -267,6 +267,7 @@
     "would_you_like_to_add_a_comment_for_the" : "",
     "add" : "",
     "all_your_recordings_will_be_permanently_deleted" : "",
+    "notification" : "",
     "erase_all" : "",
     "activate_notifications_to_receive_alerts_and_reminders" : "",
     "notifications_are_scheduled" : "",
@@ -301,5 +302,12 @@
     "d_day" : "",
     "premier_regle" : "",
     "vers" : "",
+    "@resend_cycle_3_to_2": {
+        "type": "text",
+        "placeholders": {
+            "argument": {},
+            "argument2": {}
+        }
+    },
     "insert" : ""
 }

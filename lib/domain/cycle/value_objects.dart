@@ -94,6 +94,22 @@ class CouleurAnalyse extends ValueObject<CouleurAnalyseState> {
 
 enum SensationState { sec, humide, mouille, glissantLubrifie, nonpercu, autre, none }
 
+String premieresLettres(String chaine) {
+  String result = '';
+
+  // Séparation de la chaîne en mots
+  List<String> mots = chaine.split(' ');
+
+  // Récupération de la première lettre de chaque mot
+  for (String mot in mots) {
+    if (mot.isNotEmpty) {
+      result += mot[0];
+    }
+  }
+
+  return result;
+}
+
 extension ParseToSringSensation on SensationState {
   String toShortString() {
     return this.toString().toLowerCase();
@@ -122,18 +138,18 @@ extension ParseToSringSensation on SensationState {
     switch (this) {
       case SensationState.sec:
         return AppLocalizations.of(context)!.d_letter_in_icon;
-      case SensationState.humide:
-        return 'H';
       case SensationState.mouille:
         return AppLocalizations.of(context)!.w;
-      case SensationState.glissantLubrifie:
-        return 'L';
       case SensationState.nonpercu:
-        return 'np';
+        return premieresLettres(toDisplayString(context)).toUpperCase();
       case SensationState.autre:
         return '?';
-      case SensationState.none:
-        return '';
+      default:
+        final qsdf = toDisplayString(context);
+        if (qsdf.length > 0)
+          return qsdf[0];
+        else
+          return '';
     }
   }
 
@@ -463,27 +479,8 @@ extension ParseToSringEvenement on EvenementState {
     }
   }
 
-  String toDisplayShort() {
-    switch (this) {
-      case EvenementState.fatigue:
-        return 'Fat';
-      case EvenementState.stress:
-        return 'Str';
-      case EvenementState.voyage:
-        return 'Voy';
-      case EvenementState.personnelType1:
-        return 'PersT1';
-      case EvenementState.personnelType2:
-        return 'PersT2';
-      case EvenementState.maladie:
-        return 'Mal';
-      case EvenementState.medicament:
-        return 'Méd';
-      case EvenementState.autre:
-        return 'Aut';
-      case EvenementState.none:
-        return '';
-    }
+  String toDisplayShort(BuildContext context) {
+    return toDisplayString(context).substring(0, 3);
   }
 
   String toIconPath() {

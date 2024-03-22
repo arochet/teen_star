@@ -79,7 +79,7 @@ class _TableauCycleState extends ConsumerState<TableauCycle> {
     final _title = [
       AppLocalizations.of(context)!.date,
       if (!ref.watch(showAnalyse)) AppLocalizations.of(context)!.colour,
-      if (ref.watch(showAnalyse)) AppLocalizations.of(context)!.analyse,
+      if (ref.watch(showAnalyse)) AppLocalizations.of(context)!.analysis,
       AppLocalizations.of(context)!.sensation,
       AppLocalizations.of(context)!.blood,
       AppLocalizations.of(context)!.mucus,

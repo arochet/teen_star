@@ -271,8 +271,8 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
             onPressed: () async {
               final response = await showDialogChoix(context,
                   AppLocalizations.of(context)!.etes_vous_sur_de_vouloir_supprimer_toutes_les_observations,
-                  positiveText: AppLocalizations.of(context)!.delete_all,
-                  negativeText: AppLocalizations.of(context)!.cancel);
+                  positiveText: AppLocalizations.of(context)!.delete_cycle,
+                  negativeText: AppLocalizations.of(context)!.annuler);
 
               if (response == true) {
                 if (idCourant != null) {

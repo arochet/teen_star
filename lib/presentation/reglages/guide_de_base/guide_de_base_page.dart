@@ -79,28 +79,12 @@ class PDFView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final languageValue = ref.watch(languageApp).value;
-
-    if (languageValue != LanguageApp.francais && languageValue != LanguageApp.anglais) {
-      return PDF().fromAsset(
-        isBasicGuide
-            ? AppLocalizations.of(context)!.path_basic_guide
-            : AppLocalizations.of(context)!.path_advanded_guide,
-        loadingWidget: () => Center(child: Text('Progress')),
-        errorWidget: (error) => Center(child: Text(error.toString())),
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: HtmlWidget(
-              async.data.toString(),
-              textStyle: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ),
-        ),
-      );
-    }
+    return PDF().fromAsset(
+      isBasicGuide
+          ? AppLocalizations.of(context)!.path_basic_guide
+          : AppLocalizations.of(context)!.path_advanded_guide,
+      loadingWidget: () => Center(child: Text('Progress')),
+      errorWidget: (error) => Center(child: Text(error.toString())),
+    );
   }
 }

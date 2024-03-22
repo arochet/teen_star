@@ -152,7 +152,7 @@ afficherModalModificationObservation(
           onPressed: () async {
             final res = await showDialogChoix(
                 context, AppLocalizations.of(context)!.do_you_really_want_to_delete_this_observation,
-                positiveText: AppLocalizations.of(context)!.delete,
+                positiveText: AppLocalizations.of(context)!.supprimer,
                 negativeText: AppLocalizations.of(context)!.cancel,
                 isDanger: true);
 

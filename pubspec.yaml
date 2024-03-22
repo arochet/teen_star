@@ -175,11 +175,21 @@ flutter:
     - assets/guide_avance_pdf/guide_avance_hr.pdf
     - assets/guide_avance_pdf/guide_avance_it.pdf
     - assets/guide_avance_pdf/guide_avance_pt.pdf
+    - assets/guide_avance_pdf/guide_avance_fr.pdf
+    - assets/guide_avance_pdf/guide_avance_en.pdf
     - assets/guide_de_base_pdf/guide_de_base_cs.pdf
     - assets/guide_de_base_pdf/guide_de_base_es.pdf
     - assets/guide_de_base_pdf/guide_de_base_de.pdf
     - assets/guide_de_base_pdf/guide_de_base_hr.pdf
     - assets/guide_de_base_pdf/guide_de_base_it.pdf
     - assets/guide_de_base_pdf/guide_de_base_pt.pdf
+    - assets/guide_de_base_pdf/guide_de_base_fr.pdf
+    - assets/guide_de_base_pdf/guide_de_base_en.pdf
     - assets/guide_complet/guide_fr.pdf
     - assets/guide_complet/guide_en.pdf
+    - assets/guide_complet/guide_cs.pdf
+    - assets/guide_complet/guide_es.pdf
+    - assets/guide_complet/guide_de.pdf
+    - assets/guide_complet/guide_hr.pdf
+    - assets/guide_complet/guide_it.pdf
+    - assets/guide_complet/guide_pt.pdf

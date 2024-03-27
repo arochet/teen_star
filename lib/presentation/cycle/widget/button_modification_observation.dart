@@ -46,7 +46,7 @@ class ButtonModificationObservation extends ConsumerWidget {
                 await showDialogApp(
                   context: context,
                   titre:
-                      "${AppLocalizations.of(context)!.analyse} $nombreObservation ${AppLocalizations.of(context)!.observation} ${nombreObservation > 1 ? 's' : ''}",
+                      "${AppLocalizations.of(context)!.analyse} ${AppLocalizations.of(context)!.observation} ($nombreObservation)",
                   child: _DialogModificationCycle(),
                 );
               },

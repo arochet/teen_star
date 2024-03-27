@@ -23,12 +23,46 @@ class AppWidget extends ConsumerWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: fontFamily,
+          primaryColorDark: colorpanel(50),
+          primaryColorLight: colorpanel(50),
+          colorScheme: ColorScheme(
+            brightness: Brightness.light,
+            primary: Color.fromARGB(100, 00, 69, 130),
+            onPrimary: actioncolor['primary']!,
+            secondary: Colors.red,
+            onSecondary: Colors.red,
+            error: Colors.red,
+            onError: Colors.red,
+            background: ref.watch(themeApp).value?.color ?? Colors.pink,
+            onBackground: ref.watch(themeApp).value?.color ?? Colors.pink,
+            surface: colorpanel(50)!,
+            onSurface: colorpanel(50)!,
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              foregroundColor: actioncolor['primary']!, // button text color
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+            textStyle: TextStyle(fontFamily: 'MyriadPro', fontSize: 14.0, fontWeight: FontWeight.bold),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+            backgroundColor: actioncolor['primary'],
+            foregroundColor: Colors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3.0))),
+          )),
           primaryColor: Colors.red,
           scaffoldBackgroundColor: ref.watch(themeApp).value?.color,
           dialogBackgroundColor: ref.watch(themeApp).value?.color,
           datePickerTheme: DatePickerThemeData(
             backgroundColor: ref.watch(themeApp).value?.color,
             rangePickerBackgroundColor: colorpanel(50),
+            dayForegroundColor: MaterialStateProperty.all(actioncolor['primary']!),
+            //todayBackgroundColor: MaterialStateProperty.all(Colors.white),
+          ),
+          buttonTheme: ButtonThemeData(
+            buttonColor: colorpanel(50),
           ),
           canvasColor: ref.watch(themeApp).value?.color,
           cardColor: ref.watch(themeApp).value?.color,

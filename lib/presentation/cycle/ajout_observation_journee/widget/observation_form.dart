@@ -342,7 +342,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               ),
 
             //SIGNE ASSOCIE
-            Text(AppLocalizations.of(context)!.associated_sign, style: styleTitre),
+            Text(AppLocalizations.of(context)!.associated_sign.toFirstLettersUpperCase(), style: styleTitre),
             Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -356,7 +356,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               iconTxt: (state) => (state as DouleurState).toDisplayShort(context),
             ),
             //EVENEMENTS
-            Text(AppLocalizations.of(context)!.event, style: styleTitre),
+            Text(AppLocalizations.of(context)!.event.toFirstLettersUpperCase(), style: styleTitre),
             Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(
@@ -381,7 +381,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
             //TEMPERATURE BASALE
             Row(
               children: [
-                Text(AppLocalizations.of(context)!.temperature,
+                Text(AppLocalizations.of(context)!.temperature.toFirstLettersUpperCase(),
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(color: actioncolor['primary'])),
                 SizedBox(width: 15),
                 Expanded(

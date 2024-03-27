@@ -271,7 +271,7 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
             onPressed: () async {
               final response = await showDialogChoix(context,
                   AppLocalizations.of(context)!.etes_vous_sur_de_vouloir_supprimer_toutes_les_observations,
-                  positiveText: AppLocalizations.of(context)!.delete_cycle,
+                  positiveText: AppLocalizations.of(context)!.delete,
                   negativeText: AppLocalizations.of(context)!.annuler);
 
               if (response == true) {
@@ -292,8 +292,10 @@ class _BottomBarNavigationState extends ConsumerState<BottomBarNavigation>
           CupertinoActionSheetAction(
             onPressed: () async {
               final response = await showDialogChoix(
-                  context, AppLocalizations.of(context)!.allinterpretationsofthiscyclewillbeerased,
-                  positiveText: AppLocalizations.of(context)!.delete_all,
+                  context,
+                  AppLocalizations.of(context)!
+                      .do_you_really_want_to_delete_all_interpretations_made_on_this_cycle,
+                  positiveText: AppLocalizations.of(context)!.delete,
                   negativeText: AppLocalizations.of(context)!.cancel);
 
               if (response == true) {

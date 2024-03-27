@@ -302,6 +302,7 @@
     "d_day" : "D",
     "premier_regle" : "PM",
     "vers" : "a",
+    "cycles" : "Cyclos",
     "@resend_cycle_3_to_2": {
         "type": "text",
         "placeholders": {

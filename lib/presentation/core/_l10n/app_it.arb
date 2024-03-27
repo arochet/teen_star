@@ -267,8 +267,8 @@
     "would_you_like_to_add_a_comment_for_the" : "Vuoi aggiungere un'osservazione per il",
     "add" : "Aggiungi ",
     "all_your_recordings_will_be_permanently_deleted" : "Tutte le tue registrazioni saranno cancellate definitivamente",
-    "notification" : "Cancella tutto",
-    "erase_all" : "Notifiche",
+    "notification" : "Notifiche",
+    "erase_all" : "Cancella tutto",
     "activate_notifications_to_receive_alerts_and_reminders" : "Attiva le notifiche per ricevere avvisi e promemoria",
     "notifications_are_scheduled" : "Le notifiche sono programmate",
     "notification_scheduled" : "Notifiche programmate",
@@ -302,6 +302,7 @@
     "d_day" : "G",
     "premier_regle" : "PM",
     "vers" : "a",
+    "cycles" : "Cicli",
     "@resend_cycle_3_to_2": {
         "type": "text",
         "placeholders": {

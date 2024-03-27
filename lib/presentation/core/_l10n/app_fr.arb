@@ -298,10 +298,11 @@
     "dontallow":"Ne pas autoriser",
     "ourappwouldliketosendnotifications":"Notre application souhaite envoyer des notifications",
     "icon_dry":"assets/icon_observation/sensation/sensation_S.png",
-    "this_date_already_exist_in_previous_cycle":"Cette date exite déjà dans le cycle précédent. Voulez vous confirmer ?",
+    "this_date_already_exist_in_previous_cycle":"Cette date exite déjà dans le cycle précédent. Voulez vous continuer ?",
     "d_day":"J",
     "premier_regle":"PR",
     "vers": "a",
+    "cycles" : "Cycles",
     "@resend_cycle_3_to_2": {
         "type": "text",
         "placeholders": {

@@ -53,7 +53,7 @@ class _MainNavigationPageState extends ConsumerState<MainNavigationPage> with Wi
     return Builder(builder: (context) {
       final listMenu = [
         {
-          "title": "Cycles",
+          "title": AppLocalizations.of(context)!.cycle,
           "icon": Icons.radio_button_checked,
           "id": 0,
         },

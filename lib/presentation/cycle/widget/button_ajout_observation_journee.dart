@@ -50,7 +50,7 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
             }
           },
           child: Text(AppLocalizations.of(context)!.observation_of_the_day),
-          style: buttonNormalPrimary,
+          //style: buttonNormalPrimary,
         ),
       ),
     );

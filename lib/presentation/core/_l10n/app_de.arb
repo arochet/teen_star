@@ -302,6 +302,7 @@
     "d_day" : "T",
     "premier_regle" : "DE",
     "vers" : "auf",
+    "cycles" : "Zyklen",
     "@resend_cycle_3_to_2": {
         "type": "text",
         "placeholders": {

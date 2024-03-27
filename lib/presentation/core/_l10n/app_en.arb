@@ -203,7 +203,7 @@
     "analyse_group_cycle": "Analyse group Cycle ",
     "touch_the_lines_to_be_analysed": "Touch the lines to be analysed",
     "cancel": "Cancel",
-    "analyse": "Analysis",
+    "analyse": "Analyse",
     "observation": "observation",
     "change_colour": "Change colour",
     "mark_infertile": "Mark infertile",
@@ -302,6 +302,7 @@
     "d_day":"D",
     "premier_regle":"FP",
     "vers": "to",
+    "cycles" : "Cycles",
     "@resend_cycle_3_to_2": {
         "type": "text",
         "placeholders": {

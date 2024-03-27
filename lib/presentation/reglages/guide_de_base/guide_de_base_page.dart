@@ -31,25 +31,7 @@ class Guide_de_basePage extends StatelessWidget {
         Theme.of(context).textTheme.bodyMedium!.copyWith(color: const Color.fromARGB(255, 33, 150, 243));
     return MainScaffold(
       buttonAppBar: InkWell(
-        onTap: () async {
-          final String assetPDFPath = AppLocalizations.of(context)!.path_basic_guide;
-          final ByteData bytes = await rootBundle.load(assetPDFPath);
-
-          String nomFichier = 'guide.pdf';
-          Directory appDocDirectory = await getApplicationDocumentsDirectory();
-          String path = '';
-          if (Platform.isAndroid) {
-            path = '/storage/emulated/0/Download/$nomFichier.pdf';
-          } else {
-            path = appDocDirectory.path + '/$nomFichier.pdf';
-          }
-
-          final File file = File(path);
-
-          await file.writeAsBytes(bytes.buffer.asUint8List(), flush: true);
-
-          await OpenFilex.open(path);
-        },
+        onTap: () => openPDF(AppLocalizations.of(context)!.path_basic_guide),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Image.asset(
@@ -64,12 +46,40 @@ class Guide_de_basePage extends StatelessWidget {
         child: FutureBuilder(
           future: rootBundle.loadString(AppLocalizations.of(context)!.path_basic_guide),
           builder: (context, async) {
-            return PDFView(async, true);
+            return SafeArea(
+                child: Column(
+              children: [
+                Expanded(child: PDFView(async, true)),
+                ElevatedButton(
+                  onPressed: () => openPDF(AppLocalizations.of(context)!.path_guide_pdf),
+                  child: Text(AppLocalizations.of(context)!.export_as_pdf),
+                ),
+              ],
+            ));
           },
         ),
       ),
     );
   }
+}
+
+openPDF(String pathDoc) async {
+  final ByteData bytes = await rootBundle.load(pathDoc);
+
+  String nomFichier = 'guide.pdf';
+  Directory appDocDirectory = await getApplicationDocumentsDirectory();
+  String path = '';
+  if (Platform.isAndroid) {
+    path = '/storage/emulated/0/Download/$nomFichier.pdf';
+  } else {
+    path = appDocDirectory.path + '/$nomFichier.pdf';
+  }
+
+  final File file = File(path);
+
+  await file.writeAsBytes(bytes.buffer.asUint8List(), flush: true);
+
+  await OpenFilex.open(path);
 }
 
 class PDFView extends ConsumerWidget {

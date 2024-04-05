@@ -181,7 +181,7 @@ class _Cell extends ConsumerWidget {
     //Cas ou c'est une observation vide
     if (observation.isNone) {
       if (column != 'Date') {
-        if (column == 'Analyse')
+        if (column == 'Analyse' || column == 'Couleur')
           return Container(
             width: 30,
             height: 20,

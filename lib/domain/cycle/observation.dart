@@ -141,11 +141,16 @@ abstract class Observation with _$Observation {
       pointInterrogation: isPointInterrogation(false),
       chiffre: this.marque,
       hachure: false,
+      troisPoints: isNone,
     ); //Cellule couleur
   }
 
   ///Pour le PDF, créer la cellule Analyse
   CellPDFColor toCellAnalyse(bool isJourSommet) {
+    if (isNone)
+      return CellPDFColor(
+        troisPoints: isNone,
+      );
     return CellPDFColor(
       couleur: this.analyse?.getOrCrash() == CouleurAnalyseState.none
           ? this.couleurGeneree.toColorPDF()

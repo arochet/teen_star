@@ -27,7 +27,7 @@ afficherModalModificationObservation(
       title: Text(
           "${AppLocalizations.of(context)!.observation_of_d}${cycle.getDayOfObservation(observation, cycle.getDateObservationFirstDay())}"),
       message: Text(
-          "${AppDateUtils.formatDate(observation.date, "EEEE d MMMM yyyy", ref.watch(languageApp).value?.code)}"),
+          "${AppDateUtils.formatDate(observation.date, "EEEE dd.MM.yyyy", ref.watch(languageApp).value?.code)}"),
       cancelButton: CupertinoActionSheetAction(
         onPressed: () async {
           Navigator.pop(context);

@@ -342,7 +342,7 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
               ),
 
             //SIGNE ASSOCIE
-            Text(AppLocalizations.of(context)!.associated_sign.toFirstLettersUpperCase(), style: styleTitre),
+            Text(AppLocalizations.of(context)!.associated_sign, style: styleTitre),
             Divider(color: actioncolor['primary'], thickness: 1),
             const SizedBox(height: 5),
             ChoixFormField(

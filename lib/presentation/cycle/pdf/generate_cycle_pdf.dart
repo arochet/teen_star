@@ -62,7 +62,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
     CellHeader(AppLocalizations.of(context)!.day, width: 35),
     CellHeader(AppLocalizations.of(context)!.date, width: 45),
     CellHeader(AppLocalizations.of(context)!.colour),
-    CellHeader(AppLocalizations.of(context)!.analyse),
+    CellHeader(AppLocalizations.of(context)!.analysis),
     CellHeader(AppLocalizations.of(context)!.sensation),
     CellHeader(AppLocalizations.of(context)!.blood),
     CellHeader(AppLocalizations.of(context)!.mucus),
@@ -128,13 +128,13 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
                 _CellText('$douleurs $evenements'), //Cellule evenement
               ]
             :
-            //Ligne Vide
+            //Jour VIDE !
             <_Cell>[
                 _CellText(
                     '${AppLocalizations.of(context)!.d_day}${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                 _CellNone(),
                 _CellNone(),
-                _CellNone(),
+                observation.toCellAnalyse(false), //JOUR VIDE
                 _CellNone(),
                 _CellNone(),
                 _CellNone(),
@@ -229,7 +229,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
 
   //CREATION DU FICHIER
   String nomFichier =
-      '${userData!.userName.getOrCrash()}-${AppDateUtils.formatDate(userData?.dateNaissance, 'dd_MM_yyyy')}-${userData.anneePremiereRegle}-Cycle${listCycles.first.id.getOrCrash()}_${AppLocalizations.of(context)!.vers}_${listCycles.last.id.getOrCrash()}';
+      '${userData!.userName.getOrCrash()}-${AppDateUtils.formatDate(userData?.dateNaissance, 'dd_MM_yyyy')}-${userData.anneePremiereRegle}-${AppLocalizations.of(context)!.cycle}${listCycles.first.id.getOrCrash()}-${listCycles.last.id.getOrCrash()}';
   Directory appDocDirectory = await getApplicationDocumentsDirectory();
   PdfSecurity security = pdf.security;
   security.algorithm = PdfEncryptionAlgorithm.rc4x128Bit;

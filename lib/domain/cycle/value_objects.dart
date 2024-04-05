@@ -128,7 +128,7 @@ extension ParseToSringSensation on SensationState {
       case SensationState.nonpercu:
         return AppLocalizations.of(context)!.not_perceived;
       case SensationState.autre:
-        return AppLocalizations.of(context)!.other_sensation;
+        return AppLocalizations.of(context)!.other_observation;
       case SensationState.none:
         return '';
     }
@@ -141,7 +141,9 @@ extension ParseToSringSensation on SensationState {
       case SensationState.mouille:
         return AppLocalizations.of(context)!.w;
       case SensationState.nonpercu:
-        return premieresLettres(toDisplayString(context)).toUpperCase();
+        return AppLocalizations.of(context)!.np;
+      case SensationState.glissantLubrifie:
+        return AppLocalizations.of(context)!.l;
       case SensationState.autre:
         return '?';
       default:

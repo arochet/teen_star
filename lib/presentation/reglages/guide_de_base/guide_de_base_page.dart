@@ -89,6 +89,7 @@ class PDFView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print('AppLocalizations.of(context)!.path_basic_guide ${AppLocalizations.of(context)!.path_basic_guide}');
     return PDF().fromAsset(
       isBasicGuide
           ? AppLocalizations.of(context)!.path_basic_guide

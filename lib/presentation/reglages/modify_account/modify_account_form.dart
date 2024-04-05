@@ -109,7 +109,7 @@ extension LanguageAppExtention on LanguageApp {
       case LanguageApp.espagnol:
         return 'Español';
       case LanguageApp.allemand:
-        return 'Deutch';
+        return 'Deutsch';
       case LanguageApp.portugais:
         return 'Português';
       case LanguageApp.italien:

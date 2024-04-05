@@ -59,7 +59,6 @@ class AppWidget extends ConsumerWidget {
             backgroundColor: ref.watch(themeApp).value?.color,
             rangePickerBackgroundColor: colorpanel(50),
             dayForegroundColor: MaterialStateProperty.all(actioncolor['primary']!),
-            //todayBackgroundColor: MaterialStateProperty.all(Colors.white),
           ),
           buttonTheme: ButtonThemeData(
             buttonColor: colorpanel(50),

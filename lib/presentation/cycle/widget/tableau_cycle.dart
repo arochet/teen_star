@@ -241,16 +241,14 @@ class _Cell extends ConsumerWidget {
         );
         break;
       case 'Couleur':
-        if (observation.couleurGeneree == CouleurAnalyseState.none)
-          info = Stack(
-            children: [
-              //Case vide
-              widgetShowTrucChelouCouleur,
-              Text("...", style: Theme.of(context).textTheme.bodyMedium),
-            ],
-          );
-        else
-          info = LittleBox(
+        info = Container(
+          decoration: (observation.couleurGeneree.toColor() == null)
+              ? BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(5),
+                )
+              : null,
+          child: LittleBox(
               width: widthSquare,
               height: 30,
               child: Stack(
@@ -258,7 +256,8 @@ class _Cell extends ConsumerWidget {
                   LittleBox(width: widthSquare, height: 30, color: observation.couleurGeneree.toColor()),
                   widgetShowTrucChelouCouleur
                 ],
-              ));
+              )),
+        );
         break;
       case 'Analyse':
         info = CellAnalyse(

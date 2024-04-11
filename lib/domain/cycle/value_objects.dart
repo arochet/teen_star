@@ -128,7 +128,7 @@ extension ParseToSringSensation on SensationState {
       case SensationState.nonpercu:
         return AppLocalizations.of(context)!.not_perceived;
       case SensationState.autre:
-        return AppLocalizations.of(context)!.other_observation;
+        return AppLocalizations.of(context)!.other_sensation;
       case SensationState.none:
         return '';
     }

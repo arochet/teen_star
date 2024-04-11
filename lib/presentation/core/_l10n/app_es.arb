@@ -223,7 +223,7 @@
     "export_as_pdf" : "Exportar como PDF",
     "from_cycle" : "Desde el ciclo",
     "to_cycle" : "al ciclo",
-    "fp_abbreviation_for_1st_period" : "PP ",
+    "fp_abbreviation_for_1st_period" : "PP",
     "date" : "Fecha",
     "colour" : "Color",
     "analysis" : "Análisis",
@@ -300,7 +300,7 @@
     "icon_dry" : "assets/icon_observation/sensation/sensation_S.png",
     "this_date_already_exist_in_previous_cycle" : "Esta fecha ya existe en el ciclo anterior. ¿Desea continuar?",
     "d_day" : "D",
-    "premier_regle" : "PM",
+    "premier_regle" : "PP",
     "vers" : "a",
     "cycles" : "Cyclos",
     "@resend_cycle_3_to_2": {

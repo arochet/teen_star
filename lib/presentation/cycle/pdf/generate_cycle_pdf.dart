@@ -16,6 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:io' show Platform;
 
 generatePDF(UserData? userData, List<Cycle> listCycles, Password password, BuildContext context) async {
+  PdfFontFamily fontFamily = PdfFontFamily.helvetica;
   //VERIFICATION DES PERMISSIONS !
   PermissionStatus status = await Permission.storage.status;
 
@@ -28,7 +29,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
   }
 
   final PdfDocument pdf = PdfDocument();
-  header(pdf, userData, listCycles, context);
+  header(pdf, userData, listCycles, context, fontFamily);
 
   //CHARGEMENT LISTE DES ICONES
   Map<SangState, PdfBitmap> listImageSang = {};
@@ -89,7 +90,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
     //Entete du text Cycle
     PdfTextElement textElement = PdfTextElement(
         text: '${AppLocalizations.of(context)!.cycle} ${cycle.id.getOrCrash()}',
-        font: PdfStandardFont(PdfFontFamily.helvetica, 12),
+        font: PdfStandardFont(fontFamily, 12),
         brush: PdfBrushes.black);
 
     PdfLayoutResult? layoutResult = textElement.draw(
@@ -99,6 +100,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
 
     //TABLEAU CYCLE
     layoutResult = tableauCycle(
+      fontFamily: fontFamily,
       page: page,
       tabTitleHeader: tabTitleCycle,
       data: cycle.getObservationsWithEmptyDays().map((Observation observation) {
@@ -133,8 +135,8 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
                 _CellText(
                     '${AppLocalizations.of(context)!.d_day}${cycle.getDayOfObservation(observation, datePremierJourCycle)}'),
                 _CellNone(),
-                _CellNone(),
-                observation.toCellAnalyse(false), //JOUR VIDE
+                CellPDFColor(troisPoints: true), //JOUR VIDE
+                CellPDFColor(troisPoints: true), //JOUR VIDE
                 _CellNone(),
                 _CellNone(),
                 _CellNone(),
@@ -153,7 +155,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
     page = pdf.pages.add();
     textElement = PdfTextElement(
         text: '${AppLocalizations.of(context)!.cycle_comments} ${cycle.id.getOrCrash()}',
-        font: PdfStandardFont(PdfFontFamily.helvetica, 20),
+        font: PdfStandardFont(fontFamily, 20),
         brush: PdfBrushes.black);
     layoutResult = textElement.draw(
         page: page, bounds: Rect.fromLTWH(0, 0, page.getClientSize().width, page.getClientSize().height))!;
@@ -174,6 +176,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
         iconEmpty: listImageMucus[MucusState.none]!,
         imgHachurage: imgHachurage,
         imgJourSommet: imgJourSommet,
+        fontFamily: fontFamily,
         layout: layoutResult);
   }
 
@@ -181,7 +184,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
   PdfPage page = pdf.pages.add();
   PdfTextElement textElement = PdfTextElement(
       text: AppLocalizations.of(context)!.history,
-      font: PdfStandardFont(PdfFontFamily.helvetica, 16),
+      font: PdfStandardFont(PdfFontFamily.courier, 16),
       brush: PdfBrushes.black);
   PdfLayoutResult layoutResult = textElement.draw(
       page: page, bounds: Rect.fromLTWH(0, 0, page.getClientSize().width, page.getClientSize().height))!;
@@ -225,6 +228,7 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
       imgHachurage: imgHachurage,
       imgJourSommet: imgJourSommet,
       layout: layoutResult!,
+      fontFamily: fontFamily,
       isHistorique: true);
 
   //CREATION DU FICHIER
@@ -251,19 +255,20 @@ generatePDF(UserData? userData, List<Cycle> listCycles, Password password, Build
   pdf.dispose();
 }
 
-header(PdfDocument pdf, UserData? userData, List<Cycle> listCycle, BuildContext context) {
+header(PdfDocument pdf, UserData? userData, List<Cycle> listCycle, BuildContext context,
+    PdfFontFamily fontFamily) {
   final PdfPageTemplateElement headerTemplate = PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 500, 60));
   //Résumé / Analyse du cycle 1 au cycle 2
   headerTemplate.graphics.drawString(
       listCycle.length > 1
           ? '${AppLocalizations.of(context)!.summary_analysis_of_cycle_} ${listCycle.first.id.getOrCrash()} ${AppLocalizations.of(context)!.to_cycle} ${listCycle.last.id.getOrCrash()}'
           : '${AppLocalizations.of(context)!.summary_analysis_of_cycle_} ${listCycle.first.id.getOrCrash()}',
-      PdfStandardFont(PdfFontFamily.helvetica, 16, style: PdfFontStyle.bold),
+      PdfStandardFont(fontFamily, 16, style: PdfFontStyle.bold),
       bounds: const Rect.fromLTWH(0, 15, 500, 20));
   //Nom - Age - PR 2001
   headerTemplate.graphics.drawString(
       '${userData?.userName.getOrCrash()} - ${userData?.dateNaissance?.year} - ${AppLocalizations.of(context)!.premier_regle} ${userData?.anneePremiereRegle}',
-      PdfStandardFont(PdfFontFamily.helvetica, 14),
+      PdfStandardFont(fontFamily, 14),
       bounds: const Rect.fromLTWH(0, 35, 500, 20));
   pdf.template.top = headerTemplate;
 }
@@ -277,6 +282,7 @@ PdfLayoutResult? tableauCycle({
   required PdfBitmap imgHachurage,
   required PdfBitmap imgJourSommet,
   required PdfLayoutResult layout,
+  required PdfFontFamily fontFamily,
   bool isHistorique = false,
 }) {
   final PdfGrid grid = PdfGrid();
@@ -295,7 +301,7 @@ PdfLayoutResult? tableauCycle({
     headerRow.cells[i].value = tabTitleHeader[i].text;
     headerRow.cells[i].style.backgroundBrush = PdfSolidBrush(PdfColor(230, 230, 230));
   }
-  headerRow.style.font = PdfStandardFont(PdfFontFamily.helvetica, 8, style: PdfFontStyle.bold);
+  headerRow.style.font = PdfStandardFont(fontFamily, 8, style: PdfFontStyle.bold);
 
   //DATA
   for (List<_Cell> rowData in data) {
@@ -339,7 +345,7 @@ PdfLayoutResult? tableauCycle({
         row.cells[i].value = cellData.display();
         double paddH = 2;
         double paddV = 10;
-        row.cells[i].style.font = PdfStandardFont(PdfFontFamily.helvetica, 13);
+        row.cells[i].style.font = PdfStandardFont(fontFamily, 13);
         row.cells[i].style.cellPadding = PdfPaddings(bottom: paddH, top: paddH, right: paddV, left: paddV);
         row.cells[i].style.stringFormat = PdfStringFormat(
           alignment: PdfTextAlignment.center,

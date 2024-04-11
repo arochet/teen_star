@@ -12,10 +12,12 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/app_bar_cycle.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/dialog_pdf.dart';
+import 'package:teenstar/PRESENTATION/reglages/langue/langue_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/injection.dart';
 import 'package:teenstar/providers.dart';

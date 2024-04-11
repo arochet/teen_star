@@ -155,7 +155,7 @@ abstract class Observation with _$Observation {
       couleur: this.analyse?.getOrCrash() == CouleurAnalyseState.none
           ? this.couleurGeneree.toColorPDF()
           : this.analyse?.getOrCrash().toColorPDF() ?? this.couleurGeneree.toColorPDF(),
-      pointInterrogation: false,
+      pointInterrogation: this.isPointInterrogation(true),
       chiffre: this.marque,
       hachure: this.displayHachure,
       jourSommet: isJourSommet,

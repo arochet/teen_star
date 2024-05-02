@@ -427,35 +427,37 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                 onPressed: () async {
                   ref.read(isFirstPage.notifier).state = true;
                   UniqueId? _idLastCycle;
-                  final List<Observation> obs = widget.cycle?.observations
+                  final List<Observation> listObsWithSameDate = widget.cycle?.observations
                           .where((obs) => obs.date?.isSameDayAs(form.date) == true)
                           .toList() ??
                       [];
 
+                  //On récupère idLastCycle
+                  final lastCycleEither = await ref.read(lastCycleId.future);
+                  await lastCycleEither.fold((l) => showSnackbarCycleFailure(context, l),
+                      (idLastCycle) async {
+                    _idLastCycle = idLastCycle;
+                  });
+
                   //Ajout de la vérification si la date ne se superpose pas avec les cycles précédents
                   if (widget.observation == null && widget.cycle == null) {
-                    final lastCycleEither = await ref.read(lastCycleId.future);
                     bool dispAlertDate = false;
-                    await lastCycleEither.fold((l) => showSnackbarCycleFailure(context, l),
-                        (idLastCycle) async {
-                      if (idLastCycle != null) {
-                        _idLastCycle = idLastCycle;
-                        final lastCycle = ref.read(cycleProvider(idLastCycle)); //Recupère le dernier cycle
-                        lastCycle.whenData((cycleAsync) async {
-                          cycleAsync.fold((l) => showSnackbarCycleFailure(context, l),
-                              (Cycle lastCycle) async {
-                            DateTime? lastDateOfLastCycle =
-                                lastCycle.getDateOfLastObservation(); //Dernière date du dernier cycle
 
-                            if (lastDateOfLastCycle != null) {
-                              if (form.date.toDate().isAfter(lastDateOfLastCycle) == false) {
-                                dispAlertDate = true;
-                              }
+                    if (_idLastCycle != null) {
+                      final lastCycle = ref.read(cycleProvider(_idLastCycle!)); //Recupère le dernier cycle
+                      lastCycle.whenData((cycleAsync) async {
+                        cycleAsync.fold((l) => showSnackbarCycleFailure(context, l), (Cycle lastCycle) async {
+                          DateTime? lastDateOfLastCycle =
+                              lastCycle.getDateOfLastObservation(); //Dernière date du dernier cycle
+
+                          if (lastDateOfLastCycle != null) {
+                            if (form.date.toDate().isAfter(lastDateOfLastCycle) == false) {
+                              dispAlertDate = true;
                             }
-                          });
+                          }
                         });
-                      }
-                    });
+                      });
+                    }
                     if (dispAlertDate) {
                       //Affichage d'un dialog pour confirmer l'ajout de l'observation
                       final dateOK = await showDialogChoix(
@@ -470,9 +472,10 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                     }
                   }
 
-                  //Vérification si la date n'existe pas déjà
+                  // On ajoute une nouvelle observation
                   bool addObservation = false;
-                  if (obs.length > 0 && widget.observation == null) {
+                  //Vérification si la date n'existe pas déjà
+                  if (listObsWithSameDate.length > 0 && widget.observation == null) {
                     final ok = await showDialogChoix(
                       context,
                       AppLocalizations.of(context)!
@@ -489,20 +492,26 @@ class _ObservationFormState extends ConsumerState<ObservationForm> {
                     addObservation = true;
                   }
 
+                  // AddObservation -> Si on ajoute bien une observation
                   if (addObservation) {
-                    final bool hasExceed = await notifierForm
-                        .hasExceedDate(UniqueId.fromUniqueInt((_idLastCycle?.getOrCrash() ?? 0) + 1));
-                    bool? reporterObservations;
+                    bool hasExceed = false;
+                    bool? reporterObservations = false;
+                    //Cas d'un nouveau cycle
+                    if (widget.cycle == null) {
+                      //On vérifie si la date de l'observation est antérieur à la dernière observation du dernier cycle
+                      hasExceed = await notifierForm
+                          .hasExceedDate(UniqueId.fromUniqueInt((_idLastCycle?.getOrCrash() ?? 0) + 1));
 
-                    if (hasExceed) {
-                      reporterObservations = await showDialogChoix(
-                        context,
-                        AppLocalizations.of(context)!
-                            .please_note_that_the_days_of_the_previous_cycle_after_the_date_of_this_observation_will_be_carried_over_to_this_new_cycle_would_you_like_to_confirm,
-                        positiveText: AppLocalizations.of(context)!.reporting_observations,
-                        negativeText: AppLocalizations.of(context)!.cancel,
-                        isDanger: true,
-                      );
+                      if (hasExceed) {
+                        reporterObservations = await showDialogChoix(
+                          context,
+                          AppLocalizations.of(context)!
+                              .please_note_that_the_days_of_the_previous_cycle_after_the_date_of_this_observation_will_be_carried_over_to_this_new_cycle_would_you_like_to_confirm,
+                          positiveText: AppLocalizations.of(context)!.reporting_observations,
+                          negativeText: AppLocalizations.of(context)!.cancel,
+                          isDanger: true,
+                        );
+                      }
                     }
 
                     if (reporterObservations == true || hasExceed == false) {

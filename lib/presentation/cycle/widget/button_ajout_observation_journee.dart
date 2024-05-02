@@ -39,7 +39,7 @@ class ButtonAjoutObservationJournee extends ConsumerWidget {
                 final bool? continuerCycle = await showDialogApp<bool?>(
                   context: context,
                   titre: AppLocalizations.of(context)!.do_you_want_to_continue_the_current_cycle,
-                  child: _DialogChoixContinuationCycle(cycle),
+                  child: DialogChoixContinuationCycle(cycle),
                 );
 
                 openPageNouvelleObservation(context, cycle, ref, continuerCycle, DateTime.now());
@@ -65,9 +65,9 @@ openPageNouvelleObservation(
   }
 }
 
-class _DialogChoixContinuationCycle extends StatelessWidget {
+class DialogChoixContinuationCycle extends StatelessWidget {
   Cycle cycle;
-  _DialogChoixContinuationCycle(
+  DialogChoixContinuationCycle(
     this.cycle, {
     Key? key,
   }) : super(key: key);

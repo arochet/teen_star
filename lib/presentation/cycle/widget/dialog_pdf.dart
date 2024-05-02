@@ -93,7 +93,7 @@ class _DialogPDFState extends ConsumerState<DialogPDF> {
                   final passwordPdf = await ref.read(authRepositoryProvider).getPasswordPDF();
 
                   final listCycleAsync = await ref.read(cycleRepositoryProvider).readListCycles(
-                      /* widget.listCycle.first.id! */ int.parse(controllerPremierCycle.text),
+                      int.parse(controllerPremierCycle.text),
                       int.parse(controllerDernierCycle.text) /* widget.listCycle.last.id! */);
 
                   listCycleAsync.fold((l) => showSnackbarCycleFailure(context, l), (list) async {

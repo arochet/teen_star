@@ -9,6 +9,7 @@ import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
+import 'package:teenstar/PRESENTATION/cycle/widget/button_ajout_observation_journee.dart';
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -107,13 +108,23 @@ afficherModalModificationObservation(
             refreshAndPop(context, ref);
           },
         ),
+        //Modification d'une observation
         CupertinoActionSheetAction(
           child: Text(AppLocalizations.of(context)!.modify_daily_observation),
           onPressed: () async {
             printDev();
             //On ouvre la page d'ajout d'observation
-            await context.router
-                .push(ObservationAddRoute(cycle: cycle, date: observation.date!, observation: observation));
+
+            final bool? continuerCycle = await showDialogApp<bool?>(
+              context: context,
+              titre: AppLocalizations.of(context)!.do_you_want_to_continue_the_current_cycle,
+              child: DialogChoixContinuationCycle(cycle),
+            );
+
+            if (continuerCycle != null) {
+              await context.router.push(ObservationAddRoute(
+                  cycle: continuerCycle ? cycle : null, date: observation.date!, observation: observation));
+            }
             refreshAndPop(context, ref);
           },
         ),

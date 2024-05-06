@@ -65,8 +65,7 @@ class CycleRepository implements ICycleRepository {
     try {
       //Supprime les observations du même jour
       await _database.delete(db_observation,
-          where: 'date = ? AND idCycle = ?',
-          whereArgs: [ObservationDTO.fromDomain(observation, 0).date, cycle?.id.getOrCrash()]);
+          where: 'date = ?', whereArgs: [ObservationDTO.fromDomain(observation, 0).date]);
 
       late UniqueId idCycle;
       //Nouveau cycle
@@ -103,8 +102,6 @@ class CycleRepository implements ICycleRepository {
       for (var observation in listObservations) {
         if (observation.idCycle == (idCycle?.getOrCrash() ?? -1) - 1) {
           if (observation.date! > dateObservation.millisecondsSinceEpoch) {
-            print('observation.idCycle: ${observation.idCycle}');
-            print('observation.date: ${observation.date}');
             return true;
           }
         }

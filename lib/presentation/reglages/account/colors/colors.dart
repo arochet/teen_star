@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+@RoutePage()
 class ColorsPage extends StatelessWidget {
   const ColorsPage({Key? key}) : super(key: key);
 

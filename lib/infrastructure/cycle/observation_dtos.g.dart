@@ -8,8 +8,8 @@ part of 'observation_dtos.dart';
 
 _$ObservationDTOImpl _$$ObservationDTOImplFromJson(Map<String, dynamic> json) =>
     _$ObservationDTOImpl(
-      id: json['id'] as int?,
-      date: json['date'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      date: (json['date'] as num?)?.toInt(),
       couleur: json['couleur'] as String?,
       analyse: json['analyse'] as String?,
       sensation: json['sensation'] as String?,
@@ -26,10 +26,11 @@ _$ObservationDTOImpl _$$ObservationDTOImplFromJson(Map<String, dynamic> json) =>
       humeurAutre: json['humeurAutre'] as String?,
       notesConfidentielles: json['notesConfidentielles'] as String?,
       commentaireAnimatrice: json['commentaireAnimatrice'] as String?,
-      marque: json['marque'] as int?,
-      jourFertile: json['jourFertile'] as int?,
-      idCycle: json['idCycle'] as int?,
-      enleverPointInterrogation: json['enleverPointInterrogation'] as int?,
+      marque: (json['marque'] as num?)?.toInt(),
+      jourFertile: (json['jourFertile'] as num?)?.toInt(),
+      idCycle: (json['idCycle'] as num?)?.toInt(),
+      enleverPointInterrogation:
+          (json['enleverPointInterrogation'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$ObservationDTOImplToJson(

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:open_filex/open_filex.dart';
@@ -17,6 +18,7 @@ import 'package:teenstar/PRESENTATION/reglages/guide_de_base/widget/bouton_PDF.d
 
 import '../guide_de_base/guide_de_base_page.dart';
 
+@RoutePage()
 class Guide_avancePage extends StatelessWidget {
   const Guide_avancePage({Key? key}) : super(key: key);
 

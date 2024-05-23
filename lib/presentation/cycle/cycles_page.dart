@@ -11,7 +11,7 @@ import 'package:teenstar/INFRASTRUCTURE/cycle/cycle_dtos.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_error.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
@@ -28,6 +28,7 @@ final observationSectionne = StateProvider<List<Observation>>((ref) => []);
 final rangeDisplayObservation =
     StateProvider<int?>((ref) => null); //On affiche les observations entre les jours 1 et 10 (par exemple)
 
+@RoutePage()
 class CyclesPage extends ConsumerStatefulWidget {
   const CyclesPage({Key? key}) : super(key: key);
 

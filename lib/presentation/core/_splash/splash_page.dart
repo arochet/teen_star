@@ -1,10 +1,12 @@
 import 'package:teenstar/APPLICATION/auth/auth_notifier.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.dart';
+
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
 
+@RoutePage()
 class SplashPage extends ConsumerWidget {
   const SplashPage({Key? key}) : super(key: key);
 

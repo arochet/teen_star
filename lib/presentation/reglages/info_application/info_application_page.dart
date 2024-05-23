@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
+@RoutePage()
 class Info_applicationPage extends StatelessWidget {
   const Info_applicationPage({Key? key}) : super(key: key);
 

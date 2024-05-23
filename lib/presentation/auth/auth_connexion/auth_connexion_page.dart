@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/PRESENTATION/auth/auth_connexion/widget/auth_connexion_form.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
@@ -9,6 +10,7 @@ import 'widget/auth_divider_or.dart';
 import 'widget/auth_no_account_link.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+@RoutePage()
 class AuthConnexionPage extends StatelessWidget {
   const AuthConnexionPage({Key? key}) : super(key: key);
 

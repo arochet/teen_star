@@ -7,6 +7,7 @@ import 'package:teenstar/DOMAIN/cycle/cycle.dart';
 import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/DOMAIN/cycle/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_components/dialogs.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/dev_utils.dart';
 import 'package:teenstar/PRESENTATION/cycle/widget/button_ajout_observation_journee.dart';
@@ -14,7 +15,6 @@ import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_for
 import 'package:teenstar/providers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/_core/router.gr.dart';
 import '../cycles_page.dart';
 import 'modifier_couleur_dialog.dart';
 import 'show_observation_notes.dart';

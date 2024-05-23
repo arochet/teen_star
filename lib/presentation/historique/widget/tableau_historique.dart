@@ -10,7 +10,8 @@ import 'package:teenstar/PRESENTATION/core/_components/little_box.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/table_sticky_headers.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.dart';
+
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

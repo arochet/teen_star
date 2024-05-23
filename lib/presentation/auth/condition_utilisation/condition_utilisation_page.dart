@@ -6,12 +6,14 @@ import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart'
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_snackbar.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.dart';
+
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+@RoutePage()
 class Condition_utilisationPage extends ConsumerStatefulWidget {
   const Condition_utilisationPage({Key? key}) : super(key: key);
 
@@ -45,7 +47,7 @@ class _Condition_utilisationPageState extends ConsumerState<Condition_utilisatio
                     child: ElevatedButton.icon(
                       icon: Icon(Icons.library_books),
                       onPressed: () {
-                        context.router.push(Principes_de_baseRoute());
+                        context.router.push(Guide_de_baseRoute());
                       },
                       label: Text(AppLocalizations.of(context)!.basic_guide),
                       style: buttonLittleSecondary,

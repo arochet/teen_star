@@ -3,16 +3,18 @@ import 'package:teenstar/PRESENTATION/auth/auth_connexion/auth_connexion_page.da
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_environment_widget.dart';
 import 'package:teenstar/PRESENTATION/core/_core/assets_path.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'package:teenstar/providers.dart';
 
+@RoutePage()
 class AuthInitPage extends ConsumerWidget {
   const AuthInitPage({Key? key}) : super(key: key);
 

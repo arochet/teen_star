@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_components/default_panel.dart';
@@ -11,6 +12,7 @@ import 'package:teenstar/PRESENTATION/reglages/notifications/utilities.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+@RoutePage()
 class NotificationsPage extends ConsumerStatefulWidget {
   const NotificationsPage({Key? key}) : super(key: key);
 

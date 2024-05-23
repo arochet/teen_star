@@ -17,6 +17,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'widget/tableau_historique.dart';
 
+@RoutePage()
 class HistoriquePage extends ConsumerWidget {
   const HistoriquePage({Key? key}) : super(key: key);
 

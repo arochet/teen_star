@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.dart';
 import 'package:teenstar/providers.dart';
 
-import '../../../core/_core/router.gr.dart';
 import 'panel_list.dart';
 
 class PanelDevelopper extends ConsumerWidget {

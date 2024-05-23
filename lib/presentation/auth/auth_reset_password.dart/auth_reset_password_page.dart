@@ -3,14 +3,16 @@ import 'package:teenstar/APPLICATION/auth/reset_password_notifier.dart';
 import 'package:teenstar/PRESENTATION/core/_components/contrained_box_max_width.dart';
 import 'package:teenstar/PRESENTATION/core/_components/main_scaffold.dart';
 import 'package:teenstar/PRESENTATION/core/_components/show_component_file.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+@RoutePage()
 class AuthResetPasswordPage extends ConsumerWidget {
   const AuthResetPasswordPage({Key? key}) : super(key: key);
 

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -19,6 +20,7 @@ import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_for
 import 'package:teenstar/providers.dart';
 import 'widget/bouton_PDF.dart';
 
+@RoutePage()
 class Guide_de_basePage extends StatelessWidget {
   const Guide_de_basePage({Key? key}) : super(key: key);
 

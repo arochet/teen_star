@@ -8,8 +8,8 @@ part of 'cycle_dtos.dart';
 
 _$CycleDTOImpl _$$CycleDTOImplFromJson(Map<String, dynamic> json) =>
     _$CycleDTOImpl(
-      id: json['id'] as int?,
-      idJourneeSoleil: json['idJourneeSoleil'] as int,
+      id: (json['id'] as num?)?.toInt(),
+      idJourneeSoleil: (json['idJourneeSoleil'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$CycleDTOImplToJson(_$CycleDTOImpl instance) =>

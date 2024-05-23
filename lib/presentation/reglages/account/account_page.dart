@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_colors.dart';
@@ -19,6 +20,7 @@ import 'widget/panel_reglages_autre.dart';
 import 'widget/version_number.dart';
 import 'widget/diplay_title.dart';
 
+@RoutePage()
 class AccountPage extends ConsumerStatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
 

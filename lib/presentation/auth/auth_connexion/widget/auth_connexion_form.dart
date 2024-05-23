@@ -1,7 +1,8 @@
 import 'package:teenstar/APPLICATION/auth/sign_in_form_notifier.dart';
 import 'package:teenstar/PRESENTATION/auth/widget/flushbar_auth_failure.dart';
 import 'package:teenstar/PRESENTATION/core/_components/spacing.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.dart';
+
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:teenstar/providers.dart';
 import 'package:flutter/material.dart';

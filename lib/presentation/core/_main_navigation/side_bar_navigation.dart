@@ -14,7 +14,7 @@ class SideBarNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
         routes: listRoute,
-        builder: (context, child, animation) {
+        builder: (context, child) {
           final tabsRouter = AutoTabsRouter.of(context);
           return Scaffold(
             body: SafeArea(
@@ -37,10 +37,7 @@ class SideBarNavigation extends StatelessWidget {
                   ),
                   //PAGE
                   Expanded(
-                    child: FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    ),
+                    child: child,
                   )
                 ],
               ),

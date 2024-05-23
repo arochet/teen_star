@@ -1,12 +1,13 @@
 import 'package:teenstar/DOMAIN/auth/user_data.dart';
 import 'package:teenstar/DOMAIN/auth/value_objects.dart';
+import 'package:teenstar/PRESENTATION/core/_core/router.dart';
 import 'package:teenstar/PRESENTATION/core/_core/theme_button.dart';
 import 'package:flutter/material.dart';
 import 'package:teenstar/PRESENTATION/core/_utils/app_date_utils.dart';
 import 'package:teenstar/PRESENTATION/reglages/modify_account/modify_account_form.dart';
 import 'panel_list.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:teenstar/PRESENTATION/core/_core/router.gr.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PanelPersonnelData extends StatelessWidget {

@@ -1,161 +1,151 @@
-// **************************************************************************
-// AutoRouteGenerator
-// **************************************************************************
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// AutoRouteGenerator
+// AutoRouterGenerator
 // **************************************************************************
-//
+
 // ignore_for_file: type=lint
+// coverage:ignore-file
 
-// ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i26;
-import 'package:flutter/material.dart' as _i27;
+part of 'router.dart';
 
-import '../../../DOMAIN/cycle/cycle.dart' as _i28;
-import '../../../DOMAIN/cycle/observation.dart' as _i29;
-import '../../auth/auth_connexion/auth_connexion_page.dart' as _i4;
-import '../../auth/auth_init/auth_init_page.dart' as _i3;
-import '../../auth/auth_register/auth_register_page.dart' as _i5;
-import '../../auth/auth_reset_password.dart/auth_reset_password_page.dart'
-    as _i6;
-import '../../auth/condition_utilisation/condition_utilisation_page.dart'
-    as _i19;
-import '../../cycle/ajout_observation_journee/ajout_observation_journee_page.dart'
-    as _i16;
-import '../../cycle/cycles_page.dart' as _i23;
-import '../../historique/historique_page.dart' as _i24;
-import '../../reglages/account/account_page.dart' as _i25;
-import '../../reglages/account/buttons/buttons.dart' as _i13;
-import '../../reglages/account/colors/colors.dart' as _i12;
-import '../../reglages/account/components/components_page.dart' as _i11;
-import '../../reglages/account/text_style/text_style.dart' as _i14;
-import '../../reglages/account/utils/utils_page.dart' as _i15;
-import '../../reglages/delete_account/delete_account_page.dart' as _i9;
-import '../../reglages/guide_avance/guide_avance_page.dart' as _i20;
-import '../../reglages/guide_de_base/guide_de_base_page.dart' as _i18;
-import '../../reglages/info_application/info_application_page.dart' as _i21;
-import '../../reglages/langue/langue_page.dart' as _i17;
-import '../../reglages/modify_account/modify_account_page.dart' as _i7;
-import '../../reglages/new_password/new_password_page.dart' as _i10;
-import '../../reglages/notifications/notifications_page.dart' as _i22;
-import '../../reglages/reauthenticate/reauthenticate_page.dart' as _i8;
-import '../_main_navigation/main_navigation_page.dart' as _i2;
-import '../_splash/splash_page.dart' as _i1;
-
-class AppRouter extends _i26.RootStackRouter {
-  AppRouter([_i27.GlobalKey<_i27.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+abstract class _$AppRouter extends RootStackRouter {
+  // ignore: unused_element
+  _$AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i26.PageFactory> pagesMap = {
-    SplashRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+  final Map<String, PageFactory> pagesMap = {
+    AccountRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.SplashPage(),
+        child: const AccountPage(),
+      );
+    },
+    AuthConnexionRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AuthConnexionPage(),
+      );
+    },
+    AuthInitRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AuthInitPage(),
+      );
+    },
+    AuthRegisterRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AuthRegisterPage(),
+      );
+    },
+    AuthResetPasswordRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AuthResetPasswordPage(),
+      );
+    },
+    ButtonsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ButtonsPage(),
+      );
+    },
+    ColorsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ColorsPage(),
+      );
+    },
+    ComponentsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ComponentsPage(),
+      );
+    },
+    Condition_utilisationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Condition_utilisationPage(),
+      );
+    },
+    CyclesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CyclesPage(),
+      );
+    },
+    DeleteAccountRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DeleteAccountPage(),
+      );
+    },
+    Guide_avanceRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Guide_avancePage(),
+      );
+    },
+    Guide_de_baseRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Guide_de_basePage(),
+      );
+    },
+    HistoriqueRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HistoriquePage(),
+      );
+    },
+    Info_applicationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Info_applicationPage(),
+      );
+    },
+    LangueRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LanguePage(),
       );
     },
     MainNavigationRoute.name: (routeData) {
       final args = routeData.argsAs<MainNavigationRouteArgs>(
           orElse: () => const MainNavigationRouteArgs());
-      return _i26.MaterialPageX<dynamic>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.MainNavigationPage(key: args.key),
-      );
-    },
-    AuthInitRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i3.AuthInitPage(),
-      );
-    },
-    AuthConnexionRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i4.AuthConnexionPage(),
-      );
-    },
-    AuthRegisterRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i5.AuthRegisterPage(),
-      );
-    },
-    AuthResetPasswordRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i6.AuthResetPasswordPage(),
+        child: MainNavigationPage(key: args.key),
       );
     },
     ModifyAccountRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.ModifyAccountPage(),
-      );
-    },
-    ReauthenticateRoute.name: (routeData) {
-      final args = routeData.argsAs<ReauthenticateRouteArgs>();
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: _i8.ReauthenticatePage(
-          key: args.key,
-          route: args.route,
-        ),
-      );
-    },
-    DeleteAccountRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i9.DeleteAccountPage(),
+        child: const ModifyAccountPage(),
       );
     },
     NewPasswordRoute.name: (routeData) {
       final args = routeData.argsAs<NewPasswordRouteArgs>();
-      return _i26.MaterialPageX<dynamic>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i10.NewPasswordPage(
+        child: NewPasswordPage(
           key: args.key,
           isMotDePasseAppli: args.isMotDePasseAppli,
         ),
       );
     },
-    ComponentsRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+    NotificationsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.ComponentsPage(),
-      );
-    },
-    ColorsRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i12.ColorsPage(),
-      );
-    },
-    ButtonsRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i13.ButtonsPage(),
-      );
-    },
-    TextStyleRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i14.TextStylePage(),
-      );
-    },
-    UtilsRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i15.UtilsPage(),
+        child: const NotificationsPage(),
       );
     },
     ObservationAddRoute.name: (routeData) {
       final args = routeData.argsAs<ObservationAddRouteArgs>();
-      return _i26.MaterialPageX<dynamic>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i16.ObservationAddPage(
+        child: ObservationAddPage(
           args.cycle,
           args.date,
           key: args.key,
@@ -163,211 +153,283 @@ class AppRouter extends _i26.RootStackRouter {
         ),
       );
     },
-    LangueRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+    ReauthenticateRoute.name: (routeData) {
+      final args = routeData.argsAs<ReauthenticateRouteArgs>();
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i17.LanguePage(),
+        child: ReauthenticatePage(
+          key: args.key,
+          route: args.route,
+        ),
       );
     },
-    Principes_de_baseRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+    SplashRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i18.Guide_de_basePage(),
+        child: const SplashPage(),
       );
     },
-    Condition_utilisationRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+    TextStyleRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i19.Condition_utilisationPage(),
+        child: const TextStylePage(),
       );
     },
-    Guide_avanceRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
+    UtilsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i20.Guide_avancePage(),
-      );
-    },
-    Info_applicationRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i21.Info_applicationPage(),
-      );
-    },
-    NotificationsRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i22.NotificationsPage(),
-      );
-    },
-    CyclesRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i23.CyclesPage(),
-      );
-    },
-    HistoriqueRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i24.HistoriquePage(),
-      );
-    },
-    AccountRoute.name: (routeData) {
-      return _i26.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i25.AccountPage(),
+        child: const UtilsPage(),
       );
     },
   };
-
-  @override
-  List<_i26.RouteConfig> get routes => [
-        _i26.RouteConfig(
-          SplashRoute.name,
-          path: '/',
-        ),
-        _i26.RouteConfig(
-          MainNavigationRoute.name,
-          path: '/main',
-          children: [
-            _i26.RouteConfig(
-              '#redirect',
-              path: '',
-              parent: MainNavigationRoute.name,
-              redirectTo: 'resume-route',
-              fullMatch: true,
-            ),
-            _i26.RouteConfig(
-              CyclesRoute.name,
-              path: 'cycles-route',
-              parent: MainNavigationRoute.name,
-            ),
-            _i26.RouteConfig(
-              HistoriqueRoute.name,
-              path: 'historique-route',
-              parent: MainNavigationRoute.name,
-            ),
-            _i26.RouteConfig(
-              AccountRoute.name,
-              path: 'account',
-              parent: MainNavigationRoute.name,
-            ),
-          ],
-        ),
-        _i26.RouteConfig(
-          AuthInitRoute.name,
-          path: '/auth-init',
-        ),
-        _i26.RouteConfig(
-          AuthConnexionRoute.name,
-          path: '/auth-connexion',
-        ),
-        _i26.RouteConfig(
-          AuthRegisterRoute.name,
-          path: '/auth-register',
-        ),
-        _i26.RouteConfig(
-          AuthResetPasswordRoute.name,
-          path: '/auth-reset-password',
-        ),
-        _i26.RouteConfig(
-          ModifyAccountRoute.name,
-          path: '/modify-account',
-        ),
-        _i26.RouteConfig(
-          ReauthenticateRoute.name,
-          path: '/reauthenticate',
-        ),
-        _i26.RouteConfig(
-          DeleteAccountRoute.name,
-          path: '/delete-account',
-        ),
-        _i26.RouteConfig(
-          NewPasswordRoute.name,
-          path: '/new-password',
-        ),
-        _i26.RouteConfig(
-          ComponentsRoute.name,
-          path: '/components-route',
-        ),
-        _i26.RouteConfig(
-          ColorsRoute.name,
-          path: '/colors-route',
-        ),
-        _i26.RouteConfig(
-          ButtonsRoute.name,
-          path: '/buttons-route',
-        ),
-        _i26.RouteConfig(
-          TextStyleRoute.name,
-          path: '/textStyle-route',
-        ),
-        _i26.RouteConfig(
-          UtilsRoute.name,
-          path: '/utils-route',
-        ),
-        _i26.RouteConfig(
-          ObservationAddRoute.name,
-          path: '/observation-add-route',
-        ),
-        _i26.RouteConfig(
-          LangueRoute.name,
-          path: '/langue-route',
-        ),
-        _i26.RouteConfig(
-          Principes_de_baseRoute.name,
-          path: '/principes_de_base-route',
-        ),
-        _i26.RouteConfig(
-          Condition_utilisationRoute.name,
-          path: '/condition_utilisation-route',
-        ),
-        _i26.RouteConfig(
-          Guide_avanceRoute.name,
-          path: '/guide_avance-route',
-        ),
-        _i26.RouteConfig(
-          Info_applicationRoute.name,
-          path: '/info_application-route',
-        ),
-        _i26.RouteConfig(
-          NotificationsRoute.name,
-          path: '/notifications-route',
-        ),
-      ];
 }
 
 /// generated route for
-/// [_i1.SplashPage]
-class SplashRoute extends _i26.PageRouteInfo<void> {
-  const SplashRoute()
+/// [AccountPage]
+class AccountRoute extends PageRouteInfo<void> {
+  const AccountRoute({List<PageRouteInfo>? children})
       : super(
-          SplashRoute.name,
-          path: '/',
+          AccountRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'SplashRoute';
+  static const String name = 'AccountRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.MainNavigationPage]
-class MainNavigationRoute extends _i26.PageRouteInfo<MainNavigationRouteArgs> {
+/// [AuthConnexionPage]
+class AuthConnexionRoute extends PageRouteInfo<void> {
+  const AuthConnexionRoute({List<PageRouteInfo>? children})
+      : super(
+          AuthConnexionRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AuthConnexionRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AuthInitPage]
+class AuthInitRoute extends PageRouteInfo<void> {
+  const AuthInitRoute({List<PageRouteInfo>? children})
+      : super(
+          AuthInitRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AuthInitRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AuthRegisterPage]
+class AuthRegisterRoute extends PageRouteInfo<void> {
+  const AuthRegisterRoute({List<PageRouteInfo>? children})
+      : super(
+          AuthRegisterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AuthRegisterRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AuthResetPasswordPage]
+class AuthResetPasswordRoute extends PageRouteInfo<void> {
+  const AuthResetPasswordRoute({List<PageRouteInfo>? children})
+      : super(
+          AuthResetPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AuthResetPasswordRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ButtonsPage]
+class ButtonsRoute extends PageRouteInfo<void> {
+  const ButtonsRoute({List<PageRouteInfo>? children})
+      : super(
+          ButtonsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ButtonsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ColorsPage]
+class ColorsRoute extends PageRouteInfo<void> {
+  const ColorsRoute({List<PageRouteInfo>? children})
+      : super(
+          ColorsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ColorsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ComponentsPage]
+class ComponentsRoute extends PageRouteInfo<void> {
+  const ComponentsRoute({List<PageRouteInfo>? children})
+      : super(
+          ComponentsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ComponentsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [Condition_utilisationPage]
+class Condition_utilisationRoute extends PageRouteInfo<void> {
+  const Condition_utilisationRoute({List<PageRouteInfo>? children})
+      : super(
+          Condition_utilisationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'Condition_utilisationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CyclesPage]
+class CyclesRoute extends PageRouteInfo<void> {
+  const CyclesRoute({List<PageRouteInfo>? children})
+      : super(
+          CyclesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CyclesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DeleteAccountPage]
+class DeleteAccountRoute extends PageRouteInfo<void> {
+  const DeleteAccountRoute({List<PageRouteInfo>? children})
+      : super(
+          DeleteAccountRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DeleteAccountRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [Guide_avancePage]
+class Guide_avanceRoute extends PageRouteInfo<void> {
+  const Guide_avanceRoute({List<PageRouteInfo>? children})
+      : super(
+          Guide_avanceRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'Guide_avanceRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [Guide_de_basePage]
+class Guide_de_baseRoute extends PageRouteInfo<void> {
+  const Guide_de_baseRoute({List<PageRouteInfo>? children})
+      : super(
+          Guide_de_baseRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'Guide_de_baseRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HistoriquePage]
+class HistoriqueRoute extends PageRouteInfo<void> {
+  const HistoriqueRoute({List<PageRouteInfo>? children})
+      : super(
+          HistoriqueRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HistoriqueRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [Info_applicationPage]
+class Info_applicationRoute extends PageRouteInfo<void> {
+  const Info_applicationRoute({List<PageRouteInfo>? children})
+      : super(
+          Info_applicationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'Info_applicationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LanguePage]
+class LangueRoute extends PageRouteInfo<void> {
+  const LangueRoute({List<PageRouteInfo>? children})
+      : super(
+          LangueRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LangueRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MainNavigationPage]
+class MainNavigationRoute extends PageRouteInfo<MainNavigationRouteArgs> {
   MainNavigationRoute({
-    _i27.Key? key,
-    List<_i26.PageRouteInfo>? children,
+    Key? key,
+    List<PageRouteInfo>? children,
   }) : super(
           MainNavigationRoute.name,
-          path: '/main',
           args: MainNavigationRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'MainNavigationRoute';
+
+  static const PageInfo<MainNavigationRouteArgs> page =
+      PageInfo<MainNavigationRouteArgs>(name);
 }
 
 class MainNavigationRouteArgs {
   const MainNavigationRouteArgs({this.key});
 
-  final _i27.Key? key;
+  final Key? key;
 
   @override
   String toString() {
@@ -376,127 +438,39 @@ class MainNavigationRouteArgs {
 }
 
 /// generated route for
-/// [_i3.AuthInitPage]
-class AuthInitRoute extends _i26.PageRouteInfo<void> {
-  const AuthInitRoute()
-      : super(
-          AuthInitRoute.name,
-          path: '/auth-init',
-        );
-
-  static const String name = 'AuthInitRoute';
-}
-
-/// generated route for
-/// [_i4.AuthConnexionPage]
-class AuthConnexionRoute extends _i26.PageRouteInfo<void> {
-  const AuthConnexionRoute()
-      : super(
-          AuthConnexionRoute.name,
-          path: '/auth-connexion',
-        );
-
-  static const String name = 'AuthConnexionRoute';
-}
-
-/// generated route for
-/// [_i5.AuthRegisterPage]
-class AuthRegisterRoute extends _i26.PageRouteInfo<void> {
-  const AuthRegisterRoute()
-      : super(
-          AuthRegisterRoute.name,
-          path: '/auth-register',
-        );
-
-  static const String name = 'AuthRegisterRoute';
-}
-
-/// generated route for
-/// [_i6.AuthResetPasswordPage]
-class AuthResetPasswordRoute extends _i26.PageRouteInfo<void> {
-  const AuthResetPasswordRoute()
-      : super(
-          AuthResetPasswordRoute.name,
-          path: '/auth-reset-password',
-        );
-
-  static const String name = 'AuthResetPasswordRoute';
-}
-
-/// generated route for
-/// [_i7.ModifyAccountPage]
-class ModifyAccountRoute extends _i26.PageRouteInfo<void> {
-  const ModifyAccountRoute()
+/// [ModifyAccountPage]
+class ModifyAccountRoute extends PageRouteInfo<void> {
+  const ModifyAccountRoute({List<PageRouteInfo>? children})
       : super(
           ModifyAccountRoute.name,
-          path: '/modify-account',
+          initialChildren: children,
         );
 
   static const String name = 'ModifyAccountRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i8.ReauthenticatePage]
-class ReauthenticateRoute extends _i26.PageRouteInfo<ReauthenticateRouteArgs> {
-  ReauthenticateRoute({
-    _i27.Key? key,
-    required _i26.PageRouteInfo<dynamic> route,
-  }) : super(
-          ReauthenticateRoute.name,
-          path: '/reauthenticate',
-          args: ReauthenticateRouteArgs(
-            key: key,
-            route: route,
-          ),
-        );
-
-  static const String name = 'ReauthenticateRoute';
-}
-
-class ReauthenticateRouteArgs {
-  const ReauthenticateRouteArgs({
-    this.key,
-    required this.route,
-  });
-
-  final _i27.Key? key;
-
-  final _i26.PageRouteInfo<dynamic> route;
-
-  @override
-  String toString() {
-    return 'ReauthenticateRouteArgs{key: $key, route: $route}';
-  }
-}
-
-/// generated route for
-/// [_i9.DeleteAccountPage]
-class DeleteAccountRoute extends _i26.PageRouteInfo<void> {
-  const DeleteAccountRoute()
-      : super(
-          DeleteAccountRoute.name,
-          path: '/delete-account',
-        );
-
-  static const String name = 'DeleteAccountRoute';
-}
-
-/// generated route for
-/// [_i10.NewPasswordPage]
-class NewPasswordRoute extends _i26.PageRouteInfo<NewPasswordRouteArgs> {
+/// [NewPasswordPage]
+class NewPasswordRoute extends PageRouteInfo<NewPasswordRouteArgs> {
   NewPasswordRoute({
-    _i27.Key? key,
+    Key? key,
     required bool isMotDePasseAppli,
+    List<PageRouteInfo>? children,
   }) : super(
           NewPasswordRoute.name,
-          path: '/new-password',
           args: NewPasswordRouteArgs(
             key: key,
             isMotDePasseAppli: isMotDePasseAppli,
           ),
+          initialChildren: children,
         );
 
   static const String name = 'NewPasswordRoute';
+
+  static const PageInfo<NewPasswordRouteArgs> page =
+      PageInfo<NewPasswordRouteArgs>(name);
 }
 
 class NewPasswordRouteArgs {
@@ -505,7 +479,7 @@ class NewPasswordRouteArgs {
     required this.isMotDePasseAppli,
   });
 
-  final _i27.Key? key;
+  final Key? key;
 
   final bool isMotDePasseAppli;
 
@@ -516,85 +490,43 @@ class NewPasswordRouteArgs {
 }
 
 /// generated route for
-/// [_i11.ComponentsPage]
-class ComponentsRoute extends _i26.PageRouteInfo<void> {
-  const ComponentsRoute()
+/// [NotificationsPage]
+class NotificationsRoute extends PageRouteInfo<void> {
+  const NotificationsRoute({List<PageRouteInfo>? children})
       : super(
-          ComponentsRoute.name,
-          path: '/components-route',
+          NotificationsRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'ComponentsRoute';
+  static const String name = 'NotificationsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i12.ColorsPage]
-class ColorsRoute extends _i26.PageRouteInfo<void> {
-  const ColorsRoute()
-      : super(
-          ColorsRoute.name,
-          path: '/colors-route',
-        );
-
-  static const String name = 'ColorsRoute';
-}
-
-/// generated route for
-/// [_i13.ButtonsPage]
-class ButtonsRoute extends _i26.PageRouteInfo<void> {
-  const ButtonsRoute()
-      : super(
-          ButtonsRoute.name,
-          path: '/buttons-route',
-        );
-
-  static const String name = 'ButtonsRoute';
-}
-
-/// generated route for
-/// [_i14.TextStylePage]
-class TextStyleRoute extends _i26.PageRouteInfo<void> {
-  const TextStyleRoute()
-      : super(
-          TextStyleRoute.name,
-          path: '/textStyle-route',
-        );
-
-  static const String name = 'TextStyleRoute';
-}
-
-/// generated route for
-/// [_i15.UtilsPage]
-class UtilsRoute extends _i26.PageRouteInfo<void> {
-  const UtilsRoute()
-      : super(
-          UtilsRoute.name,
-          path: '/utils-route',
-        );
-
-  static const String name = 'UtilsRoute';
-}
-
-/// generated route for
-/// [_i16.ObservationAddPage]
-class ObservationAddRoute extends _i26.PageRouteInfo<ObservationAddRouteArgs> {
+/// [ObservationAddPage]
+class ObservationAddRoute extends PageRouteInfo<ObservationAddRouteArgs> {
   ObservationAddRoute({
-    required _i28.Cycle? cycle,
+    required Cycle? cycle,
     required DateTime date,
-    _i27.Key? key,
-    _i29.Observation? observation,
+    Key? key,
+    Observation? observation,
+    List<PageRouteInfo>? children,
   }) : super(
           ObservationAddRoute.name,
-          path: '/observation-add-route',
           args: ObservationAddRouteArgs(
             cycle: cycle,
             date: date,
             key: key,
             observation: observation,
           ),
+          initialChildren: children,
         );
 
   static const String name = 'ObservationAddRoute';
+
+  static const PageInfo<ObservationAddRouteArgs> page =
+      PageInfo<ObservationAddRouteArgs>(name);
 }
 
 class ObservationAddRouteArgs {
@@ -605,13 +537,13 @@ class ObservationAddRouteArgs {
     this.observation,
   });
 
-  final _i28.Cycle? cycle;
+  final Cycle? cycle;
 
   final DateTime date;
 
-  final _i27.Key? key;
+  final Key? key;
 
-  final _i29.Observation? observation;
+  final Observation? observation;
 
   @override
   String toString() {
@@ -620,109 +552,81 @@ class ObservationAddRouteArgs {
 }
 
 /// generated route for
-/// [_i17.LanguePage]
-class LangueRoute extends _i26.PageRouteInfo<void> {
-  const LangueRoute()
-      : super(
-          LangueRoute.name,
-          path: '/langue-route',
+/// [ReauthenticatePage]
+class ReauthenticateRoute extends PageRouteInfo<ReauthenticateRouteArgs> {
+  ReauthenticateRoute({
+    Key? key,
+    required PageRouteInfo<dynamic> route,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ReauthenticateRoute.name,
+          args: ReauthenticateRouteArgs(
+            key: key,
+            route: route,
+          ),
+          initialChildren: children,
         );
 
-  static const String name = 'LangueRoute';
+  static const String name = 'ReauthenticateRoute';
+
+  static const PageInfo<ReauthenticateRouteArgs> page =
+      PageInfo<ReauthenticateRouteArgs>(name);
+}
+
+class ReauthenticateRouteArgs {
+  const ReauthenticateRouteArgs({
+    this.key,
+    required this.route,
+  });
+
+  final Key? key;
+
+  final PageRouteInfo<dynamic> route;
+
+  @override
+  String toString() {
+    return 'ReauthenticateRouteArgs{key: $key, route: $route}';
+  }
 }
 
 /// generated route for
-/// [_i18.Guide_de_basePage]
-class Principes_de_baseRoute extends _i26.PageRouteInfo<void> {
-  const Principes_de_baseRoute()
+/// [SplashPage]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute({List<PageRouteInfo>? children})
       : super(
-          Principes_de_baseRoute.name,
-          path: '/principes_de_base-route',
+          SplashRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'Principes_de_baseRoute';
+  static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i19.Condition_utilisationPage]
-class Condition_utilisationRoute extends _i26.PageRouteInfo<void> {
-  const Condition_utilisationRoute()
+/// [TextStylePage]
+class TextStyleRoute extends PageRouteInfo<void> {
+  const TextStyleRoute({List<PageRouteInfo>? children})
       : super(
-          Condition_utilisationRoute.name,
-          path: '/condition_utilisation-route',
+          TextStyleRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'Condition_utilisationRoute';
+  static const String name = 'TextStyleRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i20.Guide_avancePage]
-class Guide_avanceRoute extends _i26.PageRouteInfo<void> {
-  const Guide_avanceRoute()
+/// [UtilsPage]
+class UtilsRoute extends PageRouteInfo<void> {
+  const UtilsRoute({List<PageRouteInfo>? children})
       : super(
-          Guide_avanceRoute.name,
-          path: '/guide_avance-route',
+          UtilsRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'Guide_avanceRoute';
-}
+  static const String name = 'UtilsRoute';
 
-/// generated route for
-/// [_i21.Info_applicationPage]
-class Info_applicationRoute extends _i26.PageRouteInfo<void> {
-  const Info_applicationRoute()
-      : super(
-          Info_applicationRoute.name,
-          path: '/info_application-route',
-        );
-
-  static const String name = 'Info_applicationRoute';
-}
-
-/// generated route for
-/// [_i22.NotificationsPage]
-class NotificationsRoute extends _i26.PageRouteInfo<void> {
-  const NotificationsRoute()
-      : super(
-          NotificationsRoute.name,
-          path: '/notifications-route',
-        );
-
-  static const String name = 'NotificationsRoute';
-}
-
-/// generated route for
-/// [_i23.CyclesPage]
-class CyclesRoute extends _i26.PageRouteInfo<void> {
-  const CyclesRoute()
-      : super(
-          CyclesRoute.name,
-          path: 'cycles-route',
-        );
-
-  static const String name = 'CyclesRoute';
-}
-
-/// generated route for
-/// [_i24.HistoriquePage]
-class HistoriqueRoute extends _i26.PageRouteInfo<void> {
-  const HistoriqueRoute()
-      : super(
-          HistoriqueRoute.name,
-          path: 'historique-route',
-        );
-
-  static const String name = 'HistoriqueRoute';
-}
-
-/// generated route for
-/// [_i25.AccountPage]
-class AccountRoute extends _i26.PageRouteInfo<void> {
-  const AccountRoute()
-      : super(
-          AccountRoute.name,
-          path: 'account',
-        );
-
-  static const String name = 'AccountRoute';
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

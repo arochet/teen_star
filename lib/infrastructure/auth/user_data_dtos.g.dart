@@ -9,9 +9,9 @@ part of 'user_data_dtos.dart';
 _$UserDataDTOImpl _$$UserDataDTOImplFromJson(Map<String, dynamic> json) =>
     _$UserDataDTOImpl(
       userName: json['userName'] as String,
-      dateNaissance: json['dateNaissance'] as int?,
-      anneePremiereRegle: json['anneePremiereRegle'] as int,
-      theme: json['theme'] as int,
+      dateNaissance: (json['dateNaissance'] as num?)?.toInt(),
+      anneePremiereRegle: (json['anneePremiereRegle'] as num).toInt(),
+      theme: (json['theme'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$UserDataDTOImplToJson(_$UserDataDTOImpl instance) =>

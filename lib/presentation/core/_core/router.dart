@@ -1,4 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:teenstar/DOMAIN/cycle/cycle.dart';
+import 'package:teenstar/DOMAIN/cycle/observation.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/components/components_page.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/text_style/text_style.dart';
 import 'package:teenstar/PRESENTATION/reglages/account/account_page.dart';
@@ -25,135 +28,116 @@ import 'package:teenstar/PRESENTATION/reglages/notifications/notifications_page.
 import '../../reglages/account/buttons/buttons.dart';
 import '../../reglages/account/colors/colors.dart';
 import '../../reglages/account/utils/utils_page.dart';
+part 'router.gr.dart';
 
-@MaterialAutoRouter(replaceInRouteName: "Page,Route", routes: [
-  //RedirectRoute(path: '*', redirectTo: '/'),
-  AutoRoute(
-    path: '/',
-    name: 'SplashRoute',
-    page: SplashPage,
-    initial: true,
-  ),
-  AutoRoute(
-    path: '/main',
-    page: MainNavigationPage,
-    children: [
-      RedirectRoute(path: '', redirectTo: 'resume-route'),
-      AutoRoute(
-        path: 'cycles-route',
-        name: 'CyclesRoute',
-        page: CyclesPage,
-      ),
-      AutoRoute(
-        path: 'historique-route',
-        name: 'HistoriqueRoute',
-        page: HistoriquePage,
-      ),
-      AutoRoute(
-        path: 'account',
-        name: 'AccountRoute',
-        page: AccountPage,
-      ),
-    ],
-  ),
-  AutoRoute(
-    path: '/auth-init',
-    name: 'AuthInitRoute',
-    page: AuthInitPage,
-  ),
-  AutoRoute(
-    path: '/auth-connexion',
-    name: 'AuthConnexionRoute',
-    page: AuthConnexionPage,
-  ),
-  AutoRoute(
-    path: '/auth-register',
-    name: 'AuthRegisterRoute',
-    page: AuthRegisterPage,
-  ),
-  AutoRoute(
-    path: '/auth-reset-password',
-    name: 'AuthResetPasswordRoute',
-    page: AuthResetPasswordPage,
-  ),
-  AutoRoute(
-    path: '/modify-account',
-    name: 'ModifyAccountRoute',
-    page: ModifyAccountPage,
-  ),
-  AutoRoute(
-    path: '/reauthenticate',
-    name: 'ReauthenticateRoute',
-    page: ReauthenticatePage,
-  ),
-  AutoRoute(
-    path: '/delete-account',
-    name: 'DeleteAccountRoute',
-    page: DeleteAccountPage,
-  ),
-  AutoRoute(
-    path: '/new-password',
-    name: 'NewPasswordRoute',
-    page: NewPasswordPage,
-  ),
-  AutoRoute(
-    path: '/components-route',
-    name: 'ComponentsRoute',
-    page: ComponentsPage,
-  ),
-  AutoRoute(
-    path: '/colors-route',
-    name: 'ColorsRoute',
-    page: ColorsPage,
-  ),
-  AutoRoute(
-    path: '/buttons-route',
-    name: 'ButtonsRoute',
-    page: ButtonsPage,
-  ),
-  AutoRoute(
-    path: '/textStyle-route',
-    name: 'TextStyleRoute',
-    page: TextStylePage,
-  ),
-  AutoRoute(
-    path: '/utils-route',
-    name: 'UtilsRoute',
-    page: UtilsPage,
-  ),
-  AutoRoute(
-    path: '/observation-add-route',
-    name: 'ObservationAddRoute',
-    page: ObservationAddPage,
-  ),
-  AutoRoute(
-    path: '/langue-route',
-    name: 'LangueRoute',
-    page: LanguePage,
-  ),
-  AutoRoute(
-    path: '/principes_de_base-route',
-    name: 'Principes_de_baseRoute',
-    page: Guide_de_basePage,
-  ),
-  AutoRoute(
-    path: '/condition_utilisation-route',
-    name: 'Condition_utilisationRoute',
-    page: Condition_utilisationPage,
-  ),
-  AutoRoute(
-    path: '/guide_avance-route',
-    name: 'Guide_avanceRoute',
-    page: Guide_avancePage,
-  ),
-  AutoRoute(
-    path: '/info_application-route',
-    name: 'Info_applicationRoute',
-    page: Info_applicationPage,
-  ),
-  AutoRoute(
-    path: '/notifications-route',
-    page: NotificationsPage,
-  ), //insert-route
-])
-class $AppRouter {}
+@AutoRouterConfig(replaceInRouteName: 'Page,Route')
+class AppRouter extends _$AppRouter {
+  @override
+  List<AutoRoute> get routes => [
+        //RedirectRoute(path: '*', redirectTo: '/'),
+        AutoRoute(
+          path: '/',
+          page: SplashRoute.page,
+          initial: true,
+        ),
+        AutoRoute(
+          path: '/main',
+          page: MainNavigationRoute.page,
+          children: [
+            RedirectRoute(path: '', redirectTo: 'resume-route'),
+            AutoRoute(
+              path: 'cycles-route',
+              page: CyclesRoute.page,
+            ),
+            AutoRoute(
+              path: 'historique-route',
+              page: HistoriqueRoute.page,
+            ),
+            AutoRoute(
+              path: 'account',
+              page: AccountRoute.page,
+            ),
+          ],
+        ),
+        AutoRoute(
+          path: '/auth-init',
+          page: AuthInitRoute.page,
+        ),
+        AutoRoute(
+          path: '/auth-connexion',
+          page: AuthConnexionRoute.page,
+        ),
+        AutoRoute(
+          path: '/auth-register',
+          page: AuthRegisterRoute.page,
+        ),
+        AutoRoute(
+          path: '/auth-reset-password',
+          page: AuthResetPasswordRoute.page,
+        ),
+        AutoRoute(
+          path: '/modify-account',
+          page: ModifyAccountRoute.page,
+        ),
+        AutoRoute(
+          path: '/reauthenticate',
+          page: ReauthenticateRoute.page,
+        ),
+        AutoRoute(
+          path: '/delete-account',
+          page: DeleteAccountRoute.page,
+        ),
+        AutoRoute(
+          path: '/new-password',
+          page: NewPasswordRoute.page,
+        ),
+        AutoRoute(
+          path: '/components-route',
+          page: ComponentsRoute.page,
+        ),
+        AutoRoute(
+          path: '/colors-route',
+          page: ColorsRoute.page,
+        ),
+        AutoRoute(
+          path: '/buttons-route',
+          page: ButtonsRoute.page,
+        ),
+        AutoRoute(
+          path: '/textStyle-route',
+          page: TextStyleRoute.page,
+        ),
+        AutoRoute(
+          path: '/utils-route',
+          page: UtilsRoute.page,
+        ),
+        AutoRoute(
+          path: '/observation-add-route',
+          page: ObservationAddRoute.page,
+        ),
+        AutoRoute(
+          path: '/langue-route',
+          page: LangueRoute.page,
+        ),
+        AutoRoute(
+          path: '/principes_de_base-route',
+          page: Guide_de_baseRoute.page,
+        ),
+        AutoRoute(
+          path: '/condition_utilisation-route',
+          page: Condition_utilisationRoute.page,
+        ),
+        AutoRoute(
+          path: '/guide_avance-route',
+          page: Guide_avanceRoute.page,
+        ),
+        AutoRoute(
+          path: '/info_application-route',
+          page: Info_applicationRoute.page,
+        ),
+        AutoRoute(
+          path: '/notifications-route',
+          page: NotificationsRoute.page,
+        ), //insert-route
+      ];
+}

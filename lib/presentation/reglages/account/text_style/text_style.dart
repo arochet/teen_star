@@ -15,9 +15,6 @@ class TextStylePage extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(15),
           child: ListView(children: [
-            Text("headline1", style: Theme.of(context).textTheme.headline1),
-            SpaceH10(),
-            Text("headline2", style: Theme.of(context).textTheme.headline2),
             SpaceH10(),
             Text("headline3", style: Theme.of(context).textTheme.titleLarge),
             SpaceH10(),
@@ -28,8 +25,6 @@ class TextStylePage extends StatelessWidget {
             Text("headline6", style: Theme.of(context).textTheme.labelMedium),
             SpaceH10(),
             Text("bodytext1", style: Theme.of(context).textTheme.bodyMedium),
-            SpaceH10(),
-            Text("bodytext2", style: Theme.of(context).textTheme.bodyText2),
             SpaceH10(),
             Text("bodyLarge", style: Theme.of(context).textTheme.bodyLarge),
             SpaceH10(),

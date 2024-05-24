@@ -1,7 +1,7 @@
 PODS:
-  - awesome_notifications (0.8.1):
+  - awesome_notifications (0.9.3):
     - Flutter
-    - IosAwnCore (~> 0.8.0)
+    - IosAwnCore (~> 0.9.3)
   - awesome_notifications_core (0.0.1):
     - Flutter
   - connectivity_plus (0.0.1):
@@ -14,7 +14,7 @@ PODS:
     - Flutter
   - integration_test (0.0.1):
     - Flutter
-  - IosAwnCore (0.8.0)
+  - IosAwnCore (0.9.3)
   - open_filex (0.0.2):
     - Flutter
   - package_info_plus (0.4.5):
@@ -24,7 +24,7 @@ PODS:
     - FlutterMacOS
   - permission_handler_apple (9.1.1):
     - Flutter
-  - ReachabilitySwift (5.0.0)
+  - ReachabilitySwift (5.2.2)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -86,23 +86,23 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  awesome_notifications: db394d2e061e4583ba0f738ddea611e3986cc3fb
+  awesome_notifications: 66d28ab7174ca2823b04d275cb043e0a4a3eb9cf
   awesome_notifications_core: d02eed89738fa362d56cbd372850e9adcd2c6bef
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   integration_test: ce0a3ffa1de96d1a89ca0ac26fca7ea18a749ef4
-  IosAwnCore: ed1b2b6d84962a758354dbacd9ce525c72ce28a9
+  IosAwnCore: b8601fbb37f7b3560f31b84ebf55a72f65812e05
   open_filex: 6e26e659846ec990262224a12ef1c528bb4edbe4
-  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
+  package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
-  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  ReachabilitySwift: 2128f3a8c9107e1ad33574c6e58e8285d460b149
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
-PODFILE CHECKSUM: e138c6f50a313ebe42ba1765c0ec10e96f41db11
+PODFILE CHECKSUM: e9dd0d263187633f61eca8868e3680c5cb2d01c1
 
 COCOAPODS: 1.15.2
